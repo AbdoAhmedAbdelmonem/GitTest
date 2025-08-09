@@ -43,7 +43,7 @@ export default function Navigation() {
             <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-3">
               <div className="relative">
                   <Image
-                  src="/Images/1212-removebg-preview.png"
+                  src="../../../Images/1212-removebg-preview.png"
                   alt="Logo"
                   width={40}
                   height={40}
