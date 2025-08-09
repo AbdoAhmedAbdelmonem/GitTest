@@ -8,7 +8,14 @@ export interface Subject {
     lectures?: string
     sections?: string
     videos?: string
-    quizzes?: string[]
+    quizzes?: {
+      id: string
+      name: string
+      code: string
+      duration: number
+      questions: number
+      jsonFile: string
+    }[]
     exams?: string[]
   }
 }
@@ -28,6 +35,7 @@ export interface Department {
   }
 }
 
+
 export const departmentData: { [key: string]: Department } = {
   "computing-data-sciences": {
     name: "Computing and Data Sciences",
@@ -46,6 +54,24 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/linear-algebra-lectures",
                 sections: "https://drive.google.com/drive/folders/linear-algebra-sections",
                 videos: "https://youtube.com/playlist?list=linear-algebra-videos",
+                quizzes: [
+                  {
+                    id: "quiz1",
+                    name: "Linear Algebra Basics",
+                    code: "62672242",
+                    duration: 20,
+                    questions: 15,
+                    jsonFile: "/quizzes/linear-algebra-quiz1.json"
+                  },
+                  {
+                    id: "quiz2",
+                    name: "Matrix Operations",
+                    code: "73783353",
+                    duration: 25,
+                    questions: 20,
+                    jsonFile: "/quizzes/linear-algebra-quiz2.json"
+                  }
+                ],
               },
             },
             {
