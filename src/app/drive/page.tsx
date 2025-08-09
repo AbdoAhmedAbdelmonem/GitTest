@@ -12,6 +12,16 @@ import { Folder, ArrowRight, Info } from "lucide-react"
 import Navigation from "@/components/navigation"
 import { useRouter } from "next/navigation"
 
+// Utility function to generate a secure hash of the Drive ID
+async function hashDriveId(driveId: string): Promise<string> {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(driveId)
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data)
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("")
+  return hashHex
+}
+
 function ElegantShape({
   className,
   delay = 0,
@@ -74,10 +84,15 @@ export default function DriveHomePage() {
   const [driveId, setDriveId] = useState("")
   const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (driveId.trim()) {
-      router.push(`/drive/${encodeURIComponent(driveId.trim())}`)
+      // Hash the driveId before navigating
+      const hashedId = await hashDriveId(driveId.trim())
+      // Store the mapping in a temporary state or context if needed,
+      // but for this example, we'll just pass the hashed ID.
+      // A more robust solution would involve a server-side mapping.
+      router.push(`/drive/${encodeURIComponent(hashedId)}`)
     }
   }
 
