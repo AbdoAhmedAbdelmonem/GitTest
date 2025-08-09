@@ -1,3 +1,4 @@
+// specialization/department/page.tsx
 "use client"
 
 import { motion } from "framer-motion"
@@ -9,6 +10,8 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, GraduationCap } from "lucide-react"
 import { departmentData } from "@/lib/department-data"
 import { cn } from "@/lib/utils"
+import React, { Suspense } from "react"
+import ErrorBoundary from "@/components/ErrorBoundary"
 
 function ElegantShape({
   className,
@@ -77,7 +80,7 @@ function ElegantShape({
 }
 
 interface Props {
-  params: { department: string }
+  params: Promise<{ department: string }>
 }
 
 const fadeUpVariants = {
@@ -108,7 +111,18 @@ const cardVariants = {
 }
 
 export default function DepartmentPage({ params }: Props) {
-  const dept = departmentData[params.department]
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading department...</div>}>
+        <DepartmentContent params={params} />
+      </Suspense>
+    </ErrorBoundary>
+  )
+}
+
+function DepartmentContent({ params }: Props) {
+  const resolvedParams = React.use(params)
+  const dept = departmentData[resolvedParams.department]
 
   if (!dept) {
     notFound()
@@ -218,7 +232,7 @@ export default function DepartmentPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {levels.map((level, index) => (
               <motion.div key={level} custom={index} variants={cardVariants} initial="hidden" animate="visible">
-                <Link href={`/specialization/${params.department}/${index + 1}`}>
+                <Link href={`/specialization/${resolvedParams.department}/${index + 1}`}>
                   <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-500 group cursor-pointer backdrop-blur-sm">
                     <CardHeader className="text-center pb-4">
                       <motion.div
