@@ -1,0 +1,158 @@
+[
+  {
+    "numb": 1,
+    "question": "How is linear algebra used in business optimization?",
+    "type": "Business Applications",
+    "answer": "To solve systems of linear equations for resource allocation and profit maximization",
+    "options": [
+      "To calculate simple interest",
+      "To solve systems of linear equations for resource allocation and profit maximization",
+      "To design business logos",
+      "To manage employee schedules"
+    ],
+    "image": null
+  },
+  {
+    "numb": 2,
+    "question": "What role do matrices play in supply chain management?",
+    "type": "Supply Chain",
+    "answer": "They represent relationships between suppliers, products, and demand",
+    "options": [
+      "They store employee contact information",
+      "They represent relationships between suppliers, products, and demand",
+      "They calculate shipping costs only",
+      "They track inventory dates"
+    ],
+    "image": null
+  },
+  {
+    "numb": 3,
+    "question": "In financial portfolio analysis, what do eigenvectors represent?",
+    "type": "Finance",
+    "answer": "Principal components that explain the most variance in asset returns",
+    "options": [
+      "Individual stock prices",
+      "Principal components that explain the most variance in asset returns",
+      "Company profit margins",
+      "Market opening times"
+    ],
+    "image": null
+  },
+  {
+    "numb": 4,
+    "question": "How are linear transformations used in business forecasting?",
+    "type": "Forecasting",
+    "answer": "To model relationships between business variables and predict future outcomes",
+    "options": [
+      "To create business presentations",
+      "To model relationships between business variables and predict future outcomes",
+      "To design office layouts",
+      "To schedule meetings"
+    ],
+    "image": null
+  },
+  {
+    "numb": 5,
+    "question": "What is the business interpretation of matrix rank in data analysis?",
+    "type": "Data Analysis",
+    "answer": "It indicates the number of independent factors affecting business outcomes",
+    "options": [
+      "The number of employees in a company",
+      "It indicates the number of independent factors affecting business outcomes",
+      "The company's market ranking",
+      "The number of products sold"
+    ],
+    "image": null
+  },
+  {
+    "numb": 6,
+    "question": "How do determinants relate to business decision making?",
+    "type": "Decision Making",
+    "answer": "They help determine if a system of business constraints has a unique solution",
+    "options": [
+      "They calculate total revenue",
+      "They help determine if a system of business constraints has a unique solution",
+      "They measure customer satisfaction",
+      "They track employee performance"
+    ],
+    "image": null
+  },
+  {
+    "numb": 7,
+    "question": "In marketing analytics, what do vector spaces represent?",
+    "type": "Marketing",
+    "answer": "Customer segments and product feature spaces for targeted campaigns",
+    "options": [
+      "Physical store locations",
+      "Customer segments and product feature spaces for targeted campaigns",
+      "Advertising budgets only",
+      "Social media followers"
+    ],
+    "image": null
+  },
+  {
+    "numb": 8,
+    "question": "How is the dot product used in business analytics?",
+    "type": "Analytics",
+    "answer": "To measure similarity between customer preferences or product features",
+    "options": [
+      "To add up sales figures",
+      "To measure similarity between customer preferences or product features",
+      "To calculate employee salaries",
+      "To determine office space"
+    ],
+    "image": null
+  },
+  {
+    "numb": 9,
+    "question": "What business problem does solving Ax = b represent?",
+    "type": "Problem Solving",
+    "answer": "Finding optimal resource allocation given constraints and objectives",
+    "options": [
+      "Calculating simple arithmetic",
+      "Finding optimal resource allocation given constraints and objectives",
+      "Organizing file systems",
+      "Planning office parties"
+    ],
+    "image": null
+  },
+  {
+    "numb": 10,
+    "question": "How are eigenvalues used in risk assessment?",
+    "type": "Risk Management",
+    "answer": "They identify the principal risk factors and their relative importance",
+    "options": [
+      "They count the number of risks",
+      "They identify the principal risk factors and their relative importance",
+      "They calculate insurance premiums",
+      "They measure office security"
+    ],
+    "image": null
+  },
+  {
+    "numb": 11,
+    "question": "In operations research, what does matrix inversion help solve?",
+    "type": "Operations Research",
+    "answer": "Systems of equations for optimal production planning and resource allocation",
+    "options": [
+      "Employee scheduling conflicts",
+      "Systems of equations for optimal production planning and resource allocation",
+      "Office temperature control",
+      "Parking space assignments"
+    ],
+    "image": null
+  },
+  {
+    "numb": 12,
+    "question": "How do orthogonal matrices relate to business data analysis?",
+    "type": "Data Analysis",
+    "answer": "They preserve relationships in data while rotating coordinate systems for better analysis",
+    "options": [
+      "They organize data alphabetically",
+      "They preserve relationships in data while rotating coordinate systems for better analysis",
+      "They delete unnecessary data",
+      "They backup data files"
+    ],
+    "image": null
+  }
+]

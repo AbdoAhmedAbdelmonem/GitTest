@@ -1,0 +1,197 @@
+[
+  {
+    "numb": 1,
+    "question": "What is a vector in linear algebra?",
+    "type": "Fundamentals",
+    "answer": "A mathematical object with both magnitude and direction",
+    "options": [
+      "A number with only magnitude",
+      "A mathematical object with both magnitude and direction",
+      "A geometric shape",
+      "A type of matrix"
+    ],
+    "image": null
+  },
+  {
+    "numb": 2,
+    "question": "What is the result of multiplying a 3x2 matrix by a 2x4 matrix?",
+    "type": "Matrix Operations",
+    "answer": "A 3x4 matrix",
+    "options": [
+      "A 2x2 matrix",
+      "A 3x4 matrix",
+      "A 6x8 matrix",
+      "The operation is not possible"
+    ],
+    "image": null
+  },
+  {
+    "numb": 3,
+    "question": "What is the determinant of a 2x2 matrix [[a,b],[c,d]]?",
+    "type": "Determinants",
+    "answer": "ad - bc",
+    "options": [
+      "a + d",
+      "ad + bc",
+      "ad - bc",
+      "ac - bd"
+    ],
+    "image": null
+  },
+  {
+    "numb": 4,
+    "question": "What does it mean for vectors to be linearly independent?",
+    "type": "Linear Independence",
+    "answer": "No vector can be written as a linear combination of the others",
+    "options": [
+      "They are all perpendicular to each other",
+      "They have the same magnitude",
+      "No vector can be written as a linear combination of the others",
+      "They all point in the same direction"
+    ],
+    "image": null
+  },
+  {
+    "numb": 5,
+    "question": "What is an eigenvalue?",
+    "type": "Eigenvalues",
+    "answer": "A scalar λ such that Av = λv for some non-zero vector v",
+    "options": [
+      "The largest element in a matrix",
+      "A scalar λ such that Av = λv for some non-zero vector v",
+      "The sum of diagonal elements",
+      "The determinant of a matrix"
+    ],
+    "image": null
+  },
+  {
+    "numb": 6,
+    "question": "What is the rank of a matrix?",
+    "type": "Matrix Properties",
+    "answer": "The maximum number of linearly independent rows or columns",
+    "options": [
+      "The number of rows",
+      "The number of columns",
+      "The maximum number of linearly independent rows or columns",
+      "The sum of all elements"
+    ],
+    "image": null
+  },
+  {
+    "numb": 7,
+    "question": "What is the transpose of matrix A denoted as?",
+    "type": "Matrix Operations",
+    "answer": "A^T",
+    "options": [
+      "A^-1",
+      "A^T",
+      "A*",
+      "|A|"
+    ],
+    "image": null
+  },
+  {
+    "numb": 8,
+    "question": "When does a matrix have an inverse?",
+    "type": "Matrix Inverse",
+    "answer": "When its determinant is non-zero",
+    "options": [
+      "When it's a square matrix",
+      "When its determinant is non-zero",
+      "When all elements are positive",
+      "When it's symmetric"
+    ],
+    "image": null
+  },
+  {
+    "numb": 9,
+    "question": "What is the dot product of vectors [1,2,3] and [4,5,6]?",
+    "type": "Vector Operations",
+    "answer": "32",
+    "options": [
+      "15",
+      "32",
+      "21",
+      "18"
+    ],
+    "image": null
+  },
+  {
+    "numb": 10,
+    "question": "What is a basis for a vector space?",
+    "type": "Vector Spaces",
+    "answer": "A set of linearly independent vectors that span the space",
+    "options": [
+      "Any set of vectors in the space",
+      "The largest set of vectors",
+      "A set of linearly independent vectors that span the space",
+      "A set of orthogonal vectors"
+    ],
+    "image": null
+  },
+  {
+    "numb": 11,
+    "question": "What is the dimension of the vector space R^3?",
+    "type": "Vector Spaces",
+    "answer": "3",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "Infinite"
+    ],
+    "image": null
+  },
+  {
+    "numb": 12,
+    "question": "What is a symmetric matrix?",
+    "type": "Matrix Properties",
+    "answer": "A matrix that equals its transpose",
+    "options": [
+      "A matrix with equal rows and columns",
+      "A matrix that equals its transpose",
+      "A matrix with all positive elements",
+      "A square matrix"
+    ],
+    "image": null
+  },
+  {
+    "numb": 13,
+    "question": "What is the trace of a matrix?",
+    "type": "Matrix Properties",
+    "answer": "The sum of diagonal elements",
+    "options": [
+      "The determinant",
+      "The sum of all elements",
+      "The sum of diagonal elements",
+      "The largest element"
+    ],
+    "image": null
+  },
+  {
+    "numb": 14,
+    "question": "What is the null space of a matrix A?",
+    "type": "Vector Spaces",
+    "answer": "The set of all vectors x such that Ax = 0",
+    "options": [
+      "The set of all zero vectors",
+      "The set of all vectors x such that Ax = 0",
+      "The transpose of A",
+      "The inverse of A"
+    ],
+    "image": null
+  },
+  {
+    "numb": 15,
+    "question": "What does it mean for a matrix to be orthogonal?",
+    "type": "Matrix Properties",
+    "answer": "A^T * A = I (identity matrix)",
+    "options": [
+      "All elements are perpendicular",
+      "A^T * A = I (identity matrix)",
+      "It has orthogonal rows only",
+      "It's a diagonal matrix"
+    ],
+    "image": null
+  }
+]

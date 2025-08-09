@@ -1,0 +1,262 @@
+[
+  {
+    "numb": 1,
+    "question": "What is the result of matrix multiplication AB where A is 2x3 and B is 3x4?",
+    "type": "Matrix Operations",
+    "answer": "A 2x4 matrix",
+    "options": [
+      "A 2x3 matrix",
+      "A 3x4 matrix",
+      "A 2x4 matrix",
+      "Multiplication is not possible"
+    ],
+    "image": null
+  },
+  {
+    "numb": 2,
+    "question": "How do you calculate the (i,j) element of matrix product AB?",
+    "type": "Matrix Operations",
+    "answer": "Sum of products of corresponding elements from row i of A and column j of B",
+    "options": [
+      "A[i,j] * B[i,j]",
+      "A[i,j] + B[i,j]",
+      "Sum of products of corresponding elements from row i of A and column j of B",
+      "A[j,i] * B[j,i]"
+    ],
+    "image": null
+  },
+  {
+    "numb": 3,
+    "question": "What is the determinant of the identity matrix I_n?",
+    "type": "Determinants",
+    "answer": "1",
+    "options": [
+      "0",
+      "1",
+      "n",
+      "n!"
+    ],
+    "image": null
+  },
+  {
+    "numb": 4,
+    "question": "If det(A) = 5 and det(B) = 3, what is det(AB)?",
+    "type": "Determinants",
+    "answer": "15",
+    "options": [
+      "8",
+      "15",
+      "2",
+      "Cannot be determined"
+    ],
+    "image": null
+  },
+  {
+    "numb": 5,
+    "question": "What is the inverse of matrix [[2,1],[1,1]]?",
+    "type": "Matrix Inverse",
+    "answer": "[[1,-1],[-1,2]]",
+    "options": [
+      "[[1,-1],[-1,2]]",
+      "[[-1,1],[1,-2]]",
+      "[[1,1],[1,2]]",
+      "[[2,-1],[-1,1]]"
+    ],
+    "image": null
+  },
+  {
+    "numb": 6,
+    "question": "What is the rank of the zero matrix?",
+    "type": "Matrix Properties",
+    "answer": "0",
+    "options": [
+      "0",
+      "1",
+      "Equal to its dimensions",
+      "Undefined"
+    ],
+    "image": null
+  },
+  {
+    "numb": 7,
+    "question": "What is the cross product of vectors [1,0,0] and [0,1,0]?",
+    "type": "Vector Operations",
+    "answer": "[0,0,1]",
+    "options": [
+      "[1,1,0]",
+      "[0,0,1]",
+      "[1,0,1]",
+      "[0,1,1]"
+    ],
+    "image": null
+  },
+  {
+    "numb": 8,
+    "question": "What is the magnitude of vector [3,4]?",
+    "type": "Vector Operations",
+    "answer": "5",
+    "options": [
+      "7",
+      "5",
+      "25",
+      "12"
+    ],
+    "image": null
+  },
+  {
+    "numb": 9,
+    "question": "What does it mean for a set of vectors to span a vector space?",
+    "type": "Vector Spaces",
+    "answer": "Every vector in the space can be written as a linear combination of the set",
+    "options": [
+      "The vectors are linearly independent",
+      "Every vector in the space can be written as a linear combination of the set",
+      "The vectors are orthogonal",
+      "The vectors have unit length"
+    ],
+    "image": null
+  },
+  {
+    "numb": 10,
+    "question": "What is an eigenvector?",
+    "type": "Eigenvalues and Eigenvectors",
+    "answer": "A non-zero vector v such that Av = λv for some scalar λ",
+    "options": [
+      "Any vector in the matrix",
+      "A non-zero vector v such that Av = λv for some scalar λ",
+      "The largest vector in magnitude",
+      "A unit vector"
+    ],
+    "image": null
+  },
+  {
+    "numb": 11,
+    "question": "What is the characteristic polynomial of a 2x2 matrix A?",
+    "type": "Eigenvalues and Eigenvectors",
+    "answer": "det(A - λI)",
+    "options": [
+      "det(A)",
+      "det(A - λI)",
+      "trace(A)",
+      "A - λI"
+    ],
+    "image": null
+  },
+  {
+    "numb": 12,
+    "question": "What is the column space of a matrix A?",
+    "type": "Vector Spaces",
+    "answer": "The span of the columns of A",
+    "options": [
+      "The set of all columns",
+      "The span of the columns of A",
+      "The transpose of A",
+      "The determinant of A"
+    ],
+    "image": null
+  },
+  {
+    "numb": 13,
+    "question": "What is the row space of a matrix A?",
+    "type": "Vector Spaces",
+    "answer": "The span of the rows of A",
+    "options": [
+      "The set of all rows",
+      "The span of the rows of A",
+      "The inverse of A",
+      "The trace of A"
+    ],
+    "image": null
+  },
+  {
+    "numb": 14,
+    "question": "What is a diagonal matrix?",
+    "type": "Matrix Properties",
+    "answer": "A matrix where all non-diagonal elements are zero",
+    "options": [
+      "A matrix with equal rows and columns",
+      "A matrix where all non-diagonal elements are zero",
+      "A matrix with all elements equal",
+      "A symmetric matrix"
+    ],
+    "image": null
+  },
+  {
+    "numb": 15,
+    "question": "What is the relationship between the rank of A and the dimension of its null space?",
+    "type": "Matrix Properties",
+    "answer": "rank(A) + dim(null(A)) = number of columns",
+    "options": [
+      "They are equal",
+      "rank(A) + dim(null(A)) = number of columns",
+      "rank(A) - dim(null(A)) = number of rows",
+      "They are always different"
+    ],
+    "image": null
+  },
+  {
+    "numb": 16,
+    "question": "What is matrix factorization?",
+    "type": "Advanced Topics",
+    "answer": "Decomposing a matrix into a product of simpler matrices",
+    "options": [
+      "Finding the determinant",
+      "Decomposing a matrix into a product of simpler matrices",
+      "Finding the inverse",
+      "Calculating eigenvalues"
+    ],
+    "image": null
+  },
+  {
+    "numb": 17,
+    "question": "What is the Gram-Schmidt process used for?",
+    "type": "Advanced Topics",
+    "answer": "Converting a set of vectors into an orthonormal set",
+    "options": [
+      "Finding eigenvalues",
+      "Converting a set of vectors into an orthonormal set",
+      "Matrix multiplication",
+      "Solving linear systems"
+    ],
+    "image": null
+  },
+  {
+    "numb": 18,
+    "question": "What is a positive definite matrix?",
+    "type": "Advanced Topics",
+    "answer": "A symmetric matrix where x^T A x > 0 for all non-zero x",
+    "options": [
+      "A matrix with all positive elements",
+      "A symmetric matrix where x^T A x > 0 for all non-zero x",
+      "A matrix with positive determinant",
+      "An invertible matrix"
+    ],
+    "image": null
+  },
+  {
+    "numb": 19,
+    "question": "What is the spectral theorem?",
+    "type": "Advanced Topics",
+    "answer": "Every symmetric matrix can be diagonalized by an orthogonal matrix",
+    "options": [
+      "Every matrix has eigenvalues",
+      "Every symmetric matrix can be diagonalized by an orthogonal matrix",
+      "Every matrix is invertible",
+      "Every matrix has a determinant"
+    ],
+    "image": null
+  },
+  {
+    "numb": 20,
+    "question": "What is singular value decomposition (SVD)?",
+    "type": "Advanced Topics",
+    "answer": "A factorization A = UΣV^T where U and V are orthogonal and Σ is diagonal",
+    "options": [
+      "A method to find eigenvalues",
+      "A factorization A = UΣV^T where U and V are orthogonal and Σ is diagonal",
+      "A way to solve linear systems",
+      "A matrix multiplication technique"
+    ],
+    "image": null
+  }
+]

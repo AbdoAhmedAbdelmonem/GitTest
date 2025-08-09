@@ -1,0 +1,132 @@
+[
+  {
+    "numb": 1,
+    "question": "How are matrices used in digital image processing?",
+    "type": "Image Processing",
+    "answer": "To represent pixel values and apply transformations like rotation and scaling",
+    "options": [
+      "To store file names only",
+      "To represent pixel values and apply transformations like rotation and scaling",
+      "To count image files",
+      "To measure file sizes"
+    ],
+    "image": null
+  },
+  {
+    "numb": 2,
+    "question": "What role do linear transformations play in computer graphics?",
+    "type": "Computer Graphics",
+    "answer": "They perform 3D rotations, translations, and projections for rendering",
+    "options": [
+      "They change color palettes",
+      "They perform 3D rotations, translations, and projections for rendering",
+      "They compress graphics files",
+      "They add text overlays"
+    ],
+    "image": null
+  },
+  {
+    "numb": 3,
+    "question": "In audio signal processing, how are vectors used?",
+    "type": "Audio Processing",
+    "answer": "To represent audio samples and frequency components in digital form",
+    "options": [
+      "To store song titles",
+      "To represent audio samples and frequency components in digital form",
+      "To count audio tracks",
+      "To measure volume levels only"
+    ],
+    "image": null
+  },
+  {
+    "numb": 4,
+    "question": "How does matrix multiplication relate to image filtering?",
+    "type": "Image Filtering",
+    "answer": "Convolution operations can be represented as matrix multiplications",
+    "options": [
+      "It changes image formats",
+      "Convolution operations can be represented as matrix multiplications",
+      "It compresses image files",
+      "It adds watermarks"
+    ],
+    "image": null
+  },
+  {
+    "numb": 5,
+    "question": "What is the significance of eigenvalues in image compression?",
+    "type": "Image Compression",
+    "answer": "They identify the most important components for efficient data representation",
+    "options": [
+      "They count the number of pixels",
+      "They identify the most important components for efficient data representation",
+      "They measure file sizes",
+      "They determine image resolution"
+    ],
+    "image": null
+  },
+  {
+    "numb": 6,
+    "question": "In video processing, how are frame transformations represented?",
+    "type": "Video Processing",
+    "answer": "As sequences of matrix operations for motion and effects",
+    "options": [
+      "As text descriptions",
+      "As sequences of matrix operations for motion and effects",
+      "As file timestamps",
+      "As color codes"
+    ],
+    "image": null
+  },
+  {
+    "numb": 7,
+    "question": "How do dot products help in pattern recognition for media?",
+    "type": "Pattern Recognition",
+    "answer": "They measure similarity between feature vectors extracted from media content",
+    "options": [
+      "They count pattern occurrences",
+      "They measure similarity between feature vectors extracted from media content",
+      "They sort patterns alphabetically",
+      "They compress pattern data"
+    ],
+    "image": null
+  },
+  {
+    "numb": 8,
+    "question": "What role does SVD play in image denoising?",
+    "type": "Image Enhancement",
+    "answer": "It separates signal from noise by decomposing the image matrix",
+    "options": [
+      "It adds artistic effects",
+      "It separates signal from noise by decomposing the image matrix",
+      "It changes image colors",
+      "It resizes images"
+    ],
+    "image": null
+  },
+  {
+    "numb": 9,
+    "question": "In digital media analytics, how are user preferences modeled?",
+    "type": "Media Analytics",
+    "answer": "As vectors in high-dimensional preference spaces",
+    "options": [
+      "As simple lists",
+      "As vectors in high-dimensional preference spaces",
+      "As text files",
+      "As database tables"
+    ],
+    "image": null
+  },
+  {
+    "numb": 10,
+    "question": "How are linear algebra concepts used in color space transformations?",
+    "type": "Color Processing",
+    "answer": "Matrix operations convert between different color representations (RGB, HSV, etc.)",
+    "options": [
+      "They count color values",
+      "Matrix operations convert between different color representations (RGB, HSV, etc.)",
+      "They sort colors by brightness",
+      "They compress color data"
+    ],
+    "image": null
+  }
+]
