@@ -1,6 +1,6 @@
+// specialization/department/level/subject/page.tsx
 "use client"
 
-import { use } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -8,9 +8,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, FileText, Video, BookOpen, ClipboardList, GraduationCap, ExternalLink } from "lucide-react"
+import { ArrowLeft, FileText, Video, BookOpen, ClipboardList, GraduationCap, ExternalLink, Play } from 'lucide-react'
 import { departmentData } from "@/lib/department-data"
 import { cn } from "@/lib/utils"
+import React, { Suspense } from "react"
+import ErrorBoundary from "@/components/ErrorBoundary"
 
 function ElegantShape({
   className,
@@ -109,16 +111,26 @@ const tabVariants = {
 }
 
 export default function SubjectPage({ params }: Props) {
-  const { department, level: levelParam, subject: subjectParam } = use(params)
-  const dept = departmentData[department]
-  const levelNum = Number.parseInt(levelParam)
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading subject...</div>}>
+        <SubjectContent params={params} />
+      </Suspense>
+    </ErrorBoundary>
+  )
+}
+
+function SubjectContent({ params }: Props) {
+  const resolvedParams = React.use(params)
+  const dept = departmentData[resolvedParams.department]
+  const levelNum = Number.parseInt(resolvedParams.level)
 
   if (!dept || !dept.levels[levelNum]) {
     notFound()
   }
 
   const level = dept.levels[levelNum]
-  const subject = [...level.subjects.term1, ...level.subjects.term2].find((s) => s.id === subjectParam)
+  const subject = [...level.subjects.term1, ...level.subjects.term2].find((s) => s.id === resolvedParams.subject)
 
   if (!subject) {
     notFound()
@@ -236,7 +248,7 @@ export default function SubjectPage({ params }: Props) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8"
           >
-            <Link href={`/specialization/${department}/${levelParam}`}>
+            <Link href={`/specialization/${resolvedParams.department}/${resolvedParams.level}`}>
               <Button
                 variant="ghost"
                 className="text-white/60 hover:text-white hover:bg-white/[0.05] border border-white/[0.08] backdrop-blur-sm"
@@ -381,6 +393,80 @@ export default function SubjectPage({ params }: Props) {
                   </TabsContent>
                 )
               })}
+              <TabsContent value="quizzes">
+                <motion.div custom={4} variants={tabVariants} initial="hidden" animate="visible">
+                  <Card className="bg-white/[0.02] border-white/[0.08] backdrop-blur-sm">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3 text-white">
+                        <motion.div
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ duration: 0.3 }}
+                          className="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-r from-orange-500/[0.15] to-transparent border border-white/[0.15] backdrop-blur-sm shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]"
+                        >
+                          <ClipboardList className="w-6 h-6 text-orange-400" />
+                        </motion.div>
+                        Quizzes
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      {subject.materials.quizzes && subject.materials.quizzes.length > 0 ? (
+                        <div className="space-y-4">
+                          <p className="text-white/60 mb-4 leading-relaxed">
+                            Test your knowledge with interactive quizzes for {subject.name}.
+                          </p>
+                          <div className="grid gap-4">
+                            {subject.materials.quizzes.map((quiz: any, index: number) => (
+                              <motion.div
+                                key={quiz.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                className="p-4 bg-white/[0.05] rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <div>
+                                    <h4 className="text-white font-semibold mb-1">{quiz.name}</h4>
+                                    <div className="flex gap-4 text-sm text-white/60">
+                                      <span>Code: {quiz.code}</span>
+                                      <span>Duration: {quiz.duration} min</span>
+                                      <span>Questions: {quiz.questions}</span>
+                                    </div>
+                                  </div>
+                                  <Button
+                                    asChild
+                                    className="bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+                                  >
+                                    <Link href={`/quiz/${resolvedParams.department}/${resolvedParams.subject}/${quiz.id}`}>
+                                      <Play className="w-4 h-4 mr-2" />
+                                      Start Quiz
+                                    </Link>
+                                  </Button>
+                                </div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-center py-12">
+                          <motion.div
+                            animate={{ y: [0, -10, 0] }}
+                            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                            className="w-16 h-16 rounded-lg mx-auto mb-4 flex items-center justify-center bg-gradient-to-r from-orange-500/[0.15] to-transparent border border-white/[0.15] backdrop-blur-sm"
+                          >
+                            <ClipboardList className="w-8 h-8 text-orange-400" />
+                          </motion.div>
+                          <p className="text-white/50 mb-4 leading-relaxed">
+                            Quizzes for this subject are currently being prepared.
+                          </p>
+                          <p className="text-sm text-white/30">
+                            Interactive quizzes will be available soon to test your knowledge.
+                          </p>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </TabsContent>
             </Tabs>
           </motion.div>
         </div>
