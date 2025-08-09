@@ -1,3 +1,4 @@
+// app/specialization/page.tsx
 'use client';
 // RedirectToRoot.tsx
 import { useEffect } from 'react';
