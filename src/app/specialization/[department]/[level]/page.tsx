@@ -1,6 +1,6 @@
+// specialization/department/level/page.tsx
 "use client"
 
-import { use } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -11,6 +11,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowLeft, BookOpen, Calendar } from "lucide-react"
 import { departmentData } from "@/lib/department-data"
 import { cn } from "@/lib/utils"
+import React, { Suspense } from "react"
+import ErrorBoundary from "@/components/ErrorBoundary"
 
 function ElegantShape({
   className,
@@ -110,9 +112,19 @@ const cardVariants = {
 }
 
 export default function LevelPage({ params }: Props) {
-  const { department, level: levelParam } = use(params)
-  const dept = departmentData[department]
-  const levelNum = Number.parseInt(levelParam)
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading level...</div>}>
+        <LevelContent params={params} />
+      </Suspense>
+    </ErrorBoundary>
+  )
+}
+
+function LevelContent({ params }: Props) {
+  const resolvedParams = React.use(params)
+  const dept = departmentData[resolvedParams.department]
+  const levelNum = Number.parseInt(resolvedParams.level)
 
   if (!dept || !dept.levels[levelNum]) {
     notFound()
@@ -170,7 +182,7 @@ export default function LevelPage({ params }: Props) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8"
           >
-            <Link href={`/specialization/${department}`}>
+            <Link href={`/specialization/${resolvedParams.department}`}>
               <Button
                 variant="ghost"
                 className="text-white/60 hover:text-white hover:bg-white/[0.05] border border-white/[0.08] backdrop-blur-sm"
@@ -239,7 +251,7 @@ export default function LevelPage({ params }: Props) {
                       initial="hidden"
                       animate="visible"
                     >
-                      <Link href={`/specialization/${department}/${levelParam}/${subject.id}`}>
+                      <Link href={`/specialization/${resolvedParams.department}/${resolvedParams.level}/${subject.id}`}>
                         <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-500 group cursor-pointer backdrop-blur-sm">
                           <CardHeader>
                             <div className="flex items-center gap-3 mb-2">
@@ -294,7 +306,7 @@ export default function LevelPage({ params }: Props) {
                       initial="hidden"
                       animate="visible"
                     >
-                      <Link href={`/specialization/${department}/${levelParam}/${subject.id}`}>
+                      <Link href={`/specialization/${resolvedParams.department}/${resolvedParams.level}/${subject.id}`}>
                         <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-500 group cursor-pointer backdrop-blur-sm">
                           <CardHeader>
                             <div className="flex items-center gap-3 mb-2">
