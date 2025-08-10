@@ -1,31 +1,14 @@
 'use client'
-import dynamic from 'next/dynamic'
-import { Suspense, useMemo } from 'react'
+import HeroGeometric from "@/components/hero-geometric"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { BookOpen, Shield, Brain, Database, Users, Award, Globe, Hospital } from "lucide-react"
-
-// Lazy load heavy components
-const HeroGeometric = dynamic(() => import('@/components/hero-geometric'), {
-  loading: () => <div className="h-[80vh] min-h-[600px] bg-black" />,
-  ssr: false
-})
-
-const CountUp = dynamic(() => import('@/components/CountUp'), {
-  ssr: false
-})
-
-const CreativeFeatureSlider = dynamic(() => import('@/components/creative-feature-slider'), {
-  ssr: false
-})
-
-const ScrollAnimatedSection = dynamic(() => import('@/components/scroll-animated-section'), {
-  ssr: false
-})
-
-const Navigation = dynamic(() => import('@/components/navigation'), {
-  ssr: false
-})
+import CountUp from "@/components/CountUp"
+import { BookOpen, Shield, Brain, Code, Database, Globe, Users, Award, Hospital, Cloud } from "lucide-react"
+import CreativeFeatureSlider from "@/components/creative-feature-slider"
+import ScrollAnimatedSection from "@/components/scroll-animated-section"
+import Navigation from "@/components/navigation"
+import Link from "next/link"
 
 const specializations = () => useMemo(() => [
   {
@@ -93,147 +76,211 @@ const stats = [
 ]
 
 export default function HomePage() {
-  const specializations = useSpecializations()
-  const stats = useStats()
-
   return (
     <div className="min-h-screen bg-[#030303]">
-      {/* Simplified Navigation */}
-      <Suspense fallback={null}>
-        <Navigation />
-      </Suspense>
+      {/* Navigation */}
+      <Navigation />
 
-      {/* Hero Section with lazy loading */}
-      <Suspense fallback={<div className="h-[80vh] min-h-[600px] bg-black" />}>
-        <HeroGeometric 
-          badge="Chameleon FCDS" 
-          title1="Master Your" 
-          title2="Future Skills" 
-          simplified // Pass a prop to use a simpler version on mobile
-        />
-      </Suspense>
+      {/* Hero Section - Using the exact design without changes */}
+      <HeroGeometric badge="Chameleon FCDS" title1="Master Your" title2="Future Skills" />
 
-      {/* Stats Section - Simplified */}
-      <section className="py-12 bg-[#030303] border-t border-white/5">
+      {/* Stats Section */}
+      <ScrollAnimatedSection className="py-20 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center p-4">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 mb-2">
-                  <stat.icon className="w-5 h-5 text-white/60" />
+              <ScrollAnimatedSection key={index} animation="slideUp" delay={index * 0.1} className="text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 mb-4">
+                  <stat.icon className="w-6 h-6 text-white/60" />
                 </div>
-                <div className="text-xl font-bold text-white mb-1">
+                <div className="text-2xl md:text-3xl font-bold text-white mb-2">
                   <CountUp
                     from={0}
                     to={stat.value}
                     separator=","
+                    direction="up"
                     duration={1}
-                    delay={0}
                     className="count-up-text"
                   />
                 </div>
-                <div className="text-xs text-white/40">{stat.label}</div>
-              </div>
+                <div className="text-sm text-white/40">{stat.label}</div>
+              </ScrollAnimatedSection>
             ))}
           </div>
         </div>
-      </section>
+      </ScrollAnimatedSection>
 
-      {/* Lazy-loaded Feature Slider */}
-      <Suspense fallback={null}>
-        <CreativeFeatureSlider mobileOptimized />
-      </Suspense>
+      {/* Creative Feature Slider */}
+      <CreativeFeatureSlider />
 
-      {/* Specializations Section - Simplified */}
-      <section className="py-12 bg-[#030303]">
+      {/* Specializations Section */}
+      <ScrollAnimatedSection className="py-20 bg-[#030303]">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <Badge variant="outline" className="mb-3 bg-white/5 border-white/10 text-white/60 text-xs">
+          <ScrollAnimatedSection animation="fadeIn" className="text-center mb-16">
+            <Badge variant="outline" className="mb-4 bg-white/5 border-white/10 text-white/60">
               Specializations
             </Badge>
-            <h2 className="text-2xl font-bold text-white mb-4">Choose Your <span className="text-indigo-400">Learning Path</span></h2>
-            <p className="text-sm text-white/40 max-w-md mx-auto">
-              Explore our comprehensive specializations
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Choose Your <span style={{ color: 'rgba(99, 102, 241, 1)' }}>Learning Path</span></h2>
+            <p className="text-lg text-white/40 max-w-2xl mx-auto">
+              Explore our comprehensive specializations designed to prepare you for the careers of tomorrow
             </p>
-          </div>
+          </ScrollAnimatedSection>
 
-          <div className="grid grid-cols-1 gap-4">
-            {specializations.map((spec, index) => (
-              <div key={index} className="bg-white/[0.02] border border-white/10 rounded-lg p-4">
-                <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg border ${spec.color} mb-3`}>
-                  <spec.icon className="w-5 h-5" />
-                </div>
-                <h3 className="text-white text-lg mb-1">{spec.title}</h3>
-                <p className="text-white/40 text-sm mb-3">{spec.description}</p>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2 text-xs text-white/60">
-                    <span>{spec.courses} Courses</span>
-                    <span>{spec.students} Students</span>
-                  </div>
-                </div>
-                <a href={`/specialization/${spec.id}`}>
-                  <Button
-                    variant="outline"
-                    className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 text-sm"
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {specializations.map((spec, index) => {
+              // Define unique colors for each card's spotlight
+              const colors = [
+                'rgba(99, 102, 241, 0.3)',  // indigo
+                'rgba(236, 72, 153, 0.3)',  // pink
+                'rgba(14, 165, 233, 0.3)', // sky
+                'rgba(20, 184, 166, 0.3)', // teal
+                'rgba(234, 179, 8, 0.3)',   // yellow
+                'rgba(239, 68, 68, 0.3)'   // red
+              ];
+              const spotlightColor = colors[index % colors.length];
+              
+              return (
+                <ScrollAnimatedSection key={index} animation="slideInFromBottom" delay={index * 0.1} className="h-full">
+                  <div 
+                    className="relative h-full overflow-hidden group"
+                    onMouseMove={(e) => {
+                      const card = e.currentTarget;
+                      const rect = card.getBoundingClientRect();
+                      const x = e.clientX - rect.left;
+                      const y = e.clientY - rect.top;
+                      card.style.setProperty('--mouse-x', `${x}px`);
+                      card.style.setProperty('--mouse-y', `${y}px`);
+                    }}
                   >
-                    Explore
+                    {/* Main spotlight gradient */}
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{
+                        background: `radial-gradient(
+                          circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                          ${spotlightColor} 0%,
+                          transparent 70%
+                        )`,
+                      }}
+                    />
+                    
+                    {/* Your existing card */}
+                    <Card className="bg-white/[0.02] border-white/10 hover:bg-white/[0.04] transition-all duration-300 h-full relative z-10">
+                      <CardHeader>
+                        <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg border ${spec.color} mb-4`}>
+                          <spec.icon className="w-6 h-6" />
+                        </div>
+                        <CardTitle className="text-white text-xl mb-2">{spec.title}</CardTitle>
+                        <CardDescription className="text-white/40 leading-relaxed">{spec.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-4 text-sm text-white/60">
+                            <span>{spec.courses} Courses</span>
+                            <span>{spec.students} Students</span>
+                          </div>
+                        </div>
+                        <Link href={`/specialization/${spec.id}`}>
+                          <Button
+                            variant="outline"
+                            className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 group-hover:border-white/30 transition-all duration-300"
+                          >
+                            Explore Courses
+                          </Button>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </ScrollAnimatedSection>
+              );
+            })}
+          </div>
+        </div>
+      </ScrollAnimatedSection>
+
+      {/* CTA Section */}
+      <ScrollAnimatedSection className="py-20 bg-[#030303] border-t border-white/5">
+        <div className="container mx-auto px-4 text-center">
+          <ScrollAnimatedSection animation="scaleIn" className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to Start Your Journey?</h2>
+            <p className="text-lg text-white/40 mb-8 leading-relaxed">
+              Join thousands of students who are already building their future with our expert-led courses and
+              industry-recognized certifications.
+            </p>
+            <ScrollAnimatedSection animation="slideUp" delay={0.3}>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/specialization">
+                  <Button size="lg" className="bg-white text-black hover:bg-white/90 px-8">
+                    Start Learning Today
                   </Button>
-                </a>
+                </Link>
+                <Link href="/specialization">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/20 text-white hover:bg-white/10 px-8 bg-transparent"
+                  >
+                    View All Courses
+                  </Button>
+                </Link>
               </div>
+            </ScrollAnimatedSection>
+          </ScrollAnimatedSection>
+        </div>
+      </ScrollAnimatedSection>
+
+      {/* Footer */}
+      <ScrollAnimatedSection animation="slideUp" className="py-12 bg-[#030303] border-t border-white/5">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              {
+              title: "Chameleon FCDS",
+              content: "Empowering learners worldwide with cutting-edge education and industry-relevant skills.",
+              isMain: true,
+              },
+              {
+              title: "Specializations",
+              items: ["General Education", "Cyber Security", "Artificial Intelligence", "Software Development"],
+              },
+              {
+              title: "Resources",
+              items: ["Course Catalog", "Student Portal", "Career Services", "Certification"],
+              },
+              {
+              title: "Support",
+              items: ["Help Center", "Contact Us", "Community", "Blog"],
+              },
+            ].map((section, index) => (
+              <ScrollAnimatedSection key={index} animation="slideInFromLeft" delay={index * 0.1}>
+              <div>
+                <h3 className="text-white font-semibold mb-4">{section.title}</h3>
+                {section.isMain ? (
+                <p className="text-white/40 text-sm leading-relaxed">{section.content}</p>
+                ) : (
+                <ul className="space-y-2 text-sm text-white/40">
+                  {section.items?.map((item, itemIndex) => (
+                  <li key={itemIndex}>
+                    <a href="#" className="hover:underline">
+                    {item}
+                    </a>
+                  </li>
+                  ))}
+                </ul>
+                )}
+              </div>
+              </ScrollAnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Simplified CTA */}
-      <section className="py-12 bg-[#030303] border-t border-white/5">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-md mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-4">Ready to Start Your Journey?</h2>
-            <p className="text-sm text-white/40 mb-6">
-              Join thousands of students building their future with our courses.
-            </p>
-            <div className="flex flex-col gap-3">
-              <a href="/specialization">
-                <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full">
-                  Start Learning
-                </Button>
-              </a>
-              <a href="/specialization">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="border-white/20 text-white hover:bg-white/10 w-full"
-                >
-                  View Courses
-                </Button>
-              </a>
+          <ScrollAnimatedSection animation="fadeIn" delay={0.5}>
+            <div className="border-t border-white/5 mt-8 pt-8 text-center text-sm text-white/40">
+                <p className="copy">
+                  &copy; {new Date().getDate()} of {new Date().toLocaleString('default', { month: 'long' })} {new Date().getFullYear()} - Chameleon FCDS. All rights reserved.
+                </p>
             </div>
-          </div>
+          </ScrollAnimatedSection>
         </div>
-      </section>
-
-      {/* Simplified Footer */}
-      <footer className="py-8 bg-[#030303] border-t border-white/5 text-sm">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-white font-semibold mb-2">Chameleon FCDS</h3>
-              <p className="text-white/40">Empowering learners worldwide.</p>
-            </div>
-            <div>
-              <h3 className="text-white font-semibold mb-2">Resources</h3>
-              <ul className="space-y-1 text-white/40">
-                <li><a href="#" className="hover:underline">Courses</a></li>
-                <li><a href="#" className="hover:underline">Support</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-white/5 mt-6 pt-6 text-center text-xs text-white/40">
-            <p>&copy; {new Date().getFullYear()} Chameleon FCDS</p>
-          </div>
-        </div>
-      </footer>
+      </ScrollAnimatedSection>
     </div>
   )
 }
