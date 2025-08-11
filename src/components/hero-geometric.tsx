@@ -11,7 +11,7 @@ const pacifico = Pacifico({
   variable: "--font-pacifico",
 })
 
-function ElegantShape({
+unction ElegantShape({
   className,
   delay = 0,
   width = 400,
@@ -39,22 +39,14 @@ function ElegantShape({
         rotate: rotate,
       }}
       transition={{
-        duration: 2.4,
-        delay,
+        duration: 1.2,
+        delay: delay * 0.3,
         ease: [0.23, 0.86, 0.39, 0.96],
-        opacity: { duration: 1.2 },
+        opacity: { duration: 0.6 },
       }}
       className={cn("absolute", className)}
     >
-      <motion.div
-        animate={{
-          y: [0, 15, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
+      <div
         style={{
           width,
           height,
@@ -72,7 +64,7 @@ function ElegantShape({
             "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]",
           )}
         />
-      </motion.div>
+      </div>
     </motion.div>
   )
 }
