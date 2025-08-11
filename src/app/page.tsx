@@ -37,6 +37,10 @@ import Users from "lucide-react/dist/esm/icons/users"
 import Award from "lucide-react/dist/esm/icons/award"
 import Globe from "lucide-react/dist/esm/icons/globe"
 import Cloud from "lucide-react/dist/esm/icons/cloud"
+import Shield from "lucide-react/dist/esm/icons/shield"
+import Brain from "lucide-react/dist/esm/icons/brain"
+import Database from "lucide-react/dist/esm/icons/database"
+import Hospital from "lucide-react/dist/esm/icons/hospital"
 
 // Memoized static data to prevent re-renders
 const specializations = [
