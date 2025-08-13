@@ -290,7 +290,7 @@ export default function CreativeFeatureSlider() {
             <span className="text-xs sm:text-base text-white/80 font-medium tracking-wide">Why You will love this</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold text-white mb-4 sm:mb-6 leading-tight" style={{fontSize: 'clamp(2rem, 5vw, 4rem)'}}>
+          <h1 className="text-[50px] md:text-[80px] lg:text-[90px] font-bold text-white mb-4 sm:mb-6 leading-tight">
             <span className="block">Explore The</span>
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent animate-gradient-x">
               Difference
