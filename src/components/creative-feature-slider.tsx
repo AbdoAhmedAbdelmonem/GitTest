@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sparkles, Zap, Target, Rocket, Shield, Crown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const features = [
@@ -63,42 +63,33 @@ export default function CreativeFeatureSlider() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
 
-  const nextSlide = useCallback(() => {
+  const nextSlide = () => {
     setActiveIndex((prev) => (prev + 1) % features.length);
     setProgress(0);
-  }, []);
+  };
 
-  const prevSlide = useCallback(() => {
+  const prevSlide = () => {
     setActiveIndex((prev) => (prev - 1 + features.length) % features.length);
     setProgress(0);
-  }, []);
+  };
 
-  // Auto-advance effect
   useEffect(() => {
     if (!isPlaying) return;
 
     const interval = setInterval(() => {
-      nextSlide();
-    }, 5000); // Change slide every 5 seconds
+      setProgress((prev) => {
+        if (prev >= 100) {
+          nextSlide();
+          return 0;
+        }
+        return prev + 0.5; // Slower increment for smoother animation
+      });
+    }, 50);
 
     return () => clearInterval(interval);
-  }, [isPlaying, nextSlide]);
-
-  // Progress bar effect
-  useEffect(() => {
-    if (!isPlaying) return;
-
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) return 0;
-        return prev + 0.5; // Slower progress for smoother animation
-      });
-    }, 20);
-
-    return () => clearInterval(progressInterval);
   }, [isPlaying]);
 
-  const handleFeatureClick = (index) => {
+  const handleFeatureClick = (index: number) => {
     setActiveIndex(index);
     setProgress(0);
     setIsPlaying(false);
@@ -114,6 +105,7 @@ export default function CreativeFeatureSlider() {
         <div className="absolute -bottom-8 left-80 w-72 h-72 bg-pink-500/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
       </div>
 
+      {/* Floating Particles */}
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
@@ -239,64 +231,16 @@ export default function CreativeFeatureSlider() {
             </div>
           </div>
 
-          {/* Feature Navigation */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            {features.map((feature, index) => (
-              <button
-                key={index}
-                onClick={() => handleFeatureClick(index)}
-                className={`group relative p-4 rounded-2xl backdrop-blur-sm border transition-all duration-300 hover:scale-105 ${
-                  activeIndex === index
-                    ? 'bg-white/20 border-white/30 shadow-xl'
-                    : 'bg-white/5 border-white/10 hover:bg-white/10'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div 
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center shadow-lg`}
-                  >
-                    {React.createElement(feature.icon, { 
-                      className: "w-6 h-6 text-white" 
-                    })}
-                  </div>
-                  <div className="text-left">
-                    <div className="text-white font-semibold text-sm">
-                      {feature.title}
-                    </div>
-                    <div className="text-white/60 text-xs">
-                      {feature.highlight}
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Active Indicator */}
-                {activeIndex === index && (
-                  <div 
-                    className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${feature.gradient} opacity-10`}
-                  ></div>
-                )}
-              </button>
-            ))}
-          </div>
-
           {/* Navigation Controls */}
           <div className="flex justify-center gap-4">
             <button
-              onClick={() => {
-                prevSlide();
-                setIsPlaying(false);
-                setTimeout(() => setIsPlaying(true), 3000);
-              }}
+              onClick={prevSlide}
               className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
-              onClick={() => {
-                nextSlide();
-                setIsPlaying(false);
-                setTimeout(() => setIsPlaying(true), 3000);
-              }}
+              onClick={nextSlide}
               className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
             >
               <ChevronRight className="w-5 h-5" />
