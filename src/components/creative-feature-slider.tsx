@@ -1,272 +1,344 @@
-"use client"
-
-import React from "react"
-
-import { motion, AnimatePresence } from "framer-motion"
-import { useState, useEffect } from "react"
-import { Sparkles, Zap, Target, Rocket, Shield, Crown } from "lucide-react"
+import React, { useState, useEffect, useCallback } from 'react';
+import { Sparkles, Zap, Target, Rocket, Shield, Crown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const features = [
   {
     icon: Sparkles,
     title: "AI-Powered Learning Paths",
-    description: "Personalized curriculum that adapts to your learning style and pace",
-    gradient: "from-purple-500 to-pink-500",
-    bgGradient: "from-purple-500/10 to-pink-500/10",
+    description: "Personalized curriculum that adapts to your learning style and pace with intelligent recommendations",
+    gradient: "from-purple-500 via-pink-500 to-rose-500",
+    color: "#8b5cf6",
     highlight: "Smart & Adaptive",
+    stats: "10K+ paths created"
   },
   {
     icon: Zap,
     title: "Lightning-Fast Progress",
-    description: "Accelerated learning with micro-lessons and instant feedback loops",
-    gradient: "from-yellow-500 to-orange-500",
-    bgGradient: "from-yellow-500/10 to-orange-500/10",
+    description: "Accelerated learning with micro-lessons and instant feedback loops that maximize retention",
+    gradient: "from-amber-400 via-orange-500 to-red-500",
+    color: "#f59e0b",
     highlight: "2x Faster Results",
+    stats: "Average 4 weeks"
   },
   {
     icon: Target,
     title: "Industry-Focused Content",
-    description: "Real-world projects and skills that employers actually want",
-    gradient: "from-blue-500 to-cyan-500",
-    bgGradient: "from-blue-500/10 to-cyan-500/10",
+    description: "Real-world projects and skills that employers actually want, updated monthly",
+    gradient: "from-cyan-400 via-blue-500 to-indigo-600",
+    color: "#06b6d4",
     highlight: "Job-Ready Skills",
+    stats: "500+ companies"
   },
   {
     icon: Rocket,
     title: "Career Launch Support",
-    description: "Dedicated mentorship and job placement assistance",
-    gradient: "from-green-500 to-emerald-500",
-    bgGradient: "from-green-500/10 to-emerald-500/10",
+    description: "Dedicated mentorship and job placement assistance with industry professionals",
+    gradient: "from-emerald-400 via-green-500 to-teal-600",
+    color: "#10b981",
     highlight: "95% Job Placement",
+    stats: "Within 6 months"
   },
   {
     icon: Shield,
     title: "Lifetime Access",
-    description: "Keep learning forever with continuous content updates",
-    gradient: "from-red-500 to-rose-500",
-    bgGradient: "from-red-500/10 to-rose-500/10",
+    description: "Keep learning forever with continuous content updates and new course additions",
+    gradient: "from-red-400 via-rose-500 to-pink-600",
+    color: "#ef4444",
     highlight: "Never Expires",
+    stats: "Updates weekly"
   },
   {
     icon: Crown,
     title: "Elite Community",
-    description: "Connect with top professionals and industry leaders",
-    gradient: "from-indigo-500 to-purple-500",
-    bgGradient: "from-indigo-500/10 to-purple-500/10",
+    description: "Connect with top professionals and industry leaders in our exclusive network",
+    gradient: "from-violet-500 via-purple-600 to-indigo-700",
+    color: "#7c3aed",
     highlight: "Premium Network",
-  },
-]
+    stats: "50K+ members"
+  }
+];
 
 export default function CreativeFeatureSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isHovered, setIsHovered] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
 
+  const nextSlide = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % features.length);
+    setProgress(0);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + features.length) % features.length);
+    setProgress(0);
+  }, []);
+
+  // Auto-advance effect
   useEffect(() => {
-    if (!isHovered) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % features.length)
-      }, 4000)
-      return () => clearInterval(interval)
-    }
-  }, [isHovered])
+    if (!isPlaying) return;
 
-  const currentFeature = features[currentIndex]
-  const nextIndex = (currentIndex + 1) % features.length
-  const prevIndex = (currentIndex - 1 + features.length) % features.length
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isPlaying, nextSlide]);
+
+  // Progress bar effect
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) return 0;
+        return prev + 0.5; // Slower progress for smoother animation
+      });
+    }, 20);
+
+    return () => clearInterval(progressInterval);
+  }, [isPlaying]);
+
+  const handleFeatureClick = (index) => {
+    setActiveIndex(index);
+    setProgress(0);
+    setIsPlaying(false);
+    setTimeout(() => setIsPlaying(true), 3000); // Resume auto-play after 3 seconds
+  };
 
   return (
-    <section className="py-20 bg-[#030303] relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/5 to-cyan-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
+    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 relative overflow-hidden py-20">
+      {/* Animated Background */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-72 h-72 bg-yellow-500/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-80 w-72 h-72 bg-pink-500/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, margin: "-100px" }}
-          variants={{
-            hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0 },
-          }}
-          transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-white/60 tracking-wide">Why You'll Love This</span>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-8 hover:bg-white/10 transition-colors duration-300">
+            <Sparkles className="w-5 h-5 text-purple-400 animate-pulse" />
+            <span className="text-white/80 font-medium tracking-wide">Discover What Makes Us Different</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
-            Experience the{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Difference
+          
+          <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight">
+            <span className="block">Experience</span>
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent animate-gradient-x">
+              Excellence
             </span>
-          </h2>
-        </motion.div>
+          </h1>
+          
+          <p className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+            Discover the features that set us apart and transform your learning journey into something extraordinary
+          </p>
+        </div>
 
-        {/* Main Slider */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, margin: "-150px" }}
-          variants={{
-            hidden: { opacity: 0, scale: 0.9 },
-            visible: { opacity: 1, scale: 1 },
-          }}
-          transition={{ duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
-          className="relative max-w-6xl mx-auto"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          {/* Central Feature Card */}
-          <div className="relative h-[400px] md:h-[500px] flex items-center justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                exit={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-                className="absolute inset-0 flex items-center justify-center"
-              >
-                <div
-                  className={`relative w-full max-w-2xl h-80 rounded-3xl bg-gradient-to-br ${currentFeature.bgGradient} border border-white/10 backdrop-blur-xl overflow-hidden group`}
-                >
-                  {/* Animated Background Pattern */}
-                  <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 left-0 w-full h-full">
-                      {[...Array(20)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-2 h-2 bg-white/20 rounded-full"
-                          style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                          }}
-                          animate={{
-                            y: [0, -20, 0],
-                            opacity: [0.2, 0.8, 0.2],
-                          }}
-                          transition={{
-                            duration: 3 + Math.random() * 2,
-                            repeat: Number.POSITIVE_INFINITY,
-                            delay: Math.random() * 2,
-                          }}
-                        />
-                      ))}
+        {/* Main Slider Container */}
+        <div className="relative max-w-7xl mx-auto">
+          
+          {/* Main Feature Display */}
+          <div className="relative mb-12">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              
+              {/* Feature Content */}
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div 
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${features[activeIndex].gradient} flex items-center justify-center shadow-2xl transform hover:scale-110 transition-transform duration-300`}
+                    >
+                      {React.createElement(features[activeIndex].icon, { 
+                        className: "w-8 h-8 text-white" 
+                      })}
+                    </div>
+                    <div>
+                      <span 
+                        className={`inline-block px-4 py-2 rounded-full text-sm font-bold bg-gradient-to-r ${features[activeIndex].gradient} text-white shadow-lg`}
+                      >
+                        {features[activeIndex].highlight}
+                      </span>
                     </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="relative z-10 p-8 md:p-12 h-full flex flex-col justify-center">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-                      className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${currentFeature.gradient} mb-6 shadow-2xl`}
-                    >
-                      {React.createElement(currentFeature.icon, { className: "w-8 h-8 text-white" })}
-                    </motion.div>
+                  <div className="space-y-4">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                      {features[activeIndex].title}
+                    </h2>
+                    <p className="text-xl text-white/70 leading-relaxed max-w-lg">
+                      {features[activeIndex].description}
+                    </p>
+                    <div className="flex items-center gap-2 text-white/50">
+                      <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                      <span className="text-sm font-medium">{features[activeIndex].stats}</span>
+                    </div>
+                  </div>
+                </div>
 
-                    <motion.div
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 }}
-                      className="mb-4"
+                {/* Progress Bar */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-white/60 text-sm">Auto-advancing in</span>
+                    <button
+                      onClick={() => setIsPlaying(!isPlaying)}
+                      className="text-white/60 hover:text-white text-sm transition-colors"
                     >
-                      <span
-                        className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${currentFeature.gradient} text-white mb-3`}
-                      >
-                        {currentFeature.highlight}
-                      </span>
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">{currentFeature.title}</h3>
-                    </motion.div>
+                      {isPlaying ? 'Pause' : 'Play'}
+                    </button>
+                  </div>
+                  <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                    <div 
+                      className={`h-full bg-gradient-to-r ${features[activeIndex].gradient} transition-all duration-75 ease-linear rounded-full`}
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
 
-                    <motion.p
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.5 }}
-                      className="text-white/70 text-lg leading-relaxed"
+              {/* Visual Display */}
+              <div className="relative">
+                <div className="relative w-full h-96 rounded-3xl overflow-hidden">
+                  {/* Background Pattern */}
+                  <div 
+                    className={`absolute inset-0 bg-gradient-to-br ${features[activeIndex].gradient} opacity-20`}
+                  ></div>
+                  
+                  {/* Geometric Shapes */}
+                  <div className="absolute inset-0">
+                    <div 
+                      className="absolute top-8 right-8 w-24 h-24 rounded-2xl bg-white/10 backdrop-blur-sm transform rotate-12 animate-pulse"
+                      style={{ animationDelay: '0s' }}
+                    ></div>
+                    <div 
+                      className="absolute bottom-12 left-12 w-32 h-32 rounded-full bg-white/5 backdrop-blur-sm animate-pulse"
+                      style={{ animationDelay: '1s' }}
+                    ></div>
+                    <div 
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-3xl bg-white/10 backdrop-blur-sm animate-pulse"
+                      style={{ animationDelay: '2s' }}
+                    ></div>
+                  </div>
+
+                  {/* Central Icon */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div 
+                      className={`w-32 h-32 rounded-3xl bg-gradient-to-r ${features[activeIndex].gradient} flex items-center justify-center shadow-2xl transform hover:scale-110 transition-transform duration-500`}
                     >
-                      {currentFeature.description}
-                    </motion.p>
+                      {React.createElement(features[activeIndex].icon, { 
+                        className: "w-16 h-16 text-white animate-bounce" 
+                      })}
+                    </div>
                   </div>
 
                   {/* Glow Effect */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-r ${currentFeature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`}
-                  />
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Side Preview Cards */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 hidden lg:block">
-            <motion.div
-              key={`prev-${prevIndex}`}
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 0.6, x: 0 }}
-              className="w-48 h-32 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-4 transform rotate-12 hover:rotate-6 transition-transform duration-300"
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-8 h-8 rounded-lg bg-gradient-to-r ${features[prevIndex].gradient} flex items-center justify-center`}
-                >
-                  {React.createElement(features[prevIndex].icon, { className: "w-4 h-4 text-white" })}
-                </div>
-                <div>
-                  <h4 className="text-white text-sm font-semibold truncate">{features[prevIndex].title}</h4>
-                  <p className="text-white/50 text-xs">{features[prevIndex].highlight}</p>
+                  <div 
+                    className={`absolute inset-0 bg-gradient-to-r ${features[activeIndex].gradient} opacity-30 blur-3xl`}
+                  ></div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 hidden lg:block">
-            <motion.div
-              key={`next-${nextIndex}`}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 0.6, x: 0 }}
-              className="w-48 h-32 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-4 transform -rotate-12 hover:-rotate-6 transition-transform duration-300"
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-8 h-8 rounded-lg bg-gradient-to-r ${features[nextIndex].gradient} flex items-center justify-center`}
-                >
-                  {React.createElement(features[nextIndex].icon, { className: "w-4 h-4 text-white" })}
-                </div>
-                <div>
-                  <h4 className="text-white text-sm font-semibold truncate">{features[nextIndex].title}</h4>
-                  <p className="text-white/50 text-xs">{features[nextIndex].highlight}</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Progress Indicators */}
-        <div className="flex justify-center mt-12 gap-3">
-          {features.map((_, index) => (
-            <button key={index} onClick={() => setCurrentIndex(index)} className="group relative">
-              <div
-                className={`w-12 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? "bg-white" : "bg-white/20 hover:bg-white/40"
+          {/* Feature Navigation */}
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            {features.map((feature, index) => (
+              <button
+                key={index}
+                onClick={() => handleFeatureClick(index)}
+                className={`group relative p-4 rounded-2xl backdrop-blur-sm border transition-all duration-300 hover:scale-105 ${
+                  activeIndex === index
+                    ? 'bg-white/20 border-white/30 shadow-xl'
+                    : 'bg-white/5 border-white/10 hover:bg-white/10'
                 }`}
-              />
-              {index === currentIndex && (
-                <motion.div
-                  layoutId="activeIndicator"
-                  className={`absolute inset-0 rounded-full bg-gradient-to-r ${currentFeature.gradient} opacity-50`}
-                />
-              )}
+              >
+                <div className="flex items-center gap-3">
+                  <div 
+                    className={`w-12 h-12 rounded-xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center shadow-lg`}
+                  >
+                    {React.createElement(feature.icon, { 
+                      className: "w-6 h-6 text-white" 
+                    })}
+                  </div>
+                  <div className="text-left">
+                    <div className="text-white font-semibold text-sm">
+                      {feature.title}
+                    </div>
+                    <div className="text-white/60 text-xs">
+                      {feature.highlight}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Active Indicator */}
+                {activeIndex === index && (
+                  <div 
+                    className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${feature.gradient} opacity-10`}
+                  ></div>
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => {
+                prevSlide();
+                setIsPlaying(false);
+                setTimeout(() => setIsPlaying(true), 3000);
+              }}
+              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+            >
+              <ChevronLeft className="w-5 h-5" />
             </button>
-          ))}
+            <button
+              onClick={() => {
+                nextSlide();
+                setIsPlaying(false);
+                setTimeout(() => setIsPlaying(true), 3000);
+              }}
+              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-10px) rotate(5deg); }
+          66% { transform: translateY(5px) rotate(-5deg); }
+        }
+        
+        @keyframes gradient-x {
+          0%, 100% {
+            background-size: 200% 200%;
+            background-position: left center;
+          }
+          50% {
+            background-size: 200% 200%;
+            background-position: right center;
+          }
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-gradient-x {
+          animation: gradient-x 4s ease infinite;
+        }
+        
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </section>
-  )
+  );
 }
