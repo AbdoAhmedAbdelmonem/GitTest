@@ -1,4 +1,3 @@
-// specialization/department/level/subject/page.tsx
 "use client"
 
 import { motion } from "framer-motion"
@@ -13,64 +12,6 @@ import { departmentData } from "@/lib/department-data"
 import { cn } from "@/lib/utils"
 import React, { Suspense } from "react"
 import ErrorBoundary from "@/components/ErrorBoundary"
-
-function ElegantShape({
-  className,
-  delay = 0,
-  width = 400,
-  height = 100,
-  rotate = 0,
-  gradient = "from-white/[0.08]",
-}: {
-  className?: string
-  delay?: number
-  width?: number
-  height?: number
-  rotate?: number
-  gradient?: string
-}) {
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: -150,
-        rotate: rotate - 15,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        rotate: rotate,
-      }}
-      transition={{
-        duration: 1.2,
-        delay: delay * 0.3,
-        ease: [0.23, 0.86, 0.39, 0.96],
-        opacity: { duration: 0.6 },
-      }}
-      className={cn("absolute", className)}
-    >
-      <div
-        style={{
-          width,
-          height,
-        }}
-        className="relative"
-      >
-        <div
-          className={cn(
-            "absolute inset-0 rounded-full",
-            "bg-gradient-to-r to-transparent",
-            gradient,
-            "backdrop-blur-[2px] border-2 border-white/[0.15]",
-            "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
-            "after:absolute after:inset-0 after:rounded-full",
-            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]",
-          )}
-        />
-      </div>
-    </motion.div>
-  )
-}
 
 interface Props {
   params: Promise<{ department: string; level: string; subject: string }>
@@ -96,7 +37,7 @@ const tabVariants = {
     y: 0,
     transition: {
       duration: 0.3,
-      delay: 0.5 + i * 0.05,
+      delay: i * 0.05,
       ease: [0.25, 0.4, 0.25, 1],
     },
   }),
@@ -167,9 +108,9 @@ function SubjectContent({ params }: Props) {
       icon: ClipboardList,
       color: "from-orange-500/[0.15]",
       iconColor: "text-orange-400",
-      content: null,
-      description: "Quizzes and practice tests will be added here",
-      buttonText: "Coming Soon",
+      content: subject.materials.quizzes?.length > 0 ? true : null,
+      description: "Test your knowledge with interactive quizzes",
+      buttonText: subject.materials.quizzes?.length > 0 ? "View Quizzes" : "Coming Soon",
     },
     {
       id: "exams",
@@ -186,50 +127,6 @@ function SubjectContent({ params }: Props) {
   return (
     <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
-
-      {/* Elegant Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <ElegantShape
-          delay={0.3}
-          width={380}
-          height={95}
-          rotate={6}
-          gradient="from-indigo-500/[0.15]"
-          className="left-[-5%] top-[22%]"
-        />
-        <ElegantShape
-          delay={0.5}
-          width={300}
-          height={75}
-          rotate={-8}
-          gradient="from-rose-500/[0.15]"
-          className="right-[-1%] top-[55%]"
-        />
-        <ElegantShape
-          delay={0.4}
-          width={160}
-          height={50}
-          rotate={-2}
-          gradient="from-violet-500/[0.15]"
-          className="left-[12%] bottom-[12%]"
-        />
-        <ElegantShape
-          delay={0.6}
-          width={120}
-          height={35}
-          rotate={12}
-          gradient="from-amber-500/[0.15]"
-          className="right-[22%] top-[18%]"
-        />
-        <ElegantShape
-          delay={0.7}
-          width={90}
-          height={25}
-          rotate={-18}
-          gradient="from-cyan-500/[0.15]"
-          className="left-[25%] top-[8%]"
-        />
-      </div>
 
       <div className="relative z-10 py-12 px-4">
         <div className="max-w-7xl mx-auto">
@@ -300,7 +197,7 @@ function SubjectContent({ params }: Props) {
           <motion.div custom={3} variants={fadeUpVariants} initial="hidden" animate="visible">
             <Tabs defaultValue="lectures" className="w-full">
               <TabsList className="grid w-full grid-cols-5 mb-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
-                {sections.map((section, index) => {
+                {sections.map((section) => {
                   const IconComponent = section.icon
                   return (
                     <TabsTrigger
@@ -340,25 +237,64 @@ function SubjectContent({ params }: Props) {
                         </CardHeader>
                         <CardContent>
                           {section.content ? (
-                            <div className="space-y-4">
-                              <p className="text-white/60 mb-4 leading-relaxed">
-                                {section.description} for {subject.name}.
-                              </p>
-                              <Button
-                                asChild
-                                className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
-                              >
-                                <a
-                                  href={section.content}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center gap-2"
+                            section.id === "quizzes" ? (
+                              <div className="space-y-4">
+                                <p className="text-white/60 mb-4 leading-relaxed">
+                                  {section.description} for {subject.name}.
+                                </p>
+                                <div className="grid gap-4">
+                                  {subject.materials.quizzes.map((quiz: any, idx: number) => (
+                                    <motion.div
+                                      key={quiz.id}
+                                      initial={{ opacity: 0, y: 20 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      transition={{ delay: idx * 0.1 }}
+                                      className="p-4 bg-white/[0.05] rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all"
+                                    >
+                                      <div className="flex items-center justify-between">
+                                        <div>
+                                          <h4 className="text-white font-semibold mb-1">{quiz.name}</h4>
+                                          <div className="flex gap-4 text-sm text-white/60">
+                                            <span>{quiz.code}</span>
+                                            <span>{quiz.duration} min</span>
+                                            <span>{quiz.questions} Question</span>
+                                          </div>
+                                        </div>
+                                        <Button
+                                          asChild
+                                          className="bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+                                        >
+                                          <Link href={`/quiz/${resolvedParams.department}/${resolvedParams.subject}/${quiz.id}`}>
+                                            <Play className="w-4 h-4 mr-2" />
+                                            Start Quiz
+                                          </Link>
+                                        </Button>
+                                      </div>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="space-y-4">
+                                <p className="text-white/60 mb-4 leading-relaxed">
+                                  {section.description} for {subject.name}.
+                                </p>
+                                <Button
+                                  asChild
+                                  className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
                                 >
-                                  <ExternalLink className="w-4 h-4" />
-                                  {section.buttonText}
-                                </a>
-                              </Button>
-                            </div>
+                                  <a
+                                    href={section.content}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2"
+                                  >
+                                    <ExternalLink className="w-4 h-4" />
+                                    {section.buttonText}
+                                  </a>
+                                </Button>
+                              </div>
+                            )
                           ) : (
                             <div className="text-center py-12">
                               <motion.div
@@ -385,80 +321,6 @@ function SubjectContent({ params }: Props) {
                   </TabsContent>
                 )
               })}
-              <TabsContent value="quizzes">
-                <motion.div custom={4} variants={tabVariants} initial="hidden" animate="visible">
-                  <Card className="bg-white/[0.02] border-white/[0.08] backdrop-blur-sm">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-3 text-white">
-                        <motion.div
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          transition={{ duration: 0.3 }}
-                          className="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-r from-orange-500/[0.15] to-transparent border border-white/[0.15] backdrop-blur-sm shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]"
-                        >
-                          <ClipboardList className="w-6 h-6 text-orange-400" />
-                        </motion.div>
-                        Quizzes
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      {subject.materials.quizzes && subject.materials.quizzes.length > 0 ? (
-                        <div className="space-y-4">
-                          <p className="text-white/60 mb-4 leading-relaxed">
-                            Test your knowledge with interactive quizzes for {subject.name}.
-                          </p>
-                          <div className="grid gap-4">
-                            {subject.materials.quizzes.map((quiz: any, index: number) => (
-                              <motion.div
-                                key={quiz.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                className="p-4 bg-white/[0.05] rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all"
-                              >
-                                <div className="flex items-center justify-between">
-                                  <div>
-                                    <h4 className="text-white font-semibold mb-1">{quiz.name}</h4>
-                                    <div className="flex gap-4 text-sm text-white/60">
-                                      <span>Code: {quiz.code}</span>
-                                      <span>Duration: {quiz.duration} min</span>
-                                      <span>Questions: {quiz.questions}</span>
-                                    </div>
-                                  </div>
-                                  <Button
-                                    asChild
-                                    className="bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
-                                  >
-                                    <Link href={`/quiz/${resolvedParams.department}/${resolvedParams.subject}/${quiz.id}`}>
-                                      <Play className="w-4 h-4 mr-2" />
-                                      Start Quiz
-                                    </Link>
-                                  </Button>
-                                </div>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="text-center py-12">
-                          <motion.div
-                            animate={{ y: [0, -10, 0] }}
-                            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                            className="w-16 h-16 rounded-lg mx-auto mb-4 flex items-center justify-center bg-gradient-to-r from-orange-500/[0.15] to-transparent border border-white/[0.15] backdrop-blur-sm"
-                          >
-                            <ClipboardList className="w-8 h-8 text-orange-400" />
-                          </motion.div>
-                          <p className="text-white/50 mb-4 leading-relaxed">
-                            Quizzes for this subject are currently being prepared.
-                          </p>
-                          <p className="text-sm text-white/30">
-                            Interactive quizzes will be available soon to test your knowledge.
-                          </p>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </TabsContent>
             </Tabs>
           </motion.div>
         </div>
