@@ -1,75 +1,54 @@
-// "use client"
+"use client"
 
 import { motion } from "framer-motion"
-// Removed 'next/font/google' as it causes compilation issues outside of a full Next.js build environment.
-// import { Pacifico } from "next/font/google"
-// Replaced 'next/image' with standard 'img' tag for broader compatibility.
-// import Image from "next/image"
-import { cn } from "@/lib/utils"
+import { Pacifico } from "next/font/google"
 import Image from "next/image"
-function ElegantShape({
+import { cn } from "@/lib/utils"
+
+const pacifico = Pacifico({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-pacifico",
+})
+
+function StaticShape({
   className,
-  delay = 0,
   width = 400,
   height = 100,
   rotate = 0,
-  gradient = "from-white/[0.08]",
+  color = "rgba(99, 102, 241, 0.2)",
+  borderColor = "rgba(255, 255, 255, 0.15)"
 }: {
   className?: string
-  delay?: number
   width?: number
   height?: number
   rotate?: number
-  gradient?: string
+  color?: string
+  borderColor?: string
 }) {
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: -150,
-        rotate: rotate - 15,
+    <div 
+      className={cn("absolute", className)}
+      style={{
+        width,
+        height,
+        transform: `rotate(${rotate}deg)`,
       }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        rotate: rotate,
-      }}
-      transition={{
-        duration: 2.4,
-        delay,
-        ease: [0.23, 0.86, 0.39, 0.96],
-        opacity: { duration: 1.2 },
-      }}
-      className={`absolute ${className}`}
     >
-      <motion.div
-        animate={{
-          y: [0, 15, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
-        style={{
-          width,
-          height,
-        }}
-        className="relative"
-      >
-        {/* Removed backdrop-blur for performance */}
-        <div
-          className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} border-2 border-white/[0.15] shadow-sm after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_70%)]`}
-        />
-      </motion.div>
-    </motion.div>
+      <div className="absolute inset-0 rounded-full" style={{
+        background: color,
+        border: `1px solid ${borderColor}`,
+        boxShadow: '0 8px 32px 0 rgba(255,255,255,0.1)',
+        backdropFilter: 'blur(2px)',
+      }} />
+    </div>
   )
 }
 
 export default function HeroGeometric({
-  badge = "Chameleon FCDS",
-  title1 = "Master Your",
-  title2 = "Future Skills",
+  badge = "Kokonut UI",
+  title1 = "Elevate Your",
+  title2 = "Digital Vision",
 }: {
   badge?: string
   title1?: string
@@ -81,98 +60,110 @@ export default function HeroGeometric({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        delay: 0.2 + i * 0.1,
-        ease: "easeOut",
+        duration: 0.8,
+        delay: 0.3 + i * 0.15,
+        ease: [0.25, 0.4, 0.25, 1],
       },
     }),
   }
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]">
-      {/* Optimized background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Using simplified ElegantShape */}
-        <ElegantShape
-          delay={0.3}
+      {/* Background gradient */}
+      <div className="absolute inset-0 opacity-40" style={{
+        background: 'radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.3) 0%, rgba(0, 0, 0, 0) 70%)'
+      }} />
+
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <StaticShape
           width={600}
           height={140}
           rotate={12}
-          gradient="from-indigo-500/[0.15]"
+          color="rgba(99, 102, 241, 0.25)"
+          borderColor="rgba(199, 210, 254, 0.3)"
           className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
         />
-        <ElegantShape
-          delay={0.5}
+
+        <StaticShape
           width={500}
           height={120}
           rotate={-15}
-          gradient="from-rose-500/[0.15]"
+          color="rgba(244, 63, 94, 0.25)"
+          borderColor="rgba(253, 164, 175, 0.3)"
           className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
         />
-        <ElegantShape
-          delay={0.4}
+
+        <StaticShape
           width={300}
           height={80}
           rotate={-8}
-          gradient="from-violet-500/[0.15]"
+          color="rgba(139, 92, 246, 0.25)"
+          borderColor="rgba(196, 181, 253, 0.3)"
           className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
         />
-      </div>
 
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-rose-500/5"></div>
+        <StaticShape
+          width={200}
+          height={60}
+          rotate={20}
+          color="rgba(245, 158, 11, 0.25)"
+          borderColor="rgba(253, 230, 138, 0.3)"
+          className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+        />
+
+        <StaticShape
+          width={150}
+          height={40}
+          rotate={-25}
+          color="rgba(6, 182, 212, 0.25)"
+          borderColor="rgba(103, 232, 249, 0.3)"
+          className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
+        />
+      </div>
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             custom={0}
+            variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            variants={fadeUpVariants}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12"
           >
-            {/* Replaced Next.js Image component with standard <img> tag */}
-            <img 
+            <Image 
               src="/images/1212-removebg-preview.png" 
-              alt="Chameleon Logo" 
+              alt="Kokonut UI" 
               width={20} 
               height={20}
+              priority
             />
             <span className="text-sm text-white/60 tracking-wide">{badge}</span>
           </motion.div>
 
-          <motion.h1 
-            custom={1} 
-            initial="hidden" 
-            animate="visible" 
-            variants={fadeUpVariants}
-            className="text-[65px] md:text-[120px] font-bold mb-6 md:mb-8 tracking-tight leading-tight"
-          >
-            <span className="text-white">{title1}</span>
-            <br />
-            {/* Removed Pacifico.className as Pacifico font import was removed */}
-            <span className={cn(
-              "text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300",
-              // pacifico.className,
-            )} style={{ fontFamily: 'Pacifico, cursive' ,fontWeight: '400' }}>
-              {title2}
-            </span>
-          </motion.h1>
+          <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
+            <h1 className="text-[65px] md:text-[120px] font-bold mb-6 md:mb-8 tracking-tight leading-tight">
+              <span className="text-white">
+                {title1}
+              </span>
+              <br />
+              <span className={cn(
+                "text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300",
+                pacifico.className,
+              )}>
+                {title2}
+              </span>
+            </h1>
+          </motion.div>
 
-          <motion.p 
-            custom={2} 
-            initial="hidden" 
-            animate="visible" 
-            variants={fadeUpVariants}
-            className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4"
-          >
-            Transforming ideas into vibrant digital experiences, adapting seamlessly like a chameleon to every challenge and vision.
-          </motion.p>
+          <motion.div custom={2} variants={fadeUpVariants} initial="hidden" animate="visible">
+            <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
+              Transforming ideas into vibrant digital experiences, adapting seamlessly like a chameleon to every challenge and vision.
+            </p>
+          </motion.div>
         </div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
     </div>
   )
 }
