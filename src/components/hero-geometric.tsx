@@ -1,20 +1,75 @@
-"use client"
+// "use client"
 
 import { motion } from "framer-motion"
-import { Pacifico } from "next/font/google"
-import Image from "next/image"
+// Removed 'next/font/google' as it causes compilation issues outside of a full Next.js build environment.
+// import { Pacifico } from "next/font/google"
+// Replaced 'next/image' with standard 'img' tag for broader compatibility.
+// import Image from "next/image"
 import { cn } from "@/lib/utils"
-
-const pacifico = Pacifico({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-pacifico",
-})
+import Image from "next/image"
+function ElegantShape({
+  className,
+  delay = 0,
+  width = 400,
+  height = 100,
+  rotate = 0,
+  gradient = "from-white/[0.08]",
+}: {
+  className?: string
+  delay?: number
+  width?: number
+  height?: number
+  rotate?: number
+  gradient?: string
+}) {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: -150,
+        rotate: rotate - 15,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        rotate: rotate,
+      }}
+      transition={{
+        duration: 2.4,
+        delay,
+        ease: [0.23, 0.86, 0.39, 0.96],
+        opacity: { duration: 1.2 },
+      }}
+      className={`absolute ${className}`}
+    >
+      <motion.div
+        animate={{
+          y: [0, 15, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        style={{
+          width,
+          height,
+        }}
+        className="relative"
+      >
+        {/* Removed backdrop-blur for performance */}
+        <div
+          className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} border-2 border-white/[0.15] shadow-sm after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_70%)]`}
+        />
+      </motion.div>
+    </motion.div>
+  )
+}
 
 export default function HeroGeometric({
-  badge = "Kokonut UI",
-  title1 = "Elevate Your",
-  title2 = "Digital Vision",
+  badge = "Chameleon FCDS",
+  title1 = "Master Your",
+  title2 = "Future Skills",
 }: {
   badge?: string
   title1?: string
@@ -37,10 +92,31 @@ export default function HeroGeometric({
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]">
       {/* Optimized background elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Using simple CSS shapes instead of complex components */}
-        <div className="absolute left-[-10%] md:left-[-5%] top-[15%] md:top-[20%] w-[600px] h-[140px] rotate-12 opacity-20 rounded-full bg-indigo-500/10 border border-indigo-300/10"></div>
-        <div className="absolute right-[-5%] md:right-[0%] top-[70%] md:top-[75%] w-[500px] h-[120px] -rotate-15 opacity-20 rounded-full bg-rose-500/10 border border-rose-300/10"></div>
-        <div className="absolute left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%] w-[300px] h-[80px] -rotate-8 opacity-20 rounded-full bg-violet-500/10 border border-violet-300/10"></div>
+        {/* Using simplified ElegantShape */}
+        <ElegantShape
+          delay={0.3}
+          width={600}
+          height={140}
+          rotate={12}
+          gradient="from-indigo-500/[0.15]"
+          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+        />
+        <ElegantShape
+          delay={0.5}
+          width={500}
+          height={120}
+          rotate={-15}
+          gradient="from-rose-500/[0.15]"
+          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+        />
+        <ElegantShape
+          delay={0.4}
+          width={300}
+          height={80}
+          rotate={-8}
+          gradient="from-violet-500/[0.15]"
+          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+        />
       </div>
 
       {/* Subtle gradient overlay */}
@@ -55,12 +131,12 @@ export default function HeroGeometric({
             variants={fadeUpVariants}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12"
           >
-            <Image 
+            {/* Replaced Next.js Image component with standard <img> tag */}
+            <img 
               src="/images/1212-removebg-preview.png" 
-              alt="Kokonut UI" 
+              alt="Chameleon Logo" 
               width={20} 
               height={20}
-              priority
             />
             <span className="text-sm text-white/60 tracking-wide">{badge}</span>
           </motion.div>
@@ -74,10 +150,11 @@ export default function HeroGeometric({
           >
             <span className="text-white">{title1}</span>
             <br />
+            {/* Removed Pacifico.className as Pacifico font import was removed */}
             <span className={cn(
               "text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300",
-              pacifico.className,
-            )}>
+              // pacifico.className,
+            )} style={{ fontFamily: 'Pacifico, cursive' ,fontWeight: '400' }}>
               {title2}
             </span>
           </motion.h1>
