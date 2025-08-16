@@ -17,7 +17,7 @@ const amiri = Amiri({
 })
 
 export const metadata: Metadata = {
-  title: "ExplorAI - The Intelligent Assistant",
+  title: "ExploAI - The Intelligent Assistant",
   description: "Your academic advisor to answer the most important inquiries for new students",
     generator: 'Chameleon v2.0'
 }
@@ -33,3 +33,4 @@ export default function RootLayout({
     </html>
   )
 }
+
