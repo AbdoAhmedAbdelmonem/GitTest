@@ -52,7 +52,7 @@ export default function LuraChatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "مرحباً! أنا سين 🤖، المساعد الذكي الرسمي لموقع Chameleon FCDS. كيف يمكنني مساعدتك اليوم؟",
+      content: "مرحباً! أنا Explo 🤖، المساعد الذكي الرسمي لموقع Chameleon FCDS. كيف يمكنني مساعدتك اليوم؟",
       isBot: true,
       timestamp: new Date(),
     },
@@ -62,10 +62,14 @@ export default function LuraChatbot() {
   const [activeCategory, setActiveCategory] = useState<string>("all")
   const [isListening, setIsListening] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(true)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  // overlay states
+  const [showIntroOverlay, setShowIntroOverlay] = useState(true)
+  const [fadeOut, setFadeOut] = useState(false)
 
   const articles = articlesData as Article[]
 
@@ -79,11 +83,28 @@ export default function LuraChatbot() {
     scrollToBottom()
   }, [messages])
 
+  useEffect(() => {
+    if (showIntroOverlay) {
+      const timer1 = setTimeout(() => {
+        setFadeOut(true) // trigger fade
+      }, 4000) // start fading at 4s
+      
+      const timer2 = setTimeout(() => {
+        setShowIntroOverlay(false) // unmount after fade completes
+      }, 5000) // fully hide after 5s (1s after fade starts)
+      
+      return () => {
+        clearTimeout(timer1)
+        clearTimeout(timer2)
+      }
+    }
+  }, [showIntroOverlay])
+
   const generateResponse = (userMessage: string): string => {
     const lowerMessage = userMessage.toLowerCase()
 
-    if (lowerMessage.includes("سين") || lowerMessage.includes("Sen")) {
-      return "نعم، أنا سين! المساعد الذكي الرسمي لموقع Chameleon FCDS. كيف يمكنني مساعدتك؟ 😊"
+    if (lowerMessage.includes("explo") || lowerMessage.includes("Explo")) {
+      return "نعم، أنا Explo! المساعد الذكي الرسمي لموقع Chameleon FCDS. كيف يمكنني مساعدتك؟ 😊"
     }
 
     const relevantArticles = articles.filter((article) => {
@@ -94,7 +115,6 @@ export default function LuraChatbot() {
 
     if (relevantArticles.length > 0) {
       const bestMatch = relevantArticles[0]
-
       if (lowerMessage.includes("إيه") || lowerMessage.includes("ما هو") || lowerMessage.includes("ما هي")) {
         return `بناءً على معرفتي في Chameleon FCDS، ${bestMatch.summary}\n\n${bestMatch.content.substring(0, 300)}...`
       } else if (lowerMessage.includes("كيف") || lowerMessage.includes("ازاي")) {
@@ -107,7 +127,7 @@ export default function LuraChatbot() {
     }
 
     if (lowerMessage.includes("مرحبا") || lowerMessage.includes("السلام") || lowerMessage.includes("أهلا")) {
-      return "أهلاً وسهلاً بك في Chameleon FCDS! أنا سين مساعدك الذكي الرسمي. يمكنني مساعدتك في أي استفسار حول الكلية، الكورسات، التدريبات، أو المنح. ما الذي تريد معرفته؟"
+      return "أهلاً وسهلاً بك في Chameleon FCDS! أنا مساعدك الذكي . يمكنني مساعدتك في أي استفسار حول الكلية، الكورسات، التدريبات، أو المنح. ما الذي تريد معرفته؟"
     }
 
     if (lowerMessage.includes("شكرا") || lowerMessage.includes("تسلم")) {
@@ -135,19 +155,16 @@ export default function LuraChatbot() {
     setInputValue("")
     setIsTyping(true)
 
-    setTimeout(
-      () => {
-        const botResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          content: generateResponse(inputValue),
-          isBot: true,
-          timestamp: new Date(),
-        }
-        setMessages((prev) => [...prev, botResponse])
-        setIsTyping(false)
-      },
-      1000 + Math.random() * 1000,
-    )
+    setTimeout(() => {
+      const botResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        content: generateResponse(inputValue),
+        isBot: true,
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, botResponse])
+      setIsTyping(false)
+    }, 1000 + Math.random() * 1000)
   }
 
   const handleQuickQuestion = (article: Article) => {
@@ -198,6 +215,24 @@ export default function LuraChatbot() {
 
   return (
     <div className={`${isDarkMode ? "dark" : ""}`}>
+      {/* Video Intro Overlay */}
+      {showIntroOverlay && (
+        <div className={`fixed inset-0 z-50 bg-[#030d15] flex items-center justify-center transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
+          <video
+            autoPlay
+            muted
+            onEnded={() => {
+              setFadeOut(true)
+              setTimeout(() => setShowIntroOverlay(false), 1000)
+            }}
+            className="w-full h-full object-contain"
+          >
+            <source src="/Images/Background2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      )}
+      
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <div className="max-w-7xl mx-auto h-screen flex flex-col">
           <div className="bg-white dark:bg-gray-800 rounded-t-2xl shadow-lg border-b border-gray-200 dark:border-gray-700 p-4 md:p-6">
@@ -209,13 +244,13 @@ export default function LuraChatbot() {
                   className="md:hidden"
                   onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                 >
-                  {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                  {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" style={{ color: "white" }} />}
                 </Button>
                 <div className="relative">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 border-gray-200 dark:border-gray-600">
                     <Image
-                      src="/images/nirve-logo.png"
-                      alt="Nirve Logo"
+                      src="/images/Explor.png"
+                      alt="Explor Logo"
                       width={32}
                       height={32}
                       className="w-6 h-6 md:w-8 md:h-8 object-contain"
@@ -224,16 +259,16 @@ export default function LuraChatbot() {
                   <div className="absolute -top-1 -right-1 w-3 h-3 md:w-4 md:h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
                 </div>
                 <div>
-                  <h1 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Sen سين
+                  <h1 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+                    ExploAI
                   </h1>
-                  <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400"> المساعد الرسمي لموقع  Chameleon FCDS </p>
+                  <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Chameleon FCDS Intelligence Assistant</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 md:gap-4">
                 <div className="hidden md:flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-yellow-500" />
-                  <span className="text-sm text-gray-600 dark:text-gray-400">مدعوم بالذكاء الاصطناعي</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Powered By AI</span>
                 </div>
               </div>
             </div>
@@ -337,22 +372,22 @@ export default function LuraChatbot() {
                       <div
                         className={`max-w-[85%] md:max-w-[80%] rounded-2xl px-3 md:px-4 py-3 ${
                           message.isBot
-                            ? "bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-100 dark:border-blue-800"
-                            : "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
+                            ? "bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 border border-blue-100 dark:border-blue-800"
+                            : "bg-gradient-to-r from-blue-500 to-green-600 text-white"
                         }`}
                       >
                         {message.isBot && (
                           <div className="flex items-center gap-2 mb-2">
                             <div className="w-4 h-4 rounded-full flex items-center justify-center">
                               <Image
-                                src="/images/nirve-logo.png"
-                                alt="Nirve"
+                                src="/images/Explor.png"
+                                alt="Explor"
                                 width={12}
                                 height={12}
                                 className="w-3 h-3 object-contain"
                               />
                             </div>
-                            <span className="text-xs font-medium text-blue-600 dark:text-blue-400">سين</span>
+                            <span className="text-xs font-medium text-blue-600 dark:text-blue-400">Explo</span>
                           </div>
                         )}
                         <div
@@ -374,7 +409,7 @@ export default function LuraChatbot() {
 
                   {isTyping && (
                     <div className="flex justify-start">
-                      <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-100 dark:border-blue-800 rounded-2xl px-3 md:px-4 py-3">
+                      <div className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 border border-blue-100 dark:border-blue-800 rounded-2xl px-3 md:px-4 py-3">
                         <div className="flex items-center gap-2">
                           <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
                             <Image
@@ -385,7 +420,7 @@ export default function LuraChatbot() {
                               className="w-3 h-3 object-contain"
                             />
                           </div>
-                          <span className="text-xs font-medium text-blue-600 dark:text-blue-400">سين يكتب...</span>
+                          <span className="text-xs font-medium text-blue-600 dark:text-blue-400">Explo is typing...</span>
                         </div>
                         <div className="flex gap-1 mt-2">
                           <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
@@ -412,7 +447,7 @@ export default function LuraChatbot() {
                       ref={inputRef}
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
-                      placeholder="اكتب سؤالك هنا... أو قل 'سين' لاستدعائي"
+                      placeholder="اكتب سؤالك هنا... أو قل 'Explo' لاستدعائي"
                       className="pl-10 md:pl-12 pr-4 py-2 md:py-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-500 transition-colors dark:bg-gray-700 dark:text-white text-sm md:text-base"
                       onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                     />
@@ -433,7 +468,7 @@ export default function LuraChatbot() {
                   <Button
                     onClick={handleSendMessage}
                     disabled={!inputValue.trim() || isTyping}
-                    className="px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-xl"
+                    className="px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-blue-500 to-green-600 hover:from-blue-600 hover:to-green-700 rounded-xl"
                   >
                     <Send className="w-4 h-4" />
                   </Button>
@@ -449,5 +484,3 @@ export default function LuraChatbot() {
     </div>
   )
 }
-
-
