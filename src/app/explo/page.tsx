@@ -260,7 +260,7 @@ export default function LuraChatbot() {
                 </div>
                 <div>
                   <h1 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                    ExploAI
+                    ExploQA
                   </h1>
                   <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Chameleon FCDS Intelligence Assistant</p>
                 </div>
