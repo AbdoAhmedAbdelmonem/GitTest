@@ -17,7 +17,7 @@ const amiri = Amiri({
 })
 
 export const metadata: Metadata = {
-  title: "SenAI - The Intelligent Assistant",
+  title: "ExplorAI - The Intelligent Assistant",
   description: "Your academic advisor to answer the most important inquiries for new students",
     generator: 'Chameleon v2.0'
 }
