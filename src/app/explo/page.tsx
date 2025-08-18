@@ -8,14 +8,11 @@ import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
-  Send,
   BookOpen,
   GraduationCap,
   Award,
   HelpCircle,
   Sparkles,
-  Mic,
-  MicOff,
   Menu,
   X,
 } from "lucide-react"
@@ -52,20 +49,17 @@ export default function LuraChatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "مرحباً! أنا Explo 🤖، المساعد الذكي الرسمي لموقع Chameleon FCDS. كيف يمكنني مساعدتك اليوم؟",
+      content: "مرحباً! أنا Explo 🤖، المساعد الذكي لموقع Chameleon FCDS. يمكنك تصفح الأسئلة الشائعة من القائمة الجانبية أو طرح سؤالك الخاص. كيف يمكنني مساعدتك اليوم؟",
       isBot: true,
       timestamp: new Date(),
     },
   ])
-  const [inputValue, setInputValue] = useState("")
   const [isTyping, setIsTyping] = useState(false)
   const [activeCategory, setActiveCategory] = useState<string>("all")
-  const [isListening, setIsListening] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
 
   // overlay states
   const [showIntroOverlay, setShowIntroOverlay] = useState(true)
@@ -104,7 +98,7 @@ export default function LuraChatbot() {
     const lowerMessage = userMessage.toLowerCase()
 
     if (lowerMessage.includes("explo") || lowerMessage.includes("Explo")) {
-      return "نعم، أنا Explo! المساعد الذكي الرسمي لموقع Chameleon FCDS. كيف يمكنني مساعدتك؟ 😊"
+      return "نعم، أنا Explo! المساعد الذكي لموقع Chameleon FCDS. يمكنك تصفح الأسئلة الشائعة من القائمة الجانبية أو طرح سؤالك الخاص. 😊"
     }
 
     const relevantArticles = articles.filter((article) => {
@@ -127,7 +121,7 @@ export default function LuraChatbot() {
     }
 
     if (lowerMessage.includes("مرحبا") || lowerMessage.includes("السلام") || lowerMessage.includes("أهلا")) {
-      return "أهلاً وسهلاً بك في Chameleon FCDS! أنا مساعدك الذكي . يمكنني مساعدتك في أي استفسار حول الكلية، الكورسات، التدريبات، أو المنح. ما الذي تريد معرفته؟"
+      return "أهلاً وسهلاً بك في Chameleon FCDS! أنا مساعدك الذكي. يمكنك تصفح الأسئلة الشائعة من القائمة الجانبية أو طرح سؤالك الخاص. ما الذي تريد معرفته؟"
     }
 
     if (lowerMessage.includes("شكرا") || lowerMessage.includes("تسلم")) {
@@ -135,36 +129,10 @@ export default function LuraChatbot() {
     }
 
     if (lowerMessage.includes("مساعدة") || lowerMessage.includes("help")) {
-      return "بالطبع! كمساعد Chameleon FCDS الرسمي، يمكنني مساعدتك في:\n\n🔹 الأسئلة الشائعة للطلبة الجدد\n🔹 الكورسات المهمة والتقنيات\n🔹 فرص التدريب والتدريبات العملية\n🔹 المنح المحلية والعالمية\n\nما الموضوع الذي يهمك؟"
+      return "بالطبع! كمساعد Chameleon FCDS، يمكنني مساعدتك في:\n\n🔹 الأسئلة الشائعة للطلبة الجدد\n🔹 الكورسات المهمة والتقنيات\n🔹 فرص التدريب والتدريبات العملية\n🔹 المنح المحلية والعالمية\n\nيمكنك تصفح هذه المواضيع من القائمة الجانبية."
     }
 
-    return 'عذراً، لم أجد معلومات محددة حول هذا الموضوع في قاعدة بيانات Chameleon FCDS الحالية. يمكنك تجربة:\n\n• إعادة صياغة السؤال بطريقة أخرى\n• اختيار فئة محددة من التبويبات أعلاه\n• سؤالي عن الكورسات، التدريبات، أو المنح\n\nأو يمكنك كتابة "مساعدة" لرؤية ما يمكنني مساعدتك فيه! 🤔'
-  }
-
-  const handleSendMessage = async () => {
-    if (!inputValue.trim()) return
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      content: inputValue,
-      isBot: false,
-      timestamp: new Date(),
-    }
-
-    setMessages((prev) => [...prev, userMessage])
-    setInputValue("")
-    setIsTyping(true)
-
-    setTimeout(() => {
-      const botResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        content: generateResponse(inputValue),
-        isBot: true,
-        timestamp: new Date(),
-      }
-      setMessages((prev) => [...prev, botResponse])
-      setIsTyping(false)
-    }, 1000 + Math.random() * 1000)
+    return 'عذراً، لم أجد معلومات محددة حول هذا الموضوع في قاعدة بيانات Chameleon FCDS الحالية. يمكنك:\n\n• تصفح الأسئلة الشائعة من القائمة الجانبية\n• اختيار فئة محددة من التبويبات في القائمة\n• محاولة صياغة السؤال بطريقة أخرى\n\nاضغط على أيقونة القائمة في أعلى الشاشة لرؤية الأسئلة المتاحة!'
   }
 
   const handleQuickQuestion = (article: Article) => {
@@ -195,24 +163,6 @@ export default function LuraChatbot() {
   const filteredArticles =
     activeCategory === "all" ? articles : articles.filter((article) => article.category === activeCategory)
 
-  const startListening = () => {
-    if ("webkitSpeechRecognition" in window) {
-      const recognition = new (window as any).webkitSpeechRecognition()
-      recognition.lang = "ar-EG"
-      recognition.continuous = false
-      recognition.interimResults = false
-
-      recognition.onstart = () => setIsListening(true)
-      recognition.onend = () => setIsListening(false)
-      recognition.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript
-        setInputValue(transcript)
-      }
-
-      recognition.start()
-    }
-  }
-
   return (
     <div className={`${isDarkMode ? "dark" : ""}`}>
       {/* Video Intro Overlay */}
@@ -227,7 +177,7 @@ export default function LuraChatbot() {
             }}
             className="w-full h-full object-contain"
           >
-            <source src="../images/Background2.mp4" type="video/mp4" />
+            <source src="../Images/Background2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -260,7 +210,7 @@ export default function LuraChatbot() {
                 </div>
                 <div>
                   <h1 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                    ExploQA
+                    ExploAI
                   </h1>
                   <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Chameleon FCDS Intelligence Assistant</p>
                 </div>
@@ -291,7 +241,7 @@ export default function LuraChatbot() {
             `}
             >
               <div className="p-4">
-                <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">الفئات السريعة</h3>
+                <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">الأسئلة الشائعة</h3>
                 <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
                   <TabsList className="grid w-full grid-cols-2 gap-1 mb-4 bg-white dark:bg-gray-800">
                     <TabsTrigger value="all" className="text-xs dark:data-[state=active]:bg-gray-700">
@@ -440,42 +390,14 @@ export default function LuraChatbot() {
                 </div>
               </div>
 
-              <div className="border-t border-gray-200 dark:border-gray-700 p-3 md:p-4 bg-white dark:bg-gray-800">
-                <div className="flex gap-2 md:gap-3 max-w-4xl mx-auto">
-                  <div className="flex-1 relative">
-                    <Input
-                      ref={inputRef}
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      placeholder="اكتب سؤالك هنا... أو قل 'Explo' لاستدعائي"
-                      className="pl-10 md:pl-12 pr-4 py-2 md:py-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-500 transition-colors dark:bg-gray-700 dark:text-white text-sm md:text-base"
-                      onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-                    />
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="absolute left-1 md:left-2 top-1/2 transform -translate-y-1/2 p-1 h-6 w-6 md:h-8 md:w-8"
-                      onClick={startListening}
-                      disabled={isListening}
-                    >
-                      {isListening ? (
-                        <MicOff className="w-3 h-3 md:w-4 md:h-4 text-red-500" />
-                      ) : (
-                        <Mic className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
-                      )}
-                    </Button>
-                  </div>
-                  <Button
-                    onClick={handleSendMessage}
-                    disabled={!inputValue.trim() || isTyping}
-                    className="px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-blue-500 to-green-600 hover:from-blue-600 hover:to-green-700 rounded-xl"
-                  >
-                    <Send className="w-4 h-4" />
-                  </Button>
-                </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center max-w-4xl mx-auto">
-                  اضغط على أي سؤال من الجانب أو اكتب سؤالك الخاص
-                </p>
+              {/* Mobile-only menu button */}
+              <div className="md:hidden p-3 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                <Button
+                  onClick={() => setIsSidebarOpen(true)}
+                  className="w-full bg-gradient-to-r from-blue-500 to-green-600 hover:from-blue-600 hover:to-green-700"
+                >
+                  عرض قائمة الأسئلة الشائعة
+                </Button>
               </div>
             </div>
           </div>
