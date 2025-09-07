@@ -4,15 +4,16 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { Menu, X, LogIn, UserPlus, BookOpen, Brain, Home, Folder,CircleQuestionMark } from "lucide-react"
+import { Menu, X, LogIn, UserPlus, BookOpen,BrainCircuit, SquareUserRound, Home, Folder,CircleQuestionMark } from "lucide-react"
 import Link from "next/link"
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
   { name: "Courses", href: "/courses", icon: BookOpen },
   { name: "YouTube", href: "/youtube", icon: Folder },
-  { name: "Specializations", href: "/specializations", icon: Brain },
+  { name: "Specializations", href: "#specializations", icon:SquareUserRound  },
   { name: "About", href: "/about", icon: CircleQuestionMark },
+  { name: "Explo", href: "/exolo", icon: BrainCircuit },
 ]
 
 export default function Navigation() {
