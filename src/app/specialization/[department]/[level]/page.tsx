@@ -12,6 +12,8 @@ import { ArrowLeft, BookOpen, Calendar } from "lucide-react"
 import { departmentData } from "@/lib/department-data"
 import React, { Suspense } from "react"
 import ErrorBoundary from "@/components/ErrorBoundary"
+import Navigation from "@/components/navigation"
+
 
 
 interface Props {
@@ -70,6 +72,7 @@ function LevelContent({ params }: Props) {
   return (
     <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+      <Navigation />
 
       {/* Elegant Shapes */}
 
@@ -260,3 +263,4 @@ function LevelContent({ params }: Props) {
     </div>
   )
 }
+
