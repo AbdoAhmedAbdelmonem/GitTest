@@ -13,7 +13,7 @@ const navItems = [
   { name: "YouTube", href: "/youtube", icon: Folder },
   { name: "Specializations", href: "#specializations", icon:SquareUserRound  },
   { name: "About", href: "/about", icon: CircleQuestionMark },
-  { name: "Explo", href: "/exolo", icon: BrainCircuit },
+  { name: "Explo", href: "/explo", icon: BrainCircuit },
 ]
 
 export default function Navigation() {
