@@ -12,6 +12,7 @@ import { departmentData } from "@/lib/department-data"
 import { cn } from "@/lib/utils"
 import React, { Suspense } from "react"
 import ErrorBoundary from "@/components/ErrorBoundary"
+import Navigation from "@/components/navigation"
 
 interface Props {
   params: Promise<{ department: string; level: string; subject: string }>
@@ -127,6 +128,7 @@ function SubjectContent({ params }: Props) {
   return (
     <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+      <Navigation />
 
       <div className="relative z-10 py-12 px-4">
         <div className="max-w-7xl mx-auto">
@@ -331,3 +333,4 @@ function SubjectContent({ params }: Props) {
     </div>
   )
 }
+
