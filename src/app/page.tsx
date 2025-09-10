@@ -82,8 +82,9 @@ export default function HomePage() {
       <Navigation />
 
       {/* Hero Section - Using the exact design without changes */}
-{/*       <HeroGeometric badge="Chameleon FCDS" title1="Master Your" title2="Future Skills" /> */}
+      <HeroGeometric badge="Chameleon FCDS" title1="Master Your" title2="Future Skills" />
       {/* Stats Section */}
+      
       <ScrollAnimatedSection className="py-20 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
