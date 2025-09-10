@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Pacifico } from "next/font/google"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { memo, useMemo } from "react"
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -11,7 +12,7 @@ const pacifico = Pacifico({
   variable: "--font-pacifico",
 })
 
-function StaticShape({
+const StaticShape = memo(function StaticShape({
   className,
   width = 400,
   height = 100,
@@ -43,7 +44,7 @@ function StaticShape({
       }} />
     </div>
   )
-}
+})
 
 export default function HeroGeometric({
   badge = "Kokonut UI",
@@ -54,7 +55,7 @@ export default function HeroGeometric({
   title1?: string
   title2?: string
 }) {
-  const fadeUpVariants = {
+  const fadeUpVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 30 },
     visible: (i: number) => ({
       opacity: 1,
@@ -65,7 +66,52 @@ export default function HeroGeometric({
         ease: [0.25, 0.4, 0.25, 1],
       },
     }),
-  }
+  }), []);
+
+  const staticShapes = useMemo(() => (
+    <>
+      <StaticShape
+        width={600}
+        height={140}
+        rotate={12}
+        color="rgba(99, 102, 241, 0.25)"
+        borderColor="rgba(199, 210, 254, 0.3)"
+        className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+      />
+      <StaticShape
+        width={500}
+        height={120}
+        rotate={-15}
+        color="rgba(244, 63, 94, 0.25)"
+        borderColor="rgba(253, 164, 175, 0.3)"
+        className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+      />
+      <StaticShape
+        width={300}
+        height={80}
+        rotate={-8}
+        color="rgba(139, 92, 246, 0.25)"
+        borderColor="rgba(196, 181, 253, 0.3)"
+        className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+      />
+      <StaticShape
+        width={200}
+        height={60}
+        rotate={20}
+        color="rgba(245, 158, 11, 0.25)"
+        borderColor="rgba(253, 230, 138, 0.3)"
+        className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+      />
+      <StaticShape
+        width={150}
+        height={40}
+        rotate={-25}
+        color="rgba(6, 182, 212, 0.25)"
+        borderColor="rgba(103, 232, 249, 0.3)"
+        className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
+      />
+    </>
+  ), []);
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]">
@@ -75,50 +121,7 @@ export default function HeroGeometric({
       }} />
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <StaticShape
-          width={600}
-          height={140}
-          rotate={12}
-          color="rgba(99, 102, 241, 0.25)"
-          borderColor="rgba(199, 210, 254, 0.3)"
-          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
-        />
-
-        <StaticShape
-          width={500}
-          height={120}
-          rotate={-15}
-          color="rgba(244, 63, 94, 0.25)"
-          borderColor="rgba(253, 164, 175, 0.3)"
-          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
-        />
-
-        <StaticShape
-          width={300}
-          height={80}
-          rotate={-8}
-          color="rgba(139, 92, 246, 0.25)"
-          borderColor="rgba(196, 181, 253, 0.3)"
-          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
-        />
-
-        <StaticShape
-          width={200}
-          height={60}
-          rotate={20}
-          color="rgba(245, 158, 11, 0.25)"
-          borderColor="rgba(253, 230, 138, 0.3)"
-          className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
-        />
-
-        <StaticShape
-          width={150}
-          height={40}
-          rotate={-25}
-          color="rgba(6, 182, 212, 0.25)"
-          borderColor="rgba(103, 232, 249, 0.3)"
-          className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
-        />
+        {staticShapes}
       </div>
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
