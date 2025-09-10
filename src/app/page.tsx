@@ -111,8 +111,8 @@ export default function HomePage() {
       </ScrollAnimatedSection>
 
       {/* Creative Feature Slider */}
-      <CreativeFeatureSlider />
-
+{/*       <CreativeFeatureSlider /> */}
+        
       {/* Specializations Section */}
       <ScrollAnimatedSection className="py-20 bg-[#030303]">
         <div className="container mx-auto px-4">
