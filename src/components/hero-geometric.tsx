@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { Pacifico } from "next/font/google"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
@@ -55,6 +55,8 @@ export default function HeroGeometric({
   title1?: string
   title2?: string
 }) {
+  const prefersReducedMotion = useReducedMotion();
+
   const fadeUpVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 30 },
     visible: (i: number) => ({
@@ -63,10 +65,12 @@ export default function HeroGeometric({
       transition: {
         duration: 0.8,
         delay: 0.3 + i * 0.15,
-        ease: [0.25, 0.4, 0.25, 1],
+        ease: "easeInOut",
       },
     }),
   }), []);
+
+  const animationSettings = prefersReducedMotion ? { animate: "visible" } : { initial: "hidden", animate: "visible" };
 
   const staticShapes = useMemo(() => (
     <>
@@ -130,7 +134,8 @@ export default function HeroGeometric({
             custom={0}
             variants={fadeUpVariants}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12"
           >
             <Image 
@@ -139,11 +144,13 @@ export default function HeroGeometric({
               width={20} 
               height={20}
               priority
+              loading="eager"
+              unoptimized={true} // Only if it's a small static image
             />
             <span className="text-sm text-white/60 tracking-wide">{badge}</span>
           </motion.div>
 
-          <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
+          <motion.div custom={1} variants={fadeUpVariants} {...animationSettings}>
             <h1 className="text-[65px] md:text-[120px] font-bold mb-6 md:mb-8 tracking-tight leading-tight">
               <span className="text-white">
                 {title1}
@@ -158,7 +165,7 @@ export default function HeroGeometric({
             </h1>
           </motion.div>
 
-          <motion.div custom={2} variants={fadeUpVariants} initial="hidden" animate="visible">
+          <motion.div custom={2} variants={fadeUpVariants} {...animationSettings}>
             <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
               Transforming ideas into vibrant digital experiences, adapting seamlessly like a chameleon to every challenge and vision.
             </p>
