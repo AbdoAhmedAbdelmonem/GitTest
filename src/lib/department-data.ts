@@ -4,6 +4,7 @@ export interface Subject {
   description: string
   creditHours: number
   code: string
+  prerequisites?: string[]
   materials: {
     lectures?: string
     sections?: string
@@ -12,11 +13,11 @@ export interface Subject {
       id: string
       name: string
       code: string
-      duration: number
+      duration: string | number
       questions: number
       jsonFile: string
     }[]
-    exams?: string[]
+    exams?: string
   }
 }
 
@@ -50,28 +51,12 @@ export const departmentData: { [key: string]: Department } = {
               code: "02-24-00101",
               description: "Mathematical foundations of linear algebra for data science applications",
               creditHours: 3,
+              prerequisites: [],
               materials: {
-                lectures: "https://drive.google.com/drive/folders/linear-algebra-lectures",
+                lectures: "https://drive.google.com/drive/folders/1yFYYS37ERUHG6Ft_HnC17Jmgo-Zsrg06?usp=drive_link",
                 sections: "https://drive.google.com/drive/folders/linear-algebra-sections",
                 videos: "https://youtube.com/playlist?list=linear-algebra-videos",
-                quizzes: [
-                  {
-                    id: "quiz1",
-                    name: "Linear Algebra Basics",
-                    code: "62672242",
-                    duration: 20,
-                    questions: 15,
-                    jsonFile: "/quizzes/linear-algebra-quiz1.json"
-                  },
-                  {
-                    id: "quiz2",
-                    name: "Matrix Operations",
-                    code: "73783353",
-                    duration: 25,
-                    questions: 20,
-                    jsonFile: "/quizzes/linear-algebra-quiz2.json"
-                  }
-                ],
+                exams: "hhttps://drive.google.com/drive/folders/1aEMvu3ck662mv9UxoIJx0sXg5aXYZGT8?usp=drive_link",
               },
             },
             {
@@ -84,6 +69,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/calculus-lectures",
                 sections: "https://drive.google.com/drive/folders/calculus-sections",
                 videos: "https://youtube.com/playlist?list=calculus-videos",
+                exams: "https://drive.google.com/drive/folders/calculus-lastexam",
+
               },
             },
             {
@@ -120,6 +107,105 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/programming-1-lectures",
                 sections: "https://drive.google.com/drive/folders/programming-1-sections",
                 videos: "https://youtube.com/playlist?list=programming-1-videos",
+                quizzes: [
+                  {
+                    id: "PR1_30001",
+                    name: "Chapter 1 : Introduction to Programming",
+                    code: "PR1_30001",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30001.json"
+                  },
+                  {
+                    id: "PR1_30002",
+                    name: "Chapter 2-1 : Introduction to Java Programming",
+                    code: "PR1_30002",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30002.json"
+                  },
+                  {
+                    id: "PR1_30003",
+                    name: "Chapter 2-2 : Java Basics",
+                    code: "PR1_30003",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30003.json"
+                  },
+                  {
+                    id: "PR1_30004",
+                    name: "Chapter 2-3 : Java Basics",
+                    code: "PR1_30004",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30004.json"
+                  },
+                  {
+                    id: "PR1_30005",
+                    name: "Chapter 2-4 : Deep Dive into Java",
+                    code: "PR1_30005",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30005.json"
+                  },
+                  {
+                    id: "PR1_30006",
+                    name: "Chapter 3-1 : Controlling Program Flow",
+                    code: "PR1_30006",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30006.json"
+                  },
+                  {
+                    id: "PR1_30007",
+                    name: "Chapter 3-2 : Controlling Program Flow",
+                    code: "PR1_30007",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30007.json"
+                  },
+                  {
+                    id: "PR1_30008",
+                    name: "Chapter 4-1 : One Dimensional Arrays",
+                    code: "PR1_30008",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30008.json"
+                  },
+                  {
+                    id: "PR1_30009",
+                    name: "Chapter 4-2 : Multi Dimensional Arrays",
+                    code: "PR1_30009",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30009.json"
+                  },
+                  {
+                    id: "PR1_30010",
+                    name: "Review 1",
+                    code: "PR1_30010",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30010.json"
+                  },
+                  {
+                    id: "PR1_30011",
+                    name: "Review 2",
+                    code: "PR1_30011",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30011.json"
+                  },
+                  {
+                    id: "PR1_30012",
+                    name: "Tracing and Debugging",
+                    code: "PR1_30012",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30012.json"
+                  },
+                ],
+              
               },
             },
             {
@@ -298,7 +384,74 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/cloud-computing-lectures",
                 sections: "https://drive.google.com/drive/folders/cloud-computing-sections",
                 videos: "https://youtube.com/playlist?list=cloud-computing-videos",
+                quizzes: [
+                  {
+                    id: "CLC_10661",
+                    name: "Introduction to Cloud Computing",
+                    code: "CLC_10661",
+                    duration: "No Timer", // <-- CHANGED THIS LINE
+                    questions: 50,
+                    jsonFile: "/quizzes/cloud computing/CLC_10661.json"
+                  },
+                  {
+                    id: "CLC_10662",
+                    name: "Platform and Infrastructure Services",
+                    code: "CLC_10662",
+                    duration: "No Timer",
+                    questions: 30,
+                    jsonFile: "/quizzes/cloud computing/CLC_10662.json"
+                  },
+                  {
+                    id: "CLC_10663",
+                    name: "Virtualization",
+                    code: "CLC_10663",
+                    duration: "No Timer",
+                    questions: 30,
+                    jsonFile: "/quizzes/cloud computing/CLC_10663.json"
+                  },
+                  {
+                    id: "CLC_10664",
+                    name: "Parallel Programming",
+                    code: "CLC_10664",
+                    duration: "No Timer",
+                    questions: 30,
+                    jsonFile: "/quizzes/cloud computing/CLC_10664.json"
+                  },
+                  {
+                    id: "CLC_10665",
+                    name: "Distributed Storage Systems",
+                    code: "CLC_10665",
+                    duration: "No Timer",
+                    questions: 30,
+                    jsonFile: "/quizzes/cloud computing/CLC_10665.json"
+                  },
+                  {
+                    id: "CLC_10666",
+                    name: "Cloud Security",
+                    code: "CLC_10666",
+                    duration: "No Timer",
+                    questions: 30,
+                    jsonFile: "/quizzes/cloud computing/CLC_10666.json"
+                  },
+                  {
+                    id: "CLC_10667",
+                    name: "Cloud Performance",
+                    code: "CLC_10667",
+                    duration: "No Timer",
+                    questions: 30,
+                    jsonFile: "/quizzes/cloud computing/CLC_10667.json"
+                  },
+                  {
+                    id: "CLC_10668",
+                    name: "General Overview + 20Q of 2025's Midterm",
+                    code: "CLC_10668",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/cloud computing/CLC_10668_TOT.json"
+                  }
+                ],
               },
+              
             },
             {
               id: "machine-learning",
