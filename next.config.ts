@@ -1,12 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true, // This will skip ESLint errors
+  /* config options here */
+  images: {
+    domains: ['github.com'], // Add this line
   },
-  typescript: {
-    ignoreBuildErrors: true, // Optional: Skip TypeScript errors too
-  }
 };
 
 export default nextConfig;

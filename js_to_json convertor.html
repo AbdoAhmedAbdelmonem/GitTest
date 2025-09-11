@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Converter - JS to JSON</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+        
+        .description {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .upload-section {
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+        
+        .upload-section:hover {
+            background: #e8f4fc;
+            border-color: #2980b9;
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: 15px;
+        }
+        
+        .upload-btn:hover {
+            background: #2980b9;
+        }
+        
+        .file-info {
+            margin-top: 15px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .convert-btn {
+            background: #2ecc71;
+            color: white;
+            width: 100%;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin: 20px 0;
+        }
+        
+        .convert-btn:hover {
+            background: #27ae60;
+        }
+        
+        .convert-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .download-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .download-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .download-btn:hover {
+            background: #8e44ad;
+        }
+        
+        .download-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .preview-section {
+            margin-top: 30px;
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .preview-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .preview-content {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            white-space: pre-wrap;
+            border: 1px solid #e1e8ed;
+            display: none;
+        }
+        
+        .status {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 500;
+            min-height: 24px;
+        }
+        
+        .success {
+            color: #27ae60;
+        }
+        
+        .error {
+            color: #e74c3c;
+        }
+        
+        .instructions {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+        
+        .instructions h3 {
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            line-height: 1.6;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .stat-box {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #3498db;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Cloud Computing Quiz Converter</h1>
+    <p class="description">Convert your JavaScript quiz file to JSON format and download it</p>
+    
+    <div class="container">
+        <div class="instructions">
+            <h3>How to use this converter:</h3>
+            <ol>
+                <li>Upload a JavaScript file with quiz data in the correct format</li>
+                <li>Click the 'Convert to JSON' button to process the file</li>
+                <li>Download the resulting JSON file with the same structure as your input</li>
+                <li>This converter can handle any number of questions (50, 100, or more)</li>
+            </ol>
+        </div>
+        
+        <div class="upload-section" id="dropZone">
+            <div class="upload-icon">📁</div>
+            <p>Drag & drop your JS file here or</p>
+            <input type="file" id="fileInput" class="file-input" accept=".js">
+            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Choose File</button>
+            <div class="file-info" id="fileInfo">No file selected</div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-value" id="questionsCount">0</div>
+                <div class="stat-label">Questions</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="fileSize">0 KB</div>
+                <div class="stat-label">File Size</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="conversionStatus">-</div>
+                <div class="stat-label">Status</div>
+            </div>
+        </div>
+        
+        <button class="convert-btn" id="convertBtn" disabled>Convert to JSON</button>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="download-section">
+            <button class="download-btn" id="downloadBtn" disabled>
+                <span>⬇️</span> Download JSON
+            </button>
+        </div>
+        
+        <div class="preview-section">
+            <div class="preview-header">
+                <div class="preview-title">JSON Preview (First 5 Items)</div>
+                <button class="toggle-btn" id="togglePreview">Show Preview</button>
+            </div>
+            <div class="preview-content" id="previewContent"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const dropZone = document.getElementById('dropZone');
+            const fileInfo = document.getElementById('fileInfo');
+            const convertBtn = document.getElementById('convertBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const status = document.getElementById('status');
+            const previewContent = document.getElementById('previewContent');
+            const togglePreview = document.getElementById('togglePreview');
+            const progressBar = document.getElementById('progressBar');
+            const questionsCount = document.getElementById('questionsCount');
+            const fileSize = document.getElementById('fileSize');
+            const conversionStatus = document.getElementById('conversionStatus');
+            
+            let jsonData = null;
+            let fileName = '';
+            let fileContent = '';
+            
+            // Drag and drop handlers
+            dropZone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                dropZone.style.background = '#e1f5fe';
+            });
+            
+            dropZone.addEventListener('dragleave', function() {
+                dropZone.style.background = '#f8fafc';
+            });
+            
+            dropZone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                dropZone.style.background = '#f8fafc';
+                
+                if (e.dataTransfer.files.length) {
+                    handleFile(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // File input change handler
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length) {
+                    handleFile(fileInput.files[0]);
+                }
+            });
+            
+            // Handle the selected file
+            function handleFile(file) {
+                if (file.name.endsWith('.js')) {
+                    fileName = file.name.replace('.js', '');
+                    fileInfo.textContent = `Selected: ${file.name} (${formatFileSize(file.size)})`;
+                    fileSize.textContent = formatFileSize(file.size);
+                    convertBtn.disabled = false;
+                    status.textContent = '';
+                    status.className = 'status';
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        fileContent = e.target.result;
+                        status.textContent = 'File loaded successfully. Ready to convert.';
+                        status.className = 'status success';
+                        conversionStatus.textContent = 'Ready';
+                        conversionStatus.style.color = '#28a745';
+                    };
+                    reader.readAsText(file);
+                } else {
+                    fileInfo.textContent = 'Please select a .js file';
+                    status.textContent = 'Error: Please select a JavaScript file.';
+                    status.className = 'status error';
+                    convertBtn.disabled = true;
+                }
+            }
+            
+            // Convert JS to JSON
+            convertBtn.addEventListener('click', function() {
+                if (!fileContent) {
+                    status.textContent = 'Error: No file content to convert.';
+                    status.className = 'status error';
+                    return;
+                }
+                
+                try {
+                    // Show conversion in progress
+                    conversionStatus.textContent = 'Processing';
+                    conversionStatus.style.color = '#ffc107';
+                    progressBar.style.width = '30%';
+                    
+                    // Extract the variable assignment from the JS file
+                    const variableMatch = fileContent.match(/(let|const|var)\s+(\w+)\s*=\s*(\[.*\]);/s);
+                    
+                    if (!variableMatch || variableMatch.length < 4) {
+                        throw new Error('Could not find a valid array assignment in the JS file');
+                    }
+                    
+                    const variableName = variableMatch[2];
+                    const arrayContent = variableMatch[3];
+                    
+                    // Use Function constructor to safely evaluate the array
+                    const parseFunc = new Function(`return ${arrayContent};`);
+                    const jsData = parseFunc();
+                    
+                    if (!Array.isArray(jsData)) {
+                        throw new Error('The parsed content is not a valid array');
+                    }
+                    
+                    // Update progress
+                    progressBar.style.width = '70%';
+                    questionsCount.textContent = jsData.length;
+                    
+                    // Convert to JSON format
+                    jsonData = convertJsToJson(jsData);
+                    
+                    // Update progress
+                    progressBar.style.width = '100%';
+                    
+                    // Show preview of first 5 items
+                    const previewJson = JSON.stringify(jsonData.slice(0, 5), null, 2);
+                    previewContent.textContent = previewJson;
+                    
+                    // Enable download button
+                    downloadBtn.disabled = false;
+                    
+                    status.textContent = `Conversion successful! Processed ${jsData.length} questions.`;
+                    status.className = 'status success';
+                    conversionStatus.textContent = 'Complete';
+                    conversionStatus.style.color = '#28a745';
+                    
+                    // Reset progress bar after a delay
+                    setTimeout(() => {
+                        progressBar.style.width = '0%';
+                    }, 1000);
+                } catch (error) {
+                    status.textContent = `Error during conversion: ${error.message}`;
+                    status.className = 'status error';
+                    conversionStatus.textContent = 'Error';
+                    conversionStatus.style.color = '#dc3545';
+                    console.error(error);
+                    
+                    // Reset progress bar
+                    progressBar.style.width = '0%';
+                }
+            });
+            
+            // Download JSON
+            downloadBtn.addEventListener('click', function() {
+                if (!jsonData) return;
+                
+                const jsonString = JSON.stringify(jsonData, null, 2);
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${fileName}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                status.textContent = 'Download started!';
+                status.className = 'status success';
+            });
+            
+            // Toggle preview
+            togglePreview.addEventListener('click', function() {
+                if (previewContent.style.display === 'block') {
+                    previewContent.style.display = 'none';
+                    togglePreview.textContent = 'Show Preview';
+                } else {
+                    previewContent.style.display = 'block';
+                    togglePreview.textContent = 'Hide Preview';
+                }
+            });
+            
+            // Convert JS array to JSON format
+            function convertJsToJson(jsData) {
+                return jsData.map(item => {
+                    return {
+                        numb: item.numb,
+                        type: item.type,
+                        question: item.question,
+                        options: item.options,
+                        answer: item.answer,
+                        image: null
+                    };
+                });
+            }
+            
+            // Format file size to human-readable format
+            function formatFileSize(bytes) {
+                if (bytes < 1024) return bytes + ' bytes';
+                else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+                else return (bytes / 1048576).toFixed(1) + ' MB';
+            }
+        });
+    </script>
+</body>
+</html>
