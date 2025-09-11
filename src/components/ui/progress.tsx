@@ -1,23 +1,28 @@
-import * as React from "react";
-import { Progress } from "radix-ui";
-import "./../../app/globals.css";
+"use client"
 
-const ProgressDemo = () => {
-	const [progress, setProgress] = React.useState(13);
+import * as React from "react"
+import * as ProgressPrimitive from "@radix-ui/react-progress"
 
-	React.useEffect(() => {
-		const timer = setTimeout(() => setProgress(66), 500);
-		return () => clearTimeout(timer);
-	}, []);
+import { cn } from "@/lib/utils"
 
-	return (
-		<Progress.Root className="ProgressRoot" value={progress}>
-			<Progress.Indicator
-				className="ProgressIndicator"
-				style={{ transform: `translateX(-${100 - progress}%)` }}
-			/>
-		</Progress.Root>
-	);
-};
+const Progress = React.forwardRef<
+  React.ElementRef<typeof ProgressPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
+>(({ className, value, ...props }, ref) => (
+  <ProgressPrimitive.Root
+    ref={ref}
+    className={cn(
+      "relative h-4 w-full overflow-hidden rounded-full bg-secondary",
+      className
+    )}
+    {...props}
+  >
+    <ProgressPrimitive.Indicator
+      className="h-full w-full flex-1 bg-primary transition-all"
+      style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
+    />
+  </ProgressPrimitive.Root>
+))
+Progress.displayName = ProgressPrimitive.Root.displayName
 
-export default ProgressDemo;
+export { Progress }
