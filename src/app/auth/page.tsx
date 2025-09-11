@@ -3,15 +3,17 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import bcrypt from "bcryptjs";
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "../../components/ui/button"
+import { Input } from "../../components/ui/input"
+import { Label } from "../../components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Eye, EyeOff, Lock, User, ArrowRight, Sparkles, Shield, BookOpen, Phone, Hash, ChevronDown, GraduationCap, Star, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useSearchParams, useRouter } from "next/navigation"
-import { createBrowserClient } from "@/lib/supabase/client"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+import { createBrowserClient } from "../../lib/supabase/client"
+import { Alert, AlertDescription } from "../../components/ui/alert"
+import { useToast  } from "../../components/ToastProvider"
+
 
 function ElegantShape({
   className,
@@ -214,6 +216,8 @@ export default function AuthPage() {
   const [error, setError] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
   const [previousPath, setPreviousPath] = useState('/')
+  const { addToast } = useToast()
+
 
   // Form state
   const [loginData, setLoginData] = useState({
@@ -333,6 +337,7 @@ export default function AuthPage() {
       
       // Redirect to the previous page instead of always going to home
       router.push(previousPath)
+      addToast(`Welcome back, ${userData.username}!`, "info")
     } catch (err) {
       console.error("Unexpected error:", err)
       setError("An error occurred. Please try again.")
