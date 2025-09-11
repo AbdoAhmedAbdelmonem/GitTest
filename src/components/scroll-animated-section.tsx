@@ -6,6 +6,7 @@ import type { ReactNode } from "react"
 interface ScrollAnimatedSectionProps {
   children: ReactNode
   className?: string
+  id?: string
   animation?:
     | "fadeIn"
     | "slideUp"

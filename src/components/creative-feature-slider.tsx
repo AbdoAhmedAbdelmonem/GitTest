@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Sparkles, Zap, Target, Rocket, Shield, Crown, ChevronLeft, ChevronRight, Cpu } from 'lucide-react';
+import { Sparkles, Target, Rocket, Shield, ChevronLeft, ChevronRight, Cpu } from 'lucide-react';
 
 interface SlideData {
   id: number;
@@ -11,57 +11,56 @@ interface SlideData {
   stats: string;
   badge: string;
 }
-
 const slides: SlideData[] = [
   {
     id: 1,
-    title: "Lightning Speed",
-    subtitle: "Performance Optimized",
-    description: "Experience blazing fast interactions with our ultra-optimized slider engine",
-    icon: Zap,
-    gradient: "from-purple-500 via-pink-500 to-rose-500",
-    stats: "99.9% Uptime",
-    badge: "Ultra Fast"
+    title: "Interactive Learning",
+    subtitle: "Engage with Modern Tools",
+    description: "Empower students with interactive lessons and cutting-edge educational tools.",
+    icon: Cpu,
+    gradient: "from-blue-500 via-indigo-500 to-purple-500",
+    stats: "95% Engagement",
+    badge: "Next-Gen"
   },
   {
     id: 2,
-    title: "Precision Targeting",
-    subtitle: "Smart Analytics",
-    description: "Target your audience with surgical precision using advanced AI algorithms",
+    title: "Personalized Education",
+    subtitle: "AI-Driven Insights",
+    description: "Leverage AI to tailor learning experiences to each student's unique needs.",
     icon: Target,
-    gradient: "from-amber-400 via-orange-500 to-red-500",
-    stats: "10x Better ROI",
+    gradient: "from-green-400 via-teal-500 to-blue-500",
+    stats: "100% Adaptive",
     badge: "AI Powered"
   },
   {
     id: 3,
-    title: "Rocket Launch",
-    subtitle: "Scale Instantly",
-    description: "Launch your projects at light speed with our automated deployment pipeline",
-    icon: Rocket,
-    gradient: "from-cyan-400 via-blue-500 to-indigo-600",
-    stats: "0.3s Deploy",
-    badge: "Auto Scale"
+    title: "Seamless Collaboration",
+    subtitle: "Connect and Learn Together",
+    description: "Foster teamwork with real-time collaboration tools for students and educators.",
+    icon: Sparkles,
+    gradient: "from-yellow-400 via-orange-500 to-red-500",
+    stats: "50+ Tools",
+    badge: "Collaborative"
   },
   {
     id: 4,
-    title: "Fort Knox Security",
-    subtitle: "Enterprise Grade",
-    description: "Military-grade security protocols protect your data with zero compromises",
-    icon: Shield,
-    gradient: "from-emerald-400 via-green-500 to-teal-600",
-    stats: "100% Secure",
-    badge: "Bulletproof"
+    title: "Future-Ready Skills",
+    subtitle: "Prepare for Tomorrow",
+    description: "Equip learners with skills for the future, from coding to critical thinking.",
+    icon: Rocket,
+    gradient: "from-purple-500 via-pink-500 to-red-500",
+    stats: "10x Growth",
+    badge: "Skill Focused"
   },
   {
     id: 5,
-    title: "Crown Jewel",
-    subtitle: "Premium Experience",
-    description: "Luxury features that transform ordinary workflows into extraordinary experiences",
-    icon: Crown,
-    gradient: "from-violet-500 via-purple-600 to-indigo-700",
-    stats: "Elite Tier",
-    badge: "Luxury"
+    title: "Secure Learning Environment",
+    subtitle: "Safety First",
+    description: "Ensure a safe and secure platform for students and educators alike.",
+    icon: Shield,
+    gradient: "from-gray-500 via-slate-600 to-gray-700",
+    stats: "100% Safe",
+    badge: "Trusted"
   }
 ];
 
@@ -307,8 +306,6 @@ export default function CreativeFeatureSlider() {
         <div className="w-full max-w-7xl mx-auto mb-10 sm:mb-16">
           <CreativeSlider />
         </div>
-
-        {/* Features Grid - 1 column on mobile */}
 
         {/* Technical Stats - 2 columns on mobile */}
 
