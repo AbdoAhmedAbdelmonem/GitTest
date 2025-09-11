@@ -26,9 +26,16 @@ import {
   BookOpen,
   Cable,
   Snail,
-  Infinity
+  Infinity,
+  User,
+  Code,
+  AlertCircle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { createBrowserClient } from "@/lib/supabase/client";
+import { getStudentSession } from "@/lib/auth";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog as ImageDialog, DialogContent as ImageDialogContent } from "@/components/ui/dialog";
 
 interface QuizQuestion {
   numb: number;
@@ -44,7 +51,6 @@ interface QuizData {
   name: string;
   code: string;
   duration: number;
-  questions: number;
   jsonFile: string;
 }
 
@@ -202,7 +208,7 @@ const themes = [
 ];
 
 const durations = [
-  { label: "Lightning", value: 1, icon: Zap, description: "1 Minute" },
+  { label: "Lightning", value: 0.1, icon: Zap, description: "1 Minute" },
   { label: "Short", value: 5, icon: Star, description: "5 Minutes" },
   { label: "Standard (DEF)", value: 15, icon: Cable, description: "15 Minutes" },
   { label: "Extended", value: 30, icon: Clock, description: "30 Minutes" },
@@ -251,7 +257,34 @@ export default function QuizInterface({
   const [quizStatus, setQuizStatus] = useState<
     "completed" | "timed-out" | "in-progress"
   >("in-progress");
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
+  const [showImageDialog, setShowImageDialog] = useState(false);
+  const [currentImage, setCurrentImage] = useState<string | null>(null);
+  const [attemptsToday, setAttemptsToday] = useState(0);
+  const [maxAttemptsReached, setMaxAttemptsReached] = useState(false);
+  const [showAttemptsDialog, setShowAttemptsDialog] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const submissionInProgress = useRef(false);
+  const supabase = createBrowserClient();
+
+  // Check authentication status
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  useEffect(() => {
+    const checkAuth = async () => {
+      const session = getStudentSession();
+      setIsAuthenticated(!!session);
+      
+      // Check quiz attempts if authenticated
+      if (session) {
+        await checkQuizAttempts();
+      }
+    };
+    
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     loadQuestions();
@@ -277,6 +310,40 @@ export default function QuizInterface({
     );
   }, [selectedTheme]);
 
+  // Function to check quiz attempts
+  const checkQuizAttempts = async (): Promise<void> => {
+    try {
+      const session = getStudentSession();
+      if (!session) {
+        return;
+      }
+
+      // Get today's date at midnight for comparison
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const todayISO = today.toISOString();
+
+      // Query Supabase for today's attempts for this specific quiz
+      const { data, error, count } = await supabase
+        .from("quiz_data")
+        .select("*", { count: "exact" })
+        .eq("user_id", session.user_id)
+        .eq("quiz_id", quizData.code)
+        .gte("solved_at", todayISO);
+
+      if (error) {
+        console.error("Error checking quiz attempts:", error);
+        return;
+      }
+
+      const attemptsCount = count || 0;
+      setAttemptsToday(attemptsCount);
+      setMaxAttemptsReached(attemptsCount >= 2);
+    } catch (error) {
+      console.error("Unexpected error checking attempts:", error);
+    }
+  };
+
   const loadQuestions = async () => {
     try {
       const response = await fetch(quizData.jsonFile);
@@ -297,22 +364,50 @@ export default function QuizInterface({
     }
   };
 
-  const startQuiz = () => {
+  // Function to handle image display
+  const handleShowImage = (imageUrl: string | null | undefined) => {
+    if (imageUrl) {
+      setCurrentImage(imageUrl);
+      setShowImageDialog(true);
+    }
+  };
+
+  const startQuiz = async () => {
+    if (!isAuthenticated) {
+      setShowAuthDialog(true);
+      return;
+    }
+    
+    // Check attempts before starting
+    await checkQuizAttempts();
+    
+    if (maxAttemptsReached) {
+      setShowAttemptsDialog(true);
+      return;
+    }
+    
     setCurrentStep("quiz");
 
     if (selectedDuration > 0) {
+      // Only set timer for non-unlimited durations
       setTimeLeft(selectedDuration * 60);
       startTimer();
+    } else {
+      // For unlimited duration, set a very large number or skip timer completely
+      setTimeLeft(Number.MAX_SAFE_INTEGER); // Effectively unlimited
     }
   };
 
   const startTimer = () => {
+    // No timeout handling here, just count down
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          // Mark as timed out and finish the quiz
-          setQuizStatus("timed-out");
-          finishQuiz();
+          // Only clear the timer here
+          if (timerRef.current) {
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+          }
           return 0;
         }
         return prev - 1;
@@ -369,12 +464,95 @@ export default function QuizInterface({
     }
   };
 
+  // Updated saveScoreToSupabase function with all required fields
+  const saveScoreToSupabase = async (finalScore: number, status: "completed" | "timed-out") => {
+    // Additional guard against double submission
+    if (submissionInProgress.current && quizSubmitted) {
+      console.log("Submission already in progress, skipping database save");
+      return;
+    }
+    
+    // Set flags to prevent further submissions
+    submissionInProgress.current = true;
+    setQuizSubmitted(true);
+    
+    try {
+      const session = getStudentSession();
+      if (!session) {
+        console.error("No user session found");
+        return;
+      }
+
+      // Use the quiz code directly instead of trying to parse it as an integer
+      const quizId = quizData.code;
+      
+      const quizResult = {
+        user_id: session.user_id,
+        quiz_id: quizId,
+        score: Math.round((finalScore / questions.length) * 100),
+        how_finished: status,
+        chosen_theme: selectedTheme.name,
+        answering_mode: selectedMode,
+        duration_selected: selectedDuration === 0 ? "Unlimited" : `${selectedDuration} minutes`,
+        total_questions: questions.length,
+      };
+
+      console.log("Saving quiz data:", quizResult);
+      
+      const { data, error } = await supabase
+        .from("quiz_data")
+        .insert([quizResult])
+        .select();
+
+      if (error) {
+        console.error("Error saving quiz data to Supabase:", error.message);
+      } else {
+        console.log("Quiz data saved successfully:", data);
+        // Update attempts count after successful submission
+        setAttemptsToday(prev => prev + 1);
+        setMaxAttemptsReached(attemptsToday + 1 >= 2);
+      }
+    } catch (error) {
+      console.error("Unexpected error saving quiz data:", error);
+    }
+  };
+
+  // Updated saveScore function for localStorage
+  const saveScore = (finalScore: number, status: "completed" | "timed-out") => {
+    const quizResult = {
+      quizId: quizData.code,
+      score: finalScore,
+      totalQuestions: questions.length,
+      status: status,
+      timestamp: new Date().toISOString(),
+      answers: userAnswers,
+      theme: selectedTheme.name,
+      mode: selectedMode,
+      duration: selectedDuration,
+    };
+
+    localStorage.setItem(
+      `quiz_${quizData.id}_result`,
+      JSON.stringify(quizResult)
+    );
+  };
+
   const finishQuiz = () => {
+    // Use ref to prevent double execution
+    if (submissionInProgress.current) {
+      console.log("Submission already in progress");
+      return;
+    }
+    
+    // Set flag immediately
+    submissionInProgress.current = true;
+    
     if (timerRef.current) {
       clearInterval(timerRef.current);
+      timerRef.current = null;
     }
 
-    // Calculate score based on current answers
+    // Calculate score
     let correctAnswers = 0;
     questions.forEach((question, index) => {
       if (userAnswers[index] === question.answer) {
@@ -385,28 +563,9 @@ export default function QuizInterface({
     setScore(correctAnswers);
     setCurrentStep("results");
 
-    // Save the score to localStorage
+    // Save to localStorage and database
     saveScore(correctAnswers, quizStatus);
-  };
-
-  const saveScore = (finalScore: number, status: "completed" | "timed-out") => {
-    // Save to localStorage
-    const quizResult = {
-      quizId: quizData.id,
-      score: finalScore,
-      totalQuestions: questions.length,
-      status: status,
-      timestamp: new Date().toISOString(),
-      answers: userAnswers,
-    };
-
-    localStorage.setItem(
-      `quiz_${quizData.id}_result`,
-      JSON.stringify(quizResult)
-    );
-
-    // Here you would also send the results to your backend if needed
-    // saveToBackend(quizResult);
+    saveScoreToSupabase(correctAnswers, quizStatus);
   };
 
   const formatTime = (seconds: number) => {
@@ -441,37 +600,58 @@ export default function QuizInterface({
   };
 
   useEffect(() => {
-    if (currentStep === "quiz" && timeLeft > 0) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            let correctAnswers = 0;
-            questions.forEach((question, index) => {
-              if (userAnswers[index] === question.answer) {
-                correctAnswers++;
-              }
-            });
-
-            setScore(correctAnswers);
-            setQuizStatus("timed-out");
-            setCurrentStep("results");
-
-            // Save the current score to localStorage
-            saveScore(correctAnswers, "timed-out");
-
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
+    if (currentStep === "quiz" && timeLeft > 0 && selectedDuration > 0) {
+      // Only start timer if not unlimited and time left is positive
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      
+      // Start the timer
+      startTimer();
+    } else if (timeLeft === 0 && currentStep === "quiz" && selectedDuration > 0) {
+      // Only handle timeout for non-unlimited durations
+      handleTimeExpired();
     }
 
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
+        timerRef.current = null;
       }
     };
-  }, [currentStep, questions, userAnswers]); // Added userAnswers to dependencies
+  }, [timeLeft, currentStep, selectedDuration]);
+
+  const handleTimeExpired = () => {
+    // Use ref to prevent double execution
+    if (submissionInProgress.current) {
+      console.log("Time expired submission already in progress");
+      return;
+    }
+    
+    // Set the flag immediately
+    submissionInProgress.current = true;
+    console.log("Time expired, handling quiz completion");
+    
+    // Calculate score
+    let correctAnswers = 0;
+    questions.forEach((question, index) => {
+      if (userAnswers[index] === question.answer) {
+        correctAnswers++;
+      }
+    });
+
+    // Update state
+    setQuizStatus("timed-out");
+    setScore(correctAnswers);
+    setCurrentStep("results");
+    
+    // Save to localStorage first (this is synchronous)
+    saveScore(correctAnswers, "timed-out");
+    
+    // Then save to database
+    saveScoreToSupabase(correctAnswers, "timed-out");
+  };
 
   useEffect(() => {
     if (selectedMode === "traditional" && currentStep === "quiz") {
@@ -486,9 +666,108 @@ export default function QuizInterface({
     }
   }, [userAnswers, selectedMode, currentStep, questions]);
 
+  // Authentication Dialog Component
+  const AuthDialog = () => (
+    <Dialog open={showAuthDialog} onOpenChange={setShowAuthDialog}>
+      <DialogContent className="bg-black/80 backdrop-blur-md border-white/20 text-white">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold flex items-center gap-2">
+            <User className="w-6 h-6" />
+            Authentication Required
+          </DialogTitle>
+          <DialogDescription className="text-white/70">
+            You need to be logged in to start this quiz. Please sign in to continue.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex flex-col gap-4 mt-4">
+            <Button 
+            onClick={() => {
+              // Redirect to login page or show login modal
+              window.location.href = "/auth";
+            }}
+            className="w-full py-3 text-lg"
+            style={{
+              backgroundColor: selectedTheme.primary,
+              color: "white",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "white";
+              e.currentTarget.style.color = selectedTheme.primary;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = selectedTheme.primary;
+              e.currentTarget.style.color = "white";
+            }}
+            >
+            Sign In
+            </Button>
+            <Button 
+            variant="outline" 
+            onClick={() => setShowAuthDialog(false)}
+            className="w-full py-3 text-lg border-white/30"
+            style={{
+              backgroundColor: "white",
+              color: selectedTheme.primary,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = selectedTheme.primary;
+              e.currentTarget.style.color = "white";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "white";
+              e.currentTarget.style.color = selectedTheme.primary;
+            }}
+            >
+            Cancel
+            </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+
+  // Attempts Limit Dialog Component
+  const AttemptsDialog = () => (
+    <Dialog open={showAttemptsDialog} onOpenChange={setShowAttemptsDialog}>
+      <DialogContent className="bg-black/80 backdrop-blur-md border-white/20 text-white">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold flex items-center gap-2">
+            <AlertCircle className="w-6 h-6 text-yellow-400" />
+            Maximum Attempts Reached
+          </DialogTitle>
+          <DialogDescription className="text-white/70">
+            You have already used {attemptsToday} out of 2 attempts for this quiz today. 
+            Please try again tomorrow.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex flex-col gap-4 mt-4">
+            <Button 
+            onClick={() => setShowAttemptsDialog(false)}
+            className="w-full py-3 text-lg"
+            style={{
+              backgroundColor: selectedTheme.primary,
+              color: "white",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "white";
+              e.currentTarget.style.color = selectedTheme.primary;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = selectedTheme.primary;
+              e.currentTarget.style.color = "white";
+            }}
+            >
+            Okay
+            </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+
   if (currentStep === "setup") {
     return (
       <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
+        <AuthDialog />
+        <AttemptsDialog />
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
         {/* Elegant Shapes with Theme Colors */}
@@ -505,7 +784,7 @@ export default function QuizInterface({
             delay={0.5}
             width={350}
             height={90}
-            rotate={-12}
+            rotate={-12}  // This is correct, keep as is
             gradient={selectedTheme.gradient}
             className="right-[-3%] top-[65%]"
           />
@@ -513,7 +792,7 @@ export default function QuizInterface({
             delay={0.4}
             width={200}
             height={60}
-            rotate={-5}
+            rotate={-5}  // This is correct, keep as is
             gradient={selectedTheme.gradient}
             className="left-[8%] bottom-[8%]"
           />
@@ -539,7 +818,7 @@ export default function QuizInterface({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={onExit}
+                    onClick={() => window.history.back()}
                     className="text-white/90 hover:text-white hover:bg-white/10 border border-white/20 bg-black/20"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" />
@@ -770,6 +1049,21 @@ export default function QuizInterface({
                       <div className="text-sm text-white/80">Mode</div>
                     </div>
                   </div>
+                  
+                  {/* Attempts counter */}
+                  {isAuthenticated && (
+                    <div className="mt-6 pt-4 border-t border-white/20">
+                      <div className="flex items-center justify-center gap-2 text-white/70">
+                        <Clock className="w-4 h-4" />
+                        <span>Attempts today: {attemptsToday}/2</span>
+                        {maxAttemptsReached && (
+                          <Badge variant="destructive" className="ml-2">
+                            Limit Reached
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <motion.div
@@ -778,11 +1072,15 @@ export default function QuizInterface({
                 >
                   <Button
                     onClick={startQuiz}
+                    disabled={maxAttemptsReached}
                     className="w-full py-6 text-xl font-semibold rounded-xl"
-                    style={{ backgroundColor: selectedTheme.primary }}
+                    style={{ 
+                      backgroundColor: maxAttemptsReached ? "#666" : selectedTheme.primary,
+                      cursor: maxAttemptsReached ? "not-allowed" : "pointer"
+                    }}
                   >
                     <Play className="w-6 h-6 mr-3" />
-                    Start Quiz Adventure
+                    {maxAttemptsReached ? "Maximum Attempts Reached" : "Start Quiz Adventure"}
                   </Button>
                 </motion.div>
               </CardContent>
@@ -909,9 +1207,41 @@ export default function QuizInterface({
               >
                 <Card className="bg-white/[0.02] border-white/[0.08] backdrop-blur-lg text-white">
                   <CardHeader className="pb-6">
-                    <CardTitle className="text-2xl leading-relaxed font-medium">
-                      {currentQ?.question}
-                    </CardTitle>
+                    <div className="flex justify-between items-start">
+                      <CardTitle className="text-2xl leading-relaxed font-medium flex-1">
+                        {currentQ?.question}
+                      </CardTitle>
+                      {currentQ?.image && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                            <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleShowImage(currentQ.image)}
+                            className="ml-4 border-white/[0.15] text-white hover:bg-white/[0.05] bg-transparent"
+                            style={{
+                              backgroundColor: selectedTheme.primary,
+                              color: "white",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = "white";
+                              e.currentTarget.style.color = selectedTheme.primary;
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = selectedTheme.primary;
+                              e.currentTarget.style.color = "white";
+                            }}
+                            >
+                            <Code className="w-4 h-4 mr-2" />
+                            Show Code
+                            </Button>
+                        </motion.div>
+                      )}
+                    </div>
                   </CardHeader>
 
                   <CardContent>
@@ -1108,6 +1438,47 @@ export default function QuizInterface({
             </motion.div>
           </div>
         </div>
+
+        {/* Image Dialog */}
+        <ImageDialog open={showImageDialog} onOpenChange={setShowImageDialog}>
+          <ImageDialogContent className="bg-black/90 backdrop-blur-md border-white/20 max-w-4xl">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-semibold text-white">Code Reference</h3>
+                <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowImageDialog(false)}
+                className="text-white hover:bg-white/10"
+                style={{
+                  backgroundColor: selectedTheme.primary,
+                  color: "white",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "white";
+                  e.currentTarget.style.color = selectedTheme.primary;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = selectedTheme.primary;
+                  e.currentTarget.style.color = "white";
+                }}
+                >
+                ✕
+                </Button>
+            </div>
+            {currentImage && (
+              <div className="relative w-full h-96 bg-gray-900 rounded-lg overflow-hidden">
+                <img
+                  src={currentImage}
+                  alt="Code reference"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            )}
+            <p className="text-sm text-white/70 mt-4 text-center">
+              Refer to this code snippet to answer the question
+            </p>
+          </ImageDialogContent>
+        </ImageDialog>
       </div>
     );
   }
@@ -1187,7 +1558,7 @@ export default function QuizInterface({
                           style={{ color: selectedTheme.accent }}
                         />
                       </motion.div>
-                    </div>
+                  </div>
                   ) : percentage >= 60 ? (
                     <Award
                       className="w-24 h-24 mx-auto"
@@ -1330,16 +1701,19 @@ export default function QuizInterface({
                     <Button
                       variant="outline"
                       onClick={() => {
-                        setCurrentStep("setup");
-                        setCurrentQuestion(0);
-                        setUserAnswers({});
-                        setScore(0);
-                        setAnswerRevealed({});
-                        setQuizStatus("in-progress");
+                      setCurrentStep("setup");
+                      setCurrentQuestion(0);
+                      setUserAnswers({});
+                      setScore(0);
+                      setAnswerRevealed({});
+                      setQuizStatus("in-progress");
+                      setQuizSubmitted(false); 
+                      // Reset submission state
+                      window.location.reload(); // Refresh the page
                       }}
                       style={{
-                        backgroundColor: selectedTheme.primary,
-                        color: "white",
+                      backgroundColor: selectedTheme.primary,
+                      color: "white",
                       }}
                       className="w-full border-white/[0.15] text-white hover:bg-white/[0.05] py-4 text-lg"
                     >
@@ -1389,7 +1763,7 @@ export default function QuizInterface({
             delay={0.5}
             width={350}
             height={90}
-            rotate={-12}
+            rotate={-12}  // This is correct, keep as is
             gradient={selectedTheme.gradient}
             className="right-[-3%] top-[65%]"
           />
@@ -1397,7 +1771,7 @@ export default function QuizInterface({
             delay={0.4}
             width={200}
             height={60}
-            rotate={-5}
+            rotate={-5}  // This is correct, keep as is
             gradient={selectedTheme.gradient}
             className="left-[8%] bottom-[8%]"
           />
@@ -1472,240 +1846,215 @@ export default function QuizInterface({
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-3">
-                              <Badge
-                                variant="outline"
-                                className="text-sm px-3 py-1 border-white/[0.15] text-white/70"
-                                style={{
-                                  backgroundColor: `${selectedTheme.primary}20`,
-                                }}
-                              >
-                                Question {index + 1}
-                              </Badge>
-                              <Badge
-                                variant="outline"
-                                className="text-sm px-3 py-1 border-white/[0.15] text-white/70"
-                                style={{
-                                  backgroundColor: `${selectedTheme.primary}20`,
-                                }}
-                              >
-                                {question.type}
-                              </Badge>
-                            </div>
-                            <CardTitle className="text-xl text-white leading-relaxed">
-                              {question.question}
-                            </CardTitle>
-                          </div>
-                          <motion.div
-                            initial={{ scale: 0, rotate: -180 }}
-                            animate={{ scale: 1, rotate: 0 }}
-                            transition={{ delay: index * 0.1 + 0.3 }}
-                            className="ml-4"
+                                                        <Badge
+                            variant="outline"
+                            className="text-sm px-3 py-1 border-white/[0.15] text-white/70"
+                            style={{
+                              backgroundColor: `${selectedTheme.primary}20`,
+                            }}
                           >
-                            {isCorrect ? (
-                              <div className="w-12 h-12 rounded-full bg-green-500/[0.2] border-2 border-green-400 flex items-center justify-center">
-                                <CheckCircle className="w-6 h-6 text-green-400" />
-                              </div>
-                            ) : (
-                              <div className="w-12 h-12 rounded-full bg-red-500/[0.2] border-2 border-red-400 flex items-center justify-center">
-                                <XCircle className="w-6 h-6 text-red-400" />
-                              </div>
-                            )}
-                          </motion.div>
-                        </div>
-                      </CardHeader>
-
-                      <CardContent>
-                        <div className="space-y-4">
-                          {/* User's answer */}
-                          <div className="p-4 rounded-lg border border-white/[0.08] bg-white/[0.02]">
-                            <div className="flex items-center gap-3 mb-2">
-                              <BookOpen className="w-5 h-5 text-white/60" />
-                              <span className="text-sm font-medium text-white/60">
-                                Your Answer:
-                              </span>
-                            </div>
-                            <p
-                              className={cn(
-                                "text-lg font-medium",
-                                isCorrect ? "text-green-400" : "text-red-400"
-                              )}
+                            Question {index + 1}
+                          </Badge>
+                          <Badge
+                            variant="outline"
+                            className="text-sm px-3 py-1 border-white/[0.15] text-white/70"
+                            style={{
+                              backgroundColor: `${selectedTheme.primary}20`,
+                            }}
+                          >
+                            {question.type}
+                          </Badge>
+                          {question.image && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleShowImage(question.image)}
+                              className="border-white/[0.15] text-white hover:bg-white/[0.05] bg-transparent"
                             >
-                              {userAnswer || "No answer selected"}
-                            </p>
-                          </div>
-
-                          {/* Correct answer (if different) */}
-                          {!isCorrect && (
-                            <motion.div
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: index * 0.1 + 0.5 }}
-                              className="p-4 rounded-lg border border-green-500/[0.3] bg-green-500/[0.05]"
-                            >
-                              <div className="flex items-center gap-3 mb-2">
-                                <Lightbulb className="w-5 h-5 text-green-400" />
-                                <span className="text-sm font-medium text-green-400">
-                                  Correct Answer:
-                                </span>
-                              </div>
-                              <p className="text-lg font-medium text-green-400">
-                                {question.answer}
-                              </p>
-                            </motion.div>
+                              <Code className="w-3 h-3 mr-1" />
+                              View Code
+                            </Button>
                           )}
-
-                          {/* All options with visual feedback */}
-                          <div className="grid gap-2">
-                            <span className="text-sm font-medium text-white/60 mb-2">
-                              All Options:
-                            </span>
-                            {question.options.map((option, optionIndex) => {
-                              const isUserChoice = option === userAnswer;
-                              const isCorrectOption =
-                                option === question.answer;
-
-                              return (
-                                <motion.div
-                                  key={optionIndex}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{
-                                    delay:
-                                      index * 0.1 + optionIndex * 0.05 + 0.6,
-                                  }}
-                                  className={cn(
-                                    "p-3 rounded-lg border-2 transition-all",
-                                    isCorrectOption
-                                      ? "border-green-400 bg-green-500/[0.1]"
-                                      : isUserChoice && !isCorrectOption
-                                      ? "border-red-400 bg-red-500/[0.1]"
-                                      : "border-white/[0.08] bg-white/[0.02]"
-                                  )}
-                                >
-                                  <div className="flex items-center justify-between">
-                                    <span
-                                      className={cn(
-                                        "text-sm",
-                                        isCorrectOption
-                                          ? "text-green-400 font-medium"
-                                          : isUserChoice && !isCorrectOption
-                                          ? "text-red-400"
-                                          : "text-white/70"
-                                      )}
-                                    >
-                                      {option}
-                                    </span>
-                                    <div className="flex items-center gap-2">
-                                      {isCorrectOption && (
-                                        <CheckCircle className="w-4 h-4 text-green-400" />
-                                      )}
-                                      {isUserChoice && !isCorrectOption && (
-                                        <XCircle className="w-4 h-4 text-red-400" />
-                                      )}
-                                      {isUserChoice && (
-                                        <Badge
-                                          variant="outline"
-                                          className="text-xs border-white/[0.15] text-white/60"
-                                        >
-                                          Your choice
-                                        </Badge>
-                                      )}
-                                    </div>
-                                  </div>
-                                </motion.div>
-                              );
-                            })}
-                          </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                );
-              })}
-            </div>
+                        <CardTitle className="text-xl text-white leading-relaxed">
+                          {question.question}
+                        </CardTitle>
+                      </div>
+                      <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ delay: index * 0.1 + 0.3 }}
+                        className="ml-4"
+                      >
+                        {isCorrect ? (
+                          <div className="w-12 h-12 rounded-full bg-green-500/[0.2] border-2 border-green-400 flex items-center justify-center">
+                            <CheckCircle className="w-6 h-6 text-green-400" />
+                          </div>
+                        ) : (
+                          <div className="w-12 h-12 rounded-full bg-red-500/[0.2] border-2 border-red-400 flex items-center justify-center">
+                            <XCircle className="w-6 h-6 text-red-400" />
+                          </div>
+                        )}
+                      </motion.div>
+                    </div>
+                  </CardHeader>
 
-            {/* Summary */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: questions.length * 0.1 + 0.5 }}
-              className="mt-12"
-            >
-              <Card className="bg-white/[0.02] border-white/[0.08] backdrop-blur-lg">
-                <CardContent className="p-8 text-center">
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    Quiz Summary
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-4 rounded-lg bg-green-500/[0.1] border border-green-500/[0.3]">
-                      <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                      <div className="text-2xl font-bold text-green-400 mb-1">
-                        {score}
+                  <CardContent>
+                    <div className="space-y-4">
+                      {/* User's answer */}
+                      <div className="p-4 rounded-lg border border-white/[0.08] bg-white/[0.02]">
+                        <div className="flex items-center gap-3 mb-2">
+                          <BookOpen className="w-5 h-5 text-white/60" />
+                          <span className="text-sm font-medium text-white/60">
+                            Your Answer:
+                          </span>
+                        </div>
+                        <p
+                          className={cn(
+                            "text-lg font-medium",
+                            isCorrect ? "text-green-400" : "text-red-400"
+                          )}
+                        >
+                          {userAnswer || "No answer selected"}
+                        </p>
                       </div>
-                      <div className="text-sm text-white/60">
-                        Correct Answers
-                      </div>
-                    </div>
-                    <div className="p-4 rounded-lg bg-red-500/[0.1] border border-red-500/[0.3]">
-                      <XCircle className="w-8 h-8 text-red-400 mx-auto mb-2" />
-                      <div className="text-2xl font-bold text-red-400 mb-1">
-                        {questions.length - score}
-                      </div>
-                      <div className="text-sm text-white/60">
-                        Incorrect Answers
-                      </div>
-                    </div>
-                    <div className="p-4 rounded-lg bg-white/[0.05] border border-white/[0.15]">
-                      <Target className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-                      <div className="text-2xl font-bold text-blue-400 mb-1">
-                        {Math.round((score / questions.length) * 100)}%
-                      </div>
-                      <div className="text-sm text-white/60">Final Score</div>
-                    </div>
-                  </div>
 
-                  <div
-                    className="flex gap-4 mt-8 justify-center"
-                    style={{ display: "-grid" }}
-                  >
-                    <Button
-                      variant="outline"
-                      onClick={() => setCurrentStep("results")}
-                      className="border-white/[0.15] text-white hover:bg-white/[0.05] px-8 py-3"
-                      style={{
-                        backgroundColor: selectedTheme.primary,
-                        color: "white",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "white";
-                        e.currentTarget.style.color = selectedTheme.primary;
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor =
-                          selectedTheme.primary;
-                        e.currentTarget.style.color = "white";
-                      }}
-                    >
-                      <ArrowLeft className="w-5 h-5 mr-2" />
-                      Back to Results
-                    </Button>
-                    <Button
-                      onClick={() => window.history.back()}
-                      className="px-8 py-3 font-semibold"
-                      style={{ backgroundColor: selectedTheme.primary }}
-                    >
-                      <BookOpen className="w-5 h-5 mr-2" />
-                      Back to Course
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+                      {/* Correct answer (if different) */}
+                      {!isCorrect && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.1 + 0.5 }}
+                          className="p-4 rounded-lg border border-green-500/[0.3] bg-green-500/[0.05]"
+                        >
+                          <div className="flex items-center gap-3 mb-2">
+                            <Lightbulb className="w-5 h-5 text-green-400" />
+                            <span className="text-sm font-medium text-green-400">
+                              Correct Answer:
+                            </span>
+                          </div>
+                          <p className="text-lg font-medium text-green-400">
+                            {question.answer}
+                          </p>
+                        </motion.div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
-      </div>
-    );
-  }
 
+        {/* Summary */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: questions.length * 0.1 + 0.5 }}
+          className="mt-12"
+        >
+          <Card className="bg-white/[0.02] border-white/[0.08] backdrop-blur-lg">
+            <CardContent className="p-8 text-center">
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Quiz Summary
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-4 rounded-lg bg-green-500/[0.1] border border-green-500/[0.3]">
+                  <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-green-400 mb-1">
+                    {score}
+                  </div>
+                  <div className="text-sm text-white/60">
+                    Correct Answers
+                  </div>
+                </div>
+                <div className="p-4 rounded-lg bg-red-500/[0.1] border border-red-500/[0.3]">
+                  <XCircle className="w-8 h-8 text-red-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-red-400 mb-1">
+                    {questions.length - score}
+                  </div>
+                  <div className="text-sm text-white/60">
+                    Incorrect Answers
+                  </div>
+                </div>
+                <div className="p-4 rounded-lg bg-white/[0.05] border border-white/[0.15]">
+                  <Target className="w-8 h-8 text-blue-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-blue-400 mb-1">
+                    {Math.round((score / questions.length) * 100)}%
+                  </div>
+                  <div className="text-sm text-white/60">Final Score</div>
+                </div>
+              </div>
+
+              <div
+                className="flex gap-4 mt-8 justify-center"
+                style={{ display: "-grid" }}
+              >
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentStep("results")}
+                  className="border-white/[0.15] text-white hover:bg-white/[0.05] px-8 py-3"
+                  style={{
+                    backgroundColor: selectedTheme.primary,
+                    color: "white",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "white";
+                    e.currentTarget.style.color = selectedTheme.primary;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = selectedTheme.primary;
+                    e.currentTarget.style.color = "white";
+                  }}
+                >
+                  <ArrowLeft className="w-5 h-5 mr-2" />
+                  Back to Results
+                </Button>
+                <Button
+                  onClick={() => window.history.back()}
+                  className="px-8 py-3 font-semibold"
+                  style={{ backgroundColor: selectedTheme.primary }}
+                >
+                  <BookOpen className="w-5 h-5 mr-2" />
+                  Back to Course
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
+    </div>
+
+    {/* Image Dialog */}
+    <ImageDialog open={showImageDialog} onOpenChange={setShowImageDialog}>
+      <ImageDialogContent className="bg-black/90 backdrop-blur-md border-white/20 max-w-4xl">
+        <DialogHeader className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-semibold text-white">Code Reference</h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowImageDialog(false)}
+            className="text-white hover:bg-white/10"
+          >
+            ✕
+          </Button>
+        </DialogHeader>
+        {currentImage && (
+            <div className="relative w-full h-96 bg-transparent rounded-lg overflow-hidden">
+            <img
+              src={currentImage}
+              alt="Code reference"
+              className="w-full h-full object-contain"
+            />
+            </div>
+        )}
+        <p className="text-sm text-white/70 mt-4 text-center">
+          Refer to this code snippet to answer the question num.{currentQuestion + 1}
+        </p>
+      </ImageDialogContent>
+    </ImageDialog>
+  </div>
+);
+  }
   return null;
 }
