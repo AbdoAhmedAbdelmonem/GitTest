@@ -18,28 +18,29 @@ interface Props {
   params: Promise<{ department: string }>
 }
 
+// Significantly reduced animation durations and delays
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 15 }, // Reduced y-distance by 50%
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1,
-      delay: 0.5 + i * 0.1,
+      duration: 0.4, // Reduced from 1.0 to 0.4
+      delay: 0.1 + i * 0.05, // Reduced from 0.5 + i * 0.1
       ease: [0.25, 0.4, 0.25, 1],
     },
   }),
 }
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
+  hidden: { opacity: 0, y: 20, scale: 0.97 }, // Reduced scale and y-distance
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.8,
-      delay: 0.8 + i * 0.1,
+      duration: 0.3, // Reduced from 0.8 to 0.3
+      delay: 0.2 + i * 0.05, // Reduced from 0.8 + i * 0.1
       ease: [0.25, 0.4, 0.25, 1],
     },
   }),
@@ -72,16 +73,25 @@ function DepartmentContent({ params }: Props) {
   ]
 
   return (
-    <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
+    <div
+      className="relative min-h-screen w-full bg-[#030303] overflow-hidden"
+      style={{
+        backgroundImage: "url('/images/Background.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        // Removed backgroundAttachment: "fixed" for better performance
+      }}
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
       <Navigation />
+
       <div className="relative z-10 py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          {/* Back Button */}
+          {/* Back Button - faster animation */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -10 }} // Reduced distance
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }} // Reduced duration and delay
             className="mb-8"
           >
             <Link href="/specialization">
@@ -95,14 +105,14 @@ function DepartmentContent({ params }: Props) {
             </Link>
           </motion.div>
 
-          {/* Header */}
-          <div className="text-center mb-16">
+          {/* Header - Optimized for LCP */}
+          <div className="text-center mb-12"> {/* Reduced margin for faster visual completion */}
             <motion.h1
               custom={0}
               variants={fadeUpVariants}
               initial="hidden"
               animate="visible"
-              className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight"
+              className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight" // Reduced bottom margin
             >
               <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">{dept.name}</span>
             </motion.h1>
@@ -112,7 +122,7 @@ function DepartmentContent({ params }: Props) {
               variants={fadeUpVariants}
               initial="hidden"
               animate="visible"
-              className="text-lg text-white/60 mb-8 max-w-2xl mx-auto leading-relaxed"
+              className="text-lg text-white/60 mb-6 max-w-2xl mx-auto leading-relaxed" // Reduced bottom margin
             >
               {dept.description}
             </motion.p>
@@ -127,31 +137,31 @@ function DepartmentContent({ params }: Props) {
             </motion.div>
           </div>
 
-          {/* Level Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Level Cards - Optimized animations */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"> {/* Reduced gap for faster rendering */}
             {levels.map((level, index) => (
               <motion.div key={level} custom={index} variants={cardVariants} initial="hidden" animate="visible">
                 <Link href={`/specialization/${resolvedParams.department}/${index + 1}`}>
-                  <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-500 group cursor-pointer backdrop-blur-sm">
-                    <CardHeader className="text-center pb-4">
+                  <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-300 group cursor-pointer backdrop-blur-sm">
+                    <CardHeader className="text-center pb-3"> {/* Reduced padding */}
                       <motion.div
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ duration: 0.3 }}
+                        whileHover={{ scale: 1.05, rotate: 3 }} // Reduced scale and rotation
+                        transition={{ duration: 0.2 }} // Faster transition
                         className={cn(
-                          "w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4",
+                          "w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3", // Smaller icon container
                           "bg-gradient-to-r to-transparent border-2 border-white/[0.15]",
-                          "backdrop-blur-[2px] shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
+                          "backdrop-blur-[2px] shadow-[0_4px_16px_0_rgba(255,255,255,0.08)]", // Reduced shadow
                           levelColors[index],
                         )}
                       >
-                        <GraduationCap className="w-8 h-8 text-white" />
+                        <GraduationCap className="w-7 h-7 text-white" /> {/* Slightly smaller icon */}
                       </motion.div>
                       <CardTitle className="text-xl font-semibold text-white group-hover:text-white/90 transition-colors">
                         {level}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="text-center">
-                      <p className="text-white/60 group-hover:text-white/70 transition-colors mb-4">
+                      <p className="text-white/60 group-hover:text-white/70 transition-colors mb-3"> {/* Reduced margin */}
                         Access {level.toLowerCase()} curriculum and study materials
                       </p>
                       <Badge variant="outline" className="bg-white/[0.03] border-white/[0.1] text-white/60">
@@ -168,9 +178,8 @@ function DepartmentContent({ params }: Props) {
         </div>
       </div>
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
+      {/* Simplified gradient overlay for better performance */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/70 pointer-events-none" />
     </div>
   )
 }
-
