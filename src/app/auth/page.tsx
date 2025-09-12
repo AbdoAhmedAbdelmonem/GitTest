@@ -3,16 +3,16 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import bcrypt from "bcryptjs";
-import { Button } from "../../components/ui/button"
-import { Input } from "../../components/ui/input"
-import { Label } from "../../components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Eye, EyeOff, Lock, User, ArrowRight, Sparkles, Shield, BookOpen, Phone, Hash, ChevronDown, GraduationCap, Star, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useSearchParams, useRouter } from "next/navigation"
-import { createBrowserClient } from "../../lib/supabase/client"
-import { Alert, AlertDescription } from "../../components/ui/alert"
-import { useToast  } from "../../components/ToastProvider"
+import { createBrowserClient } from "@/lib/supabase/client"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { useToast  } from "@/components/ToastProvider"
 
 
 function ElegantShape({
