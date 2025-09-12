@@ -3,45 +3,43 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { notFound } from "next/navigation"
+import { notFound, useSearchParams } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, BookOpen, Calendar } from "lucide-react"
+import { ArrowLeft, BookOpen, Calendar, CheckCircle } from "lucide-react"
 import { departmentData } from "@/lib/department-data"
-import React, { Suspense } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import ErrorBoundary from "@/components/ErrorBoundary"
 import Navigation from "@/components/navigation"
-
-
 
 interface Props {
   params: Promise<{ department: string; level: string }>
 }
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },  // Reduced y-distance to load faster
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1,
-      delay: 0.5 + i * 0.1,
+      duration: 0.5,  // Reduced from 1.0 to 0.5
+      delay: 0.2 + i * 0.05,  // Reduced delay from 0.5 + i * 0.1
       ease: [0.25, 0.4, 0.25, 1],
     },
   }),
 }
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
+  hidden: { opacity: 0, y: 30, scale: 0.95 },  // Reduced y-distance and scale difference
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.8,
-      delay: 0.8 + i * 0.1,
+      duration: 0.4,  // Reduced from 0.8 to 0.4
+      delay: 0.3 + i * 0.05,  // Reduced delay from 0.8 + i * 0.1
       ease: [0.25, 0.4, 0.25, 1],
     },
   }),
@@ -59,6 +57,11 @@ export default function LevelPage({ params }: Props) {
 
 function LevelContent({ params }: Props) {
   const resolvedParams = React.use(params)
+  const searchParams = useSearchParams()
+  const [activeTab, setActiveTab] = useState("term1")
+  const [showTermIndicator, setShowTermIndicator] = useState(false)
+  const [indicatorTerm, setIndicatorTerm] = useState("")
+  
   const dept = departmentData[resolvedParams.department]
   const levelNum = Number.parseInt(resolvedParams.level)
 
@@ -69,20 +72,77 @@ function LevelContent({ params }: Props) {
   const level = dept.levels[levelNum]
   const yearSuffix = levelNum === 1 ? "st" : levelNum === 2 ? "nd" : levelNum === 3 ? "rd" : "th"
 
+  // Handle URL parameter and set default when none exists
+  useEffect(() => {
+    const mode = searchParams.get("mode")
+    if (mode === "term2") {
+      setActiveTab("term2")
+      setIndicatorTerm("Second Term")
+      setShowTermIndicator(true)
+      
+      // Reduced from 3000 to 1500ms
+      const timer = setTimeout(() => {
+        setShowTermIndicator(false)
+      }, 1500)
+      
+      return () => clearTimeout(timer)
+    } else if (mode === "term1") {
+      setActiveTab("term1")
+      setIndicatorTerm("First Term")
+      setShowTermIndicator(true)
+      
+      // Reduced from 3000 to 1500ms
+      const timer = setTimeout(() => {
+        setShowTermIndicator(false)
+      }, 1500)
+      
+      return () => clearTimeout(timer)
+    } else {
+      // If no mode parameter exists, default to term1 and update URL
+      window.history.replaceState({}, '', `?mode=term1`);
+      setActiveTab("term1")
+    }
+  }, [searchParams])
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value)
+  }
+
   return (
-    <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
+    <div 
+      style={{
+        backgroundImage: "url('/images/Background.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}  // Removed backgroundAttachment: "fixed" as it can cause performance issues
+      className="relative min-h-screen w-full bg-[#030303] overflow-hidden"
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
       <Navigation />
 
-      {/* Elegant Shapes */}
+      {/* Term Selection Indicator with faster animation */}
+      {showTermIndicator && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}  // Reduced distance
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}  // Added explicit shorter duration
+          className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50"
+        >
+            <div className="bg-white/[0.1] border border-white/[0.2] backdrop-blur-md rounded-lg px-4 py-3 flex items-center gap-2">
+            <CheckCircle className="w-5 h-5 text-green-400" />
+            <span className="text-white text-sm md:text-base font-small">{indicatorTerm} is Active</span>
+            </div>
+        </motion.div>
+      )}
 
       <div className="relative z-10 py-12 px-4">
         <div className="max-w-7xl mx-auto">
-          {/* Back Button */}
+          {/* Back Button - faster transition */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -10 }}  // Reduced distance
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }}  // Reduced duration and delay
             className="mb-8"
           >
             <Link href={`/specialization/${resolvedParams.department}`}>
@@ -122,15 +182,23 @@ function LevelContent({ params }: Props) {
             >
               Complete curriculum organized by academic terms
             </motion.p>
+
+            {/* Quick Navigation Links */}
+            
           </div>
 
           {/* Tabs */}
-          <motion.div custom={2} variants={fadeUpVariants} initial="hidden" animate="visible">
-            <Tabs defaultValue="term1" className="w-full">
+          <motion.div custom={3} variants={fadeUpVariants} initial="hidden" animate="visible">
+            <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
                 <TabsTrigger
                   value="term1"
                   className="flex items-center gap-2 data-[state=active]:bg-white/[0.1] data-[state=active]:text-white text-white/60"
+                  onClick={() => {
+                    // Use router.push instead of Link
+                    window.history.pushState({}, '', `?mode=term1`);
+                    handleTabChange("term1");
+                  }}
                 >
                   <Calendar className="w-4 h-4" />
                   First Term
@@ -138,6 +206,11 @@ function LevelContent({ params }: Props) {
                 <TabsTrigger
                   value="term2"
                   className="flex items-center gap-2 data-[state=active]:bg-white/[0.1] data-[state=active]:text-white text-white/60"
+                  onClick={() => {
+                    // Use router.push instead of Link
+                    window.history.pushState({}, '', `?mode=term2`);
+                    handleTabChange("term2");
+                  }}
                 >
                   <Calendar className="w-4 h-4" />
                   Second Term
@@ -263,4 +336,3 @@ function LevelContent({ params }: Props) {
     </div>
   )
 }
-
