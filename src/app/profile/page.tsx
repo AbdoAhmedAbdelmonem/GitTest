@@ -78,22 +78,20 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
 
   // Process quiz data for visualization
   const processData = () => {
-    // Sort by date and calculate day index from first quiz
+    // Filter and sort by date
     const sortedData = [...quizData]
       .filter(attempt => attempt.score !== undefined && attempt.score !== null)
       .sort((a, b) => new Date(a.solved_at || a.created_at).getTime() - new Date(b.solved_at || b.created_at).getTime());
     
     if (sortedData.length === 0) return [];
     
-    const firstDate = new Date(sortedData[0].solved_at || sortedData[0].created_at);
-    
-    return sortedData.map(attempt => {
-      const currentDate = new Date(attempt.solved_at || attempt.created_at);
-      const dayIndex = Math.floor((currentDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24));
+    return sortedData.map((attempt, index) => {
       return {
-        day: dayIndex,
+        trial: index + 1,
         score: Math.round(Number(attempt.score)),
-        date: currentDate.toLocaleDateString()
+        date: new Date(attempt.solved_at || attempt.created_at).toLocaleDateString(),
+        quizTitle: attempt.quiz_title || "Quiz",
+        totalQuestions: attempt.total_questions || "N/A"
       };
     });
   };
@@ -101,42 +99,18 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
   const data = processData();
   if (data.length === 0) return null;
 
-  const maxDay = Math.max(...data.map(d => d.day));
+  const maxTrial = data.length;
   const maxScore = Math.max(...data.map(d => d.score));
-
-  // Calculate KDE (simplified for visualization)
-  const calculateKDE = () => {
-    const kdePoints = [];
-    const bandwidth = 5; // Smoothing parameter
-    
-    for (let day = 0; day <= maxDay; day++) {
-      let density = 0;
-      for (const point of data) {
-        // Gaussian kernel
-        density += Math.exp(-0.5 * Math.pow((day - point.day) / bandwidth, 2));
-      }
-      kdePoints.push({ day, density: density / data.length });
-    }
-    
-    // Normalize to 0-100 range for visualization
-    const maxDensity = Math.max(...kdePoints.map(d => d.density));
-    return kdePoints.map(d => ({
-      day: d.day,
-      density: (d.density / maxDensity) * 100
-    }));
-  };
-
-  const kdeData = calculateKDE();
 
   return (
     <Card className="bg-white/[0.02] border-white/10 backdrop-blur-xl shadow-2xl mt-8">
       <CardHeader>
         <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
           <TrendingUp className="w-5 h-5 text-purple-400" />
-          Progress Over Time
+          Progress Over Attempts
         </CardTitle>
         <CardDescription className="text-white/60">
-          Your performance trend with Kernel Density Estimation
+          Your performance across quiz attempts with trend line
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -161,18 +135,39 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
               />
             ))}
             
+            {/* Connection lines between dots */}
+            <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
+              {data.slice(0, -1).map((point, i) => {
+                const nextPoint = data[i + 1];
+                return (
+                  <line
+                    key={i}
+                    x1={`${(point.trial / maxTrial) * 100}%`}
+                    y1={`${100 - point.score}%`}
+                    x2={`${(nextPoint.trial / maxTrial) * 100}%`}
+                    y2={`${100 - nextPoint.score}%`}
+                    stroke="rgba(168, 85, 247, 0.5)"
+                    strokeWidth="2"
+                  />
+                );
+              })}
+            </svg>
+            
             {/* Data points */}
             {data.map((point, i) => (
               <div
                 key={i}
-                className="absolute w-3 h-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border border-white/50 shadow-lg transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
+                className="absolute w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-white/70 shadow-lg transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-10"
                 style={{
-                  left: `${(point.day / maxDay) * 100}%`,
+                  left: `${(point.trial / maxTrial) * 100}%`,
                   top: `${100 - point.score}%`
                 }}
               >
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/80 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
-                  Day {point.day}: {point.score}%<br/>{point.date}
+                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/90 text-white text-xs p-2 rounded whitespace-nowrap shadow-xl z-20">
+                  <div className="font-bold">{point.quizTitle}</div>
+                  <div>Trial {point.trial}: {point.score}%</div>
+                  <div>Date: {point.date}</div>
+                  <div>Questions: {point.totalQuestions}</div>
                 </div>
               </div>
             ))}
@@ -180,17 +175,21 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
           
           {/* X-axis labels */}
           <div className="ml-8 mt-2 flex justify-between text-xs text-white/60">
-            <span>Day 0</span>
-            <span>Day {Math.floor(maxDay/2)}</span>
-            <span>Day {maxDay}</span>
+            <span>Trial 1</span>
+            <span>Trial {Math.floor(maxTrial/2)}</span>
+            <span>Trial {maxTrial}</span>
           </div>
         </div>
         
         <div className="mt-4 text-sm text-white/60">
-          <p style={{marginTop: "3rem"}}>This visualization shows your quiz scores over time, with a smoothed density estimate showing your performance trends.</p>
+          <p style={{marginTop: "3rem"}}>This visualization shows your quiz scores across attempts, with a line connecting your performance over time.</p>
           <div className="mt-2 flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500"></span>
             <span>Each dot represents a quiz attempt</span>
+          </div>
+          <div className="mt-1 flex items-center gap-2">
+            <span className="w-4 h-0.5 bg-purple-500/50"></span>
+            <span>Line shows progress trend across attempts</span>
           </div>
         </div>
       </CardContent>
@@ -613,13 +612,13 @@ export default function ProfilePage() {
             className="md:col-span-2"
           >
             <Card className="bg-white/[0.02] border-white/10 backdrop-blur-xl shadow-2xl h-full">
-              <CardHeader className="">
+              <CardHeader style={{height: "auto"}} className="text-center pb-6">
                 <CardTitle className="text-xl font-bold text-white">Quiz History</CardTitle>
                 <CardDescription className="text-white/60">
                   Your recent quiz attempts and performance
                 </CardDescription>
               </CardHeader>
-              <CardContent className="">
+              <CardContent style={{height: "48rem"}} className="overflow-y-auto custom-scrollbar">
                 {quizData.length > 0 ? (
                   <div className="space-y-4 flex-1">
                   {quizData.map((attempt, index) => {
