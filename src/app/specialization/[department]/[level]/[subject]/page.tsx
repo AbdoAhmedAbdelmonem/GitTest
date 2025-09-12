@@ -1,21 +1,31 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, FileText, Video, BookOpen, ClipboardList, GraduationCap, ExternalLink, Play } from 'lucide-react'
-import { departmentData } from "@/lib/department-data"
-import { cn } from "@/lib/utils"
-import React, { Suspense } from "react"
-import ErrorBoundary from "@/components/ErrorBoundary"
-import Navigation from "@/components/navigation"
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  ArrowLeft,
+  FileText,
+  Video,
+  BookOpen,
+  ClipboardList,
+  GraduationCap,
+  ExternalLink,
+  Play,
+  Layers,
+} from "lucide-react";
+import { departmentData } from "@/lib/department-data";
+import { cn } from "@/lib/utils";
+import React, { Suspense } from "react";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import Navigation from "@/components/navigation";
 
 interface Props {
-  params: Promise<{ department: string; level: string; subject: string }>
+  params: Promise<{ department: string; level: string; subject: string }>;
 }
 
 const fadeUpVariants = {
@@ -29,7 +39,7 @@ const fadeUpVariants = {
       ease: [0.25, 0.4, 0.25, 1],
     },
   }),
-}
+};
 
 const tabVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -42,7 +52,7 @@ const tabVariants = {
       ease: [0.25, 0.4, 0.25, 1],
     },
   }),
-}
+};
 
 export default function SubjectPage({ params }: Props) {
   return (
@@ -51,26 +61,77 @@ export default function SubjectPage({ params }: Props) {
         <SubjectContent params={params} />
       </Suspense>
     </ErrorBoundary>
-  )
+  );
 }
 
 function SubjectContent({ params }: Props) {
-  const resolvedParams = React.use(params)
-  const dept = departmentData[resolvedParams.department]
-  const levelNum = Number.parseInt(resolvedParams.level)
+  const resolvedParams = React.use(params);
+  const dept = departmentData[resolvedParams.department];
+  const levelNum = Number.parseInt(resolvedParams.level);
 
   if (!dept || !dept.levels[levelNum]) {
-    notFound()
+    notFound();
   }
 
-  const level = dept.levels[levelNum]
-  const subject = [...level.subjects.term1, ...level.subjects.term2].find((s) => s.id === resolvedParams.subject)
+  const level = dept.levels[levelNum];
+  const subject = [...level.subjects.term1, ...level.subjects.term2].find(
+    (s) => s.id === resolvedParams.subject
+  );
 
   if (!subject) {
-    notFound()
+    notFound();
   }
 
-  const yearSuffix = levelNum === 1 ? "st" : levelNum === 2 ? "nd" : levelNum === 3 ? "rd" : "th"
+  const yearSuffix =
+    levelNum === 1
+      ? "st"
+      : levelNum === 2
+      ? "nd"
+      : levelNum === 3
+      ? "rd"
+      : "th";
+
+  // Function to extract drive ID from Google Drive URL
+  const extractDriveId = (url: string): string => {
+    try {
+      const urlObj = new URL(url);
+      // Handle different Google Drive URL formats
+      if (urlObj.hostname.includes("drive.google.com")) {
+        if (urlObj.pathname.includes("/file/d/")) {
+          const match = url.match(/\/file\/d\/([^\/]+)/);
+          return match ? match[1] : url;
+        } else if (urlObj.pathname.includes("/folders/")) {
+          const match = url.match(/\/folders\/([^\/\?]+)/);
+          return match ? match[1] : url;
+        } else if (urlObj.searchParams.has("id")) {
+          return urlObj.searchParams.get("id") || url;
+        }
+      }
+      return url;
+    } catch {
+      return url;
+    }
+  };
+
+  // Function to find prerequisite subjects
+  const getPrerequisiteSubjects = () => {
+    if (!subject.prerequisites || subject.prerequisites.length === 0) {
+      return null;
+    }
+
+    const allSubjects = [];
+    for (const level of Object.values(dept.levels)) {
+      allSubjects.push(...level.subjects.term1, ...level.subjects.term2);
+    }
+
+    return subject.prerequisites
+      .map((prereqId) => {
+        return allSubjects.find((s) => s.id === prereqId);
+      })
+      .filter(Boolean); // Remove any undefined values
+  };
+
+  const prerequisiteSubjects = getPrerequisiteSubjects();
 
   const sections = [
     {
@@ -82,6 +143,7 @@ function SubjectContent({ params }: Props) {
       content: subject.materials.lectures,
       description: "Access comprehensive lecture materials and notes",
       buttonText: "Open Lecture Materials",
+      redirectToDrive: true,
     },
     {
       id: "sections",
@@ -92,6 +154,7 @@ function SubjectContent({ params }: Props) {
       content: subject.materials.sections,
       description: "Practice problems, worksheets, and section materials",
       buttonText: "Open Section Materials",
+      redirectToDrive: true,
     },
     {
       id: "videos",
@@ -102,6 +165,7 @@ function SubjectContent({ params }: Props) {
       content: subject.materials.videos,
       description: "Watch comprehensive video lectures and tutorials",
       buttonText: "Open Video Playlist",
+      redirectToDrive: false, // Videos will open directly in YouTube
     },
     {
       id: "quizzes",
@@ -111,7 +175,9 @@ function SubjectContent({ params }: Props) {
       iconColor: "text-orange-400",
       content: subject.materials.quizzes?.length > 0 ? true : null,
       description: "Test your knowledge with interactive quizzes",
-      buttonText: subject.materials.quizzes?.length > 0 ? "View Quizzes" : "Coming Soon",
+      buttonText:
+        subject.materials.quizzes?.length > 0 ? "View Quizzes" : "Coming Soon",
+      redirectToDrive: false,
     },
     {
       id: "exams",
@@ -119,14 +185,23 @@ function SubjectContent({ params }: Props) {
       icon: GraduationCap,
       color: "from-red-500/[0.15]",
       iconColor: "text-red-400",
-      content: null,
-      description: "Previous exam papers and solutions will be available here",
-      buttonText: "Coming Soon",
+      content: subject.materials.exams,
+      description: "Previous exam papers and solutions",
+      buttonText: subject.materials.exams ? "Open Last Exams" : "Coming Soon",
+      redirectToDrive: true,
     },
-  ]
+  ];
 
   return (
-    <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
+    <div
+      className="relative h-full w-full overflow-auto bg-[#030303]"
+      style={{
+        backgroundImage: "url('/images/Background.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed", // makes background static
+      }}
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
       <Navigation />
 
@@ -139,7 +214,9 @@ function SubjectContent({ params }: Props) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8"
           >
-            <Link href={`/specialization/${resolvedParams.department}/${resolvedParams.level}`}>
+            <Link
+              href={`/specialization/${resolvedParams.department}/${resolvedParams.level}`}
+            >
               <Button
                 variant="ghost"
                 className="text-white/60 hover:text-white hover:bg-white/[0.05] border border-white/[0.08] backdrop-blur-sm"
@@ -182,25 +259,109 @@ function SubjectContent({ params }: Props) {
               animate="visible"
               className="flex justify-center gap-4 mb-8 flex-wrap"
             >
-              <Badge variant="outline" className="text-lg px-4 py-2 bg-white/[0.03] border-white/[0.1] text-white/70">
+              <Badge
+                variant="outline"
+                className="text-lg px-4 py-2 bg-white/[0.03] border-white/[0.1] text-white/70"
+                style={{ height: "37px", fontSize: "11px" }}
+              >
                 {dept.name}
               </Badge>
-              <Badge variant="outline" className="text-lg px-4 py-2 bg-white/[0.03] border-white/[0.1] text-white/70">
+              <Badge
+                variant="outline"
+                className="text-lg px-4 py-2 bg-white/[0.03] border-white/[0.1] text-white/70"
+                style={{ height: "37px", fontSize: "11px" }}
+
+              >
                 {levelNum}
                 {yearSuffix} Year
               </Badge>
-              <Badge variant="outline" className="text-lg px-4 py-2 bg-white/[0.03] border-white/[0.1] text-white/70">
+              <Badge
+                variant="outline"
+                className="text-lg px-4 py-2 bg-white/[0.03] border-white/[0.1] text-white/70"
+                style={{ height: "37px", fontSize: "11px" }}
+              >
                 {subject.creditHours} Credits
               </Badge>
             </motion.div>
           </div>
 
+          {/* Prerequisites Card */}
+          {prerequisiteSubjects && (
+            <motion.div
+              custom={2.5}
+              variants={fadeUpVariants}
+              initial="hidden"
+              animate="visible"
+              className="mb-8"
+            >
+              <Card className="bg-white/[0.02] border-white/[0.08] backdrop-blur-sm overflow-hidden">
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-3 text-white">
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-r from-amber-500/[0.15] to-transparent border border-white/[0.15] backdrop-blur-sm shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]"
+                    >
+                      <Layers className="w-6 h-6 text-amber-400" />
+                    </motion.div>
+                    Prerequisites
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-white/60 mb-4">
+                    These are the foundational subjects you should complete
+                    before studying {subject.name}:
+                  </p>
+                  <div className="grid gap-3">
+                    {prerequisiteSubjects.map((prereq, index) => (
+                      <motion.div
+                        key={prereq.id}
+                        custom={index}
+                        variants={tabVariants}
+                        initial="hidden"
+                        animate="visible"
+                      >
+                        <Link
+                          href={`/specialization/${
+                            resolvedParams.department
+                          }/${findSubjectLevel(dept, prereq.id)}/${prereq.id}`}
+                        >
+                          <div className="group flex items-center justify-between p-4 rounded-lg border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06] transition-all cursor-pointer">
+                            <div>
+                              <h4 className="text-white font-medium mb-1">
+                                {prereq.name}
+                              </h4>
+                              <p className="text-sm text-white/60">
+                                {prereq.code}
+                              </p>
+                            </div>
+                            <div className="flex items-center">
+                              <span className="text-amber-400 text-sm mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                View Subject
+                              </span>
+                              <ArrowLeft className="w-4 h-4 text-amber-400 rotate-180" />
+                            </div>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
+
           {/* Tabs */}
-          <motion.div custom={3} variants={fadeUpVariants} initial="hidden" animate="visible">
+          <motion.div
+            custom={3}
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <Tabs defaultValue="lectures" className="w-full">
               <TabsList className="grid w-full grid-cols-5 mb-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
                 {sections.map((section) => {
-                  const IconComponent = section.icon
+                  const IconComponent = section.icon;
                   return (
                     <TabsTrigger
                       key={section.id}
@@ -210,15 +371,20 @@ function SubjectContent({ params }: Props) {
                       <IconComponent className="w-4 h-4" />
                       <span className="hidden sm:inline">{section.title}</span>
                     </TabsTrigger>
-                  )
+                  );
                 })}
               </TabsList>
 
               {sections.map((section, index) => {
-                const IconComponent = section.icon
+                const IconComponent = section.icon;
                 return (
                   <TabsContent key={section.id} value={section.id}>
-                    <motion.div custom={index} variants={tabVariants} initial="hidden" animate="visible">
+                    <motion.div
+                      custom={index}
+                      variants={tabVariants}
+                      initial="hidden"
+                      animate="visible"
+                    >
                       <Card className="bg-white/[0.02] border-white/[0.08] backdrop-blur-sm">
                         <CardHeader>
                           <CardTitle className="flex items-center gap-3 text-white">
@@ -229,10 +395,12 @@ function SubjectContent({ params }: Props) {
                                 "w-12 h-12 rounded-lg flex items-center justify-center",
                                 "bg-gradient-to-r to-transparent border border-white/[0.15]",
                                 "backdrop-blur-sm shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
-                                section.color,
+                                section.color
                               )}
                             >
-                              <IconComponent className={cn("w-6 h-6", section.iconColor)} />
+                              <IconComponent
+                                className={cn("w-6 h-6", section.iconColor)}
+                              />
                             </motion.div>
                             {section.title}
                           </CardTitle>
@@ -245,38 +413,67 @@ function SubjectContent({ params }: Props) {
                                   {section.description} for {subject.name}.
                                 </p>
                                 <div className="grid gap-4">
-                                  {subject.materials.quizzes.map((quiz: any, idx: number) => (
-                                    <motion.div
-                                      key={quiz.id}
-                                      initial={{ opacity: 0, y: 20 }}
-                                      animate={{ opacity: 1, y: 0 }}
-                                      transition={{ delay: idx * 0.1 }}
-                                      className="p-4 bg-white/[0.05] rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all"
-                                    >
-                                      <div className="flex items-center justify-between">
-                                        <div>
-                                          <h4 className="text-white font-semibold mb-1">{quiz.name}</h4>
-                                          <div className="flex gap-4 text-sm text-white/60">
-                                            <span>{quiz.code}</span>
-                                            <span>{quiz.duration} min</span>
-                                            <span>{quiz.questions} Question</span>
+                                  {subject.materials.quizzes?.map(
+                                    (quiz: any, idx: number) => (
+                                      <motion.div
+                                        key={quiz.id}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: idx * 0.1 }}
+                                        className="p-4 bg-white/[0.05] rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all"
+                                      >
+                                        <div className="flex items-center justify-between">
+                                          <div>
+                                            <h4 className="text-white font-semibold mb-1">
+                                              {quiz.name}
+                                            </h4>
+                                            <div className="flex gap-4 text-sm text-white/60">
+                                              <span>{quiz.code}</span>
+                                              <span>{quiz.duration}</span>
+                                              <span>
+                                                {quiz.questions} Question
+                                              </span>
+                                            </div>
                                           </div>
+                                          <Button
+                                            asChild
+                                            className="bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+                                          >
+                                            <Link
+                                              href={`/quiz/${resolvedParams.department}/${resolvedParams.subject}/${quiz.id}`}
+                                            >
+                                              <Play className="w-4 h-4 mr-2" />
+                                              Start Quiz
+                                            </Link>
+                                          </Button>
                                         </div>
-                                        <Button
-                                          asChild
-                                          className="bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
-                                        >
-                                          <Link href={`/quiz/${resolvedParams.department}/${resolvedParams.subject}/${quiz.id}`}>
-                                            <Play className="w-4 h-4 mr-2" />
-                                            Start Quiz
-                                          </Link>
-                                        </Button>
-                                      </div>
-                                    </motion.div>
-                                  ))}
+                                      </motion.div>
+                                    )
+                                  )}
                                 </div>
                               </div>
+                            ) : section.redirectToDrive ? (
+                              // Redirect to drive page for lectures, sections, and exams
+                              <div className="space-y-4">
+                                <p className="text-white/60 mb-4 leading-relaxed">
+                                  {section.description} for {subject.name}.
+                                </p>
+                                <Button
+                                  asChild
+                                  className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+                                >
+                                  <Link
+                                    href={`/drive/${extractDriveId(
+                                      section.content
+                                    )}`}
+                                  >
+                                    <ExternalLink className="w-4 h-4 mr-2" />
+                                    {section.buttonText}
+                                  </Link>
+                                </Button>
+                              </div>
                             ) : (
+                              // Direct link for videos
                               <div className="space-y-4">
                                 <p className="text-white/60 mb-4 leading-relaxed">
                                   {section.description} for {subject.name}.
@@ -291,7 +488,7 @@ function SubjectContent({ params }: Props) {
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2"
                                   >
-                                    <ExternalLink className="w-4 h-4" />
+                                    <ExternalLink className="w-4 h-4 mr-2" />
                                     {section.buttonText}
                                   </a>
                                 </Button>
@@ -301,19 +498,28 @@ function SubjectContent({ params }: Props) {
                             <div className="text-center py-12">
                               <motion.div
                                 animate={{ y: [0, -10, 0] }}
-                                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                                transition={{
+                                  duration: 2,
+                                  repeat: Number.POSITIVE_INFINITY,
+                                  ease: "easeInOut",
+                                }}
                                 className={cn(
                                   "w-16 h-16 rounded-lg mx-auto mb-4 flex items-center justify-center",
                                   "bg-gradient-to-r to-transparent border border-white/[0.15]",
                                   "backdrop-blur-sm",
-                                  section.color,
+                                  section.color
                                 )}
                               >
-                                <IconComponent className={cn("w-8 h-8", section.iconColor)} />
+                                <IconComponent
+                                  className={cn("w-8 h-8", section.iconColor)}
+                                />
                               </motion.div>
-                              <p className="text-white/50 mb-4 leading-relaxed">{section.description}.</p>
+                              <p className="text-white/50 mb-4 leading-relaxed">
+                                {section.description}.
+                              </p>
                               <p className="text-sm text-white/30">
-                                This section is currently being prepared and will be available soon.
+                                This section is currently being prepared and
+                                will be available soon.
                               </p>
                             </div>
                           )}
@@ -321,7 +527,7 @@ function SubjectContent({ params }: Props) {
                       </Card>
                     </motion.div>
                   </TabsContent>
-                )
+                );
               })}
             </Tabs>
           </motion.div>
@@ -331,6 +537,16 @@ function SubjectContent({ params }: Props) {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
     </div>
-  )
+  );
 }
 
+// Helper function to find which level a subject belongs to
+function findSubjectLevel(dept: any, subjectId: string): string {
+  for (const [levelNum, level] of Object.entries(dept.levels)) {
+    const allSubjects = [...level.subjects.term1, ...level.subjects.term2];
+    if (allSubjects.some((s) => s.id === subjectId)) {
+      return levelNum;
+    }
+  }
+  return "1"; // Default to first level if not found
+}
