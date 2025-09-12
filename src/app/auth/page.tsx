@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import { Button } from "../../components/ui/button"
 import { Input } from "../../components/ui/input"
 import { Label } from "../../components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
 import { Eye, EyeOff, Lock, User, ArrowRight, Sparkles, Shield, BookOpen, Phone, Hash, ChevronDown, GraduationCap, Star, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useSearchParams, useRouter } from "next/navigation"
