@@ -29,26 +29,26 @@ interface Props {
 }
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 }, // Reduced y value from 30 to 20
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1,
-      delay: 0.5 + i * 0.1,
+      duration: 0.5, // Reduced from 1.0 to 0.5
+      delay: 0.2 + i * 0.05, // Reduced initial delay from 0.5 to 0.2 and per-item delay from 0.1 to 0.05
       ease: [0.25, 0.4, 0.25, 1],
     },
   }),
 };
 
 const tabVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 10 }, // Reduced y value from 20 to 10
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.3,
-      delay: i * 0.05,
+      duration: 0.2, // Reduced from 0.3 to 0.2
+      delay: i * 0.03, // Reduced from 0.05 to 0.03
       ease: [0.25, 0.4, 0.25, 1],
     },
   }),
@@ -209,9 +209,9 @@ function SubjectContent({ params }: Props) {
         <div className="max-w-7xl mx-auto">
           {/* Back Button */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -10 }} // Reduced x value from -20 to -10
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }} // Reduced duration from 0.6 to 0.3 and delay from 0.2 to 0.1
             className="mb-8"
           >
             <Link
@@ -417,9 +417,9 @@ function SubjectContent({ params }: Props) {
                                     (quiz: any, idx: number) => (
                                       <motion.div
                                         key={quiz.id}
-                                        initial={{ opacity: 0, y: 20 }}
+                                        initial={{ opacity: 0, y: 10 }} // Reduced y value from 20 to 10
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: idx * 0.1 }}
+                                        transition={{ delay: idx * 0.05 }} // Reduced from 0.1 to 0.05
                                         className="p-4 bg-white/[0.05] rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all"
                                       >
                                         <div className="flex items-center justify-between">
@@ -497,9 +497,9 @@ function SubjectContent({ params }: Props) {
                           ) : (
                             <div className="text-center py-12">
                               <motion.div
-                                animate={{ y: [0, -10, 0] }}
+                                animate={{ y: [0, -5, 0] }} // Reduced range from [-10, 0] to [-5, 0]
                                 transition={{
-                                  duration: 2,
+                                  duration: 1.5, // Reduced from 2 to 1.5
                                   repeat: Number.POSITIVE_INFINITY,
                                   ease: "easeInOut",
                                 }}
