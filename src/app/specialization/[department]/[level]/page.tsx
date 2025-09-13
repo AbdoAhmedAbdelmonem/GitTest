@@ -136,7 +136,7 @@ function LevelContent({ params }: Props) {
         </motion.div>
       )}
 
-      <div className="relative z-10 py-30 px-4">
+      <div className="relative z-10 py-12 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Back Button - faster transition */}
           <motion.div
@@ -336,4 +336,5 @@ function LevelContent({ params }: Props) {
     </div>
   )
 }
+
 
