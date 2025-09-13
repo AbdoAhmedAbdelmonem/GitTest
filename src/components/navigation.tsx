@@ -336,6 +336,8 @@ export default function Navigation() {
         </AnimatePresence>
       </motion.nav>
 
+      {/* Spacer to prevent content from hiding behind fixed nav */}
+      <div className="h-20 md:h-24"/>
     </>
   )
 }
