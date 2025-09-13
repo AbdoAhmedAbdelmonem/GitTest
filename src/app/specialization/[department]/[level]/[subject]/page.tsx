@@ -205,7 +205,7 @@ function SubjectContent({ params }: Props) {
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
       <Navigation />
 
-      <div className="relative z-10 py-12 px-4">
+      <div className="relative z-10 py-30 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Back Button */}
           <motion.div
@@ -550,3 +550,4 @@ function findSubjectLevel(dept: any, subjectId: string): string {
   }
   return "1"; // Default to first level if not found
 }
+
