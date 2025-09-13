@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "terser .next/static/chunks/*.js -o .next/static/chunks/*.js"
   },
   "dependencies": {
     "@nestjs/jwt": "^11.0.0",
@@ -32,6 +33,7 @@
     "lucide-react": "^0.536.0",
     "next": "15.2.4",
     "next-auth": "^4.24.11",
+    "ogl": "^1.0.11",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "radix-ui": "^1.4.2",
@@ -52,6 +54,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "tailwindcss": "^4",
+    "terser": "^5.44.0",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5"
   }
