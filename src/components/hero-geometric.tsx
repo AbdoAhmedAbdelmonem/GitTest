@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import { Pacifico } from "next/font/google"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { memo, useMemo } from "react"
+import { useMemo } from "react"
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -12,44 +12,10 @@ const pacifico = Pacifico({
   variable: "--font-pacifico",
 })
 
-const StaticShape = memo(function StaticShape({
-  className,
-  width = 400,
-  height = 100,
-  rotate = 0,
-  color = "rgba(99, 102, 241, 0.2)",
-  borderColor = "rgba(255, 255, 255, 0.15)"
-}: {
-  className?: string
-  width?: number
-  height?: number
-  rotate?: number
-  color?: string
-  borderColor?: string
-}) {
-  return (
-    <div 
-      className={cn("absolute", className)}
-      style={{
-        width,
-        height,
-        transform: `rotate(${rotate}deg)`,
-      }}
-    >
-      <div className="absolute inset-0 rounded-full" style={{
-        background: color,
-        border: `1px solid ${borderColor}`,
-        boxShadow: '0 8px 32px 0 rgba(255,255,255,0.1)',
-        backdropFilter: 'blur(2px)',
-      }} />
-    </div>
-  )
-})
-
 export default function HeroGeometric({
-  badge = "Kokonut UI",
-  title1 = "Elevate Your",
-  title2 = "Digital Vision",
+  badge = "Chameleon FCDS",
+  title1 = "Master Your",
+  title2 = "Future Skills",
 }: {
   badge?: string
   title1?: string
@@ -72,61 +38,19 @@ export default function HeroGeometric({
 
   const animationSettings = prefersReducedMotion ? { animate: "visible" } : { initial: "hidden", animate: "visible" };
 
-  const staticShapes = useMemo(() => (
-    <>
-      <StaticShape
-        width={600}
-        height={140}
-        rotate={12}
-        color="rgba(99, 102, 241, 0.25)"
-        borderColor="rgba(199, 210, 254, 0.3)"
-        className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
-      />
-      <StaticShape
-        width={500}
-        height={120}
-        rotate={-15}
-        color="rgba(244, 63, 94, 0.25)"
-        borderColor="rgba(253, 164, 175, 0.3)"
-        className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
-      />
-      <StaticShape
-        width={300}
-        height={80}
-        rotate={-8}
-        color="rgba(139, 92, 246, 0.25)"
-        borderColor="rgba(196, 181, 253, 0.3)"
-        className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
-      />
-      <StaticShape
-        width={200}
-        height={60}
-        rotate={20}
-        color="rgba(245, 158, 11, 0.25)"
-        borderColor="rgba(253, 230, 138, 0.3)"
-        className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
-      />
-      <StaticShape
-        width={150}
-        height={40}
-        rotate={-25}
-        color="rgba(6, 182, 212, 0.25)"
-        borderColor="rgba(103, 232, 249, 0.3)"
-        className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
-      />
-    </>
-  ), []);
-
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]">
+    <div
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]"
+      style={{
+        backgroundImage: 'url("/images/Background.png")', // Replace with your image path
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Background gradient */}
       <div className="absolute inset-0 opacity-40" style={{
         background: 'radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.3) 0%, rgba(0, 0, 0, 0) 70%)'
       }} />
-
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {staticShapes}
-      </div>
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center">
