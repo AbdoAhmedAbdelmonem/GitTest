@@ -931,26 +931,6 @@ export default function AuthPage() {
                                     </button>
                                   </div>
                                 </motion.div>
-
-                                <motion.div
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: 0.4 }}
-                                  className="flex items-center space-x-2"
-                                >
-                                  <input
-                                    id="remember"
-                                    type="checkbox"
-                                    checked={rememberMe}
-                                    onChange={(e) => setRememberMe(e.target.checked)}
-                                    className="h-4 w-4 rounded bg-white/5 border-white/20 text-purple-500 focus:ring-purple-500/20"
-                                    aria-labelledby="remember-label"
-                                    title="Remember login credentials"
-                                  />
-                                  <Label id="remember-label" htmlFor="remember" className="text-white/80 text-sm">
-                                    Remember Me
-                                  </Label>
-                                </motion.div>
                               </>
                             )}
                           </>
