@@ -29,29 +29,13 @@ interface Props {
 }
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 20 }, // Reduced y value from 30 to 20
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5, // Reduced from 1.0 to 0.5
-      delay: 0.2 + i * 0.05, // Reduced initial delay from 0.5 to 0.2 and per-item delay from 0.1 to 0.05
-      ease: [0.25, 0.4, 0.25, 1],
-    },
-  }),
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
 };
 
 const tabVariants = {
-  hidden: { opacity: 0, y: 10 }, // Reduced y value from 20 to 10
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.2, // Reduced from 0.3 to 0.2
-      delay: i * 0.03, // Reduced from 0.05 to 0.03
-      ease: [0.25, 0.4, 0.25, 1],
-    },
-  }),
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
 };
 
 export default function SubjectPage({ params }: Props) {
@@ -64,8 +48,8 @@ export default function SubjectPage({ params }: Props) {
   );
 }
 
-function SubjectContent({ params }: Props) {
-  const resolvedParams = React.use(params);
+async function SubjectContent({ params }: Props) {
+  const resolvedParams = await params;
   const dept = departmentData[resolvedParams.department];
   const levelNum = Number.parseInt(resolvedParams.level);
 
@@ -119,7 +103,7 @@ function SubjectContent({ params }: Props) {
       return null;
     }
 
-    const allSubjects = [];
+    const allSubjects: any[] = [];
     for (const level of Object.values(dept.levels)) {
       allSubjects.push(...level.subjects.term1, ...level.subjects.term2);
     }
@@ -173,10 +157,10 @@ function SubjectContent({ params }: Props) {
       icon: ClipboardList,
       color: "from-orange-500/[0.15]",
       iconColor: "text-orange-400",
-      content: subject.materials.quizzes?.length > 0 ? true : null,
+      content: (subject.materials.quizzes?.length || 0) > 0 ? true : null,
       description: "Test your knowledge with interactive quizzes",
       buttonText:
-        subject.materials.quizzes?.length > 0 ? "View Quizzes" : "Coming Soon",
+        (subject.materials.quizzes?.length || 0) > 0 ? "View Quizzes" : "Coming Soon",
       redirectToDrive: false,
     },
     {
@@ -464,7 +448,7 @@ function SubjectContent({ params }: Props) {
                                 >
                                   <Link
                                     href={`/drive/${extractDriveId(
-                                      section.content
+                                      typeof section.content === 'string' ? section.content : ''
                                     )}`}
                                   >
                                     <ExternalLink className="w-4 h-4 mr-2" />
@@ -483,7 +467,7 @@ function SubjectContent({ params }: Props) {
                                   className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
                                 >
                                   <a
-                                    href={section.content}
+                                    href={typeof section.content === 'string' ? section.content : '#'}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2"
@@ -543,12 +527,11 @@ function SubjectContent({ params }: Props) {
 // Helper function to find which level a subject belongs to
 function findSubjectLevel(dept: any, subjectId: string): string {
   for (const [levelNum, level] of Object.entries(dept.levels)) {
-    const allSubjects = [...level.subjects.term1, ...level.subjects.term2];
+    const levelData = level as any;
+    const allSubjects = [...levelData.subjects.term1, ...levelData.subjects.term2];
     if (allSubjects.some((s) => s.id === subjectId)) {
       return levelNum;
     }
   }
   return "1"; // Default to first level if not found
 }
-
-
