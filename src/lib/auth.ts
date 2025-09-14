@@ -25,7 +25,26 @@ export function getStudentSession(): StudentUser | null {
 
 export function clearStudentSession(): void {
   if (typeof window !== "undefined") {
+    // Clear all localStorage
     localStorage.clear()
+    
+    // Clear all sessionStorage
+    sessionStorage.clear()
+    
+    // Clear all cookies by setting them to expire
+    document.cookie.split(";").forEach((c) => {
+      const eqPos = c.indexOf("=")
+      const name = eqPos > -1 ? c.substr(0, eqPos) : c
+      document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`
+      document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=${window.location.hostname}`
+      document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.${window.location.hostname}`
+    })
+    
+    // Clear Supabase session
+    import('@/lib/supabase/client').then(({ createBrowserClient }) => {
+      const supabase = createBrowserClient()
+      supabase.auth.signOut({ scope: 'global' })
+    })
   }
 }
 
