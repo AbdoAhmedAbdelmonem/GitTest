@@ -1,15 +1,14 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    domains: ["github.com"], // تقدر تزود أي دومين تاني هنا
+    domains: ["github.com"],
   },
   eslint: {
-    ignoreDuringBuilds: true, // ده بيخلي Vercel يكمل build حتى لو فيه أخطاء lint
+    ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: true, // ده بيخلي Vercel يكمل build حتى لو فيه أخطاء types
+    ignoreBuildErrors: true,
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
