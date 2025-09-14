@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import { ToastProvider } from "@/components/ToastProvider"; // ⬅️ استورد الكومبوننت
+import { ToastProvider } from "@/components/ToastProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// بديل Geist → Inter
+const geistSans = Inter({
   subsets: ["latin"],
+  variable: "--font-geist-sans",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// بديل Geist Mono → Roboto Mono
+const geistMono = Roboto_Mono({
   subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
@@ -33,7 +35,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* هنا غلف الـ children بـ ToastProvider */}
         <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
