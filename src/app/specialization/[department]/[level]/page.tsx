@@ -19,30 +19,13 @@ interface Props {
 }
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 20 },  // Reduced y-distance to load faster
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,  // Reduced from 1.0 to 0.5
-      delay: 0.2 + i * 0.05,  // Reduced delay from 0.5 + i * 0.1
-      ease: [0.25, 0.4, 0.25, 1],
-    },
-  }),
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
 }
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },  // Reduced y-distance and scale difference
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.4,  // Reduced from 0.8 to 0.4
-      delay: 0.3 + i * 0.05,  // Reduced delay from 0.8 + i * 0.1
-      ease: [0.25, 0.4, 0.25, 1],
-    },
-  }),
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1 },
 }
 
 export default function LevelPage({ params }: Props) {
@@ -55,21 +38,25 @@ export default function LevelPage({ params }: Props) {
   )
 }
 
-function LevelContent({ params }: Props) {
-  const resolvedParams = React.use(params)
+async function LevelContent({ params }: Props) {
+  const resolvedParams = await params
+  return <LevelContentClient department={resolvedParams.department} level={resolvedParams.level} />
+}
+
+function LevelContentClient({ department, level }: { department: string; level: string }) {
   const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState("term1")
   const [showTermIndicator, setShowTermIndicator] = useState(false)
   const [indicatorTerm, setIndicatorTerm] = useState("")
   
-  const dept = departmentData[resolvedParams.department]
-  const levelNum = Number.parseInt(resolvedParams.level)
+  const dept = departmentData[department]
+  const levelNum = Number.parseInt(level)
 
   if (!dept || !dept.levels[levelNum]) {
     notFound()
   }
 
-  const level = dept.levels[levelNum]
+  const levelData = dept.levels[levelNum]
   const yearSuffix = levelNum === 1 ? "st" : levelNum === 2 ? "nd" : levelNum === 3 ? "rd" : "th"
 
   // Handle URL parameter and set default when none exists
@@ -145,7 +132,7 @@ function LevelContent({ params }: Props) {
             transition={{ duration: 0.3, delay: 0.1 }}  // Reduced duration and delay
             className="mb-8"
           >
-            <Link href={`/specialization/${resolvedParams.department}`}>
+            <Link href={`/specialization/${department}`}>
               <Button
                 variant="ghost"
                 className="text-white/60 hover:text-white hover:bg-white/[0.05] border border-white/[0.08] backdrop-blur-sm"
@@ -219,7 +206,7 @@ function LevelContent({ params }: Props) {
 
               <TabsContent value="term1">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {level.subjects.term1.map((subject, index) => (
+                  {levelData.subjects.term1.map((subject: any, index: number) => (
                     <motion.div
                       key={subject.id}
                       custom={index}
@@ -227,7 +214,7 @@ function LevelContent({ params }: Props) {
                       initial="hidden"
                       animate="visible"
                     >
-                      <Link href={`/specialization/${resolvedParams.department}/${resolvedParams.level}/${subject.id}`}>
+                      <Link href={`/specialization/${department}/${level}/${subject.id}`}>
                         <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-500 group cursor-pointer backdrop-blur-sm">
                           <CardHeader>
                             <div className="flex items-center gap-3 mb-2">
@@ -274,7 +261,7 @@ function LevelContent({ params }: Props) {
 
               <TabsContent value="term2">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {level.subjects.term2.map((subject, index) => (
+                  {levelData.subjects.term2.map((subject: any, index: number) => (
                     <motion.div
                       key={subject.id}
                       custom={index}
@@ -282,7 +269,7 @@ function LevelContent({ params }: Props) {
                       initial="hidden"
                       animate="visible"
                     >
-                      <Link href={`/specialization/${resolvedParams.department}/${resolvedParams.level}/${subject.id}`}>
+                      <Link href={`/specialization/${department}/${level}/${subject.id}`}>
                         <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-500 group cursor-pointer backdrop-blur-sm">
                           <CardHeader>
                             <div className="flex items-center gap-3 mb-2">
@@ -336,5 +323,3 @@ function LevelContent({ params }: Props) {
     </div>
   )
 }
-
-
