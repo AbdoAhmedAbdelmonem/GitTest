@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, Home, Folder, CircleQuestionMark, User, LogOut } from "lucide-react"
+import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, Home, Folder, HelpCircle , User, LogOut } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { getStudentSession, clearStudentSession } from "@/lib/auth"
@@ -15,7 +15,7 @@ const navItems = [
   { name: "Courses", href: "/courses", icon: BookOpen },
   { name: "YouTube", href: "/youtube", icon: Folder },
   { name: "Specializations", href: "#specializations", icon: SquareUserRound, isSection: true },
-  { name: "About", href: "/about", icon: CircleQuestionMark },
+  { name: "About", href: "/about", icon: HelpCircle  },
   { name: "Explo", href: "/explo", icon: BrainCircuit },
 ]
 
