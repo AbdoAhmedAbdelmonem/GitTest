@@ -22,7 +22,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'lh6.googleusercontent.com',
-      }
+      },
     ],
   },
   eslint: {
@@ -33,4 +33,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
