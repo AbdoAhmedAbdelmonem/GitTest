@@ -2,28 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'github.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh4.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh5.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh6.googleusercontent.com',
-      }
-    ],
+    domains: ["github.com"], // تقدر تزود أي دومين تاني هنا
   },
   eslint: {
     ignoreDuringBuilds: true, // ده بيخلي Vercel يكمل build حتى لو فيه أخطاء lint
