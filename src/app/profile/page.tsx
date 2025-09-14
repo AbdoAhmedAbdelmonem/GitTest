@@ -1,76 +1,20 @@
 "use client"
 
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState } from "react"
 import { getStudentSession } from "@/lib/auth"
 import { createBrowserClient } from "@/lib/supabase/client"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { LoadingSpinner } from "@/components/ui/loading-spinner"
-import { ArrowLeft, User, BookOpen, Star, Award, Calendar, Phone, GraduationCap, Shield, Edit3, LogOut, Save, X, TrendingUp } from "lucide-react"
+import { ArrowLeft, User, BookOpen, Star, Award, Calendar, Phone, GraduationCap, Shield, Edit3, LogOut, Save, X, TrendingUp, Mail } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast  } from "@/components/ToastProvider"
+import Image from "next/image"
 
-function ElegantShape({
-  className,
-  delay = 0,
-  width = 400,
-  height = 100,
-  rotate = 0,
-  gradient = "from-white/[0.08]",
-}: {
-  className?: string
-  delay?: number
-  width?: number
-  height?: number
-  rotate?: number
-  gradient?: string
-}) {
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: -150,
-        rotate: rotate - 15,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        rotate: rotate,
-      }}
-      transition={{
-        duration: 2.4,
-        delay,
-        ease: [0.23, 0.86, 0.39, 0.96],
-        opacity: { duration: 1.2 },
-      }}
-      className={`absolute ${className}`}
-    >
-      <motion.div
-        animate={{
-          y: [0, 15, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
-        style={{
-          width,
-          height,
-        }}
-        className="relative"
-      >
-        <div
-          className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} backdrop-blur-[2px] border-2 border-white/[0.15] shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]`}
-        />
-      </motion.div>
-    </motion.div>
-  )
-}
 
 // Dot Plot with KDE Visualization Component
 function ProgressDotPlot({ quizData }: { quizData: any[] }) {
@@ -100,7 +44,6 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
   if (data.length === 0) return null;
 
   const maxTrial = data.length;
-  const maxScore = Math.max(...data.map(d => d.score));
 
   return (
     <Card className="bg-white/[0.02] border-white/10 backdrop-blur-xl shadow-2xl mt-8">
@@ -212,55 +155,6 @@ export default function ProfilePage() {
   const [isSaving, setIsSaving] = useState(false)
   const router = useRouter()
 
-  // Move the useMemo here, before any conditional returns
-  const staticShapes = useMemo(() => [
-    <ElegantShape
-      key="shape-1"
-      delay={0.3}
-      width={600}
-      height={140}
-      rotate={12}
-      gradient="from-indigo-500/[0.15]"
-      className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
-    />,
-    <ElegantShape
-      key="shape-2"
-      delay={0.5}
-      width={500}
-      height={120}
-      rotate={-15}
-      gradient="from-rose-500/[0.15]"
-      className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
-    />,
-    <ElegantShape
-      key="shape-3"
-      delay={0.4}
-      width={300}
-      height={80}
-      rotate={-8}
-      gradient="from-violet-500/[0.15]"
-      className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
-    />,
-    <ElegantShape
-      key="shape-4"
-      delay={0.6}
-      width={200}
-      height={60}
-      rotate={20}
-      gradient="from-amber-500/[0.15]"
-      className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
-    />,
-    <ElegantShape
-      key="shape-5"
-      delay={0.7}
-      width={150}
-      height={40}
-      rotate={-25}
-      gradient="from-cyan-500/[0.15]"
-      className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
-    />
-  ], []);
-
   useEffect(() => {
     const loadProfileData = async () => {
       const session = getStudentSession()
@@ -274,7 +168,7 @@ export default function ProfilePage() {
       // Initialize edit form with current data
       setEditForm({
         username: session.username || "",
-        age: session.age || "",
+        age: String(session.age || ""),
         phone_number: session.phone_number || ""
       })
 
@@ -294,11 +188,29 @@ export default function ProfilePage() {
     loadProfileData()
   }, [router])
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem("student_session")
-      localStorage.removeItem("remembered_login")
-      router.push('/')
+      // Clear all local storage
+      localStorage.clear()
+      
+      // Clear session storage
+      sessionStorage.clear()
+      
+      // Clear all cookies
+      document.cookie.split(";").forEach((c) => {
+        const eqPos = c.indexOf("=")
+        const name = eqPos > -1 ? c.substr(0, eqPos) : c
+        document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`
+        document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=${window.location.hostname}`
+        document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.${window.location.hostname}`
+      })
+      
+      // Clear Supabase session with global scope
+      const supabase = createBrowserClient()
+      await supabase.auth.signOut({ scope: 'global' })
+      
+      // Force reload to clear any cached state
+      window.location.href = '/'
     }
   }
 
@@ -310,7 +222,7 @@ export default function ProfilePage() {
     // Reset form to original values
     setEditForm({
       username: userData.username || "",
-      age: userData.age || "",
+      age: String(userData.age || ""),
       phone_number: userData.phone_number || ""
     })
     setIsEditing(false)
@@ -398,11 +310,6 @@ export default function ProfilePage() {
       {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
       
-      {/* Floating shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        {staticShapes}
-      </div>
-
       {/* Back Button */}
       <div className="absolute top-6 left-6 z-20">
         <Button
@@ -438,9 +345,19 @@ export default function ProfilePage() {
         >
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-6 shadow-lg"
+            className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-6 shadow-lg overflow-hidden"
           >
-            <User className="w-12 h-12 text-white" />
+            {userData.profile_image ? (
+              <Image
+                src={userData.profile_image}
+                alt="Profile"
+                width={96}
+                height={96}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <User className="w-12 h-12 text-white" />
+            )}
           </motion.div>
           <h1 className="text-3xl font-bold text-white mb-2">Your Profile</h1>
           <p className="text-white/60">Manage your account and view your progress</p>
@@ -471,6 +388,16 @@ export default function ProfilePage() {
                 </div>
                 
                 <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
+                  <div className="p-3 rounded-full bg-blue-500/20">
+                    <Mail className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-white/60">Email</p>
+                    <p className="text-white font-medium">{userData.email || 'Not provided'}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
                   <div className="p-3 rounded-full bg-purple-500/20">
                     <User className="w-5 h-5 text-purple-400" />
                   </div>
@@ -491,8 +418,8 @@ export default function ProfilePage() {
                 </div>
 
                 <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-blue-500/20">
-                    <Phone className="w-5 h-5 text-blue-400" />
+                  <div className="p-3 rounded-full bg-green-500/20">
+                    <Phone className="w-5 h-5 text-green-400" />
                   </div>
                   <div className="flex-1">
                     <Label htmlFor="phone_number" className="text-sm text-white/60 block mb-1">Phone Number</Label>
@@ -511,8 +438,8 @@ export default function ProfilePage() {
                 </div>
 
                 <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-green-500/20">
-                    <Calendar className="w-5 h-5 text-green-400" />
+                  <div className="p-3 rounded-full bg-orange-500/20">
+                    <Calendar className="w-5 h-5 text-orange-400" />
                   </div>
                   <div className="flex-1">
                     <Label htmlFor="age" className="text-sm text-white/60 block mb-1">Age</Label>
