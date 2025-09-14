@@ -20,30 +20,13 @@ interface Props {
 
 // Significantly reduced animation durations and delays
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 15 }, // Reduced y-distance by 50%
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4, // Reduced from 1.0 to 0.4
-      delay: 0.1 + i * 0.05, // Reduced from 0.5 + i * 0.1
-      ease: [0.25, 0.4, 0.25, 1],
-    },
-  }),
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0 },
 }
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.97 }, // Reduced scale and y-distance
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.3, // Reduced from 0.8 to 0.3
-      delay: 0.2 + i * 0.05, // Reduced from 0.8 + i * 0.1
-      ease: [0.25, 0.4, 0.25, 1],
-    },
-  }),
+  hidden: { opacity: 0, y: 20, scale: 0.97 },
+  visible: { opacity: 1, y: 0, scale: 1 },
 }
 
 export default function DepartmentPage({ params }: Props) {
@@ -56,8 +39,8 @@ export default function DepartmentPage({ params }: Props) {
   )
 }
 
-function DepartmentContent({ params }: Props) {
-  const resolvedParams = React.use(params)
+async function DepartmentContent({ params }: Props) {
+  const resolvedParams = await params
   const dept = departmentData[resolvedParams.department]
 
   if (!dept) {
@@ -183,5 +166,3 @@ function DepartmentContent({ params }: Props) {
     </div>
   )
 }
-
-
