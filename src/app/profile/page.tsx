@@ -46,7 +46,7 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
   const maxTrial = data.length;
 
   return (
-    <Card className="bg-white/[0.02] border-white/10 backdrop-blur-xl shadow-2xl mt-8">
+    <Card className="bg-black/40 border-white/20 shadow-2xl mt-8">
       <CardHeader>
         <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
           <TrendingUp className="w-5 h-5 text-purple-400" />
@@ -306,16 +306,23 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-[#030303] relative">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+    <div 
+      className="min-h-screen w-full overflow-x-hidden relative"
+      style={{
+        backgroundImage: 'url(/images/Background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       
-      {/* Back Button */}
+          {/* Back Button */}
       <div className="absolute top-6 left-6 z-20">
         <Button
           onClick={() => window.history.back()}
           variant="ghost"
-          className="text-white/60 hover:text-white hover:bg-white/[0.05] border border-white/[0.08] backdrop-blur-sm"
+          className="text-white/90 hover:text-white hover:bg-white/10 border border-white/20 bg-black/30"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Dashboard
@@ -327,7 +334,7 @@ export default function ProfilePage() {
         <Button
           variant="ghost"
           onClick={handleLogout}
-          className="text-white/60 hover:text-white hover:bg-white/[0.05] border border-white/[0.08] backdrop-blur-sm"
+          className="text-white/90 hover:text-white hover:bg-white/10 border border-white/20 bg-black/30"
         >
           <LogOut className="w-4 h-4 mr-2" />
           Logout
@@ -337,16 +344,8 @@ export default function ProfilePage() {
       {/* Main content - Fixed centering */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-20 overflow-visible">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-          className="text-center mb-12"
-        >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-6 shadow-lg overflow-hidden"
-          >
+        <div className="text-center mb-12 animate-in fade-in duration-800">
+          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-6 shadow-lg overflow-hidden transition-transform hover:scale-105">
             {userData.profile_image ? (
               <Image
                 src={userData.profile_image}
@@ -358,20 +357,15 @@ export default function ProfilePage() {
             ) : (
               <User className="w-12 h-12 text-white" />
             )}
-          </motion.div>
+          </div>
           <h1 className="text-3xl font-bold text-white mb-2">Your Profile</h1>
           <p className="text-white/60">Manage your account and view your progress</p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* User Info Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="md:col-span-1"
-          >
-            <Card className="bg-white/[0.02] border-white/10 backdrop-blur-xl shadow-2xl h-full">
+          <div className="md:col-span-1 animate-in slide-in-from-left duration-500 delay-100">
+            <Card className="bg-black/40 border-white/20 shadow-2xl h-full">
               <CardHeader className="text-center pb-6">
                 <CardTitle className="text-xl font-bold text-white">Personal Information</CardTitle>
                 <CardDescription className="text-white/60">Your account details</CardDescription>
@@ -512,7 +506,7 @@ export default function ProfilePage() {
                     <Button 
                       onClick={handleCancelEdit}
                       variant="outline"
-                      className="flex-1 text-red-500 bg-white hover:text-white hover:bg-red-500 hover:border-red-500 border-red-500"
+                      className="flex-1 text-red-500 bg-black hover:text-white hover:bg-red-500 hover:border-red-500 border-red-500"
                     >
                       <X className="w-4 h-4 mr-2" />
                       Cancel
@@ -529,16 +523,11 @@ export default function ProfilePage() {
                 )}
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
 
           {/* Quiz History Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:col-span-2"
-          >
-            <Card className="bg-white/[0.02] border-white/10 backdrop-blur-xl shadow-2xl h-full">
+          <div className="md:col-span-2 animate-in slide-in-from-right duration-500 delay-200">
+            <Card className="bg-black/40 border-white/20 shadow-2xl h-full">
               <CardHeader style={{height: "auto"}} className="text-center pb-6">
                 <CardTitle className="text-xl font-bold text-white">Quiz History</CardTitle>
                 <CardDescription className="text-white/60">
@@ -584,14 +573,12 @@ export default function ProfilePage() {
                     }
                     
                     return (
-                    <motion.div
+                    <div
                       key={attempt.id || index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      className="p-4 rounded-lg border border-white/10 overflow-hidden relative h-full"
+                      className="p-4 rounded-lg border border-white/10 overflow-hidden relative h-full animate-in fade-in duration-300"
                       style={{
                       background: `linear-gradient(90deg, ${themeColor}20 0%, ${themeColor}10 ${attempt.score || 0}%, rgba(0,0,0,0.2) ${attempt.score || 0}%)`,
+                      animationDelay: `${index * 100}ms`
                       }}
                     >
                       {/* Background progress indicator */}
@@ -633,7 +620,7 @@ export default function ProfilePage() {
                         <div className="mb-4 p-3 rounded-md bg-black/20 border border-white/5 flex-1">
                         <div className="text-sm text-white/80 mb-2">Questions:</div>
                         <div className="space-y-2">
-                          {attempt.questions_data.slice(0, 3).map((q, i) => (
+                          {attempt.questions_data.slice(0, 3).map((q: any, i: number) => (
                           <div key={i} className="flex items-start gap-2">
                             <div 
                             className={`min-w-4 h-4 rounded-full mt-1`}
@@ -708,7 +695,7 @@ export default function ProfilePage() {
                         </div>
                       </div>
                       </div>
-                    </motion.div>
+                    </div>
                     );
                   })}
                   </div>
@@ -724,17 +711,12 @@ export default function ProfilePage() {
                 )}
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         </div>
 
         {/* Stats Overview */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12"
-        >
-          <Card className="bg-white/[0.02] border-white/10 backdrop-blur-xl shadow-2xl">
+        <div className="mt-12 animate-in fade-in duration-500 delay-300">
+          <Card className="bg-black/40 border-white/20 shadow-2xl">
             <CardHeader className="text-center pb-6">
               <CardTitle className="text-xl font-bold text-white">Learning Statistics</CardTitle>
               <CardDescription className="text-white/60">Your overall progress and achievements</CardDescription>
@@ -784,14 +766,11 @@ export default function ProfilePage() {
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </div>
 
         {/* Progress Visualization */}
         <ProgressDotPlot quizData={quizData} />
       </div>
-
-      {/* Background overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
     </div>
   )
 }
