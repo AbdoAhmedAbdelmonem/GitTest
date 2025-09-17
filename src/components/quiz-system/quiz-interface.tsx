@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { determineQuizLevel } from "@/lib/quiz-level";
 import {
   Clock,
   Trophy,
@@ -59,50 +60,49 @@ interface QuizInterfaceProps {
   onExit: () => void;
 }
 
+// Replace ElegantShape with this optimized version
 function ElegantShape({
   className,
-  delay = 0,
   width = 400,
   height = 100,
   rotate = 0,
   gradient = "from-white/[0.08]",
 }: {
   className?: string;
-  delay?: number;
   width?: number;
   height?: number;
   rotate?: number;
   gradient?: string;
 }) {
+  // Only render on non-mobile devices and when not in loading state
+  const [isMobile, setIsMobile] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  
+  // Skip rendering if reduced motion is preferred
+  if (prefersReducedMotion) return null;
+  
+  // Use ResizeObserver instead of window event for better performance
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    
+    // Use ResizeObserver instead of event listener
+    const resizeObserver = new ResizeObserver(checkMobile);
+    resizeObserver.observe(document.body);
+    return () => resizeObserver.disconnect();
+  }, []);
+  
+  if (isMobile) return null;
+  
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: -150,
-        rotate: rotate - 15,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        rotate: rotate,
-      }}
-      transition={{
-        duration: 1.2,
-        delay: delay * 0.3,
-        ease: [0.23, 0.86, 0.39, 0.96],
-        opacity: { duration: 0.6 },
-      }}
+    <div
       className={cn("absolute", className)}
+      style={{
+        opacity: 0.4, // Reduced opacity
+        transform: `rotate(${rotate}deg)`,
+      }}
     >
-      <motion.div
-        animate={{
-          y: [0, 15, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
+      <div
         style={{
           width,
           height,
@@ -114,53 +114,14 @@ function ElegantShape({
             "absolute inset-0 rounded-full",
             "bg-gradient-to-r to-transparent",
             gradient,
-            "backdrop-blur-[2px] border-2 border-white/[0.15]",
-            "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
-            "after:absolute after:inset-0 after:rounded-full",
-            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
+            "border border-white/[0.15]", // Thinner border
           )}
         />
-      </motion.div>
-    </motion.div>
-  );
-}
-
-function FloatingParticles({
-  color,
-  count = 20,
-}: {
-  color: string;
-  count?: number;
-}) {
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {Array.from({ length: count }).map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: window.innerHeight + 50,
-            rotate: 0,
-            scale: 0,
-          }}
-          animate={{
-            y: -100,
-            rotate: 360,
-            scale: [0, 1, 0],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            delay: Math.random() * 2,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeOut",
-          }}
-          className="absolute w-3 h-3 rounded-full"
-          style={{ backgroundColor: color }}
-        />
-      ))}
+      </div>
     </div>
   );
 }
+
 
 const themes = [
   {
@@ -233,6 +194,22 @@ const quizModes = [
   },
 ];
 
+// First, add a motion reduction detection
+function useReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const listener = (event) => setPrefersReducedMotion(event.matches);
+    mediaQuery.addEventListener('change', listener);
+    return () => mediaQuery.removeEventListener('change', listener);
+  }, []);
+  
+  return prefersReducedMotion;
+}
+
 export default function QuizInterface({
   quizData,
   onExit,
@@ -295,19 +272,24 @@ export default function QuizInterface({
     };
   }, []);
 
+  // Debounce theme changes
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--quiz-primary",
-      selectedTheme.primary
-    );
-    document.documentElement.style.setProperty(
-      "--quiz-secondary",
-      selectedTheme.secondary
-    );
-    document.documentElement.style.setProperty(
-      "--quiz-accent",
-      selectedTheme.accent
-    );
+    const handler = setTimeout(() => {
+      document.documentElement.style.setProperty(
+        "--quiz-primary",
+        selectedTheme.primary
+      );
+      document.documentElement.style.setProperty(
+        "--quiz-secondary",
+        selectedTheme.secondary
+      );
+      document.documentElement.style.setProperty(
+        "--quiz-accent",
+        selectedTheme.accent
+      );
+    }, 50);
+    
+    return () => clearTimeout(handler);
   }, [selectedTheme]);
 
   // Function to check quiz attempts
@@ -416,36 +398,30 @@ export default function QuizInterface({
   };
 
   const selectAnswer = (answer: string) => {
-    setUserAnswers((prev) => ({
+  // Batch multiple state updates
+  if (selectedMode === "instant") {
+    setUserAnswers(prev => ({
       ...prev,
       [currentQuestion]: answer,
     }));
-
-    // In traditional mode, we need to check answers continuously
-    if (selectedMode === "traditional") {
-      // Calculate current score based on all answered questions
-      let correctAnswers = 0;
-      questions.forEach((question, index) => {
-        if (userAnswers[index] === question.answer) {
-          correctAnswers++;
-        }
-      });
+    setShowAnswer(true);
+    setAnswerRevealed(prev => ({
+      ...prev,
+      [currentQuestion]: true,
+    }));
+    
+    // Show celebration only for correct answers
+    if (answer === questions[currentQuestion].answer) {
+      setShowCelebration(true);
+      setTimeout(() => setShowCelebration(false), 1000); // Reduced time
     }
-
-    if (selectedMode === "instant") {
-      setShowAnswer(true);
-      setAnswerRevealed((prev) => ({
-        ...prev,
-        [currentQuestion]: true,
-      }));
-
-      // Show celebration for correct answers
-      if (answer === questions[currentQuestion].answer) {
-        setShowCelebration(true);
-        setTimeout(() => setShowCelebration(false), 2000);
-      }
-    }
-  };
+  } else {
+    setUserAnswers(prev => ({
+      ...prev,
+      [currentQuestion]: answer,
+    }));
+  }
+};
 
   const nextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
@@ -495,6 +471,7 @@ export default function QuizInterface({
         answering_mode: selectedMode,
         duration_selected: selectedDuration === 0 ? "Unlimited" : `${selectedDuration} minutes`,
         total_questions: questions.length,
+        quiz_level: determineQuizLevel(quizId), // Use the imported function here
       };
 
       console.log("Saving quiz data:", quizResult);
@@ -807,11 +784,7 @@ export default function QuizInterface({
         </div>
 
         <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="w-full max-w-5xl"
-          >
+          <div className="w-full max-w-5xl transition-all duration-300 opacity-100 quiz-card">
             <Card className="bg-black/40 border-white/20 backdrop-blur-lg text-white">
               <CardHeader className="text-center pb-8">
                 <div className="flex items-center justify-between mb-6">
@@ -1085,7 +1058,7 @@ export default function QuizInterface({
                 </motion.div>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         </div>
       </div>
     );
@@ -1099,13 +1072,6 @@ export default function QuizInterface({
     return (
       <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
-
-        {/* Celebration particles for correct answers */}
-        <AnimatePresence>
-          {showCelebration && (
-            <FloatingParticles color={selectedTheme.primary} count={30} />
-          )}
-        </AnimatePresence>
 
         {/* Elegant Shapes */}
         <div className="absolute inset-0 overflow-hidden">
@@ -1471,11 +1437,14 @@ export default function QuizInterface({
                   src={currentImage}
                   alt="Code reference"
                   className="w-full h-full object-contain"
+                  loading="lazy"
+                  width="800"
+                  height="600"
                 />
               </div>
             )}
             <p className="text-sm text-white/70 mt-4 text-center">
-              Refer to this code snippet to answer the question
+              Refer to this code snippet to answer the question num.{currentQuestion + 1}
             </p>
           </ImageDialogContent>
         </ImageDialog>
@@ -1490,11 +1459,6 @@ export default function QuizInterface({
     return (
       <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
-
-        {/* Celebration particles for high scores */}
-        {percentage >= 80 && (
-          <FloatingParticles color={selectedTheme.primary} count={50} />
-        )}
 
         {/* Elegant Shapes */}
         <div className="absolute inset-0 overflow-hidden">
@@ -1701,15 +1665,15 @@ export default function QuizInterface({
                     <Button
                       variant="outline"
                       onClick={() => {
-                      setCurrentStep("setup");
-                      setCurrentQuestion(0);
-                      setUserAnswers({});
-                      setScore(0);
-                      setAnswerRevealed({});
-                      setQuizStatus("in-progress");
-                      setQuizSubmitted(false); 
-                      // Reset submission state
-                      window.location.reload(); // Refresh the page
+                        window.location.reload(); // Refresh the page
+                        setCurrentStep("setup");
+                        setCurrentQuestion(0);
+                        setUserAnswers({});
+                        setScore(0);
+                        setAnswerRevealed({});
+                        setQuizStatus("in-progress");
+                        setQuizSubmitted(false); 
+                        // Reset submission state
                       }}
                       style={{
                       backgroundColor: selectedTheme.primary,
@@ -2040,13 +2004,16 @@ export default function QuizInterface({
           </Button>
         </DialogHeader>
         {currentImage && (
-            <div className="relative w-full h-96 bg-transparent rounded-lg overflow-hidden">
+          <div className="relative w-full h-96 bg-gray-900 rounded-lg overflow-hidden">
             <img
               src={currentImage}
               alt="Code reference"
               className="w-full h-full object-contain"
+              loading="lazy"
+              width="800"
+              height="600"
             />
-            </div>
+          </div>
         )}
         <p className="text-sm text-white/70 mt-4 text-center">
           Refer to this code snippet to answer the question num.{currentQuestion + 1}
