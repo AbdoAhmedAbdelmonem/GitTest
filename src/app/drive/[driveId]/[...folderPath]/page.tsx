@@ -33,6 +33,7 @@ import {
   Copy,
   Check,
   Shield,
+  Crown,
 } from "lucide-react"
 import Navigation from "@/components/navigation"
 import { useParams, useRouter } from "next/navigation"
@@ -168,6 +169,44 @@ function OwnerDisplay({
       <span className="truncate">
         Owner: {username}
       </span>
+    </div>
+  )
+}
+
+// Ownership Badge Component with beautiful styling and tooltip
+function OwnershipBadge() {
+  const [showTooltip, setShowTooltip] = useState(false)
+
+  return (
+    <div 
+      className="relative inline-flex"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+    >
+      <div className="absolute -top-2 -right-2 z-10" style={{ cursor: 'pointer' ,marginTop:"12px"}}>
+        <div className="relative">
+          <div className="w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+            <Crown className="w-3 h-3 text-yellow-900" />
+          </div>
+          <div className="absolute inset-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full animate-ping opacity-20"></div>
+        </div>
+      </div>
+      
+      {/* Tooltip */}
+      {showTooltip && (
+        <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="bg-gray-900 text-white text-xs py-2 px-3 rounded-lg shadow-xl border border-gray-700 whitespace-nowrap">
+            <div className="flex items-center gap-1">
+              <Crown className="w-3 h-3 text-yellow-400" />
+              <span>Dude it's yours 😂</span>
+            </div>
+            {/* Tooltip arrow */}
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1">
+              <div className="w-2 h-2 bg-gray-900 border-r border-b border-gray-700 transform rotate-45"></div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -565,6 +604,15 @@ export default function DrivePage() {
 
   const supabase = createBrowserClient()
 
+  // Check if current user owns the file
+  const isCurrentUserOwner = (file: DriveFile): boolean => {
+    if (!userSession?.email || !file.owners) return false
+    
+    return file.owners.some(owner => 
+      owner.emailAddress.toLowerCase() === userSession.email.toLowerCase()
+    )
+  }
+
   const getUsername = async (email: string): Promise<string> => {
     // Check cache first
     if (usernameCache.has(email)) {
@@ -896,7 +944,12 @@ export default function DrivePage() {
                         role={isFolder ? "button" : "article"}
                         aria-label={isFolder ? `Open folder ${file.name}` : `File ${file.name}`}
                       >
-                        <CardHeader className="pb-2">
+                        <CardHeader className="pb-2 relative overflow-hidden">
+                          {/* Ownership Badge */}
+                          {isCurrentUserOwner(file) && (
+                            <OwnershipBadge />
+                          )}
+                          
                           <div className="flex items-start gap-3">
                             <div
                               className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-150 ${
