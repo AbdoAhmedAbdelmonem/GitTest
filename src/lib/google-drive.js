@@ -1,119 +1,251 @@
-const credentials = {
-  web: {
-    client_id: process.env.GOOGLE_CLIENT_ID || "",
-    client_secret: process.env.GOOGLE_CLIENT_SECRET || "",
-    redirect_uris: ["http://localhost:3000/api/auth/callback/google"],
-  }
-};
+import { google } from 'googleapis'
+import { configureOAuthClientForUser } from './google-oauth'
+import { Readable } from 'stream'
+import { createClient } from '@/lib/supabase/client'
 
-/**
- * @typedef {Object} GoogleDriveAuth
- * @property {string} access_token
- * @property {number} expires_at
- */
-
-/** @type {GoogleDriveAuth|null} */
-let authToken = null;
-
-export async function getGoogleDriveAccessToken() {
-  // Check if we have a valid cached token
-  if (authToken && authToken.expires_at > Date.now()) {
-    return authToken.access_token
-  }
-
+// Initialize Google Drive API
+export async function getDriveClient(userId) {
   try {
-    // Get new access token using client credentials
-    const response = await fetch("https://oauth2.googleapis.com/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        grant_type: "client_credentials",
-        client_id: credentials.web.client_id,
-        client_secret: credentials.web.client_secret,
-        scope: "https://www.googleapis.com/auth/drive",
-      }),
+    // For public folder access, use API key instead of OAuth
+    const drive = google.drive({
+      version: 'v3',
+      auth: process.env.GOOGLE_DRIVE_API_KEY
     })
-
-    if (!response.ok) {
-      throw new Error("Failed to get access token")
-    }
-
-    const data = await response.json()
-
-    // Cache the token (expires in 1 hour)
-    authToken = {
-      access_token: data.access_token,
-      expires_at: Date.now() + data.expires_in * 1000,
-    }
-
-    return data.access_token
+    
+    return drive
   } catch (error) {
-    console.error("Error getting Google Drive access token:", error)
-    throw error
+    console.error('Error creating Drive client:', error)
+    throw new Error('Failed to initialize Google Drive client')
   }
 }
 
+// Create OAuth-enabled Drive client for write operations
+export async function getOAuthDriveClient(userId) {
+  try {
+    // 🔧 ADMIN FIX: All admins use User 1's OAuth tokens (Drive owner)
+    let effectiveUserId = userId
+    
+    // Check if this user is an admin and not User 1
+    if (userId !== 1) {
+      const supabase = createClient()
+      
+      const { data: user, error } = await supabase
+        .from('chameleons')
+        .select('is_admin, Authorized')
+        .eq('user_id', userId)
+        .single()
+      
+      // If user is admin and authorized, use User 1's tokens (Drive owner)
+      if (!error && user?.is_admin && user?.Authorized) {
+        console.log(`🛡️ Admin user ${userId} using Drive owner's OAuth tokens`)
+        effectiveUserId = 1 // Use User 1's OAuth tokens
+      }
+    }
+    
+    const auth = await configureOAuthClientForUser(effectiveUserId)
+    return google.drive({ version: 'v3', auth })
+  } catch (error) {
+    console.error('Error creating OAuth Drive client:', error)
+    throw new Error('Failed to initialize OAuth Google Drive client')
+  }
+}
+
+// List files in user's Google Drive
+export async function listUserFiles(
+  userId,
+  pageSize = 10,
+  pageToken,
+  query
+) {
+  try {
+    const drive = await getOAuthDriveClient(userId)
+    
+    const params = {
+      pageSize,
+      fields: 'nextPageToken, files(id, name, mimeType, size, createdTime, modifiedTime, webViewLink, thumbnailLink)',
+      orderBy: 'modifiedTime desc',
+      q: query || "trashed=false"
+    }
+
+    if (pageToken) {
+      params.pageToken = pageToken
+    }
+
+    const response = await drive.files.list(params)
+    return response.data
+  } catch (error) {
+    console.error('Error listing user files:', error)
+    throw new Error('Failed to list files from Google Drive')
+  }
+}
+
+// Upload file to user's Google Drive (requires OAuth authentication)
+export async function uploadFileToUserDrive(
+  userId,
+  fileBuffer,
+  fileName,
+  mimeType,
+  parentFolderId
+) {
+  try {
+    // Use OAuth-enabled Drive client for write operations
+    const drive = await getOAuthDriveClient(userId)
+    
+    const fileMetadata = {
+      name: fileName,
+      parents: parentFolderId ? [parentFolderId] : undefined
+    }
+
+    // إنشاء stream صالح للـ Google Drive API
+    const bufferStream = new Readable()
+    bufferStream.push(fileBuffer)
+    bufferStream.push(null) // End the stream
+
+    const media = {
+      mimeType,
+      body: bufferStream
+    }
+
+    const response = await drive.files.create({
+      requestBody: fileMetadata,
+      media,
+      fields: 'id, name, webViewLink'
+    })
+
+    return response.data
+  } catch (error) {
+    console.error('Error uploading file to Drive:', error)
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    if (errorMessage.includes('No access token found')) {
+      throw new Error('Google Drive authentication required. Please authorize your Google Drive access first.')
+    }
+    throw new Error('Failed to upload file to Google Drive')
+  }
+}
+
+// Update file in user's Google Drive (rename)
+export async function updateFileInUserDrive(
+  userId,
+  fileId,
+  fileBuffer,
+  fileName,
+  mimeType
+) {
+  try {
+    const drive = await getOAuthDriveClient(userId)
+    
+    const updateParams = {
+      fileId,
+      fields: 'id, name, webViewLink, modifiedTime',
+      requestBody: fileName ? { name: fileName } : undefined,
+      media: fileBuffer && mimeType ? {
+        mimeType,
+        body: fileBuffer
+      } : undefined
+    }
+
+    const response = await drive.files.update(updateParams)
+    return response.data
+  } catch (error) {
+    console.error('Error updating file in Drive:', error)
+    if ((error).message?.includes('No access token found')) {
+      throw new Error('Google Drive authentication required. Please authorize your Google Drive access first.')
+    }
+    throw new Error('Failed to update file in Google Drive')
+  }
+}
+
+// Delete file from user's Google Drive
+export async function deleteFileFromUserDrive(userId, fileId) {
+  try {
+    console.log(`🗑️ Attempting to delete file ${fileId} for user ${userId}`)
+    
+    const drive = await getOAuthDriveClient(userId)
+    
+    // First, try to get file metadata to check if it exists
+    try {
+      const fileInfo = await drive.files.get({
+        fileId,
+        fields: 'id, name, owners'
+      })
+      console.log(`📄 File exists: ${fileInfo.data.name}`)
+    } catch (getError) {
+      if (getError.code === 404) {
+        throw new Error('File not found')
+      }
+      console.warn('Could not get file info, proceeding with delete:', getError.message)
+    }
+    
+    // Attempt to delete the file
+    await drive.files.delete({ fileId })
+    
+    console.log(`✅ File ${fileId} deleted successfully`)
+    return { success: true, message: 'File deleted successfully', fileId }
+    
+  } catch (error) {
+    console.error('Error deleting file from Drive:', error)
+    
+    // Handle specific Google Drive API errors
+    if (error.code === 404) {
+      throw new Error('File not found')
+    }
+    
+    if (error.code === 403) {
+      throw new Error('Permission denied')
+    }
+    
+    if (error.code === 401) {
+      throw new Error('Authentication required')
+    }
+    
+    if (error.message?.includes('No access token found')) {
+      throw new Error('Google Drive authentication required. Please authorize your Google Drive access first.')
+    }
+    
+    // Generic error
+    const errorMessage = error.message || 'Unknown error occurred'
+    throw new Error(`Failed to delete file from Google Drive: ${errorMessage}`)
+  }
+}
+
+// Get file metadata from user's Google Drive
+export async function getFileMetadata(userId, fileId) {
+  try {
+    const drive = await getOAuthDriveClient(userId)
+    
+    const response = await drive.files.get({
+      fileId,
+      fields: 'id, name, mimeType, size, createdTime, modifiedTime, webViewLink, thumbnailLink, parents'
+    })
+
+    return response.data
+  } catch (error) {
+    console.error('Error getting file metadata:', error)
+    throw new Error('Failed to get file metadata from Google Drive')
+  }
+}
+
+// Legacy functions for backward compatibility
 export async function uploadFileToDrive(file, parentId) {
-  const accessToken = await getGoogleDriveAccessToken()
-
-  const metadata = {
-    name: file.name,
-    parents: [parentId],
-  }
-
-  const form = new FormData()
-  form.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }))
-  form.append("file", file)
-
-  const response = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: form,
-  })
-
-  if (!response.ok) {
-    throw new Error("Failed to upload file")
-  }
-
-  return response.json()
+  // This function needs user context - will throw error if called directly
+  throw new Error('Please use uploadFileToUserDrive with userId parameter')
 }
 
 export async function deleteFileFromDrive(fileId) {
-  const accessToken = await getGoogleDriveAccessToken()
-
-  const response = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-
-  if (!response.ok) {
-    throw new Error("Failed to delete file")
-  }
+  // This function needs user context - will throw error if called directly  
+  throw new Error('Please use deleteFileFromUserDrive with userId parameter')
 }
 
 export async function renameFileInDrive(fileId, newName) {
-  const accessToken = await getGoogleDriveAccessToken()
-
-  const response = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}`, {
-    method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: newName,
-    }),
-  })
-
-  if (!response.ok) {
-    throw new Error("Failed to rename file")
-  }
-
-  return response.json()
+  // This function needs user context - will throw error if called directly
+  throw new Error('Please use updateFileInUserDrive with userId parameter')
 }
+
+// Export all functions individually for better import support
+export { getDriveClient }
+export { getOAuthDriveClient }
+export { listUserFiles }
+export { uploadFileToUserDrive }
+export { updateFileInUserDrive }
+export { deleteFileFromUserDrive }
+export { getFileMetadata }

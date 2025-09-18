@@ -9,6 +9,7 @@ export interface Subject {
     lectures?: string
     sections?: string
     videos?: string
+    summaries?: string
     quizzes?: {
       id: string
       name: string
@@ -54,9 +55,10 @@ export const departmentData: { [key: string]: Department } = {
               prerequisites: [],
               materials: {
                 lectures: "https://drive.google.com/drive/folders/1yFYYS37ERUHG6Ft_HnC17Jmgo-Zsrg06?usp=drive_link",
-                sections: "https://drive.google.com/drive/folders/linear-algebra-sections",
+                sections: "https://drive.google.com/drive/folders/191trjdbwAtjG6yz65q-C1Hd3gigqoti7?usp=drive_link",
                 videos: "https://youtube.com/playlist?list=linear-algebra-videos",
-                exams: "hhttps://drive.google.com/drive/folders/1aEMvu3ck662mv9UxoIJx0sXg5aXYZGT8?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1aEMvu3ck662mv9UxoIJx0sXg5aXYZGT8?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/linear-algebra-summaries"
               },
             },
             {
@@ -70,7 +72,7 @@ export const departmentData: { [key: string]: Department } = {
                 sections: "https://drive.google.com/drive/folders/calculus-sections",
                 videos: "https://youtube.com/playlist?list=calculus-videos",
                 exams: "https://drive.google.com/drive/folders/calculus-lastexam",
-
+                summaries: "https://drive.google.com/drive/folders/calculus-summaries"
               },
             },
             {
@@ -83,6 +85,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/computer-systems-lectures",
                 sections: "https://drive.google.com/drive/folders/computer-systems-sections",
                 videos: "https://youtube.com/playlist?list=computer-systems-videos",
+                summaries: "https://drive.google.com/drive/folders/computer-systems-summaries",
+                exams: "https://drive.google.com/drive/folders/computer-systems-lastexam"
               },
             },
             {
@@ -95,6 +99,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-sciences-lectures",
                 sections: "https://drive.google.com/drive/folders/data-sciences-sections",
                 videos: "https://youtube.com/playlist?list=data-sciences-videos",
+                summaries: "https://drive.google.com/drive/folders/data-sciences-summaries",
+                exams: "https://drive.google.com/drive/folders/data-sciences-lastexam"
               },
             },
             {
@@ -107,6 +113,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/programming-1-lectures",
                 sections: "https://drive.google.com/drive/folders/programming-1-sections",
                 videos: "https://youtube.com/playlist?list=programming-1-videos",
+                summaries: "https://drive.google.com/drive/folders/programming-1-summaries",
+                exams: "https://drive.google.com/drive/folders/programming-1-lastexam",
                 quizzes: [
                   {
                     id: "PR1_30001",
@@ -218,6 +226,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/critical-thinking-lectures",
                 sections: "https://drive.google.com/drive/folders/critical-thinking-sections",
                 videos: "https://youtube.com/playlist?list=critical-thinking-videos",
+                summaries: "https://drive.google.com/drive/folders/critical-thinking-summaries",
+                exams: "https://drive.google.com/drive/folders/critical-thinking-lastexam"
               },
             },
           ],
@@ -232,6 +242,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/probability-statistics-1-lectures",
                 sections: "https://drive.google.com/drive/folders/probability-statistics-1-sections",
                 videos: "https://youtube.com/playlist?list=probability-statistics-1-videos",
+                summaries: "https://drive.google.com/drive/folders/probability-statistics-1-summaries",
+                exams: "https://drive.google.com/drive/folders/probability-statistics-1-lastexam"
               },
             },
             {
@@ -244,6 +256,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/discrete-structures-lectures",
                 sections: "https://drive.google.com/drive/folders/discrete-structures-sections",
                 videos: "https://youtube.com/playlist?list=discrete-structures-videos",
+                summaries: "https://drive.google.com/drive/folders/discrete-structures-summaries",
+                exams: "https://drive.google.com/drive/folders/discrete-structures-lastexam"
               },
             },
             {
@@ -256,6 +270,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-structures-algorithms-lectures",
                 sections: "https://drive.google.com/drive/folders/data-structures-algorithms-sections",
                 videos: "https://youtube.com/playlist?list=data-structures-algorithms-videos",
+                summaries: "https://drive.google.com/drive/folders/data-structures-algorithms-summaries",
+                exams: "https://drive.google.com/drive/folders/data-structures-algorithms-lastexam"
               },
             },
             {
@@ -268,6 +284,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/intro-ai-lectures",
                 sections: "https://drive.google.com/drive/folders/intro-ai-sections",
                 videos: "https://youtube.com/playlist?list=intro-ai-videos",
+                summaries: "https://drive.google.com/drive/folders/intro-ai-summaries",
+                exams: "https://drive.google.com/drive/folders/intro-ai-lastexam"
               },
             },
             {
@@ -280,6 +298,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/programming-2-lectures",
                 sections: "https://drive.google.com/drive/folders/programming-2-sections",
                 videos: "https://youtube.com/playlist?list=programming-2-videos",
+                summaries: "https://drive.google.com/drive/folders/programming-2-summaries",
+                exams: "https://drive.google.com/drive/folders/programming-2-lastexam"
               },
             },
             {
@@ -292,6 +312,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/innovation-entrepreneurship-lectures",
                 sections: "https://drive.google.com/drive/folders/innovation-entrepreneurship-sections",
                 videos: "https://youtube.com/playlist?list=innovation-entrepreneurship-videos",
+                summaries: "https://drive.google.com/drive/folders/innovation-entrepreneurship-summaries",
+                exams: "https://drive.google.com/drive/folders/innovation-entrepreneurship-lastexam"
               },
             },
           ],
@@ -310,6 +332,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/probability-statistics-2-lectures",
                 sections: "https://drive.google.com/drive/folders/probability-statistics-2-sections",
                 videos: "https://youtube.com/playlist?list=probability-statistics-2-videos",
+                summaries: "https://drive.google.com/drive/folders/probability-statistics-2-summaries",
+                exams: "https://drive.google.com/drive/folders/probability-statistics-2-lastexam"
               },
             },
             {
@@ -322,6 +346,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/intro-databases-lectures",
                 sections: "https://drive.google.com/drive/folders/intro-databases-sections",
                 videos: "https://youtube.com/playlist?list=intro-databases-videos",
+                summaries: "https://drive.google.com/drive/folders/intro-databases-summaries",
+                exams: "https://drive.google.com/drive/folders/intro-databases-lastexam"
               },
             },
             {
@@ -334,6 +360,7 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/numerical-computations-lectures",
                 sections: "https://drive.google.com/drive/folders/numerical-computations-sections",
                 videos: "https://youtube.com/playlist?list=numerical-computations-videos",
+                summaries: "https://drive.google.com/drive/folders/numerical-computations-summaries"
               },
             },
             {
@@ -346,6 +373,7 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/advanced-calculus-lectures",
                 sections: "https://drive.google.com/drive/folders/advanced-calculus-sections",
                 videos: "https://youtube.com/playlist?list=advanced-calculus-videos",
+                summaries: "https://drive.google.com/drive/folders/advanced-calculus-summaries"
               },
             },
             {
@@ -358,6 +386,7 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-science-methodology-lectures",
                 sections: "https://drive.google.com/drive/folders/data-science-methodology-sections",
                 videos: "https://youtube.com/playlist?list=data-science-methodology-videos",
+                summaries: "https://drive.google.com/drive/folders/data-science-methodology-summaries"
               },
             },
             {
@@ -370,6 +399,7 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-summaries"
               },
             },
           ],
@@ -384,6 +414,7 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/cloud-computing-lectures",
                 sections: "https://drive.google.com/drive/folders/cloud-computing-sections",
                 videos: "https://youtube.com/playlist?list=cloud-computing-videos",
+                summaries: "https://drive.google.com/drive/folders/cloud-computing-summaries",
                 quizzes: [
                   {
                     id: "CLC_10661",
@@ -463,6 +494,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/machine-learning-lectures",
                 sections: "https://drive.google.com/drive/folders/machine-learning-sections",
                 videos: "https://youtube.com/playlist?list=machine-learning-videos",
+                summaries: "https://drive.google.com/drive/folders/machine-learning-summaries",
+                exams: "https://drive.google.com/drive/folders/machine-learning-lastexam"
               },
             },
             {
@@ -475,6 +508,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-mining-analytics-lectures",
                 sections: "https://drive.google.com/drive/folders/data-mining-analytics-sections",
                 videos: "https://youtube.com/playlist?list=data-mining-analytics-videos",
+                summaries: "https://drive.google.com/drive/folders/data-mining-analytics-summaries",
+                exams: "https://drive.google.com/drive/folders/data-mining-analytics-lastexam"
               },
             },
             {
@@ -487,6 +522,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-science-tools-lectures",
                 sections: "https://drive.google.com/drive/folders/data-science-tools-sections",
                 videos: "https://youtube.com/playlist?list=data-science-tools-videos",
+                summaries: "https://drive.google.com/drive/folders/data-science-tools-summaries",
+                exams: "https://drive.google.com/drive/folders/data-science-tools-lastexam"
               },
             },
             {
@@ -499,6 +536,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/regression-analysis-lectures",
                 sections: "https://drive.google.com/drive/folders/regression-analysis-sections",
                 videos: "https://youtube.com/playlist?list=regression-analysis-videos",
+                summaries: "https://drive.google.com/drive/folders/regression-analysis-summaries",
+                exams: "https://drive.google.com/drive/folders/regression-analysis-lastexam"
               },
             },
             {
@@ -511,6 +550,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-2-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-2-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-2-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-2-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-2-lastexam"
               },
             },
           ],
@@ -529,6 +570,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/stochastic-processes-lectures",
                 sections: "https://drive.google.com/drive/folders/stochastic-processes-sections",
                 videos: "https://youtube.com/playlist?list=stochastic-processes-videos",
+                summaries: "https://drive.google.com/drive/folders/stochastic-processes-summaries",
+                exams: "https://drive.google.com/drive/folders/stochastic-processes-lastexam"
               },
             },
             {
@@ -541,6 +584,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/design-analysis-experiments-lectures",
                 sections: "https://drive.google.com/drive/folders/design-analysis-experiments-sections",
                 videos: "https://youtube.com/playlist?list=design-analysis-experiments-videos",
+                summaries: "https://drive.google.com/drive/folders/design-analysis-experiments-summaries",
+                exams: "https://drive.google.com/drive/folders/design-analysis-experiments-lastexam"
               },
             },
             {
@@ -553,6 +598,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-visualization-tools-lectures",
                 sections: "https://drive.google.com/drive/folders/data-visualization-tools-sections",
                 videos: "https://youtube.com/playlist?list=data-visualization-tools-videos",
+                summaries: "https://drive.google.com/drive/folders/data-visualization-tools-summaries",
+                exams: "https://drive.google.com/drive/folders/data-visualization-tools-lastexam"
               },
             },
             {
@@ -565,6 +612,22 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-1-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-1-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-1-videos",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-1-summaries",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-1-lastexam"
+              },
+            },
+            {
+              id: "faculty-elective-1",
+              name: "Faculty Elective",
+              code: "02-24-0X0XX",
+              description: "Specialized elective from faculty offerings",
+              creditHours: 3,
+              materials: {
+                lectures: "https://drive.google.com/drive/folders/faculty-elective-1-lectures",
+                sections: "https://drive.google.com/drive/folders/faculty-elective-1-sections",
+                videos: "https://youtube.com/playlist?list=faculty-elective-1-videos",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-1-summaries",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-1-lastexam"
               },
             },
             {
@@ -577,6 +640,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-2-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-2-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-2-videos",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-2-summaries",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-2-lastexam"
               },
             },
             {
@@ -589,6 +654,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-3-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-3-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-3-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-3-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-3-lastexam"
               },
             },
           ],
@@ -603,6 +670,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-computation-analysis-lectures",
                 sections: "https://drive.google.com/drive/folders/data-computation-analysis-sections",
                 videos: "https://youtube.com/playlist?list=data-computation-analysis-videos",
+                summaries: "https://drive.google.com/drive/folders/data-computation-analysis-summaries",
+                exams: "https://drive.google.com/drive/folders/data-computation-analysis-lastexam"
               },
             },
             {
@@ -615,6 +684,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/survey-methodology-lectures",
                 sections: "https://drive.google.com/drive/folders/survey-methodology-sections",
                 videos: "https://youtube.com/playlist?list=survey-methodology-videos",
+                summaries: "https://drive.google.com/drive/folders/survey-methodology-summaries",
+                exams: "https://drive.google.com/drive/folders/survey-methodology-lastexam"
               },
             },
             {
@@ -627,6 +698,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/computing-intensive-statistical-lectures",
                 sections: "https://drive.google.com/drive/folders/computing-intensive-statistical-sections",
                 videos: "https://youtube.com/playlist?list=computing-intensive-statistical-videos",
+                summaries: "https://drive.google.com/drive/folders/computing-intensive-statistical-summaries",
+                exams: "https://drive.google.com/drive/folders/computing-intensive-statistical-lastexam"
               },
             },
             {
@@ -639,6 +712,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-3-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-3-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-3-videos",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-3-summaries",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-3-lastexam",
               },
             },
             {
@@ -651,6 +726,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-4-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-4-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-4-videos",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-4-summaries",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-4-lastexam",
               },
             },
           ],
@@ -669,6 +746,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/big-data-analytics-lectures",
                 sections: "https://drive.google.com/drive/folders/big-data-analytics-sections",
                 videos: "https://youtube.com/playlist?list=big-data-analytics-videos",
+                summaries: "https://drive.google.com/drive/folders/big-data-analytics-summaries",
+                exams: "https://drive.google.com/drive/folders/big-data-analytics-lastexam",
               },
             },
             {
@@ -681,6 +760,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/intro-social-networks-lectures",
                 sections: "https://drive.google.com/drive/folders/intro-social-networks-sections",
                 videos: "https://youtube.com/playlist?list=intro-social-networks-videos",
+                summaries: "https://drive.google.com/drive/folders/intro-social-networks-summaries",
+                exams: "https://drive.google.com/drive/folders/intro-social-networks-lastexam",
               },
             },
             {
@@ -693,6 +774,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/simulations-lectures",
                 sections: "https://drive.google.com/drive/folders/simulations-sections",
                 videos: "https://youtube.com/playlist?list=simulations-videos",
+                summaries: "https://drive.google.com/drive/folders/simulations-summaries",
+                exams: "https://drive.google.com/drive/folders/simulations-lastexam",
               },
             },
             {
@@ -705,6 +788,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-1-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-1-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-1-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-1-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-1-lastexam",
               },
             },
             {
@@ -717,6 +802,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-2-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-2-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-2-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-2-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-2-lastexam",
               },
             },
             {
@@ -729,6 +816,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-4-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-4-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-4-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-4-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-4-lastexam",
               },
             },
           ],
@@ -743,6 +832,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/social-data-analytics-lectures",
                 sections: "https://drive.google.com/drive/folders/social-data-analytics-sections",
                 videos: "https://youtube.com/playlist?list=social-data-analytics-videos",
+                summaries: "https://drive.google.com/drive/folders/social-data-analytics-summaries",
+                exams: "https://drive.google.com/drive/folders/social-data-analytics-lastexam",
               },
             },
             {
@@ -755,6 +846,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/distributed-data-analysis-lectures",
                 sections: "https://drive.google.com/drive/folders/distributed-data-analysis-sections",
                 videos: "https://youtube.com/playlist?list=distributed-data-analysis-videos",
+                summaries: "https://drive.google.com/drive/folders/distributed-data-analysis-summaries",
+                exams: "https://drive.google.com/drive/folders/distributed-data-analysis-lastexam",
               },
             },
             {
@@ -767,6 +860,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/stream-processing-lectures",
                 sections: "https://drive.google.com/drive/folders/stream-processing-sections",
                 videos: "https://youtube.com/playlist?list=stream-processing-videos",
+                summaries: "https://drive.google.com/drive/folders/stream-processing-summaries",
+                exams: "https://drive.google.com/drive/folders/stream-processing-lastexam",
               },
             },
             {
@@ -779,6 +874,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-3-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-3-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-3-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-3-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-3-lastexam",
               },
             },
             {
@@ -791,6 +888,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-4-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-4-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-4-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-4-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-4-lastexam",
               },
             },
             {
@@ -803,6 +902,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-5-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-5-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-5-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-5-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-5-lastexam",
               },
             },
           ],
@@ -827,6 +928,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/linear-algebra-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/linear-algebra-ba-sections",
                 videos: "https://youtube.com/playlist?list=linear-algebra-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/linear-algebra-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/linear-algebra-ba-lastexam"
               },
             },
             {
@@ -839,6 +942,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/calculus-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/calculus-ba-sections",
                 videos: "https://youtube.com/playlist?list=calculus-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/calculus-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/calculus-ba-lastexam"
               },
             },
             {
@@ -851,6 +956,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/computer-systems-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/computer-systems-ba-sections",
                 videos: "https://youtube.com/playlist?list=computer-systems-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/computer-systems-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/computer-systems-ba-lastexam"
               },
             },
             {
@@ -863,6 +970,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-sciences-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/data-sciences-ba-sections",
                 videos: "https://youtube.com/playlist?list=data-sciences-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/data-sciences-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/data-sciences-ba-lastexam"
               },
             },
             {
@@ -875,6 +984,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/programming-1-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/programming-1-ba-sections",
                 videos: "https://youtube.com/playlist?list=programming-1-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/programming-1-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/programming-1-ba-lastexam"
               },
             },
             {
@@ -887,6 +998,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/critical-thinking-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/critical-thinking-ba-sections",
                 videos: "https://youtube.com/playlist?list=critical-thinking-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/critical-thinking-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/critical-thinking-ba-lastexam"
               },
             },
           ],
@@ -901,6 +1014,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/probability-statistics-1-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/probability-statistics-1-ba-sections",
                 videos: "https://youtube.com/playlist?list=probability-statistics-1-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/probability-statistics-1-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/probability-statistics-1-ba-lastexam"
               },
             },
             {
@@ -913,6 +1028,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/discrete-structures-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/discrete-structures-ba-sections",
                 videos: "https://youtube.com/playlist?list=discrete-structures-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/discrete-structures-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/discrete-structures-ba-lastexam"
               },
             },
             {
@@ -925,6 +1042,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-structures-algorithms-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/data-structures-algorithms-ba-sections",
                 videos: "https://youtube.com/playlist?list=data-structures-algorithms-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/data-structures-algorithms-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/data-structures-algorithms-ba-lastexam"
               },
             },
             {
@@ -937,6 +1056,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/intro-ai-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/intro-ai-ba-sections",
                 videos: "https://youtube.com/playlist?list=intro-ai-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/intro-ai-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/intro-ai-ba-lastexam"
               },
             },
             {
@@ -949,6 +1070,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/programming-2-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/programming-2-ba-sections",
                 videos: "https://youtube.com/playlist?list=programming-2-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/programming-2-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/programming-2-ba-lastexam"
               },
             },
             {
@@ -961,6 +1084,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/innovation-entrepreneurship-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/innovation-entrepreneurship-ba-sections",
                 videos: "https://youtube.com/playlist?list=innovation-entrepreneurship-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/innovation-entrepreneurship-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/innovation-entrepreneurship-ba-lastexam"
               },
             },
           ],
@@ -979,6 +1104,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/probability-statistics-2-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/probability-statistics-2-ba-sections",
                 videos: "https://youtube.com/playlist?list=probability-statistics-2-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/probability-statistics-2-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/probability-statistics-2-ba-lastexam"
               },
             },
             {
@@ -991,6 +1118,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/intro-databases-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/intro-databases-ba-sections",
                 videos: "https://youtube.com/playlist?list=intro-databases-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/intro-databases-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/intro-databases-ba-lastexam"
               },
             },
             {
@@ -1003,6 +1132,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/numerical-computations-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/numerical-computations-ba-sections",
                 videos: "https://youtube.com/playlist?list=numerical-computations-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/numerical-computations-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/numerical-computations-ba-lastexam"
               },
             },
             {
@@ -1015,6 +1146,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/intro-business-lectures",
                 sections: "https://drive.google.com/drive/folders/intro-business-sections",
                 videos: "https://youtube.com/playlist?list=intro-business-videos",
+                summaries: "https://drive.google.com/drive/folders/intro-business-summaries",
+                exams: "https://drive.google.com/drive/folders/intro-business-lastexam"
               },
             },
             {
@@ -1027,6 +1160,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/accounting-information-systems-lectures",
                 sections: "https://drive.google.com/drive/folders/accounting-information-systems-sections",
                 videos: "https://youtube.com/playlist?list=accounting-information-systems-videos",
+                summaries: "https://drive.google.com/drive/folders/accounting-information-systems-summaries",
+                exams: "https://drive.google.com/drive/folders/accounting-information-systems-lastexam"
               },
             },
             {
@@ -1039,6 +1174,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-ba-1-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-ba-1-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-ba-1-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-ba-1-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-ba-1-lastexam"
               },
             },
           ],
@@ -1053,6 +1190,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/cloud-computing-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/cloud-computing-ba-sections",
                 videos: "https://youtube.com/playlist?list=cloud-computing-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/cloud-computing-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/cloud-computing-ba-lastexam",
               },
             },
             {
@@ -1065,6 +1204,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/machine-learning-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/machine-learning-ba-sections",
                 videos: "https://youtube.com/playlist?list=machine-learning-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/machine-learning-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/machine-learning-ba-lastexam",
               },
             },
             {
@@ -1089,6 +1230,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/system-analysis-design-lectures",
                 sections: "https://drive.google.com/drive/folders/system-analysis-design-sections",
                 videos: "https://youtube.com/playlist?list=system-analysis-design-videos",
+                summaries: "https://drive.google.com/drive/folders/system-analysis-design-summaries",
+                exams: "https://drive.google.com/drive/folders/system-analysis-design-lastexam"
               },
             },
             {
@@ -1101,6 +1244,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/financial-planning-analysis-lectures",
                 sections: "https://drive.google.com/drive/folders/financial-planning-analysis-sections",
                 videos: "https://youtube.com/playlist?list=financial-planning-analysis-videos",
+                summaries: "https://drive.google.com/drive/folders/financial-planning-analysis-summaries",
+                exams: "https://drive.google.com/drive/folders/financial-planning-analysis-lastexam"
               },
             },
             {
@@ -1113,6 +1258,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-ba-2-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-ba-2-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-ba-2-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-ba-2-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-ba-2-lastexam"
               },
             },
           ],
@@ -1131,6 +1278,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/business-process-modeling-lectures",
                 sections: "https://drive.google.com/drive/folders/business-process-modeling-sections",
                 videos: "https://youtube.com/playlist?list=business-process-modeling-videos",
+                summaries: "https://drive.google.com/drive/folders/business-process-modeling-summaries",
+                exams: "https://drive.google.com/drive/folders/business-process-modeling-lastexam"
               },
             },
             {
@@ -1143,6 +1292,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/quantitative-analysis-lectures",
                 sections: "https://drive.google.com/drive/folders/quantitative-analysis-sections",
                 videos: "https://youtube.com/playlist?list=quantitative-analysis-videos",
+                summaries: "https://drive.google.com/drive/folders/quantitative-analysis-summaries",
+                exams: "https://drive.google.com/drive/folders/quantitative-analysis-lastexam"
               },
             },
             {
@@ -1155,6 +1306,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-warehousing-bi-lectures",
                 sections: "https://drive.google.com/drive/folders/data-warehousing-bi-sections",
                 videos: "https://youtube.com/playlist?list=data-warehousing-bi-videos",
+                summaries: "https://drive.google.com/drive/folders/data-warehousing-bi-summaries",
+                exams: "https://drive.google.com/drive/folders/data-warehousing-bi-lastexam"  
               },
             },
             {
@@ -1167,6 +1320,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-ba-1-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-ba-1-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-ba-1-videos",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-ba-1-summaries",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-ba-1-lastexam"
               },
             },
             {
@@ -1179,6 +1334,7 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-ba-2-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-ba-2-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-ba-2-videos",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-ba-2-summaries",
               },
             },
             {
@@ -1191,6 +1347,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-ba-3-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-ba-3-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-ba-3-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-ba-3-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-ba-3-lastexam"
               },
             },
           ],
@@ -1205,6 +1363,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-visualization-ba-lectures",
                 sections: "https://drive.google.com/drive/folders/data-visualization-ba-sections",
                 videos: "https://youtube.com/playlist?list=data-visualization-ba-videos",
+                summaries: "https://drive.google.com/drive/folders/data-visualization-ba-summaries",
+                exams: "https://drive.google.com/drive/folders/data-visualization-ba-lastexam"
               },
             },
             {
@@ -1217,6 +1377,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/enterprise-information-systems-lectures",
                 sections: "https://drive.google.com/drive/folders/enterprise-information-systems-sections",
                 videos: "https://youtube.com/playlist?list=enterprise-information-systems-videos",
+                summaries: "https://drive.google.com/drive/folders/enterprise-information-systems-summaries",
+                exams: "https://drive.google.com/drive/folders/enterprise-information-systems-lastexam"
               },
             },
             {
@@ -1229,6 +1391,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-driven-marketing-lectures",
                 sections: "https://drive.google.com/drive/folders/data-driven-marketing-sections",
                 videos: "https://youtube.com/playlist?list=data-driven-marketing-videos",
+                summaries: "https://drive.google.com/drive/folders/data-driven-marketing-summaries",
+                exams: "https://drive.google.com/drive/folders/data-driven-marketing-lastexam"
               },
             },
             {
@@ -1241,6 +1405,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-ba-3-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-ba-3-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-ba-3-videos",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-ba-3-summaries",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-ba-3-lastexam"
               },
             },
             {
@@ -1253,6 +1419,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-ba-4-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-ba-4-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-ba-4-videos",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-ba-4-summaries",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-ba-4-lastexam"
               },
             },
           ],
@@ -1271,6 +1439,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/leadership-people-analytics-lectures",
                 sections: "https://drive.google.com/drive/folders/leadership-people-analytics-sections",
                 videos: "https://youtube.com/playlist?list=leadership-people-analytics-videos",
+                exams: "https://drive.google.com/drive/folders/leadership-people-analytics-lastexam",
+                summaries: "https://drive.google.com/drive/folders/leadership-people-analytics-summaries"
               },
             },
             {
@@ -1283,6 +1453,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-it-governance-lectures",
                 sections: "https://drive.google.com/drive/folders/data-it-governance-sections",
                 videos: "https://youtube.com/playlist?list=data-it-governance-videos",
+                summaries: "https://drive.google.com/drive/folders/data-it-governance-summaries",
+                exams: "https://drive.google.com/drive/folders/data-it-governance-lastexam"
               },
             },
             {
@@ -1295,6 +1467,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/information-retrieval-lectures",
                 sections: "https://drive.google.com/drive/folders/information-retrieval-sections",
                 videos: "https://youtube.com/playlist?list=information-retrieval-videos",
+                summaries: "https://drive.google.com/drive/folders/information-retrieval-summaries",
+                exams: "https://drive.google.com/drive/folders/information-retrieval-lastexam"
               },
             },
             {
@@ -1307,6 +1481,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-ba-1-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-ba-1-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-ba-1-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-ba-1-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-ba-1-lastexam"
               },
             },
             {
@@ -1319,6 +1495,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-ba-2-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-ba-2-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-ba-2-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-ba-2-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-ba-2-lastexam"
               },
             },
             {
@@ -1331,6 +1509,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-ba-4-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-ba-4-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-ba-4-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-ba-4-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-ba-4-lastexam"
               },
             },
           ],
@@ -1345,6 +1525,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/text-social-media-mining-lectures",
                 sections: "https://drive.google.com/drive/folders/text-social-media-mining-sections",
                 videos: "https://youtube.com/playlist?list=text-social-media-mining-videos",
+                summaries: "https://drive.google.com/drive/folders/text-social-media-mining-summaries",
+                exams: "https://drive.google.com/drive/folders/text-social-media-mining-lastexam"
               },
             },
             {
@@ -1357,6 +1539,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/logistics-supply-chain-analytics-lectures",
                 sections: "https://drive.google.com/drive/folders/logistics-supply-chain-analytics-sections",
                 videos: "https://youtube.com/playlist?list=logistics-supply-chain-analytics-videos",
+                summaries: "https://drive.google.com/drive/folders/logistics-supply-chain-analytics-summaries",
+                exams: "https://drive.google.com/drive/folders/logistics-supply-chain-analytics-lastexam"
               },
             },
             {
@@ -1369,6 +1553,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/it-laws-ethics-lectures",
                 sections: "https://drive.google.com/drive/folders/it-laws-ethics-sections",
                 videos: "https://youtube.com/playlist?list=it-laws-ethics-videos",
+                summaries: "https://drive.google.com/drive/folders/it-laws-ethics-summaries",
+                exams: "https://drive.google.com/drive/folders/it-laws-ethics-lastexam"
               },
             },
             {
@@ -1381,6 +1567,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-ba-3-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-ba-3-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-ba-3-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-ba-3-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-ba-3-lastexam"
               },
             },
             {
@@ -1393,6 +1581,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-ba-4-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-ba-4-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-ba-4-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-ba-4-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-ba-4-lastexam"
               },
             },
             {
@@ -1405,6 +1595,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-ba-5-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-ba-5-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-ba-5-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-ba-5-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-ba-5-lastexam"
               },
             },
           ],
@@ -1429,6 +1621,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/linear-algebra-is-lectures",
                 sections: "https://drive.google.com/drive/folders/linear-algebra-is-sections",
                 videos: "https://youtube.com/playlist?list=linear-algebra-is-videos",
+                summaries: "https://drive.google.com/drive/folders/linear-algebra-is-summaries",
+                exams: "https://drive.google.com/drive/folders/linear-algebra-is-lastexam"
               },
             },
             {
@@ -1441,6 +1635,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/calculus-is-lectures",
                 sections: "https://drive.google.com/drive/folders/calculus-is-sections",
                 videos: "https://youtube.com/playlist?list=calculus-is-videos",
+                summaries: "https://drive.google.com/drive/folders/calculus-is-summaries",
+                exams: "https://drive.google.com/drive/folders/calculus-is-lastexam"
               },
             },
             {
@@ -1453,6 +1649,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/computer-systems-is-lectures",
                 sections: "https://drive.google.com/drive/folders/computer-systems-is-sections",
                 videos: "https://youtube.com/playlist?list=computer-systems-is-videos",
+                summaries: "https://drive.google.com/drive/folders/computer-systems-is-summaries",
+                exams: "https://drive.google.com/drive/folders/computer-systems-is-lastexam"
               },
             },
             {
@@ -1465,6 +1663,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-sciences-is-lectures",
                 sections: "https://drive.google.com/drive/folders/data-sciences-is-sections",
                 videos: "https://youtube.com/playlist?list=data-sciences-is-videos",
+                summaries: "https://drive.google.com/drive/folders/data-sciences-is-summaries",
+                exams: "https://drive.google.com/drive/folders/data-sciences-is-lastexam"
               },
             },
             {
@@ -1477,6 +1677,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/programming-1-is-lectures",
                 sections: "https://drive.google.com/drive/folders/programming-1-is-sections",
                 videos: "https://youtube.com/playlist?list=programming-1-is-videos",
+                summaries: "https://drive.google.com/drive/folders/programming-1-is-summaries",
+                exams: "https://drive.google.com/drive/folders/programming-1-is-lastexam"
               },
             },
             {
@@ -1489,6 +1691,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/critical-thinking-is-lectures",
                 sections: "https://drive.google.com/drive/folders/critical-thinking-is-sections",
                 videos: "https://youtube.com/playlist?list=critical-thinking-is-videos",
+                summaries: "https://drive.google.com/drive/folders/critical-thinking-is-summaries",
+                exams: "https://drive.google.com/drive/folders/critical-thinking-is-lastexam"
               },
             },
           ],
@@ -1503,6 +1707,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/probability-statistics-1-is-lectures",
                 sections: "https://drive.google.com/drive/folders/probability-statistics-1-is-sections",
                 videos: "https://youtube.com/playlist?list=probability-statistics-1-is-videos",
+                summaries: "https://drive.google.com/drive/folders/probability-statistics-1-is-summaries",
+                exams: "https://drive.google.com/drive/folders/probability-statistics-1-is-lastexam"
               },
             },
             {
@@ -1515,6 +1721,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/discrete-structures-is-lectures",
                 sections: "https://drive.google.com/drive/folders/discrete-structures-is-sections",
                 videos: "https://youtube.com/playlist?list=discrete-structures-is-videos",
+                summaries: "https://drive.google.com/drive/folders/discrete-structures-is-summaries",
+                exams: "https://drive.google.com/drive/folders/discrete-structures-is-lastexam"
               },
             },
             {
@@ -1527,6 +1735,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-structures-algorithms-is-lectures",
                 sections: "https://drive.google.com/drive/folders/data-structures-algorithms-is-sections",
                 videos: "https://youtube.com/playlist?list=data-structures-algorithms-is-videos",
+                summaries: "https://drive.google.com/drive/folders/data-structures-algorithms-is-summaries",
+                exams: "https://drive.google.com/drive/folders/data-structures-algorithms-is-lastexam"
               },
             },
             {
@@ -1539,6 +1749,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/intro-ai-is-lectures",
                 sections: "https://drive.google.com/drive/folders/intro-ai-is-sections",
                 videos: "https://youtube.com/playlist?list=intro-ai-is-videos",
+                summaries: "https://drive.google.com/drive/folders/intro-ai-is-summaries",
+                exams: "https://drive.google.com/drive/folders/intro-ai-is-lastexam"
               },
             },
             {
@@ -1551,6 +1763,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/programming-2-is-lectures",
                 sections: "https://drive.google.com/drive/folders/programming-2-is-sections",
                 videos: "https://youtube.com/playlist?list=programming-2-is-videos",
+                summaries: "https://drive.google.com/drive/folders/programming-2-is-summaries",
+                exams: "https://drive.google.com/drive/folders/programming-2-is-lastexam"
               },
             },
             {
@@ -1563,6 +1777,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/innovation-entrepreneurship-is-lectures",
                 sections: "https://drive.google.com/drive/folders/innovation-entrepreneurship-is-sections",
                 videos: "https://youtube.com/playlist?list=innovation-entrepreneurship-is-videos",
+                summaries: "https://drive.google.com/drive/folders/innovation-entrepreneurship-is-summaries",
+                exams: "https://drive.google.com/drive/folders/innovation-entrepreneurship-is-lastexam"
               },
             },
           ],
@@ -1581,6 +1797,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/probability-statistics-2-is-lectures",
                 sections: "https://drive.google.com/drive/folders/probability-statistics-2-is-sections",
                 videos: "https://youtube.com/playlist?list=probability-statistics-2-is-videos",
+                summaries: "https://drive.google.com/drive/folders/probability-statistics-2-is-summaries",
+                exams: "https://drive.google.com/drive/folders/probability-statistics-2-is-lastexam"
               },
             },
             {
@@ -1593,6 +1811,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/intro-databases-is-lectures",
                 sections: "https://drive.google.com/drive/folders/intro-databases-is-sections",
                 videos: "https://youtube.com/playlist?list=intro-databases-is-videos",
+                summaries: "https://drive.google.com/drive/folders/intro-databases-is-summaries",
+                exams: "https://drive.google.com/drive/folders/intro-databases-is-lastexam"
               },
             },
             {
@@ -1605,6 +1825,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/numerical-computations-is-lectures",
                 sections: "https://drive.google.com/drive/folders/numerical-computations-is-sections",
                 videos: "https://youtube.com/playlist?list=numerical-computations-is-videos",
+                summaries: "https://drive.google.com/drive/folders/numerical-computations-is-summaries",
+                exams: "https://drive.google.com/drive/folders/numerical-computations-is-lastexam"
               },
             },
             {
@@ -1617,6 +1839,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/smart-systems-computational-intelligence-lectures",
                 sections: "https://drive.google.com/drive/folders/smart-systems-computational-intelligence-sections",
                 videos: "https://youtube.com/playlist?list=smart-systems-computational-intelligence-videos",
+                summaries: "https://drive.google.com/drive/folders/smart-systems-computational-intelligence-summaries",
+                exams: "https://drive.google.com/drive/folders/smart-systems-computational-intelligence-lastexam"
               },
             },
             {
@@ -1629,6 +1853,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/operations-research-lectures",
                 sections: "https://drive.google.com/drive/folders/operations-research-sections",
                 videos: "https://youtube.com/playlist?list=operations-research-videos",
+                summaries: "https://drive.google.com/drive/folders/operations-research-summaries",
+                exams: "https://drive.google.com/drive/folders/operations-research-lastexam"
               },
             },
             {
@@ -1641,6 +1867,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-is-1-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-is-1-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-is-1-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-is-1-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-is-1-lastexam"
               },
             },
           ],
@@ -1655,6 +1883,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/cloud-computing-is-lectures",
                 sections: "https://drive.google.com/drive/folders/cloud-computing-is-sections",
                 videos: "https://youtube.com/playlist?list=cloud-computing-is-videos",
+                summaries: "https://drive.google.com/drive/folders/cloud-computing-is-summaries",
+                exams: "https://drive.google.com/drive/folders/cloud-computing-is-lastexam"
               },
             },
             {
@@ -1667,6 +1897,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/machine-learning-is-lectures",
                 sections: "https://drive.google.com/drive/folders/machine-learning-is-sections",
                 videos: "https://youtube.com/playlist?list=machine-learning-is-videos",
+                summaries: "https://drive.google.com/drive/folders/machine-learning-is-summaries",
+                exams: "https://drive.google.com/drive/folders/machine-learning-is-lastexam"
               },
             },
             {
@@ -1679,6 +1911,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-mining-analytics-is-lectures",
                 sections: "https://drive.google.com/drive/folders/data-mining-analytics-is-sections",
                 videos: "https://youtube.com/playlist?list=data-mining-analytics-is-videos",
+                summaries: "https://drive.google.com/drive/folders/data-mining-analytics-is-summaries",
+                exams: "https://drive.google.com/drive/folders/data-mining-analytics-is-lastexam"
               },
             },
             {
@@ -1691,6 +1925,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/pattern-recognition-lectures",
                 sections: "https://drive.google.com/drive/folders/pattern-recognition-sections",
                 videos: "https://youtube.com/playlist?list=pattern-recognition-videos",
+                summaries: "https://drive.google.com/drive/folders/pattern-recognition-summaries",
+                exams: "https://drive.google.com/drive/folders/pattern-recognition-lastexam"
               },
             },
             {
@@ -1703,6 +1939,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/neural-networks-lectures",
                 sections: "https://drive.google.com/drive/folders/neural-networks-sections",
                 videos: "https://youtube.com/playlist?list=neural-networks-videos",
+                summaries: "https://drive.google.com/drive/folders/neural-networks-summaries",
+                exams: "https://drive.google.com/drive/folders/neural-networks-lastexam"
               },
             },
             {
@@ -1715,6 +1953,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-is-2-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-is-2-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-is-2-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-is-2-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-is-2-lastexam"
               },
             },
           ],
@@ -1733,6 +1973,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/intelligent-programming-lectures",
                 sections: "https://drive.google.com/drive/folders/intelligent-programming-sections",
                 videos: "https://youtube.com/playlist?list=intelligent-programming-videos",
+                exams: "https://drive.google.com/drive/folders/intelligent-programming-lastexam",
+                summaries: "https://drive.google.com/drive/folders/intelligent-programming-summaries"
               },
             },
             {
@@ -1745,6 +1987,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/deep-learning-lectures",
                 sections: "https://drive.google.com/drive/folders/deep-learning-sections",
                 videos: "https://youtube.com/playlist?list=deep-learning-videos",
+                exams: "https://drive.google.com/drive/folders/deep-learning-lastexam",
+                summaries: "https://drive.google.com/drive/folders/deep-learning-summaries"
               },
             },
             {
@@ -1757,6 +2001,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/modern-control-systems-lectures",
                 sections: "https://drive.google.com/drive/folders/modern-control-systems-sections",
                 videos: "https://youtube.com/playlist?list=modern-control-systems-videos",
+                exams: "https://drive.google.com/drive/folders/modern-control-systems-lastexam",
+                summaries: "https://drive.google.com/drive/folders/modern-control-systems-summaries"
               },
             },
             {
@@ -1769,6 +2015,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-is-1-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-is-1-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-is-1-videos",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-is-1-lastexam",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-is-1-summaries"
               },
             },
             {
@@ -1781,6 +2029,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-is-2-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-is-2-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-is-2-videos",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-is-2-lastexam",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-is-2-summaries"
               },
             },
             {
@@ -1793,6 +2043,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-is-3-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-is-3-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-is-3-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-is-3-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-is-3-lastexam"
               },
             },
           ],
@@ -1807,6 +2059,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/embedded-systems-lectures",
                 sections: "https://drive.google.com/drive/folders/embedded-systems-sections",
                 videos: "https://youtube.com/playlist?list=embedded-systems-videos",
+                exams: "https://drive.google.com/drive/folders/embedded-systems-lastexam",
+                summaries: "https://drive.google.com/drive/folders/embedded-systems-summaries"
               },
             },
             {
@@ -1819,6 +2073,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/computer-vision-lectures",
                 sections: "https://drive.google.com/drive/folders/computer-vision-sections",
                 videos: "https://youtube.com/playlist?list=computer-vision-videos",
+                exams: "https://drive.google.com/drive/folders/computer-vision-lastexam",
+                summaries: "https://drive.google.com/drive/folders/computer-vision-summaries"
               },
             },
             {
@@ -1831,6 +2087,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/ai-security-issues-lectures",
                 sections: "https://drive.google.com/drive/folders/ai-security-issues-sections",
                 videos: "https://youtube.com/playlist?list=ai-security-issues-videos",
+                exams: "https://drive.google.com/drive/folders/ai-security-issues-lastexam",
+                summaries: "https://drive.google.com/drive/folders/ai-security-issues-summaries"
               },
             },
             {
@@ -1843,6 +2101,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-is-3-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-is-3-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-is-3-videos",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-is-3-lastexam",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-is-3-summaries"
               },
             },
             {
@@ -1855,6 +2115,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/faculty-elective-is-4-lectures",
                 sections: "https://drive.google.com/drive/folders/faculty-elective-is-4-sections",
                 videos: "https://youtube.com/playlist?list=faculty-elective-is-4-videos",
+                exams: "https://drive.google.com/drive/folders/faculty-elective-is-4-lastexam",
+                summaries: "https://drive.google.com/drive/folders/faculty-elective-is-4-summaries"
               },
             },
           ],
@@ -1873,6 +2135,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/ai-platforms-lectures",
                 sections: "https://drive.google.com/drive/folders/ai-platforms-sections",
                 videos: "https://youtube.com/playlist?list=ai-platforms-videos",
+                exams: "https://drive.google.com/drive/folders/ai-platforms-lastexam",
+                summaries: "https://drive.google.com/drive/folders/ai-platforms-summaries"
               },
             },
             {
@@ -1885,6 +2149,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/internet-of-things-1-lectures",
                 sections: "https://drive.google.com/drive/folders/internet-of-things-1-sections",
                 videos: "https://youtube.com/playlist?list=internet-of-things-1-videos",
+                summaries: "https://drive.google.com/drive/folders/internet-of-things-1-summaries",
+                exams: "https://drive.google.com/drive/folders/internet-of-things-1-lastexam"
               },
             },
             {
@@ -1897,6 +2163,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/natural-language-processing-is-lectures",
                 sections: "https://drive.google.com/drive/folders/natural-language-processing-is-sections",
                 videos: "https://youtube.com/playlist?list=natural-language-processing-is-videos",
+                summaries: "https://drive.google.com/drive/folders/natural-language-processing-is-summaries",
+                exams: "https://drive.google.com/drive/folders/natural-language-processing-is-lastexam"
               },
             },
             {
@@ -1909,6 +2177,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-is-1-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-is-1-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-is-1-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-is-1-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-is-1-lastexam"
               },
             },
             {
@@ -1921,6 +2191,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-is-2-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-is-2-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-is-2-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-is-2-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-is-2-lastexam"
               },
             },
             {
@@ -1933,6 +2205,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-is-4-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-is-4-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-is-4-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-is-4-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-is-4-lastexam"
               },
             },
           ],
@@ -1947,6 +2221,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/reinforcement-learning-lectures",
                 sections: "https://drive.google.com/drive/folders/reinforcement-learning-sections",
                 videos: "https://youtube.com/playlist?list=reinforcement-learning-videos",
+                summaries: "https://drive.google.com/drive/folders/reinforcement-learning-summaries",
+                exams: "https://drive.google.com/drive/folders/reinforcement-learning-lastexam"
               },
             },
             {
@@ -1959,6 +2235,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/ai-for-robotics-lectures",
                 sections: "https://drive.google.com/drive/folders/ai-for-robotics-sections",
                 videos: "https://youtube.com/playlist?list=ai-for-robotics-videos",
+                summaries: "https://drive.google.com/drive/folders/ai-for-robotics-summaries",
+                exams: "https://drive.google.com/drive/folders/ai-for-robotics-lastexam"
               },
             },
             {
@@ -1971,6 +2249,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/visual-recognition-lectures",
                 sections: "https://drive.google.com/drive/folders/visual-recognition-sections",
                 videos: "https://youtube.com/playlist?list=visual-recognition-videos",
+                summaries: "https://drive.google.com/drive/folders/visual-recognition-summaries",
+                exams: "https://drive.google.com/drive/folders/visual-recognition-lastexam"
               },
             },
             {
@@ -1983,6 +2263,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-is-3-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-is-3-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-is-3-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-is-3-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-is-3-lastexam"
               },
             },
             {
@@ -1995,6 +2277,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/program-elective-is-4-lectures",
                 sections: "https://drive.google.com/drive/folders/program-elective-is-4-sections",
                 videos: "https://youtube.com/playlist?list=program-elective-is-4-videos",
+                summaries: "https://drive.google.com/drive/folders/program-elective-is-4-summaries",
+                exams: "https://drive.google.com/drive/folders/program-elective-is-4-lastexam"
               },
             },
             {
@@ -2007,6 +2291,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/university-elective-is-5-lectures",
                 sections: "https://drive.google.com/drive/folders/university-elective-is-5-sections",
                 videos: "https://youtube.com/playlist?list=university-elective-is-5-videos",
+                summaries: "https://drive.google.com/drive/folders/university-elective-is-5-summaries",
+                exams: "https://drive.google.com/drive/folders/university-elective-is-5-lastexam"
               },
             },
           ],
@@ -2031,6 +2317,8 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/linear-algebra-ma-lectures",
                 sections: "https://drive.google.com/drive/folders/linear-algebra-ma-sections",
                 videos: "https://youtube.com/playlist?list=linear-algebra-ma-videos",
+                summaries: "https://drive.google.com/drive/folders/linear-algebra-ma-summaries",
+                exams: "https://drive.google.com/drive/folders/linear-algebra-ma-lastexam"
               },
             },
             {

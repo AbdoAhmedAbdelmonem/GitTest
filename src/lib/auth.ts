@@ -8,6 +8,7 @@ export interface StudentUser {
   is_admin: boolean
   is_banned: boolean
   created_at: string
+  Authorized?: boolean // Google Drive authorization status
 }
 
 export function getStudentSession(): StudentUser | null {
