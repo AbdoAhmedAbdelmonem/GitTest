@@ -11,16 +11,18 @@ export interface RefreshResult {
   message: string;
   refreshedCount?: number;
   failedCount?: number;
+  totalUsers?: number;
   timestamp: string;
 }
 
 // Check token status by calling the API
 export async function checkTokenStatus(): Promise<TokenStatus> {
   try {
-    const response = await fetch('/api/google-drive/check-tokens', {
+    const response = await fetch('/api/cron/token-refresh', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'x-cron-secret': process.env.NEXT_PUBLIC_CRON_SECRET || 'your-secret-key-here'
       },
     });
 
@@ -48,10 +50,11 @@ export async function checkTokenStatus(): Promise<TokenStatus> {
 // Manual token refresh trigger
 export async function triggerTokenRefresh(): Promise<RefreshResult> {
   try {
-    const response = await fetch('/api/google-drive/check-tokens', {
+    const response = await fetch('/api/cron/token-refresh', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'x-cron-secret': process.env.NEXT_PUBLIC_CRON_SECRET || 'your-secret-key-here'
       },
     });
 
