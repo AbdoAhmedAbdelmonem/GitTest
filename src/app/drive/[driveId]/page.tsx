@@ -1,3 +1,5 @@
+//app/drive/[driveId]/page.tsx
+
 "use client"
 
 import { useState, useEffect } from "react"
@@ -6,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
+import { createBrowserClient } from "@/lib/supabase/client"
 import {
   FileText,
   Folder,
@@ -22,13 +25,21 @@ import {
   RefreshCw,
   Copy,
   Check,
+  Shield,
+  Crown,
 } from "lucide-react"
 import Navigation from "@/components/navigation"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import { useParams, useRouter } from "next/navigation"
-
-const GOOGLE_DRIVE_API_KEY = "AIzaSyALQYyTG9yMs9Xd2leIqYgcxybOzFWciY0"
-const GOOGLE_DRIVE_API_BASE = "https://www.googleapis.com/drive/v3"
+import { getStudentSession } from "@/lib/auth"
+import { AdminControls, FileActions, FolderActions } from "@/components/admin-controls"
+import { CreateActions } from "@/components/create-actions"
+import { FileCardSkeleton, StatsCardSkeleton } from "@/components/loading-skeletons"
+import { filesCache, folderInfoCache, getCacheKey } from "@/lib/fast-cache"
+import { useDynamicMetadata, dynamicPageMetadata } from "@/lib/dynamic-metadata"
+import { isValidDriveId, resolveActualDriveId } from "@/lib/drive-mapping"
+import { createSecureDriveUrl } from "@/lib/secure-drive-urls"
+import { AdminAuthGuard } from "@/components/AdminAuthGuard"
 
 interface DriveFile {
   id: string
@@ -55,63 +66,7 @@ interface FolderInfo {
   parents?: string[]
 }
 
-function ElegantShape({
-  className,
-  delay = 0,
-  width = 400,
-  height = 100,
-  rotate = 0,
-  gradient = "from-white/[0.08]",
-}: {
-  className?: string
-  delay?: number
-  width?: number
-  height?: number
-  rotate?: number
-  gradient?: string
-}) {
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: -150,
-        rotate: rotate - 15,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        rotate: rotate,
-      }}
-      transition={{
-        duration: 2.4,
-        delay,
-        ease: [0.23, 0.86, 0.39, 0.96],
-        opacity: { duration: 1.2 },
-      }}
-      className={`absolute ${className}`}
-    >
-      <motion.div
-        animate={{
-          y: [0, 15, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
-        style={{
-          width,
-          height,
-        }}
-        className="relative"
-      >
-        <div
-          className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} backdrop-blur-[2px] border-2 border-white/[0.15] shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]`}
-        />
-      </motion.div>
-    </motion.div>
-  )
-}
+
 
 function getFileIcon(mimeType: string) {
   if (mimeType.includes("folder")) return Folder
@@ -147,10 +102,90 @@ function formatDate(dateString: string) {
   })
 }
 
+// Ownership Badge Component with beautiful styling and tooltip
+function OwnershipBadge() {
+  const [showTooltip, setShowTooltip] = useState(false)
+
+  return (
+    <div 
+      className="relative inline-flex"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+    >
+      <div className="absolute -top-2 -right-2 z-10" style={{ cursor: 'pointer' ,marginTop:"12px"}}>
+        <div className="relative">
+          <div className="w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+            <Crown className="w-3 h-3 text-yellow-900" />
+          </div>
+          <div className="absolute inset-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full animate-ping opacity-20"></div>
+        </div>
+      </div>
+      
+      {/* Tooltip */}
+      {showTooltip && (
+        <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="bg-gray-900 text-white text-xs py-2 px-3 rounded-lg shadow-xl border border-gray-700 whitespace-nowrap">
+            <div className="flex items-center gap-1">
+              <Crown className="w-3 h-3 text-yellow-400" />
+              <span>Dude it's yours 😂</span>
+            </div>
+            {/* Tooltip arrow */}
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1">
+              <div className="w-2 h-2 bg-gray-900 border-r border-b border-gray-700 transform rotate-45"></div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Component to display owner information with username lookup
+function OwnerDisplay({ 
+  owner, 
+  getUsername 
+}: { 
+  owner: { displayName: string; emailAddress: string }
+  getUsername: (email: string) => Promise<string>
+}) {
+  const [username, setUsername] = useState<string>("Loading...")
+
+  useEffect(() => {
+    let mounted = true
+    
+    const fetchUsername = async () => {
+      try {
+        const result = await getUsername(owner.emailAddress)
+        if (mounted) {
+          setUsername(result)
+        }
+      } catch (error) {
+        console.error('Error fetching username for owner:', error)
+        if (mounted) {
+          setUsername(owner.displayName || "Unknown User")
+        }
+      }
+    }
+
+    fetchUsername()
+
+    return () => {
+      mounted = false
+    }
+  }, [owner.emailAddress, getUsername, owner.displayName])
+
+  return (
+    <div className="flex items-center gap-2">
+      <User className="w-3 h-3 flex-shrink-0" />
+      <span className="truncate">Owner: {username}</span>
+    </div>
+  )
+}
+
 export default function DriveRootPage() {
   const params = useParams()
   const router = useRouter()
-  const driveId = params.driveId as string
+  const urlParam = params.driveId as string
 
   const [files, setFiles] = useState<DriveFile[]>([])
   const [loading, setLoading] = useState(true)
@@ -159,16 +194,172 @@ export default function DriveRootPage() {
   const [filteredFiles, setFilteredFiles] = useState<DriveFile[]>([])
   const [driveInfo, setDriveInfo] = useState<FolderInfo | null>(null)
   const [urlCopied, setUrlCopied] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [userSession, setUserSession] = useState<any>(null)
+  const [fetchingPromises, setFetchingPromises] = useState<Map<string, Promise<any>>>(new Map())
+  const [basicLoaded, setBasicLoaded] = useState(false)
+  const [usernameCache, setUsernameCache] = useState<Map<string, string>>(new Map())
+  
+  // Hash resolution states
+  const [notFound, setNotFound] = useState(false)
+  const [actualDriveId, setActualDriveId] = useState<string | null>(null)
+  const [isHashed, setIsHashed] = useState(false)
+
+  // Dynamic metadata
+  useDynamicMetadata(dynamicPageMetadata.driveRoot(driveInfo?.name))
+
+  // Supabase client and username fetching function
+  const supabase = createBrowserClient()
+
+  const getUsername = async (email: string): Promise<string> => {
+    // Check cache first
+    if (usernameCache.has(email)) {
+      return usernameCache.get(email)!
+    }
+
+    try {
+      const { data: userData, error } = await supabase
+        .from("chameleons")
+        .select("username")
+        .eq("email", email)
+        .single()
+
+      if (error || !userData) {
+        console.log(`No user found for email: ${email}`)
+        const fallback = "Unknown User"
+        setUsernameCache(prev => new Map(prev).set(email, fallback))
+        return fallback
+      }
+
+      const username = userData.username || "Unknown User"
+      
+      // Cache the result
+      setUsernameCache(prev => new Map(prev).set(email, username))
+      
+      return username
+    } catch (error) {
+      console.error('Error fetching username:', error)
+      const fallback = "Unknown User"
+      setUsernameCache(prev => new Map(prev).set(email, fallback))
+      return fallback
+    }
+  }
+
+  // Check if current user owns the file
+  const isCurrentUserOwner = (file: DriveFile): boolean => {
+    if (!userSession?.email || !file.owners) return false
+    
+    return file.owners.some(owner => 
+      owner.emailAddress.toLowerCase() === userSession.email.toLowerCase()
+    )
+  }
+
+  // Resolve URL parameter to actual drive ID with enhanced security logging
+  useEffect(() => {
+    // Log access attempt for security monitoring
+    const accessAttempt = {
+      urlParam,
+      timestamp: new Date().toISOString(),
+      userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'unknown',
+      referrer: typeof window !== 'undefined' ? document.referrer : 'unknown'
+    }
+    
+    console.log('Drive access attempt:', accessAttempt)
+    
+    const resolved = resolveActualDriveId(urlParam)
+    if (resolved) {
+      setActualDriveId(resolved)
+      // Check if the URL param looks like a secure token (longer than 20 chars and contains URL-safe base64 chars)
+      const isSecureToken = urlParam.length > 20 && !isValidDriveId(urlParam)
+      setIsHashed(isSecureToken)
+      setNotFound(false)
+      
+      // Log successful resolution
+      console.log('Drive access authorized:', {
+        originalParam: urlParam,
+        resolvedId: resolved,
+        isHashed: isSecureToken
+      })
+    } else {
+      setNotFound(true)
+      setLoading(false)
+      
+      // Log unauthorized access attempt
+      console.warn('Unauthorized drive access attempt:', {
+        urlParam,
+        timestamp: accessAttempt.timestamp,
+        userAgent: accessAttempt.userAgent,
+        referrer: accessAttempt.referrer
+      })
+    }
+  }, [urlParam])
+
+  useEffect(() => {
+    // Preload session immediately
+    const session = getStudentSession()
+    if (session) {
+      setUserSession(session)
+      setBasicLoaded(true)
+    }
+    
+    // Fetch fresh admin status from database since localStorage might be outdated
+    const checkAdminStatus = async () => {
+      if (session?.user_id) {
+        try {
+          const response = await fetch(`/api/google-drive/check-access?userId=${session.user_id}`)
+          const result = await response.json()
+          
+          console.log('Fresh admin status from DB:', result)
+          
+          // User is admin if they have is_admin=true AND are authorized
+          const isUserAdmin = result.isAdmin && result.authorized
+          console.log('Final admin status:', isUserAdmin)
+          setIsAdmin(isUserAdmin)
+        } catch (error) {
+          console.error('Error checking admin status:', error)
+          // Fallback to session data
+          setIsAdmin(session.is_admin || false)
+        }
+      }
+    }
+    
+    if (session) {
+      checkAdminStatus()
+    }
+  }, [])
 
   const fetchDriveInfo = async () => {
     try {
-      const response = await fetch(
-        `${GOOGLE_DRIVE_API_BASE}/files/${driveId}?` +
-          new URLSearchParams({
-            key: GOOGLE_DRIVE_API_KEY,
-            fields: "id,name,parents",
-          }),
-      )
+      if (!userSession || !actualDriveId) return
+      
+      // Check cache first
+      const cacheKey = getCacheKey.folderInfo(actualDriveId, isAdmin)
+      const cached = folderInfoCache.get(cacheKey)
+      if (cached) {
+        setDriveInfo(cached)
+        return
+      }
+      
+      // For non-admin users, try the public API first, then fallback to authenticated API
+      let response
+      let endpoint
+      
+      if (!isAdmin) {
+        // Try public API first
+        endpoint = `/api/drive/public-files?fileId=${encodeURIComponent(actualDriveId)}&type=info`
+        response = await fetch(endpoint)
+        
+        // If public API fails, fallback to authenticated API
+        if (!response.ok) {
+          console.log('Public API failed for drive info, trying authenticated API')
+          endpoint = `/api/google-drive/files?userId=${userSession.user_id}&fileId=${encodeURIComponent(actualDriveId)}&type=info`
+          response = await fetch(endpoint)
+        }
+      } else {
+        // Admin users use authenticated API directly
+        endpoint = `/api/google-drive/files?userId=${userSession.user_id}&fileId=${encodeURIComponent(actualDriveId)}&type=info`
+        response = await fetch(endpoint)
+      }
 
       if (!response.ok) {
         throw new Error(`Failed to fetch drive info: ${response.status}`)
@@ -176,6 +367,9 @@ export default function DriveRootPage() {
 
       const data = await response.json()
       setDriveInfo(data)
+      
+      // Cache the result
+      folderInfoCache.set(cacheKey, data)
     } catch (err) {
       console.error("Error fetching drive info:", err)
     }
@@ -183,40 +377,97 @@ export default function DriveRootPage() {
 
   const fetchDriveFiles = async () => {
     try {
+      if (!userSession || !actualDriveId) {
+        throw new Error('No user session or drive ID found')
+      }
+
+      // Check cache first
+      const cacheKey = getCacheKey.files(actualDriveId, isAdmin)
+      const cached = filesCache.get(cacheKey)
+      if (cached) {
+        setFiles(cached)
+        setFilteredFiles(cached)
+        return
+      }
+
+      // Prevent duplicate requests
+      if (fetchingPromises.has(cacheKey)) {
+        const result = await fetchingPromises.get(cacheKey)
+        return result
+      }
+
       setLoading(true)
       setError(null)
 
-      const response = await fetch(
-        `${GOOGLE_DRIVE_API_BASE}/files?` +
-          new URLSearchParams({
-            key: GOOGLE_DRIVE_API_KEY,
-            q: `'${driveId}' in parents and trashed=false`,
-            fields: "files(id,name,mimeType,size,modifiedTime,createdTime,owners,webViewLink,webContentLink,thumbnailLink,parents)",
-            orderBy: "folder,modifiedTime desc",
-            pageSize: "100",
-          }),
-      )
+      const fetchPromise = (async () => {
+        // For non-admin users, try the public API first, then fallback to authenticated API
+        let response
+        let endpoint
+        
+        if (!isAdmin) {
+          // Try public API first
+          endpoint = `/api/drive/public-files?folderId=${actualDriveId}`
+          response = await fetch(endpoint)
+          
+          // If public API fails, fallback to authenticated API
+          if (!response.ok) {
+            console.log('Public API failed, trying authenticated API for non-admin user')
+            endpoint = `/api/google-drive/files?userId=${userSession.user_id}&folderId=${actualDriveId}`
+            response = await fetch(endpoint)
+          }
+        } else {
+          // Admin users use authenticated API directly
+          endpoint = `/api/google-drive/files?userId=${userSession.user_id}&folderId=${actualDriveId}`
+          response = await fetch(endpoint)
+        }
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch files: ${response.status} ${response.statusText}`)
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || `Failed to fetch files: ${response.status} ${response.statusText}`)
+        }
+
+        const data: DriveResponse = await response.json()
+        const files = data.files || []
+        
+        setFiles(files)
+        setFilteredFiles(files)
+        
+        // Cache the result
+        filesCache.set(cacheKey, files)
+        return files
+      })()
+
+      // Store promise to prevent duplicates
+      setFetchingPromises(prev => new Map(prev).set(cacheKey, fetchPromise))
+
+      try {
+        await fetchPromise
+      } finally {
+        // Clean up promise
+        setFetchingPromises(prev => {
+          const newMap = new Map(prev)
+          newMap.delete(cacheKey)
+          return newMap
+        })
       }
-
-      const data: DriveResponse = await response.json()
-      setFiles(data.files || [])
-      setFilteredFiles(data.files || [])
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred while fetching files")
+      const errorMessage = err instanceof Error ? err.message : "An error occurred while fetching files"
+      setError(errorMessage)
     } finally {
       setLoading(false)
     }
   }
 
   useEffect(() => {
-    if (driveId) {
+    if (actualDriveId && userSession) {
+      // Show basic layout immediately
+      setBasicLoaded(true)
+      
+      // Then load data
       fetchDriveInfo()
       fetchDriveFiles()
     }
-  }, [driveId])
+  }, [actualDriveId, userSession, isAdmin]) // Add isAdmin as dependency
 
   useEffect(() => {
     const filtered = files.filter((file) => file.name.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -225,16 +476,27 @@ export default function DriveRootPage() {
 
   const handleFolderClick = (folder: DriveFile) => {
     if (folder.mimeType.includes("folder")) {
-      // Navigate to the folder using the new structure
-      router.push(`/drive/${driveId}/${folder.id}`)
+      // Generate a secure URL for the subfolder navigation
+      const secureUrl = createSecureDriveUrl(actualDriveId!, folder.id)
+      if (secureUrl) {
+        router.push(secureUrl)
+      } else {
+        // Fallback to original method if secure URL generation fails
+        router.push(`/drive/${actualDriveId}/${folder.id}`)
+      }
     }
   }
 
   const handleView = (file: DriveFile) => {
     if (file.mimeType.includes("folder")) {
       handleFolderClick(file)
-    } else if (file.webViewLink) {
-      window.open(file.webViewLink, "_blank")
+    } else {
+      // Open all file types in new tab
+      if (file.webViewLink) {
+        window.open(file.webViewLink, "_blank", "noopener,noreferrer")
+      } else if (file.webContentLink) {
+        window.open(file.webContentLink, "_blank", "noopener,noreferrer")
+      }
     }
   }
 
@@ -256,87 +518,133 @@ export default function DriveRootPage() {
     }
   }
 
+  const refreshFiles = () => {
+    if (!actualDriveId) return
+    
+    // Clear cache for this folder
+    const cacheKey = getCacheKey.files(actualDriveId, isAdmin)
+    filesCache.delete(cacheKey)
+    
+    // Refetch files
+    fetchDriveFiles()
+  }
+
   return (
-    <div className="min-h-screen bg-[#030303]">
+    <div className="min-h-screen bg-[#030303] overflow-x-hidden">
       <Navigation />
 
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
-        <ElegantShape
-          delay={0.3}
-          width={600}
-          height={140}
-          rotate={12}
-          gradient="from-indigo-500/[0.15]"
-          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
-        />
-        <ElegantShape
-          delay={0.5}
-          width={500}
-          height={120}
-          rotate={-15}
-          gradient="from-rose-500/[0.15]"
-          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
-        />
-        <ElegantShape
-          delay={0.4}
-          width={300}
-          height={80}
-          rotate={-8}
-          gradient="from-violet-500/[0.15]"
-          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
-        />
-        <ElegantShape
-          delay={0.6}
-          width={200}
-          height={60}
-          rotate={20}
-          gradient="from-amber-500/[0.15]"
-          className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+        {/* Static background image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
+          style={{ backgroundImage: 'url(/images/Background.png)' }}
         />
       </div>
 
-      <ScrollAnimatedSection className="pt-32 pb-16 relative z-10">
-        <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <div className="flex items-center justify-end mb-6">
-              <Button
-                onClick={copyCurrentUrl}
-                variant="outline"
-                size="sm"
-                className="bg-white/5 border-white/20 text-white hover:bg-white/10"
-              >
-                {urlCopied ? (
-                  <>
-                    <Check className="w-4 h-4 mr-2" />
-                    Copied!
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4 mr-2" />
-                    Copy URL
-                  </>
+      {/* 404 Not Found Section */}
+      {notFound && (
+        <ScrollAnimatedSection className="pt-32 pb-16 relative z-10">
+          <div className="container mx-auto px-3 sm:px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center py-20"
+            >
+              <Card className="bg-red-500/10 border-red-500/20 max-w-md mx-auto">
+                <CardContent className="p-8">
+                  <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-white mb-2">404 - Not Found</h3>
+                  <p className="text-white/60 mb-4">
+                    The drive link you're looking for doesn't exist or is not authorized.
+                  </p>
+                  <div className="space-y-2 mb-6">
+                    <p className="text-sm text-white/40">
+                      URL Parameter: <code className="bg-white/10 px-2 py-1 rounded text-xs">{urlParam}</code>
+                    </p>
+                  </div>
+                  <Button
+                    onClick={() => router.push('/drive')}
+                    className="bg-blue-500 hover:bg-blue-600 text-white"
+                  >
+                    Go Back to Drive Home
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </ScrollAnimatedSection>
+      )}
+
+      {/* Normal Drive Content */}
+      {!notFound && (
+        <>
+          <ScrollAnimatedSection className="pt-32 pb-16 relative z-10">
+            <div className="container mx-auto px-3 sm:px-4">
+              <div className="mb-6 sm:mb-8">
+            <div className="flex items-center justify-between mb-4 sm:mb-6 gap-2">
+              <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+                {isAdmin && (
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">
+                    <Shield className="w-3 h-3 mr-1" />
+                    <span className="hidden sm:inline">Admin Access</span>
+                  </Badge>
                 )}
-              </Button>
+                <Badge className={`text-xs ${
+                  isHashed 
+                    ? "bg-blue-500/20 text-blue-400 border-blue-500/30" 
+                    : "bg-amber-500/20 text-amber-400 border-amber-500/30"
+                }`}>
+                  <Shield className="w-3 h-3 mr-1" />
+                  <span className="hidden sm:inline">{isHashed ? "Secure URL" : "Direct Access"}</span>
+                </Badge>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                {isAdmin && actualDriveId && (
+                  <CreateActions
+                    currentFolderId={actualDriveId}
+                    onFileCreated={refreshFiles}
+                    userSession={userSession}
+                  />
+                )}
+                <Button
+                  onClick={copyCurrentUrl}
+                  variant="outline"
+                  size="sm"
+                  className="bg-white/5 border-white/20 text-white hover:bg-white/10 text-xs sm:text-sm"
+                >
+                  {urlCopied ? (
+                    <>
+                      <Check className="w-4 h-4 mr-1 sm:mr-2" />
+                      <span className="hidden sm:inline">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4 mr-1 sm:mr-2" />
+                      <span className="hidden sm:inline">Copy URL</span>
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
 
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
+              transition={{ duration: 0.3 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-6"
             >
               <Folder className="w-4 h-4 text-blue-400" />
               <span className="text-sm text-white/60 tracking-wide">Drive Root</span>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-6xl font-bold text-white mb-6"
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 px-2"
             >
               {driveInfo ? (
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -353,27 +661,27 @@ export default function DriveRootPage() {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg text-white/60 max-w-2xl mx-auto mb-8"
+              transition={{ duration: 0.3, delay: 0.15 }}
+              className="text-sm sm:text-lg text-white/60 max-w-2xl mx-auto mb-6 sm:mb-8 px-2"
             >
-              Explore and manage your Google Drive files with our beautiful interface
+              Explore and manage your files with our beautiful and Intelligent interface
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="max-w-md mx-auto relative"
+              transition={{ duration: 0.3, delay: 0.2 }}
+              className="max-w-md mx-auto relative px-2"
             >
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
+              <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
               <Input
                 type="text"
                 placeholder="Search files..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-500/50 focus:ring-blue-500/20"
+                className="pl-10 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-500/50 focus:ring-blue-500/20 w-full"
               />
             </motion.div>
           </div>
@@ -381,52 +689,63 @@ export default function DriveRootPage() {
       </ScrollAnimatedSection>
 
       <ScrollAnimatedSection className="pb-20 relative z-10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            <ScrollAnimatedSection animation="slideUp" delay={0.1}>
-              <Card className="bg-white/[0.02] border-white/10 text-center">
-                <CardContent className="p-4">
-                  <div className="text-2xl font-bold text-white mb-1">{filteredFiles.length}</div>
-                  <div className="text-sm text-white/60">Total Items</div>
-                </CardContent>
-              </Card>
-            </ScrollAnimatedSection>
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
+            {loading ? (
+              <>
+                <StatsCardSkeleton />
+                <StatsCardSkeleton />
+                <StatsCardSkeleton />
+                <StatsCardSkeleton />
+              </>
+            ) : (
+              <>
+                <ScrollAnimatedSection animation="slideUp" delay={0.05}>
+                  <Card className="bg-white/[0.02] border-white/10 text-center">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="text-xl sm:text-2xl font-bold text-white mb-1">{filteredFiles.length}</div>
+                      <div className="text-xs sm:text-sm text-white/60">Total Items</div>
+                    </CardContent>
+                  </Card>
+                </ScrollAnimatedSection>
 
-            <ScrollAnimatedSection animation="slideUp" delay={0.2}>
-              <Card className="bg-white/[0.02] border-white/10 text-center">
-                <CardContent className="p-4">
-                  <div className="text-2xl font-bold text-white mb-1">
-                    {filteredFiles.filter((f) => f.mimeType.includes("folder")).length}
-                  </div>
-                  <div className="text-sm text-white/60">Folders</div>
-                </CardContent>
-              </Card>
-            </ScrollAnimatedSection>
+                <ScrollAnimatedSection animation="slideUp" delay={0.1}>
+                  <Card className="bg-white/[0.02] border-white/10 text-center">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                        {filteredFiles.filter((f) => f.mimeType.includes("folder")).length}
+                      </div>
+                      <div className="text-xs sm:text-sm text-white/60">Folders</div>
+                    </CardContent>
+                  </Card>
+                </ScrollAnimatedSection>
 
-            <ScrollAnimatedSection animation="slideUp" delay={0.3}>
-              <Card className="bg-white/[0.02] border-white/10 text-center">
-                <CardContent className="p-4">
-                  <div className="text-2xl font-bold text-white mb-1">
-                    {filteredFiles.filter((f) => f.mimeType.includes("image")).length}
-                  </div>
-                  <div className="text-sm text-white/60">Images</div>
-                </CardContent>
-              </Card>
-            </ScrollAnimatedSection>
+                <ScrollAnimatedSection animation="slideUp" delay={0.15}>
+                  <Card className="bg-white/[0.02] border-white/10 text-center">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                        {filteredFiles.filter((f) => f.mimeType.includes("image")).length}
+                      </div>
+                      <div className="text-xs sm:text-sm text-white/60">Images</div>
+                    </CardContent>
+                  </Card>
+                </ScrollAnimatedSection>
 
-            <ScrollAnimatedSection animation="slideUp" delay={0.4}>
-              <Card className="bg-white/[0.02] border-white/10 text-center">
-                <CardContent className="p-4">
-                  <div className="text-2xl font-bold text-white mb-1">
-                    {
-                      filteredFiles.filter((f) => !f.mimeType.includes("folder") && !f.mimeType.includes("image"))
-                        .length
-                    }
-                  </div>
-                  <div className="text-sm text-white/60">Documents</div>
-                </CardContent>
-              </Card>
-            </ScrollAnimatedSection>
+                <ScrollAnimatedSection animation="slideUp" delay={0.2}>
+                  <Card className="bg-white/[0.02] border-white/10 text-center">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                        {
+                          filteredFiles.filter((f) => !f.mimeType.includes("folder") && !f.mimeType.includes("image"))
+                            .length
+                        }
+                      </div>
+                      <div className="text-xs sm:text-sm text-white/60">Documents</div>
+                    </CardContent>
+                  </Card>
+                </ScrollAnimatedSection>
+              </>
+            )}
           </div>
 
           <AnimatePresence>
@@ -435,14 +754,11 @@ export default function DriveRootPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex flex-col items-center justify-center py-20"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"
               >
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                  className="w-12 h-12 border-4 border-white/20 border-t-blue-500 rounded-full mb-4"
-                />
-                <p className="text-white/60">Loading drive contents...</p>
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <FileCardSkeleton key={index} />
+                ))}
               </motion.div>
             )}
           </AnimatePresence>
@@ -474,13 +790,40 @@ export default function DriveRootPage() {
             )}
           </AnimatePresence>
 
+                    <AnimatePresence>
+            {!loading && error && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="text-center py-20"
+              >
+                <Card className="bg-red-500/10 border-red-500/20 max-w-md mx-auto">
+                  <CardContent className="p-6">
+                    <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold text-white mb-2">Error Loading Files</h3>
+                    <p className="text-white/60 mb-4">{error}</p>
+                    <Button
+                      onClick={fetchDriveFiles}
+                      className="bg-red-500 hover:bg-red-600 text-white"
+                      disabled={loading}
+                    >
+                      <RefreshCw className="w-4 h-4 mr-2" />
+                      Try Again
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <AnimatePresence>
             {!loading && !error && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"
               >
                 {filteredFiles.map((file, index) => {
                   const FileIcon = getFileIcon(file.mimeType)
@@ -490,18 +833,24 @@ export default function DriveRootPage() {
                   return (
                     <motion.div
                       key={file.id}
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
+                      transition={{ delay: index * 0.02, duration: 0.2 }}
+                      className="relative w-full h-full"
                     >
                       <Card
-                        className={`bg-white/[0.02] border-white/10 hover:bg-white/[0.04] transition-all duration-300 group h-full ${
-                          isFolder ? "cursor-pointer hover:border-blue-500/30" : ""
+                        className={`relative bg-white/[0.02] border-white/10 hover:bg-white/[0.06] hover:border-white/20 hover:scale-[1.02] transition-all duration-300 group h-full cursor-pointer overflow-hidden ${
+                          isFolder ? "hover:border-blue-500/40" : "hover:border-green-500/40"
                         }`}
-                        onClick={isFolder ? () => handleFolderClick(file) : undefined}
+                        onClick={() => handleView(file)}
                       >
-                        <CardHeader className="pb-3">
-                          <div className="flex items-start gap-3">
+                        <CardHeader className="pb-3 relative overflow-hidden">
+                          {/* Ownership Badge */}
+                          {isCurrentUserOwner(file) && (
+                            <OwnershipBadge />
+                          )}
+                          
+                          <div className="flex items-start gap-3 w-full">
                             <div
                               className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center ${
                                 isFolder
@@ -521,14 +870,27 @@ export default function DriveRootPage() {
                                 <FileIcon className="w-6 h-6" />
                               )}
                             </div>
-                            <div className="flex-1 min-w-0">
-                              <CardTitle className="text-white text-sm font-medium truncate" title={file.name}>
-                                {file.name}
-                              </CardTitle>
+                            <div className="flex-1 min-w-0 max-w-full overflow-hidden">
+                              <div className="w-full">
+                                <CardTitle 
+                                  className="text-white text-sm font-medium leading-tight break-words max-w-full"
+                                  style={{
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 2,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden',
+                                    wordBreak: 'break-word',
+                                    hyphens: 'auto'
+                                  }}
+                                  title={file.name}
+                                >
+                                  {file.name}
+                                </CardTitle>
+                              </div>
                               <div className="flex items-center gap-2 mt-1">
                                 <Badge
                                   variant="outline"
-                                  className={`text-xs bg-white/5 border-white/20 text-white/60 ${
+                                  className={`text-xs bg-white/5 border-white/20 text-white/60 flex-shrink-0 ${
                                     isFolder ? "border-blue-500/30 text-blue-400" : ""
                                   }`}
                                 >
@@ -539,23 +901,23 @@ export default function DriveRootPage() {
                           </div>
                         </CardHeader>
 
-                        <CardContent className="pt-0">
+                        <CardContent className="pt-0 relative">
                           <div className="space-y-2 text-xs text-white/50 mb-4">
                             <div className="flex items-center gap-2">
-                              <Calendar className="w-3 h-3" />
-                              <span>Modified: {formatDate(file.modifiedTime)}</span>
+                              <Calendar className="w-3 h-3 flex-shrink-0" />
+                              <span className="truncate">Modified: {formatDate(file.modifiedTime)}</span>
                             </div>
                             {file.size && (
                               <div className="flex items-center gap-2">
-                                <FileText className="w-3 h-3" />
-                                <span>Size: {formatFileSize(file.size)}</span>
+                                <FileText className="w-3 h-3 flex-shrink-0" />
+                                <span className="truncate">Size: {formatFileSize(file.size)}</span>
                               </div>
                             )}
                             {file.owners?.[0] && (
-                              <div className="flex items-center gap-2">
-                                <User className="w-3 h-3" />
-                                <span className="truncate">Owner: {file.owners[0].displayName}</span>
-                              </div>
+                              <OwnerDisplay 
+                                owner={file.owners[0]} 
+                                getUsername={getUsername}
+                              />
                             )}
                           </div>
 
@@ -567,7 +929,7 @@ export default function DriveRootPage() {
                                 e.stopPropagation()
                                 handleView(file)
                               }}
-                              className="flex-1 bg-transparent border-white/20 text-white hover:bg-white/10 text-xs"
+                              className="flex-1 bg-transparent border-white/20 text-white hover:bg-white/10 text-xs hover:text-white/80"
                             >
                               <Eye className="w-3 h-3 mr-1" />
                               {isFolder ? "Open" : "View"}
@@ -586,6 +948,34 @@ export default function DriveRootPage() {
                               </Button>
                             )}
                           </div>
+
+                          {isAdmin && !isFolder && (
+                            <div 
+                              className="mt-2 pt-2 border-t border-white/10"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <FileActions
+                                fileId={file.id}
+                                fileName={file.name}
+                                onDeleted={refreshFiles}
+                                onRenamed={refreshFiles}
+                              />
+                            </div>
+                          )}
+
+                          {isAdmin && isFolder && (
+                            <div 
+                              className="mt-2 pt-2 border-t border-white/10"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <FolderActions
+                                folderId={file.id}
+                                folderName={file.name}
+                                onDeleted={refreshFiles}
+                                onRenamed={refreshFiles}
+                              />
+                            </div>
+                          )}
                         </CardContent>
                       </Card>
                     </motion.div>
@@ -606,6 +996,8 @@ export default function DriveRootPage() {
           )}
         </div>
       </ScrollAnimatedSection>
+        </>
+      )}
     </div>
   )
 }
