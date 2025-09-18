@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { RefreshCw, CheckCircle, XCircle, Clock } from 'lucide-react';
-import { checkTokenStatus, triggerTokenRefresh, formatTimeRemaining, type TokenStatus, type RefreshResult } from '@/lib/token-utils';
+import { RefreshCw, CheckCircle, XCircle, Clock, AlertTriangle } from 'lucide-react';
+import { checkTokenStatus, triggerTokenRefresh, type TokenStatus, type RefreshResult } from '@/lib/token-utils';
 
 export default function TokenStatusMonitor() {
   const [tokenStatus, setTokenStatus] = useState<TokenStatus | null>(null);
@@ -102,7 +102,8 @@ export default function TokenStatusMonitor() {
             {lastRefreshResult.refreshedCount !== undefined && (
               <div className="mt-1">
                 Refreshed: {lastRefreshResult.refreshedCount} |
-                Failed: {lastRefreshResult.failedCount}
+                Failed: {lastRefreshResult.failedCount} |
+                Total: {lastRefreshResult.totalUsers}
               </div>
             )}
           </div>
@@ -129,10 +130,14 @@ export default function TokenStatusMonitor() {
           </Button>
         </div>
 
-        <div className="text-xs text-muted-foreground">
-          <p>• Automatic refresh runs every hour via Vercel cron</p>
+        <div className="text-xs text-muted-foreground space-y-1">
+          <div className="flex items-center gap-1">
+            <AlertTriangle className="w-3 h-3" />
+            <span>Automatic refresh runs every 30 minutes via cron-job.org</span>
+          </div>
           <p>• Manual refresh can be triggered anytime</p>
           <p>• All admin users' tokens are refreshed simultaneously</p>
+          <p>• System runs 24/7 when site is active</p>
         </div>
       </CardContent>
     </Card>
