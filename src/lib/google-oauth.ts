@@ -208,3 +208,81 @@ export async function configureOAuthClientForUser(userId: number) {
     throw error
   }
 }
+
+// Refresh tokens for all admin users
+export async function refreshAllAdminTokens() {
+  try {
+    const supabase = createClient()
+
+    // Get all admin users with tokens
+    const { data: adminUsers, error } = await supabase
+      .from('chameleons')
+      .select('user_id, google_id, google_email, access_token, refresh_token, token_expiry')
+      .eq('Authorized', true)
+      .not('refresh_token', 'is', null)
+
+    if (error) {
+      console.error('Error fetching admin users:', error)
+      throw new Error('Failed to fetch admin users')
+    }
+
+    if (!adminUsers || adminUsers.length === 0) {
+      console.log('No admin users found with refresh tokens')
+      return { refreshedCount: 0, failedCount: 0 }
+    }
+
+    let refreshedCount = 0
+    let failedCount = 0
+
+    for (const user of adminUsers) {
+      try {
+        // Check if token needs refresh
+        if (!isTokenExpired(user.token_expiry)) {
+          console.log(`Token for user ${user.user_id} is still valid`)
+          continue
+        }
+
+        if (!user.refresh_token) {
+          console.log(`No refresh token for user ${user.user_id}`)
+          failedCount++
+          continue
+        }
+
+        console.log(`Refreshing token for user ${user.user_id}`)
+
+        // Refresh the token
+        const newTokens = await refreshAccessToken(user.refresh_token)
+
+        if (!newTokens.access_token) {
+          console.error(`Failed to get new access token for user ${user.user_id}`)
+          failedCount++
+          continue
+        }
+
+        // Store new tokens
+        await storeUserTokens(
+          user.user_id,
+          user.google_id,
+          user.google_email,
+          newTokens.access_token,
+          newTokens.refresh_token || user.refresh_token,
+          newTokens.expiry_date || undefined
+        )
+
+        refreshedCount++
+        console.log(`Successfully refreshed token for user ${user.user_id}`)
+
+      } catch (userError) {
+        console.error(`Error refreshing token for user ${user.user_id}:`, userError)
+        failedCount++
+      }
+    }
+
+    console.log(`Token refresh completed: ${refreshedCount} refreshed, ${failedCount} failed`)
+    return { refreshedCount, failedCount }
+
+  } catch (error) {
+    console.error('Error in refreshAllAdminTokens:', error)
+    throw error
+  }
+}
