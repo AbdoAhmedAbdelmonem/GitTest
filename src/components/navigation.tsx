@@ -1,10 +1,11 @@
+// components/navigation.tsx (updated)
 "use client"
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, Home, HelpCircle, User, LogOut } from "lucide-react"
+import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, Home, Folder, HelpCircle , User, LogOut } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { getStudentSession, clearStudentSession } from "@/lib/auth"
@@ -12,7 +13,9 @@ import { getStudentSession, clearStudentSession } from "@/lib/auth"
 const navItems = [
   { name: "Home", href: "/", icon: Home },
   { name: "Courses", href: "/courses", icon: BookOpen },
-  { name: "About", href: "/about", icon: HelpCircle },
+  { name: "YouTube", href: "/youtube", icon: Folder },
+  { name: "Specializations", href: "#specializations", icon: SquareUserRound, isSection: true },
+  { name: "About", href: "/about", icon: HelpCircle  },
   { name: "Explo", href: "/explo", icon: BrainCircuit },
 ]
 
@@ -38,13 +41,10 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleLogout = async () => {
-    // Clear local session using the comprehensive function
+  const handleLogout = () => {
     clearStudentSession()
     setUser(null)
-    
-    // Force reload to clear any cached state
-    window.location.href = '/'
+    window.location.reload() // Refresh the page to update the UI
   }
 
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, item: typeof navItems[0]) => {
@@ -61,7 +61,7 @@ export default function Navigation() {
         }
       } else {
         // Navigate to homepage with hash
-        router.push('/' + item.href)
+        router.push('/' + item.href) // This joins correctly for hash fragments
       }
       
       // Close mobile menu if open
@@ -77,38 +77,11 @@ export default function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 rounded-2xl overflow-hidden ${
-          scrolled 
-            ? "bg-[rgba(255,255,255,0.1)] backdrop-blur-3xl border border-white/20 shadow-2xl" 
-            : "bg-[rgba(255,255,255,0.07)] backdrop-blur-2xl border border-white/10"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? "bg-[#030303]/80 backdrop-blur-xl border-b border-white/10" : "bg-transparent"
         }`}
-        style={{
-          borderRadius: '100px',
-          background: scrolled 
-            ? 'radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.025) 100%)' 
-            : 'radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.02) 100%)',
-          boxShadow: scrolled 
-            ? '0 20px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(120, 119, 198, 0.15)' 
-            : '0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 15px rgba(120, 119, 198, 0.1)'
-        }}
       >
-        {/* Animated gradient overlay for liquid glass effect */}
-        <div className="absolute inset-0 overflow-hidden rounded-2xl">
-          <motion.div 
-            className="absolute inset-0 opacity-20 mix-blend-overlay"
-            animate={{
-              background: [
-                'radial-gradient(ellipse at 50% 50%, rgba(162, 155, 254, 0.5) 0%, rgba(162, 155, 254, 0) 50%)',
-                'radial-gradient(ellipse at 30% 20%, rgba(108, 92, 231, 0.5) 0%, rgba(108, 92, 231, 0) 50%)',
-                'radial-gradient(ellipse at 70% 80%, rgba(224, 135, 249, 0.5) 0%, rgba(224, 135, 249, 0) 50%)',
-                'radial-gradient(ellipse at 50% 50%, rgba(162, 155, 254, 0.5) 0%, rgba(162, 155, 254, 0) 50%)',
-              ]
-            }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          />
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-3">
@@ -129,7 +102,7 @@ export default function Navigation() {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-8">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
@@ -140,13 +113,13 @@ export default function Navigation() {
                   <Link
                     href={item.href}
                     onClick={(e) => handleNavigation(e, item)}
-                    className="flex items-center gap-2 text-white/80 hover:text-white transition-colors duration-300 group mx-1 px-4 py-2 rounded-xl hover:bg-white/10 backdrop-blur-sm"
+                    className="flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300 group"
                   >
                     <item.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
                     <span className="relative">
                       {item.name}
                       <motion.div
-                        className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
+                        className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
                         initial={{ width: 0 }}
                         whileHover={{ width: "100%" }}
                         transition={{ duration: 0.3 }}
@@ -158,22 +131,22 @@ export default function Navigation() {
             </div>
 
             {/* Auth Buttons or User Profile */}
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-4">
               {user ? (
                 <motion.div 
                   initial={{ opacity: 0, x: 20 }} 
                   animate={{ opacity: 1, x: 0 }} 
                   transition={{ delay: 0.6 }}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-4"
                 >
-                  <Link href="/profile" className="flex items-center gap-2 text-white hover:text-purple-300 transition-colors px-4 py-2 rounded-xl hover:bg-white/10 backdrop-blur-sm">
+                  <Link href="/profile" className="flex items-center gap-2 text-white hover:text-purple-300 transition-colors">
                     <User className="w-4 h-4" />
                     <span>{user.username}</span>
                   </Link>
                   <Button
                     onClick={handleLogout}
                     variant="ghost"
-                    className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-xl backdrop-blur-sm"
+                    className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
                   >
                     <LogOut className="w-4 h-4 mr-2" />
                     Logout
@@ -185,7 +158,7 @@ export default function Navigation() {
                     <Link href="/auth">
                       <Button
                         variant="ghost"
-                        className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-xl backdrop-blur-sm"
+                        className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
                       >
                         <LogIn className="w-4 h-4 mr-2" />
                         Login
@@ -194,7 +167,7 @@ export default function Navigation() {
                   </motion.div>
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.7 }}>
                     <Link href="/auth?mode=signup">
-                      <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 shadow-lg hover:shadow-purple-500/25 transition-all duration-300 rounded-xl backdrop-blur-sm">
+                      <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
                         <UserPlus className="w-4 h-4 mr-2" />
                         Sign Up
                       </Button>
@@ -210,7 +183,7 @@ export default function Navigation() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-white p-2 hover:bg-white/10 rounded-xl transition-colors duration-300 backdrop-blur-sm"
+              className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors duration-300"
             >
               <AnimatePresence mode="wait">
                 {isOpen ? (
@@ -247,30 +220,10 @@ export default function Navigation() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
-              className="md:hidden bg-[rgba(255,255,255,0.1)] backdrop-blur-3xl border-t border-white/20 rounded-b-2xl"
-              style={{
-                background: 'radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.025) 100%)',
-                boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(120, 119, 198, 0.15)'
-              }}
+              className="md:hidden bg-[#030303]/95 backdrop-blur-xl border-t border-white/10"
             >
-              {/* Animated gradient overlay for mobile menu */}
-              <div className="absolute inset-0 overflow-hidden rounded-b-2xl">
-                <motion.div 
-                  className="absolute inset-0 opacity-20 mix-blend-overlay"
-                  animate={{
-                    background: [
-                      'radial-gradient(ellipse at 50% 0%, rgba(162, 155, 254, 0.5) 0%, rgba(162, 155, 254, 0) 70%)',
-                      'radial-gradient(ellipse at 30% 0%, rgba(108, 92, 231, 0.5) 0%, rgba(108, 92, 231, 0) 70%)',
-                      'radial-gradient(ellipse at 70% 0%, rgba(224, 135, 249, 0.5) 0%, rgba(224, 135, 249, 0) 70%)',
-                      'radial-gradient(ellipse at 50% 0%, rgba(162, 155, 254, 0.5) 0%, rgba(162, 155, 254, 0) 70%)',
-                    ]
-                  }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                />
-              </div>
-              
-              <div className="container mx-auto px-4 py-6 relative z-10">
-                <div className="flex flex-col gap-2">
+              <div className="container mx-auto px-4 py-6">
+                <div className="flex flex-col gap-4">
                   {navItems.map((item, index) => (
                     <motion.div
                       key={item.name}
@@ -281,7 +234,7 @@ export default function Navigation() {
                       <Link
                         href={item.href}
                         onClick={(e) => handleNavigation(e, item)}
-                        className="flex items-center gap-3 text-white/80 hover:text-white p-3 rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
+                        className="flex items-center gap-3 text-white/70 hover:text-white p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
                       >
                         <item.icon className="w-5 h-5" />
                         <span>{item.name}</span>
@@ -289,13 +242,13 @@ export default function Navigation() {
                     </motion.div>
                   ))}
                   
-                  <div className="border-t border-white/20 pt-4 mt-2">
+                  <div className="border-t border-white/10 pt-4 mt-2">
                     {user ? (
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-3">
                         <Link 
                           href="/profile" 
                           onClick={() => setIsOpen(false)}
-                          className="flex items-center gap-3 text-white p-3 rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
+                          className="flex items-center gap-3 text-white p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
                         >
                           <User className="w-5 h-5" />
                           <span>{user.username}</span>
@@ -306,25 +259,25 @@ export default function Navigation() {
                             setIsOpen(false)
                           }}
                           variant="ghost"
-                          className="w-full justify-start text-white/80 hover:text-white hover:bg-white/10 rounded-xl backdrop-blur-sm"
+                          className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10"
                         >
                           <LogOut className="w-4 h-4 mr-2" />
                           Logout
                         </Button>
                       </div>
                     ) : (
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-3">
                         <Link href="/auth" onClick={() => setIsOpen(false)}>
                           <Button
                             variant="ghost"
-                            className="w-full justify-start text-white/80 hover:text-white hover:bg-white/10 rounded-xl backdrop-blur-sm"
+                            className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10"
                           >
                             <LogIn className="w-4 h-4 mr-2" />
                             Login
                           </Button>
                         </Link>
                         <Link href="/auth?mode=signup" onClick={() => setIsOpen(false)}>
-                          <Button className="w-full justify-start bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 rounded-xl backdrop-blur-sm">
+                          <Button className="w-full justify-start bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0">
                             <UserPlus className="w-4 h-4 mr-2" />
                             Sign Up
                           </Button>
@@ -340,7 +293,7 @@ export default function Navigation() {
       </motion.nav>
 
       {/* Spacer to prevent content from hiding behind fixed nav */}
-      <div className="h-20 md:h-24"/>
+      <div className="h-16 md:h-20" />
     </>
   )
 }
