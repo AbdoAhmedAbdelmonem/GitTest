@@ -1,3 +1,10 @@
+import { generateMetadata, pageMetadata } from "@/lib/metadata"
+
+export const metadata = generateMetadata({
+  ...pageMetadata.about,
+  path: "/about"
+})
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-black text-white p-8">
