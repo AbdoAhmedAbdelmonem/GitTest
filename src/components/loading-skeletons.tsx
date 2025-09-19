@@ -33,7 +33,7 @@ export function FileCardSkeleton() {
 export function StatsCardSkeleton() {
   return (
     <Card className="bg-white/[0.02] border-white/10 text-center">
-      <CardContent className="p-4">
+      <CardContent className="p-4" style={{ marginTop:'-34px',marginBottom:'-22px' }}>
         <Skeleton className="h-8 w-16 mx-auto mb-1" />
         <Skeleton className="h-4 w-20 mx-auto" />
       </CardContent>
