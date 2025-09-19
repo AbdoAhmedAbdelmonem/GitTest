@@ -696,17 +696,18 @@ export default function DriveRootPage() {
                       onClick={copyCurrentUrl}
                       variant="outline"
                       size="sm"
-                      className="bg-white/5 border-white/20 text-white hover:bg-white/10 text-xs sm:text-sm"
+                      className="bg-white/5 border-white/20 text-white/40 hover:bg-white/10 text-xs sm:text-sm hover:scale-105 transition-transform hover:text-white hover:cursor-pointer"
+                      aria-label="Copy current URL to clipboard"
                     >
                       {urlCopied ? (
                         <>
-                          <Check className="w-4 h-4 mr-1 sm:mr-2" />
-                          <span className="hidden sm:inline">Copied!</span>
+                          <Check className="w-4 h-4 mr-1 sm:mr-2 text-green-500" />
+                          <span className="hidden sm:inline text-green-500">Copied!</span>
                         </>
                       ) : (
                         <>
                           <Copy className="w-4 h-4 mr-1 sm:mr-2" />
-                          <span className="hidden sm:inline">Copy URL</span>
+                          <span className="hidden sm:inline text-white">Copy URL</span>
                         </>
                       )}
                     </Button>
