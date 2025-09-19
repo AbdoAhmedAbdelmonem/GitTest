@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-const GOOGLE_DRIVE_API_KEY = "AIzaSyALQYyTG9yMs9Xd2leIqYgcxybOzFWciY0"
+const GOOGLE_DRIVE_API_KEY = process.env.GOOGLE_DRIVE_API_KEY
 const GOOGLE_DRIVE_API_BASE = "https://www.googleapis.com/drive/v3"
 
 export async function GET(request: NextRequest) {
   try {
+    if (!GOOGLE_DRIVE_API_KEY) {
+      return NextResponse.json({ error: 'Google Drive API key is not configured' }, { status: 500 })
+    }
     const { searchParams } = new URL(request.url)
     const action = searchParams.get('action')
     
