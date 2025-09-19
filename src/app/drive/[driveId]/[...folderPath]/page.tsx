@@ -36,6 +36,7 @@ import {
   Crown,
 } from "lucide-react"
 import Navigation from "@/components/navigation"
+import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import { useParams, useRouter } from "next/navigation"
 import { getStudentSession } from "@/lib/auth"
 import { AdminControls, FileActions, FolderActions } from "@/components/admin-controls"
@@ -43,6 +44,7 @@ import { CreateActions } from "@/components/create-actions"
 import { useDynamicMetadata, dynamicPageMetadata } from "@/lib/dynamic-metadata"
 import { isValidDriveId, resolveActualDriveId } from "@/lib/drive-mapping"
 import { createSecureDriveUrl } from "@/lib/secure-drive-urls"
+import { FileCardSkeleton, StatsCardSkeleton } from "@/components/loading-skeletons"
 
 interface DriveFile {
   id: string
@@ -710,7 +712,7 @@ export default function DrivePage() {
                     onClick={goBack}
                     variant="outline"
                     size="sm"
-                    className="bg-white/5 border-white/20 text-white hover:bg-white/10 text-xs sm:text-sm"
+                    className="bg-white/5 border-white/20 text-white hover:bg-white/10 text-xs sm:text-sm hover:scale-105 transition-transform hover:text-white hover:cursor-pointer"
                     aria-label="Go back to previous folder"
                   >
                     <ArrowLeft className="w-4 h-4 mr-1 sm:mr-2" />
@@ -736,13 +738,13 @@ export default function DrivePage() {
                   onClick={copyCurrentUrl}
                   variant="outline"
                   size="sm"
-                  className="bg-white/5 border-white/20 text-white hover:bg-white/10 text-xs sm:text-sm"
+                  className="bg-white/5 border-white/20 text-white/40 hover:bg-white/10 text-xs sm:text-sm hover:scale-105 transition-transform hover:text-white hover:cursor-pointer"
                   aria-label="Copy current URL to clipboard"
                 >
                   {urlCopied ? (
                     <>
-                      <Check className="w-4 h-4 mr-1 sm:mr-2" />
-                      <span className="hidden sm:inline">Copied!</span>
+                      <Check className="w-4 h-4 mr-1 sm:mr-2 text-green-400" />
+                      <span className="hidden sm:inline text-green-400">Copied!</span>
                     </>
                   ) : (
                     <>
@@ -832,7 +834,7 @@ export default function DrivePage() {
                   variant="outline"
                   size="sm"
                   onClick={() => handleSort("name")}
-                  className="bg-white/5 border-white/20 text-white hover:bg-white/10 text-xs sm:text-sm"
+                  className="bg-white/5 border-white/20 text-white hover:bg-white/10 text-xs sm:text-sm hover:text-purple-400 transition-colors duration-150"
                 >
                   Name {sortOption === "name" && (sortDirection === "asc" ? "↑" : "↓")}
                 </Button>
@@ -840,7 +842,7 @@ export default function DrivePage() {
                   variant="outline"
                   size="sm"
                   onClick={() => handleSort("modified")}
-                  className="bg-white/5 border-white/20 text-white hover:bg-white/10 text-xs sm:text-sm"
+                  className="bg-white/5 border-white/20 text-white hover:bg-white/10 text-xs sm:text-sm hover:text-purple-400"
                 >
                   Modified {sortOption === "modified" && (sortDirection === "asc" ? "↑" : "↓")}
                 </Button>
@@ -855,48 +857,73 @@ export default function DrivePage() {
         <div className="container mx-auto px-3 sm:px-4">
           {/* Stats Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8">
-            <Card className="bg-white/[0.02] border-white/10 text-center">
-              <CardContent className="p-3">
-                <div className="text-xl font-bold text-white mb-1">{filteredFiles.length}</div>
-                <div className="text-xs text-white/60">Total Items</div>
-              </CardContent>
-            </Card>
+            {loading ? (
+              <>
+                <StatsCardSkeleton />
+                <StatsCardSkeleton />
+                <StatsCardSkeleton />
+                <StatsCardSkeleton />
+              </>
+            ) : (
+              <>
+                <ScrollAnimatedSection animation="slideUp" delay={0.05}>
+                  <Card className="bg-white/[0.02] border-white/10 text-center">
+                    <CardContent className="p-3">
+                      <div className="text-xl font-bold text-white mb-1">{filteredFiles.length}</div>
+                      <div className="text-xs text-white/60">Total Items</div>
+                    </CardContent>
+                  </Card>
+                </ScrollAnimatedSection>
 
-            <Card className="bg-white/[0.02] border-white/10 text-center">
-              <CardContent className="p-3">
-                <div className="text-xl font-bold text-white mb-1">
-                  {filteredFiles.filter((f) => f.mimeType.includes("folder")).length}
-                </div>
-                <div className="text-xs text-white/60">Folders</div>
-              </CardContent>
-            </Card>
+                <ScrollAnimatedSection animation="slideUp" delay={0.1}>
+                  <Card className="bg-white/[0.02] border-white/10 text-center">
+                    <CardContent className="p-3">
+                      <div className="text-xl font-bold text-white mb-1">
+                        {filteredFiles.filter((f) => f.mimeType.includes("folder")).length}
+                      </div>
+                      <div className="text-xs text-white/60">Folders</div>
+                    </CardContent>
+                  </Card>
+                </ScrollAnimatedSection>
 
-            <Card className="bg-white/[0.02] border-white/10 text-center">
-              <CardContent className="p-3">
-                <div className="text-xl font-bold text-white mb-1">
-                  {filteredFiles.filter((f) => f.mimeType.includes("image")).length}
-                </div>
-                <div className="text-xs text-white/60">Images</div>
-              </CardContent>
-            </Card>
+                <ScrollAnimatedSection animation="slideUp" delay={0.15}>
+                  <Card className="bg-white/[0.02] border-white/10 text-center">
+                    <CardContent className="p-3">
+                      <div className="text-xl font-bold text-white mb-1">
+                        {filteredFiles.filter((f) => f.mimeType.includes("image")).length}
+                      </div>
+                      <div className="text-xs text-white/60">Images</div>
+                    </CardContent>
+                  </Card>
+                </ScrollAnimatedSection>
 
-            <Card className="bg-white/[0.02] border-white/10 text-center">
-              <CardContent className="p-3">
-                <div className="text-xl font-bold text-white mb-1">
-                  {filteredFiles.filter((f) => !f.mimeType.includes("folder") && !f.mimeType.includes("image")).length}
-                </div>
-                <div className="text-xs text-white/60">Documents</div>
-              </CardContent>
-            </Card>
+                <ScrollAnimatedSection animation="slideUp" delay={0.2}>
+                  <Card className="bg-white/[0.02] border-white/10 text-center">
+                    <CardContent className="p-3">
+                      <div className="text-xl font-bold text-white mb-1">
+                        {filteredFiles.filter((f) => !f.mimeType.includes("folder") && !f.mimeType.includes("image")).length}
+                      </div>
+                      <div className="text-xs text-white/60">Documents</div>
+                    </CardContent>
+                  </Card>
+                </ScrollAnimatedSection>
+              </>
+            )}
           </div>
 
           {/* Loading State */}
           <AnimatePresence>
             {loading && (
-              <div className="flex flex-col items-center justify-center py-20">
-                <div className="w-8 h-8 border-2 border-white/20 border-t-blue-500 rounded-full animate-spin mb-4" />
-                <p className="text-white/60">Loading folder contents...</p>
-              </div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
+              >
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <FileCardSkeleton key={index} />
+                ))}
+              </motion.div>
             )}
           </AnimatePresence>
 
