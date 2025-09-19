@@ -731,6 +731,7 @@ export default function DriveRootPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.1 }}
+                  style={{fontSize: '50px', fontWeight: '700'}}
                   className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 px-2"
                 >
                   {driveInfo ? (
@@ -816,7 +817,7 @@ export default function DriveRootPage() {
             </div>
           </ScrollAnimatedSection>
 
-          <ScrollAnimatedSection className="pb-20 relative z-10">
+          <ScrollAnimatedSection className="pb-20 relative z-10 mt-[-75px]">
             <div className="container mx-auto px-3 sm:px-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
                 {loading ? (
@@ -830,8 +831,8 @@ export default function DriveRootPage() {
                   <>
                     <ScrollAnimatedSection animation="slideUp" delay={0.05}>
                       <Card className="bg-white/[0.02] border-white/10 text-center">
-                        <CardContent className="p-3 sm:p-4">
-                          <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                        <CardContent className="p-3 sm:p-4" style={{ marginTop:'-34px',marginBottom:'-22px' }}>
+                          <div className="text-xl sm:text-2xl font-bold text-purple-500 mb-1">
                             {filteredFiles.length}
                           </div>
                           <div className="text-xs sm:text-sm text-white/60">
@@ -843,8 +844,8 @@ export default function DriveRootPage() {
 
                     <ScrollAnimatedSection animation="slideUp" delay={0.1}>
                       <Card className="bg-white/[0.02] border-white/10 text-center">
-                        <CardContent className="p-3 sm:p-4">
-                          <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                        <CardContent className="p-3 sm:p-4" style={{ marginTop:'-34px',marginBottom:'-22px' }}>
+                          <div className="text-xl sm:text-2xl font-bold text-purple-500 mb-1">
                             {
                               filteredFiles.filter((f) =>
                                 f.mimeType.includes("folder")
@@ -860,8 +861,8 @@ export default function DriveRootPage() {
 
                     <ScrollAnimatedSection animation="slideUp" delay={0.15}>
                       <Card className="bg-white/[0.02] border-white/10 text-center">
-                        <CardContent className="p-3 sm:p-4">
-                          <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                        <CardContent className="p-3 sm:p-4" style={{ marginTop:'-34px',marginBottom:'-22px' }}>
+                          <div className="text-xl sm:text-2xl font-bold text-purple-500 mb-1">
                             {
                               filteredFiles.filter((f) =>
                                 f.mimeType.includes("image")
@@ -877,8 +878,8 @@ export default function DriveRootPage() {
 
                     <ScrollAnimatedSection animation="slideUp" delay={0.2}>
                       <Card className="bg-white/[0.02] border-white/10 text-center">
-                        <CardContent className="p-3 sm:p-4">
-                          <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                        <CardContent className="p-3 sm:p-4" style={{ marginTop:'-34px',marginBottom:'-22px' }}>
+                          <div className="text-xl sm:text-2xl font-bold text-purple-500 mb-1">
                             {
                               filteredFiles.filter(
                                 (f) =>
