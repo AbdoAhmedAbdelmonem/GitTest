@@ -792,7 +792,7 @@ export default function DrivePage() {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-5xl font-bold text-white mb-4 px-2 leading-tight break-words">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-5xl font-bold text-white mb-4 px-2 leading-tight break-words" style={{fontSize: '50px', fontWeight: '700'}}>
               {currentFolder ? (
               <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 {currentFolder.name}
@@ -853,7 +853,7 @@ export default function DrivePage() {
       </div>
 
       {/* Content Section */}
-      <div className="pb-20 relative z-10">
+      <div className="pb-20 relative z-10 mt-[-75px]">
         <div className="container mx-auto px-3 sm:px-4">
           {/* Stats Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8">
@@ -868,8 +868,8 @@ export default function DrivePage() {
               <>
                 <ScrollAnimatedSection animation="slideUp" delay={0.05}>
                   <Card className="bg-white/[0.02] border-white/10 text-center">
-                    <CardContent className="p-3">
-                      <div className="text-xl font-bold text-white mb-1">{filteredFiles.length}</div>
+                    <CardContent className="p-3" style={{ marginTop:'-34px',marginBottom:'-22px' }}>
+                      <div className="text-xl font-bold text-purple-500 mb-1">{filteredFiles.length}</div>
                       <div className="text-xs text-white/60">Total Items</div>
                     </CardContent>
                   </Card>
@@ -877,8 +877,8 @@ export default function DrivePage() {
 
                 <ScrollAnimatedSection animation="slideUp" delay={0.1}>
                   <Card className="bg-white/[0.02] border-white/10 text-center">
-                    <CardContent className="p-3">
-                      <div className="text-xl font-bold text-white mb-1">
+                    <CardContent className="p-3" style={{ marginTop:'-34px',marginBottom:'-22px' }}>
+                      <div className="text-xl font-bold text-purple-500 mb-1">
                         {filteredFiles.filter((f) => f.mimeType.includes("folder")).length}
                       </div>
                       <div className="text-xs text-white/60">Folders</div>
@@ -888,8 +888,8 @@ export default function DrivePage() {
 
                 <ScrollAnimatedSection animation="slideUp" delay={0.15}>
                   <Card className="bg-white/[0.02] border-white/10 text-center">
-                    <CardContent className="p-3">
-                      <div className="text-xl font-bold text-white mb-1">
+                    <CardContent className="p-3" style={{ marginTop:'-34px',marginBottom:'-22px' }}>
+                      <div className="text-xl font-bold text-purple-500 mb-1">
                         {filteredFiles.filter((f) => f.mimeType.includes("image")).length}
                       </div>
                       <div className="text-xs text-white/60">Images</div>
@@ -899,8 +899,8 @@ export default function DrivePage() {
 
                 <ScrollAnimatedSection animation="slideUp" delay={0.2}>
                   <Card className="bg-white/[0.02] border-white/10 text-center">
-                    <CardContent className="p-3">
-                      <div className="text-xl font-bold text-white mb-1">
+                    <CardContent className="p-3" style={{ marginTop:'-34px',marginBottom:'-22px' }}>
+                      <div className="text-xl font-bold text-purple-500 mb-1">
                         {filteredFiles.filter((f) => !f.mimeType.includes("folder") && !f.mimeType.includes("image")).length}
                       </div>
                       <div className="text-xs text-white/60">Documents</div>
