@@ -5,10 +5,12 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, Home, Folder, HelpCircle , User, LogOut } from "lucide-react"
+import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, User as UserIcon, LogOut, Home, Folder, HelpCircle } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { getStudentSession, clearStudentSession } from "@/lib/auth"
+import { NotificationBell } from "./notification-bell"
+import { User } from "@/lib/types"
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
@@ -22,7 +24,7 @@ const navItems = [
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<User | null>(null)
   const router = useRouter()
   const pathname = usePathname()
 
@@ -139,8 +141,9 @@ export default function Navigation() {
                   transition={{ delay: 0.6 }}
                   className="flex items-center gap-4"
                 >
+                  <NotificationBell />
                   <Link href="/profile" className="flex items-center gap-2 text-white hover:text-purple-300 transition-colors">
-                    <User className="w-4 h-4" />
+                    <UserIcon className="w-4 h-4" />
                     <span>{user.username}</span>
                   </Link>
                   <Button
@@ -178,37 +181,40 @@ export default function Navigation() {
             </div>
 
             {/* Mobile Menu Button */}
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors duration-300"
-            >
-              <AnimatePresence mode="wait">
-                {isOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="w-6 h-6" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="w-6 h-6" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
+            <div className="md:hidden flex items-center gap-2">
+              {user && <NotificationBell />}
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors duration-300"
+              >
+                <AnimatePresence mode="wait">
+                  {isOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="w-6 h-6" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu className="w-6 h-6" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+            </div>
           </div>
         </div>
 
@@ -250,7 +256,7 @@ export default function Navigation() {
                           onClick={() => setIsOpen(false)}
                           className="flex items-center gap-3 text-white p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
                         >
-                          <User className="w-5 h-5" />
+                          <UserIcon className="w-5 h-5" />
                           <span>{user.username}</span>
                         </Link>
                         <Button
