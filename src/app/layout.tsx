@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ToastProvider";
+import { NotificationProvider } from "@/hooks/use-notifications";
 
-// بديل Geist → Inter
+// Inter as Geist Sans replacement
 const geistSans = Inter({
   subsets: ["latin"],
   variable: "--font-geist-sans",
 });
 
-// بديل Geist Mono → Roboto Mono
+// Roboto Mono as Geist Mono replacement
 const geistMono = Roboto_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
@@ -35,7 +36,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ToastProvider>{children}</ToastProvider>
+        {/* لف الـ children جوه NotificationProvider وبعدها ToastProvider */}
+        <NotificationProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </NotificationProvider>
       </body>
     </html>
   );
