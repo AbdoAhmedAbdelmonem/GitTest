@@ -18,7 +18,7 @@ import {
   Play,
   Layers,
 } from "lucide-react";
-import { departmentData } from "@/lib/department-data";
+import { departmentData, type Department, type Subject } from "@/lib/department-data";
 import { cn } from "@/lib/utils";
 import React, { Suspense } from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -97,13 +97,31 @@ async function SubjectContent({ params }: Props) {
     }
   };
 
+  // Function to extract playlist ID from YouTube URL
+  const extractPlaylistId = (url: string): string => {
+    try {
+      const urlObj = new URL(url);
+      if (urlObj.hostname.includes("youtube.com") || urlObj.hostname.includes("youtu.be")) {
+        // Handle different YouTube URL formats
+        if (urlObj.pathname.includes("/playlist")) {
+          return urlObj.searchParams.get("list") || "";
+        } else if (urlObj.pathname.includes("/watch")) {
+          return urlObj.searchParams.get("list") || "";
+        }
+      }
+      return "";
+    } catch {
+      return "";
+    }
+  };
+
   // Function to find prerequisite subjects
   const getPrerequisiteSubjects = () => {
     if (!subject.prerequisites || subject.prerequisites.length === 0) {
       return null;
     }
 
-    const allSubjects: any[] = [];
+    const allSubjects: Subject[] = [];
     for (const level of Object.values(dept.levels)) {
       allSubjects.push(...level.subjects.term1, ...level.subjects.term2);
     }
@@ -112,7 +130,7 @@ async function SubjectContent({ params }: Props) {
       .map((prereqId) => {
         return allSubjects.find((s) => s.id === prereqId);
       })
-      .filter(Boolean); // Remove any undefined values
+      .filter((prereq): prereq is Subject => prereq !== undefined); // Remove any undefined values
   };
 
   const prerequisiteSubjects = getPrerequisiteSubjects();
@@ -138,6 +156,17 @@ async function SubjectContent({ params }: Props) {
       content: subject.materials.sections,
       description: "Practice problems, worksheets, and section materials",
       buttonText: "Open Section Materials",
+      redirectToDrive: true,
+    },
+    {
+      id: "summaries",
+      title: "Summaries",
+      icon: ClipboardList,
+      color: "from-indigo-500/[0.15]",
+      iconColor: "text-indigo-400",
+      content: subject.materials.summaries,
+      description: "Quick reference guides and summary materials",
+      buttonText: "Open Summary Materials",
       redirectToDrive: true,
     },
     {
@@ -189,7 +218,9 @@ async function SubjectContent({ params }: Props) {
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
       <Navigation />
 
-      <div className="relative z-10 py-12 px-4">
+<div
+  className="relative z-10 py-12 px-4 h-[759px] md:h-auto"
+>
         <div className="max-w-7xl mx-auto">
           {/* Back Button */}
           <motion.div
@@ -343,17 +374,17 @@ async function SubjectContent({ params }: Props) {
             animate="visible"
           >
             <Tabs defaultValue="lectures" className="w-full">
-              <TabsList className="grid w-full grid-cols-5 mb-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
+              <TabsList className="flex w-full mb-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm h-12">
                 {sections.map((section) => {
                   const IconComponent = section.icon;
                   return (
                     <TabsTrigger
                       key={section.id}
                       value={section.id}
-                      className="flex items-center gap-2 data-[state=active]:bg-white/[0.1] data-[state=active]:text-white text-white/60"
+                      className="flex-1 flex items-center justify-center gap-2 data-[state=active]:bg-white/[0.1] data-[state=active]:text-white text-white/60 h-full px-2 py-2"
                     >
-                      <IconComponent className="w-4 h-4" />
-                      <span className="hidden sm:inline">{section.title}</span>
+                      <IconComponent className="w-4 h-4 flex-shrink-0" />
+                      <span className="hidden sm:inline truncate text-xs">{section.title}</span>
                     </TabsTrigger>
                   );
                 })}
@@ -398,7 +429,7 @@ async function SubjectContent({ params }: Props) {
                                 </p>
                                 <div className="grid gap-4">
                                   {subject.materials.quizzes?.map(
-                                    (quiz: any, idx: number) => (
+                                    (quiz, idx: number) => (
                                       <motion.div
                                         key={quiz.id}
                                         initial={{ opacity: 0, y: 10 }} // Reduced y value from 20 to 10
@@ -457,25 +488,58 @@ async function SubjectContent({ params }: Props) {
                                 </Button>
                               </div>
                             ) : (
-                              // Direct link for videos
+                              // Direct link for videos (supports multiple playlists)
                               <div className="space-y-4">
                                 <p className="text-white/60 mb-4 leading-relaxed">
                                   {section.description} for {subject.name}.
                                 </p>
-                                <Button
-                                  asChild
-                                  className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
-                                >
-                                  <a
-                                    href={typeof section.content === 'string' ? section.content : '#'}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2"
-                                  >
-                                    <ExternalLink className="w-4 h-4 mr-2" />
-                                    {section.buttonText}
-                                  </a>
-                                </Button>
+                                {(() => {
+                                  const videoContent = section.content;
+                                  if (Array.isArray(videoContent)) {
+                                    // Handle multiple video playlists
+                                    return (
+                                      <div className="grid gap-3">
+                                        {videoContent.map((videoUrl, idx) => {
+                                          const url = typeof videoUrl === 'string' ? videoUrl : '';
+                                          const playlistId = extractPlaylistId(url);
+                                          return (
+                                            <Button
+                                              key={idx}
+                                              asChild
+                                              className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+                                            >
+                                              <Link
+                                                href={playlistId ? `/youtube/${playlistId}` : '#'}
+                                                className="flex items-center gap-2"
+                                              >
+                                                <ExternalLink className="w-4 h-4 mr-2" />
+                                                {videoContent.length > 1 ? `Video Playlist ${idx + 1}` : section.buttonText}
+                                              </Link>
+                                            </Button>
+                                          );
+                                        })}
+                                      </div>
+                                    );
+                                  } else {
+                                    // Handle single video URL
+                                    const videoUrl = typeof videoContent === 'string' ? videoContent : '';
+                                    const playlistId = extractPlaylistId(videoUrl);
+                                    return (
+                                      <Button
+                                        asChild
+                                        className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+                                      >
+                                        <Link
+                                          href={playlistId ? `/youtube/${playlistId}` : '#'}
+                                          className="flex items-center gap-2"
+                                        >
+                                          <ExternalLink className="w-4 h-4 mr-2" />
+                                          {section.buttonText}
+                                        </Link>
+                                      </Button>
+                                    );
+                                  }
+                                })()}
                               </div>
                             )
                           ) : (
@@ -525,9 +589,9 @@ async function SubjectContent({ params }: Props) {
 }
 
 // Helper function to find which level a subject belongs to
-function findSubjectLevel(dept: any, subjectId: string): string {
+function findSubjectLevel(dept: Department, subjectId: string): string {
   for (const [levelNum, level] of Object.entries(dept.levels)) {
-    const levelData = level as any;
+    const levelData = level;
     const allSubjects = [...levelData.subjects.term1, ...levelData.subjects.term2];
     if (allSubjects.some((s) => s.id === subjectId)) {
       return levelNum;
