@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 export const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID!,
   process.env.GOOGLE_CLIENT_SECRET!,
-  `${process.env.NEXT_PUBLIC_APP_URL || 'https://git-test-2bdx.vercel.app'}/api/google-drive/callback`
+  `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.chameleon-nu.tech'}/api/google-drive/callback`
 )
 
 // Google Drive API scopes
@@ -228,15 +228,18 @@ export async function refreshAllAdminTokens() {
 
     if (!adminUsers || adminUsers.length === 0) {
       console.log('No admin users found with refresh tokens')
-      return { refreshedCount: 0, failedCount: 0 }
+      return { refreshedCount: 0, failedCount: 0, totalUsers: 0 }
     }
 
     let refreshedCount = 0
     let failedCount = 0
+    const totalUsers = adminUsers.length
+
+    console.log(`Starting token refresh for ${totalUsers} admin users`)
 
     for (const user of adminUsers) {
       try {
-        // Check if token needs refresh
+        // Check if token needs refresh (add 10-minute buffer for cron job)
         if (!isTokenExpired(user.token_expiry)) {
           console.log(`Token for user ${user.user_id} is still valid`)
           continue
@@ -278,8 +281,8 @@ export async function refreshAllAdminTokens() {
       }
     }
 
-    console.log(`Token refresh completed: ${refreshedCount} refreshed, ${failedCount} failed`)
-    return { refreshedCount, failedCount }
+    console.log(`Token refresh completed: ${refreshedCount} refreshed, ${failedCount} failed, ${totalUsers} total`)
+    return { refreshedCount, failedCount, totalUsers }
 
   } catch (error) {
     console.error('Error in refreshAllAdminTokens:', error)
