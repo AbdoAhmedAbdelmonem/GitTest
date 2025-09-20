@@ -2,7 +2,10 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -118,33 +121,49 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Prevent layout shifts */
+    overflow-x: hidden;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-/* Custom Scrollbar Styling */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+/* Notification dropdown improvements */
+.notification-dropdown {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+/* Prevent backdrop blur performance issues on some devices */
+.backdrop-blur-sm {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, rgba(236, 72, 153, 0.7), rgba(139, 92, 246, 0.7));
-  border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.05);
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, rgba(236, 72, 153, 0.9), rgba(139, 92, 246, 0.9));
-}
-
-/* For Firefox */
-.custom-scrollbar {
+/* Notification content scrolling */
+.notification-content-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgba(236, 72, 153, 0.7) rgba(255, 255, 255, 0.05);
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+.notification-content-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.notification-content-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.notification-content-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.notification-content-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 .quiz-card {
   animation: fadeIn 0.3s ease-in-out;
