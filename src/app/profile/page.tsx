@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast  } from "@/components/ToastProvider"
 import Image from "next/image"
+import { useAddNotification } from "@/components/notification"
 
 
 // Dot Plot with KDE Visualization Component
@@ -154,6 +155,7 @@ export default function ProfilePage() {
   const { addToast } = useToast()
   const [isSaving, setIsSaving] = useState(false)
   const router = useRouter()
+  const addNotification = useAddNotification()
 
   useEffect(() => {
     const loadProfileData = async () => {
@@ -266,10 +268,27 @@ export default function ProfilePage() {
         
         setIsEditing(false)
         addToast("Profile updated successfully!", "success")
+        // Add a notification about profile update
+        addNotification(
+          userData.user_id,
+          "Profile Updated",
+          "System",
+          "success",
+          "Your profile information has been successfully updated, it may require re-login to reflect changes!",
+          "false"
+        )
       }
     } catch (error) {
       console.error("Error updating profile:", error)
       addToast("Failed to update profile. Please try again.", "error")
+      addNotification(
+        userData.user_id,
+        "Profile Update Failed",
+        "System",
+        "failure",
+        "There was an error updating your profile information. Please try again.",
+        "false"
+      )
     } finally {
       setIsSaving(false)
     }
