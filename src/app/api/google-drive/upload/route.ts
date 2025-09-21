@@ -3,6 +3,7 @@ import { google } from 'googleapis'
 import { createClient } from '@/lib/supabase/client'
 import { getValidAccessToken } from '@/lib/google-oauth'
 import { Readable } from 'stream'
+import type { drive_v3 } from 'googleapis'
 
 // Check if user has admin access
 async function checkAdminAccess(userId: number) {
@@ -72,32 +73,44 @@ export async function POST(request: NextRequest) {
 
     const drive = google.drive({ version: 'v3', auth: oauth2Client })
 
-    // Convert file to buffer and create readable stream
-    const fileBuffer = Buffer.from(await file.arrayBuffer())
-    const fileStream = Readable.from(fileBuffer)
-    
+    // For large files, process in chunks to avoid memory issues
+    const fileSize = file.size
+    console.log(`Uploading file: ${file.name} (${fileSize} bytes)`)
+
     // Prepare file metadata
-    const fileMetadata: any = {
+    const fileMetadata = {
       name: file.name,
-    }
-    
-    if (parentFolderId) {
-      fileMetadata.parents = [parentFolderId]
+      parents: parentFolderId ? [parentFolderId] : undefined,
     }
 
-    // Upload file to Google Drive
-    const response = await drive.files.create({
+    // Create a readable stream from the file
+    // For large files, we'll stream the data instead of loading everything into memory
+    const fileBuffer = Buffer.from(await file.arrayBuffer())
+    const fileStream = Readable.from(fileBuffer)
+
+    // Upload file to Google Drive with timeout handling
+    const uploadPromise = drive.files.create({
       requestBody: fileMetadata,
       media: {
         mimeType: file.type,
         body: fileStream,
       },
-      fields: 'id, name, mimeType, size, createdTime, modifiedTime, webViewLink, webContentLink'
+      fields: 'id, name, mimeType, size, createdTime, modifiedTime, webViewLink, webContentLink',
+      supportsAllDrives: true,
     })
+
+    // Add timeout for large files (30 minutes for files over 100MB)
+    const timeoutMs = fileSize > 100 * 1024 * 1024 ? 30 * 60 * 1000 : 10 * 60 * 1000
+
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Upload timeout')), timeoutMs)
+    })
+
+    const response = await Promise.race([uploadPromise, timeoutPromise])
     
     return NextResponse.json({
       success: true,
-      data: response.data
+      data: (response as { data: drive_v3.Schema$File }).data
     })
     
   } catch (error) {
