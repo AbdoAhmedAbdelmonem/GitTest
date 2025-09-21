@@ -19,12 +19,12 @@ import {
   FolderPlus,
   Upload,
   Loader2,
-  CheckCircle,
-  XCircle,
   Shield,
   AlertCircle,
+  CloudUpload,
 } from "lucide-react"
 import { useToast } from "@/components/ToastProvider"
+import { useUpload } from "./upload-context"
 
 interface CreateActionsProps {
   currentFolderId: string
@@ -34,17 +34,14 @@ interface CreateActionsProps {
 
 export function CreateActions({ currentFolderId, onFileCreated, userSession }: CreateActionsProps) {
   const [showCreateFolder, setShowCreateFolder] = useState(false)
-  const [showUploadFile, setShowUploadFile] = useState(false)
   const [folderName, setFolderName] = useState("")
   const [isCreatingFolder, setIsCreatingFolder] = useState(false)
-  const [isUploading, setIsUploading] = useState(false)
-  const [uploadProgress, setUploadProgress] = useState(0)
-  const [uploadSuccess, setUploadSuccess] = useState(false)
   const [isAutoClosing, setIsAutoClosing] = useState(false)
   const [hasGoogleAuth, setHasGoogleAuth] = useState<boolean | null>(null)
   const [authError, setAuthError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { addToast } = useToast()
+  const { uploadFile, uploads } = useUpload()
 
   // Check if user has Google Drive authentication
   useEffect(() => {
@@ -127,7 +124,7 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
         throw new Error(errorData.error || 'Failed to create folder')
       }
 
-      const result = await response.json()
+      await response.json()
       
       addToast(`Folder "${folderName}" created successfully`, "success")
       
@@ -164,71 +161,18 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
   }
 
   const handleFileUpload = async (file: File) => {
-    if (!file) return
-
-    setIsUploading(true)
-    setUploadProgress(0)
-    setUploadSuccess(false)
+    if (!file || !userSession?.user_id) return
 
     try {
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('userId', userSession?.user_id?.toString())
-      formData.append('parentFolderId', currentFolderId)
-
-      // Simulate progress for better UX
-      const progressInterval = setInterval(() => {
-        setUploadProgress(prev => Math.min(prev + 10, 90))
-      }, 200)
-
-      const response = await fetch('/api/google-drive/upload', {
-        method: 'POST',
-        body: formData,
-      })
-
-      clearInterval(progressInterval)
-      setUploadProgress(100)
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to upload file')
-      }
-
-      const result = await response.json()
-      
-      setUploadSuccess(true)
-      addToast(`File "${file.name}" uploaded successfully`, "success")
-
-      // Show refresh message and auto-close
-      setIsAutoClosing(true)
+      await uploadFile(file, currentFolderId, userSession.user_id.toString())
+      // The upload context will handle progress and notifications
+      // Refresh the file list after successful upload
       setTimeout(() => {
-        addToast("The page will be refreshed for loading the new content", "info")
-        
-        setTimeout(() => {
-          setShowUploadFile(false)
-          setIsAutoClosing(false)
-          setUploadSuccess(false)
-          setUploadProgress(0)
-          onFileCreated?.() // This should refresh the file list
-          
-          // Force a page refresh to ensure new content is loaded
-          window.location.reload()
-        }, 1500) // Give time to read the refresh message
-      }, 1000) // Show success message first
+        onFileCreated?.()
+      }, 1000) // Small delay to ensure upload is processed
     } catch (error) {
-      console.error('Error uploading file:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Failed to upload file'
-      
-      // Check if it's an authentication error
-      if (errorMessage.includes('authentication') || errorMessage.includes('auth')) {
-        setHasGoogleAuth(false)
-        setAuthError('Google Drive authentication required')
-        addToast('Authentication required. Please connect your Google Drive.', "error")
-      } else {
-        addToast(errorMessage, "error")
-      }
-    } finally {
-      setIsUploading(false)
+      console.error('Error initiating upload:', error)
+      // Error handling is done in the upload context
     }
   }
 
@@ -236,13 +180,22 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
     fileInputRef.current?.click()
   }
 
+  // Check if there are any active uploads (pending or uploading)
+  const hasActiveUploads = uploads.some(upload => 
+    upload.status === 'pending' || upload.status === 'uploading'
+  )
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file) {
-      setShowUploadFile(true)
-      setUploadSuccess(false) // Reset success state
-      setUploadProgress(0) // Reset progress
-      handleFileUpload(file)
+    const selectedFiles = event.target.files
+    if (selectedFiles && selectedFiles.length > 0) {
+      // Handle multiple files
+      Array.from(selectedFiles).forEach(file => {
+        handleFileUpload(file)
+      })
+    }
+    // Reset the input so the same files can be selected again
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
     }
   }
 
@@ -321,8 +274,9 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
   return (
     <>
       {/* Simple dialog-based approach instead of dropdown */}
-      <Dialog>
-        <DialogTrigger asChild>
+      <div className="relative flex items-center gap-2">
+        <Dialog>
+          <DialogTrigger asChild>
           <Button
             size="sm"
 
@@ -342,7 +296,7 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
               Create New
             </DialogTitle>
             <DialogDescription className="text-white/60">
-              Choose what you'd like to create
+              Choose what you&apos;d like to create
             </DialogDescription>
           </DialogHeader>
           
@@ -365,11 +319,51 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
               variant="outline"
             >
               <Upload className="w-4 h-4 mr-2" />
-              Upload File
+              Upload Files
             </Button>
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Animated upload indicator */}
+      {hasActiveUploads && (
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          className="relative"
+          title={`${uploads.filter(u => u.status === 'pending' || u.status === 'uploading').length} file(s) uploading`}
+        >
+          <div className="w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+            <motion.div
+              animate={{ 
+                rotate: 360,
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ 
+                rotate: { duration: 2, repeat: Infinity, ease: "linear" },
+                scale: { duration: 1, repeat: Infinity, ease: "easeInOut" }
+              }}
+            >
+              <CloudUpload className="w-3 h-3 text-white" />
+            </motion.div>
+          </div>
+          {/* Pulsing ring */}
+          <motion.div
+            className="absolute inset-0 w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"
+            animate={{ 
+              scale: [1, 1.5, 1],
+              opacity: [0.7, 0, 0.7]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+          />
+        </motion.div>
+      )}
+      </div>
 
       {/* Hidden file input */}
       <input
@@ -377,8 +371,8 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
         type="file"
         onChange={handleFileChange}
         className="hidden"
-        multiple={false}
-        aria-label="Upload file"
+        multiple={true}
+        aria-label="Upload files"
       />
 
       {/* Create Folder Dialog */}
@@ -466,81 +460,6 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
               )}
             </Button>
           </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      {/* Upload Progress Dialog */}
-      <Dialog open={showUploadFile} onOpenChange={(open) => {
-        if (!isAutoClosing) {
-          setShowUploadFile(open)
-        }
-      }}>
-        <DialogContent className="bg-black/90 backdrop-blur-xl border-white/20 text-white max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-semibold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              Uploading File
-            </DialogTitle>
-            <DialogDescription className="text-white/60">
-              Please wait while your file is being uploaded
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-white/80">Progress</span>
-                <span className="text-white/60">{uploadProgress}%</span>
-              </div>
-              <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-                <motion.div
-                  className="h-full bg-gradient-to-r from-green-500 to-blue-500 rounded-full"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${uploadProgress}%` }}
-                  transition={{ duration: 0.3 }}
-                />
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2 text-sm text-white/60">
-              {isUploading ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Uploading...
-                </>
-              ) : uploadSuccess ? (
-                <>
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  Upload complete!
-                </>
-              ) : uploadProgress === 100 ? (
-                <>
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  Processing...
-                </>
-              ) : uploadProgress > 0 ? (
-                <>
-                  <XCircle className="w-4 h-4 text-red-500" />
-                  Upload failed
-                </>
-              ) : (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Preparing...
-                </>
-              )}
-            </div>
-          </div>
-
-          {(!isUploading && !isAutoClosing) && (
-            <DialogFooter>
-              <Button
-                onClick={() => setShowUploadFile(false)}
-                className="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white border-0"
-              >
-                Close
-              </Button>
-            </DialogFooter>
-          )}
         </DialogContent>
       </Dialog>
     </>
