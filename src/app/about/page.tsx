@@ -26,7 +26,6 @@ import {
   ArrowRight,
   ChevronDown,
   Mail,
-  MapPin,
   Calendar,
   Sparkles,
   Brain,
@@ -34,6 +33,7 @@ import {
   Trophy
 } from 'lucide-react';
 import Navigation from '@/components/navigation';
+import '../globals.css';
 import ScrollAnimatedSection from '@/components/scroll-animated-section';
 import Image from 'next/image';
 import { LucideIcon } from 'lucide-react';
