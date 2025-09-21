@@ -50,6 +50,8 @@ import {
 import { isValidDriveId, resolveActualDriveId } from "@/lib/drive-mapping";
 import { createSecureDriveUrl } from "@/lib/secure-drive-urls";
 import { AdminAuthGuard } from "@/components/AdminAuthGuard";
+import { UploadProvider } from "@/components/upload-context";
+import { UploadProgressBar } from "@/components/upload-progress-bar";
 
 interface DriveFile {
   id: string;
@@ -605,17 +607,21 @@ export default function DriveRootPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#030303] overflow-x-hidden">
-      <Navigation />
+    <UploadProvider>
+      <div className="min-h-screen bg-[#030303] overflow-x-hidden">
+        <Navigation />
 
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
-        {/* Static background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-          style={{ backgroundImage: "url(/images/Background.png)" }}
-        />
-      </div>
+        {/* Upload Progress Bar */}
+        <UploadProgressBar />
+
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+          {/* Static background image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
+            style={{ backgroundImage: "url(/images/Background.png)" }}
+          />
+        </div>
 
       {/* 404 Not Found Section */}
       {notFound && (
@@ -1171,6 +1177,7 @@ export default function DriveRootPage() {
           </ScrollAnimatedSection>
         </>
       )}
-    </div>
+      </div>
+    </UploadProvider>
   );
 }
