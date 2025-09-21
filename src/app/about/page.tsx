@@ -459,17 +459,10 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="p-4 bg-pink-500/10 rounded-lg border border-pink-500/20 flex items-center gap-3">
-              <MapPin className="w-5 h-5 text-pink-400 flex-shrink-0" />
-              <div>
-                <span className="text-pink-400 font-medium">Location:</span>
-                <span className="text-white/80 ml-2">Alexandria University, Faculty of Computer and Data Science - Third Batch</span>
-              </div>
-            </div>
-            <div className="p-4 bg-pink-500/10 rounded-lg border border-pink-500/20 flex items-center gap-3">
               <Globe className="w-5 h-5 text-pink-400 flex-shrink-0" />
               <div>
                 <span className="text-pink-400 font-medium">Website:</span>
-                <span className="text-white/80 ml-2">https://abdoahmedportfolio.vercel.app/</span>
+                <span className="text-white/80 ml-2">abdoahmedportfolio.vercel.app</span>
               </div>
             </div>
           </div>
@@ -517,7 +510,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               className="mb-6"
             >
-              <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-4 font-arabic">
+              <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-4 font-arabic" style={{ fontFamily: 'Rubik, sans-serif' }}>
                 بسم الله الرحمن الرحيم
               </div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
@@ -544,7 +537,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg text-white/60 max-w-3xl mx-auto mb-8"
             >
-              <span className="text-blue-400 font-medium">&ldquo;بالعلم نرتقي، وبالإيمان ننتصر، وخدمة المجتمع واجب ديني ووطني&rdquo;</span> - Empowering the next generation of computer scientists and data scientists at Alexandria University through innovative education and community-driven excellence.
+              <span className="text-blue-400 font-medium">&ldquo;مَن سلك طريقًا يلتمس فيه علمًا، سهَّل الله له به طريقًا إلى الجنة&rdquo; <br /></span> - Empowering the next generation of computer scientists and data scientists at Alexandria University through innovative education and community-driven excellence.
             </motion.p>
 
             <motion.div
