@@ -1,5 +1,6 @@
 "use client"
 
+import { Rubik } from 'next/font/google'
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -19,6 +20,8 @@ import {
 } from "lucide-react"
 import articlesData from "@/data/articles.json"
 import Image from "next/image"
+
+const rubik = Rubik({ subsets: ['latin'] })
 
 interface Message {
   id: string
@@ -193,7 +196,7 @@ export default function LuraChatbot() {
 
 
   return (
-    <div className="dark">
+    <div className={`${rubik.className} dark`}>
       {/* Custom scrollbar styles for chat area */}
       <style jsx>{`
         .chat-scroll::-webkit-scrollbar {
