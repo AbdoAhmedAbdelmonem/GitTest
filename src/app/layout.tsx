@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Roboto_Mono } from "next/font/google";
+import { Inter, Roboto_Mono, Rubik } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ToastProvider";
 import { NotificationProvider } from "@/hooks/use-notifications";
@@ -14,6 +14,12 @@ const geistSans = Inter({
 const geistMono = Roboto_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
+});
+
+// Rubik font
+const rubik = Rubik({
+  subsets: ["latin"],
+  variable: "--font-rubik",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} antialiased`}
       >
         {/* لف الـ children جوه NotificationProvider وبعدها ToastProvider */}
         <NotificationProvider>
