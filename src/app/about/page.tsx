@@ -480,7 +480,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#030303] relative overflow-hidden" style={{ fontFamily: 'Rubik, sans-serif' }}>
+    <div className="min-h-screen bg-[#030303] relative overflow-hidden about-page">
       <Navigation />
 
       {/* Animated Background */}
@@ -510,7 +510,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               className="mb-6"
             >
-              <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-4 font-arabic" style={{ fontFamily: 'Rubik, sans-serif' }}>
+              <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-4 font-arabic">
                 بسم الله الرحمن الرحيم
               </div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
