@@ -480,7 +480,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#030303] relative overflow-hidden about-page">
+    <div className="min-h-screen bg-[#030303] relative overflow-hidden">
       <Navigation />
 
       {/* Animated Background */}
