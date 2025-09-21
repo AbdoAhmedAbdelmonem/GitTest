@@ -1,19 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Cairo, Amiri } from "next/font/google"
+import { Rubik } from "next/font/google"
 import "../globals.css"
 
-const cairo = Cairo({
-  subsets: ["arabic"],
+const rubik = Rubik({
+  subsets: ["latin"],
   display: "swap",
-  variable: "--font-cairo",
-})
-
-const amiri = Amiri({
-  subsets: ["arabic"],
-  weight: ["400", "700"],
-  display: "swap",
-  variable: "--font-amiri",
+  variable: "--font-rubik",
 })
 
 export const metadata: Metadata = {
@@ -28,9 +21,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${amiri.variable}`}>
+    <html lang="ar" dir="rtl" className={`${rubik.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   )
 }
-
