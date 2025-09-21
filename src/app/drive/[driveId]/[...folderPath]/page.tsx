@@ -45,6 +45,8 @@ import { useDynamicMetadata, dynamicPageMetadata } from "@/lib/dynamic-metadata"
 import { isValidDriveId, resolveActualDriveId } from "@/lib/drive-mapping"
 import { createSecureDriveUrl } from "@/lib/secure-drive-urls"
 import { FileCardSkeleton, StatsCardSkeleton } from "@/components/loading-skeletons"
+import { UploadProvider } from "@/components/upload-context"
+import { UploadProgressBar } from "@/components/upload-progress-bar"
 
 interface DriveFile {
   id: string
@@ -665,30 +667,34 @@ export default function DrivePage() {
   }, [actualDriveId, folderPath.join("/"), fetchFolderContents, userSession, notFound])
 
   return (
-    <div className="min-h-screen bg-[#030303] overflow-x-hidden">
-      <Navigation />
+    <UploadProvider>
+      <div className="min-h-screen bg-[#030303] overflow-x-hidden">
+        <Navigation />
 
-      {/* Not Found Page */}
-      {notFound && (
-        <div className="min-h-screen flex items-center justify-center px-4">
-          <div className="text-center max-w-md mx-auto">
-            <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-white mb-2">Drive Not Found</h1>
-            <p className="text-gray-400 mb-6">
-              The requested drive could not be accessed. It may not exist or you may not have permission to view it.
-            </p>
-            <Button 
-              onClick={() => router.push('/')}
-              className="bg-indigo-600 hover:bg-indigo-700"
-            >
-              Return Home
-            </Button>
+        {/* Upload Progress Bar */}
+        <UploadProgressBar />
+
+        {/* Not Found Page */}
+        {notFound && (
+          <div className="min-h-screen flex items-center justify-center px-4">
+            <div className="text-center max-w-md mx-auto">
+              <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
+              <h1 className="text-2xl font-bold text-white mb-2">Drive Not Found</h1>
+              <p className="text-gray-400 mb-6">
+                The requested drive could not be accessed. It may not exist or you may not have permission to view it.
+              </p>
+              <Button 
+                onClick={() => router.push('/')}
+                className="bg-indigo-600 hover:bg-indigo-700"
+              >
+                Return Home
+              </Button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Main Content */}
-      {!notFound && (
+        {/* Main Content */}
+        {!notFound && (
         <>
           {/* Background Elements */}
           <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -749,7 +755,7 @@ export default function DrivePage() {
                   ) : (
                     <>
                       <Copy className="w-4 h-4 mr-1 sm:mr-2" />
-                      <span className="hidden sm:inline">Copy URL</span>
+                      <span className="hidden sm:inline text-white">Copy URL</span>
                     </>
                   )}
                 </Button>
@@ -1140,6 +1146,7 @@ export default function DrivePage() {
       </div>
         </>
       )}
-    </div>
+      </div>
+    </UploadProvider>
   )
 }
