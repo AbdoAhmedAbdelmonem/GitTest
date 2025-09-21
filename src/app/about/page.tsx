@@ -222,9 +222,9 @@ export default function AboutPage() {
                 <Briefcase className="w-6 h-6 text-purple-400" />
                 <span className="font-medium text-purple-400">Career Development</span>
               </div>
-              <p className="text-white/70 text-sm mb-3">Internship opportunities, job placement assistance, and career counseling.</p>
+              <p className="text-white/70 text-sm mb-3">Easy Material Access, job placement assistance, and career counseling.</p>
               <div className="flex flex-wrap gap-2">
-                <Badge className="bg-purple-500/20 text-purple-300 text-xs">Internships</Badge>
+                <Badge className="bg-purple-500/20 text-purple-300 text-xs">Materials</Badge>
                 <Badge className="bg-purple-500/20 text-purple-300 text-xs">Job Opportunities</Badge>
                 <Badge className="bg-purple-500/20 text-purple-300 text-xs">Career Counseling</Badge>
               </div>
@@ -233,9 +233,9 @@ export default function AboutPage() {
             <div className="p-6 bg-purple-500/10 rounded-lg border border-purple-500/20">
               <div className="flex items-center gap-3 mb-4">
                 <Award className="w-6 h-6 text-purple-400" />
-                <span className="font-medium text-purple-400">Scholarships & Grants</span>
+                <span className="font-medium text-purple-400">Materials & Grants</span>
               </div>
-              <p className="text-white/70 text-sm mb-3">Information about available scholarships, grants, and financial aid opportunities.</p>
+              <p className="text-white/70 text-sm mb-3">Information about available Materials, grants, and financial aid opportunities.</p>
               <div className="flex flex-wrap gap-2">
                 <Badge className="bg-purple-500/20 text-purple-300 text-xs">Local Scholarships</Badge>
                 <Badge className="bg-purple-500/20 text-purple-300 text-xs">International Grants</Badge>
@@ -335,13 +335,13 @@ export default function AboutPage() {
               <div className="text-white/60 text-xs mt-1">Helped this semester</div>
             </div>
             <div className="text-center p-6 bg-cyan-500/10 rounded-lg border border-cyan-500/20">
-              <div className="text-3xl font-bold text-cyan-400 mb-2">500+</div>
-              <div className="text-white/80 text-sm">Internships Secured</div>
+              <div className="text-3xl font-bold text-cyan-400 mb-2">30000+</div>
+              <div className="text-white/80 text-sm">Quiz Solved Last Year</div>
               <div className="text-white/60 text-xs mt-1">Through our platform</div>
             </div>
             <div className="text-center p-6 bg-cyan-500/10 rounded-lg border border-cyan-500/20">
-              <div className="text-3xl font-bold text-cyan-400 mb-2">200+</div>
-              <div className="text-white/80 text-sm">Scholarships Won</div>
+              <div className="text-3xl font-bold text-cyan-400 mb-2">100+</div>
+              <div className="text-white/80 text-sm">Review</div>
               <div className="text-white/60 text-xs mt-1">By our students</div>
             </div>
           </div>
@@ -361,7 +361,7 @@ export default function AboutPage() {
                     <p className="text-white/80 text-sm italic">
                       &ldquo;Chameleon FCDS helped me land my dream internship at Google through their career guidance and interview preparation resources.&rdquo;
                     </p>
-                    <span className="text-cyan-400 text-xs mt-2 block">- Ahmed M., Data Science Student</span>
+                    <span className="text-cyan-400 text-xs mt-2 block">- Data Science Student</span>
                   </div>
                 </div>
               </div>
@@ -374,7 +374,7 @@ export default function AboutPage() {
                     <p className="text-white/80 text-sm italic">
                       &ldquo;The AI chatbot saved me countless hours by answering my questions instantly. It&apos;s like having a personal academic advisor 24/7.&rdquo;
                     </p>
-                    <span className="text-cyan-400 text-xs mt-2 block">- Sara K., Cybersecurity Student</span>
+                    <span className="text-cyan-400 text-xs mt-2 block">- Cybersecurity Student</span>
                   </div>
                 </div>
               </div>
@@ -455,29 +455,30 @@ export default function AboutPage() {
               <Mail className="w-5 h-5 text-pink-400 flex-shrink-0" />
               <div>
                 <span className="text-pink-400 font-medium">Email:</span>
-                <span className="text-white/80 ml-2">hello@chameleonfeds.com</span>
+                <span className="text-white/80 ml-2">tokyo9900777@gmail.com</span>
               </div>
             </div>
             <div className="p-4 bg-pink-500/10 rounded-lg border border-pink-500/20 flex items-center gap-3">
               <MapPin className="w-5 h-5 text-pink-400 flex-shrink-0" />
               <div>
                 <span className="text-pink-400 font-medium">Location:</span>
-                <span className="text-white/80 ml-2">Alexandria University, Faculty of Computer and Data Science</span>
+                <span className="text-white/80 ml-2">Alexandria University, Faculty of Computer and Data Science - Third Batch</span>
               </div>
             </div>
             <div className="p-4 bg-pink-500/10 rounded-lg border border-pink-500/20 flex items-center gap-3">
               <Globe className="w-5 h-5 text-pink-400 flex-shrink-0" />
               <div>
                 <span className="text-pink-400 font-medium">Website:</span>
-                <span className="text-white/80 ml-2">www.chameleonfeds.com</span>
+                <span className="text-white/80 ml-2">https://abdoahmedportfolio.vercel.app/</span>
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-2 p-4 bg-pink-500/10 rounded-lg border border-pink-500/20">
             <Calendar className="w-5 h-5 text-pink-400 flex-shrink-0" />
-            <span className="text-pink-400 text-sm">
-              <strong>Founded:</strong> 2024 • <strong>Last Updated:</strong> September 21, 2025
+            <span className="text-white text-sm">
+              <strong className='text-pink-400'>Founded:</strong> August 18, 2024 •
+              <strong className='text-pink-400'>Last Updated:</strong> September 21, 2025
             </span>
           </div>
         </div>
@@ -486,7 +487,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#030303] relative overflow-hidden">
+    <div className="min-h-screen bg-[#030303] relative overflow-hidden" style={{ fontFamily: 'Rubik, sans-serif' }}>
       <Navigation />
 
       {/* Animated Background */}
@@ -696,7 +697,7 @@ export default function AboutPage() {
                       <Sparkles className="w-4 h-4 mr-2" />
                       Start Your Journey
                     </Button>
-                    <Button variant="outline" className="bg-white/5 border-white/20 text-white hover:bg-white/10">
+                    <Button variant="outline" className="bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-white" onClick={() => (window.location.href = 'mailto:tokyo9900777@gmail.com')}>
                       <Mail className="w-4 h-4 mr-2" />
                       Contact Us
                     </Button>
