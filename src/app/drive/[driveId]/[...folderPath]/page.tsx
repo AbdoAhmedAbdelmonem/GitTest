@@ -571,6 +571,17 @@ export default function DrivePage() {
   }
 
   const refreshFiles = () => {
+    // Clear cache for current folder to ensure fresh data
+    const cacheKey = `folder-contents-${currentFolderId}-${"initial"}`
+    driveCache.delete(cacheKey)
+    
+    // Also clear any pagination cache
+    driveCache.forEach((_, key) => {
+      if (key.startsWith(`folder-contents-${currentFolderId}-`)) {
+        driveCache.delete(key)
+      }
+    })
+    
     fetchFolderContents(currentFolderId)
   }
 
@@ -970,12 +981,12 @@ export default function DrivePage() {
                     return (
                       <Card
                         key={file.id}
-                        className={`bg-white/[0.02] border-white/10 hover:bg-white/[0.04] transition-colors duration-150 group h-full ${
-                          isFolder ? "cursor-pointer hover:border-blue-500/30" : ""
+                        className={`bg-white/[0.02] border-white/10 hover:bg-white/[0.04] transition-colors duration-150 group h-full cursor-pointer ${
+                          isFolder ? "hover:border-blue-500/30" : "hover:border-purple-500/30"
                         }`}
-                        onClick={isFolder ? () => handleFolderClick(file) : undefined}
-                        role={isFolder ? "button" : "article"}
-                        aria-label={isFolder ? `Open folder ${file.name}` : `File ${file.name}`}
+                        onClick={() => isFolder ? handleFolderClick(file) : handleView(file)}
+                        role="button"
+                        aria-label={isFolder ? `Open folder ${file.name}` : `View file ${file.name}`}
                       >
                         <CardHeader className="pb-2 relative overflow-hidden">
                           {/* Ownership Badge */}
@@ -997,7 +1008,7 @@ export default function DrivePage() {
                             >
                               {isImage && file.thumbnailLink ? (
                                 <img
-                                  src={file.thumbnailLink.replace("=s220", "=s500") || "/placeholder.svg"}
+                                  src={file.thumbnailLink.replace("=s220", "=s500") || "https://cdn-icons-png.flaticon.com/512/5676/5676033.png"}
                                   alt={file.name}
                                   className="w-full h-full object-cover rounded-lg"
                                   loading="lazy"
