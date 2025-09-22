@@ -8,7 +8,7 @@ export interface Subject {
   materials: {
     lectures?: string
     sections?: string
-    videos?: string
+    videos?: string | string[]
     summaries?: string
     quizzes?: {
       id: string
@@ -56,9 +56,9 @@ export const departmentData: { [key: string]: Department } = {
               materials: {
                 lectures: "https://drive.google.com/drive/folders/1yFYYS37ERUHG6Ft_HnC17Jmgo-Zsrg06?usp=drive_link",
                 sections: "https://drive.google.com/drive/folders/191trjdbwAtjG6yz65q-C1Hd3gigqoti7?usp=drive_link",
-                videos: "https://youtube.com/playlist?list=linear-algebra-videos",
-                exams: "https://drive.google.com/drive/folders/1aEMvu3ck662mv9UxoIJx0sXg5aXYZGT8?usp=drive_link",
-                summaries: "https://drive.google.com/drive/folders/linear-algebra-summaries"
+                videos: ["https://youtube.com/playlist?list=PLvuToPs04FnD1lFBolGr4ROQaxQ_zyC1c&si=6IWNZY0eY_ymFdAq"] ,
+                exams: "https://drive.google.com/drive/folders/1vUbUjWsbexiPgjDbJOuh-N43PVDc9hjc?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/150zP5Dc9vDKzazlm37IRttDG-_b-opK1?usp=drive_link"
               },
             },
             {
@@ -68,11 +68,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Differential and integral calculus with applications in computing",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/calculus-lectures",
-                sections: "https://drive.google.com/drive/folders/calculus-sections",
-                videos: "https://youtube.com/playlist?list=calculus-videos",
-                exams: "https://drive.google.com/drive/folders/calculus-lastexam",
-                summaries: "https://drive.google.com/drive/folders/calculus-summaries"
+                lectures: "https://drive.google.com/drive/folders/1LsWVrCXpwVsL7YhGL_QFQhyryvpc_Yon?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1U2LbrtWkf-X8DL3c7Yo12kgV8bbZ0Wb6?usp=drive_link",
+                videos: '',
+                exams: "https://drive.google.com/drive/folders/1Uf7LaRzQyqxEbTVG0dfmWFzTxmZNHLvB?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/1UkJQ6mJmcSb_MTbzT_8liJZTUMCOLARt?usp=drive_link"
               },
             },
             {
@@ -82,11 +82,29 @@ export const departmentData: { [key: string]: Department } = {
               description: "Fundamentals of computer architecture and system organization",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/computer-systems-lectures",
-                sections: "https://drive.google.com/drive/folders/computer-systems-sections",
-                videos: "https://youtube.com/playlist?list=computer-systems-videos",
-                summaries: "https://drive.google.com/drive/folders/computer-systems-summaries",
-                exams: "https://drive.google.com/drive/folders/computer-systems-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1yQK4QiXQ7e7Ui6DLMAGYQa3aTuQp0v9O?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1q0iRgXguAaa2zZTSA9J1smnCwN2PwCAn?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLskaQRgiRMYb0SqvJ-wKx2n4Q3CB5uQ8e&si=wXANl6gRLW404zuP"],
+                summaries: "https://drive.google.com/drive/folders/1RFPXNiitr2yiHr1AyCsZWuTX0rYyOwIL?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1hTVXduWW2Icy8HY-uOc5lEiUUM42RSkB?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "CS101_quiz1",
+                    name: "Quiz 1: Computer Systems Basics",
+                    code: "CS101_quiz1",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/computer-systems/CS101_quiz1.json"
+                  },
+                  {
+                    id: "CS101_quiz2",
+                    name: "Quiz 2: Computer Architecture",
+                    code: "CS101_quiz2",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/computer-systems/CS101_quiz2.json"
+                  }
+                ],
               },
             },
             {
@@ -96,11 +114,21 @@ export const departmentData: { [key: string]: Department } = {
               description: "Overview of data science concepts, tools, and methodologies",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/data-sciences-lectures",
-                sections: "https://drive.google.com/drive/folders/data-sciences-sections",
-                videos: "https://youtube.com/playlist?list=data-sciences-videos",
-                summaries: "https://drive.google.com/drive/folders/data-sciences-summaries",
-                exams: "https://drive.google.com/drive/folders/data-sciences-lastexam"
+                lectures: "https://drive.google.com/drive/folders/10SsZONPzWccvjTQB4ZcHmT0j_FU8b981?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/14IwWgXRgD8G2IPJ2op1RdBIj9pgs77LJ?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLNVsyemi1cQyXLWT3vm4GbWzVxAK_4nbR&si=Q7kxeMYT4iXhr2uC"],
+                summaries: "https://drive.google.com/drive/folders/13IFz-O_64Ga8y9TyFe13CSovw0xzxdUQ?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1adpsd15n6hieC29aQECkrftCHNz20U9c?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "DS101_10001",
+                    name: "Quiz 1: Data Science Basics",
+                    code: "DS101_10001",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/data-sciences/DS101_10001.json"
+                  }
+                ],
               },
             },
             {
@@ -110,11 +138,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Introduction to programming concepts and problem-solving techniques",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/programming-1-lectures",
-                sections: "https://drive.google.com/drive/folders/programming-1-sections",
-                videos: "https://youtube.com/playlist?list=programming-1-videos",
-                summaries: "https://drive.google.com/drive/folders/programming-1-summaries",
-                exams: "https://drive.google.com/drive/folders/programming-1-lastexam",
+                lectures: "https://drive.google.com/drive/folders/1VDUvvvKoRcBfdCAgdO5GUa8ourGzEj43?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/14-W3wcsn8gw2ym8CnIo_L6jh0RfQW-mR?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLCInYL3l2AajYlZGzU_LVrHdoouf8W6ZN&si=_3EUjHYYQd7xAuGr", "https://youtube.com/playlist?list=PL1DUmTEdeA6K7rdxKiWJq6JIxTvHalY8f&si=wl8ryBAWTyTatxTw"],
+                summaries: "https://drive.google.com/drive/folders/19GRYDzueyRIB45_CJGn9Qh3_3JkIgfQH?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1wT8Ad9IGifK4NMgE71xXzLhXs4FF0wuc?usp=drive_link",
                 quizzes: [
                   {
                     id: "PR1_30001",
@@ -223,11 +251,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Development of analytical and critical thinking skills",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/critical-thinking-lectures",
-                sections: "https://drive.google.com/drive/folders/critical-thinking-sections",
-                videos: "https://youtube.com/playlist?list=critical-thinking-videos",
-                summaries: "https://drive.google.com/drive/folders/critical-thinking-summaries",
-                exams: "https://drive.google.com/drive/folders/critical-thinking-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1mGHqF_BIXdX-S6BipXm942CsOvr6WHTG?usp=drive_link",
+                sections: '',
+                videos: ["https://youtube.com/playlist?list=PL2y4AZEEnQLmigukmMl5lD0CkewT1pBQ3&si=GijvUZQgn4vO1gdR"],
+                summaries: "https://drive.google.com/drive/folders/1He5H59nOzExcoG5GYaujPWQVnKTZwD2Z?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1ZfnkRMneHYU5wYlq4738XZt1NvGlRbt6?usp=drive_link"
               },
             },
           ],
@@ -295,8 +323,8 @@ export const departmentData: { [key: string]: Department } = {
               description: "Advanced programming concepts and software development",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/programming-2-lectures",
-                sections: "https://drive.google.com/drive/folders/programming-2-sections",
+                lectures: "https://drive.google.com/drive/folders/1_Z4FSE1Dx0oJ9_nxbHoFvn1WP2wN-Iyd?usp=drive_link",
+                sections: " ",
                 videos: "https://youtube.com/playlist?list=programming-2-videos",
                 summaries: "https://drive.google.com/drive/folders/programming-2-summaries",
                 exams: "https://drive.google.com/drive/folders/programming-2-lastexam"
@@ -329,11 +357,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Advanced statistical methods and probability distributions",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/probability-statistics-2-lectures",
-                sections: "https://drive.google.com/drive/folders/probability-statistics-2-sections",
-                videos: "https://youtube.com/playlist?list=probability-statistics-2-videos",
-                summaries: "https://drive.google.com/drive/folders/probability-statistics-2-summaries",
-                exams: "https://drive.google.com/drive/folders/probability-statistics-2-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1kMuGgdNfirnO_HP6CYKL02-LRJXjpgfh?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/19elXC7fQOQASSTk2cG9pa2GVU1i4gFW3?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL7snZ0LSsq3g6KzD6pdqwU3_Do8WPY4M8&si=1ZMtkTPNNIX7q31M",
+                summaries: "https://drive.google.com/drive/folders/1iGMlitjUbTAe-PAr1Gm7ftOqMQjbmjvV?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1NlpAB2MaIloRaoBeiNG2qiZagRn8EYPU?usp=drive_link"
               },
             },
             {
@@ -343,11 +371,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Database design, implementation, and management principles",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/intro-databases-lectures",
-                sections: "https://drive.google.com/drive/folders/intro-databases-sections",
-                videos: "https://youtube.com/playlist?list=intro-databases-videos",
-                summaries: "https://drive.google.com/drive/folders/intro-databases-summaries",
-                exams: "https://drive.google.com/drive/folders/intro-databases-lastexam"
+                lectures: "https://drive.google.com/drive/folders/10DIqel1WkLIg5YZ1qbT604vRdpVPyLZ6?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1a78X1gWfKKui7qrsGkHvwycayAssG8Le?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL37D52B7714788190&si=9Qkf5KQWLTXqYKt1",
+                summaries: "https://drive.google.com/drive/folders/1vMRqmZ7ID3YIT920N6loq_yJKOQSOG65?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1luaj1L4qB2T3hTcQvwra667abVRXOx9c?usp=drive_link"
               },
             },
             {
@@ -357,10 +385,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Numerical methods and computational techniques",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/numerical-computations-lectures",
-                sections: "https://drive.google.com/drive/folders/numerical-computations-sections",
-                videos: "https://youtube.com/playlist?list=numerical-computations-videos",
-                summaries: "https://drive.google.com/drive/folders/numerical-computations-summaries"
+                lectures: "https://drive.google.com/drive/folders/1YerbhXBHp9cLVhuBlsp337xKVS_01139?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1K4WIBD41wo7MP_GwXpo6yfEg-93c2wVM?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1WbNyHrPMQg8aBKK3pEUvBplv7gxzsxHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/14RRGt31M6KSQAxypsDQ2sMI_DR939Wy5?usp=drive_link"
               },
             },
             {
@@ -370,10 +399,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Multivariable calculus and advanced mathematical analysis",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/advanced-calculus-lectures",
-                sections: "https://drive.google.com/drive/folders/advanced-calculus-sections",
-                videos: "https://youtube.com/playlist?list=advanced-calculus-videos",
-                summaries: "https://drive.google.com/drive/folders/advanced-calculus-summaries"
+                lectures: "https://drive.google.com/drive/folders/1kMuGgdNfirnO_HP6CYKL02-LRJXjpgfh?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/19elXC7fQOQASSTk2cG9pa2GVU1i4gFW3?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1iGMlitjUbTAe-PAr1Gm7ftOqMQjbmjvV?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1NlpAB2MaIloRaoBeiNG2qiZagRn8EYPU?usp=drive_link"
               },
             },
             {
@@ -383,23 +413,47 @@ export const departmentData: { [key: string]: Department } = {
               description: "Systematic approaches to data science projects and research",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/data-science-methodology-lectures",
-                sections: "https://drive.google.com/drive/folders/data-science-methodology-sections",
-                videos: "https://youtube.com/playlist?list=data-science-methodology-videos",
-                summaries: "https://drive.google.com/drive/folders/data-science-methodology-summaries"
+                lectures: "https://drive.google.com/drive/folders/1euOjkcK23yHHMKwvx6zOJiPgrj7-m09k?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1C14zdESIjWhVfxFXP5eDsGY5D290Mu6Z?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1G_XU_TmlwWBKyhFUOj0L055GBsTfniJT?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1_PCpSjwGN8wHeO_uB0bthGi6iDcI5AsI?usp=drive_link"
               },
             },
             {
               id: "university-elective-1",
-              name: "University Elective",
-              code: "02-0X-000XX",
-              description: "Elective course from university-wide offerings",
+              name: "Economy Science",
+              code: "HE_005",
+              description: "Study of economic principles and their applications",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/university-elective-lectures",
-                sections: "https://drive.google.com/drive/folders/university-elective-sections",
-                videos: "https://youtube.com/playlist?list=university-elective-videos",
-                summaries: "https://drive.google.com/drive/folders/university-elective-summaries"
+                lectures: "https://drive.google.com/drive/folders/1_Z4FSE1Dx0oJ9_nxbHoFvn1WP2wN-Iyd?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1LuCRHkTxVc_uKOX7SdVEwcc0WrEL-n2D?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1B_bMKIcqQ4t_PsxDR6-GMUWQOv67AvNK?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "HE_005_10001",
+                    name: "Quiz 1: Economy Science Basics",
+                    code: "HE_005_10001",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/economy-science/HE_005_10001.json"
+                  },
+                ],
+              },
+            },
+            {
+              id: "university-elective-2",
+              name: "Modern Tourism",
+              code: "ME_009",
+              description: "Study of tourism principles and their economic impact",
+              creditHours: 2,
+              materials: {
+                lectures: "https://drive.google.com/drive/folders/1luEP1w4OZmcg05AwcncvVo2ZOi3LIToY?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1vmVid1wxaYgp9cLalkWXA3pXzItuYvAa?usp=drive_link",
+                exams: "",
+                summaries: "https://drive.google.com/drive/folders/1oCwYJQD0kkOWrECJCFI0uXXv4lpLmklI?usp=drive_link",
               },
             },
           ],
@@ -567,11 +621,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Random processes and their applications in data science",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/stochastic-processes-lectures",
-                sections: "https://drive.google.com/drive/folders/stochastic-processes-sections",
-                videos: "https://youtube.com/playlist?list=stochastic-processes-videos",
-                summaries: "https://drive.google.com/drive/folders/stochastic-processes-summaries",
-                exams: "https://drive.google.com/drive/folders/stochastic-processes-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1PKWYRXoXWqGpom2A64o1xZvKJZtEuPD1?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1OK_hd7pcqWv_8pm9dXTR4xYx9axAtDcD?usp=drive_link",
+                videos: " ",
+                summaries: "https://drive.google.com/drive/folders/1ffKJxpEG86cFWOtlDa42CcQSECLlCVeg?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1k6L4jQgzqFxLMFdcPvm3kJp6m8B2bzUc?usp=drive_link"
               },
             },
             {
@@ -581,11 +635,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Experimental design principles and statistical analysis",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/design-analysis-experiments-lectures",
-                sections: "https://drive.google.com/drive/folders/design-analysis-experiments-sections",
-                videos: "https://youtube.com/playlist?list=design-analysis-experiments-videos",
-                summaries: "https://drive.google.com/drive/folders/design-analysis-experiments-summaries",
-                exams: "https://drive.google.com/drive/folders/design-analysis-experiments-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1Dbp5JfaMcYG9DoJxOlgwL7eTw3n5v2_H?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1vKXnF7anmsn_vUMUCmL8geYGVFwWpz9R?usp=drive_link",
+                videos: " ",
+                summaries: "https://drive.google.com/drive/folders/1q6Wct_XlOa-vcL5oZQmOh-M4DShs79pm?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1yalskt-sOK3_0envMxfdiVtTXD7OfV-k?usp=drive_link"
               },
             },
             {
@@ -595,11 +649,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Tools and techniques for effective data visualization",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/data-visualization-tools-lectures",
-                sections: "https://drive.google.com/drive/folders/data-visualization-tools-sections",
-                videos: "https://youtube.com/playlist?list=data-visualization-tools-videos",
-                summaries: "https://drive.google.com/drive/folders/data-visualization-tools-summaries",
-                exams: "https://drive.google.com/drive/folders/data-visualization-tools-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1cPdkERtei3lc_XCT_5flekoJuYPWZ29Q?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1akup2XLHU9HNVhNrRoVPXGjoJGS_b7xH?usp=drive_link",
+                videos: " ",
+                summaries: "https://drive.google.com/drive/folders/152JzhYGQ9AiMksjks4mIIoULsYBNQ0Jt?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1g8MeUv89wUc5meya3zO5_DBIIVvc4xu7?usp=drive_link"
               },
             },
             {
