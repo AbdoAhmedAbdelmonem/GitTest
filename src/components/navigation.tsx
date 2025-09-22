@@ -5,18 +5,16 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, User as UserIcon, LogOut, Home, Folder, HelpCircle } from "lucide-react"
+import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, User as UserIcon, LogOut, Home, Folder, HelpCircle, ChevronDown, Lock } from "lucide-react"
 import Link from "next/link"
-import { useRouter, usePathname } from "next/navigation"
 import { getStudentSession, clearStudentSession } from "@/lib/auth"
 import { NotificationBell } from "./notification-bell"
 import { User } from "@/lib/types"
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
-  { name: "Courses", href: "/courses", icon: BookOpen },
-  { name: "YouTube", href: "/youtube", icon: Folder },
-  { name: "Specializations", href: "#specializations", icon: SquareUserRound, isSection: true },
+  { name: "Tournament", href: "/Tournment", icon: BookOpen },
+  { name: "Specializations", href: "#", icon: SquareUserRound },
   { name: "About", href: "/about", icon: HelpCircle  },
   { name: "Explo", href: "/explo", icon: BrainCircuit },
 ]
@@ -25,8 +23,42 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [user, setUser] = useState<User | null>(null)
-  const router = useRouter()
-  const pathname = usePathname()
+  const [isSpecializationsOpen, setIsSpecializationsOpen] = useState(false)
+  const [isTournamentLocked, setIsTournamentLocked] = useState(false)
+  const [daysRemaining, setDaysRemaining] = useState(0)
+
+  const specializations = [
+    {
+      name: "Computing and Data Sciences",
+      href: "/specialization/computing-data-sciences",
+      description: "Advanced computing and data science methodologies"
+    },
+    {
+      name: "Cybersecurity",
+      href: "/specialization/cybersecurity",
+      description: "Protecting information systems and networks"
+    },
+    {
+      name: "Intelligent Systems",
+      href: "/specialization/artificial-intelligence",
+      description: "Advanced AI systems and intelligent automation"
+    },
+    {
+      name: "Media Analytics",
+      href: "/specialization/media-analytics",
+      description: "Analyzing and interpreting media content"
+    },
+    {
+      name: "Business Analytics",
+      href: "/specialization/business-analytics",
+      description: "Data-driven business intelligence and analytics"
+    },
+    {
+      name: "Healthcare Informatics",
+      href: "/specialization/healthcare-informatics",
+      description: "Leveraging data and technology to improve patient care"
+    },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,9 +71,48 @@ export default function Navigation() {
     if (session) {
       setUser(session)
     }
+
+    // Check tournament lock status
+    const targetDate = new Date('2025-10-07')
+    const currentDate = new Date()
+    if (currentDate < targetDate) {
+      setIsTournamentLocked(true)
+      const diffTime = targetDate.getTime() - currentDate.getTime()
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+      setDaysRemaining(diffDays)
+    } else {
+      setIsTournamentLocked(false)
+      setDaysRemaining(0)
+    }
     
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // Handle clicks outside the specializations menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element
+      if (isSpecializationsOpen && !target.closest('.specializations-menu') && !target.closest('.specializations-trigger')) {
+        setIsSpecializationsOpen(false)
+      }
+    }
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isSpecializationsOpen) {
+        setIsSpecializationsOpen(false)
+      }
+    }
+
+    if (isSpecializationsOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener('keydown', handleEscapeKey)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleEscapeKey)
+    }
+  }, [isSpecializationsOpen])
 
   const handleLogout = () => {
     clearStudentSession()
@@ -50,26 +121,10 @@ export default function Navigation() {
   }
 
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, item: typeof navItems[0]) => {
-    // Only handle special navigation for section links
-    if (item.isSection) {
+    if (item.name === "Specializations") {
       e.preventDefault()
-      
-      // If already on homepage, just scroll to section
-      if (pathname === '/') {
-        const sectionId = item.href.startsWith('#') ? item.href.substring(1) : item.href
-        const element = document.getElementById(sectionId)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      } else {
-        // Navigate to homepage with hash
-        router.push('/' + item.href) // This joins correctly for hash fragments
-      }
-      
-      // Close mobile menu if open
-      if (isOpen) {
-        setIsOpen(false)
-      }
+      setIsSpecializationsOpen(!isSpecializationsOpen)
+      return
     }
   }
 
@@ -112,22 +167,93 @@ export default function Navigation() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 + 0.3 }}
                 >
-                  <Link
-                    href={item.href}
-                    onClick={(e) => handleNavigation(e, item)}
-                    className="flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300 group"
-                  >
-                    <item.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-                    <span className="relative">
-                      {item.name}
-                      <motion.div
-                        className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
-                        initial={{ width: 0 }}
-                        whileHover={{ width: "100%" }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </span>
-                  </Link>
+                  {item.name === "Tournament" && isTournamentLocked ? (
+                    <div className="flex items-center gap-2 text-white/50 cursor-not-allowed">
+                      <Lock className="w-4 h-4" />
+                      <span>Tournament (+{daysRemaining} days)</span>
+                    </div>
+                  ) : item.name === "Specializations" ? (
+                    <div className="relative">
+                      <button
+                        onClick={() => setIsSpecializationsOpen(!isSpecializationsOpen)}
+                        className="flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300 group specializations-trigger"
+                      >
+                        <item.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                        <span className="relative">
+                          {item.name}
+                          <motion.div
+                            className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+                            initial={{ width: 0 }}
+                            whileHover={{ width: "100%" }}
+                            transition={{ duration: 0.3 }}
+                          />
+                        </span>
+                        <motion.div
+                          animate={{ rotate: isSpecializationsOpen ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <ChevronDown className="w-4 h-4" />
+                        </motion.div>
+                      </button>
+
+                      {/* Specializations Dropdown Menu */}
+                      <AnimatePresence>
+                        {isSpecializationsOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute top-full left-0 mt-2 w-80 bg-[#030303]/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl specializations-menu z-50"
+                          >
+                            <div className="p-4">
+                              <h3 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide">Available Specializations</h3>
+                              <div className="space-y-2">
+                                {specializations.map((spec, specIndex) => (
+                                  <motion.div
+                                    key={spec.name}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: specIndex * 0.1 }}
+                                  >
+                                    <Link
+                                      href={spec.href}
+                                      onClick={() => setIsSpecializationsOpen(false)}
+                                      className="block p-3 rounded-lg hover:bg-white/5 transition-colors duration-200 group"
+                                    >
+                                      <div className="text-white font-medium group-hover:text-purple-300 transition-colors">
+                                        {spec.name}
+                                      </div>
+                                      <div className="text-white/60 text-sm mt-1">
+                                        {spec.description}
+                                      </div>
+                                    </Link>
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={(e) => handleNavigation(e, item)}
+                      className="flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300 group"
+                    >
+                      <item.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                      <span className="relative">
+                        {item.name}
+                        <motion.div
+                          className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+                          initial={{ width: 0 }}
+                          whileHover={{ width: "100%" }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </span>
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -237,14 +363,77 @@ export default function Navigation() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <Link
-                        href={item.href}
-                        onClick={(e) => handleNavigation(e, item)}
-                        className="flex items-center gap-3 text-white/70 hover:text-white p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
-                      >
-                        <item.icon className="w-5 h-5" />
-                        <span>{item.name}</span>
-                      </Link>
+                      {item.name === "Tournament" && isTournamentLocked ? (
+                        <div className="flex items-center gap-3 text-white/50 cursor-not-allowed p-3 rounded-lg">
+                          <Lock className="w-5 h-5" />
+                          <span>Tournament (+{daysRemaining} days)</span>
+                        </div>
+                      ) : item.name === "Specializations" ? (
+                        <div>
+                          <button
+                            onClick={() => setIsSpecializationsOpen(!isSpecializationsOpen)}
+                            className="flex items-center gap-3 text-white/70 hover:text-white p-3 rounded-lg hover:bg-white/5 transition-all duration-300 w-full justify-between specializations-trigger"
+                          >
+                            <div className="flex items-center gap-3">
+                              <item.icon className="w-5 h-5" />
+                              <span>{item.name}</span>
+                            </div>
+                            <motion.div
+                              animate={{ rotate: isSpecializationsOpen ? 180 : 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <ChevronDown className="w-4 h-4" />
+                            </motion.div>
+                          </button>
+
+                          {/* Mobile Specializations Menu */}
+                          <AnimatePresence>
+                            {isSpecializationsOpen && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="ml-8 mt-2 space-y-2"
+                              >
+                                {specializations.map((spec, specIndex) => (
+                                  <motion.div
+                                    key={spec.name}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: specIndex * 0.1 }}
+                                  >
+                                    <Link
+                                      href={spec.href}
+                                      onClick={() => {
+                                        setIsSpecializationsOpen(false)
+                                        setIsOpen(false)
+                                      }}
+                                      className="block p-3 rounded-lg hover:bg-white/5 transition-colors duration-200"
+                                    >
+                                      <div className="text-white font-medium hover:text-purple-300 transition-colors">
+                                        {spec.name}
+                                      </div>
+                                      <div className="text-white/60 text-sm mt-1">
+                                        {spec.description}
+                                      </div>
+                                    </Link>
+                                  </motion.div>
+                                ))}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          onClick={(e) => handleNavigation(e, item)}
+                          className="flex items-center gap-3 text-white/70 hover:text-white p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
+                        >
+                          <item.icon className="w-5 h-5" />
+                          <span>{item.name}</span>
+                        </Link>
+                      )}
                     </motion.div>
                   ))}
                   
