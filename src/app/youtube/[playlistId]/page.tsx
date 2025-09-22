@@ -59,64 +59,6 @@ interface PlaylistInfo {
   itemCount: number
 }
 
-function ElegantShape({
-  className,
-  delay = 0,
-  width = 400,
-  height = 100,
-  rotate = 0,
-  gradient = "from-white/[0.08]",
-}: {
-  className?: string
-  delay?: number
-  width?: number
-  height?: number
-  rotate?: number
-  gradient?: string
-}) {
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: -150,
-        rotate: rotate - 15,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        rotate: rotate,
-      }}
-      transition={{
-        duration: 1.2,
-        delay,
-        ease: [0.23, 0.86, 0.39, 0.96],
-        opacity: { duration: 0.6 },
-      }}
-      className={`absolute ${className}`}
-    >
-      <motion.div
-        animate={{
-          y: [0, 15, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
-        style={{
-          width,
-          height,
-        }}
-        className="relative"
-      >
-        <div
-          className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} backdrop-blur-[2px] border-2 border-white/[0.15] shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]`}
-        />
-      </motion.div>
-    </motion.div>
-  )
-}
-
 function formatDuration(duration: string) {
   const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
   if (!match) return "0:00"
@@ -292,7 +234,7 @@ export default function YouTubePlaylistPage() {
   }
 
   const goBack = () => {
-    router.push("/youtube")
+    router.back()
   }
 
   return (
@@ -301,38 +243,11 @@ export default function YouTubePlaylistPage() {
 
       {/* Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-500/[0.05] via-transparent to-purple-500/[0.05] blur-3xl" />
-        <ElegantShape
-          delay={0.1}
-          width={600}
-          height={140}
-          rotate={12}
-          gradient="from-red-500/[0.15]"
-          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
-        />
-        <ElegantShape
-          delay={0.2}
-          width={500}
-          height={120}
-          rotate={-15}
-          gradient="from-purple-500/[0.15]"
-          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
-        />
-        <ElegantShape
-          delay={0.15}
-          width={300}
-          height={80}
-          rotate={-8}
-          gradient="from-pink-500/[0.15]"
-          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
-        />
-        <ElegantShape
-          delay={0.25}
-          width={200}
-          height={60}
-          rotate={20}
-          gradient="from-orange-500/[0.15]"
-          className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+        {/* Static background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
+          style={{ backgroundImage: "url(/images/Background.png)" }}
         />
       </div>
 
@@ -346,21 +261,21 @@ export default function YouTubePlaylistPage() {
                 onClick={goBack}
                 variant="outline"
                 size="sm"
-                className="w-full md:w-auto bg-white/5 border-white/20 text-white hover:bg-white/10"
+                className="w-full md:w-auto bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-white/80"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to YouTube
+                Back to Materials
               </Button>
               <div className="flex items-center gap-2 w-full md:w-auto">
                 <Button
                   onClick={copyCurrentUrl}
                   variant="outline"
                   size="sm"
-                  className="w-1/2 md:w-auto bg-white/5 border-white/20 text-white hover:bg-white/10"
+                  className="w-1/2 md:w-auto bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-white/80"
                 >
                   {urlCopied ? (
                     <>
-                      <Check className="w-4 h-4 mr-2" />
+                      <Check className="w-4 h-4 mr-2 text-green-500" />
                       Copied!
                     </>
                   ) : (
@@ -513,7 +428,7 @@ export default function YouTubePlaylistPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-0">
-                    <div className="overflow-y-auto max-h-[550px] lg:max-h-[700px] custom-scrollbar">
+                    <div className="overflow-y-auto max-h-[550px] lg:max-h-[700px] custom-youtube-scrollbar">
                       {filteredVideos.map((video, index) => (
                         <motion.div
                           key={video.id}
@@ -538,7 +453,7 @@ export default function YouTubePlaylistPage() {
                             </div>
                             <div className="flex-1 min-w-0">
                               <h3
-                                className={`font-medium text-sm leading-tight mb-1 sm:mb-2 line-clamp-2 ${
+                                className={`font-medium text-sm leading-tight mb-1 sm:mb-2 truncate ${
                                   currentVideo?.id === video.id ? "text-red-400" : "text-white"
                                 }`}
                                 title={video.title}
@@ -629,7 +544,7 @@ export default function YouTubePlaylistPage() {
                             {currentVideo.description && (
                               <div className="bg-white/5 rounded-lg p-3 md:p-4">
                                 <h3 className="text-white font-medium mb-1 md:mb-2">Description</h3>
-                                <p className="text-white/70 text-sm leading-relaxed line-clamp-4">
+                                <p className="text-white/70 text-sm leading-relaxed truncate">
                                   {currentVideo.description}
                                 </p>
                               </div>
@@ -664,32 +579,24 @@ export default function YouTubePlaylistPage() {
         </div>
       </ScrollAnimatedSection>
 
-      <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
+      <style jsx>{`
+        .custom-youtube-scrollbar::-webkit-scrollbar {
+          width: 8px;
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 3px;
+        .custom-youtube-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 4px;
         }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(239, 68, 68, 0.5);
-          border-radius: 3px;
+        .custom-youtube-scrollbar::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #ef4444, #ec4899);
+          border-radius: 4px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(239, 68, 68, 0.7);
+        .custom-youtube-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, #dc2626, #db2777);
         }
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        .line-clamp-4 {
-          display: -webkit-box;
-          -webkit-line-clamp: 4;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
+        .custom-youtube-scrollbar::-webkit-scrollbar-corner {
+          background: transparent;
         }
       `}</style>
     </div>
