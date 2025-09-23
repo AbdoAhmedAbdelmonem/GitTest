@@ -182,4 +182,10 @@ export const pageMetadata = {
     keywords: ["terms", "service", "legal", "agreement"],
     noIndex: true,
   },
+  
+  certifications: {
+    title: "Certifications",
+    description: "Unlock prestigious certifications that showcase your academic achievements and dedication to excellence in computer science and data science education.",
+    keywords: ["certifications", "achievements", "badges", "academic excellence", "recognition"],
+  },
 }
