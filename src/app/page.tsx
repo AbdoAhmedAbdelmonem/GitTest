@@ -256,12 +256,20 @@ export default function HomePage() {
               })),
               },
               {
-              title: "Resources",
-              items: ["Course Catalog", "Student Portal", "Career Services", "Certification"],
+                title: "Legal Zone",
+                items: [
+                  { name: "Certifications", link: "/certifications" },
+                  { name: "Terms of Service", link: "/terms" },
+                  { name: "Privacy and Policies", link: "/privacy" }
+                ],
               },
               {
-              title: "Support",
-              items: ["Help Center", "Contact Us", "Community", "Blog"],
+                title: "Support",
+                items: [
+                  { name: "Help Center", link: "mailto:tokyo9900777@gmail.com" },
+                  { name: "Contact Us", link: "https://wa.me/+201552828377" },
+                  { name: "LinkedIn", link: "https://www.linkedin.com/in/abdoahmed/" },
+                ],
               },
             ].map((section, index) => (
               <ScrollAnimatedSection key={index} animation="slideInFromLeft" delay={index * 0.1}>
