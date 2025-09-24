@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "terser .next/static/chunks/*.js -o .next/static/chunks/*.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
