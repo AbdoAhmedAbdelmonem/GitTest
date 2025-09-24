@@ -10,7 +10,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
   Send,
   BookOpen,
@@ -34,7 +33,6 @@ import {
 } from "lucide-react"
 import articlesData from "@/data/articles.json"
 import Image from "next/image"
-import { geminiClient } from "@/lib/gemini-client"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 
 interface Message {
@@ -94,13 +92,6 @@ const FloatingIcon = ({ icon: Icon, className, delay = 0 }: { icon: React.Compon
   );
 };
 
-const availableModels = [
-  { id: "gemini-1.5-pro", name: "Explo Pro 1.0", description: "أحدث نموذج متقدم" },
-  { id: "gemini-1.5-flash", name: "Explo Plus 1.0", description: "نموذج سريع ومحسن" },
-  { id: "gemini-pro", name: "Explo Pro", description: "نموذج متقدم للنصوص" },
-  { id: "gemini-pro-vision", name: "Explo Vision Pro", description: "نموذج متقدم للنصوص والصور" },
-]
-
 export default function ExploChatbot() {
   const [chatSessions, setChatSessions] = useState<ChatSession[]>([
     {
@@ -119,7 +110,6 @@ export default function ExploChatbot() {
     },
   ])
   const [activeSessionId, setActiveSessionId] = useState("1")
-  const [selectedModel, setSelectedModel] = useState("gemini-1.5-flash")
 
   const [inputValue, setInputValue] = useState("")
   const [isTyping, setIsTyping] = useState(false)
@@ -179,16 +169,15 @@ export default function ExploChatbot() {
     return () => clearTimeout(timer)
   }, [])
 
-  const createNewSession = (modelId: string) => {
-    const model = availableModels.find((m) => m.id === modelId) || availableModels[0]
+  const createNewSession = () => {
     const newSession: ChatSession = {
       id: Date.now().toString(),
-      model: modelId,
-      name: model.name,
+      model: "default",
+      name: "جلسة جديدة",
       messages: [
         {
           id: Date.now().toString(),
-          content: `مرحباً! أنا إكسبلو باستخدام نموذج ${model.name} 🤖\n\n${model.description}\n\nكيف يمكنني مساعدتك اليوم؟`,
+          content: "مرحباً! أنا إكسبلو، المساعد الذكي لكلية Chameleon FCDS. كيف يمكنني مساعدتك اليوم؟ يمكنك البدء بسؤالي عن الكورسات، التدريبات أو اختيار أحد المواضيع المحفوظة في قاعدة البيانات من الشريط الجانبي.",
           isBot: true,
           timestamp: new Date(),
         },
@@ -215,81 +204,14 @@ export default function ExploChatbot() {
   }
 
   const generateResponse = async (userMessage: string): Promise<Message> => {
-    try {
-      const contextPrompt = `
-أنت إكسبلو، المساعد الذكي المتطور لموقع Chameleon FCDS (كلية حاسبات وعلوم البيانات - الإسكندرية).
+    // Use local fallback response only
+    const fallbackResponse = getFallbackResponse(userMessage)
 
-🧠 **قدراتك الذكية:**
-• الإجابة على الأسئلة الأكاديمية المعقدة
-• مساعدة الطلاب في الكورسات والتدريبات والمنح
-
-🎯 **أسلوبك:**
-• ودود ومفيد ومحترف
-• تتحدث باللغة العربية بطلاقة
-• تقدم إجابات دقيقة ومفصلة
-• تستخدم الرموز التعبيرية بذكاء
-
-السؤال: ${userMessage}
-
-قدم إجابة ذكية ومفيدة باللغة العربية مع استخدام التنسيق المناسب.
-`
-      const response = await geminiClient.generateText(contextPrompt, activeSession.model)
-
-      return {
-        id: (Date.now() + 1).toString(),
-        content: response,
-        isBot: true,
-        timestamp: new Date(),
-      }
-    } catch (error: unknown) {
-      console.error("Error generating response:", error)
-
-      let errorMessage = "عذراً، حدث خطأ في الاتصال بنموذج الذكاء الاصطناعي."
-
-      if (error instanceof Error) {
-        if (error.message && error.message.includes("429")) {
-          errorMessage = `🚫 **تم تجاوز حد الاستخدام المسموح**
-
-عذراً، تم استنفاد الحصة المجانية لنموذج ${activeSession.name} لهذه الدقيقة.
-
-**الحلول المتاحة:**
-• انتظر دقيقة واحدة ثم حاول مرة أخرى
-• جرب نموذج آخر من القائمة أعلاه
-• اختصر سؤالك لتوفير الرموز المميزة
-
-**نصائح لتوفير الاستخدام:**
-• اسأل أسئلة محددة وقصيرة
-• تجنب إرفاق ملفات كبيرة
-• استخدم الأسئلة السريعة من الشريط الجانبي`
-        } else if (error.message && error.message.includes("404")) {
-          errorMessage = `❌ **خطأ في الاتصال بالنموذج**
-
-لا يمكن الوصول إلى نموذج ${activeSession.name} حالياً.
-
-**جرب الحلول التالية:**
-• اختر نموذج آخر من القائمة
-• تأكد من اتصالك بالإنترنت
-• حاول مرة أخرى بعد قليل`
-        } else if (error.message && error.message.includes("401")) {
-          errorMessage = `🔑 **خطأ في المصادقة**
-
-هناك مشكلة في مفتاح API المستخدم.
-
-**يرجى:**
-• التواصل مع مطور الموقع
-• المحاولة مرة أخرى لاحقاً`
-        }
-      }
-
-      // Provide local fallback response for known questions
-      const fallbackResponse = getFallbackResponse(userMessage)
-
-      return {
-        id: (Date.now() + 1).toString(),
-        content: errorMessage + (fallbackResponse ? `\n\n---\n\n**إجابة محلية:**\n${fallbackResponse}` : ""),
-        isBot: true,
-        timestamp: new Date(),
-      }
+    return {
+      id: (Date.now() + 1).toString(),
+      content: fallbackResponse || "عذراً، لا أستطيع الإجابة على هذا السؤال حالياً. يرجى المحاولة مرة أخرى أو اختيار سؤال من الشريط الجانبي.",
+      isBot: true,
+      timestamp: new Date(),
     }
   }
 
@@ -500,7 +422,7 @@ export default function ExploChatbot() {
               className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 mb-4 md:mb-6"
             >
               <Bot className="w-3 h-3 md:w-4 md:h-4 text-green-400" />
-              <span className="text-xs md:text-sm text-white/60 tracking-wide font-rubik">AI Chatbot</span>
+              <span className="text-xs md:text-sm text-white/60 tracking-wide font-rubik">Chat Assistant</span>
             </motion.div>
 
             <motion.h1
@@ -523,7 +445,7 @@ export default function ExploChatbot() {
               className="text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-6 md:mb-8 px-2"
               style={{ fontFamily: 'Rubik, sans-serif' }}
             >
-              المساعد الذكي المتطور لكلية حاسبات وعلوم البيانات - استكشف المعرفة مع الذكاء الاصطناعي المتقدم
+              المساعد الذكي لكلية حاسبات وعلوم البيانات - استكشف المعرفة مع المساعدة المتقدمة
             </motion.p>
 
             <motion.div
@@ -534,11 +456,11 @@ export default function ExploChatbot() {
             >
               <Badge className="bg-green-500/20 text-green-400 border-green-500/30 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm font-rubik">
                 <Brain className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-                ذكاء اصطناعي متقدم
+                مساعد ذكي
               </Badge>
               <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm font-rubik">
                 <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-                محادثة ذكية
+                محادثة تفاعلية
               </Badge>
             </motion.div>
           </div>
@@ -571,15 +493,12 @@ export default function ExploChatbot() {
                   <div>
                     <h1 className="text-lg md:text-2xl font-bold text-green-400" style={{ fontFamily: 'Rubik, sans-serif' }}>EXPLO إكسبلو</h1>
                     <p className="text-xs md:text-sm text-white/60" style={{ fontFamily: 'Rubik, sans-serif' }}>
-                      المساعد الذكي المتطور لـ Chameleon FCDS - {activeSession.name}
+                      المساعد الذكي لـ Chameleon FCDS - جلسة محادثة
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 md:gap-4">
-                  <div className="hidden md:flex items-center gap-2">
-                    <Brain className="w-5 h-5 text-green-500" />
-                    <span className="text-sm text-white/60 font-rubik">Smart AI Assistant</span>
-                  </div>
+                  {/* Removed AI assistant indicator */}
                 </div>
               </div>
 
@@ -594,7 +513,7 @@ export default function ExploChatbot() {
                         className="text-xs whitespace-nowrap font-rubik"
                       >
                         <MessageSquare className="w-3 h-3 mr-1" />
-                        {session.name}
+                        جلسة {session.id}
                       </Button>
                       {chatSessions.length > 1 && (
                         <Button
@@ -610,25 +529,9 @@ export default function ExploChatbot() {
                   ))}
                 </div>
 
-                <Select value={selectedModel} onValueChange={setSelectedModel}>
-                  <SelectTrigger className="w-40 h-8 text-xs text-white border-white/20 font-rubik">
-                    <SelectValue placeholder="اختر النموذج" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {availableModels.map((model) => (
-                      <SelectItem key={model.id} value={model.id} className="text-xs font-rubik">
-                        <div>
-                          <div className="font-medium text-gray-900 dark:text-gray-100">{model.name}</div>
-                          <div className="text-xs text-gray-600 dark:text-gray-400">{model.description}</div>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
                 <Button
                   size="sm"
-                  onClick={() => createNewSession(selectedModel)}
+                  onClick={() => createNewSession()}
                   className="text-xs whitespace-nowrap text-white bg-green-600 hover:bg-green-700 font-rubik"
                 >
                   <Bot className="w-3 h-3 mr-1" />
@@ -825,7 +728,7 @@ export default function ExploChatbot() {
                         ref={inputRef}
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
-                        placeholder={`اكتب سؤالك لـ ${activeSession.name}...`}
+                        placeholder="اكتب سؤالك هنا..."
                         className="pl-16 md:pl-20 pr-4 py-2 md:py-3 rounded-xl border-2 border-white/20 focus:border-green-400 transition-colors bg-white/5 text-white placeholder:text-white/60 font-rubik"
                         onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                         style={{ fontFamily: 'Rubik, sans-serif' }}
@@ -854,7 +757,7 @@ export default function ExploChatbot() {
                     </Button>
                   </div>
                   <p className="text-xs text-white/60 mt-2 text-center max-w-4xl mx-auto font-rubik">
-                    💬 محادثة متقدمة مع الذكاء الاصطناعي المتطور
+                    💬 مساعدة تفاعلية للطلاب
                   </p>
                 </div>
               </div>
