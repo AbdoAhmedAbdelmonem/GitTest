@@ -153,9 +153,21 @@ export default function ExploChatbot() {
     setIsSpeechRecognitionSupported("webkitSpeechRecognition" in window)
   }, [])
 
-  // Force dark mode
+  // Force dark mode and apply Rubik font
   useEffect(() => {
     document.documentElement.classList.add("dark")
+    
+    // Apply Rubik font to the body if not already applied
+    if (!document.body.style.fontFamily?.includes('Rubik')) {
+      // Load Google Fonts Rubik
+      const link = document.createElement('link')
+      link.href = 'https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap'
+      link.rel = 'stylesheet'
+      document.head.appendChild(link)
+      
+      // Apply font to body
+      document.body.style.fontFamily = 'Rubik, sans-serif'
+    }
   }, [])
 
   // Handle intro video fade out
@@ -416,7 +428,7 @@ export default function ExploChatbot() {
   }
 
   return (
-    <div className="min-h-screen bg-[#030303] relative overflow-hidden" suppressHydrationWarning>
+    <div className="min-h-screen bg-[#030303] relative overflow-hidden font-[Rubik]" suppressHydrationWarning style={{ fontFamily: 'Rubik, sans-serif' }}>
       {/* Intro Video Overlay */}
       <AnimatePresence>
         {showIntroVideo && (
@@ -447,6 +459,7 @@ export default function ExploChatbot() {
           href="https://chameleon-nu.tech"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-lg transition-all duration-300 backdrop-blur-sm border border-white/20"
+          style={{ fontFamily: 'Rubik, sans-serif' }}
         >
           ← Back to Chameleon
         </a>
@@ -477,7 +490,7 @@ export default function ExploChatbot() {
       </div>
 
       <ScrollAnimatedSection className="pt-24 md:pt-32 pb-8 md:pb-16 relative z-10">
-        <div className="container mx-auto px-3 md:px-4">
+        <div className="container mx-auto px-3 md:px-4" style={{ fontFamily: 'Rubik, sans-serif' }}>
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
             <motion.div
@@ -487,7 +500,7 @@ export default function ExploChatbot() {
               className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 mb-4 md:mb-6"
             >
               <Bot className="w-3 h-3 md:w-4 md:h-4 text-green-400" />
-              <span className="text-xs md:text-sm text-white/60 tracking-wide">AI Chatbot</span>
+              <span className="text-xs md:text-sm text-white/60 tracking-wide font-rubik">AI Chatbot</span>
             </motion.div>
 
             <motion.h1
@@ -495,6 +508,7 @@ export default function ExploChatbot() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-2xl md:text-4xl lg:text-6xl font-bold text-white mb-4 md:mb-6"
+              style={{ fontFamily: 'Rubik, sans-serif' }}
             >
               EXPLO{" "}
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
@@ -507,6 +521,7 @@ export default function ExploChatbot() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-6 md:mb-8 px-2"
+              style={{ fontFamily: 'Rubik, sans-serif' }}
             >
               المساعد الذكي المتطور لكلية حاسبات وعلوم البيانات - استكشف المعرفة مع الذكاء الاصطناعي المتقدم
             </motion.p>
@@ -517,11 +532,11 @@ export default function ExploChatbot() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-wrap items-center justify-center gap-2 md:gap-4"
             >
-              <Badge className="bg-green-500/20 text-green-400 border-green-500/30 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm">
+              <Badge className="bg-green-500/20 text-green-400 border-green-500/30 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm font-rubik">
                 <Brain className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                 ذكاء اصطناعي متقدم
               </Badge>
-              <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm">
+              <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm font-rubik">
                 <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                 محادثة ذكية
               </Badge>
@@ -535,7 +550,7 @@ export default function ExploChatbot() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="md:hidden text-white"
+                    className="md:hidden text-white font-rubik"
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                   >
                     {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -554,8 +569,8 @@ export default function ExploChatbot() {
                     <div className="absolute -top-1 -right-1 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-white bg-green-400 animate-pulse"></div>
                   </div>
                   <div>
-                    <h1 className="text-lg md:text-2xl font-bold text-green-400">EXPLO إكسبلو</h1>
-                    <p className="text-xs md:text-sm text-white/60">
+                    <h1 className="text-lg md:text-2xl font-bold text-green-400" style={{ fontFamily: 'Rubik, sans-serif' }}>EXPLO إكسبلو</h1>
+                    <p className="text-xs md:text-sm text-white/60" style={{ fontFamily: 'Rubik, sans-serif' }}>
                       المساعد الذكي المتطور لـ Chameleon FCDS - {activeSession.name}
                     </p>
                   </div>
@@ -563,7 +578,7 @@ export default function ExploChatbot() {
                 <div className="flex items-center gap-2 md:gap-4">
                   <div className="hidden md:flex items-center gap-2">
                     <Brain className="w-5 h-5 text-green-500" />
-                    <span className="text-sm text-white/60">Smart AI Assistant</span>
+                    <span className="text-sm text-white/60 font-rubik">Smart AI Assistant</span>
                   </div>
                 </div>
               </div>
@@ -576,7 +591,7 @@ export default function ExploChatbot() {
                         variant={activeSessionId === session.id ? "default" : "ghost"}
                         size="sm"
                         onClick={() => switchToSession(session.id)}
-                        className="text-xs whitespace-nowrap"
+                        className="text-xs whitespace-nowrap font-rubik"
                       >
                         <MessageSquare className="w-3 h-3 mr-1" />
                         {session.name}
@@ -596,12 +611,12 @@ export default function ExploChatbot() {
                 </div>
 
                 <Select value={selectedModel} onValueChange={setSelectedModel}>
-                  <SelectTrigger className="w-40 h-8 text-xs text-white border-white/20">
+                  <SelectTrigger className="w-40 h-8 text-xs text-white border-white/20 font-rubik">
                     <SelectValue placeholder="اختر النموذج" />
                   </SelectTrigger>
                   <SelectContent>
                     {availableModels.map((model) => (
-                      <SelectItem key={model.id} value={model.id} className="text-xs">
+                      <SelectItem key={model.id} value={model.id} className="text-xs font-rubik">
                         <div>
                           <div className="font-medium text-gray-900 dark:text-gray-100">{model.name}</div>
                           <div className="text-xs text-gray-600 dark:text-gray-400">{model.description}</div>
@@ -614,15 +629,13 @@ export default function ExploChatbot() {
                 <Button
                   size="sm"
                   onClick={() => createNewSession(selectedModel)}
-                  className="text-xs whitespace-nowrap text-white bg-green-600 hover:bg-green-700"
+                  className="text-xs whitespace-nowrap text-white bg-green-600 hover:bg-green-700 font-rubik"
                 >
                   <Bot className="w-3 h-3 mr-1" />
                   محادثة جديدة
                 </Button>
               </div>
             </div>
-
-            {/* ... existing code for sidebar and main chat area ... */}
 
             <div className="flex-1 bg-white/5 dark:bg-white/[0.02] shadow-lg flex overflow-hidden relative border-x border-white/10 backdrop-blur-xl">
               {isSidebarOpen && (
@@ -640,25 +653,25 @@ export default function ExploChatbot() {
                 transition-transform duration-300 ease-in-out z-50 md:z-auto
               `}
               >
-                <div className="p-4">
+                <div className="p-4" style={{ fontFamily: 'Rubik, sans-serif' }}>
                   <h3 className="font-semibold text-white mb-4">الفئات السريعة</h3>
                   <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
                     <TabsList className="grid w-full grid-cols-2 gap-1 mb-4 bg-white/10 p-1 rounded-lg">
-                      <TabsTrigger value="all" className="text-xs data-[state=active]:bg-white/20">
+                      <TabsTrigger value="all" className="text-xs data-[state=active]:bg-white/20 font-rubik">
                         الكل
                       </TabsTrigger>
-                      <TabsTrigger value="faq" className="text-xs data-[state=active]:bg-white/20">
+                      <TabsTrigger value="faq" className="text-xs data-[state=active]:bg-white/20 font-rubik">
                         أسئلة
                       </TabsTrigger>
                     </TabsList>
                     <TabsList className="grid w-full grid-cols-3 gap-1 bg-white/10 p-1 rounded-lg">
-                      <TabsTrigger value="courses" className="text-xs data-[state=active]:bg-white/20">
+                      <TabsTrigger value="courses" className="text-xs data-[state=active]:bg-white/20 font-rubik">
                         كورسات
                       </TabsTrigger>
-                      <TabsTrigger value="internships" className="text-xs data-[state=active]:bg-white/20">
+                      <TabsTrigger value="internships" className="text-xs data-[state=active]:bg-white/20 font-rubik">
                         تدريب
                       </TabsTrigger>
-                      <TabsTrigger value="grants" className="text-xs data-[state=active]:bg-white/20">
+                      <TabsTrigger value="grants" className="text-xs data-[state=active]:bg-white/20 font-rubik">
                         منح
                       </TabsTrigger>
                     </TabsList>
@@ -683,10 +696,10 @@ export default function ExploChatbot() {
                                 <categoryInfo.icon className="w-4 h-4 text-white" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <h4 className="font-medium text-sm text-white line-clamp-2 leading-tight">
+                                <h4 className="font-medium text-sm text-white line-clamp-2 leading-tight font-rubik">
                                   {article.title}
                                 </h4>
-                                <p className="text-xs text-white/60 mt-1 line-clamp-2">
+                                <p className="text-xs text-white/60 mt-1 line-clamp-2 font-rubik">
                                   {article.summary}
                                 </p>
                                 <div className="flex flex-wrap gap-1 mt-2">
@@ -694,7 +707,7 @@ export default function ExploChatbot() {
                                     <Badge
                                       key={tag}
                                       variant="secondary"
-                                      className="text-xs px-2 py-0 bg-white/10 text-white/80 border-white/20"
+                                      className="text-xs px-2 py-0 bg-white/10 text-white/80 border-white/20 font-rubik"
                                     >
                                       {tag}
                                     </Badge>
@@ -713,8 +726,8 @@ export default function ExploChatbot() {
               <div className="flex-1 flex flex-col min-w-0">
                 <div
                   ref={messagesContainerRef}
-                  className="flex-1 p-3 md:p-6 overflow-y-auto scroll-smooth"
-                  style={{ scrollBehavior: "smooth" }}
+                  className="flex-1 p-3 md:p-6 overflow-y-auto scroll-smooth chat-scroll"
+                  style={{ scrollBehavior: "smooth", fontFamily: 'Rubik, sans-serif' }}
                   suppressHydrationWarning
                 >
                   <div className="space-y-4 max-w-4xl mx-auto">
@@ -744,18 +757,18 @@ export default function ExploChatbot() {
                                   className="w-3 h-3 object-contain"
                                 />
                               </div>
-                              <span className="text-xs font-medium text-green-600 dark:text-green-400">إكسبلو</span>
+                              <span className="text-xs font-medium text-green-600 dark:text-green-400 font-rubik">إكسبلو</span>
                             </div>
                           )}
 
                           <div
-                            className={`whitespace-pre-wrap text-sm md:text-base ${message.isBot ? "text-gray-800 dark:text-gray-200" : "text-white"}`}
+                            className={`whitespace-pre-wrap text-sm md:text-base font-rubik ${message.isBot ? "text-gray-800 dark:text-gray-200" : "text-white"}`}
                           >
                             {message.content}
                           </div>
 
                           <div
-                            className={`text-xs mt-2 ${message.isBot ? "text-gray-500 dark:text-gray-400" : "text-green-100"}`}
+                            className={`text-xs mt-2 font-rubik ${message.isBot ? "text-gray-500 dark:text-gray-400" : "text-green-100"}`}
                           >
                             {message.timestamp.toLocaleTimeString("ar-EG", {
                               hour: "2-digit",
@@ -783,7 +796,7 @@ export default function ExploChatbot() {
                                 className="w-3 h-3 object-contain"
                               />
                             </div>
-                            <span className="text-xs font-medium text-green-600 dark:text-green-400">
+                            <span className="text-xs font-medium text-green-600 dark:text-green-400 font-rubik">
                               إكسبلو يحلل بذكاء...
                             </span>
                           </div>
@@ -813,8 +826,9 @@ export default function ExploChatbot() {
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         placeholder={`اكتب سؤالك لـ ${activeSession.name}...`}
-                        className="pl-16 md:pl-20 pr-4 py-2 md:py-3 rounded-xl border-2 border-white/20 focus:border-green-400 transition-colors bg-white/5 text-white placeholder:text-white/60"
+                        className="pl-16 md:pl-20 pr-4 py-2 md:py-3 rounded-xl border-2 border-white/20 focus:border-green-400 transition-colors bg-white/5 text-white placeholder:text-white/60 font-rubik"
                         onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                        style={{ fontFamily: 'Rubik, sans-serif' }}
                       />
 
                       <Button
@@ -839,7 +853,7 @@ export default function ExploChatbot() {
                       <Send className="w-4 h-4" />
                     </Button>
                   </div>
-                  <p className="text-xs text-white/60 mt-2 text-center max-w-4xl mx-auto">
+                  <p className="text-xs text-white/60 mt-2 text-center max-w-4xl mx-auto font-rubik">
                     💬 محادثة متقدمة مع الذكاء الاصطناعي المتطور
                   </p>
                 </div>
