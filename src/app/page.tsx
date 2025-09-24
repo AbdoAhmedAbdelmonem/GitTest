@@ -259,6 +259,7 @@ export default function HomePage() {
                 title: "Legal Zone",
                 items: [
                   { name: "Certifications", link: "/certifications" },
+                  { name: "Internal Regulations for FCDS", link: "https://drive.google.com/file/d/1x7pupdeFrJZd-Sz5tiKoudSRRsBP96e3/view" },
                   { name: "Terms of Service", link: "/terms" },
                   { name: "Privacy and Policies", link: "/privacy" }
                 ],
