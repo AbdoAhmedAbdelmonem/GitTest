@@ -303,6 +303,7 @@ export default function HomePage() {
                 <p className="copy">
                   &copy; {new Date().getDate()} of {new Date().toLocaleString('default', { month: 'long' })} {new Date().getFullYear()} - Chameleon FCDS. All rights reserved.
                 </p>
+                <p>Chameleon FCDS - Educatinal Platform by Levi Ackerman</p>
             </div>
           </ScrollAnimatedSection>
         </div>
