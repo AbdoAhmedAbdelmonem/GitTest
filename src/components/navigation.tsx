@@ -137,6 +137,7 @@ export default function Navigation() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? "bg-[#030303]/80 backdrop-blur-xl border-b border-white/10" : "bg-transparent"
         }`}
+        dir="ltr"
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
@@ -236,6 +237,24 @@ export default function Navigation() {
                         )}
                       </AnimatePresence>
                     </div>
+                  ) : item.name === "Explo" ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300 group"
+                    >
+                      <item.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                      <span className="relative">
+                        {item.name}
+                        <motion.div
+                          className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+                          initial={{ width: 0 }}
+                          whileHover={{ width: "100%" }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </span>
+                    </a>
                   ) : (
                     <Link
                       href={item.href}
@@ -424,6 +443,16 @@ export default function Navigation() {
                             )}
                           </AnimatePresence>
                         </div>
+                      ) : item.name === "Explo" ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 text-white/70 hover:text-white p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
+                        >
+                          <item.icon className="w-5 h-5" />
+                          <span>{item.name}</span>
+                        </a>
                       ) : (
                         <Link
                           href={item.href}
