@@ -16,7 +16,7 @@ const navItems = [
   { name: "Tournament", href: "/Tournment", icon: BookOpen },
   { name: "Specializations", href: "#", icon: SquareUserRound },
   { name: "About", href: "/about", icon: HelpCircle  },
-{ name: "Explo", href: "/explo", icon: BrainCircuit, target: "_blank" }
+  { name: "Explo", href: "/explo", icon: BrainCircuit, target: "_blank" }
 ]
 
 export default function Navigation() {
