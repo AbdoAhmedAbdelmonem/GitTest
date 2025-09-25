@@ -400,21 +400,21 @@ export default function TermsOfServicePage() {
               <Mail className="w-5 h-5 text-pink-400 flex-shrink-0" />
               <div>
                 <span className="text-pink-400 font-medium">Email:</span>
-                <span className="text-white/80 ml-2">legal@drivemanager.com</span>
+                <span className="text-white/80 ml-2">tokyo9900777@gmail.com</span>
               </div>
             </div>
             <div className="p-4 bg-pink-500/10 rounded-lg border border-pink-500/20 flex items-center gap-3">
               <MapPin className="w-5 h-5 text-pink-400 flex-shrink-0" />
               <div>
                 <span className="text-pink-400 font-medium">Address:</span>
-                <span className="text-white/80 ml-2">123 Legal Street, Business City, BC 12345</span>
+                <span className="text-white/80 ml-2">Faculty of Computer and Data Science</span>
               </div>
             </div>
             <div className="p-4 bg-pink-500/10 rounded-lg border border-pink-500/20 flex items-center gap-3">
               <Phone className="w-5 h-5 text-pink-400 flex-shrink-0" />
               <div>
                 <span className="text-pink-400 font-medium">Phone:</span>
-                <span className="text-white/80 ml-2">+1 (555) 123-4567</span>
+                <span className="text-white/80 ml-2">+(20)1552828377</span>
               </div>
             </div>
           </div>
