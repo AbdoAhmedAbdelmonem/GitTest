@@ -3,9 +3,22 @@
 import { useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { LoadingSpinner } from "@/components/ui/loading-spinner"
+import { useToast } from "@/components/ToastProvider"
 
 // Helper function to save student session
-const saveStudentSession = (userData: any) => {
+const saveStudentSession = (userData: {
+  user_id: number
+  username: string
+  phone_number: string
+  specialization: string
+  age: number
+  current_level: number
+  is_admin: boolean
+  is_banned: boolean
+  created_at: string
+  email?: string
+  profile_image?: string
+}) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("student_session", JSON.stringify(userData))
   }
@@ -14,6 +27,7 @@ const saveStudentSession = (userData: any) => {
 export default function CompleteLoginPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { addToast } = useToast()
 
   useEffect(() => {
     const sessionParam = searchParams.get("session")
@@ -26,6 +40,14 @@ export default function CompleteLoginPage() {
         // Save the session to localStorage
         saveStudentSession(sessionData)
         
+        // Dispatch login event to fetch notifications
+        window.dispatchEvent(new CustomEvent('userLoggedIn', {
+          detail: { userId: sessionData.user_id }
+        }))
+        
+        // Show success toast for Google login
+        addToast(`Welcome back, ${sessionData.username}!`, "success")
+        
         // Redirect to main page
         router.replace("/")
       } catch (error) {
@@ -37,7 +59,7 @@ export default function CompleteLoginPage() {
       // No session data, redirect to auth
       router.replace("/auth")
     }
-  }, [router, searchParams])
+  }, [router, searchParams, addToast])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#030303]">
