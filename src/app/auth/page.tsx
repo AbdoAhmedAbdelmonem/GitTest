@@ -616,7 +616,7 @@ export default function AuthPage() {
             <CardHeader className="text-center pb-6">
               {mode === "signup" && (
                 <div className="flex items-center justify-center mb-4">
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2" style={{ width: "307px" }}>
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-all ${
                         authStep === "google" ? "bg-purple-500 text-white" : "bg-purple-500/20 text-purple-300"
