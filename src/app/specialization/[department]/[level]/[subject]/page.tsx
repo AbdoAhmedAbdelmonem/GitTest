@@ -207,13 +207,19 @@ async function SubjectContent({ params }: Props) {
 
   return (
     <div
-      className="relative h-full w-full overflow-auto bg-black"
+      className="relative h-full w-full overflow-auto bg-[#030303]"
+      style={{
+        backgroundImage: "url('/images/Background.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed", // makes background static
+      }}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
       <Navigation />
 
 <div
-  className="relative z-10 py-12 px-4 h-[759px] md:h-auto bg-black"
+  className="relative z-10 py-12 px-4 h-[759px] md:h-auto"
 >
         <div className="max-w-7xl mx-auto">
           {/* Back Button */}
@@ -228,7 +234,7 @@ async function SubjectContent({ params }: Props) {
             >
               <Button
                 variant="ghost"
-                className="text-white/60 hover:text-white hover:bg-black/[0.05] border border-black/[0.08] backdrop-blur-sm"
+                className="text-white/60 hover:text-white hover:bg-white/[0.05] border border-white/[0.08] backdrop-blur-sm"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to {levelNum}
@@ -446,7 +452,7 @@ async function SubjectContent({ params }: Props) {
                                           </div>
                                           <Button
                                             asChild
-                                            className="bg-black/[0.05] border border-black/[0.1] text-white hover:bg-black/[0.1] backdrop-blur-sm"
+                                            className="bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
                                           >
                                             <Link
                                               href={`/quiz/${resolvedParams.department}/${resolvedParams.subject}/${quiz.id}`}
@@ -469,7 +475,7 @@ async function SubjectContent({ params }: Props) {
                                 </p>
                                 <Button
                                   asChild
-                                  className="w-full bg-black/[0.05] border border-black/[0.1] text-white hover:bg-black/[0.1] backdrop-blur-sm"
+                                  className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
                                 >
                                   <Link
                                     href={`/drive/${extractDriveId(
@@ -500,7 +506,7 @@ async function SubjectContent({ params }: Props) {
                                             <Button
                                               key={idx}
                                               asChild
-                                              className="w-full bg-black/[0.05] border border-black/[0.1] text-white hover:bg-black/[0.1] backdrop-blur-sm"
+                                              className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
                                             >
                                               <Link
                                                 href={playlistId ? `/youtube/${playlistId}` : '#'}
@@ -521,7 +527,7 @@ async function SubjectContent({ params }: Props) {
                                     return (
                                       <Button
                                         asChild
-                                        className="w-full bg-black/[0.05] border border-black/[0.1] text-white hover:bg-black/[0.1] backdrop-blur-sm"
+                                        className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
                                       >
                                         <Link
                                           href={playlistId ? `/youtube/${playlistId}` : '#'}
