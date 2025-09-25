@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
+import Link from 'next/link'
 
-export function FileCardSkeleton() {
+export function FileCardSkeleton({ isLoggedIn = false }: { isLoggedIn?: boolean }) {
   return (
     <Card className="bg-white/[0.02] border-white/10 h-full">
       <CardHeader className="pb-3">
@@ -15,6 +16,12 @@ export function FileCardSkeleton() {
       </CardHeader>
 
       <CardContent className="pt-0">
+        {!isLoggedIn && (
+          <div className="text-red-500 font-semibold mb-4">
+            Unlogged users cannot see the drive data due to <Link href="/privacy" className="underline">policy of privacy</Link>
+          </div>
+        )}
+
         <div className="space-y-2 mb-4">
           <Skeleton className="h-3 w-full" />
           <Skeleton className="h-3 w-2/3" />
