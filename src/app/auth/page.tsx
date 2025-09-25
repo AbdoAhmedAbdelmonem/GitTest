@@ -321,7 +321,7 @@ export default function AuthPage() {
 
       // Redirect to the previous page instead of always going to home
       router.push(previousPath)
-      addToast(`Welcome back, ${userData.username}!`, "info")
+      addToast(`Welcome back, ${userData.username}!`, "success")
     } catch (err) {
       console.error("Unexpected error:", err)
       setError("An error occurred. Please try again.")
@@ -481,7 +481,7 @@ export default function AuthPage() {
         // Redirect after a brief success message
         setTimeout(() => {
           router.push(previousPath)
-          addToast(`Welcome, ${newUser.username}!`, "info")
+          addToast(`Welcome, ${newUser.username}!`, "success")
         }, 2000)
       }
     } catch (err) {
