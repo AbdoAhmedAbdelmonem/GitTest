@@ -207,7 +207,7 @@ async function SubjectContent({ params }: Props) {
 
   return (
     <div
-      className="relative h-full w-full overflow-auto bg-[#030303]"
+      className="relative h-full w-full overflow-auto bg-black"
       style={{
         backgroundImage: "url('/images/Background.png')",
         backgroundSize: "cover",
