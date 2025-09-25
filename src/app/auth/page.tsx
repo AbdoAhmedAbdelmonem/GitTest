@@ -149,11 +149,6 @@ async function hashPassword(plainPassword: string) {
   return hash
 }
 
-async function verifyPassword(plainPassword: string, hashedPassword: string) {
-  const match = await bcrypt.compare(plainPassword, hashedPassword)
-  return match
-}
-
 // Clear student session function for backward compatibility
 const clearStudentSession = () => {
   if (typeof window !== "undefined") {
@@ -271,35 +266,31 @@ export default function AuthPage() {
     setError("")
 
     try {
-      const supabase = createBrowserClient()
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          studentId: loginData.studentId,
+          password: loginData.password,
+        }),
+      })
 
-      // First get the user data with the hashed password
-      const { data: userData, error: userError } = await supabase
-        .from("chameleons")
-        .select("*")
-        .eq("user_id", Number.parseInt(loginData.studentId))
-        .single()
+      const data = await response.json()
 
-      if (userError || !userData) {
-        setError("Invalid student ID or password")
+      if (!response.ok) {
+        if (response.status === 429 && data.lockoutRemaining) {
+          setError(`Too many failed login attempts. Please try again in ${data.lockoutRemaining} minutes.`)
+        } else {
+          setError(data.error || 'Login failed')
+        }
         setIsLoading(false)
         return
       }
 
-      // Verify the password against the hashed version
-      const isPasswordValid = await verifyPassword(loginData.password, userData.pass)
-
-      if (!isPasswordValid) {
-        setError("Invalid student ID or password")
-        setIsLoading(false)
-        return
-      }
-
-      if (userData.is_banned) {
-        setError("Your account has been banned. Please contact support.")
-        setIsLoading(false)
-        return
-      }
+      // Successful login
+      const userData = data.user
 
       // Save credentials if rememberMe is checked, else remove
       if (rememberMe) {
