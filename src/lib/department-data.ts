@@ -271,7 +271,7 @@ export const departmentData: { [key: string]: Department } = {
                 sections: "https://drive.google.com/drive/folders/probability-statistics-1-sections",
                 videos: "https://youtube.com/playlist?list=probability-statistics-1-videos",
                 summaries: "https://drive.google.com/drive/folders/probability-statistics-1-summaries",
-                exams: "https://drive.google.com/drive/folders/probability-statistics-1-lastexam"
+                exams: "https://drive.google.com/drive/folders/1reVZYtR8aOBqpHY8PSn2vmwVwNCS_nQC?usp=drive_link"
               },
             },
             {
@@ -337,11 +337,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Principles of innovation and entrepreneurial thinking",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/innovation-entrepreneurship-lectures",
-                sections: "https://drive.google.com/drive/folders/innovation-entrepreneurship-sections",
-                videos: "https://youtube.com/playlist?list=innovation-entrepreneurship-videos",
-                summaries: "https://drive.google.com/drive/folders/innovation-entrepreneurship-summaries",
-                exams: "https://drive.google.com/drive/folders/innovation-entrepreneurship-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1aEPdYTJoeTy0QhS3j1YE3GnJsjIs_8ij?usp=drive_link",
+                sections: "",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1n1AWZVhnH-Hr_8xmF8PiHdzTHYLGIsRa?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1HAXVuYR1Dlcx8smy2czHGRBw5JQp9fPH?usp=drive_link"
               },
             },
           ],
@@ -357,11 +357,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Advanced statistical methods and probability distributions",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/1kMuGgdNfirnO_HP6CYKL02-LRJXjpgfh?usp=drive_link",
-                sections: "https://drive.google.com/drive/folders/19elXC7fQOQASSTk2cG9pa2GVU1i4gFW3?usp=drive_link",
+                lectures: "https://drive.google.com/drive/folders/1Cat1L5ibgjDAx3qcU8XpKuM2Sp0jIWdA?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/17m-plzdlLyhkjM_TFmcYw5AZyC61yNrx?usp=drive_link",
                 videos: "https://youtube.com/playlist?list=PL7snZ0LSsq3g6KzD6pdqwU3_Do8WPY4M8&si=1ZMtkTPNNIX7q31M",
-                summaries: "https://drive.google.com/drive/folders/1iGMlitjUbTAe-PAr1Gm7ftOqMQjbmjvV?usp=drive_link",
-                exams: "https://drive.google.com/drive/folders/1NlpAB2MaIloRaoBeiNG2qiZagRn8EYPU?usp=drive_link"
+                summaries: "https://drive.google.com/drive/folders/1z2c94GAfxG4TdX63ZY_rZSicvEZlrRHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1QRMaP_UgieJRGo5ebwvD_bIu9EMF0SYs?usp=drive_link"
               },
             },
             {
@@ -433,12 +433,12 @@ export const departmentData: { [key: string]: Department } = {
                 summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
                 quizzes: [
                   {
-                    id: "HE_005_10001",
+                    id: "ECO_005_10001",
                     name: "Quiz 1: Economy Science Basics",
-                    code: "HE_005_10001",
+                    code: "ECO_005_10001",
                     duration: "No Timer",
                     questions: 10,
-                    jsonFile: "/quizzes/economy-science/HE_005_10001.json"
+                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
                   },
                 ],
               },
@@ -658,58 +658,58 @@ export const departmentData: { [key: string]: Department } = {
             },
             {
               id: "faculty-elective-1",
-              name: "Faculty Elective",
-              code: "02-24-0X0XX",
-              description: "Specialized elective from faculty offerings",
+              name: "Web Programming",
+              code: "02-24-00306",
+              description: "Explore web development technologies and frameworks to build the next chameleon",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/faculty-elective-1-lectures",
-                sections: "https://drive.google.com/drive/folders/faculty-elective-1-sections",
-                videos: "https://youtube.com/playlist?list=faculty-elective-1-videos",
-                summaries: "https://drive.google.com/drive/folders/faculty-elective-1-summaries",
-                exams: "https://drive.google.com/drive/folders/faculty-elective-1-lastexam"
-              },
-            },
-            {
-              id: "faculty-elective-1",
-              name: "Faculty Elective",
-              code: "02-24-0X0XX",
-              description: "Specialized elective from faculty offerings",
-              creditHours: 3,
-              materials: {
-                lectures: "https://drive.google.com/drive/folders/faculty-elective-1-lectures",
-                sections: "https://drive.google.com/drive/folders/faculty-elective-1-sections",
-                videos: "https://youtube.com/playlist?list=faculty-elective-1-videos",
-                summaries: "https://drive.google.com/drive/folders/faculty-elective-1-summaries",
-                exams: "https://drive.google.com/drive/folders/faculty-elective-1-lastexam"
+                lectures: "https://drive.google.com/drive/folders/10lmuusGOSB6PCUE0bLTddEKMDubhNmGu?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1elx6DFq_rBC-HBrMUwkvXetROKMb4xYP?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLDoPjvoNmBAw_t_XWUFbBX-c9MafPk9ji&si=SrbjHtzgw5XhuvwE","https://youtube.com/playlist?list=PLDoPjvoNmBAzjsz06gkzlSrlev53MGIKe&si=iWjgud4FmxHht6-V","https://youtube.com/playlist?list=PLDoPjvoNmBAx3kiplQR_oeDqLDBUDYwVv&si=IMPINKzaCcwKyPFy"],
+                summaries: "https://drive.google.com/drive/folders/1izlOiejC_W5u0KEwRrV3Gn7uGRsMLabV?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1pqHAxus_oyiKwz8aI4qxUAI1hyJeH3LO?usp=drive_link"
               },
             },
             {
               id: "faculty-elective-2",
-              name: "Faculty Elective",
-              code: "02-24-0X0XX",
-              description: "Specialized elective from faculty offerings",
+              name: "Computer Networks",
+              code: "02-24-00308",
+              description: "Fundamentals of computer networking and communication protocols",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/faculty-elective-2-lectures",
-                sections: "https://drive.google.com/drive/folders/faculty-elective-2-sections",
-                videos: "https://youtube.com/playlist?list=faculty-elective-2-videos",
-                summaries: "https://drive.google.com/drive/folders/faculty-elective-2-summaries",
-                exams: "https://drive.google.com/drive/folders/faculty-elective-2-lastexam"
+                lectures: "https://drive.google.com/drive/folders/18EfL-u4z06mBDNki39-XEfShYMKvMUXn?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1XV94AxwvlgXikzZ3qbYR5QtJqNIIe-LI?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PL8v_bZALWLKE9Lo2BIy8nsdsakbSvQlEo&si=jBAfivc5JJCLnv5-"],
+                summaries: "https://drive.google.com/drive/folders/1y_ZHb47S0RCveSEoWc17PsXEsQDH019K?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1qPJuDNlabxV5IctxPU1_0tomDLmZIEVR?usp=drive_link"
+              },
+            },
+            {
+              id: "faculty-elective-3",
+              name: "Dist Processing",
+              code: "02-24-00304",
+              description: "Explore distributed systems and parallel computing concepts",
+              creditHours: 3,
+              materials: {
+                lectures: "https://drive.google.com/drive/folders/12niCwNHhJywcK8A9M6RsiY8mI9C2nxyN?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1SHTshE8VjDQvZXAjlOf3uVNr7ntMx-2p?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1YJKn5zhVSV0YiAzfudohb8tO0IKawpKl?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1tdG9OjPWoXds9z1fcJUXO2scrR1ZA4M6?usp=drive_link"
               },
             },
             {
               id: "university-elective-3",
-              name: "University Elective",
-              code: "02-0X-000XX",
-              description: "Elective course from university-wide offerings",
+              name: "Fitness and Health",
+              code: "02-24-HS001",
+              description: "Promoting physical fitness and healthy lifestyle choices",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/university-elective-3-lectures",
-                sections: "https://drive.google.com/drive/folders/university-elective-3-sections",
-                videos: "https://youtube.com/playlist?list=university-elective-3-videos",
-                summaries: "https://drive.google.com/drive/folders/university-elective-3-summaries",
-                exams: "https://drive.google.com/drive/folders/university-elective-3-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1aEW9G3GneVHEUPvCwKs2PiQ-kFEbvn5x?usp=drive_link",
+                sections: "",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/13posL3y_6GC-0LnQakxkEVfbHnnSWur5?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/162Bx_kHSG2w1hsC-xEWGy3e2oMcGioh7?usp=drive_link"
               },
             },
           ],
@@ -976,84 +976,212 @@ export const departmentData: { [key: string]: Department } = {
               id: "linear-algebra-ba",
               name: "Linear Algebra",
               code: "02-24-00101",
-              description: "Mathematical foundations of linear algebra for business analytics",
+              description: "Mathematical foundations of linear algebra for data science applications",
               creditHours: 3,
+              prerequisites: [],
               materials: {
-                lectures: "https://drive.google.com/drive/folders/linear-algebra-ba-lectures",
-                sections: "https://drive.google.com/drive/folders/linear-algebra-ba-sections",
-                videos: "https://youtube.com/playlist?list=linear-algebra-ba-videos",
-                summaries: "https://drive.google.com/drive/folders/linear-algebra-ba-summaries",
-                exams: "https://drive.google.com/drive/folders/linear-algebra-ba-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1yFYYS37ERUHG6Ft_HnC17Jmgo-Zsrg06?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/191trjdbwAtjG6yz65q-C1Hd3gigqoti7?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLvuToPs04FnD1lFBolGr4ROQaxQ_zyC1c&si=6IWNZY0eY_ymFdAq"] ,
+                exams: "https://drive.google.com/drive/folders/1vUbUjWsbexiPgjDbJOuh-N43PVDc9hjc?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/150zP5Dc9vDKzazlm37IRttDG-_b-opK1?usp=drive_link"
               },
             },
             {
               id: "calculus-ba",
               name: "Calculus",
               code: "02-24-00102",
-              description: "Differential and integral calculus with business applications",
+              description: "Differential and integral calculus with applications in computing",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/calculus-ba-lectures",
-                sections: "https://drive.google.com/drive/folders/calculus-ba-sections",
-                videos: "https://youtube.com/playlist?list=calculus-ba-videos",
-                summaries: "https://drive.google.com/drive/folders/calculus-ba-summaries",
-                exams: "https://drive.google.com/drive/folders/calculus-ba-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1LsWVrCXpwVsL7YhGL_QFQhyryvpc_Yon?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1U2LbrtWkf-X8DL3c7Yo12kgV8bbZ0Wb6?usp=drive_link",
+                videos: '',
+                exams: "https://drive.google.com/drive/folders/1Uf7LaRzQyqxEbTVG0dfmWFzTxmZNHLvB?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/1UkJQ6mJmcSb_MTbzT_8liJZTUMCOLARt?usp=drive_link"
               },
             },
             {
               id: "intro-computer-systems-ba",
               name: "Introduction to Computer Systems",
               code: "02-24-00103",
-              description: "Computer systems fundamentals for business applications",
+              description: "Fundamentals of computer architecture and system organization",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/computer-systems-ba-lectures",
-                sections: "https://drive.google.com/drive/folders/computer-systems-ba-sections",
-                videos: "https://youtube.com/playlist?list=computer-systems-ba-videos",
-                summaries: "https://drive.google.com/drive/folders/computer-systems-ba-summaries",
-                exams: "https://drive.google.com/drive/folders/computer-systems-ba-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1yQK4QiXQ7e7Ui6DLMAGYQa3aTuQp0v9O?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1q0iRgXguAaa2zZTSA9J1smnCwN2PwCAn?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLskaQRgiRMYb0SqvJ-wKx2n4Q3CB5uQ8e&si=wXANl6gRLW404zuP"],
+                summaries: "https://drive.google.com/drive/folders/1RFPXNiitr2yiHr1AyCsZWuTX0rYyOwIL?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1hTVXduWW2Icy8HY-uOc5lEiUUM42RSkB?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "CS101_quiz1",
+                    name: "Quiz 1: Computer Systems Basics",
+                    code: "CS101_quiz1",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/computer-systems/CS101_quiz1.json"
+                  },
+                  {
+                    id: "CS101_quiz2",
+                    name: "Quiz 2: Computer Architecture",
+                    code: "CS101_quiz2",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/computer-systems/CS101_quiz2.json"
+                  }
+                ],
               },
             },
             {
               id: "intro-data-sciences-ba",
               name: "Introduction to Data Sciences",
               code: "02-24-00104",
-              description: "Data science fundamentals for business analytics",
+              description: "Overview of data science concepts, tools, and methodologies",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/data-sciences-ba-lectures",
-                sections: "https://drive.google.com/drive/folders/data-sciences-ba-sections",
-                videos: "https://youtube.com/playlist?list=data-sciences-ba-videos",
-                summaries: "https://drive.google.com/drive/folders/data-sciences-ba-summaries",
-                exams: "https://drive.google.com/drive/folders/data-sciences-ba-lastexam"
+                lectures: "https://drive.google.com/drive/folders/10SsZONPzWccvjTQB4ZcHmT0j_FU8b981?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/14IwWgXRgD8G2IPJ2op1RdBIj9pgs77LJ?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLNVsyemi1cQyXLWT3vm4GbWzVxAK_4nbR&si=Q7kxeMYT4iXhr2uC"],
+                summaries: "https://drive.google.com/drive/folders/13IFz-O_64Ga8y9TyFe13CSovw0xzxdUQ?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1adpsd15n6hieC29aQECkrftCHNz20U9c?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "DS101_10001",
+                    name: "Quiz 1: Data Science Basics",
+                    code: "DS101_10001",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/data-sciences/DS101_10001.json"
+                  }
+                ],
               },
             },
             {
               id: "programming-1-ba",
               name: "Programming I",
               code: "02-24-00105",
-              description: "Programming fundamentals for business analytics",
+              description: "Introduction to programming concepts and problem-solving techniques",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/programming-1-ba-lectures",
-                sections: "https://drive.google.com/drive/folders/programming-1-ba-sections",
-                videos: "https://youtube.com/playlist?list=programming-1-ba-videos",
-                summaries: "https://drive.google.com/drive/folders/programming-1-ba-summaries",
-                exams: "https://drive.google.com/drive/folders/programming-1-ba-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1VDUvvvKoRcBfdCAgdO5GUa8ourGzEj43?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/14-W3wcsn8gw2ym8CnIo_L6jh0RfQW-mR?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLCInYL3l2AajYlZGzU_LVrHdoouf8W6ZN&si=_3EUjHYYQd7xAuGr", "https://youtube.com/playlist?list=PL1DUmTEdeA6K7rdxKiWJq6JIxTvHalY8f&si=wl8ryBAWTyTatxTw"],
+                summaries: "https://drive.google.com/drive/folders/19GRYDzueyRIB45_CJGn9Qh3_3JkIgfQH?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1wT8Ad9IGifK4NMgE71xXzLhXs4FF0wuc?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "PR1_30001",
+                    name: "Chapter 1 : Introduction to Programming",
+                    code: "PR1_30001",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30001.json"
+                  },
+                  {
+                    id: "PR1_30002",
+                    name: "Chapter 2-1 : Introduction to Java Programming",
+                    code: "PR1_30002",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30002.json"
+                  },
+                  {
+                    id: "PR1_30003",
+                    name: "Chapter 2-2 : Java Basics",
+                    code: "PR1_30003",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30003.json"
+                  },
+                  {
+                    id: "PR1_30004",
+                    name: "Chapter 2-3 : Java Basics",
+                    code: "PR1_30004",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30004.json"
+                  },
+                  {
+                    id: "PR1_30005",
+                    name: "Chapter 2-4 : Deep Dive into Java",
+                    code: "PR1_30005",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30005.json"
+                  },
+                  {
+                    id: "PR1_30006",
+                    name: "Chapter 3-1 : Controlling Program Flow",
+                    code: "PR1_30006",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30006.json"
+                  },
+                  {
+                    id: "PR1_30007",
+                    name: "Chapter 3-2 : Controlling Program Flow",
+                    code: "PR1_30007",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30007.json"
+                  },
+                  {
+                    id: "PR1_30008",
+                    name: "Chapter 4-1 : One Dimensional Arrays",
+                    code: "PR1_30008",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30008.json"
+                  },
+                  {
+                    id: "PR1_30009",
+                    name: "Chapter 4-2 : Multi Dimensional Arrays",
+                    code: "PR1_30009",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30009.json"
+                  },
+                  {
+                    id: "PR1_30010",
+                    name: "Review 1",
+                    code: "PR1_30010",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30010.json"
+                  },
+                  {
+                    id: "PR1_30011",
+                    name: "Review 2",
+                    code: "PR1_30011",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30011.json"
+                  },
+                  {
+                    id: "PR1_30012",
+                    name: "Tracing and Debugging",
+                    code: "PR1_30012",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30012.json"
+                  },
+                ],
+              
               },
             },
             {
               id: "critical-thinking-ba",
               name: "Critical Thinking",
               code: "02-00-000XX",
-              description: "Critical thinking skills for business decision making",
+              description: "Development of analytical and critical thinking skills",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/critical-thinking-ba-lectures",
-                sections: "https://drive.google.com/drive/folders/critical-thinking-ba-sections",
-                videos: "https://youtube.com/playlist?list=critical-thinking-ba-videos",
-                summaries: "https://drive.google.com/drive/folders/critical-thinking-ba-summaries",
-                exams: "https://drive.google.com/drive/folders/critical-thinking-ba-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1mGHqF_BIXdX-S6BipXm942CsOvr6WHTG?usp=drive_link",
+                sections: '',
+                videos: ["https://youtube.com/playlist?list=PL2y4AZEEnQLmigukmMl5lD0CkewT1pBQ3&si=GijvUZQgn4vO1gdR"],
+                summaries: "https://drive.google.com/drive/folders/1He5H59nOzExcoG5GYaujPWQVnKTZwD2Z?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1ZfnkRMneHYU5wYlq4738XZt1NvGlRbt6?usp=drive_link"
               },
             },
           ],
@@ -1152,42 +1280,93 @@ export const departmentData: { [key: string]: Department } = {
               id: "probability-statistics-2-ba",
               name: "Probability and Statistics II",
               code: "02-24-00201",
-              description: "Advanced statistical methods for business analytics",
+              description: "Advanced statistical methods and probability distributions",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/probability-statistics-2-ba-lectures",
-                sections: "https://drive.google.com/drive/folders/probability-statistics-2-ba-sections",
-                videos: "https://youtube.com/playlist?list=probability-statistics-2-ba-videos",
-                summaries: "https://drive.google.com/drive/folders/probability-statistics-2-ba-summaries",
-                exams: "https://drive.google.com/drive/folders/probability-statistics-2-ba-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1Cat1L5ibgjDAx3qcU8XpKuM2Sp0jIWdA?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/17m-plzdlLyhkjM_TFmcYw5AZyC61yNrx?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL7snZ0LSsq3g6KzD6pdqwU3_Do8WPY4M8&si=1ZMtkTPNNIX7q31M",
+                summaries: "https://drive.google.com/drive/folders/1z2c94GAfxG4TdX63ZY_rZSicvEZlrRHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1QRMaP_UgieJRGo5ebwvD_bIu9EMF0SYs?usp=drive_link"
               },
             },
             {
               id: "intro-databases-ba",
               name: "Introduction to Databases",
               code: "02-24-00202",
-              description: "Database systems for business applications",
+              description: "Database design, implementation, and management principles",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/intro-databases-ba-lectures",
-                sections: "https://drive.google.com/drive/folders/intro-databases-ba-sections",
-                videos: "https://youtube.com/playlist?list=intro-databases-ba-videos",
-                summaries: "https://drive.google.com/drive/folders/intro-databases-ba-summaries",
-                exams: "https://drive.google.com/drive/folders/intro-databases-ba-lastexam"
+                lectures: "https://drive.google.com/drive/folders/10DIqel1WkLIg5YZ1qbT604vRdpVPyLZ6?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1a78X1gWfKKui7qrsGkHvwycayAssG8Le?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL37D52B7714788190&si=9Qkf5KQWLTXqYKt1",
+                summaries: "https://drive.google.com/drive/folders/1vMRqmZ7ID3YIT920N6loq_yJKOQSOG65?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1luaj1L4qB2T3hTcQvwra667abVRXOx9c?usp=drive_link"
               },
             },
             {
               id: "numerical-computations-ba",
               name: "Numerical Computations",
               code: "02-24-00203",
-              description: "Numerical methods for business problem solving",
+              description: "Numerical methods and computational techniques",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/numerical-computations-ba-lectures",
-                sections: "https://drive.google.com/drive/folders/numerical-computations-ba-sections",
-                videos: "https://youtube.com/playlist?list=numerical-computations-ba-videos",
-                summaries: "https://drive.google.com/drive/folders/numerical-computations-ba-summaries",
-                exams: "https://drive.google.com/drive/folders/numerical-computations-ba-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1YerbhXBHp9cLVhuBlsp337xKVS_01139?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1K4WIBD41wo7MP_GwXpo6yfEg-93c2wVM?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1WbNyHrPMQg8aBKK3pEUvBplv7gxzsxHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/14RRGt31M6KSQAxypsDQ2sMI_DR939Wy5?usp=drive_link"
+              },
+            },
+            {
+              id: "advanced-calculus-ba",
+              name: "Advanced Calculus",
+              code: "02-24-01201",
+              description: "Multivariable calculus and advanced mathematical analysis",
+              creditHours: 3,
+              materials: {
+                lectures: "https://drive.google.com/drive/folders/1kMuGgdNfirnO_HP6CYKL02-LRJXjpgfh?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/19elXC7fQOQASSTk2cG9pa2GVU1i4gFW3?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1iGMlitjUbTAe-PAr1Gm7ftOqMQjbmjvV?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1NlpAB2MaIloRaoBeiNG2qiZagRn8EYPU?usp=drive_link"
+              },
+            },
+            {
+              id: "data-science-methodology-ba",
+              name: "Data Science Methodology",
+              code: "02-24-01202",
+              description: "Systematic approaches to data science projects and research",
+              creditHours: 3,
+              materials: {
+                lectures: "https://drive.google.com/drive/folders/1euOjkcK23yHHMKwvx6zOJiPgrj7-m09k?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1C14zdESIjWhVfxFXP5eDsGY5D290Mu6Z?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1G_XU_TmlwWBKyhFUOj0L055GBsTfniJT?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1_PCpSjwGN8wHeO_uB0bthGi6iDcI5AsI?usp=drive_link"
+              },
+            },
+            {
+              id: "university-elective-1-ba",
+              name: "Economy Science",
+              code: "HE_005",
+              description: "Study of economic principles and their applications",
+              creditHours: 2,
+              materials: {
+                lectures: "https://drive.google.com/drive/folders/1_Z4FSE1Dx0oJ9_nxbHoFvn1WP2wN-Iyd?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1LuCRHkTxVc_uKOX7SdVEwcc0WrEL-n2D?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1B_bMKIcqQ4t_PsxDR6-GMUWQOv67AvNK?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "ECO_005_10001",
+                    name: "Quiz 1: Economy Science Basics",
+                    code: "ECO_005_10001",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
+                  },
+                ],
               },
             },
             {
@@ -1197,11 +1376,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Fundamentals of business operations and management",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/intro-business-lectures",
-                sections: "https://drive.google.com/drive/folders/intro-business-sections",
-                videos: "https://youtube.com/playlist?list=intro-business-videos",
-                summaries: "https://drive.google.com/drive/folders/intro-business-summaries",
-                exams: "https://drive.google.com/drive/folders/intro-business-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1EHeFukmbY41Byh0ICRdOYeGEGlRFOjre?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1t4KpjfxW5gbLGby0sIB-q8jQwUHFP4N0?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1hn-uMnhuaCRvLBDRrgzr4MIHEH6m-K0H?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1gzE-EwAi10rdxc6WIUYrrZR-tLOAnvid?usp=drive_link"
               },
             },
             {
@@ -1211,25 +1390,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Accounting principles and information systems integration",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/accounting-information-systems-lectures",
-                sections: "https://drive.google.com/drive/folders/accounting-information-systems-sections",
-                videos: "https://youtube.com/playlist?list=accounting-information-systems-videos",
-                summaries: "https://drive.google.com/drive/folders/accounting-information-systems-summaries",
-                exams: "https://drive.google.com/drive/folders/accounting-information-systems-lastexam"
-              },
-            },
-            {
-              id: "university-elective-ba-1",
-              name: "University Elective",
-              code: "02-0X-000XX",
-              description: "University-wide elective course",
-              creditHours: 2,
-              materials: {
-                lectures: "https://drive.google.com/drive/folders/university-elective-ba-1-lectures",
-                sections: "https://drive.google.com/drive/folders/university-elective-ba-1-sections",
-                videos: "https://youtube.com/playlist?list=university-elective-ba-1-videos",
-                summaries: "https://drive.google.com/drive/folders/university-elective-ba-1-summaries",
-                exams: "https://drive.google.com/drive/folders/university-elective-ba-1-lastexam"
+                lectures: "https://drive.google.com/drive/folders/16Ky0uBqcK_qLTTwt4H2kLR_OuqgqvQv-?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/17rp47Vi0r6ORxAjsaHNnGBFqoeez0J_I?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/11GR8XB5TldP3B9S07T6V70-LURnmTAv2?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/18f3nr-TvK01abgOtBZ1lZDwgrMf1E832?usp=drive_link"
               },
             },
           ],
@@ -1669,84 +1834,212 @@ export const departmentData: { [key: string]: Department } = {
               id: "linear-algebra-is",
               name: "Linear Algebra",
               code: "02-24-00101",
-              description: "Mathematical foundations for intelligent systems",
+              description: "Mathematical foundations of linear algebra for data science applications",
               creditHours: 3,
+              prerequisites: [],
               materials: {
-                lectures: "https://drive.google.com/drive/folders/linear-algebra-is-lectures",
-                sections: "https://drive.google.com/drive/folders/linear-algebra-is-sections",
-                videos: "https://youtube.com/playlist?list=linear-algebra-is-videos",
-                summaries: "https://drive.google.com/drive/folders/linear-algebra-is-summaries",
-                exams: "https://drive.google.com/drive/folders/linear-algebra-is-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1yFYYS37ERUHG6Ft_HnC17Jmgo-Zsrg06?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/191trjdbwAtjG6yz65q-C1Hd3gigqoti7?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLvuToPs04FnD1lFBolGr4ROQaxQ_zyC1c&si=6IWNZY0eY_ymFdAq"] ,
+                exams: "https://drive.google.com/drive/folders/1vUbUjWsbexiPgjDbJOuh-N43PVDc9hjc?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/150zP5Dc9vDKzazlm37IRttDG-_b-opK1?usp=drive_link"
               },
             },
             {
               id: "calculus-is",
               name: "Calculus",
               code: "02-24-00102",
-              description: "Calculus for AI and intelligent systems",
+              description: "Differential and integral calculus with applications in computing",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/calculus-is-lectures",
-                sections: "https://drive.google.com/drive/folders/calculus-is-sections",
-                videos: "https://youtube.com/playlist?list=calculus-is-videos",
-                summaries: "https://drive.google.com/drive/folders/calculus-is-summaries",
-                exams: "https://drive.google.com/drive/folders/calculus-is-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1LsWVrCXpwVsL7YhGL_QFQhyryvpc_Yon?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1U2LbrtWkf-X8DL3c7Yo12kgV8bbZ0Wb6?usp=drive_link",
+                videos: '',
+                exams: "https://drive.google.com/drive/folders/1Uf7LaRzQyqxEbTVG0dfmWFzTxmZNHLvB?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/1UkJQ6mJmcSb_MTbzT_8liJZTUMCOLARt?usp=drive_link"
               },
             },
             {
               id: "intro-computer-systems-is",
               name: "Introduction to Computer Systems",
               code: "02-24-00103",
-              description: "Computer systems for intelligent applications",
+              description: "Fundamentals of computer architecture and system organization",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/computer-systems-is-lectures",
-                sections: "https://drive.google.com/drive/folders/computer-systems-is-sections",
-                videos: "https://youtube.com/playlist?list=computer-systems-is-videos",
-                summaries: "https://drive.google.com/drive/folders/computer-systems-is-summaries",
-                exams: "https://drive.google.com/drive/folders/computer-systems-is-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1yQK4QiXQ7e7Ui6DLMAGYQa3aTuQp0v9O?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1q0iRgXguAaa2zZTSA9J1smnCwN2PwCAn?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLskaQRgiRMYb0SqvJ-wKx2n4Q3CB5uQ8e&si=wXANl6gRLW404zuP"],
+                summaries: "https://drive.google.com/drive/folders/1RFPXNiitr2yiHr1AyCsZWuTX0rYyOwIL?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1hTVXduWW2Icy8HY-uOc5lEiUUM42RSkB?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "CS101_quiz1",
+                    name: "Quiz 1: Computer Systems Basics",
+                    code: "CS101_quiz1",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/computer-systems/CS101_quiz1.json"
+                  },
+                  {
+                    id: "CS101_quiz2",
+                    name: "Quiz 2: Computer Architecture",
+                    code: "CS101_quiz2",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/computer-systems/CS101_quiz2.json"
+                  }
+                ],
               },
             },
             {
               id: "intro-data-sciences-is",
               name: "Introduction to Data Sciences",
               code: "02-24-00104",
-              description: "Data science foundations for intelligent systems",
+              description: "Overview of data science concepts, tools, and methodologies",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/data-sciences-is-lectures",
-                sections: "https://drive.google.com/drive/folders/data-sciences-is-sections",
-                videos: "https://youtube.com/playlist?list=data-sciences-is-videos",
-                summaries: "https://drive.google.com/drive/folders/data-sciences-is-summaries",
-                exams: "https://drive.google.com/drive/folders/data-sciences-is-lastexam"
+                lectures: "https://drive.google.com/drive/folders/10SsZONPzWccvjTQB4ZcHmT0j_FU8b981?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/14IwWgXRgD8G2IPJ2op1RdBIj9pgs77LJ?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLNVsyemi1cQyXLWT3vm4GbWzVxAK_4nbR&si=Q7kxeMYT4iXhr2uC"],
+                summaries: "https://drive.google.com/drive/folders/13IFz-O_64Ga8y9TyFe13CSovw0xzxdUQ?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1adpsd15n6hieC29aQECkrftCHNz20U9c?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "DS101_10001",
+                    name: "Quiz 1: Data Science Basics",
+                    code: "DS101_10001",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/data-sciences/DS101_10001.json"
+                  }
+                ],
               },
             },
             {
               id: "programming-1-is",
               name: "Programming I",
               code: "02-24-00105",
-              description: "Programming fundamentals for intelligent systems",
+              description: "Introduction to programming concepts and problem-solving techniques",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/programming-1-is-lectures",
-                sections: "https://drive.google.com/drive/folders/programming-1-is-sections",
-                videos: "https://youtube.com/playlist?list=programming-1-is-videos",
-                summaries: "https://drive.google.com/drive/folders/programming-1-is-summaries",
-                exams: "https://drive.google.com/drive/folders/programming-1-is-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1VDUvvvKoRcBfdCAgdO5GUa8ourGzEj43?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/14-W3wcsn8gw2ym8CnIo_L6jh0RfQW-mR?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLCInYL3l2AajYlZGzU_LVrHdoouf8W6ZN&si=_3EUjHYYQd7xAuGr", "https://youtube.com/playlist?list=PL1DUmTEdeA6K7rdxKiWJq6JIxTvHalY8f&si=wl8ryBAWTyTatxTw"],
+                summaries: "https://drive.google.com/drive/folders/19GRYDzueyRIB45_CJGn9Qh3_3JkIgfQH?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1wT8Ad9IGifK4NMgE71xXzLhXs4FF0wuc?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "PR1_30001",
+                    name: "Chapter 1 : Introduction to Programming",
+                    code: "PR1_30001",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30001.json"
+                  },
+                  {
+                    id: "PR1_30002",
+                    name: "Chapter 2-1 : Introduction to Java Programming",
+                    code: "PR1_30002",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30002.json"
+                  },
+                  {
+                    id: "PR1_30003",
+                    name: "Chapter 2-2 : Java Basics",
+                    code: "PR1_30003",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30003.json"
+                  },
+                  {
+                    id: "PR1_30004",
+                    name: "Chapter 2-3 : Java Basics",
+                    code: "PR1_30004",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30004.json"
+                  },
+                  {
+                    id: "PR1_30005",
+                    name: "Chapter 2-4 : Deep Dive into Java",
+                    code: "PR1_30005",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30005.json"
+                  },
+                  {
+                    id: "PR1_30006",
+                    name: "Chapter 3-1 : Controlling Program Flow",
+                    code: "PR1_30006",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30006.json"
+                  },
+                  {
+                    id: "PR1_30007",
+                    name: "Chapter 3-2 : Controlling Program Flow",
+                    code: "PR1_30007",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30007.json"
+                  },
+                  {
+                    id: "PR1_30008",
+                    name: "Chapter 4-1 : One Dimensional Arrays",
+                    code: "PR1_30008",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30008.json"
+                  },
+                  {
+                    id: "PR1_30009",
+                    name: "Chapter 4-2 : Multi Dimensional Arrays",
+                    code: "PR1_30009",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30009.json"
+                  },
+                  {
+                    id: "PR1_30010",
+                    name: "Review 1",
+                    code: "PR1_30010",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30010.json"
+                  },
+                  {
+                    id: "PR1_30011",
+                    name: "Review 2",
+                    code: "PR1_30011",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30011.json"
+                  },
+                  {
+                    id: "PR1_30012",
+                    name: "Tracing and Debugging",
+                    code: "PR1_30012",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30012.json"
+                  },
+                ],
+              
               },
             },
             {
               id: "critical-thinking-is",
               name: "Critical Thinking",
               code: "02-00-000XX",
-              description: "Critical thinking for AI and intelligent systems",
+              description: "Development of analytical and critical thinking skills",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/critical-thinking-is-lectures",
-                sections: "https://drive.google.com/drive/folders/critical-thinking-is-sections",
-                videos: "https://youtube.com/playlist?list=critical-thinking-is-videos",
-                summaries: "https://drive.google.com/drive/folders/critical-thinking-is-summaries",
-                exams: "https://drive.google.com/drive/folders/critical-thinking-is-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1mGHqF_BIXdX-S6BipXm942CsOvr6WHTG?usp=drive_link",
+                sections: '',
+                videos: ["https://youtube.com/playlist?list=PL2y4AZEEnQLmigukmMl5lD0CkewT1pBQ3&si=GijvUZQgn4vO1gdR"],
+                summaries: "https://drive.google.com/drive/folders/1He5H59nOzExcoG5GYaujPWQVnKTZwD2Z?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1ZfnkRMneHYU5wYlq4738XZt1NvGlRbt6?usp=drive_link"
               },
             },
           ],
@@ -1845,42 +2138,42 @@ export const departmentData: { [key: string]: Department } = {
               id: "probability-statistics-2-is",
               name: "Probability and Statistics II",
               code: "02-24-00201",
-              description: "Advanced statistics for intelligent systems",
+              description: "Advanced statistical methods and probability distributions",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/probability-statistics-2-is-lectures",
-                sections: "https://drive.google.com/drive/folders/probability-statistics-2-is-sections",
-                videos: "https://youtube.com/playlist?list=probability-statistics-2-is-videos",
-                summaries: "https://drive.google.com/drive/folders/probability-statistics-2-is-summaries",
-                exams: "https://drive.google.com/drive/folders/probability-statistics-2-is-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1Cat1L5ibgjDAx3qcU8XpKuM2Sp0jIWdA?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/17m-plzdlLyhkjM_TFmcYw5AZyC61yNrx?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL7snZ0LSsq3g6KzD6pdqwU3_Do8WPY4M8&si=1ZMtkTPNNIX7q31M",
+                summaries: "https://drive.google.com/drive/folders/1z2c94GAfxG4TdX63ZY_rZSicvEZlrRHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1QRMaP_UgieJRGo5ebwvD_bIu9EMF0SYs?usp=drive_link"
               },
             },
             {
               id: "intro-databases-is",
               name: "Introduction to Databases",
               code: "02-24-00202",
-              description: "Database systems for intelligent applications",
+              description: "Database design, implementation, and management principles",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/intro-databases-is-lectures",
-                sections: "https://drive.google.com/drive/folders/intro-databases-is-sections",
-                videos: "https://youtube.com/playlist?list=intro-databases-is-videos",
-                summaries: "https://drive.google.com/drive/folders/intro-databases-is-summaries",
-                exams: "https://drive.google.com/drive/folders/intro-databases-is-lastexam"
+                lectures: "https://drive.google.com/drive/folders/10DIqel1WkLIg5YZ1qbT604vRdpVPyLZ6?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1a78X1gWfKKui7qrsGkHvwycayAssG8Le?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL37D52B7714788190&si=9Qkf5KQWLTXqYKt1",
+                summaries: "https://drive.google.com/drive/folders/1vMRqmZ7ID3YIT920N6loq_yJKOQSOG65?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1luaj1L4qB2T3hTcQvwra667abVRXOx9c?usp=drive_link"
               },
             },
             {
               id: "numerical-computations-is",
               name: "Numerical Computations",
               code: "02-24-00203",
-              description: "Numerical methods for intelligent systems",
+              description: "Numerical methods and computational techniques",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/numerical-computations-is-lectures",
-                sections: "https://drive.google.com/drive/folders/numerical-computations-is-sections",
-                videos: "https://youtube.com/playlist?list=numerical-computations-is-videos",
-                summaries: "https://drive.google.com/drive/folders/numerical-computations-is-summaries",
-                exams: "https://drive.google.com/drive/folders/numerical-computations-is-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1YerbhXBHp9cLVhuBlsp337xKVS_01139?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1K4WIBD41wo7MP_GwXpo6yfEg-93c2wVM?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1WbNyHrPMQg8aBKK3pEUvBplv7gxzsxHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/14RRGt31M6KSQAxypsDQ2sMI_DR939Wy5?usp=drive_link"
               },
             },
             {
@@ -1890,11 +2183,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Intelligent systems design and computational intelligence",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/smart-systems-computational-intelligence-lectures",
-                sections: "https://drive.google.com/drive/folders/smart-systems-computational-intelligence-sections",
-                videos: "https://youtube.com/playlist?list=smart-systems-computational-intelligence-videos",
-                summaries: "https://drive.google.com/drive/folders/smart-systems-computational-intelligence-summaries",
-                exams: "https://drive.google.com/drive/folders/smart-systems-computational-intelligence-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1I-G13-wTo-QEympSlLygMyERa1fuuAzJ?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1As8BizbMGdT8NgI2iyE79kHj9KyFsP_Y?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1fYFXF7nzhy14DZjvCGBbfqOOIU2wG7Op?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1EB83ykK4iM7EKuX518digunlTHW1f48b?usp=drive_link"
               },
             },
             {
@@ -1904,25 +2197,34 @@ export const departmentData: { [key: string]: Department } = {
               description: "Optimization techniques and operations research methods",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/operations-research-lectures",
-                sections: "https://drive.google.com/drive/folders/operations-research-sections",
-                videos: "https://youtube.com/playlist?list=operations-research-videos",
-                summaries: "https://drive.google.com/drive/folders/operations-research-summaries",
-                exams: "https://drive.google.com/drive/folders/operations-research-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1UsjMAbX3Hylna15Q4mgMvTN60JDWlCsk?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1GNv82mzZ5heehxXkBmSz9bcwBF6twFiE?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1FSJy5BRx93VYB9S5V13LWaVgsgtfDSfR?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1tovGbCvULpJCG6BXHaeuBXN0-EOjAk_Z?usp=drive_link"
               },
             },
             {
-              id: "university-elective-is-1",
-              name: "University Elective",
-              code: "02-0X-000XX",
-              description: "University-wide elective course",
+              id: "university-elective-1-is",
+              name: "Economy Science",
+              code: "HE_005",
+              description: "Study of economic principles and their applications",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/university-elective-is-1-lectures",
-                sections: "https://drive.google.com/drive/folders/university-elective-is-1-sections",
-                videos: "https://youtube.com/playlist?list=university-elective-is-1-videos",
-                summaries: "https://drive.google.com/drive/folders/university-elective-is-1-summaries",
-                exams: "https://drive.google.com/drive/folders/university-elective-is-1-lastexam"
+                lectures: "https://drive.google.com/drive/folders/1_Z4FSE1Dx0oJ9_nxbHoFvn1WP2wN-Iyd?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1LuCRHkTxVc_uKOX7SdVEwcc0WrEL-n2D?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1B_bMKIcqQ4t_PsxDR6-GMUWQOv67AvNK?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "ECO_005_10001",
+                    name: "Quiz 1: Economy Science Basics",
+                    code: "ECO_005_10001",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
+                  },
+                ],
               },
             },
           ],
@@ -2519,36 +2821,42 @@ export const departmentData: { [key: string]: Department } = {
               id: "probability-statistics-2-ma",
               name: "Probability and Statistics II",
               code: "02-24-00201",
-              description: "Advanced statistics for media data analysis",
+              description: "Advanced statistical methods and probability distributions",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/probability-statistics-2-ma-lectures",
-                sections: "https://drive.google.com/drive/folders/probability-statistics-2-ma-sections",
-                videos: "https://youtube.com/playlist?list=probability-statistics-2-ma-videos",
+                lectures: "https://drive.google.com/drive/folders/1Cat1L5ibgjDAx3qcU8XpKuM2Sp0jIWdA?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/17m-plzdlLyhkjM_TFmcYw5AZyC61yNrx?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL7snZ0LSsq3g6KzD6pdqwU3_Do8WPY4M8&si=1ZMtkTPNNIX7q31M",
+                summaries: "https://drive.google.com/drive/folders/1z2c94GAfxG4TdX63ZY_rZSicvEZlrRHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1QRMaP_UgieJRGo5ebwvD_bIu9EMF0SYs?usp=drive_link"
               },
             },
             {
               id: "intro-databases-ma",
               name: "Introduction to Databases",
               code: "02-24-00202",
-              description: "Database systems for media content management",
+              description: "Database design, implementation, and management principles",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/intro-databases-ma-lectures",
-                sections: "https://drive.google.com/drive/folders/intro-databases-ma-sections",
-                videos: "https://youtube.com/playlist?list=intro-databases-ma-videos",
+                lectures: "https://drive.google.com/drive/folders/10DIqel1WkLIg5YZ1qbT604vRdpVPyLZ6?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1a78X1gWfKKui7qrsGkHvwycayAssG8Le?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL37D52B7714788190&si=9Qkf5KQWLTXqYKt1",
+                summaries: "https://drive.google.com/drive/folders/1vMRqmZ7ID3YIT920N6loq_yJKOQSOG65?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1luaj1L4qB2T3hTcQvwra667abVRXOx9c?usp=drive_link"
               },
             },
             {
               id: "numerical-computations-ma",
               name: "Numerical Computations",
               code: "02-24-00203",
-              description: "Numerical methods for media processing",
+              description: "Numerical methods and computational techniques",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/numerical-computations-ma-lectures",
-                sections: "https://drive.google.com/drive/folders/numerical-computations-ma-sections",
-                videos: "https://youtube.com/playlist?list=numerical-computations-ma-videos",
+                lectures: "https://drive.google.com/drive/folders/1YerbhXBHp9cLVhuBlsp337xKVS_01139?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1K4WIBD41wo7MP_GwXpo6yfEg-93c2wVM?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1WbNyHrPMQg8aBKK3pEUvBplv7gxzsxHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/14RRGt31M6KSQAxypsDQ2sMI_DR939Wy5?usp=drive_link"
               },
             },
             {
@@ -2558,9 +2866,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Data analysis and visualization for journalism",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/data-driven-journalism-lectures",
-                sections: "https://drive.google.com/drive/folders/data-driven-journalism-sections",
-                videos: "https://youtube.com/playlist?list=data-driven-journalism-videos",
+                lectures: "https://drive.google.com/drive/folders/17DyOBlP5AtyL9gfAWs69CGonO1tRD6Y9?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/19yJcRK13uE_EhtZ87kCdxWrXYg1NVZ9y?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1xaILR53ySZKUY_WLI9ifRoLIBcrnPRkY?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1zNkDQpkRlN0P6M8dXVLXd34BR6piY84O?usp=drive_link"
               },
             },
             {
@@ -2570,21 +2880,34 @@ export const departmentData: { [key: string]: Department } = {
               description: "Digital communication theories and practices",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/digital-mass-communication-lectures",
-                sections: "https://drive.google.com/drive/folders/digital-mass-communication-sections",
-                videos: "https://youtube.com/playlist?list=digital-mass-communication-videos",
+                lectures: "https://drive.google.com/drive/folders/1Bah21GU7oDHCcmk5D5KEkSAjcDYMpw_0?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1c1vBKiBvFutaUARuKG38XCBdePWq_ryZ?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1GJlTRf0RR_QsbqNUZzIzBNpZDdWa7_dB?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1l-eSxZso5-W62CCgJHhxe2OWChOGgKeF?usp=drive_link"
               },
             },
             {
-              id: "university-elective-ma-1",
-              name: "University Elective",
-              code: "02-0X-000XX",
-              description: "University-wide elective course",
+              id: "university-elective-1-ma",
+              name: "Economy Science",
+              code: "HE_005",
+              description: "Study of economic principles and their applications",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/university-elective-ma-1-lectures",
-                sections: "https://drive.google.com/drive/folders/university-elective-ma-1-sections",
-                videos: "https://youtube.com/playlist?list=university-elective-ma-1-videos",
+                lectures: "https://drive.google.com/drive/folders/1_Z4FSE1Dx0oJ9_nxbHoFvn1WP2wN-Iyd?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1LuCRHkTxVc_uKOX7SdVEwcc0WrEL-n2D?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1B_bMKIcqQ4t_PsxDR6-GMUWQOv67AvNK?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "ECO_005_10001",
+                    name: "Quiz 1: Economy Science Basics",
+                    code: "ECO_005_10001",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
+                  },
+                ],
               },
             },
           ],
@@ -3560,7 +3883,7 @@ export const departmentData: { [key: string]: Department } = {
       },
     },
   },
-  cybersecurity: {
+  "cybersecurity": {
     name: "Cybersecurity",
     description: "Information security, cyber defense, and digital forensics",
     levels: {
@@ -3571,72 +3894,212 @@ export const departmentData: { [key: string]: Department } = {
               id: "linear-algebra-cs",
               name: "Linear Algebra",
               code: "02-24-00101",
-              description: "Mathematical foundations for cybersecurity applications",
+              description: "Mathematical foundations of linear algebra for data science applications",
               creditHours: 3,
+              prerequisites: [],
               materials: {
-                lectures: "https://drive.google.com/drive/folders/linear-algebra-cs-lectures",
-                sections: "https://drive.google.com/drive/folders/linear-algebra-cs-sections",
-                videos: "https://youtube.com/playlist?list=linear-algebra-cs-videos",
+                lectures: "https://drive.google.com/drive/folders/1yFYYS37ERUHG6Ft_HnC17Jmgo-Zsrg06?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/191trjdbwAtjG6yz65q-C1Hd3gigqoti7?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLvuToPs04FnD1lFBolGr4ROQaxQ_zyC1c&si=6IWNZY0eY_ymFdAq"] ,
+                exams: "https://drive.google.com/drive/folders/1vUbUjWsbexiPgjDbJOuh-N43PVDc9hjc?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/150zP5Dc9vDKzazlm37IRttDG-_b-opK1?usp=drive_link"
               },
             },
             {
               id: "calculus-cs",
               name: "Calculus",
               code: "02-24-00102",
-              description: "Calculus for cybersecurity and cryptographic applications",
+              description: "Differential and integral calculus with applications in computing",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/calculus-cs-lectures",
-                sections: "https://drive.google.com/drive/folders/calculus-cs-sections",
-                videos: "https://youtube.com/playlist?list=calculus-cs-videos",
+                lectures: "https://drive.google.com/drive/folders/1LsWVrCXpwVsL7YhGL_QFQhyryvpc_Yon?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1U2LbrtWkf-X8DL3c7Yo12kgV8bbZ0Wb6?usp=drive_link",
+                videos: '',
+                exams: "https://drive.google.com/drive/folders/1Uf7LaRzQyqxEbTVG0dfmWFzTxmZNHLvB?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/1UkJQ6mJmcSb_MTbzT_8liJZTUMCOLARt?usp=drive_link"
               },
             },
             {
               id: "intro-computer-systems-cs",
               name: "Introduction to Computer Systems",
               code: "02-24-00103",
-              description: "Computer systems architecture and security fundamentals",
+              description: "Fundamentals of computer architecture and system organization",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/computer-systems-cs-lectures",
-                sections: "https://drive.google.com/drive/folders/computer-systems-cs-sections",
-                videos: "https://youtube.com/playlist?list=computer-systems-cs-videos",
+                lectures: "https://drive.google.com/drive/folders/1yQK4QiXQ7e7Ui6DLMAGYQa3aTuQp0v9O?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1q0iRgXguAaa2zZTSA9J1smnCwN2PwCAn?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLskaQRgiRMYb0SqvJ-wKx2n4Q3CB5uQ8e&si=wXANl6gRLW404zuP"],
+                summaries: "https://drive.google.com/drive/folders/1RFPXNiitr2yiHr1AyCsZWuTX0rYyOwIL?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1hTVXduWW2Icy8HY-uOc5lEiUUM42RSkB?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "CS101_quiz1",
+                    name: "Quiz 1: Computer Systems Basics",
+                    code: "CS101_quiz1",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/computer-systems/CS101_quiz1.json"
+                  },
+                  {
+                    id: "CS101_quiz2",
+                    name: "Quiz 2: Computer Architecture",
+                    code: "CS101_quiz2",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/computer-systems/CS101_quiz2.json"
+                  }
+                ],
               },
             },
             {
               id: "intro-data-sciences-cs",
               name: "Introduction to Data Sciences",
               code: "02-24-00104",
-              description: "Data science fundamentals for cybersecurity analytics",
+              description: "Overview of data science concepts, tools, and methodologies",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/data-sciences-cs-lectures",
-                sections: "https://drive.google.com/drive/folders/data-sciences-cs-sections",
-                videos: "https://youtube.com/playlist?list=data-sciences-cs-videos",
+                lectures: "https://drive.google.com/drive/folders/10SsZONPzWccvjTQB4ZcHmT0j_FU8b981?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/14IwWgXRgD8G2IPJ2op1RdBIj9pgs77LJ?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLNVsyemi1cQyXLWT3vm4GbWzVxAK_4nbR&si=Q7kxeMYT4iXhr2uC"],
+                summaries: "https://drive.google.com/drive/folders/13IFz-O_64Ga8y9TyFe13CSovw0xzxdUQ?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1adpsd15n6hieC29aQECkrftCHNz20U9c?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "DS101_10001",
+                    name: "Quiz 1: Data Science Basics",
+                    code: "DS101_10001",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/data-sciences/DS101_10001.json"
+                  }
+                ],
               },
             },
             {
               id: "programming-1-cs",
               name: "Programming I",
               code: "02-24-00105",
-              description: "Programming fundamentals for cybersecurity applications",
+              description: "Introduction to programming concepts and problem-solving techniques",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/programming-1-cs-lectures",
-                sections: "https://drive.google.com/drive/folders/programming-1-cs-sections",
-                videos: "https://youtube.com/playlist?list=programming-1-cs-videos",
+                lectures: "https://drive.google.com/drive/folders/1VDUvvvKoRcBfdCAgdO5GUa8ourGzEj43?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/14-W3wcsn8gw2ym8CnIo_L6jh0RfQW-mR?usp=drive_link",
+                videos: ["https://youtube.com/playlist?list=PLCInYL3l2AajYlZGzU_LVrHdoouf8W6ZN&si=_3EUjHYYQd7xAuGr", "https://youtube.com/playlist?list=PL1DUmTEdeA6K7rdxKiWJq6JIxTvHalY8f&si=wl8ryBAWTyTatxTw"],
+                summaries: "https://drive.google.com/drive/folders/19GRYDzueyRIB45_CJGn9Qh3_3JkIgfQH?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1wT8Ad9IGifK4NMgE71xXzLhXs4FF0wuc?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "PR1_30001",
+                    name: "Chapter 1 : Introduction to Programming",
+                    code: "PR1_30001",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30001.json"
+                  },
+                  {
+                    id: "PR1_30002",
+                    name: "Chapter 2-1 : Introduction to Java Programming",
+                    code: "PR1_30002",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30002.json"
+                  },
+                  {
+                    id: "PR1_30003",
+                    name: "Chapter 2-2 : Java Basics",
+                    code: "PR1_30003",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30003.json"
+                  },
+                  {
+                    id: "PR1_30004",
+                    name: "Chapter 2-3 : Java Basics",
+                    code: "PR1_30004",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30004.json"
+                  },
+                  {
+                    id: "PR1_30005",
+                    name: "Chapter 2-4 : Deep Dive into Java",
+                    code: "PR1_30005",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30005.json"
+                  },
+                  {
+                    id: "PR1_30006",
+                    name: "Chapter 3-1 : Controlling Program Flow",
+                    code: "PR1_30006",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30006.json"
+                  },
+                  {
+                    id: "PR1_30007",
+                    name: "Chapter 3-2 : Controlling Program Flow",
+                    code: "PR1_30007",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30007.json"
+                  },
+                  {
+                    id: "PR1_30008",
+                    name: "Chapter 4-1 : One Dimensional Arrays",
+                    code: "PR1_30008",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30008.json"
+                  },
+                  {
+                    id: "PR1_30009",
+                    name: "Chapter 4-2 : Multi Dimensional Arrays",
+                    code: "PR1_30009",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30009.json"
+                  },
+                  {
+                    id: "PR1_30010",
+                    name: "Review 1",
+                    code: "PR1_30010",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30010.json"
+                  },
+                  {
+                    id: "PR1_30011",
+                    name: "Review 2",
+                    code: "PR1_30011",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30011.json"
+                  },
+                  {
+                    id: "PR1_30012",
+                    name: "Tracing and Debugging",
+                    code: "PR1_30012",
+                    duration: "No Timer", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/programming/programming1/PR1_30012.json"
+                  },
+                ],
+              
               },
             },
             {
-              id: "critical-thinking-cs",
+              id: "critical-thinking-sc",
               name: "Critical Thinking",
               code: "02-00-000XX",
-              description: "Critical thinking for cybersecurity analysis",
+              description: "Development of analytical and critical thinking skills",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/critical-thinking-cs-lectures",
-                sections: "https://drive.google.com/drive/folders/critical-thinking-cs-sections",
-                videos: "https://youtube.com/playlist?list=critical-thinking-cs-videos",
+                lectures: "https://drive.google.com/drive/folders/1mGHqF_BIXdX-S6BipXm942CsOvr6WHTG?usp=drive_link",
+                sections: '',
+                videos: ["https://youtube.com/playlist?list=PL2y4AZEEnQLmigukmMl5lD0CkewT1pBQ3&si=GijvUZQgn4vO1gdR"],
+                summaries: "https://drive.google.com/drive/folders/1He5H59nOzExcoG5GYaujPWQVnKTZwD2Z?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1ZfnkRMneHYU5wYlq4738XZt1NvGlRbt6?usp=drive_link"
               },
             },
           ],
@@ -3723,36 +4186,42 @@ export const departmentData: { [key: string]: Department } = {
               id: "probability-statistics-2-cs",
               name: "Probability and Statistics II",
               code: "02-24-00201",
-              description: "Advanced statistics for cybersecurity research",
+              description: "Advanced statistical methods and probability distributions",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/probability-statistics-2-cs-lectures",
-                sections: "https://drive.google.com/drive/folders/probability-statistics-2-cs-sections",
-                videos: "https://youtube.com/playlist?list=probability-statistics-2-cs-videos",
+                lectures: "https://drive.google.com/drive/folders/1Cat1L5ibgjDAx3qcU8XpKuM2Sp0jIWdA?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/17m-plzdlLyhkjM_TFmcYw5AZyC61yNrx?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL7snZ0LSsq3g6KzD6pdqwU3_Do8WPY4M8&si=1ZMtkTPNNIX7q31M",
+                summaries: "https://drive.google.com/drive/folders/1z2c94GAfxG4TdX63ZY_rZSicvEZlrRHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1QRMaP_UgieJRGo5ebwvD_bIu9EMF0SYs?usp=drive_link"
               },
             },
             {
               id: "intro-databases-cs",
               name: "Introduction to Databases",
               code: "02-24-00202",
-              description: "Database security and secure database design",
+              description: "Database design, implementation, and management principles",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/intro-databases-cs-lectures",
-                sections: "https://drive.google.com/drive/folders/intro-databases-cs-sections",
-                videos: "https://youtube.com/playlist?list=intro-databases-cs-videos",
+                lectures: "https://drive.google.com/drive/folders/10DIqel1WkLIg5YZ1qbT604vRdpVPyLZ6?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1a78X1gWfKKui7qrsGkHvwycayAssG8Le?usp=drive_link",
+                videos: "https://youtube.com/playlist?list=PL37D52B7714788190&si=9Qkf5KQWLTXqYKt1",
+                summaries: "https://drive.google.com/drive/folders/1vMRqmZ7ID3YIT920N6loq_yJKOQSOG65?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1luaj1L4qB2T3hTcQvwra667abVRXOx9c?usp=drive_link"
               },
             },
             {
               id: "numerical-computations-cs",
               name: "Numerical Computations",
               code: "02-24-00203",
-              description: "Numerical methods for cryptographic applications",
+              description: "Numerical methods and computational techniques",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/numerical-computations-cs-lectures",
-                sections: "https://drive.google.com/drive/folders/numerical-computations-cs-sections",
-                videos: "https://youtube.com/playlist?list=numerical-computations-cs-videos",
+                lectures: "https://drive.google.com/drive/folders/1YerbhXBHp9cLVhuBlsp337xKVS_01139?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1K4WIBD41wo7MP_GwXpo6yfEg-93c2wVM?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1WbNyHrPMQg8aBKK3pEUvBplv7gxzsxHS?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/14RRGt31M6KSQAxypsDQ2sMI_DR939Wy5?usp=drive_link"
               },
             },
             {
@@ -3762,9 +4231,11 @@ export const departmentData: { [key: string]: Department } = {
               description: "Fundamentals of cybersecurity and information security",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/intro-cybersecurity-lectures",
-                sections: "https://drive.google.com/drive/folders/intro-cybersecurity-sections",
-                videos: "https://youtube.com/playlist?list=intro-cybersecurity-videos",
+                lectures: "https://drive.google.com/drive/folders/1czNoBYcq9PxtDGhsK0m8PkY3jCermkUJ?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1QFYrLnoJhSwmoiAATSAeFxdMGkaKTu-g?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/1hyS7CmYw3pg5LuB2bGi4DDLzEYNkoopm?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/10sjQ3VXB32w3avBJQG60K-kjVT-KRbfh?usp=drive_link"
               },
             },
             {
@@ -3774,21 +4245,34 @@ export const departmentData: { [key: string]: Department } = {
               description: "Number theory foundations for cryptography",
               creditHours: 3,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/number-theory-lectures",
-                sections: "https://drive.google.com/drive/folders/number-theory-sections",
-                videos: "https://youtube.com/playlist?list=number-theory-videos",
+                lectures: "https://drive.google.com/drive/folders/1kLhhrcZR_-9aZqRkt8R_heUbhjvJC2Au?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1oGBn9RtjfZQ0jHV3LIHKDN1DF8qL_NSz?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/16KrHdQcwdcP1507oSL7MIPoxZBXY9cM3?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1OjK4epFkpr0IDG94LuM7WZjrj2CZv_Kw?usp=drive_link"
               },
             },
             {
-              id: "university-elective-cs-1",
-              name: "University Elective",
-              code: "02-0X-000XX",
-              description: "University-wide elective course",
+              id: "university-elective-1-cs",
+              name: "Economy Science",
+              code: "HE_005",
+              description: "Study of economic principles and their applications",
               creditHours: 2,
               materials: {
-                lectures: "https://drive.google.com/drive/folders/university-elective-cs-1-lectures",
-                sections: "https://drive.google.com/drive/folders/university-elective-cs-1-sections",
-                videos: "https://youtube.com/playlist?list=university-elective-cs-1-videos",
+                lectures: "https://drive.google.com/drive/folders/1_Z4FSE1Dx0oJ9_nxbHoFvn1WP2wN-Iyd?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1LuCRHkTxVc_uKOX7SdVEwcc0WrEL-n2D?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1B_bMKIcqQ4t_PsxDR6-GMUWQOv67AvNK?usp=drive_link",
+                summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "ECO_005_10001",
+                    name: "Quiz 1: Economy Science Basics",
+                    code: "ECO_005_10001",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
+                  },
+                ],
               },
             },
           ],
