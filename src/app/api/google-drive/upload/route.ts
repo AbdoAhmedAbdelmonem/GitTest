@@ -28,11 +28,15 @@ async function checkAdminAccess(userId: number) {
 }
 
 export async function POST(request: NextRequest) {
+  let file: File | null = null
+  let userId: string = ''
+  let parentFolderId: string = ''
+  
   try {
     const formData = await request.formData()
-    const file = formData.get('file') as File
-    const userId = formData.get('userId') as string
-    const parentFolderId = formData.get('parentFolderId') as string
+    file = formData.get('file') as File
+    userId = formData.get('userId') as string
+    parentFolderId = formData.get('parentFolderId') as string
     
     console.log('Upload request received:', {
       hasFile: !!file,
@@ -100,9 +104,9 @@ export async function POST(request: NextRequest) {
 
     const drive = google.drive({ version: 'v3', auth: oauth2Client })
 
-    // For large files, process in chunks to avoid memory issues
+    // For large files, use streaming to avoid memory issues
     const fileSize = file.size
-    console.log(`Uploading file: ${file.name} (${fileSize} bytes)`)
+    console.log(`Uploading file: ${file.name} (${fileSize} bytes, ${(fileSize / (1024 * 1024)).toFixed(2)} MB)`)
 
     // Prepare file metadata
     const fileMetadata = {
@@ -110,9 +114,35 @@ export async function POST(request: NextRequest) {
       parents: parentFolderId ? [parentFolderId] : undefined,
     }
 
-    // Convert file to buffer for upload
-    const fileBuffer = Buffer.from(await file.arrayBuffer())
-    const fileStream = Readable.from(fileBuffer)
+    let fileStream: Readable
+
+    // For files larger than 10MB, use streaming to avoid memory issues
+    if (fileSize > 10 * 1024 * 1024) {
+      console.log('Using streaming upload for large file')
+      // Create a readable stream from the file's web stream
+      const webStream = file.stream()
+      const reader = webStream.getReader()
+
+      fileStream = new Readable({
+        async read() {
+          try {
+            const { done, value } = await reader.read()
+            if (done) {
+              this.push(null)
+            } else {
+              this.push(Buffer.from(value))
+            }
+          } catch (error) {
+            this.destroy(error as Error)
+          }
+        }
+      })
+    } else {
+      console.log('Using buffer upload for small file')
+      // For smaller files, use buffer approach
+      const fileBuffer = Buffer.from(await file.arrayBuffer())
+      fileStream = Readable.from(fileBuffer)
+    }
 
     // Upload file to Google Drive
     const uploadPromise = drive.files.create({
@@ -125,11 +155,12 @@ export async function POST(request: NextRequest) {
       supportsAllDrives: true,
     })
 
-    // Add timeout for large files (30 minutes for files over 100MB)
-    const timeoutMs = fileSize > 100 * 1024 * 1024 ? 30 * 60 * 1000 : 10 * 60 * 1000
+    // Add timeout for large files (45 minutes for files over 100MB, 15 minutes for others)
+    const timeoutMs = fileSize > 100 * 1024 * 1024 ? 45 * 60 * 1000 : 15 * 60 * 1000
+    console.log(`Upload timeout set to ${timeoutMs / (60 * 1000)} minutes`)
 
     const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('Upload timeout')), timeoutMs)
+      setTimeout(() => reject(new Error(`Upload timeout after ${timeoutMs / (60 * 1000)} minutes`)), timeoutMs)
     })
 
     const response = await Promise.race([uploadPromise, timeoutPromise])
@@ -140,8 +171,29 @@ export async function POST(request: NextRequest) {
     })
     
   } catch (error) {
-    console.error('Error uploading file to Google Drive:', error)
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
+    console.error('Error uploading file to Google Drive:', {
+      error,
+      errorMessage: error instanceof Error ? error.message : 'Unknown error',
+      fileName: file?.name,
+      fileSize: file?.size,
+      fileSizeMB: file?.size ? (file.size / (1024 * 1024)).toFixed(2) : 'unknown',
+      userId,
+      parentFolderId
+    })
+    
+    const errorObj = error instanceof Error ? error : new Error('Unknown error occurred')
+    let errorMessage = errorObj.message
+
+    // Provide more specific error messages for common issues
+    if (errorMessage.includes('timeout') || errorMessage.includes('Timeout')) {
+      errorMessage = `Upload timeout. File size ${(file?.size ? (file.size / (1024 * 1024)).toFixed(2) : 'unknown')} MB may be too large or network connection is slow.`
+    } else if (errorMessage.includes('memory') || errorMessage.includes('out of memory')) {
+      errorMessage = `Memory error during upload. File size ${(file?.size ? (file.size / (1024 * 1024)).toFixed(2) : 'unknown')} MB is too large for current memory limits.`
+    } else if (errorMessage.includes('quota') || errorMessage.includes('storage')) {
+      errorMessage = 'Google Drive storage quota exceeded.'
+    } else if (errorMessage.includes('rate limit') || errorMessage.includes('quota exceeded')) {
+      errorMessage = 'Google Drive API rate limit exceeded. Please wait and try again.'
+    }
     
     if (errorMessage.includes('No access token found') || errorMessage.includes('invalid_grant')) {
       return NextResponse.json(
