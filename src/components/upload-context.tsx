@@ -100,10 +100,94 @@ export function UploadProvider({ children }: UploadProviderProps) {
 
       const urlData = await urlResponse.json()
       const uploadUrl = urlData.uploadUrl
+      const accessToken = urlData.accessToken
+      const uploadMethod = urlData.uploadMethod || 'direct' // Default to 'direct' for backward compatibility
 
-      console.log('Got upload URL, starting direct upload to Google Drive')
+      console.log('Got upload info:', {
+        success: urlData.success,
+        uploadMethod,
+        hasUploadUrl: !!uploadUrl,
+        hasAccessToken: !!accessToken,
+        uploadUrlPreview: uploadUrl ? uploadUrl.substring(0, 50) + '...' : 'none'
+      })
 
-      // Step 2: Upload directly to Google Drive using XMLHttpRequest
+      // Handle server-proxy method (new approach)
+      if (uploadMethod === 'server-proxy') {
+        console.log('Using server-proxy upload method')
+
+        // Create FormData to send file to server
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('userId', userId)
+        formData.append('parentFolderId', parentFolderId)
+
+        // Simulate progress for server-proxy uploads
+        const progressInterval = setInterval(() => {
+          setUploads(prev => prev.map(u => {
+            if (u.id === uploadId && u.progress < 90) {
+              return { ...u, progress: Math.min(u.progress + Math.random() * 10, 90) }
+            }
+            return u
+          }))
+        }, 500)
+
+        try {
+          // Upload via server proxy
+          const serverResponse = await fetch('/api/google-drive/upload', {
+            method: 'POST',
+            body: formData,
+            signal: abortController.signal
+          })
+
+          clearInterval(progressInterval)
+
+          if (!serverResponse.ok) {
+            const errorData = await serverResponse.json()
+            throw new Error(errorData.error || 'Server upload failed')
+          }
+
+          const result = await serverResponse.json()
+
+          // Update progress to 100% on success
+          setUploads(prev => prev.map(u =>
+            u.id === uploadId ? { ...u, progress: 100 } : u
+          ))
+
+          console.log('Server-proxy upload completed successfully:', result)
+
+          // Mark as completed
+          setUploads(prev => prev.map(u =>
+            u.id === uploadId ? {
+              ...u,
+              status: 'completed',
+              progress: 100,
+              endTime: Date.now()
+            } : u
+          ))
+          addToast(`File "${file.name}" uploaded successfully`, 'success')
+
+          // Call refresh callback if set
+          const callback = uploadCallbacksRef.current.get(uploadId)
+          if (callback) {
+            callback()
+            uploadCallbacksRef.current.delete(uploadId)
+          }
+        } catch (error) {
+          clearInterval(progressInterval)
+          throw error
+        }
+
+        return // Exit early for server-proxy method
+      }
+
+      // Handle direct upload method (legacy approach)
+      if (!uploadUrl || !accessToken) {
+        throw new Error('Missing upload URL or access token from server')
+      }
+
+      console.log('Starting multipart upload to Google Drive')
+
+      // Step 2: Upload directly to Google Drive using multipart upload
       const xhr = new XMLHttpRequest()
 
       // Set up progress tracking
@@ -118,7 +202,7 @@ export function UploadProvider({ children }: UploadProviderProps) {
 
       // Set up completion
       xhr.addEventListener('load', () => {
-        console.log('Direct upload completed:', {
+        console.log('Direct multipart upload completed:', {
           status: xhr.status,
           statusText: xhr.statusText,
           responseText: xhr.responseText?.substring(0, 200)
@@ -147,7 +231,7 @@ export function UploadProvider({ children }: UploadProviderProps) {
           try {
             if (xhr.responseText && xhr.responseText.trim()) {
               const response = JSON.parse(xhr.responseText)
-              errorMessage = response.error || `Server error: ${xhr.status} ${xhr.statusText}`
+              errorMessage = response.error?.message || response.error || `Server error: ${xhr.status} ${xhr.statusText}`
             } else {
               errorMessage = `Server error: ${xhr.status} ${xhr.statusText || 'Unknown error'}`
             }
@@ -224,16 +308,52 @@ export function UploadProvider({ children }: UploadProviderProps) {
         ))
       })
 
-      // Configure and send request directly to Google Drive
-      xhr.open('PUT', uploadUrl)
-      xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
-      xhr.setRequestHeader('Content-Length', file.size.toString())
+      // Create multipart form data for Google Drive
+      const boundary = '----FormBoundary' + Math.random().toString(36).substr(2, 9)
+      const metadata = {
+        name: file.name,
+        ...(urlData.fileMetadata.parents && { parents: urlData.fileMetadata.parents })
+      }
 
-      console.log('Starting direct upload to Google Drive:', {
-        uploadUrl: uploadUrl.substring(0, 100) + '...',
-        fileName: file.name,
+      // Create the multipart body
+      const parts = [
+        `--${boundary}`,
+        'Content-Type: application/json; charset=UTF-8',
+        '',
+        JSON.stringify(metadata),
+        '',
+        `--${boundary}`,
+        `Content-Type: ${file.type || 'application/octet-stream'}`,
+        '',
+      ].join('\r\n')
+
+      // Convert file to array buffer and create multipart data
+      const fileBuffer = await file.arrayBuffer()
+      const closingBoundary = `\r\n--${boundary}--\r\n`
+      const encoder = new TextEncoder()
+      const partsArray = encoder.encode(parts)
+      const closingArray = encoder.encode(closingBoundary)
+      
+      const multipartData = new Uint8Array(partsArray.length + fileBuffer.byteLength + closingArray.length)
+      multipartData.set(partsArray, 0)
+      multipartData.set(new Uint8Array(fileBuffer), partsArray.length)
+      multipartData.set(closingArray, partsArray.length + fileBuffer.byteLength)
+
+      // Configure and send multipart request
+      xhr.open('POST', uploadUrl)
+      xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`)
+      xhr.setRequestHeader('Content-Type', `multipart/related; boundary=${boundary}`)
+      xhr.setRequestHeader('Content-Length', multipartData.length.toString())
+
+      console.log('Multipart request configuration:', {
+        method: 'POST',
+        url: uploadUrl,
+        boundary,
+        contentType: `multipart/related; boundary=${boundary}`,
+        contentLength: multipartData.length.toString(),
+        metadataSize: JSON.stringify(metadata).length,
         fileSize: file.size,
-        fileSizeMB: (file.size / (1024 * 1024)).toFixed(2),
+        totalSize: multipartData.length,
         timeoutMs
       })
 
@@ -243,8 +363,8 @@ export function UploadProvider({ children }: UploadProviderProps) {
         xhr.abort()
       })
 
-      // Send the file directly to Google Drive
-      xhr.send(file)
+      // Send the multipart data
+      xhr.send(multipartData)
 
     } catch (error) {
       console.error('Upload setup error:', error)
