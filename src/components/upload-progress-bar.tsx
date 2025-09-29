@@ -42,9 +42,9 @@ export function UploadProgressBar() {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
-          className="fixed bottom-4 left-4 z-50 max-w-sm"
+          className="fixed bottom-4 left-4 right-4 max-w-lg z-50"
         >
-          <Card className="bg-black/90 backdrop-blur-xl border-white/20 text-white shadow-2xl">
+          <Card className="bg-black/90 backdrop-blur-xl border-white/20 text-white shadow-2xl w-full">
             <CardContent className="p-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">

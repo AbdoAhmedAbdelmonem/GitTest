@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,6 +22,7 @@ import {
   Shield,
   AlertCircle,
   CloudUpload,
+  FolderOpen,
 } from "lucide-react"
 import { useToast } from "@/components/ToastProvider"
 import { useUpload } from "./upload-context"
@@ -40,8 +41,15 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
   const [hasGoogleAuth, setHasGoogleAuth] = useState<boolean | null>(null)
   const [authError, setAuthError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const folderInputRef = useRef<HTMLInputElement>(null)
   const { addToast } = useToast()
   const { uploadFile, uploads } = useUpload()
+
+  // Set up upload refresh callback
+  React.useEffect(() => {
+    // This effect ensures the refresh callback is available for uploads
+    // The actual callback setup happens in the upload context when uploadFile is called
+  }, [onFileCreated])
 
   // Check if user has Google Drive authentication
   useEffect(() => {
@@ -128,21 +136,16 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
       
       addToast(`Folder "${folderName}" created successfully`, "success")
       
+      // Auto-refresh immediately after successful creation
+      onFileCreated?.()
+      
       // Show refresh message and auto-close
       setIsAutoClosing(true)
       setTimeout(() => {
-        addToast("The page will be refreshed for loading the new content", "info")
-        
-        setTimeout(() => {
-          setFolderName("")
-          setShowCreateFolder(false)
-          setIsAutoClosing(false)
-          onFileCreated?.() // This should refresh the file list
-          
-          // Force a page refresh to ensure new content is loaded
-          window.location.reload()
-        }, 1500) // Give time to read the refresh message
-      }, 1000) // Show success message first
+        setFolderName("")
+        setShowCreateFolder(false)
+        setIsAutoClosing(false)
+      }, 1000)
     } catch (error) {
       console.error('Error creating folder:', error)
       const errorMessage = error instanceof Error ? error.message : 'Failed to create folder'
@@ -164,12 +167,11 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
     if (!file || !userSession?.user_id) return
 
     try {
-      await uploadFile(file, currentFolderId, userSession.user_id.toString())
-      // The upload context will handle progress and notifications
-      // Refresh the file list after successful upload
-      setTimeout(() => {
+      await uploadFile(file, currentFolderId, userSession.user_id.toString(), () => {
+        // Auto-refresh immediately after successful upload
         onFileCreated?.()
-      }, 1000) // Small delay to ensure upload is processed
+      })
+      // The upload context will handle progress and notifications
     } catch (error) {
       console.error('Error initiating upload:', error)
       // Error handling is done in the upload context
@@ -178,6 +180,36 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
 
   const handleFileSelect = () => {
     fileInputRef.current?.click()
+  }
+
+  const handleFolderSelect = () => {
+    folderInputRef.current?.click()
+  }
+
+  // Create folder in Google Drive
+  const createFolder = async (folderName: string, parentId: string): Promise<string> => {
+    try {
+      const response = await fetch('/api/google-drive/create-folder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          folderName,
+          parentFolderId: parentId,
+          userId: userSession?.user_id,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || `Failed to create folder: ${folderName}`)
+      }
+
+      const result = await response.json()
+      return result.id
+    } catch (error) {
+      console.error(`Error creating folder ${folderName}:`, error)
+      throw error
+    }
   }
 
   // Check if there are any active uploads (pending or uploading)
@@ -196,6 +228,133 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
     // Reset the input so the same files can be selected again
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
+    }
+  }
+
+  const handleFolderChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = event.target.files
+    if (!selectedFiles || selectedFiles.length === 0) {
+      addToast('No files selected. Please select a folder with files.', 'error')
+      return
+    }
+
+    try {
+      addToast('Starting folder upload...', 'info')
+
+      console.log('Selected files count:', selectedFiles.length)
+
+      // Get the folder name from the first file's path
+      const firstFile = selectedFiles[0] as File & { webkitRelativePath?: string }
+      console.log('First file:', firstFile)
+      console.log('First file name:', firstFile.name)
+      console.log('First file webkitRelativePath:', firstFile.webkitRelativePath)
+
+      const relativePath = firstFile.webkitRelativePath || firstFile.name
+
+      if (!relativePath.includes('/')) {
+        // This shouldn't happen for folder uploads, but handle it
+        addToast('Please select a folder, not individual files', 'error')
+        return
+      }
+
+      // Extract the root folder name (e.g., "mama" from "mama/text1.txt")
+      const rootFolderName = relativePath.split('/')[0]
+
+      console.log(`Creating root folder: ${rootFolderName}`)
+
+      // Create the root folder in the current directory
+      const rootFolderId = await createFolder(rootFolderName, currentFolderId)
+
+      addToast(`Created folder "${rootFolderName}"`, 'info')
+
+      // Group files by their folder paths and create subfolders as needed
+      const folderStructure: { [path: string]: string } = {} // path -> folderId
+      folderStructure[''] = rootFolderId // root folder
+
+      const filesArray = Array.from(selectedFiles) as (File & { webkitRelativePath?: string })[]
+
+      // First pass: create all necessary folders
+      for (const file of filesArray) {
+        const relativePath = file.webkitRelativePath || file.name
+        const pathParts = relativePath.split('/')
+
+        if (pathParts.length < 2) continue // skip root level files for now
+
+        // Remove the filename to get the folder path
+        const folderPath = pathParts.slice(0, -1).join('/')
+        const folderName = pathParts[pathParts.length - 2] // parent folder name
+
+        if (!folderStructure[folderPath]) {
+          // Need to create this folder
+          const parentPath = pathParts.slice(0, -2).join('/')
+          const parentId = folderStructure[parentPath] || rootFolderId
+
+          console.log(`Creating subfolder: ${folderName} in parent: ${parentId}`)
+          const folderId = await createFolder(folderName, parentId)
+          folderStructure[folderPath] = folderId
+        }
+      }
+
+      // Second pass: upload all files to their correct folders
+      let uploadedCount = 0
+      for (const file of filesArray) {
+        console.log(`Processing file ${uploadedCount + 1}/${filesArray.length}:`, {
+          name: file?.name,
+          size: file?.size,
+          type: file?.type,
+          webkitRelativePath: file?.webkitRelativePath,
+          isFile: file instanceof File,
+          fileExists: !!file
+        })
+
+        if (!file || !(file instanceof File)) {
+          console.error('Invalid file object:', file)
+          continue
+        }
+
+        const relativePath = file.webkitRelativePath || file.name
+        const pathParts = relativePath.split('/')
+
+        let parentId: string
+        if (pathParts.length < 2) {
+          // File in root folder
+          parentId = rootFolderId
+          console.log(`Uploading root file: ${file.name} to ${parentId}`)
+        } else {
+          // File in subfolder
+          const folderPath = pathParts.slice(0, -1).join('/')
+          parentId = folderStructure[folderPath]
+
+          if (!parentId) {
+            console.error(`No parent folder found for path: ${folderPath}`)
+            continue
+          }
+
+          console.log(`Uploading file: ${file.name} to folder: ${folderPath} (${parentId})`)
+        }
+
+        try {
+          await uploadFile(file, parentId, userSession.user_id.toString(), () => {
+            onFileCreated?.()
+          })
+          uploadedCount++
+          console.log(`Successfully uploaded ${uploadedCount}/${filesArray.length}: ${file.name}`)
+        } catch (uploadError) {
+          console.error(`Failed to upload ${file.name}:`, uploadError)
+          // Continue with other files instead of failing the entire upload
+        }
+      }
+
+      addToast(`Successfully uploaded ${uploadedCount} files to "${rootFolderName}" with folder structure!`, 'success')
+    } catch (error) {
+      console.error('Error uploading folder:', error)
+      const errorMessage = error instanceof Error ? error.message : 'Failed to upload folder'
+      addToast(`Folder upload failed: ${errorMessage}`, 'error')
+    }
+
+    // Reset the input
+    if (folderInputRef.current) {
+      folderInputRef.current.value = ''
     }
   }
 
@@ -321,6 +480,16 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
               <Upload className="w-4 h-4 mr-2" />
               Upload Files
             </Button>
+            {/* <Button
+              onClick={() => {
+              handleFolderSelect()
+              }}
+              className="bg-green-500/20 hover:bg-green-500/30 text-green-300 hover:text-white border-green-500/30 justify-start"
+              variant="outline"
+            >
+              <FolderOpen className="w-4 h-4 mr-2" />
+              Upload Folder
+            </Button> */}
           </div>
         </DialogContent>
       </Dialog>
@@ -373,6 +542,17 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
         className="hidden"
         multiple={true}
         aria-label="Upload files"
+      />
+
+      {/* Hidden folder input */}
+      <input
+        ref={folderInputRef}
+        type="file"
+        onChange={handleFolderChange}
+        className="hidden"
+        multiple={true}
+        {...({ webkitdirectory: '' } as React.InputHTMLAttributes<HTMLInputElement>)}
+        aria-label="Upload folder"
       />
 
       {/* Create Folder Dialog */}
