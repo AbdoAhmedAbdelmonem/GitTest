@@ -34,9 +34,36 @@ export async function POST(request: NextRequest) {
     const userId = formData.get('userId') as string
     const parentFolderId = formData.get('parentFolderId') as string
     
-    if (!file || !userId) {
+    console.log('Upload request received:', {
+      hasFile: !!file,
+      fileType: typeof file,
+      fileName: file?.name,
+      fileSize: file?.size,
+      userId,
+      parentFolderId,
+      formDataKeys: Array.from(formData.keys())
+    })
+    
+    if (!file) {
+      console.error('File validation failed:', {
+        file,
+        typeofFile: typeof file,
+        formDataEntries: Array.from(formData.entries()).map(([key, value]) => ({
+          key,
+          valueType: typeof value,
+          isFile: value instanceof File,
+          fileName: value instanceof File ? value.name : 'N/A'
+        }))
+      })
       return NextResponse.json(
-        { error: 'File and user ID are required' },
+        { error: 'File not found: ' + typeof file },
+        { status: 400 }
+      )
+    }
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'User ID is required' },
         { status: 400 }
       )
     }
@@ -83,12 +110,11 @@ export async function POST(request: NextRequest) {
       parents: parentFolderId ? [parentFolderId] : undefined,
     }
 
-    // Create a readable stream from the file
-    // For large files, we'll stream the data instead of loading everything into memory
+    // Convert file to buffer for upload
     const fileBuffer = Buffer.from(await file.arrayBuffer())
     const fileStream = Readable.from(fileBuffer)
 
-    // Upload file to Google Drive with timeout handling
+    // Upload file to Google Drive
     const uploadPromise = drive.files.create({
       requestBody: fileMetadata,
       media: {
