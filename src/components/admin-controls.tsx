@@ -75,9 +75,11 @@ export function FileActions({ fileId, fileName, onDeleted, onRenamed }: FileActi
 
       setRenameSuccess(true)
       
+      // Auto-refresh immediately after successful rename
+      onRenamed()
+      
       // Show success animation for a moment
       setTimeout(() => {
-        onRenamed()
         setShowRenameDialog(false)
         setRenameSuccess(false)
         addToast(`Renamed to "${newName.trim()}"`, "success")
@@ -108,9 +110,11 @@ export function FileActions({ fileId, fileName, onDeleted, onRenamed }: FileActi
         throw new Error(result.error || 'Failed to delete file')
       }
 
-      // Show success and then trigger delete
+      // Auto-refresh immediately after successful delete
+      onDeleted()
+      
+      // Show success and then close dialog
       setTimeout(() => {
-        onDeleted()
         setShowDeleteDialog(false)
         addToast(`"${fileName}" has been deleted`, "success")
       }, 1500)
@@ -397,9 +401,11 @@ export function FolderActions({ folderId, folderName, onDeleted, onRenamed }: Fo
 
       setRenameSuccess(true)
       
+      // Auto-refresh immediately after successful rename
+      onRenamed()
+      
       // Show success animation for a moment
       setTimeout(() => {
-        onRenamed()
         setShowRenameDialog(false)
         setRenameSuccess(false)
         addToast(`Folder renamed to "${newName.trim()}"`, "success")
@@ -430,9 +436,11 @@ export function FolderActions({ folderId, folderName, onDeleted, onRenamed }: Fo
         throw new Error(result.error || 'Failed to delete folder')
       }
 
-      // Show success and then trigger delete
+      // Auto-refresh immediately after successful delete
+      onDeleted()
+      
+      // Show success and then close dialog
       setTimeout(() => {
-        onDeleted()
         setShowDeleteDialog(false)
         addToast(`Folder "${folderName}" has been deleted`, "success")
       }, 1500)
