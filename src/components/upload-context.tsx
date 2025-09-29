@@ -69,12 +69,41 @@ export function UploadProvider({ children }: UploadProviderProps) {
       // Start upload
       setUploads(prev => prev.map(u => u.id === uploadId ? { ...u, status: 'uploading' } : u))
 
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('userId', userId)
-      formData.append('parentFolderId', parentFolderId)
+      console.log('Requesting upload URL for file:', {
+        name: file.name,
+        size: file.size,
+        sizeMB: (file.size / (1024 * 1024)).toFixed(2),
+        type: file.type,
+        parentFolderId,
+        userId
+      })
 
-      // Use XMLHttpRequest for better progress tracking
+      // Step 1: Get signed upload URL from our server
+      const urlResponse = await fetch('/api/google-drive/get-upload-url', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fileName: file.name,
+          fileSize: file.size,
+          mimeType: file.type,
+          parentFolderId,
+          userId
+        }),
+      })
+
+      if (!urlResponse.ok) {
+        const errorData = await urlResponse.json()
+        throw new Error(errorData.error || 'Failed to get upload URL')
+      }
+
+      const urlData = await urlResponse.json()
+      const uploadUrl = urlData.uploadUrl
+
+      console.log('Got upload URL, starting direct upload to Google Drive')
+
+      // Step 2: Upload directly to Google Drive using XMLHttpRequest
       const xhr = new XMLHttpRequest()
 
       // Set up progress tracking
@@ -89,14 +118,10 @@ export function UploadProvider({ children }: UploadProviderProps) {
 
       // Set up completion
       xhr.addEventListener('load', () => {
-        console.log('XMLHttpRequest load event fired:', {
+        console.log('Direct upload completed:', {
           status: xhr.status,
           statusText: xhr.statusText,
-          readyState: xhr.readyState,
-          responseType: xhr.responseType,
-          responseTextType: typeof xhr.responseText,
-          responseTextLength: xhr.responseText?.length || 0,
-          fileName: file.name
+          responseText: xhr.responseText?.substring(0, 200)
         })
 
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -117,39 +142,19 @@ export function UploadProvider({ children }: UploadProviderProps) {
             uploadCallbacksRef.current.delete(uploadId)
           }
         } else {
-          console.error('Upload failed - detailed error info:', {
-            status: xhr.status,
-            statusText: xhr.statusText,
-            responseType: typeof xhr.responseText,
-            responseText: xhr.responseText,
-            responseTextLength: xhr.responseText?.length,
-            fileName: file.name,
-            fileSize: file.size,
-            fileSizeMB: (file.size / (1024 * 1024)).toFixed(2),
-            readyState: xhr.readyState,
-            responseURL: xhr.responseURL
-          })
-
           let errorMessage = `Upload failed with status ${xhr.status}`
 
           try {
-            // Check if responseText is actually a string
-            if (typeof xhr.responseText === 'string' && xhr.responseText.trim()) {
+            if (xhr.responseText && xhr.responseText.trim()) {
               const response = JSON.parse(xhr.responseText)
               errorMessage = response.error || `Server error: ${xhr.status} ${xhr.statusText}`
-              console.log('Parsed JSON error response:', response)
             } else {
-              console.warn('Response text is not a valid string:', xhr.responseText)
               errorMessage = `Server error: ${xhr.status} ${xhr.statusText || 'Unknown error'}`
             }
           } catch (parseError) {
-            console.error('Failed to parse error response as JSON:', parseError, 'Raw response:', xhr.responseText)
-            // If response is not JSON, try to extract meaningful error info
+            console.error('Failed to parse error response:', parseError)
             if (xhr.statusText) {
               errorMessage = `HTTP ${xhr.status}: ${xhr.statusText}`
-            } else if (xhr.responseText && typeof xhr.responseText === 'string') {
-              // Take first 200 chars of response text as error message
-              errorMessage = xhr.responseText.substring(0, 200)
             } else {
               errorMessage = `Upload failed with HTTP ${xhr.status} error`
             }
@@ -169,11 +174,9 @@ export function UploadProvider({ children }: UploadProviderProps) {
 
       // Set up error handling
       xhr.addEventListener('error', (event) => {
-        console.error('Upload network error for:', file.name, {
+        console.error('Direct upload network error:', {
+          fileName: file.name,
           fileSize: file.size,
-          fileSizeMB: (file.size / (1024 * 1024)).toFixed(2),
-          readyState: xhr.readyState,
-          status: xhr.status,
           event
         })
         setUploads(prev => prev.map(u =>
@@ -187,26 +190,26 @@ export function UploadProvider({ children }: UploadProviderProps) {
         addToast(`Network error uploading "${file.name}". Please check your connection and retry.`, 'error')
       })
 
-      // Set up timeout handling
+      // Set up timeout handling (much longer since direct to Google Drive)
       xhr.addEventListener('timeout', () => {
-        console.error('Upload timeout for:', file.name, {
+        console.error('Direct upload timeout:', {
+          fileName: file.name,
           fileSize: file.size,
-          timeoutMs,
-          fileSizeMB: (file.size / (1024 * 1024)).toFixed(2)
+          timeoutMs
         })
         setUploads(prev => prev.map(u =>
           u.id === uploadId ? {
             ...u,
             status: 'error',
-            error: `Upload timeout after ${timeoutMs / 1000} seconds. File size: ${(file.size / (1024 * 1024)).toFixed(2)} MB may be too large.`,
+            error: `Upload timeout after ${timeoutMs / 1000} seconds. File size: ${(file.size / (1024 * 1024)).toFixed(2)} MB may be too large or network is slow.`,
             endTime: Date.now()
           } : u
         ))
         addToast(`Upload timeout for "${file.name}". Large files may take longer.`, 'error')
       })
 
-      // Set timeout for large files (10 minutes for files over 50MB, 5 minutes for large files, 2 minutes for small)
-      const timeoutMs = file.size > 50 * 1024 * 1024 ? 600000 : file.size > 10 * 1024 * 1024 ? 300000 : 120000 // 10 min for >50MB, 5 min for >10MB, 2 min for small
+      // Set timeout for large files (30 minutes for files over 50MB, 15 minutes for large files, 5 minutes for small)
+      const timeoutMs = file.size > 50 * 1024 * 1024 ? 1800000 : file.size > 10 * 1024 * 1024 ? 900000 : 300000 // 30 min for >50MB, 15 min for >10MB, 5 min for small
       xhr.timeout = timeoutMs
 
       // Set up abort handling
@@ -221,18 +224,16 @@ export function UploadProvider({ children }: UploadProviderProps) {
         ))
       })
 
-      // Configure and send request
-      xhr.open('POST', '/api/google-drive/upload')
-      xhr.setRequestHeader('Accept', 'application/json')
-      // Don't set Content-Type for FormData - let browser set it with boundary
+      // Configure and send request directly to Google Drive
+      xhr.open('PUT', uploadUrl)
+      xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
+      xhr.setRequestHeader('Content-Length', file.size.toString())
 
-      console.log('Sending upload request:', {
-        url: '/api/google-drive/upload',
+      console.log('Starting direct upload to Google Drive:', {
+        uploadUrl: uploadUrl.substring(0, 100) + '...',
         fileName: file.name,
         fileSize: file.size,
         fileSizeMB: (file.size / (1024 * 1024)).toFixed(2),
-        parentFolderId,
-        userId,
         timeoutMs
       })
 
@@ -242,10 +243,11 @@ export function UploadProvider({ children }: UploadProviderProps) {
         xhr.abort()
       })
 
-      xhr.send(formData)
+      // Send the file directly to Google Drive
+      xhr.send(file)
 
     } catch (error) {
-      console.error('Upload error:', error)
+      console.error('Upload setup error:', error)
       const errorMessage = error instanceof Error ? error.message : 'Unknown error'
 
       setUploads(prev => prev.map(u =>
