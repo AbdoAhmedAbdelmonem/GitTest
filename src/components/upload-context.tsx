@@ -18,7 +18,7 @@ export interface UploadItem {
 
 interface UploadContextType {
   uploads: UploadItem[]
-  uploadFile: (file: File, parentFolderId: string, userId: string) => Promise<void>
+  uploadFile: (file: File, parentFolderId: string, userId: string, onComplete?: () => void) => Promise<void>
   cancelUpload: (uploadId: string) => void
   clearCompleted: () => void
   retryUpload: (uploadId: string) => void
@@ -43,7 +43,7 @@ export function UploadProvider({ children }: UploadProviderProps) {
   const { addToast } = useToast()
   const uploadCallbacksRef = useRef<Map<string, () => void>>(new Map())
 
-  const uploadFile = useCallback(async (file: File, parentFolderId: string, userId: string) => {
+  const uploadFile = useCallback(async (file: File, parentFolderId: string, userId: string, onComplete?: () => void) => {
     const uploadId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
     const abortController = new AbortController()
 
@@ -59,6 +59,11 @@ export function UploadProvider({ children }: UploadProviderProps) {
     }
 
     setUploads(prev => [...prev, uploadItem])
+
+    // Store the callback for this upload
+    if (onComplete) {
+      uploadCallbacksRef.current.set(uploadId, onComplete)
+    }
 
     try {
       // Start upload
@@ -102,12 +107,22 @@ export function UploadProvider({ children }: UploadProviderProps) {
             uploadCallbacksRef.current.delete(uploadId)
           }
         } else {
-          let errorMessage = 'Upload failed'
+          let errorMessage = `Upload failed with status ${xhr.status}`
+          console.error('Upload failed:', {
+            status: xhr.status,
+            statusText: xhr.statusText,
+            responseText: xhr.responseText,
+            fileName: file.name,
+            fileSize: file.size
+          })
+
           try {
             const response = JSON.parse(xhr.responseText)
-            errorMessage = response.error || errorMessage
-          } catch {
-            // Ignore parse error
+            errorMessage = response.error || `Server error: ${xhr.status} ${xhr.statusText}`
+          } catch (parseError) {
+            console.error('Failed to parse error response:', parseError)
+            // If response is not JSON, use the raw response or status text
+            errorMessage = xhr.responseText || xhr.statusText || `HTTP ${xhr.status} error`
           }
 
           setUploads(prev => prev.map(u =>
@@ -123,13 +138,19 @@ export function UploadProvider({ children }: UploadProviderProps) {
       })
 
       // Set up error handling
-      xhr.addEventListener('error', () => {
-        console.error('Upload network error for:', file.name)
+      xhr.addEventListener('error', (event) => {
+        console.error('Upload network error for:', file.name, {
+          fileSize: file.size,
+          fileSizeMB: (file.size / (1024 * 1024)).toFixed(2),
+          readyState: xhr.readyState,
+          status: xhr.status,
+          event
+        })
         setUploads(prev => prev.map(u =>
           u.id === uploadId ? {
             ...u,
             status: 'error',
-            error: 'Network error - check your connection and try again',
+            error: `Network error during upload. Check your connection and try again. File: ${(file.size / (1024 * 1024)).toFixed(2)} MB`,
             endTime: Date.now()
           } : u
         ))
@@ -138,12 +159,16 @@ export function UploadProvider({ children }: UploadProviderProps) {
 
       // Set up timeout handling
       xhr.addEventListener('timeout', () => {
-        console.error('Upload timeout for:', file.name)
+        console.error('Upload timeout for:', file.name, {
+          fileSize: file.size,
+          timeoutMs,
+          fileSizeMB: (file.size / (1024 * 1024)).toFixed(2)
+        })
         setUploads(prev => prev.map(u =>
           u.id === uploadId ? {
             ...u,
             status: 'error',
-            error: 'Upload timeout - file may be too large or network is slow',
+            error: `Upload timeout after ${timeoutMs / 1000} seconds. File size: ${(file.size / (1024 * 1024)).toFixed(2)} MB may be too large.`,
             endTime: Date.now()
           } : u
         ))
