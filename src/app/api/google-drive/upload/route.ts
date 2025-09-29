@@ -5,14 +5,8 @@ import { google } from 'googleapis'
 import type { drive_v3 } from 'googleapis'
 import { Readable } from 'stream'
 
-// Configure the API route to handle large bodies
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '200mb',
-    },
-  },
-}
+// Use Node.js runtime for file handling
+export const runtime = 'nodejs'
 
 // Check if user has admin access
 async function checkAdminAccess(userId: number) {
