@@ -67,11 +67,8 @@ export async function POST(request: NextRequest) {
 
     console.log('Got access token, length:', accessToken.length, 'starts with:', accessToken.substring(0, 10) + '...')
 
-    // Determine upload method based on file size
-    const isLargeFile = fileSize > 20 * 1024 * 1024 // 20MB threshold
-    const uploadMethod = isLargeFile ? 'direct' : 'server-proxy'
-
-    console.log(`File size: ${fileSize} bytes (${(fileSize / (1024 * 1024)).toFixed(2)} MB), using ${uploadMethod} upload method`)
+    // Always use direct upload to avoid server limits (Vercel, etc.)
+    console.log(`File size: ${fileSize} bytes (${(fileSize / (1024 * 1024)).toFixed(2)} MB), using direct upload method`)
 
     // Prepare file metadata
     const metadata = {
@@ -79,69 +76,53 @@ export async function POST(request: NextRequest) {
       ...(parentFolderId && { parents: [parentFolderId] })
     }
 
-    if (uploadMethod === 'direct') {
-      // For large files, initiate resumable upload session using Google Drive API
-      const { google } = await import('googleapis')
-      const oauth2Client = new google.auth.OAuth2(
-        process.env.GOOGLE_CLIENT_ID,
-        process.env.GOOGLE_CLIENT_SECRET,
-        process.env.GOOGLE_REDIRECT_URI
-      )
-      oauth2Client.setCredentials({ access_token: accessToken })
+    // Initiate resumable upload session using Google Drive API
+    const { google } = await import('googleapis')
+    const oauth2Client = new google.auth.OAuth2(
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET,
+      process.env.GOOGLE_REDIRECT_URI
+    )
+    oauth2Client.setCredentials({ access_token: accessToken })
 
-      const drive = google.drive({ version: 'v3', auth: oauth2Client })
+    const drive = google.drive({ version: 'v3', auth: oauth2Client })
 
-      // Initiate resumable upload to get session URL
-      const initiateResponse = await drive.files.create({
-        requestBody: metadata,
-        media: {
-          mimeType: mimeType,
-          body: '', // Empty body for initiation
-        },
-        supportsAllDrives: true,
-      }, {
-        params: {
-          uploadType: 'resumable',
-        }
-      })
-
-      // Extract the session URL from response headers
-      const response = initiateResponse as unknown as { config?: { url?: string }; headers?: { location?: string } }
-      const sessionUrl = response.config?.url || response.headers?.location
-
-      if (!sessionUrl) {
-        throw new Error('Failed to initiate resumable upload session')
+    // Initiate resumable upload to get session URL
+    const initiateResponse = await drive.files.create({
+      requestBody: metadata,
+      media: {
+        mimeType: mimeType,
+        body: '', // Empty body for initiation
+      },
+      supportsAllDrives: true,
+    }, {
+      params: {
+        uploadType: 'resumable',
       }
+    })
 
-      console.log('Direct upload session initiated successfully')
+    // Extract the session URL from response headers
+    const response = initiateResponse as unknown as { config?: { url?: string }; headers?: { location?: string } }
+    const sessionUrl = response.config?.url || response.headers?.location
 
-      return NextResponse.json({
-        success: true,
-        uploadMethod: 'direct',
-        uploadUrl: sessionUrl,
-        accessToken: accessToken,
-        fileMetadata: {
-          name: fileName,
-          size: fileSize,
-          mimeType: mimeType,
-          parents: parentFolderId ? [parentFolderId] : undefined
-        }
-      })
-    } else {
-      // For smaller files, use server-side proxy upload to avoid CORS issues
-      console.log('Preparing server-side proxy upload info')
-
-      return NextResponse.json({
-        success: true,
-        uploadMethod: 'server-proxy',
-        fileMetadata: {
-          name: fileName,
-          size: fileSize,
-          mimeType: mimeType,
-          parents: parentFolderId ? [parentFolderId] : undefined
-        }
-      })
+    if (!sessionUrl) {
+      throw new Error('Failed to initiate resumable upload session')
     }
+
+    console.log('Direct upload session initiated successfully')
+
+    return NextResponse.json({
+      success: true,
+      uploadMethod: 'direct',
+      uploadUrl: sessionUrl,
+      accessToken: accessToken,
+      fileMetadata: {
+        name: fileName,
+        size: fileSize,
+        mimeType: mimeType,
+        parents: parentFolderId ? [parentFolderId] : undefined
+      }
+    })
 
   } catch (error) {
     console.error('Error generating upload URL:', error)
