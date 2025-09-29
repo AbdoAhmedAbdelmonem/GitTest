@@ -128,11 +128,14 @@ export async function POST(request: NextRequest) {
           try {
             const { done, value } = await reader.read()
             if (done) {
+              console.log('Stream reading completed for file:', file!.name)
               this.push(null)
             } else {
+              console.log(`Read ${value.length} bytes from stream for file:`, file!.name)
               this.push(Buffer.from(value))
             }
           } catch (error) {
+            console.error('Error reading from stream for file:', file!.name, error)
             this.destroy(error as Error)
           }
         }
