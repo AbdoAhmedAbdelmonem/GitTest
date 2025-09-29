@@ -1,8 +1,9 @@
-﻿import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/client'
 import { getValidAccessToken } from '@/lib/google-oauth'
 import { google } from 'googleapis'
 import type { drive_v3 } from 'googleapis'
+import { Readable } from 'stream'
 
 // Check if user has admin access
 async function checkAdminAccess(userId: number) {
@@ -109,14 +110,17 @@ export async function POST(request: NextRequest) {
 
     // Use simple upload for all files (reliable and handles large files well)
     console.log('Using simple upload for file')
+
+    // Convert file to a readable stream for Google Drive API
     const fileBuffer = Buffer.from(await file.arrayBuffer())
+    const fileStream = Readable.from(fileBuffer)
 
     // Upload file to Google Drive
     const uploadPromise = drive.files.create({
       requestBody: fileMetadata,
       media: {
         mimeType: file.type,
-        body: fileBuffer,
+        body: fileStream,
       },
       fields: 'id, name, mimeType, size, createdTime, modifiedTime, webViewLink, webContentLink',
       supportsAllDrives: true,
