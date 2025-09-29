@@ -238,36 +238,41 @@ export function UploadProvider({ children }: UploadProviderProps) {
         ))
       })
 
-      // Create multipart form data for Google Drive
+      // Create multipart form data for Google Drive using proper format
       const boundary = '----FormBoundary' + Math.random().toString(36).substr(2, 9)
       const metadata = {
         name: file.name,
         ...(urlData.fileMetadata.parents && { parents: urlData.fileMetadata.parents })
       }
 
-      // Create the multipart body
-      const parts = [
-        `--${boundary}`,
-        'Content-Type: application/json; charset=UTF-8',
-        '',
-        JSON.stringify(metadata),
-        '',
-        `--${boundary}`,
-        `Content-Type: ${file.type || 'application/octet-stream'}`,
-        '',
-      ].join('\r\n')
-
-      // Convert file to array buffer and create multipart data
-      const fileBuffer = await file.arrayBuffer()
+      // Create the multipart body parts manually (Google Drive specific format)
+      const metadataPart = `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(metadata)}\r\n`
+      const filePartHeader = `--${boundary}\r\nContent-Type: ${file.type || 'application/octet-stream'}\r\n\r\n`
       const closingBoundary = `\r\n--${boundary}--\r\n`
-      const encoder = new TextEncoder()
-      const partsArray = encoder.encode(parts)
-      const closingArray = encoder.encode(closingBoundary)
 
-      const multipartData = new Uint8Array(partsArray.length + fileBuffer.byteLength + closingArray.length)
-      multipartData.set(partsArray, 0)
-      multipartData.set(new Uint8Array(fileBuffer), partsArray.length)
-      multipartData.set(closingArray, partsArray.length + fileBuffer.byteLength)
+      // Convert parts to Uint8Arrays
+      const encoder = new TextEncoder()
+      const metadataArray = encoder.encode(metadataPart)
+      const fileHeaderArray = encoder.encode(filePartHeader)
+      const closingArray = encoder.encode(closingBoundary)
+      const fileBuffer = await file.arrayBuffer()
+      const fileArray = new Uint8Array(fileBuffer)
+
+      // Combine all parts
+      const totalLength = metadataArray.length + fileHeaderArray.length + fileArray.length + closingArray.length
+      const multipartData = new Uint8Array(totalLength)
+
+      let offset = 0
+      multipartData.set(metadataArray, offset)
+      offset += metadataArray.length
+
+      multipartData.set(fileHeaderArray, offset)
+      offset += fileHeaderArray.length
+
+      multipartData.set(fileArray, offset)
+      offset += fileArray.length
+
+      multipartData.set(closingArray, offset)
 
       // Configure and send multipart request
       xhr.open('POST', uploadUrl)
