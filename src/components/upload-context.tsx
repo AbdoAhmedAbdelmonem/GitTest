@@ -205,8 +205,8 @@ export function UploadProvider({ children }: UploadProviderProps) {
         addToast(`Upload timeout for "${file.name}". Large files may take longer.`, 'error')
       })
 
-      // Set timeout for large files
-      const timeoutMs = file.size > 50 * 1024 * 1024 ? 300000 : 120000 // 5 min for large files, 2 min for small
+      // Set timeout for large files (10 minutes for files over 50MB, 5 minutes for large files, 2 minutes for small)
+      const timeoutMs = file.size > 50 * 1024 * 1024 ? 600000 : file.size > 10 * 1024 * 1024 ? 300000 : 120000 // 10 min for >50MB, 5 min for >10MB, 2 min for small
       xhr.timeout = timeoutMs
 
       // Set up abort handling
