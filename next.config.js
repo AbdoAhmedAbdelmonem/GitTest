@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
+  experimental: {
+    serverComponentsExternalPackages: [],
+    serverActions: {
+      bodySizeLimit: '100mb',
+    },
+  },
   images: {
     remotePatterns: [
       {
@@ -22,7 +28,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'lh6.googleusercontent.com',
-      },
+      }
     ],
   },
   eslint: {
@@ -33,4 +39,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
