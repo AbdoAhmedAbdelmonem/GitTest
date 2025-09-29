@@ -89,6 +89,16 @@ export function UploadProvider({ children }: UploadProviderProps) {
 
       // Set up completion
       xhr.addEventListener('load', () => {
+        console.log('XMLHttpRequest load event fired:', {
+          status: xhr.status,
+          statusText: xhr.statusText,
+          readyState: xhr.readyState,
+          responseType: xhr.responseType,
+          responseTextType: typeof xhr.responseText,
+          responseTextLength: xhr.responseText?.length || 0,
+          fileName: file.name
+        })
+
         if (xhr.status >= 200 && xhr.status < 300) {
           setUploads(prev => prev.map(u =>
             u.id === uploadId ? {
@@ -107,22 +117,42 @@ export function UploadProvider({ children }: UploadProviderProps) {
             uploadCallbacksRef.current.delete(uploadId)
           }
         } else {
-          let errorMessage = `Upload failed with status ${xhr.status}`
-          console.error('Upload failed:', {
+          console.error('Upload failed - detailed error info:', {
             status: xhr.status,
             statusText: xhr.statusText,
+            responseType: typeof xhr.responseText,
             responseText: xhr.responseText,
+            responseTextLength: xhr.responseText?.length,
             fileName: file.name,
-            fileSize: file.size
+            fileSize: file.size,
+            fileSizeMB: (file.size / (1024 * 1024)).toFixed(2),
+            readyState: xhr.readyState,
+            responseURL: xhr.responseURL
           })
 
+          let errorMessage = `Upload failed with status ${xhr.status}`
+
           try {
-            const response = JSON.parse(xhr.responseText)
-            errorMessage = response.error || `Server error: ${xhr.status} ${xhr.statusText}`
+            // Check if responseText is actually a string
+            if (typeof xhr.responseText === 'string' && xhr.responseText.trim()) {
+              const response = JSON.parse(xhr.responseText)
+              errorMessage = response.error || `Server error: ${xhr.status} ${xhr.statusText}`
+              console.log('Parsed JSON error response:', response)
+            } else {
+              console.warn('Response text is not a valid string:', xhr.responseText)
+              errorMessage = `Server error: ${xhr.status} ${xhr.statusText || 'Unknown error'}`
+            }
           } catch (parseError) {
-            console.error('Failed to parse error response:', parseError)
-            // If response is not JSON, use the raw response or status text
-            errorMessage = xhr.responseText || xhr.statusText || `HTTP ${xhr.status} error`
+            console.error('Failed to parse error response as JSON:', parseError, 'Raw response:', xhr.responseText)
+            // If response is not JSON, try to extract meaningful error info
+            if (xhr.statusText) {
+              errorMessage = `HTTP ${xhr.status}: ${xhr.statusText}`
+            } else if (xhr.responseText && typeof xhr.responseText === 'string') {
+              // Take first 200 chars of response text as error message
+              errorMessage = xhr.responseText.substring(0, 200)
+            } else {
+              errorMessage = `Upload failed with HTTP ${xhr.status} error`
+            }
           }
 
           setUploads(prev => prev.map(u =>
@@ -194,9 +224,21 @@ export function UploadProvider({ children }: UploadProviderProps) {
       // Configure and send request
       xhr.open('POST', '/api/google-drive/upload')
       xhr.setRequestHeader('Accept', 'application/json')
+      // Don't set Content-Type for FormData - let browser set it with boundary
+
+      console.log('Sending upload request:', {
+        url: '/api/google-drive/upload',
+        fileName: file.name,
+        fileSize: file.size,
+        fileSizeMB: (file.size / (1024 * 1024)).toFixed(2),
+        parentFolderId,
+        userId,
+        timeoutMs
+      })
 
       // Handle abort controller
       abortController.signal.addEventListener('abort', () => {
+        console.log('Upload aborted for:', file.name)
         xhr.abort()
       })
 
