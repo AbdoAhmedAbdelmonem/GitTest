@@ -60,67 +60,67 @@ interface QuizInterfaceProps {
   onExit: () => void;
 }
 
-// Replace ElegantShape with this optimized version
-function ElegantShape({
-  className,
-  width = 400,
-  height = 100,
-  rotate = 0,
-  gradient = "from-white/[0.08]",
-}: {
-  className?: string;
-  width?: number;
-  height?: number;
-  rotate?: number;
-  gradient?: string;
-}) {
-  // Only render on non-mobile devices and when not in loading state
-  const [isMobile, setIsMobile] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+// // Replace ElegantShape with this optimized version
+// function ElegantShape({
+//   className,
+//   width = 400,
+//   height = 100,
+//   rotate = 0,
+//   gradient = "from-white/[0.08]",
+// }: {
+//   className?: string;
+//   width?: number;
+//   height?: number;
+//   rotate?: number;
+//   gradient?: string;
+// }) {
+//   // Only render on non-mobile devices and when not in loading state
+//   const [isMobile, setIsMobile] = useState(false);
+//   const prefersReducedMotion = useReducedMotion();
   
-  // Skip rendering if reduced motion is preferred
-  if (prefersReducedMotion) return null;
+//   // Skip rendering if reduced motion is preferred
+//   if (prefersReducedMotion) return null;
   
-  // Use ResizeObserver instead of window event for better performance
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
+//   // Use ResizeObserver instead of window event for better performance
+//   useEffect(() => {
+//     const checkMobile = () => setIsMobile(window.innerWidth < 768);
+//     checkMobile();
     
-    // Use ResizeObserver instead of event listener
-    const resizeObserver = new ResizeObserver(checkMobile);
-    resizeObserver.observe(document.body);
-    return () => resizeObserver.disconnect();
-  }, []);
+//     // Use ResizeObserver instead of event listener
+//     const resizeObserver = new ResizeObserver(checkMobile);
+//     resizeObserver.observe(document.body);
+//     return () => resizeObserver.disconnect();
+//   }, []);
   
-  if (isMobile) return null;
+//   if (isMobile) return null;
   
-  return (
-    <div
-      className={cn("absolute", className)}
-      style={{
-        opacity: 0.4, // Reduced opacity
-        transform: `rotate(${rotate}deg)`,
-      }}
-    >
-      <div
-        style={{
-          width,
-          height,
-        }}
-        className="relative"
-      >
-        <div
-          className={cn(
-            "absolute inset-0 rounded-full",
-            "bg-gradient-to-r to-transparent",
-            gradient,
-            "border border-white/[0.15]", // Thinner border
-          )}
-        />
-      </div>
-    </div>
-  );
-}
+//   return (
+//     <div
+//       className={cn("absolute", className)}
+//       style={{
+//         opacity: 0.4, // Reduced opacity
+//         transform: `rotate(${rotate}deg)`,
+//       }}
+//     >
+//       <div
+//         style={{
+//           width,
+//           height,
+//         }}
+//         className="relative"
+//       >
+//         <div
+//           className={cn(
+//             "absolute inset-0 rounded-full",
+//             "bg-gradient-to-r to-transparent",
+//             gradient,
+//             "border border-white/[0.15]", // Thinner border
+//           )}
+//         />
+//       </div>
+//     </div>
+//   );
+// }
 
 
 const themes = [
