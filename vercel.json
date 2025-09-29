@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "app/api/google-drive/upload/route.ts": {
+      "maxDuration": 300,
+      "memory": 3008
+    }
+  },
+  "regions": ["iad1"]
+}
