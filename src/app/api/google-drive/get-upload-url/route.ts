@@ -67,54 +67,18 @@ export async function POST(request: NextRequest) {
 
     console.log('Got access token, length:', accessToken.length, 'starts with:', accessToken.substring(0, 10) + '...')
 
-    // Always use direct upload to avoid server limits (Vercel, etc.)
-    console.log(`File size: ${fileSize} bytes (${(fileSize / (1024 * 1024)).toFixed(2)} MB), using direct upload method`)
+    // Always use direct multipart upload to avoid server limits (Vercel, etc.)
+    console.log(`File size: ${fileSize} bytes (${(fileSize / (1024 * 1024)).toFixed(2)} MB), using direct multipart upload method`)
 
-    // Prepare file metadata
-    const metadata = {
-      name: fileName,
-      ...(parentFolderId && { parents: [parentFolderId] })
-    }
+    // For multipart uploads, we don't need to initiate a session - just return the upload URL
+    const uploadUrl = `https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart`
 
-    // Initiate resumable upload session using Google Drive API
-    const { google } = await import('googleapis')
-    const oauth2Client = new google.auth.OAuth2(
-      process.env.GOOGLE_CLIENT_ID,
-      process.env.GOOGLE_CLIENT_SECRET,
-      process.env.GOOGLE_REDIRECT_URI
-    )
-    oauth2Client.setCredentials({ access_token: accessToken })
-
-    const drive = google.drive({ version: 'v3', auth: oauth2Client })
-
-    // Initiate resumable upload to get session URL
-    const initiateResponse = await drive.files.create({
-      requestBody: metadata,
-      media: {
-        mimeType: mimeType,
-        body: '', // Empty body for initiation
-      },
-      supportsAllDrives: true,
-    }, {
-      params: {
-        uploadType: 'resumable',
-      }
-    })
-
-    // Extract the session URL from response headers
-    const response = initiateResponse as unknown as { config?: { url?: string }; headers?: { location?: string } }
-    const sessionUrl = response.config?.url || response.headers?.location
-
-    if (!sessionUrl) {
-      throw new Error('Failed to initiate resumable upload session')
-    }
-
-    console.log('Direct upload session initiated successfully')
+    console.log('Using multipart upload URL:', uploadUrl)
 
     return NextResponse.json({
       success: true,
       uploadMethod: 'direct',
-      uploadUrl: sessionUrl,
+      uploadUrl: uploadUrl,
       accessToken: accessToken,
       fileMetadata: {
         name: fileName,
