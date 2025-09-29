@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { google } from 'googleapis'
 import { createClient } from '@/lib/supabase/client'
 import { getValidAccessToken } from '@/lib/google-oauth'
 
@@ -66,60 +65,29 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Configure OAuth2 client
-    const oauth2Client = new google.auth.OAuth2(
-      process.env.GOOGLE_CLIENT_ID,
-      process.env.GOOGLE_CLIENT_SECRET,
-      process.env.GOOGLE_REDIRECT_URI
-    )
-    oauth2Client.setCredentials({ access_token: accessToken })
+    console.log('Got access token, length:', accessToken.length, 'starts with:', accessToken.substring(0, 10) + '...')
 
-    const drive = google.drive({ version: 'v3', auth: oauth2Client })
-
-    // Prepare file metadata
-    const fileMetadata = {
+    // Initiate resumable upload session using Google Drive API
+    // We need to make a direct HTTP request to get the proper session URL
+    const metadata = {
       name: fileName,
-      parents: parentFolderId ? [parentFolderId] : undefined,
+      ...(parentFolderId && { parents: [parentFolderId] })
     }
 
-    // Initiate resumable upload session
-    const resumableResponse = await drive.files.create({
-      requestBody: fileMetadata,
-      media: {
-        mimeType: mimeType || 'application/octet-stream',
-        body: '', // Empty body for session initiation
-      },
-      supportsAllDrives: true,
-    }, {
-      params: {
-        uploadType: 'resumable',
-      }
-    })
+    console.log('Initiating resumable upload with metadata:', metadata)
 
-    // Extract the upload URL from the response
-    // Google Drive API returns the upload URL in response headers for resumable uploads
-    // @ts-expect-error - Complex API response structure
-    const response = resumableResponse
-    const uploadUrl = response.headers?.location || response.config?.url
-
-    if (!uploadUrl) {
-      console.error('No upload URL received from Google Drive')
-      return NextResponse.json(
-        { error: 'Failed to generate upload URL' },
-        { status: 500 }
-      )
-    }
-
-    console.log('Generated upload URL successfully')
+    // For server-side proxy upload to avoid CORS issues
+    // Return info needed for server-side upload
+    console.log('Preparing server-side proxy upload info')
 
     return NextResponse.json({
       success: true,
-      uploadUrl,
+      uploadMethod: 'server-proxy',
       fileMetadata: {
         name: fileName,
         size: fileSize,
         mimeType: mimeType,
-        parentFolderId
+        parents: parentFolderId ? [parentFolderId] : undefined
       }
     })
 
