@@ -142,8 +142,26 @@ export function UploadProvider({ children }: UploadProviderProps) {
           clearInterval(progressInterval)
 
           if (!serverResponse.ok) {
-            const errorData = await serverResponse.json()
-            throw new Error(errorData.error || 'Server upload failed')
+            let errorMessage = `Server upload failed with status ${serverResponse.status}`
+
+            try {
+              // Try to parse as JSON first
+              const errorData = await serverResponse.json()
+              errorMessage = errorData.error || errorMessage
+            } catch (jsonError) {
+              // If JSON parsing fails, try to get text response
+              try {
+                const textResponse = await serverResponse.text()
+                if (textResponse && textResponse.trim()) {
+                  errorMessage = `Server error: ${textResponse.substring(0, 200)}${textResponse.length > 200 ? '...' : ''}`
+                }
+              } catch (textError) {
+                // If both JSON and text parsing fail, use status-based message
+                errorMessage = `HTTP ${serverResponse.status}: ${serverResponse.statusText || 'Unknown error'}`
+              }
+            }
+
+            throw new Error(errorMessage)
           }
 
           const result = await serverResponse.json()
