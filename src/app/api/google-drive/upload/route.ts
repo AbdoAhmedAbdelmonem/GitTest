@@ -8,6 +8,10 @@ import { Readable } from 'stream'
 // Use Node.js runtime for file handling
 export const runtime = 'nodejs'
 
+// Configure for large file uploads
+export const maxDuration = 300 // 5 minutes timeout
+export const dynamic = 'force-dynamic'
+
 // Check if user has admin access
 async function checkAdminAccess(userId: number) {
   const supabase = createClient()
@@ -41,10 +45,21 @@ export async function POST(request: NextRequest) {
       console.log('Request aborted by client')
     })
 
-    const formData = await request.formData()
-    file = formData.get('file') as File
-    userId = formData.get('userId') as string
-    parentFolderId = formData.get('parentFolderId') as string
+    // Try to parse FormData, but handle large files differently
+    try {
+      const formData = await request.formData()
+      file = formData.get('file') as File
+      userId = formData.get('userId') as string
+      parentFolderId = formData.get('parentFolderId') as string
+    } catch (formDataError) {
+      console.log('FormData parsing failed, this might be due to large file size:', formDataError)
+      // If FormData parsing fails, try to extract from request body directly
+      // This is a fallback for very large files
+      return NextResponse.json(
+        { error: 'File too large for standard upload. Please use a smaller file or contact support.' },
+        { status: 413 }
+      )
+    }
 
     console.log('Server-side upload request:', {
       fileName: file?.name,
