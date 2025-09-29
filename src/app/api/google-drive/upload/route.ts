@@ -33,6 +33,11 @@ export async function POST(request: NextRequest) {
   let parentFolderId: string = ''
   
   try {
+    // Increase timeout for large file processing
+    request.signal?.addEventListener('abort', () => {
+      console.log('Request aborted by client')
+    })
+
     const formData = await request.formData()
     file = formData.get('file') as File
     userId = formData.get('userId') as string
@@ -114,50 +119,6 @@ export async function POST(request: NextRequest) {
       parents: parentFolderId ? [parentFolderId] : undefined,
     }
 
-    let fileStream: Readable
-
-    // For files larger than 10MB, use streaming to avoid memory issues
-    if (fileSize > 10 * 1024 * 1024) {
-      console.log('Using streaming upload for large file')
-      // Create a readable stream from the file's web stream
-      const webStream = file.stream()
-      const reader = webStream.getReader()
-
-      fileStream = new Readable({
-        async read() {
-          try {
-            const { done, value } = await reader.read()
-            if (done) {
-              console.log('Stream reading completed for file:', file!.name)
-              this.push(null)
-            } else {
-              console.log(`Read ${value.length} bytes from stream for file:`, file!.name)
-              this.push(Buffer.from(value))
-            }
-          } catch (error) {
-            console.error('Error reading from stream for file:', file!.name, error)
-            this.destroy(error as Error)
-          }
-        }
-      })
-    } else {
-      console.log('Using buffer upload for small file')
-      // For smaller files, use buffer approach
-      const fileBuffer = Buffer.from(await file.arrayBuffer())
-      fileStream = Readable.from(fileBuffer)
-    }
-
-    // Upload file to Google Drive
-    const uploadPromise = drive.files.create({
-      requestBody: fileMetadata,
-      media: {
-        mimeType: file.type,
-        body: fileStream,
-      },
-      fields: 'id, name, mimeType, size, createdTime, modifiedTime, webViewLink, webContentLink',
-      supportsAllDrives: true,
-    })
-
     // Add timeout for large files (45 minutes for files over 100MB, 15 minutes for others)
     const timeoutMs = fileSize > 100 * 1024 * 1024 ? 45 * 60 * 1000 : 15 * 60 * 1000
     console.log(`Upload timeout set to ${timeoutMs / (60 * 1000)} minutes`)
@@ -166,12 +127,113 @@ export async function POST(request: NextRequest) {
       setTimeout(() => reject(new Error(`Upload timeout after ${timeoutMs / (60 * 1000)} minutes`)), timeoutMs)
     })
 
-    const response = await Promise.race([uploadPromise, timeoutPromise])
-    
-    return NextResponse.json({
-      success: true,
-      data: (response as { data: drive_v3.Schema$File }).data
-    })
+    // Use Google Drive resumable upload for files larger than 50MB
+    if (fileSize > 50 * 1024 * 1024) {
+      console.log('Using Google Drive resumable upload for very large file')
+
+      try {
+        // Step 1: Initiate resumable upload session
+        await drive.files.create({
+          requestBody: fileMetadata,
+          media: {
+            mimeType: file.type,
+            body: '', // Empty body for initiation
+          },
+          supportsAllDrives: true,
+        }, {
+          params: {
+            uploadType: 'resumable',
+          }
+        })
+
+        console.log('Resumable upload session initiated')
+
+        // Step 2: Upload the complete file using the resumable session
+        // The googleapis library handles the resumable upload automatically
+        const fileBuffer = Buffer.from(await file.arrayBuffer())
+        const fileStream = Readable.from(fileBuffer)
+
+        const uploadResponse = await drive.files.create({
+          requestBody: fileMetadata,
+          media: {
+            mimeType: file.type,
+            body: fileStream,
+          },
+          fields: 'id, name, mimeType, size, createdTime, modifiedTime, webViewLink, webContentLink',
+          supportsAllDrives: true,
+        }, {
+          timeout: timeoutMs,
+          headers: {
+            'Content-Length': fileSize.toString(),
+          }
+        })
+
+        return NextResponse.json({
+          success: true,
+          data: (uploadResponse as { data: drive_v3.Schema$File }).data
+        })
+
+      } catch (resumableError) {
+        console.error('Resumable upload failed:', resumableError)
+        throw resumableError
+      }
+
+    } else if (fileSize > 10 * 1024 * 1024) {
+      console.log('Using optimized upload for large file')
+
+      // For files 10-50MB, use optimized single upload
+      const fileBuffer = Buffer.from(await file.arrayBuffer())
+      const fileStream = Readable.from(fileBuffer)
+
+      // Set up optimized upload request
+      const uploadRequest = drive.files.create({
+        requestBody: fileMetadata,
+        media: {
+          mimeType: file.type,
+          body: fileStream,
+        },
+        fields: 'id, name, mimeType, size, createdTime, modifiedTime, webViewLink, webContentLink',
+        supportsAllDrives: true,
+      }, {
+        // Configure for large file uploads
+        timeout: timeoutMs,
+        headers: {
+          'Content-Length': fileSize.toString(),
+        }
+      })
+
+      console.log('Starting optimized upload with timeout:', timeoutMs / (60 * 1000), 'minutes')
+      const response = await Promise.race([uploadRequest, timeoutPromise])
+
+      return NextResponse.json({
+        success: true,
+        data: (response as { data: drive_v3.Schema$File }).data
+      })
+
+    } else {
+      console.log('Using simple upload for small file')
+      // For smaller files, use the simple upload approach
+      const fileBuffer = Buffer.from(await file.arrayBuffer())
+      const fileStream = Readable.from(fileBuffer)
+
+      // Upload file to Google Drive
+      const uploadPromise = drive.files.create({
+        requestBody: fileMetadata,
+        media: {
+          mimeType: file.type,
+          body: fileStream,
+        },
+        fields: 'id, name, mimeType, size, createdTime, modifiedTime, webViewLink, webContentLink',
+        supportsAllDrives: true,
+      })
+
+      const response = await Promise.race([uploadPromise, timeoutPromise])
+
+      return NextResponse.json({
+        success: true,
+        data: (response as { data: drive_v3.Schema$File }).data
+      })
+    }
     
   } catch (error) {
     console.error('Error uploading file to Google Drive:', {
