@@ -5,6 +5,15 @@ import { google } from 'googleapis'
 import type { drive_v3 } from 'googleapis'
 import { Readable } from 'stream'
 
+// Configure the API route to handle large bodies
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '200mb',
+    },
+  },
+}
+
 // Check if user has admin access
 async function checkAdminAccess(userId: number) {
   const supabase = createClient()
@@ -46,9 +55,12 @@ export async function POST(request: NextRequest) {
     console.log('Server-side upload request:', {
       fileName: file?.name,
       fileSize: file?.size,
+      fileSizeMB: file?.size ? (file.size / (1024 * 1024)).toFixed(2) : 'unknown',
       fileType: file?.type,
       parentFolderId,
-      userId
+      userId,
+      contentLength: request.headers.get('content-length'),
+      contentType: request.headers.get('content-type')
     })
 
     if (!file || !userId) {
@@ -112,10 +124,15 @@ export async function POST(request: NextRequest) {
     console.log('Using simple upload for file')
 
     // Convert file to a readable stream for Google Drive API
+    console.log('Converting file to buffer and stream...')
     const fileBuffer = Buffer.from(await file.arrayBuffer())
+    console.log(`File buffer created: ${fileBuffer.length} bytes`)
+
     const fileStream = Readable.from(fileBuffer)
+    console.log('File stream created successfully')
 
     // Upload file to Google Drive
+    console.log('Initiating Google Drive upload...')
     const uploadPromise = drive.files.create({
       requestBody: fileMetadata,
       media: {
@@ -127,6 +144,12 @@ export async function POST(request: NextRequest) {
     })
 
     const response = await Promise.race([uploadPromise, timeoutPromise])
+
+    console.log('Google Drive upload completed successfully:', {
+      fileId: (response as { data: drive_v3.Schema$File }).data.id,
+      fileName: (response as { data: drive_v3.Schema$File }).data.name,
+      fileSize: (response as { data: drive_v3.Schema$File }).data.size
+    })
 
     return NextResponse.json({
       success: true,
