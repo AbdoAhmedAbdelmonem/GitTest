@@ -747,52 +747,43 @@ export default function QuizInterface({
               </CardHeader>
 
               <CardContent className="space-y-8">
-                <AnimatePresence>
-                  {showSettings && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="space-y-6 p-6 bg-black/30 rounded-xl border border-white/20"
-                    >
-                      <h3 className="text-xl font-semibold flex items-center text-white">
-                        <Palette className="w-5 h-5 mr-3" />
-                        Customize Your Experience
-                      </h3>
+                {showSettings && (
+                  <div className="space-y-6 p-6 bg-black/30 rounded-xl border border-white/20 transition-all duration-300 ease-in-out">
+                    <h3 className="text-xl font-semibold flex items-center text-white">
+                      <Palette className="w-5 h-5 mr-3" />
+                      Customize Your Experience
+                    </h3>
 
-                      <div>
-                        <label className="block text-sm font-medium mb-4 text-white/90">
-                          Choose Theme
-                        </label>
-                        <div className="grid grid-cols-3 gap-3">
-                          {themes.map((theme) => (
-                            <motion.button
-                              key={theme.name}
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                              onClick={() => setSelectedTheme(theme)}
-                              className={cn(
-                                "p-4 rounded-xl border-2 transition-all backdrop-blur-sm",
-                                selectedTheme.name === theme.name
-                                  ? "border-white scale-105 shadow-lg bg-black/30"
-                                  : "border-white/30 hover:border-white/50 bg-black/20"
-                              )}
-                              style={{ backgroundColor: `${theme.primary}30` }}
-                            >
-                              <div
-                                className="w-8 h-8 rounded-full mx-auto mb-2"
-                                style={{ backgroundColor: theme.primary }}
-                              />
-                              <div className="text-sm font-medium text-white">
-                                {theme.name}
-                              </div>
-                            </motion.button>
-                          ))}
-                        </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-4 text-white/90">
+                        Choose Theme
+                      </label>
+                      <div className="grid grid-cols-3 gap-3">
+                        {themes.map((theme) => (
+                          <button
+                            key={theme.name}
+                            onClick={() => setSelectedTheme(theme)}
+                            className={cn(
+                              "p-4 rounded-xl border-2 transition-all duration-200 backdrop-blur-sm hover:scale-105 active:scale-95",
+                              selectedTheme.name === theme.name
+                                ? "border-white scale-105 shadow-lg bg-black/30"
+                                : "border-white/30 hover:border-white/50 bg-black/20"
+                            )}
+                            style={{ backgroundColor: `${theme.primary}30` }}
+                          >
+                            <div
+                              className="w-8 h-8 rounded-full mx-auto mb-2"
+                              style={{ backgroundColor: theme.primary }}
+                            />
+                            <div className="text-sm font-medium text-white">
+                              {theme.name}
+                            </div>
+                          </button>
+                        ))}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                  </div>
+                )}
 
                 {/* Quiz Mode Selection */}
                 <div>
@@ -804,13 +795,11 @@ export default function QuizInterface({
                     {quizModes.map((mode) => {
                       const IconComponent = mode.icon;
                       return (
-                        <motion.button
+                        <button
                           key={mode.id}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
                           onClick={() => setSelectedMode(mode.id)}
                           className={cn(
-                            "p-6 rounded-xl border-2 transition-all backdrop-blur-sm text-left",
+                            "p-6 rounded-xl border-2 transition-all duration-200 backdrop-blur-sm text-left hover:scale-102 active:scale-98",
                             selectedMode === mode.id
                               ? "border-white bg-black/40 scale-105"
                               : "border-white/30 hover:border-white/50 hover:bg-black/20 bg-black/10"
@@ -838,7 +827,7 @@ export default function QuizInterface({
                               </div>
                             </div>
                           </div>
-                        </motion.button>
+                        </button>
                       );
                     })}
                   </div>
@@ -853,13 +842,11 @@ export default function QuizInterface({
                     {durations.map((duration) => {
                       const IconComponent = duration.icon || Clock;
                       return (
-                        <motion.button
+                        <button
                         key={duration.value}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
                         onClick={() => setSelectedDuration(duration.value)}
                         className={cn(
-                          "p-6 rounded-xl border-2 transition-all backdrop-blur-sm text-center",
+                          "p-6 rounded-xl border-2 transition-all duration-200 backdrop-blur-sm text-center hover:scale-105 active:scale-95",
                           selectedDuration === duration.value
                           ? "scale-105"
                           : "hover:border-white/50 hover:bg-black/20 bg-black/10"
@@ -890,7 +877,7 @@ export default function QuizInterface({
                         <div className="text-sm text-white/80">
                           {duration.description}
                         </div>
-                        </motion.button>
+                        </button>
                       );
                     })}
                     </div>
