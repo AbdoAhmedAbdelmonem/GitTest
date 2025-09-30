@@ -69,10 +69,10 @@ const specializations = [
 ]
 
 const stats = [
-  { icon: BookOpen, label: "Courses Available", value: "200" },
-  { icon: Award, label: "Solved Quizzes", value: "30000" },
-  { icon: BookOpenCheck, label: "Available Quizzes", value: "140+" },
-  { icon: ServerCrash , label: "Million Requests", value: "1.25M" },
+  { icon: BookOpen, label: "Courses Available", value: 200, suffix: "" },
+  { icon: Award, label: "Solved Quizzes", value: 30000, suffix: "" },
+  { icon: BookOpenCheck, label: "Available Quizzes", value: 140, suffix: "+" },
+  { icon: ServerCrash , label: "Million Requests", value: 1.25, suffix: "M" },
 ]
 
 export default function HomePage() {
@@ -102,6 +102,7 @@ export default function HomePage() {
                     duration={1}
                     className="count-up-text"
                   />
+                  {stat.suffix}
                 </div>
                 <div className="text-sm text-white/40">{stat.label}</div>
               </ScrollAnimatedSection>
@@ -165,41 +166,41 @@ export default function HomePage() {
                     />
                     
                     {/* Your existing card */}
-                    <Card className="bg-white/[0.02] border-white/10 hover:bg-white/[0.04] transition-all duration-300 h-full relative z-10">
-                      <CardHeader>
-                        <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg border ${spec.color} mb-4`}>
-                          <spec.icon className="w-6 h-6" />
-                        </div>
-                        <CardTitle className="text-white text-xl mb-2">{spec.title}</CardTitle>
-                        <CardDescription className="text-white/40 leading-relaxed">{spec.description}</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center gap-4 text-sm text-white/60">
-                            <span>{spec.courses} Courses</span>
-                            <span>{spec.students} Students</span>
+                    <Link href={`/specialization/${spec.id}`}>
+                      <Card className="bg-white/[0.02] border-white/10 hover:bg-white/[0.04] transition-all duration-300 h-full relative z-10 cursor-pointer">
+                        <CardHeader>
+                          <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg border ${spec.color} mb-4`}>
+                            <spec.icon className="w-6 h-6" />
                           </div>
-                        </div>
-                        <Link href={`/specialization/${spec.id}`}>
-                            <Button
-                              variant="outline"
-                              className={`w-full bg-transparent border-white/20 text-white hover:bg-white/10 group-hover:border-white/30 transition-all duration-300`}
-                              style={{
-                              color: "white",
-                              transition: "color 0.3s ease",
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.color = spotlightColor;
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.color = "white";
-                              }}
-                            >
-                              Explore Courses
-                            </Button>
-                        </Link>
-                      </CardContent>
-                    </Card>
+                          <CardTitle className="text-white text-xl mb-2">{spec.title}</CardTitle>
+                          <CardDescription className="text-white/40 leading-relaxed">{spec.description}</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-4 text-sm text-white/60">
+                              <span>{spec.courses} Courses</span>
+                              <span>{spec.students} Students</span>
+                            </div>
+                          </div>
+                          <Button
+                            variant="outline"
+                            className={`w-full bg-transparent border-white/20 text-white hover:bg-white/10 group-hover:border-white/30 transition-all duration-300`}
+                            style={{
+                            color: "white",
+                            transition: "color 0.3s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color = spotlightColor;
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color = "white";
+                            }}
+                          >
+                            Explore Courses
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   </div>
                 </ScrollAnimatedSection>
               );
@@ -259,7 +260,6 @@ export default function HomePage() {
                 title: "Legal Zone",
                 items: [
                   { name: "Certifications", link: "/certifications" },
-                  { name: "Internal Regulations for FCDS", link: "https://drive.google.com/file/d/1x7pupdeFrJZd-Sz5tiKoudSRRsBP96e3/view" },
                   { name: "Terms of Service", link: "/terms" },
                   { name: "Privacy and Policies", link: "/privacy" }
                 ],
@@ -304,7 +304,6 @@ export default function HomePage() {
                 <p className="copy">
                   &copy; {new Date().getDate()} of {new Date().toLocaleString('default', { month: 'long' })} {new Date().getFullYear()} - Chameleon FCDS. All rights reserved.
                 </p>
-                <p>Chameleon FCDS - Educational Platform by Levi Ackerman</p>
             </div>
           </ScrollAnimatedSection>
         </div>
