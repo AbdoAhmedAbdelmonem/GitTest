@@ -1144,40 +1144,6 @@ export default function QuizInterface({
                             </AnimatePresence>
 
                             <div className="flex items-center">
-                              <div
-                                className={cn(
-                                  "w-8 h-8 rounded-full border-2 mr-4 flex items-center justify-center transition-all",
-                                  showFeedback
-                                    ? isCorrectOption
-                                      ? "border-green-400 bg-green-400"
-                                      : isSelected
-                                      ? "border-red-400 bg-red-400"
-                                      : "border-white/[0.4]"
-                                    : isSelected
-                                    ? "border-white bg-white"
-                                    : "border-white/[0.4]"
-                                )}
-                              >
-                                {!showFeedback && isSelected && (
-                                  <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    className="w-4 h-4 rounded-full"
-                                    style={{
-                                      backgroundColor: selectedTheme.primary,
-                                    }}
-                                  />
-                                )}
-                                {showFeedback &&
-                                  (isCorrectOption ||
-                                    (isSelected && !isCorrectOption)) && (
-                                    <motion.div
-                                      initial={{ scale: 0 }}
-                                      animate={{ scale: 1 }}
-                                      className="w-4 h-4 rounded-full bg-white"
-                                    />
-                                  )}
-                              </div>
                               <span className="text-lg">{option}</span>
                             </div>
 
