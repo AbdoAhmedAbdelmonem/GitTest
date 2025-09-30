@@ -9,6 +9,8 @@ import CreativeFeatureSlider from "@/components/creative-feature-slider"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
 import Link from "next/link"
+import { getStudentSession } from "@/lib/auth"
+import { useEffect, useState } from "react"
 
 const specializations = [
   {
@@ -76,6 +78,15 @@ const stats = [
 ]
 
 export default function HomePage() {
+  const [username, setUsername] = useState<string>("")
+
+  useEffect(() => {
+    const session = getStudentSession()
+    if (session) {
+      setUsername(session.username)
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#030303]">
       {/* Navigation */}
@@ -121,9 +132,9 @@ export default function HomePage() {
             <Badge variant="outline" className="mb-4 bg-white/5 border-white/10 text-white/60">
               Specializations
             </Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Choose Your <span style={{ color: 'rgba(99, 102, 241, 1)' }}>Learning Path</span></h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{username ? `${username}'s Learning Path` : 'Choose Your'} <span style={{ color: 'rgba(99, 102, 241, 1)' }}>Adventure</span></h2>
             <p className="text-lg text-white/40 max-w-2xl mx-auto">
-              Explore our comprehensive specializations designed to prepare you for the careers of tomorrow
+              {username ? `Hi ${username}! Explore our comprehensive specializations designed to prepare you for the careers of tomorrow` : 'Explore our comprehensive specializations designed to prepare you for the careers of tomorrow'}
             </p>
           </ScrollAnimatedSection>
 
@@ -213,7 +224,7 @@ export default function HomePage() {
       <ScrollAnimatedSection className="py-20 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4 text-center">
           <ScrollAnimatedSection animation="scaleIn" className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to Start Your Journey?</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{username ? `${username}, Ready to Start Your Journey?` : 'Ready to Start Your Journey?'}</h2>
             <p className="text-lg text-white/40 mb-8 leading-relaxed">
               Join thousands of students who are already building their future with our expert-led courses and
               industry-recognized certifications.
@@ -301,9 +312,17 @@ export default function HomePage() {
           </div>
           <ScrollAnimatedSection animation="fadeIn" delay={0.5}>
             <div className="border-t border-white/5 mt-8 pt-8 text-center text-sm text-white/40">
-                <p className="copy">
+                <p className="copy mb-2">
                   &copy; {new Date().getDate()} of {new Date().toLocaleString('default', { month: 'long' })} {new Date().getFullYear()} - Chameleon FCDS. All rights reserved.
                 </p>
+                <p className="copy mb-2">
+                  Chameleon FCDS - Educational Platform by Levi Ackerman
+                </p>
+                {username && (
+                  <p className="text-xs text-white/40" style={{ fontFamily: 'forte' }}>
+                    Personalized experience for {username} ✨
+                  </p>
+                )}
             </div>
           </ScrollAnimatedSection>
         </div>
