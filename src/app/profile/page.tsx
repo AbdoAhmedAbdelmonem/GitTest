@@ -17,6 +17,11 @@ import Image from "next/image"
 import { useAddNotification } from "@/components/notification"
 
 
+interface QuizQuestion {
+  correct: boolean;
+  question_text: string;
+}
+
 // Dot Plot with KDE Visualization Component
 function ProgressDotPlot({ quizData }: { quizData: any[] }) {
   if (!quizData.length) return null;
@@ -152,6 +157,11 @@ export default function ProfilePage() {
     age: "",
     phone_number: ""
   })
+  const [validationErrors, setValidationErrors] = useState<{
+    username?: string;
+    age?: string;
+    phone_number?: string;
+  }>({})
   const { addToast } = useToast()
   const [isSaving, setIsSaving] = useState(false)
   const router = useRouter()
@@ -221,16 +231,57 @@ export default function ProfilePage() {
   }
 
   const handleCancelEdit = () => {
-    // Reset form to original values
     setEditForm({
-      username: userData.username || "",
-      age: String(userData.age || ""),
-      phone_number: userData.phone_number || ""
+      username: userData.username,
+      age: userData.age.toString(),
+      phone_number: userData.phone_number
     })
     setIsEditing(false)
+    setValidationErrors({})
+  }
+
+  const validateForm = () => {
+    const errors: { username?: string; age?: string; phone_number?: string } = {}
+
+    // Username validation
+    if (!editForm.username.trim()) {
+      errors.username = "Username is required"
+    } else if (editForm.username.trim().length < 3) {
+      errors.username = "Username must be at least 3 characters long"
+    } else if (editForm.username.trim() === userData.username) {
+      errors.username = "New username cannot be the same as current username"
+    }
+
+    // Age validation
+    const ageNum = parseInt(editForm.age)
+    if (!editForm.age.trim()) {
+      errors.age = "Age is required"
+    } else if (isNaN(ageNum) || ageNum < 1) {
+      errors.age = "Please enter a valid age"
+    } else if (ageNum > 99) {
+      errors.age = "Age cannot exceed 99 years"
+    }
+
+    // Phone number validation
+    if (!editForm.phone_number.trim()) {
+      errors.phone_number = "Phone number is required"
+    } else if (editForm.phone_number.trim().length < 11) {
+      errors.phone_number = "Phone number must be at least 11 characters long"
+    } else if (editForm.phone_number.trim() === userData.phone_number) {
+      errors.phone_number = "New phone number cannot be the same as current phone number"
+    }
+
+    setValidationErrors(errors)
+    return Object.keys(errors).length === 0
   }
 
   const handleSaveEdit = async () => {
+    // Validate form before saving
+    if (!validateForm()) {
+      addToast("Please fix the validation errors before saving.", "error")
+      return
+    }
+
     setIsSaving(true)
     const supabase = createBrowserClient()
     
@@ -239,9 +290,9 @@ export default function ProfilePage() {
       const { data, error } = await supabase
         .from("chameleons")
         .update({
-          username: editForm.username,
-          age: editForm.age,
-          phone_number: editForm.phone_number
+          username: editForm.username.trim(),
+          age: parseInt(editForm.age),
+          phone_number: editForm.phone_number.trim()
         })
         .eq("user_id", userData.user_id)
         .select()
@@ -267,6 +318,7 @@ export default function ProfilePage() {
         }
         
         setIsEditing(false)
+        setValidationErrors({})
         addToast("Profile updated successfully!", "success")
         // Add a notification about profile update
         addNotification(
@@ -300,6 +352,14 @@ export default function ProfilePage() {
       ...prev,
       [name]: value
     }))
+
+    // Clear validation error for this field when user starts typing
+    if (validationErrors[name as keyof typeof validationErrors]) {
+      setValidationErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }))
+    }
   }
 
   // Show loading while checking authentication or redirecting
@@ -417,13 +477,18 @@ export default function ProfilePage() {
                   <div className="flex-1">
                     <Label htmlFor="username" className="text-sm text-white/60 block mb-1">Username</Label>
                     {isEditing ? (
-                      <Input
-                        id="username"
-                        name="username"
-                        value={editForm.username}
-                        onChange={handleInputChange}
-                        className="bg-white/10 border-white/20 text-white"
-                      />
+                      <>
+                        <Input
+                          id="username"
+                          name="username"
+                          value={editForm.username}
+                          onChange={handleInputChange}
+                          className={`bg-white/10 border-white/20 text-white ${validationErrors.username ? 'border-red-500' : ''}`}
+                        />
+                        {validationErrors.username && (
+                          <p className="text-red-400 text-xs mt-1">{validationErrors.username}</p>
+                        )}
+                      </>
                     ) : (
                       <p className="text-white font-medium">{userData.username}</p>
                     )}
@@ -437,13 +502,18 @@ export default function ProfilePage() {
                   <div className="flex-1">
                     <Label htmlFor="phone_number" className="text-sm text-white/60 block mb-1">Phone Number</Label>
                     {isEditing ? (
-                      <Input
-                        id="phone_number"
-                        name="phone_number"
-                        value={editForm.phone_number}
-                        onChange={handleInputChange}
-                        className="bg-white/10 border-white/20 text-white"
-                      />
+                      <>
+                        <Input
+                          id="phone_number"
+                          name="phone_number"
+                          value={editForm.phone_number}
+                          onChange={handleInputChange}
+                          className={`bg-white/10 border-white/20 text-white ${validationErrors.phone_number ? 'border-red-500' : ''}`}
+                        />
+                        {validationErrors.phone_number && (
+                          <p className="text-red-400 text-xs mt-1">{validationErrors.phone_number}</p>
+                        )}
+                      </>
                     ) : (
                       <p className="text-white font-medium">{userData.phone_number}</p>
                     )}
@@ -457,14 +527,19 @@ export default function ProfilePage() {
                   <div className="flex-1">
                     <Label htmlFor="age" className="text-sm text-white/60 block mb-1">Age</Label>
                     {isEditing ? (
-                      <Input
-                        id="age"
-                        name="age"
-                        type="number"
-                        value={editForm.age}
-                        onChange={handleInputChange}
-                        className="bg-white/10 border-white/20 text-white"
-                      />
+                      <>
+                        <Input
+                          id="age"
+                          name="age"
+                          type="number"
+                          value={editForm.age}
+                          onChange={handleInputChange}
+                          className={`bg-white/10 border-white/20 text-white ${validationErrors.age ? 'border-red-500' : ''}`}
+                        />
+                        {validationErrors.age && (
+                          <p className="text-red-400 text-xs mt-1">{validationErrors.age}</p>
+                        )}
+                      </>
                     ) : (
                       <p className="text-white font-medium">{userData.age}</p>
                     )}
@@ -639,7 +714,7 @@ export default function ProfilePage() {
                         <div className="mb-4 p-3 rounded-md bg-black/20 border border-white/5 flex-1">
                         <div className="text-sm text-white/80 mb-2">Questions:</div>
                         <div className="space-y-2">
-                          {attempt.questions_data.slice(0, 3).map((q: any, i: number) => (
+                          {attempt.questions_data.slice(0, 3).map((q: QuizQuestion, i: number) => (
                           <div key={i} className="flex items-start gap-2">
                             <div 
                             className={`min-w-4 h-4 rounded-full mt-1`}
