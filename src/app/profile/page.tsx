@@ -248,8 +248,6 @@ export default function ProfilePage() {
       errors.username = "Username is required"
     } else if (editForm.username.trim().length < 3) {
       errors.username = "Username must be at least 3 characters long"
-    } else if (editForm.username.trim() === userData.username) {
-      errors.username = "New username cannot be the same as current username"
     }
 
     // Age validation
@@ -267,8 +265,6 @@ export default function ProfilePage() {
       errors.phone_number = "Phone number is required"
     } else if (editForm.phone_number.trim().length < 11) {
       errors.phone_number = "Phone number must be at least 11 characters long"
-    } else if (editForm.phone_number.trim() === userData.phone_number) {
-      errors.phone_number = "New phone number cannot be the same as current phone number"
     }
 
     setValidationErrors(errors)
