@@ -60,69 +60,6 @@ interface QuizInterfaceProps {
   onExit: () => void;
 }
 
-// // Replace ElegantShape with this optimized version
-// function ElegantShape({
-//   className,
-//   width = 400,
-//   height = 100,
-//   rotate = 0,
-//   gradient = "from-white/[0.08]",
-// }: {
-//   className?: string;
-//   width?: number;
-//   height?: number;
-//   rotate?: number;
-//   gradient?: string;
-// }) {
-//   // Only render on non-mobile devices and when not in loading state
-//   const [isMobile, setIsMobile] = useState(false);
-//   const prefersReducedMotion = useReducedMotion();
-  
-//   // Skip rendering if reduced motion is preferred
-//   if (prefersReducedMotion) return null;
-  
-//   // Use ResizeObserver instead of window event for better performance
-//   useEffect(() => {
-//     const checkMobile = () => setIsMobile(window.innerWidth < 768);
-//     checkMobile();
-    
-//     // Use ResizeObserver instead of event listener
-//     const resizeObserver = new ResizeObserver(checkMobile);
-//     resizeObserver.observe(document.body);
-//     return () => resizeObserver.disconnect();
-//   }, []);
-  
-//   if (isMobile) return null;
-  
-//   return (
-//     <div
-//       className={cn("absolute", className)}
-//       style={{
-//         opacity: 0.4, // Reduced opacity
-//         transform: `rotate(${rotate}deg)`,
-//       }}
-//     >
-//       <div
-//         style={{
-//           width,
-//           height,
-//         }}
-//         className="relative"
-//       >
-//         <div
-//           className={cn(
-//             "absolute inset-0 rounded-full",
-//             "bg-gradient-to-r to-transparent",
-//             gradient,
-//             "border border-white/[0.15]", // Thinner border
-//           )}
-//         />
-//       </div>
-//     </div>
-//   );
-// }
-
-
 const themes = [
   {
     name: "Ocean",
@@ -202,7 +139,7 @@ function useReducedMotion() {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
     
-    const listener = (event) => setPrefersReducedMotion(event.matches);
+    const listener = (event: MediaQueryListEvent) => setPrefersReducedMotion(event.matches);
     mediaQuery.addEventListener('change', listener);
     return () => mediaQuery.removeEventListener('change', listener);
   }, []);
@@ -232,8 +169,8 @@ export default function QuizInterface({
   }>({});
   const [showCelebration, setShowCelebration] = useState(false);
   const [quizStatus, setQuizStatus] = useState<
-    "completed" | "timed-out" | "in-progress"
-  >("in-progress");
+    "completed" | "timed-out"
+  >("completed");
   const [showAuthDialog, setShowAuthDialog] = useState(false);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
@@ -748,40 +685,7 @@ export default function QuizInterface({
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
         {/* Elegant Shapes with Theme Colors */}
-        <div className="absolute inset-0 overflow-hidden">
-          <ElegantShape
-            delay={0.3}
-            width={450}
-            height={110}
-            rotate={8}
-            gradient={selectedTheme.gradient}
-            className="left-[-8%] top-[20%]"
-          />
-          <ElegantShape
-            delay={0.5}
-            width={350}
-            height={90}
-            rotate={-12}  // This is correct, keep as is
-            gradient={selectedTheme.gradient}
-            className="right-[-3%] top-[65%]"
-          />
-          <ElegantShape
-            delay={0.4}
-            width={200}
-            height={60}
-            rotate={-5}  // This is correct, keep as is
-            gradient={selectedTheme.gradient}
-            className="left-[8%] bottom-[8%]"
-          />
-          <ElegantShape
-            delay={0.6}
-            width={160}
-            height={45}
-            rotate={18}
-            gradient={selectedTheme.gradient}
-            className="right-[18%] top-[12%]"
-          />
-        </div>
+        {/* Removed for performance */}
 
         <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
           <div className="w-full max-w-5xl transition-all duration-300 opacity-100 quiz-card">
@@ -892,7 +796,7 @@ export default function QuizInterface({
 
                 {/* Quiz Mode Selection */}
                 <div>
-                  <label className="block text-lg font-medium mb-6 text-white flex items-center">
+                  <label className="text-lg font-medium mb-6 text-white flex items-center">
                     <Sparkles className="w-5 h-5 mr-3" />
                     Choose Quiz Mode
                   </label>
@@ -941,7 +845,7 @@ export default function QuizInterface({
                 </div>
 
                 <div>
-                  <label className="block text-lg font-medium mb-6 text-white flex items-center">
+                  <label className="text-lg font-medium mb-6 text-white flex items-center">
                     <Timer className="w-5 h-5 mr-3" />
                     Select Duration
                   </label>
@@ -1074,32 +978,7 @@ export default function QuizInterface({
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
         {/* Elegant Shapes */}
-        <div className="absolute inset-0 overflow-hidden">
-          <ElegantShape
-            delay={0.3}
-            width={400}
-            height={100}
-            rotate={10}
-            gradient={selectedTheme.gradient}
-            className="left-[-6%] top-[18%]"
-          />
-          <ElegantShape
-            delay={0.5}
-            width={320}
-            height={80}
-            rotate={-10}
-            gradient={selectedTheme.gradient}
-            className="right-[-2%] top-[60%]"
-          />
-          <ElegantShape
-            delay={0.4}
-            width={180}
-            height={55}
-            rotate={-3}
-            gradient={selectedTheme.gradient}
-            className="left-[10%] bottom-[10%]"
-          />
-        </div>
+        {/* Removed for performance */}
 
         {/* Timer and Score Display */}
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50">
@@ -1461,32 +1340,7 @@ export default function QuizInterface({
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
         {/* Elegant Shapes */}
-        <div className="absolute inset-0 overflow-hidden">
-          <ElegantShape
-            delay={0.3}
-            width={500}
-            height={120}
-            rotate={12}
-            gradient={selectedTheme.gradient}
-            className="left-[-10%] top-[15%]"
-          />
-          <ElegantShape
-            delay={0.5}
-            width={400}
-            height={100}
-            rotate={-15}
-            gradient={selectedTheme.gradient}
-            className="right-[-5%] top-[70%]"
-          />
-          <ElegantShape
-            delay={0.4}
-            width={250}
-            height={70}
-            rotate={-8}
-            gradient={selectedTheme.gradient}
-            className="left-[5%] bottom-[5%]"
-          />
-        </div>
+        {/* Removed for performance */}
 
         <div className="relative z-10 flex items-center justify-center min-h-screen p-6">
           <motion.div
@@ -1671,7 +1525,7 @@ export default function QuizInterface({
                         setUserAnswers({});
                         setScore(0);
                         setAnswerRevealed({});
-                        setQuizStatus("in-progress");
+                        setQuizStatus("completed");
                         setQuizSubmitted(false); 
                         // Reset submission state
                       }}
@@ -1714,32 +1568,7 @@ export default function QuizInterface({
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
         {/* Elegant Shapes */}
-        <div className="absolute inset-0 overflow-hidden">
-          <ElegantShape
-            delay={0.3}
-            width={450}
-            height={110}
-            rotate={8}
-            gradient={selectedTheme.gradient}
-            className="left-[-8%] top-[20%]"
-          />
-          <ElegantShape
-            delay={0.5}
-            width={350}
-            height={90}
-            rotate={-12}  // This is correct, keep as is
-            gradient={selectedTheme.gradient}
-            className="right-[-3%] top-[65%]"
-          />
-          <ElegantShape
-            delay={0.4}
-            width={200}
-            height={60}
-            rotate={-5}  // This is correct, keep as is
-            gradient={selectedTheme.gradient}
-            className="left-[8%] bottom-[8%]"
-          />
-        </div>
+        {/* Removed for performance */}
 
         <div className="relative z-10 py-12 px-4">
           <div className="max-w-6xl mx-auto">
