@@ -106,7 +106,7 @@ const themes = [
 ];
 
 const durations = [
-  { label: "Lightning", value: 0.1, icon: Zap, description: "1 Minute" },
+  { label: "Lightning", value: 1, icon: Zap, description: "1 Minute" },
   { label: "Short", value: 5, icon: Star, description: "5 Minutes" },
   { label: "Standard (DEF)", value: 15, icon: Cable, description: "15 Minutes" },
   { label: "Extended", value: 30, icon: Clock, description: "30 Minutes" },
