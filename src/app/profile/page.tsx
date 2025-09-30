@@ -161,6 +161,7 @@ export default function ProfilePage() {
     username?: string;
     age?: string;
     phone_number?: string;
+    general?: string;
   }>({})
   const { addToast } = useToast()
   const [isSaving, setIsSaving] = useState(false)
@@ -241,7 +242,16 @@ export default function ProfilePage() {
   }
 
   const validateForm = () => {
-    const errors: { username?: string; age?: string; phone_number?: string } = {}
+    const errors: { username?: string; age?: string; phone_number?: string; general?: string } = {}
+
+    // Check if at least one field has been changed
+    const hasUsernameChanged = editForm.username.trim() !== userData.username
+    const hasAgeChanged = parseInt(editForm.age) !== userData.age
+    const hasPhoneChanged = editForm.phone_number.trim() !== userData.phone_number
+
+    if (!hasUsernameChanged && !hasAgeChanged && !hasPhoneChanged) {
+      errors.general = "At least one field must be changed to save"
+    }
 
     // Username validation
     if (!editForm.username.trim()) {
@@ -444,6 +454,11 @@ export default function ProfilePage() {
               <CardHeader className="text-center pb-6">
                 <CardTitle className="text-xl font-bold text-white">Personal Information</CardTitle>
                 <CardDescription className="text-white/60">Your account details</CardDescription>
+                {validationErrors.general && (
+                  <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
+                    <p className="text-red-400 text-sm text-center">{validationErrors.general}</p>
+                  </div>
+                )}
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
