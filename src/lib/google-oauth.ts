@@ -61,8 +61,16 @@ export async function getGoogleUserInfo(accessToken: string) {
 // Refresh access token using refresh token
 export async function refreshAccessToken(refreshToken: string) {
   try {
-    oauth2Client.setCredentials({ refresh_token: refreshToken })
-    const { credentials } = await oauth2Client.refreshAccessToken()
+    // Create a new OAuth2 client instance for this refresh operation
+    // to avoid global state conflicts between concurrent requests
+    const client = new google.auth.OAuth2(
+      process.env.GOOGLE_CLIENT_ID!,
+      process.env.GOOGLE_CLIENT_SECRET!,
+      `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.chameleon-nu.tech'}/api/google-drive/callback`
+    )
+
+    client.setCredentials({ refresh_token: refreshToken })
+    const { credentials } = await client.refreshAccessToken()
     return credentials
   } catch (error) {
     console.error('Error refreshing access token:', error)
@@ -81,7 +89,21 @@ export async function storeUserTokens(
 ) {
   try {
     const supabase = createClient()
-    
+
+    // Check if this refresh token is already used by another user
+    if (refreshToken) {
+      const { data: existingUsers } = await supabase
+        .from('chameleons')
+        .select('user_id, google_email')
+        .eq('refresh_token', refreshToken)
+        .neq('user_id', userId)
+
+      if (existingUsers && existingUsers.length > 0) {
+        console.error(`🚨 SECURITY VIOLATION: Attempting to store duplicate refresh token for user ${userId}. Token already used by:`, existingUsers)
+        throw new Error('This Google account is already connected to another user. Each user must use their own Google account.')
+      }
+    }
+
     const updateData = {
       google_id: googleId,
       google_email: googleEmail,
@@ -150,29 +172,39 @@ export function isTokenExpired(expiryDate: string | Date | null): boolean {
 // Get valid access token (refresh if needed) - requires individual authentication
 export async function getValidAccessToken(userId: number): Promise<string> {
   try {
+    console.log('🔑 TOKEN DEBUG - Getting valid access token for user:', userId)
+    
     // Each user must have their own tokens - no token sharing
     const tokens = await getUserTokens(userId)
     
     if (!tokens?.access_token) {
+      console.log('🔑 TOKEN DEBUG - No access token found for user:', userId)
       throw new Error('No access token found for user. Please authenticate with Google Drive.')
     }
 
+    console.log('🔑 TOKEN DEBUG - User', userId, 'has token starting with:', tokens.access_token.substring(0, 20) + '...')
+
     // User has their own tokens, check if valid
     if (!isTokenExpired(tokens.token_expiry)) {
+      console.log('🔑 TOKEN DEBUG - User', userId, 'token is still valid')
       return tokens.access_token
     }
 
     // Token is expired, refresh it
     if (!tokens.refresh_token) {
+      console.log('🔑 TOKEN DEBUG - User', userId, 'has no refresh token')
       throw new Error('No refresh token available to refresh access token')
     }
 
-    console.log('Access token expired, refreshing...')
+    console.log('🔑 TOKEN DEBUG - User', userId, 'token expired, refreshing...')
     const newTokens = await refreshAccessToken(tokens.refresh_token)
     
     if (!newTokens.access_token) {
+      console.log('🔑 TOKEN DEBUG - Failed to get new access token for user:', userId)
       throw new Error('Failed to get new access token')
     }
+
+    console.log('🔑 TOKEN DEBUG - User', userId, 'got new token starting with:', newTokens.access_token.substring(0, 20) + '...')
 
     // Store new tokens
     await storeUserTokens(
@@ -184,9 +216,10 @@ export async function getValidAccessToken(userId: number): Promise<string> {
       newTokens.expiry_date || undefined
     )
 
+    console.log('🔑 TOKEN DEBUG - Stored new tokens for user:', userId)
     return newTokens.access_token
   } catch (error) {
-    console.error('Error getting valid access token:', error)
+    console.error('🔑 TOKEN DEBUG - Error getting valid access token for user', userId, ':', error)
     throw error
   }
 }
@@ -196,13 +229,21 @@ export async function configureOAuthClientForUser(userId: number) {
   try {
     const accessToken = await getValidAccessToken(userId)
     const tokens = await getUserTokens(userId)
-    
-    oauth2Client.setCredentials({
+
+    // Create a new OAuth2 client instance for this user
+    // to avoid global state conflicts
+    const client = new google.auth.OAuth2(
+      process.env.GOOGLE_CLIENT_ID!,
+      process.env.GOOGLE_CLIENT_SECRET!,
+      `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.chameleon-nu.tech'}/api/google-drive/callback`
+    )
+
+    client.setCredentials({
       access_token: accessToken,
       refresh_token: tokens.refresh_token
     })
 
-    return oauth2Client
+    return client
   } catch (error) {
     console.error('Error configuring OAuth client for user:', error)
     throw error
