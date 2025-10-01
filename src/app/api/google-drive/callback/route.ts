@@ -36,6 +36,8 @@ export async function GET(request: NextRequest) {
       )
     }
 
+    console.log(`🔐 OAUTH CALLBACK DEBUG - Processing callback for user ${userId}, state: ${state}`)
+
     // Exchange code for tokens
     const tokens = await exchangeCodeForTokens(code) as any
     
@@ -43,11 +45,31 @@ export async function GET(request: NextRequest) {
       throw new Error('No access token received from Google')
     }
 
+    console.log(`🔐 OAUTH CALLBACK DEBUG - Got tokens for user ${userId}: access_token starts with ${tokens.access_token.substring(0, 20)}..., refresh_token starts with ${tokens.refresh_token ? tokens.refresh_token.substring(0, 20) + '...' : 'NONE'}`)
+
     // Get user info from Google
     const userInfo = await getGoogleUserInfo(tokens.access_token)
     
     if (!userInfo.id || !userInfo.email) {
       throw new Error('Failed to get user information from Google')
+    }
+
+    console.log(`🔐 OAUTH CALLBACK DEBUG - Google user info for user ${userId}: ${userInfo.email} (ID: ${userInfo.id})`)
+
+    // Check if this Google account is already associated with another user
+    const supabase = createClient()
+    const { data: existingUser } = await supabase
+      .from('chameleons')
+      .select('user_id, google_email')
+      .eq('google_id', userInfo.id)
+      .neq('user_id', userId)
+      .single()
+
+    if (existingUser) {
+      console.log(`🚨 OAUTH CALLBACK DEBUG - Google account ${userInfo.email} already associated with user ${existingUser.user_id}, but trying to associate with user ${userId}`)
+      return NextResponse.redirect(
+        new URL(`/drive?error=${encodeURIComponent('This Google account is already connected to another user. Each user must use their own Google account.')}`, request.url)
+      )
     }
 
     // Store tokens in database
@@ -59,6 +81,8 @@ export async function GET(request: NextRequest) {
       tokens.refresh_token,
       tokens.expiry_date
     )
+
+    console.log(`✅ OAUTH CALLBACK DEBUG - Tokens stored successfully for user ${userId} with Google account ${userInfo.email}`)
 
     // For admin users, also set Authorized to true
     if (isAdmin) {
