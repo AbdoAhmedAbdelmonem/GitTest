@@ -74,10 +74,13 @@ export function GoogleDriveManager({
       import('@/lib/auth').then(({ getStudentSession }) => {
         const session = getStudentSession()
         if (session) {
+          console.log('📁 SESSION DEBUG - Got session for user:', session.user_id, 'is_admin:', session.is_admin)
           setCurrentUserId(session.user_id)
           // For now, just check is_admin to allow debugging
           // TODO: Add back Authorized check once OAuth is properly set up
           setCurrentIsAdmin(session.is_admin || false)
+        } else {
+          console.log('📁 SESSION DEBUG - No session found')
         }
       })
     }
@@ -120,6 +123,8 @@ export function GoogleDriveManager({
   // Upload file to Google Drive (Admin only) - now using direct upload
   const uploadFile = async () => {
     if (!selectedFile || !currentIsAdmin || !currentUserId) return
+
+    console.log('📁 UPLOAD DEBUG - Starting upload for user:', currentUserId, 'file:', selectedFile.name)
 
     setUploading(true)
     setError(null)
@@ -167,7 +172,7 @@ export function GoogleDriveManager({
     setAutoAuthInProgress(true)
 
     try {
-      const response = await fetch(`/api/google-drive/auth?userId=${currentUserId}`, {
+      const response = await fetch(`/api/google-drive/auth?userId=${currentUserId}&isAdmin=${currentIsAdmin}`, {
         method: 'GET'
       })
 
@@ -190,7 +195,7 @@ export function GoogleDriveManager({
     if (!currentUserId) return
     
     try {
-      const response = await fetch(`/api/google-drive/auth?userId=${currentUserId}`, {
+      const response = await fetch(`/api/google-drive/auth?userId=${currentUserId}&isAdmin=${currentIsAdmin}`, {
         method: 'GET'
       })
       
@@ -597,5 +602,3 @@ export function GoogleDriveManager({
     </div>
   )
 }
-
-
