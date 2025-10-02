@@ -73,7 +73,7 @@ export default function Navigation() {
     }
 
     // Check tournament lock status
-    const targetDate = new Date('2025-10-07')
+    const targetDate = new Date('2025-10-12')
     const currentDate = new Date()
     if (currentDate < targetDate) {
       setIsTournamentLocked(true)
