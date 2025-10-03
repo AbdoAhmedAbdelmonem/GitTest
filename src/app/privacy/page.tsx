@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useDynamicMetadata, dynamicPageMetadata } from '@/lib/dynamic-metadata';
+import { useDynamicMetadata } from '@/lib/dynamic-metadata';
 import { pageMetadata } from '@/lib/metadata';
 import { 
   Shield, 
@@ -27,7 +27,6 @@ import {
   RefreshCw,
   ArrowRight,
   ChevronDown,
-  ChevronUp,
   Star,
   Heart,
   Zap
@@ -91,7 +90,7 @@ export default function PrivacyPolicyPage() {
       content: (
         <div className="space-y-4">
           <p className="text-white/80 leading-relaxed">
-            Drive Manager ("we," "our," or "us") provides a file management service that helps users organize and manage their Google Drive files. This Privacy Policy explains how we collect, use, and protect your information when you use our service.
+            ("we," "our," or "us") provides a file management service and Educational Experience that helps users organize and manage their Study Materials. This Privacy Policy explains how we collect, use, and protect your information when you use our service.
           </p>
           <div className="flex items-center gap-2 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
             <CheckCircle className="w-5 h-5 text-blue-400 flex-shrink-0" />
@@ -176,7 +175,7 @@ export default function PrivacyPolicyPage() {
                   <Shield className="w-5 h-5 text-purple-400" />
                   <span className="font-medium text-purple-400">User Authentication</span>
                 </div>
-                <p className="text-white/70 text-sm">To identify you and maintain your session</p>
+                <p className="text-white/70 text-sm">To identify you and maintain your session and Gain Access tokens in case of you are an Administrator</p>
               </div>
               <div className="p-4 bg-purple-500/10 rounded-lg border border-purple-500/20">
                 <div className="flex items-center gap-3 mb-2">
@@ -226,7 +225,7 @@ export default function PrivacyPolicyPage() {
             <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-white/80">Share your files or personal information with third parties</span>
+                <span className="text-white/80">Share your personal information with third parties</span>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -234,11 +233,7 @@ export default function PrivacyPolicyPage() {
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-white/80">Access your Google Drive files without your explicit action</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-white/80">Store copies of your files on our servers</span>
+                <span className="text-white/80">Access your Account without your explicit action</span>
               </div>
             </div>
           </div>
@@ -333,7 +328,7 @@ export default function PrivacyPolicyPage() {
             <div className="grid gap-4">
               <div className="p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/20 flex items-start gap-3">
                 <RefreshCw className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
-                <span className="text-white/80 text-sm">You can revoke our access to your Google Drive at any time through your Google Account settings</span>
+                <span className="text-white/80 text-sm">You can revoke our access to your Google Drive at any time through your Google Account settings or contact us</span>
               </div>
               <div className="p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/20 flex items-start gap-3">
                 <Trash2 className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
