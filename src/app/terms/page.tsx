@@ -116,13 +116,13 @@ export default function TermsOfServicePage() {
       content: (
         <div className="space-y-6">
           <p className="text-white/80 leading-relaxed">
-            Drive Manager is a web-based application that provides file management capabilities for Google Drive accounts. The Service allows users to:
+            Integrated Drive Manager in Chameleon is a web-based application that provides file management capabilities for Google Drive accounts. The Service allows users to:
           </p>
           
           <div className="grid gap-4">
             <div className="p-4 bg-green-500/10 rounded-lg border border-green-500/20 flex items-center gap-3">
               <Upload className="w-5 h-5 text-green-400 flex-shrink-0" />
-              <span className="text-white/80">Upload files to their Google Drive</span>
+              <span className="text-white/80">Upload files to Platform Drive</span>
             </div>
             <div className="p-4 bg-green-500/10 rounded-lg border border-green-500/20 flex items-center gap-3">
               <Settings className="w-5 h-5 text-green-400 flex-shrink-0" />
@@ -130,7 +130,7 @@ export default function TermsOfServicePage() {
             </div>
             <div className="p-4 bg-green-500/10 rounded-lg border border-green-500/20 flex items-center gap-3">
               <Trash2 className="w-5 h-5 text-green-400 flex-shrink-0" />
-              <span className="text-white/80">Delete files from their Google Drive</span>
+              <span className="text-white/80">Delete files (Only What You Upload) from Drive Bucket</span>
             </div>
             <div className="p-4 bg-green-500/10 rounded-lg border border-green-500/20 flex items-center gap-3">
               <FolderOpen className="w-5 h-5 text-green-400 flex-shrink-0" />
@@ -139,6 +139,28 @@ export default function TermsOfServicePage() {
             <div className="p-4 bg-green-500/10 rounded-lg border border-green-500/20 flex items-center gap-3">
               <FileText className="w-5 h-5 text-green-400 flex-shrink-0" />
               <span className="text-white/80">View and organize their existing Drive files</span>
+            </div>
+          </div>
+          <p className="text-white/80 leading-relaxed">
+          Chameleon Platform Collecting some data about user interactions to improve the service.
+          </p>
+          
+          <div className="grid gap-4">
+            <div className="p-4 bg-yellow-500/10 rounded-lg border border-green-500/20 flex items-center gap-3">
+              <Upload className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+              <span className="text-white/80">We Collecting Your Google Account data</span>
+            </div>
+            <div className="p-4 bg-yellow-500/10 rounded-lg border border-green-500/20 flex items-center gap-3">
+              <Settings className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+              <span className="text-white/80">We Collecting Your Phone Number in case of account recovery</span>
+            </div>
+            <div className="p-4 bg-yellow-500/10 rounded-lg border border-green-500/20 flex items-center gap-3">
+              <Trash2 className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+              <span className="text-white/80">We Collecting Your Files (Only What You Upload) from Drive Bucket</span>
+            </div>
+            <div className="p-4 bg-yellow-500/10 rounded-lg border border-green-500/20 flex items-center gap-3">
+              <FolderOpen className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+              <span className="text-white/80">By Signin to our Platform, you are trusting us with your data</span>
             </div>
           </div>
         </div>
@@ -263,11 +285,11 @@ export default function TermsOfServicePage() {
             <div className="space-y-3 pl-7">
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-white/80">You must explicitly authorize our Service to access your Google Drive</span>
+                <span className="text-white/80">You must explicitly authorize our Service to access your Platform Drive</span>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-white/80">You can revoke this authorization at any time through your Google Account settings</span>
+                <span className="text-white/80">You can revoke this authorization at any time through your Google Account settings or Contact Us</span>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -343,7 +365,7 @@ export default function TermsOfServicePage() {
             <div className="space-y-3 pl-7">
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-white/80">You may stop using the Service at any time</span>
+                <span className="text-white/80">You may stop using the Service at any time just contact us</span>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -366,6 +388,10 @@ export default function TermsOfServicePage() {
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
                 <span className="text-white/80">You violate these terms</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                <span className="text-white/80">You Inputed an Invalid Personal Details</span>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -483,7 +509,7 @@ export default function TermsOfServicePage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg text-white/60 max-w-3xl mx-auto mb-8"
             >
-              Please read these terms carefully before using Drive Manager. By using our service, you agree to these terms and conditions.
+              Please read these terms carefully before using platform . By using our service, you agree to these terms and conditions.
             </motion.p>
 
             <motion.div
