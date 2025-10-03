@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react"
 import { getStudentSession } from "@/lib/auth"
 import { createBrowserClient } from "@/lib/supabase/client"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { LoadingSpinner } from "@/components/ui/loading-spinner"
-import { ArrowLeft, User, BookOpen, Star, Award, Calendar, Phone, GraduationCap, Shield, Edit3, LogOut, Save, X, TrendingUp, Mail } from "lucide-react"
+import { ArrowLeft, User, BookOpen, Star, Award, Calendar, Phone, GraduationCap, Shield, Edit3, LogOut, Save, X, TrendingUp, Mail, Crown, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
@@ -22,8 +22,190 @@ interface QuizQuestion {
   question_text: string;
 }
 
+// Golden Particle Component for Admin Animations
+function GoldenParticle({ delay = 0 }: { delay?: number }) {
+  return (
+    <motion.div
+      className="absolute w-1 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{
+        opacity: [0, 1, 0],
+        scale: [0, 1, 0],
+        y: [-20, -60, -100],
+        x: [0, Math.random() * 40 - 20, Math.random() * 60 - 30]
+      }}
+      transition={{
+        duration: 3,
+        delay: delay,
+        repeat: Infinity,
+        repeatDelay: Math.random() * 2 + 1
+      }}
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`
+      }}
+    />
+  )
+}
+
+// Golden Sparkle Component
+function GoldenSparkle({ size = 4, delay = 0 }: { size?: number; delay?: number }) {
+  return (
+    <motion.div
+      className="absolute"
+      initial={{ opacity: 0, rotate: 0, scale: 0 }}
+      animate={{
+        opacity: [0, 1, 0],
+        rotate: [0, 180, 360],
+        scale: [0, 1, 0]
+      }}
+      transition={{
+        duration: 2,
+        delay: delay,
+        repeat: Infinity,
+        repeatDelay: Math.random() * 3 + 2
+      }}
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`
+      }}
+    >
+      <Sparkles className={`text-yellow-400`} style={{ width: size, height: size }} />
+    </motion.div>
+  )
+}
+
+// Golden Crown Animation for Admin Badge
+function GoldenCrown() {
+  return (
+    <motion.div
+      className="relative"
+      initial={{ scale: 0, rotate: -180 }}
+      animate={{ scale: 1, rotate: 0 }}
+      transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+    >
+      <motion.div
+        animate={{
+          filter: [
+            "drop-shadow(0 0 5px #fbbf24)",
+            "drop-shadow(0 0 15px #fbbf24)",
+            "drop-shadow(0 0 5px #fbbf24)"
+          ]
+        }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <Crown className="w-6 h-6 text-yellow-400" />
+      </motion.div>
+      {/* Golden glow effect */}
+      <motion.div
+        className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.6, 0.3]
+        }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+    </motion.div>
+  )
+}
+
+// Golden Border Animation Component
+function GoldenBorder({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <motion.div
+      className={`relative ${className}`}
+      initial={{ borderColor: "rgba(251, 191, 36, 0.2)" }}
+      animate={{
+        borderColor: [
+          "rgba(251, 191, 36, 0.2)",
+          "rgba(251, 191, 36, 0.8)",
+          "rgba(251, 191, 36, 0.2)"
+        ]
+      }}
+      transition={{ duration: 3, repeat: Infinity }}
+    >
+      {/* Golden particles around border */}
+      {[...Array(8)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+          style={{
+            top: i < 4 ? 0 : i === 4 ? "50%" : "100%",
+            left: i === 0 || i === 4 || i === 7 ? 0 : i === 1 || i === 5 ? "25%" : i === 2 || i === 6 ? "75%" : "100%",
+            transform: "translate(-50%, -50%)"
+          }}
+          animate={{
+            opacity: [0, 1, 0],
+            scale: [0, 1, 0]
+          }}
+          transition={{
+            duration: 2,
+            delay: i * 0.3,
+            repeat: Infinity,
+            repeatDelay: 1
+          }}
+        />
+      ))}
+      {children}
+    </motion.div>
+  )
+}
+
+// Admin Golden Background Effect
+function AdminGoldenBackground() {
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      {/* Floating golden particles */}
+      {[...Array(20)].map((_, i) => (
+        <GoldenParticle key={i} delay={i * 0.2} />
+      ))}
+
+      {/* Golden sparkles */}
+      {[...Array(15)].map((_, i) => (
+        <GoldenSparkle key={`sparkle-${i}`} size={3 + Math.random() * 4} delay={i * 0.3} />
+      ))}
+
+      {/* Golden light rays */}
+      <motion.div
+        className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-yellow-400/30 via-yellow-400/10 to-transparent"
+        animate={{
+          opacity: [0.1, 0.3, 0.1],
+          scaleY: [0.8, 1.2, 0.8]
+        }}
+        transition={{ duration: 4, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-yellow-400/30 via-yellow-400/10 to-transparent"
+        animate={{
+          opacity: [0.1, 0.3, 0.1],
+          scaleY: [1.2, 0.8, 1.2]
+        }}
+        transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+      />
+
+      {/* Golden orb effects */}
+      <motion.div
+        className="absolute top-20 left-20 w-32 h-32 rounded-full bg-yellow-400/5 blur-3xl"
+        animate={{
+          scale: [1, 1.5, 1],
+          opacity: [0.1, 0.3, 0.1]
+        }}
+        transition={{ duration: 6, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-20 w-40 h-40 rounded-full bg-yellow-400/5 blur-3xl"
+        animate={{
+          scale: [1.5, 1, 1.5],
+          opacity: [0.1, 0.3, 0.1]
+        }}
+        transition={{ duration: 6, repeat: Infinity, delay: 3 }}
+      />
+    </div>
+  )
+}
+
 // Dot Plot with KDE Visualization Component
-function ProgressDotPlot({ quizData }: { quizData: any[] }) {
+function ProgressDotPlot({ quizData, userData }: { quizData: any[], userData: any }) {
   if (!quizData.length) return null;
 
   // Process quiz data for visualization
@@ -52,16 +234,18 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
   const maxTrial = data.length;
 
   return (
-    <Card className="bg-black/40 border-white/20 shadow-2xl mt-8">
-      <CardHeader>
-        <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
-          <TrendingUp className="w-5 h-5 text-purple-400" />
-          Progress Over Attempts
-        </CardTitle>
-        <CardDescription className="text-white/60">
-          Your performance across quiz attempts with trend line
-        </CardDescription>
-      </CardHeader>
+    <div className="mt-8">
+      <GoldenBorder className={`bg-black/40 border-white/20 shadow-2xl ${userData?.is_admin ? 'relative overflow-hidden' : ''}`}>
+        <Card className="border-0 bg-transparent shadow-none">
+          <CardHeader>
+            <CardTitle className={`text-xl font-bold text-white flex items-center gap-2 ${userData?.is_admin ? 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200' : ''}`}>
+              <TrendingUp className="w-5 h-5 text-purple-400" />
+              Progress Over Attempts
+            </CardTitle>
+            <CardDescription className="text-white/60">
+              Your performance across quiz attempts with trend line
+            </CardDescription>
+          </CardHeader>
       <CardContent>
         <div className="relative h-64">
           {/* Y-axis labels */}
@@ -142,7 +326,9 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
           </div>
         </div>
       </CardContent>
-    </Card>
+        </Card>
+      </GoldenBorder>
+    </div>
   );
 }
 
@@ -401,6 +587,8 @@ export default function ProfilePage() {
         backgroundAttachment: 'fixed'
       }}
     >
+      {/* Admin Golden Background Effects */}
+      {userData?.is_admin && <AdminGoldenBackground />}
       
           {/* Back Button */}
       <div className="absolute top-6 left-6 z-20">
@@ -430,7 +618,7 @@ export default function ProfilePage() {
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-20 overflow-visible">
         {/* Header */}
         <div className="text-center mb-12 animate-in fade-in duration-800">
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-6 shadow-lg overflow-hidden transition-transform hover:scale-105">
+          <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-6 shadow-lg overflow-hidden transition-transform hover:scale-105 ${userData?.is_admin ? 'relative' : ''}`}>
             {userData.profile_image ? (
               <Image
                 src={userData.profile_image}
@@ -442,24 +630,31 @@ export default function ProfilePage() {
             ) : (
               <User className="w-12 h-12 text-white" />
             )}
+            {/* Admin Golden Crown */}
+            {userData?.is_admin && <GoldenCrown />}
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">Your Profile</h1>
+          <h1 className={`text-3xl font-bold text-white mb-2 ${userData?.is_admin ? 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200' : ''}`}>
+            Your Profile
+          </h1>
           <p className="text-white/60">Manage your account and view your progress</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* User Info Card */}
           <div className="md:col-span-1 animate-in slide-in-from-left duration-500 delay-100">
-            <Card className="bg-black/40 border-white/20 shadow-2xl h-full">
-              <CardHeader className="text-center pb-6">
-                <CardTitle className="text-xl font-bold text-white">Personal Information</CardTitle>
-                <CardDescription className="text-white/60">Your account details</CardDescription>
-                {validationErrors.general && (
-                  <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
-                    <p className="text-red-400 text-sm text-center">{validationErrors.general}</p>
-                  </div>
-                )}
-              </CardHeader>
+            <GoldenBorder className={`bg-black/40 border-white/20 shadow-2xl h-full ${userData?.is_admin ? 'relative overflow-hidden' : ''}`}>
+              <Card className="border-0 bg-transparent shadow-none h-full">
+                <CardHeader className="text-center pb-6">
+                  <CardTitle className={`text-xl font-bold text-white ${userData?.is_admin ? 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200' : ''}`}>
+                    Personal Information
+                  </CardTitle>
+                  <CardDescription className="text-white/60">Your account details</CardDescription>
+                  {validationErrors.general && (
+                    <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
+                      <p className="text-red-400 text-sm text-center">{validationErrors.general}</p>
+                    </div>
+                  )}
+                </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
                   <div className="p-3 rounded-full bg-yellow-500/20">
@@ -628,17 +823,21 @@ export default function ProfilePage() {
                 )}
               </CardContent>
             </Card>
+            </GoldenBorder>
           </div>
 
           {/* Quiz History Card */}
           <div className="md:col-span-2 animate-in slide-in-from-right duration-500 delay-200">
-            <Card className="bg-black/40 border-white/20 shadow-2xl h-full">
-              <CardHeader style={{height: "auto"}} className="text-center pb-6">
-                <CardTitle className="text-xl font-bold text-white">Quiz History</CardTitle>
-                <CardDescription className="text-white/60">
-                  Your recent quiz attempts and performance
-                </CardDescription>
-              </CardHeader>
+            <GoldenBorder className={`bg-black/40 border-white/20 shadow-2xl h-full ${userData?.is_admin ? 'relative overflow-hidden' : ''}`}>
+              <Card className="border-0 bg-transparent shadow-none h-full">
+                <CardHeader style={{height: "auto"}} className="text-center pb-6">
+                  <CardTitle className={`text-xl font-bold text-white ${userData?.is_admin ? 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200' : ''}`}>
+                    Quiz History
+                  </CardTitle>
+                  <CardDescription className="text-white/60">
+                    Your recent quiz attempts and performance
+                  </CardDescription>
+                </CardHeader>
               <CardContent style={{height: "53rem"}} className="overflow-y-auto custom-scrollbar">
                 {quizData.length > 0 ? (
                   <div className="space-y-4 flex-1">
@@ -816,16 +1015,20 @@ export default function ProfilePage() {
                 )}
               </CardContent>
             </Card>
+            </GoldenBorder>
           </div>
         </div>
 
         {/* Stats Overview */}
         <div className="mt-12 animate-in fade-in duration-500 delay-300">
-          <Card className="bg-black/40 border-white/20 shadow-2xl">
-            <CardHeader className="text-center pb-6">
-              <CardTitle className="text-xl font-bold text-white">Learning Statistics</CardTitle>
-              <CardDescription className="text-white/60">Your overall progress and achievements</CardDescription>
-            </CardHeader>
+          <GoldenBorder className={`bg-black/40 border-white/20 shadow-2xl ${userData?.is_admin ? 'relative overflow-hidden' : ''}`}>
+            <Card className="border-0 bg-transparent shadow-none">
+              <CardHeader className="text-center pb-6">
+                <CardTitle className={`text-xl font-bold text-white ${userData?.is_admin ? 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200' : ''}`}>
+                  Learning Statistics
+                </CardTitle>
+                <CardDescription className="text-white/60">Your overall progress and achievements</CardDescription>
+              </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="text-center p-6 rounded-lg bg-white/5 border border-white/10">
@@ -871,10 +1074,11 @@ export default function ProfilePage() {
               </div>
             </CardContent>
           </Card>
+          </GoldenBorder>
         </div>
 
         {/* Progress Visualization */}
-        <ProgressDotPlot quizData={quizData} />
+        <ProgressDotPlot quizData={quizData} userData={userData} />
       </div>
     </div>
   )
