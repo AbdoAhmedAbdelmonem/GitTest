@@ -1,0 +1,262 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "Which relationship allows one object instance to cause another to perform an action on its behalf?",
+    "options": [
+      "A) Inheritance",
+      "B) Association",
+      "C) Aggregation",
+      "D) Composition"
+    ],
+    "answer": "B) Association",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "Which of the following best describes aggregation?",
+    "options": [
+      "A) A 'uses-a' relationship with strong ownership",
+      "B) A 'has-a' relationship with independent lifecycle",
+      "C) A 'is-a' relationship with weak ownership",
+      "D) A 'part-of' relationship with dependent lifecycle"
+    ],
+    "answer": "B) A 'has-a' relationship with independent lifecycle",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "In which relationship is the lifecycle of the contained object strictly dependent on the container object?",
+    "options": [
+      "A) Inheritance",
+      "B) Association",
+      "C) Aggregation",
+      "D) Composition"
+    ],
+    "answer": "D) Composition",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the primary difference between aggregation and composition?",
+    "options": [
+      "A) Aggregation implies ownership, while composition does not.",
+      "B) Composition allows shared ownership, while aggregation does not.",
+      "C) Aggregation allows the contained object to exist independently, while composition does not.",
+      "D) Composition implies a 'uses-a' relationship, while aggregation does not."
+    ],
+    "answer": "C) Aggregation allows the contained object to exist independently, while composition does not.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which of the following is true about association?",
+    "options": [
+      "A) It always involves a bidirectional relationship.",
+      "B) It defines a 'has-a' relationship with strict ownership.",
+      "C) It allows one object to use another without implying ownership.",
+      "D) It always requires the use of inheritance."
+    ],
+    "answer": "C) It allows one object to use another without implying ownership.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What type of relationship is depicted when a 'Car' class has an 'Engine' class instance and the engine cannot exist without the car?",
+    "options": [
+      "A) Association",
+      "B) Aggregation",
+      "C) Composition",
+      "D) Inheritance"
+    ],
+    "answer": "C) Composition",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which relationship is demonstrated by the statement 'A department has professors'?",
+    "options": [
+      "A) Inheritance",
+      "B) Association",
+      "C) Aggregation",
+      "D) Composition"
+    ],
+    "answer": "C) Aggregation",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "In the context of object-oriented programming, what does a 'uses-a' relationship imply?",
+    "options": [
+      "A) Aggregation",
+      "B) Composition",
+      "C) Inheritance",
+      "D) Association"
+    ],
+    "answer": "D) Association",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "If a 'Person' class contains a reference to a 'Lawyer' class, what type of relationship is this an example of?",
+    "options": [
+      "A) Composition",
+      "B) Inheritance",
+      "C) Aggregation",
+      "D) Association"
+    ],
+    "answer": "D) Association",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which relationship is the weakest form of a 'has-a' relationship?",
+    "options": [
+      "A) Inheritance",
+      "B) Association",
+      "C) Aggregation",
+      "D) Composition"
+    ],
+    "answer": "C) Aggregation",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What keyword is commonly used in Java to denote an inheritance relationship?",
+    "options": [
+      "A) extends",
+      "B) implements",
+      "C) includes",
+      "D) uses"
+    ],
+    "answer": "A) extends",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "In which relationship can the contained object exist independently of the container object?",
+    "options": [
+      "A) Inheritance",
+      "B) Association",
+      "C) Aggregation",
+      "D) Composition"
+    ],
+    "answer": "C) Aggregation",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which of the following is NOT true about composition?",
+    "options": [
+      "A) It implies strong ownership.",
+      "B) The contained object cannot exist independently.",
+      "C) It defines a 'part-of' relationship.",
+      "D) It allows the contained object to be shared among multiple containers."
+    ],
+    "answer": "D) It allows the contained object to be shared among multiple containers.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which relationship is depicted by the statement 'A student has an address'?",
+    "options": [
+      "A) Inheritance",
+      "B) Association",
+      "C) Aggregation",
+      "D) Composition"
+    ],
+    "answer": "D) Composition",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What type of relationship is demonstrated by the statement 'A customer purchases a book'?",
+    "options": [
+      "A) Inheritance",
+      "B) Association",
+      "C) Aggregation",
+      "D) Composition"
+    ],
+    "answer": "B) Association",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which of the following best describes composition?",
+    "options": [
+      "A) A 'has-a' relationship where the parts can exist independently.",
+      "B) A 'has-a' relationship with dependent lifecycle.",
+      "C) A 'uses-a' relationship with strong ownership.",
+      "D) A 'is-a' relationship with weak ownership."
+    ],
+    "answer": "B) A 'has-a' relationship with dependent lifecycle.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What type of relationship is depicted when a 'House' class has a 'Room' class instance and the room cannot exist without the house?",
+    "options": [
+      "A) Association",
+      "B) Aggregation",
+      "C) Composition",
+      "D) Inheritance"
+    ],
+    "answer": "C) Composition",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which relationship is demonstrated by the statement 'A company has employees'?",
+    "options": [
+      "A) Inheritance",
+      "B) Association",
+      "C) Aggregation",
+      "D) Composition"
+    ],
+    "answer": "C) Aggregation",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "In which relationship is one class considered a part of another class?",
+    "options": [
+      "A) Inheritance",
+      "B) Association",
+      "C) Aggregation",
+      "D) Composition"
+    ],
+    "answer": "D) Composition",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "If an 'Order' class contains a reference to a 'Product' class and the product can exist without the order, what type of relationship is this?",
+    "options": [
+      "A) Association",
+      "B) Aggregation",
+      "C) Composition",
+      "D) Inheritance"
+    ],
+    "answer": "B) Aggregation",
+    "image": null
+  }
+]
