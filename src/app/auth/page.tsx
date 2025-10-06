@@ -1016,6 +1016,7 @@ export default function AuthPage() {
                               <Input
                                 id="age"
                                 type="number"
+                                maxLength={2}
                                 placeholder="Enter your age"
                                 value={signupData.age}
                                 onChange={(e) => setSignupData({ ...signupData, age: e.target.value })}
