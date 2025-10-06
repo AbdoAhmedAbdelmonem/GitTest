@@ -1,0 +1,327 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "Which method is used to read an integer from the user in Java?",
+    "options": [
+      "A) nextInt()",
+      "B) nextDouble()",
+      "C) nextFloat()",
+      "D) next()"
+    ],
+    "answer": "A) nextInt()",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What package needs to be imported to use the Scanner class in Java?",
+    "options": [
+      "A) java.io",
+      "B) java.util",
+      "C) java.lang",
+      "D) java.net"
+    ],
+    "answer": "B) java.util",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the System.in parameter in the Scanner class?",
+    "options": [
+      "A) It refers to output to the console",
+      "B) It refers to reading a file",
+      "C) It refers to accepting input from the keyboard",
+      "D) It refers to the system properties"
+    ],
+    "answer": "C) It refers to accepting input from the keyboard",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "Which method of the Math class is used to calculate the square root of a number?",
+    "options": [
+      "A) abs()",
+      "B) sqrt()",
+      "C) pow()",
+      "D) round()"
+    ],
+    "answer": "B) sqrt()",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which method of the Math class is used to return the larger of two values?",
+    "options": [
+      "A) min()",
+      "B) pow()",
+      "C) max()",
+      "D) abs()"
+    ],
+    "answer": "C) max()",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which method of the Math class converts degrees to radians?",
+    "options": [
+      "A) toRadians()",
+      "B) toDegrees()",
+      "C) sin()",
+      "D) cos()"
+    ],
+    "answer": "A) toRadians()",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which Math class method returns a random double between 0 and 1?",
+    "options": [
+      "A) ceil()",
+      "B) floor()",
+      "C) round()",
+      "D) random()"
+    ],
+    "answer": "D) random()",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which Scanner method reads a one-word String from the user?",
+    "options": [
+      "A) nextInt()",
+      "B) nextDouble()",
+      "C) nextFloat()",
+      "D) next()"
+    ],
+    "answer": "D) next()",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "How do you call the abs() method to find the absolute value of -50?",
+    "options": [
+      "A) Math.abs(-50)",
+      "B) Math.abs(50)",
+      "C) Math.abs(-50.0)",
+      "D) Math.abs(50.0)"
+    ],
+    "answer": "A) Math.abs(-50)",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which method is used to round a floating-point number to the nearest whole number?",
+    "options": [
+      "A) ceil()",
+      "B) round()",
+      "C) floor()",
+      "D) sqrt()"
+    ],
+    "answer": "B) round()",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "Which method would you use to calculate 2 to the power of 4?",
+    "options": [
+      "A) Math.pow(2, 4)",
+      "B) Math.pow(4, 2)",
+      "C) Math.sqrt(4, 2)",
+      "D) Math.sqrt(2, 4)"
+    ],
+    "answer": "A) Math.pow(2, 4)",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What is the output of the following code?<br><br>System.out.println(Math.sqrt(121.0));",
+    "options": [
+      "A) 121.0",
+      "B) 12.1",
+      "C) 11",
+      "D) 11.0"
+    ],
+    "answer": "D) 11.0",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which method is used to find the smaller of two values in the Math class?",
+    "options": [
+      "A) min()",
+      "B) max()",
+      "C) floor()",
+      "D) ceil()"
+    ],
+    "answer": "A) min()",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which Scanner method reads a floating-point number from the user?",
+    "options": [
+      "A) nextDouble()",
+      "B) nextFloat()",
+      "C) nextInt()",
+      "D) next()"
+    ],
+    "answer": "B) nextFloat()",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What does the following line of code do?<br><br>Scanner input = new Scanner(System.in);",
+    "options": [
+      "A) Imports the Scanner class",
+      "B) Creates a Scanner object to output to the console",
+      "C) Creates a new System object",
+      "D) Creates a Scanner object to accept input from the keyboard"
+    ],
+    "answer": "D) Creates a Scanner object to accept input from the keyboard",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What does the method Math.round(2.71) return?",
+    "options": [
+      "A) 2.7",
+      "B) 3",
+      "C) 2.71",
+      "D) 2"
+    ],
+    "answer": "B) 3",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which Scanner method is used to read a single character from the user?",
+    "options": [
+      "A) nextChar()",
+      "B) nextInt().charAt(0)",
+      "C) next().charAt(0)",
+      "D) nextLine().charAt(0)"
+    ],
+    "answer": "C) next().charAt(0)",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What will be the output of the following code?<br><br>System.out.println(Math.min(3, 7) + 2);",
+    "options": [
+      "A) 7",
+      "B) 5",
+      "C) 3",
+      "D) 9"
+    ],
+    "answer": "B) 5",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which constant represents the value of pi in the Math class?",
+    "options": [
+      "A) Math.E",
+      "B) Math.P",
+      "C) Math.PI",
+      "D) Math.PI()"
+    ],
+    "answer": "C) Math.PI",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "How do you type cast an integer result to a double in Java?",
+    "options": [
+      "A) double(result)",
+      "B) cast double result",
+      "C) (int) result",
+      "D) (double) result"
+    ],
+    "answer": "D) (double) result",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What is the result of the following code?<br><br>int x = (int) Math.pow(10, 3);",
+    "options": [
+      "A) 10",
+      "B) 1000",
+      "C) 3",
+      "D) 100"
+    ],
+    "answer": "B) 1000",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "Which method of the Math class is used to find the absolute value of a number?",
+    "options": [
+      "A) abs()",
+      "B) sqrt()",
+      "C) pow()",
+      "D) round()"
+    ],
+    "answer": "A) abs()",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which method is used to truncate a double to an integer in Java?",
+    "options": [
+      "A) Math.floor()",
+      "B) Math.round()",
+      "C) (int)",
+      "D) Math.ceil()"
+    ],
+    "answer": "C) (int)",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "Which of the following methods converts radians to degrees?",
+    "options": [
+      "A) toRadians()",
+      "B) toDegrees()",
+      "C) sin()",
+      "D) cos()"
+    ],
+    "answer": "B) toDegrees()",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What does the following expression evaluate to?<br><br>Math.pow(2, 3) * Math.sqrt(4)",
+    "options": [
+      "A) 8.0",
+      "B) 4.0",
+      "C) 16.0",
+      "D) 12.0"
+    ],
+    "answer": "C) 16.0",
+    "image": null
+  }
+]

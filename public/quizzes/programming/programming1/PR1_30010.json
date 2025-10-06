@@ -1,0 +1,652 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is Java?",
+    "options": [
+      "A) A scripting language",
+      "B) A compiled language",
+      "C) A high-level programming language",
+      "D) A markup language"
+    ],
+    "answer": "C) A high-level programming language",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What is the file extension for Java source files?",
+    "options": [
+      "A) .js",
+      "B) .class",
+      "C) .java",
+      "D) .jav"
+    ],
+    "answer": "C) .java",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Which method is the entry point for any Java program?",
+    "options": [
+      "A) start()",
+      "B) init()",
+      "C) run()",
+      "D) main()"
+    ],
+    "answer": "D) main()",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the correct syntax to print a message in Java?",
+    "options": [
+      "A) print(\"Hello World\");",
+      "B) System.out.println(\"Hello World\");",
+      "C) echo(\"Hello World\");",
+      "D) cout << \"Hello World\";"
+    ],
+    "answer": "B) System.out.println(\"Hello World\");",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which of the following is not a primitive data type in Java?",
+    "options": [
+      "A) int",
+      "B) boolean",
+      "C) char",
+      "D) String"
+    ],
+    "answer": "D) String",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "How many bytes does an 'int' occupy in Java?",
+    "options": [
+      "A) 1",
+      "B) 2",
+      "C) 4",
+      "D) 8"
+    ],
+    "answer": "C) 4",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is the range of a byte data type in Java?",
+    "options": [
+      "A) 0 to 255",
+      "B) -128 to 127",
+      "C) -32768 to 32767",
+      "D) -2147483648 to 2147483647"
+    ],
+    "answer": "B) -128 to 127",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which of the following is the correct way to declare a variable in Java?",
+    "options": [
+      "A) int number;",
+      "B) number int;",
+      "C) int number =",
+      "D) int = number;"
+    ],
+    "answer": "A) int number;",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What does the term 'JVM' stand for?",
+    "options": [
+      "A) Java Variable Method",
+      "B) Java Visual Machine",
+      "C) Java Virtual Machine",
+      "D) Java Verification Mode"
+    ],
+    "answer": "C) Java Virtual Machine",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which data type would you use to store a true or false value?",
+    "options": [
+      "A) boolean",
+      "B) int",
+      "C) String",
+      "D) char"
+    ],
+    "answer": "A) boolean",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "Which of these is not a loop structure in Java?",
+    "options": [
+      "A) for",
+      "B) while",
+      "C) foreach",
+      "D) do-while"
+    ],
+    "answer": "C) foreach",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "Which symbol is used for single-line comments in Java?",
+    "options": [
+      "A) //",
+      "B) /*",
+      "C) /**",
+      "D) <!--"
+    ],
+    "answer": "A) //",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What will be the output of the following code?<br><br>System.out.println(2 + 3 + \"Hello\");",
+    "options": [
+      "A) 5Hello",
+      "B) 23Hello",
+      "C) Hello23",
+      "D) Hello5"
+    ],
+    "answer": "A) 5Hello",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which method is used to convert a string to lowercase in Java?",
+    "options": [
+      "A) lower()",
+      "B) tolower()",
+      "C) toLowerCase()",
+      "D) lowcase()"
+    ],
+    "answer": "C) toLowerCase()",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the size of an int data type in Java?",
+    "options": [
+      "A) 2 bytes",
+      "B) 8 bytes",
+      "C) 4 bytes",
+      "D) 16 bytes"
+    ],
+    "answer": "C) 4 bytes",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is the output of the following code?<br><br>System.out.println(\"10\" + 20 + 30);",
+    "options": [
+      "A) 60",
+      "B) 1020",
+      "C) 102030",
+      "D) 1020 + 30"
+    ],
+    "answer": "C) 102030",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What will be the output of the following code?<br><br>System.out.println(10 + 20 + \"30\");",
+    "options": [
+      "A) 102030",
+      "B) 102030",
+      "C) 30",
+      "D) 3030"
+    ],
+    "answer": "D) 3030",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a valid method declaration in Java?",
+    "options": [
+      "A) method void()",
+      "B) myMethod void()",
+      "C) void myMethod()",
+      "D) void myMethod"
+    ],
+    "answer": "C) void myMethod()",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is the output of the following code?<br><br>System.out.println(\"Hello\".length());",
+    "options": [
+      "A) 4",
+      "B) 5",
+      "C) 6",
+      "D) 7"
+    ],
+    "answer": "B) 5",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a logical operator in Java?",
+    "options": [
+      "A) +",
+      "B) -",
+      "C) *",
+      "D) &&"
+    ],
+    "answer": "D) &&",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What will be the output of the following code?<br><br>System.out.println(2 + 3 * 5);",
+    "options": [
+      "A) 25",
+      "B) 10",
+      "C) 15",
+      "D) 17"
+    ],
+    "answer": "D) 17",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is the result of the following expression?<br><br>10 / 3",
+    "options": [
+      "A) 3.33",
+      "B) 3",
+      "C) 0",
+      "D) 10"
+    ],
+    "answer": "B) 3",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which of the following is the correct way to check if two strings are equal in Java?",
+    "options": [
+      "A) str1 == str2",
+      "B) str1 = str2",
+      "C) str1.equals(str2)",
+      "D) str1.compareTo(str2)"
+    ],
+    "answer": "C) str1.equals(str2)",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "Which of the following is used to compare two strings in Java?",
+    "options": [
+      "A) ==",
+      "B) compare()",
+      "C) equals()",
+      "D) strcmp()"
+    ],
+    "answer": "C) equals()",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which of the following is used to generate random numbers in Java?",
+    "options": [
+      "A) Math.random()",
+      "B) Random.random()",
+      "C) random()",
+      "D) Random.nextInt()"
+    ],
+    "answer": "A) Math.random()",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What will be the output of the following code?<br><br>System.out.println('A' + 1);",
+    "options": [
+      "A) A1",
+      "B) B",
+      "C) 66",
+      "D) 2"
+    ],
+    "answer": "C) 66",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a valid way to initialize a char variable in Java?",
+    "options": [
+      "A) char c = 'A';",
+      "B) char c = A;",
+      "C) char c = \"A\";",
+      "D) char c = 'AB';"
+    ],
+    "answer": "A) char c = 'A';",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "Which data type is used to represent a single character in Java?",
+    "options": [
+      "A) int",
+      "B) String",
+      "C) char",
+      "D) byte"
+    ],
+    "answer": "C) char",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What is the default value of a boolean variable in Java?",
+    "options": [
+      "A) true",
+      "B) false",
+      "C) 0",
+      "D) null"
+    ],
+    "answer": "B) false",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "Which of the following is used to concatenate two strings in Java?",
+    "options": [
+      "A) +",
+      "B) &",
+      "C) *",
+      "D) append()"
+    ],
+    "answer": "A) +",
+    "image": null
+  },
+  {
+    "numb": 31,
+    "type": "Multiple Choices",
+    "question": "Which of the following is not a valid identifier in Java?",
+    "options": [
+      "A) variable1",
+      "B) _variable",
+      "C) 1variable",
+      "D) $variable"
+    ],
+    "answer": "C) 1variable",
+    "image": null
+  },
+  {
+    "numb": 32,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a valid return type for a method in Java?",
+    "options": [
+      "A) int",
+      "B) void",
+      "C) String",
+      "D) All of the above"
+    ],
+    "answer": "D) All of the above",
+    "image": null
+  },
+  {
+    "numb": 33,
+    "type": "Multiple Choices",
+    "question": "What is the default value of an int variable in Java?",
+    "options": [
+      "A) 0",
+      "B) 1",
+      "C) -1",
+      "D) null"
+    ],
+    "answer": "A) 0",
+    "image": null
+  },
+  {
+    "numb": 34,
+    "type": "Multiple Choices",
+    "question": "What is the output of the following code<br><br>System.out.println(10 % 3);",
+    "options": [
+      "A) 3",
+      "B) 0",
+      "C) 1",
+      "D) 10"
+    ],
+    "answer": "C) 1",
+    "image": null
+  },
+  {
+    "numb": 35,
+    "type": "Multiple Choices",
+    "question": "Which method is used to find the character at a specific index in a string in Java?",
+    "options": [
+      "A) getChar()",
+      "B) index()",
+      "C) charAt()",
+      "D) findChar()"
+    ],
+    "answer": "C) charAt()",
+    "image": null
+  },
+  {
+    "numb": 36,
+    "type": "Multiple Choices",
+    "question": "What will be the output of the following code?<br><br>System.out.println(\"Java\" + \" is fun!\");",
+    "options": [
+      "A) Javais fun!",
+      "B) Java is fun!",
+      "C) Java isfun!",
+      "D) Java + is fun!"
+    ],
+    "answer": "B) Java is fun!",
+    "image": null
+  },
+  {
+    "numb": 37,
+    "type": "Multiple Choices",
+    "question": "Which method is used to convert a string to uppercase in Java?",
+    "options": [
+      "A) toUpperCase()",
+      "B) upper()",
+      "C) toupper()",
+      "D) toUpper()"
+    ],
+    "answer": "A) toUpperCase()",
+    "image": null
+  },
+  {
+    "numb": 38,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a correct way to initialize a double variable in Java?",
+    "options": [
+      "A) double d = 10;",
+      "B) double d = 10.5;",
+      "C) double d = 10L;",
+      "D) double d = 10D;"
+    ],
+    "answer": "B) double d = 10.5;",
+    "image": null
+  },
+  {
+    "numb": 39,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a valid comment in Java?",
+    "options": [
+      "A) /* Comment",
+      "B) / Comment /",
+      "C) /* Comment */",
+      "D) ** Comment **"
+    ],
+    "answer": "C) /* Comment */",
+    "image": null
+  },
+  {
+    "numb": 40,
+    "type": "Multiple Choices",
+    "question": "What will be the output of the following code?<br><br>System.out.println(10 > 5);",
+    "options": [
+      "A) true",
+      "B) false",
+      "C) 10",
+      "D) 5"
+    ],
+    "answer": "A) true",
+    "image": null
+  },
+  {
+    "numb": 41,
+    "type": "Multiple Choices",
+    "question": "Which of the following is the correct way to create a multi-line comment in Java?",
+    "options": [
+      "A) // This is a multi-line comment //",
+      "B) /* This is a multi-line comment */",
+      "C) ** This is a multi-line comment **",
+      "D) /* This is a multi-line comment */"
+    ],
+    "answer": "B) /* This is a multi-line comment */",
+    "image": null
+  },
+  {
+    "numb": 42,
+    "type": "Multiple Choices",
+    "question": "Which method is used to check if two strings are equal in Java?",
+    "options": [
+      "A) ==",
+      "B) compareTo()",
+      "C) equalsIgnoreCase()",
+      "D) equals()"
+    ],
+    "answer": "D) equals()",
+    "image": null
+  },
+  {
+    "numb": 43,
+    "type": "Multiple Choices",
+    "question": "What is the correct way to declare a float variable in Java?",
+    "options": [
+      "A) float f = 10.5f;",
+      "B) float f = 10;",
+      "C) float f = 10.5;",
+      "D) float f = 10.5d;"
+    ],
+    "answer": "A) float f = 10.5f;",
+    "image": null
+  },
+  {
+    "numb": 44,
+    "type": "Multiple Choices",
+    "question": "Which of the following is the correct way to declare a method in Java?",
+    "options": [
+      "A) method void myMethod()",
+      "B) void myMethod()",
+      "C) void myMethod",
+      "D) myMethod void()"
+    ],
+    "answer": "B) void myMethod()",
+    "image": null
+  },
+  {
+    "numb": 45,
+    "type": "Multiple Choices",
+    "question": "What will be the output of the following code?<br><br>System.out.println(\"Hello\".substring(1, 4));",
+    "options": [
+      "A) Hel",
+      "B) ell",
+      "C) llo",
+      "D) He"
+    ],
+    "answer": "B) ell",
+    "image": null
+  },
+  {
+    "numb": 46,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a valid identifier in Java?",
+    "options": [
+      "A) 1variable",
+      "B) #variable",
+      "C) variable-1",
+      "D) myVariable"
+    ],
+    "answer": "D) myVariable",
+    "image": null
+  },
+  {
+    "numb": 47,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a valid method return type in Java?",
+    "options": [
+      "A) int",
+      "B) void",
+      "C) String",
+      "D) All of the above"
+    ],
+    "answer": "A) int",
+    "image": null
+  },
+  {
+    "numb": 48,
+    "type": "Multiple Choices",
+    "question": "What does 'null' mean in Java?",
+    "options": [
+      "A) A zero value",
+      "B) A void reference",
+      "C) A reference with no value",
+      "D) A reference to an empty string"
+    ],
+    "answer": "C) A reference with no value",
+    "image": null
+  },
+  {
+    "numb": 49,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a valid declaration of a string in Java?",
+    "options": [
+      "A) String str = \"Hello\";",
+      "B) string str = \"Hello\";",
+      "C) String str = new String(\"Hello\");",
+      "D) A and C"
+    ],
+    "answer": "A) String str = \"Hello\";",
+    "image": null
+  },
+  {
+    "numb": 50,
+    "type": "Multiple Choices",
+    "question": "What is the output of the following code?<br><br>System.out.println(\"Hello\".charAt(1));",
+    "options": [
+      "A) H",
+      "B) e",
+      "C) l",
+      "D) o"
+    ],
+    "answer": "B) e",
+    "image": null
+  }
+]

@@ -1,0 +1,327 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What does the 'char' data type represent in Java?",
+    "options": [
+      "A) An array of characters",
+      "B) A string",
+      "C) A floating-point number",
+      "D) A primitive data type representing single characters of text"
+    ],
+    "answer": "D) A primitive data type representing single characters of text",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What is the ASCII value of the character 'A'?",
+    "options": [
+      "A) 97",
+      "B) 65",
+      "C) 32",
+      "D) 130"
+    ],
+    "answer": "B) 65",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Which operator is used for incrementing a variable in Java?",
+    "options": [
+      "A) ++",
+      "B) --",
+      "C) +=",
+      "D) =="
+    ],
+    "answer": "A) ++",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What does type casting do in Java?",
+    "options": [
+      "A) Converts a char to int",
+      "B) Converts a float to int",
+      "C) Changes the data type of a value",
+      "D) Changes a string to char"
+    ],
+    "answer": "C) Changes the data type of a value",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is the output of 'System.out.println('a' + 2);'?",
+    "options": [
+      "A) 97",
+      "B) 99",
+      "C) 'c'",
+      "D) 'a2'"
+    ],
+    "answer": "B) 99",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which of the following is an example of type casting?",
+    "options": [
+      "A) (char) ('a' + 2)",
+      "B) int x = 2 + 'a';",
+      "C) 'a' + 'b'",
+      "D) x = 'b';"
+    ],
+    "answer": "A) (char) ('a' + 2)",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "How is the pre-increment operation performed?",
+    "options": [
+      "A) The value is used first, then the variable is incremented",
+      "B) The variable remains unchanged",
+      "C) The variable is incremented first, then the value is used",
+      "D) The variable is decremented first, then the value is used"
+    ],
+    "answer": "C) The variable is incremented first, then the value is used",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What will be the output of the following code?",
+    "options": [
+      "A) 3",
+      "B) 97",
+      "C) 100",
+      "D) 'd'"
+    ],
+    "answer": "C) 100",
+    "image": "/quizzes/programming/programming_images/4-8.png"
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is the result of the following code?",
+    "options": [
+      "A) 'd'",
+      "B) 'e'",
+      "C) 'c'",
+      "D) 101"
+    ],
+    "answer": "B) 'e'",
+    "image": "/quizzes/programming/programming_images/4-9.png"
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which of the following represents the post-increment operation?",
+    "options": [
+      "A) ++x",
+      "B) x++",
+      "C) x--",
+      "D) --x"
+    ],
+    "answer": "B) x++",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is the correct way to modify and assign a value to a variable in Java?",
+    "options": [
+      "A) x =+ 5;",
+      "B) x = x;",
+      "C) x += 5;",
+      "D) x = 5;"
+    ],
+    "answer": "C) x += 5;",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "Which of the following is true about ASCII values?",
+    "options": [
+      "A) Each character is mapped to an integer value",
+      "B) Characters and integers are the same in ASCII",
+      "C) ASCII only represents numbers",
+      "D) ASCII is used only in Java"
+    ],
+    "answer": "A) Each character is mapped to an integer value",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What will be the value of x after the following code is executed?",
+    "options": [
+      "A) 1",
+      "B) 3",
+      "C) 4",
+      "D) 0"
+    ],
+    "answer": "C) 4",
+    "image": "/quizzes/programming/programming_images/img_1.png"
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which of the following is not a primitive data type in Java?",
+    "options": [
+      "A) int",
+      "B) char",
+      "C) float",
+      "D) String"
+    ],
+    "answer": "D) String",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the 'System.out.println' function?",
+    "options": [
+      "A) To take input from the user",
+      "B) To print output to the console",
+      "C) To declare a variable",
+      "D) To initialize an array"
+    ],
+    "answer": "B) To print output to the console",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What happens when you mix char and int in an expression in Java?",
+    "options": [
+      "A) Automatic conversion to int",
+      "B) Conversion to char",
+      "C) Compile-time error",
+      "D) The program crashes"
+    ],
+    "answer": "A) Automatic conversion to int",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which character is represented by the ASCII value 32?",
+    "options": [
+      "A) '@'",
+      "B) 'A'",
+      "C) 'a'",
+      "D) ' ' (space)"
+    ],
+    "answer": "D) ' ' (space)",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which data type is used to represent integer values in Java?",
+    "options": [
+      "A) int",
+      "B) float",
+      "C) char",
+      "D) double"
+    ],
+    "answer": "A) int",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What does the expression 'a' + 10 evaluate to in Java?",
+    "options": [
+      "A) 'k'",
+      "B) 97",
+      "C) 107",
+      "D) 'a10'"
+    ],
+    "answer": "C) 107",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "How do you explicitly cast an integer to a character in Java?",
+    "options": [
+      "A) (char) int_variable",
+      "B) (int) char_variable",
+      "C) char_variable = int_variable;",
+      "D) (char) 'int_variable'"
+    ],
+    "answer": "A) (char) int_variable",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "Which of the following statements about the 'char' data type is true?",
+    "options": [
+      "A) It can store multiple characters.",
+      "B) It is used to store single characters.",
+      "C) It is equivalent to an int.",
+      "D) It cannot store numeric values."
+    ],
+    "answer": "B) It is used to store single characters.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is the result of the following code?<br>System.out.println((char)('A'+2));",
+    "options": [
+      "A) 67",
+      "B) Error",
+      "C) 'C'",
+      "D) 'x'"
+    ],
+    "answer": "C) 'C'",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "What is the difference between pre-increment and post-increment?",
+    "options": [
+      "A) Pre-increment decrements first; post-increment increments first.",
+      "B) Pre-increment increments before the value is used; post-increment increments after.",
+      "C) Pre-increment is faster.",
+      "D) There is no difference."
+    ],
+    "answer": "B) Pre-increment increments before the value is used; post-increment increments after.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "Which of the following is an example of modifying and assigning a value in Java?",
+    "options": [
+      "A) x *= 3;",
+      "B) x == 3;",
+      "C) x = = 3;",
+      "D) x +* 3;"
+    ],
+    "answer": "A) x *= 3;",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which of the following will produce the character 'e'?",
+    "options": [
+      "A) (char) ('a' + 4)",
+      "B) (char) ('a' + 2)",
+      "C) 'e' + 4",
+      "D) 'e'"
+    ],
+    "answer": "A) (char) ('a' + 4)",
+    "image": null
+  }
+]
