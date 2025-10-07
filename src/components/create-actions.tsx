@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import React, { useState, useRef, useEffect, useCallback } from "react"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -22,7 +22,8 @@ import {
   Shield,
   AlertCircle,
   CloudUpload,
-  FolderOpen,
+  FileText,
+  X,
 } from "lucide-react"
 import { useToast } from "@/components/ToastProvider"
 import { useUpload } from "./upload-context"
@@ -30,18 +31,25 @@ import { useUpload } from "./upload-context"
 interface CreateActionsProps {
   currentFolderId: string
   onFileCreated?: () => void
-  userSession: any
+  userSession: { user_id: string } | null
 }
 
 export function CreateActions({ currentFolderId, onFileCreated, userSession }: CreateActionsProps) {
   const [showCreateFolder, setShowCreateFolder] = useState(false)
+  const [showUploadDialog, setShowUploadDialog] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState<{[key: string]: number}>({})
+  const [uploadedCount, setUploadedCount] = useState(0)
   const [folderName, setFolderName] = useState("")
   const [isCreatingFolder, setIsCreatingFolder] = useState(false)
   const [isAutoClosing, setIsAutoClosing] = useState(false)
   const [hasGoogleAuth, setHasGoogleAuth] = useState<boolean | null>(null)
   const [authError, setAuthError] = useState<string | null>(null)
+  const [isDragActive, setIsDragActive] = useState(false)
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
   const folderInputRef = useRef<HTMLInputElement>(null)
+  const dropZoneRef = useRef<HTMLDivElement>(null)
   const { addToast } = useToast()
   const { uploadFile, uploads } = useUpload()
 
@@ -178,12 +186,92 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
     }
   }
 
-  const handleFileSelect = () => {
-    fileInputRef.current?.click()
+  // Drag and drop handlers
+  const handleDragEnter = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragActive(true)
+  }, [])
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragActive(false)
+  }, [])
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }, [])
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragActive(false)
+
+    const files = Array.from(e.dataTransfer.files)
+    if (files.length > 0) {
+      setSelectedFiles(files)
+      setShowUploadDialog(true)
+    }
+  }, [])
+
+  const removeFile = (index: number) => {
+    setSelectedFiles(prev => prev.filter((_, i) => i !== index))
   }
 
-  const handleFolderSelect = () => {
-    folderInputRef.current?.click()
+  const uploadSelectedFiles = async () => {
+    if (selectedFiles.length === 0 || isUploading) return
+
+    setIsUploading(true)
+    setUploadedCount(0)
+    setUploadProgress({})
+
+    try {
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i]
+        const fileKey = `${file.name}-${file.size}-${i}`
+        
+        // Set file as starting upload
+        setUploadProgress(prev => ({ ...prev, [fileKey]: 0 }))
+        
+        try {
+          await handleFileUpload(file)
+          
+          // Mark file as completed
+          setUploadProgress(prev => ({ ...prev, [fileKey]: 100 }))
+          setUploadedCount(prev => prev + 1)
+          
+        } catch (error) {
+          console.error(`Error uploading ${file.name}:`, error)
+          // Mark file as failed
+          setUploadProgress(prev => ({ ...prev, [fileKey]: -1 }))
+        }
+      }
+      
+      // Close dialog and reset states
+      setTimeout(() => {
+        setSelectedFiles([])
+        setShowUploadDialog(false)
+        setUploadProgress({})
+        setUploadedCount(0)
+        addToast(`Successfully uploaded ${uploadedCount} file(s)`, "success")
+      }, 1000)
+      
+    } catch (error) {
+      console.error('Error uploading files:', error)
+      addToast('Some files failed to upload', "error")
+    } finally {
+      setIsUploading(false)
+    }
+  }
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes === 0) return '0 Bytes'
+    const k = 1024
+    const sizes = ['Bytes', 'KB', 'MB', 'GB']
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
   }
 
   // Create folder in Google Drive
@@ -220,10 +308,9 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = event.target.files
     if (selectedFiles && selectedFiles.length > 0) {
-      // Handle multiple files
-      Array.from(selectedFiles).forEach(file => {
-        handleFileUpload(file)
-      })
+      const filesArray = Array.from(selectedFiles)
+      setSelectedFiles(filesArray)
+      setShowUploadDialog(true)
     }
     // Reset the input so the same files can be selected again
     if (fileInputRef.current) {
@@ -334,7 +421,7 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
         }
 
         try {
-          await uploadFile(file, parentId, userSession.user_id.toString(), () => {
+          await uploadFile(file, parentId, userSession?.user_id?.toString() || '', () => {
             onFileCreated?.()
           })
           uploadedCount++
@@ -472,7 +559,7 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
             </Button>
             <Button
               onClick={() => {
-              handleFileSelect()
+              setShowUploadDialog(true)
               }}
               className="bg-purple-500/30 hover:bg-purple-500/20 text-purple-300 hover:text-white border-purple-500/30 justify-start"
               variant="outline"
@@ -554,6 +641,227 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
         {...({ webkitdirectory: '' } as React.InputHTMLAttributes<HTMLInputElement>)}
         aria-label="Upload folder"
       />
+
+      {/* File Upload Dialog with Drag & Drop */}
+      <Dialog open={showUploadDialog} onOpenChange={setShowUploadDialog}>
+        <DialogContent className="bg-black/90 backdrop-blur-xl border-white/20 text-white max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Upload Files
+            </DialogTitle>
+            <DialogDescription className="text-white/60">
+              Drag and drop files here or click to browse
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            {/* Drag and Drop Zone */}
+            <div
+              ref={dropZoneRef}
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+              className={`
+                relative border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-300
+                ${isDragActive 
+                  ? 'border-purple-500 bg-purple-500/10' 
+                  : 'border-white/30 hover:border-purple-500/50 hover:bg-white/5'
+                }
+              `}
+            >
+              <motion.div
+                animate={isDragActive ? { scale: 1.05 } : { scale: 1 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-4"
+              >
+                <div className="flex justify-center">
+                  <motion.div
+                    animate={isDragActive ? { y: -5 } : { y: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className={`
+                      w-16 h-16 rounded-full flex items-center justify-center
+                      ${isDragActive 
+                        ? 'bg-purple-500/20 text-purple-400' 
+                        : 'bg-white/10 text-white/60'
+                      }
+                    `}
+                  >
+                    <CloudUpload className="w-8 h-8" />
+                  </motion.div>
+                </div>
+                
+                <div>
+                  <h3 className={`text-lg font-medium mb-2 ${isDragActive ? 'text-purple-300' : 'text-white'}`}>
+                    {isDragActive ? 'Drop files here' : 'Upload Files'}
+                  </h3>
+                  <p className="text-white/60 text-sm">
+                    {isDragActive 
+                      ? 'Release to upload files' 
+                      : 'Drag and drop files here, or click to browse'
+                    }
+                  </p>
+                </div>
+                
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    fileInputRef.current?.click()
+                  }}
+                  className="bg-white/5 border-white/30 text-white hover:bg-white/10 hover:text-white"
+                >
+                  <Upload className="w-4 h-4 mr-2" />
+                  Choose Files
+                </Button>
+              </motion.div>
+            </div>
+
+            {/* Selected Files List */}
+            {selectedFiles.length > 0 && (
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium text-white/80">
+                  Selected Files ({selectedFiles.length})
+                  {isUploading && (
+                    <span className="ml-2 text-xs text-blue-400">
+                      Uploading {uploadedCount}/{selectedFiles.length}
+                    </span>
+                  )}
+                </h4>
+                <div className="max-h-48 overflow-y-auto space-y-2 bg-white/5 rounded-lg p-3 custom-scrollbar">
+                  {selectedFiles.map((file, index) => {
+                    const fileKey = `${file.name}-${file.size}-${index}`
+                    const progress = uploadProgress[fileKey]
+                    const isFileUploading = progress !== undefined && progress >= 0 && progress < 100
+                    const isFileCompleted = progress === 100
+                    const isFileFailed = progress === -1
+                    
+                    return (
+                      <motion.div
+                        key={fileKey}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="relative"
+                      >
+                        <div className="flex items-center justify-between p-3 bg-white/5 rounded border border-white/10 relative overflow-hidden">
+                          {/* Progress background */}
+                          {isFileUploading && (
+                            <div 
+                              className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 transition-all duration-300"
+                              style={{ width: `${progress}%` }}
+                            />
+                          )}
+                          {isFileCompleted && (
+                            <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20" />
+                          )}
+                          {isFileFailed && (
+                            <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-pink-500/20" />
+                          )}
+                          
+                          <div className="flex items-center gap-2 flex-1 min-w-0 relative z-10">
+                            <div className="flex-shrink-0">
+                              {isFileCompleted ? (
+                                <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center">
+                                  <svg className="w-2 h-2 text-white" fill="currentColor" viewBox="0 0 8 8">
+                                    <path d="M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z"/>
+                                  </svg>
+                                </div>
+                              ) : isFileFailed ? (
+                                <X className="w-4 h-4 text-red-400" />
+                              ) : isFileUploading ? (
+                                <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+                              ) : (
+                                <FileText className="w-4 h-4 text-blue-400" />
+                              )}
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm text-white truncate" title={file.name}>
+                                {file.name}
+                              </p>
+                              <div className="flex items-center gap-2">
+                                <p className="text-xs text-white/60">
+                                  {formatFileSize(file.size)}
+                                </p>
+                                {isFileUploading && (
+                                  <p className="text-xs text-blue-400">
+                                    {progress}%
+                                  </p>
+                                )}
+                                {isFileCompleted && (
+                                  <p className="text-xs text-green-400">
+                                    ✓ Uploaded
+                                  </p>
+                                )}
+                                {isFileFailed && (
+                                  <p className="text-xs text-red-400">
+                                    ✗ Failed
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          {!isUploading && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => removeFile(index)}
+                              className="h-8 w-8 p-0 text-white/60 hover:text-red-400 hover:bg-red-500/10 relative z-10"
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          )}
+                        </div>
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <DialogFooter className="gap-2">
+            <Button
+              variant="outline"
+              onClick={() => {
+                if (!isUploading) {
+                  setShowUploadDialog(false)
+                  setSelectedFiles([])
+                  setUploadProgress({})
+                  setUploadedCount(0)
+                }
+              }}
+              disabled={isUploading}
+              className="bg-transparent border-white/20 text-white hover:bg-white/10 disabled:opacity-50 hover:text-red"
+            >
+              {isUploading ? 'Uploading...' : 'Cancel'}
+            </Button>
+            <Button
+              onClick={uploadSelectedFiles}
+              disabled={selectedFiles.length === 0 || isUploading}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 disabled:opacity-50 disabled:cursor-not-allowed min-w-[120px]"
+            >
+              {isUploading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span>
+                    {uploadedCount}/{selectedFiles.length}
+                  </span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Upload className="w-4 h-4" />
+                  <span>
+                    Upload {selectedFiles.length > 0 ? `${selectedFiles.length} ` : ''}Files
+                  </span>
+                </div>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Create Folder Dialog */}
       <Dialog open={showCreateFolder} onOpenChange={(open) => {
