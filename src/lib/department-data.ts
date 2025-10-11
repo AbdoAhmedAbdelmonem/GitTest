@@ -89,20 +89,140 @@ export const departmentData: { [key: string]: Department } = {
                 exams: "https://drive.google.com/drive/folders/1hTVXduWW2Icy8HY-uOc5lEiUUM42RSkB?usp=drive_link",
                 quizzes: [
                   {
-                    id: "CS101_quiz1",
-                    name: "Quiz 1: Computer Systems Basics",
-                    code: "CS101_quiz1",
+                    id: "CS_001",
+                    name: "Chapter 1 : Introduction to Computer Systems",
+                    code: "CS_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/computer-systems/CS101_quiz1.json"
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
                   {
-                    id: "CS101_quiz2",
-                    name: "Quiz 2: Computer Architecture",
-                    code: "CS101_quiz2",
+                    id: "CS_002",
+                    name: "Chapter 2 : Processing and Memory Management",
+                    code: "CS_002",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_002.json"
+                  },
+                  {
+                    id: "CS_003",
+                    name: "Chapter 3 : Storage",
+                    code: "CS_003",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_003.json"
+                  },
+                  {
+                    id: "CS_004",
+                    name: "Chapter 4 : Input and Output",
+                    code: "CS_004",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_004.json"
+                  },
+                  {
+                    id: "CS_005",
+                    name: "Chapter 5 : System Software",
+                    code: "CS_005",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_005.json"
+                  },
+                  {
+                    id: "CS_006",
+                    name: "Chapter 6 : Applications Software (1/2)",
+                    code: "CS_006",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_006.json"
+                  }
+                  ,{
+                    id: "CS_007",
+                    name: "Chapter 6 : Applications Software (2/2)",
+                    code: "CS_007",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_007.json"
+                  }
+                  ,{
+                    id: "CS_008",
+                    name: "Chapter 7 : Computer Networks",
+                    code: "CS_008",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_008.json"
+                  },
+                  {
+                    id: "CS_009",
+                    name: "Chapter 13 : Program Dev & Programming Languages",
+                    code: "CS_009",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_009.json"
+                  },
+                  {
+                    id: "CS_010",
+                    name: "Converting Binary to Decimal and Vice Versa",
+                    code: "CS_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_010.json"
+                  },
+                  {
+                    id: "CS_011",
+                    name: "Converting Binary to Octal and Vice Versa",
+                    code: "CS_011",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_011.json"
+                  },
+                  {
+                    id: "CS_012",
+                    name: "Converting Binary to Hexadecimal and Vice Versa",
+                    code: "CS_012",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_012.json"
+                  },
+                  {
+                    id: "CS_013",
+                    name: "Converting Decimal to Octal and Vice Versa",
+                    code: "CS_013",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_013.json"
+                  },
+                  {
+                    id: "CS_014",
+                    name: "Converting Decimal to Hexadecimal and Vice Versa",
+                    code: "CS_014",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_014.json"
+                  },
+                  {
+                    id: "CS_015",
+                    name: "Converting Octal to Hexadecimal and Vice Versa",
+                    code: "CS_015",
                     duration: "No Timer",
                     questions: 10,
-                    jsonFile: "/quizzes/computer-systems/CS101_quiz2.json"
+                    jsonFile: "/quizzes/Computer System/CS_015.json"
+                  },
+                  {
+                    id: "CS_016",
+                    name: "Converting Gray Code to Binary and Vice Versa",
+                    code: "CS_016",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_016.json"
+                  },
+                  {
+                    id: "CS_017",
+                    name: "Converting BCD to Decimal and Vice Versa",
+                    code: "CS_017",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
                 ],
               },
@@ -121,12 +241,84 @@ export const departmentData: { [key: string]: Department } = {
                 exams: "https://drive.google.com/drive/folders/1adpsd15n6hieC29aQECkrftCHNz20U9c?usp=drive_link",
                 quizzes: [
                   {
-                    id: "DS101_10001",
-                    name: "Quiz 1: Data Science Basics",
-                    code: "DS101_10001",
+                    id: "DS_001",
+                    name: "Lecture 1 - Introduction to Data Science",
+                    code: "DS_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/data-sciences/DS101_10001.json"
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
+                  },
+                  {
+                    id: "DS_002",
+                    name: "Lecture 2 - Big Data",
+                    code: "DS_002",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
+                  },
+                  {
+                    id: "DS_003",
+                    name: "Lecture 3 - Data Analytics lifecycle (Characters)",
+                    code: "DS_003",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
+                  },
+                  {
+                    id: "DS_004",
+                    name: "Lecture 4 - Data Analytics lifecycle (Phases)",
+                    code: "DS_004",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
+                  },
+                  {
+                    id: "DS_005",
+                    name: "Lecture 5 - Clustering Analysis",
+                    code: "DS_005",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
+                  },
+                  {
+                    id: "DS_006",
+                    name: "Lecture 6 - Introduction Association Rules (1/2)",
+                    code: "DS_006",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
+                  },
+                  {
+                    id: "DS_007",
+                    name: "Lecture 7 - Introduction Association Rules (2/2)",
+                    code: "DS_007",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
+                  },
+                  {
+                    id: "DS_008",
+                    name: "Lecture 8 - Data Visualization",
+                    code: "DS_008",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
+                  },
+                  {
+                    id: "DS_009",
+                    name: "Lecture 9 - Classification Analysis",
+                    code: "DS_009",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
+                  },
+                  {
+                    id: "DS_010",
+                    name: "Lecture 10 - Decision Trees",
+                    code: "DS_010",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
                 ],
               },
@@ -149,7 +341,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Chapter 1 : Introduction to Programming",
                     code: "PR1_30001",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30001.json"
                   },
                   {
@@ -157,7 +349,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Chapter 2-1 : Introduction to Java Programming",
                     code: "PR1_30002",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30002.json"
                   },
                   {
@@ -165,7 +357,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Chapter 2-2 : Java Basics",
                     code: "PR1_30003",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30003.json"
                   },
                   {
@@ -173,7 +365,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Chapter 2-3 : Java Basics",
                     code: "PR1_30004",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30004.json"
                   },
                   {
@@ -181,7 +373,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Chapter 2-4 : Deep Dive into Java",
                     code: "PR1_30005",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30005.json"
                   },
                   {
@@ -189,7 +381,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Chapter 3-1 : Controlling Program Flow",
                     code: "PR1_30006",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30006.json"
                   },
                   {
@@ -197,7 +389,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Chapter 3-2 : Controlling Program Flow",
                     code: "PR1_30007",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 25,
                     jsonFile: "/quizzes/programming/programming1/PR1_30007.json"
                   },
                   {
@@ -205,7 +397,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Chapter 4-1 : One Dimensional Arrays",
                     code: "PR1_30008",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30008.json"
                   },
                   {
@@ -213,7 +405,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Chapter 4-2 : Multi Dimensional Arrays",
                     code: "PR1_30009",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30009.json"
                   },
                   {
@@ -221,7 +413,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Review 1",
                     code: "PR1_30010",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 50,
                     jsonFile: "/quizzes/programming/programming1/PR1_30010.json"
                   },
                   {
@@ -229,7 +421,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Review 2",
                     code: "PR1_30011",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30011.json"
                   },
                   {
@@ -237,7 +429,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Tracing and Debugging",
                     code: "PR1_30012",
                     duration: "No Timer", // in minutes
-                    questions: 30,
+                    questions: 50,
                     jsonFile: "/quizzes/programming/programming1/PR1_30012.json"
                   },
                 ],
@@ -623,7 +815,7 @@ export const departmentData: { [key: string]: Department } = {
               materials: {
                 lectures: "https://drive.google.com/drive/folders/1PKWYRXoXWqGpom2A64o1xZvKJZtEuPD1?usp=drive_link",
                 sections: "https://drive.google.com/drive/folders/1OK_hd7pcqWv_8pm9dXTR4xYx9axAtDcD?usp=drive_link",
-                videos: ["https://youtube.com/playlist?list=PLAtIITWfkz9AquTyThwz7mkg6dGqIXKI3&si=kJnBpQQ--3kW-gSF"],
+                videos: " ",
                 summaries: "https://drive.google.com/drive/folders/1ffKJxpEG86cFWOtlDa42CcQSECLlCVeg?usp=drive_link",
                 exams: "https://drive.google.com/drive/folders/1k6L4jQgzqFxLMFdcPvm3kJp6m8B2bzUc?usp=drive_link"
               },
@@ -637,7 +829,7 @@ export const departmentData: { [key: string]: Department } = {
               materials: {
                 lectures: "https://drive.google.com/drive/folders/1Dbp5JfaMcYG9DoJxOlgwL7eTw3n5v2_H?usp=drive_link",
                 sections: "https://drive.google.com/drive/folders/1vKXnF7anmsn_vUMUCmL8geYGVFwWpz9R?usp=drive_link",
-                videos: " ",
+                videos: ["https://youtube.com/playlist?list=PLAtIITWfkz9AquTyThwz7mkg6dGqIXKI3&si=kJnBpQQ--3kW-gSF"],
                 summaries: "https://drive.google.com/drive/folders/1q6Wct_XlOa-vcL5oZQmOh-M4DShs79pm?usp=drive_link",
                 exams: "https://drive.google.com/drive/folders/1yalskt-sOK3_0envMxfdiVtTXD7OfV-k?usp=drive_link"
               },
@@ -1015,20 +1207,140 @@ export const departmentData: { [key: string]: Department } = {
                 exams: "https://drive.google.com/drive/folders/1hTVXduWW2Icy8HY-uOc5lEiUUM42RSkB?usp=drive_link",
                 quizzes: [
                   {
-                    id: "CS101_quiz1",
-                    name: "Quiz 1: Computer Systems Basics",
-                    code: "CS101_quiz1",
+                    id: "CS_001",
+                    name: "Chapter 1 : Introduction to Computer Systems",
+                    code: "CS_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/computer-systems/CS101_quiz1.json"
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
                   {
-                    id: "CS101_quiz2",
-                    name: "Quiz 2: Computer Architecture",
-                    code: "CS101_quiz2",
+                    id: "CS_002",
+                    name: "Chapter 2 : Processing and Memory Management",
+                    code: "CS_002",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_002.json"
+                  },
+                  {
+                    id: "CS_003",
+                    name: "Chapter 3 : Storage",
+                    code: "CS_003",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_003.json"
+                  },
+                  {
+                    id: "CS_004",
+                    name: "Chapter 4 : Input and Output",
+                    code: "CS_004",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_004.json"
+                  },
+                  {
+                    id: "CS_005",
+                    name: "Chapter 5 : System Software",
+                    code: "CS_005",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_005.json"
+                  },
+                  {
+                    id: "CS_006",
+                    name: "Chapter 6 : Applications Software (1/2)",
+                    code: "CS_006",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_006.json"
+                  }
+                  ,{
+                    id: "CS_007",
+                    name: "Chapter 6 : Applications Software (2/2)",
+                    code: "CS_007",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_007.json"
+                  }
+                  ,{
+                    id: "CS_008",
+                    name: "Chapter 7 : Computer Networks",
+                    code: "CS_008",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_008.json"
+                  },
+                  {
+                    id: "CS_009",
+                    name: "Chapter 13 : Program Dev & Programming Languages",
+                    code: "CS_009",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_009.json"
+                  },
+                  {
+                    id: "CS_010",
+                    name: "Converting Binary to Decimal and Vice Versa",
+                    code: "CS_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_010.json"
+                  },
+                  {
+                    id: "CS_011",
+                    name: "Converting Binary to Octal and Vice Versa",
+                    code: "CS_011",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_011.json"
+                  },
+                  {
+                    id: "CS_012",
+                    name: "Converting Binary to Hexadecimal and Vice Versa",
+                    code: "CS_012",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_012.json"
+                  },
+                  {
+                    id: "CS_013",
+                    name: "Converting Decimal to Octal and Vice Versa",
+                    code: "CS_013",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_013.json"
+                  },
+                  {
+                    id: "CS_014",
+                    name: "Converting Decimal to Hexadecimal and Vice Versa",
+                    code: "CS_014",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_014.json"
+                  },
+                  {
+                    id: "CS_015",
+                    name: "Converting Octal to Hexadecimal and Vice Versa",
+                    code: "CS_015",
                     duration: "No Timer",
                     questions: 10,
-                    jsonFile: "/quizzes/computer-systems/CS101_quiz2.json"
+                    jsonFile: "/quizzes/Computer System/CS_015.json"
+                  },
+                  {
+                    id: "CS_016",
+                    name: "Converting Gray Code to Binary and Vice Versa",
+                    code: "CS_016",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_016.json"
+                  },
+                  {
+                    id: "CS_017",
+                    name: "Converting BCD to Decimal and Vice Versa",
+                    code: "CS_017",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
                 ],
               },
@@ -1047,12 +1359,84 @@ export const departmentData: { [key: string]: Department } = {
                 exams: "https://drive.google.com/drive/folders/1adpsd15n6hieC29aQECkrftCHNz20U9c?usp=drive_link",
                 quizzes: [
                   {
-                    id: "DS101_10001",
-                    name: "Quiz 1: Data Science Basics",
-                    code: "DS101_10001",
+                    id: "DS_001",
+                    name: "Lecture 1 - Introduction to Data Science",
+                    code: "DS_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/data-sciences/DS101_10001.json"
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
+                  },
+                  {
+                    id: "DS_002",
+                    name: "Lecture 2 - Big Data",
+                    code: "DS_002",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
+                  },
+                  {
+                    id: "DS_003",
+                    name: "Lecture 3 - Data Analytics lifecycle (Characters)",
+                    code: "DS_003",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
+                  },
+                  {
+                    id: "DS_004",
+                    name: "Lecture 4 - Data Analytics lifecycle (Phases)",
+                    code: "DS_004",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
+                  },
+                  {
+                    id: "DS_005",
+                    name: "Lecture 5 - Clustering Analysis",
+                    code: "DS_005",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
+                  },
+                  {
+                    id: "DS_006",
+                    name: "Lecture 6 - Introduction Association Rules (1/2)",
+                    code: "DS_006",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
+                  },
+                  {
+                    id: "DS_007",
+                    name: "Lecture 7 - Introduction Association Rules (2/2)",
+                    code: "DS_007",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
+                  },
+                  {
+                    id: "DS_008",
+                    name: "Lecture 8 - Data Visualization",
+                    code: "DS_008",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
+                  },
+                  {
+                    id: "DS_009",
+                    name: "Lecture 9 - Classification Analysis",
+                    code: "DS_009",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
+                  },
+                  {
+                    id: "DS_010",
+                    name: "Lecture 10 - Decision Trees",
+                    code: "DS_010",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
                 ],
               },
@@ -1873,20 +2257,140 @@ export const departmentData: { [key: string]: Department } = {
                 exams: "https://drive.google.com/drive/folders/1hTVXduWW2Icy8HY-uOc5lEiUUM42RSkB?usp=drive_link",
                 quizzes: [
                   {
-                    id: "CS101_quiz1",
-                    name: "Quiz 1: Computer Systems Basics",
-                    code: "CS101_quiz1",
+                    id: "CS_001",
+                    name: "Chapter 1 : Introduction to Computer Systems",
+                    code: "CS_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/computer-systems/CS101_quiz1.json"
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
                   {
-                    id: "CS101_quiz2",
-                    name: "Quiz 2: Computer Architecture",
-                    code: "CS101_quiz2",
+                    id: "CS_002",
+                    name: "Chapter 2 : Processing and Memory Management",
+                    code: "CS_002",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_002.json"
+                  },
+                  {
+                    id: "CS_003",
+                    name: "Chapter 3 : Storage",
+                    code: "CS_003",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_003.json"
+                  },
+                  {
+                    id: "CS_004",
+                    name: "Chapter 4 : Input and Output",
+                    code: "CS_004",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_004.json"
+                  },
+                  {
+                    id: "CS_005",
+                    name: "Chapter 5 : System Software",
+                    code: "CS_005",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_005.json"
+                  },
+                  {
+                    id: "CS_006",
+                    name: "Chapter 6 : Applications Software (1/2)",
+                    code: "CS_006",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_006.json"
+                  }
+                  ,{
+                    id: "CS_007",
+                    name: "Chapter 6 : Applications Software (2/2)",
+                    code: "CS_007",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_007.json"
+                  }
+                  ,{
+                    id: "CS_008",
+                    name: "Chapter 7 : Computer Networks",
+                    code: "CS_008",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_008.json"
+                  },
+                  {
+                    id: "CS_009",
+                    name: "Chapter 13 : Program Dev & Programming Languages",
+                    code: "CS_009",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_009.json"
+                  },
+                  {
+                    id: "CS_010",
+                    name: "Converting Binary to Decimal and Vice Versa",
+                    code: "CS_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_010.json"
+                  },
+                  {
+                    id: "CS_011",
+                    name: "Converting Binary to Octal and Vice Versa",
+                    code: "CS_011",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_011.json"
+                  },
+                  {
+                    id: "CS_012",
+                    name: "Converting Binary to Hexadecimal and Vice Versa",
+                    code: "CS_012",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_012.json"
+                  },
+                  {
+                    id: "CS_013",
+                    name: "Converting Decimal to Octal and Vice Versa",
+                    code: "CS_013",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_013.json"
+                  },
+                  {
+                    id: "CS_014",
+                    name: "Converting Decimal to Hexadecimal and Vice Versa",
+                    code: "CS_014",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_014.json"
+                  },
+                  {
+                    id: "CS_015",
+                    name: "Converting Octal to Hexadecimal and Vice Versa",
+                    code: "CS_015",
                     duration: "No Timer",
                     questions: 10,
-                    jsonFile: "/quizzes/computer-systems/CS101_quiz2.json"
+                    jsonFile: "/quizzes/Computer System/CS_015.json"
+                  },
+                  {
+                    id: "CS_016",
+                    name: "Converting Gray Code to Binary and Vice Versa",
+                    code: "CS_016",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_016.json"
+                  },
+                  {
+                    id: "CS_017",
+                    name: "Converting BCD to Decimal and Vice Versa",
+                    code: "CS_017",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
                 ],
               },
@@ -1905,12 +2409,84 @@ export const departmentData: { [key: string]: Department } = {
                 exams: "https://drive.google.com/drive/folders/1adpsd15n6hieC29aQECkrftCHNz20U9c?usp=drive_link",
                 quizzes: [
                   {
-                    id: "DS101_10001",
-                    name: "Quiz 1: Data Science Basics",
-                    code: "DS101_10001",
+                    id: "DS_001",
+                    name: "Lecture 1 - Introduction to Data Science",
+                    code: "DS_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/data-sciences/DS101_10001.json"
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
+                  },
+                  {
+                    id: "DS_002",
+                    name: "Lecture 2 - Big Data",
+                    code: "DS_002",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
+                  },
+                  {
+                    id: "DS_003",
+                    name: "Lecture 3 - Data Analytics lifecycle (Characters)",
+                    code: "DS_003",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
+                  },
+                  {
+                    id: "DS_004",
+                    name: "Lecture 4 - Data Analytics lifecycle (Phases)",
+                    code: "DS_004",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
+                  },
+                  {
+                    id: "DS_005",
+                    name: "Lecture 5 - Clustering Analysis",
+                    code: "DS_005",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
+                  },
+                  {
+                    id: "DS_006",
+                    name: "Lecture 6 - Introduction Association Rules (1/2)",
+                    code: "DS_006",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
+                  },
+                  {
+                    id: "DS_007",
+                    name: "Lecture 7 - Introduction Association Rules (2/2)",
+                    code: "DS_007",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
+                  },
+                  {
+                    id: "DS_008",
+                    name: "Lecture 8 - Data Visualization",
+                    code: "DS_008",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
+                  },
+                  {
+                    id: "DS_009",
+                    name: "Lecture 9 - Classification Analysis",
+                    code: "DS_009",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
+                  },
+                  {
+                    id: "DS_010",
+                    name: "Lecture 10 - Decision Trees",
+                    code: "DS_010",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
                 ],
               },
@@ -2699,6 +3275,146 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/computer-systems-ma-lectures",
                 sections: "https://drive.google.com/drive/folders/computer-systems-ma-sections",
                 videos: "https://youtube.com/playlist?list=computer-systems-ma-videos",
+                summaries: "https://drive.google.com/drive/folders/computer-systems-ma-summaries",
+                exams: "https://drive.google.com/drive/folders/computer-systems-ma-lastexam",
+                quizzes: [
+                  {
+                    id: "CS_001",
+                    name: "Chapter 1 : Introduction to Computer Systems",
+                    code: "CS_001",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_001.json"
+                  },
+                  {
+                    id: "CS_002",
+                    name: "Chapter 2 : Processing and Memory Management",
+                    code: "CS_002",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_002.json"
+                  },
+                  {
+                    id: "CS_003",
+                    name: "Chapter 3 : Storage",
+                    code: "CS_003",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_003.json"
+                  },
+                  {
+                    id: "CS_004",
+                    name: "Chapter 4 : Input and Output",
+                    code: "CS_004",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_004.json"
+                  },
+                  {
+                    id: "CS_005",
+                    name: "Chapter 5 : System Software",
+                    code: "CS_005",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_005.json"
+                  },
+                  {
+                    id: "CS_006",
+                    name: "Chapter 6 : Applications Software (1/2)",
+                    code: "CS_006",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_006.json"
+                  }
+                  ,{
+                    id: "CS_007",
+                    name: "Chapter 6 : Applications Software (2/2)",
+                    code: "CS_007",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_007.json"
+                  }
+                  ,{
+                    id: "CS_008",
+                    name: "Chapter 7 : Computer Networks",
+                    code: "CS_008",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_008.json"
+                  },
+                  {
+                    id: "CS_009",
+                    name: "Chapter 13 : Program Dev & Programming Languages",
+                    code: "CS_009",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_009.json"
+                  },
+                  {
+                    id: "CS_010",
+                    name: "Converting Binary to Decimal and Vice Versa",
+                    code: "CS_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_010.json"
+                  },
+                  {
+                    id: "CS_011",
+                    name: "Converting Binary to Octal and Vice Versa",
+                    code: "CS_011",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_011.json"
+                  },
+                  {
+                    id: "CS_012",
+                    name: "Converting Binary to Hexadecimal and Vice Versa",
+                    code: "CS_012",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_012.json"
+                  },
+                  {
+                    id: "CS_013",
+                    name: "Converting Decimal to Octal and Vice Versa",
+                    code: "CS_013",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_013.json"
+                  },
+                  {
+                    id: "CS_014",
+                    name: "Converting Decimal to Hexadecimal and Vice Versa",
+                    code: "CS_014",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_014.json"
+                  },
+                  {
+                    id: "CS_015",
+                    name: "Converting Octal to Hexadecimal and Vice Versa",
+                    code: "CS_015",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/Computer System/CS_015.json"
+                  },
+                  {
+                    id: "CS_016",
+                    name: "Converting Gray Code to Binary and Vice Versa",
+                    code: "CS_016",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_016.json"
+                  },
+                  {
+                    id: "CS_017",
+                    name: "Converting BCD to Decimal and Vice Versa",
+                    code: "CS_017",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_017.json"
+                  }
+                ],
               },
             },
             {
@@ -2711,6 +3427,88 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-sciences-ma-lectures",
                 sections: "https://drive.google.com/drive/folders/data-sciences-ma-sections",
                 videos: "https://youtube.com/playlist?list=data-sciences-ma-videos",
+                quizzes: [
+                  {
+                    id: "DS_001",
+                    name: "Lecture 1 - Introduction to Data Science",
+                    code: "DS_001",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
+                  },
+                  {
+                    id: "DS_002",
+                    name: "Lecture 2 - Big Data",
+                    code: "DS_002",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
+                  },
+                  {
+                    id: "DS_003",
+                    name: "Lecture 3 - Data Analytics lifecycle (Characters)",
+                    code: "DS_003",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
+                  },
+                  {
+                    id: "DS_004",
+                    name: "Lecture 4 - Data Analytics lifecycle (Phases)",
+                    code: "DS_004",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
+                  },
+                  {
+                    id: "DS_005",
+                    name: "Lecture 5 - Clustering Analysis",
+                    code: "DS_005",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
+                  },
+                  {
+                    id: "DS_006",
+                    name: "Lecture 6 - Introduction Association Rules (1/2)",
+                    code: "DS_006",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
+                  },
+                  {
+                    id: "DS_007",
+                    name: "Lecture 7 - Introduction Association Rules (2/2)",
+                    code: "DS_007",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
+                  },
+                  {
+                    id: "DS_008",
+                    name: "Lecture 8 - Data Visualization",
+                    code: "DS_008",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
+                  },
+                  {
+                    id: "DS_009",
+                    name: "Lecture 9 - Classification Analysis",
+                    code: "DS_009",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
+                  },
+                  {
+                    id: "DS_010",
+                    name: "Lecture 10 - Decision Trees",
+                    code: "DS_010",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
+                  }
+                ],
               },
             },
             {
@@ -3322,6 +4120,146 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/computer-systems-hi-lectures",
                 sections: "https://drive.google.com/drive/folders/computer-systems-hi-sections",
                 videos: "https://youtube.com/playlist?list=computer-systems-hi-videos",
+                summaries: "https://drive.google.com/drive/folders/computer-systems-hi-summaries",
+                exams: "https://drive.google.com/drive/folders/computer-systems-hi-exams",
+                quizzes: [
+                  {
+                    id: "CS_001",
+                    name: "Chapter 1 : Introduction to Computer Systems",
+                    code: "CS_001",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_001.json"
+                  },
+                  {
+                    id: "CS_002",
+                    name: "Chapter 2 : Processing and Memory Management",
+                    code: "CS_002",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_002.json"
+                  },
+                  {
+                    id: "CS_003",
+                    name: "Chapter 3 : Storage",
+                    code: "CS_003",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_003.json"
+                  },
+                  {
+                    id: "CS_004",
+                    name: "Chapter 4 : Input and Output",
+                    code: "CS_004",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_004.json"
+                  },
+                  {
+                    id: "CS_005",
+                    name: "Chapter 5 : System Software",
+                    code: "CS_005",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_005.json"
+                  },
+                  {
+                    id: "CS_006",
+                    name: "Chapter 6 : Applications Software (1/2)",
+                    code: "CS_006",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_006.json"
+                  }
+                  ,{
+                    id: "CS_007",
+                    name: "Chapter 6 : Applications Software (2/2)",
+                    code: "CS_007",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_007.json"
+                  }
+                  ,{
+                    id: "CS_008",
+                    name: "Chapter 7 : Computer Networks",
+                    code: "CS_008",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_008.json"
+                  },
+                  {
+                    id: "CS_009",
+                    name: "Chapter 13 : Program Dev & Programming Languages",
+                    code: "CS_009",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_009.json"
+                  },
+                  {
+                    id: "CS_010",
+                    name: "Converting Binary to Decimal and Vice Versa",
+                    code: "CS_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_010.json"
+                  },
+                  {
+                    id: "CS_011",
+                    name: "Converting Binary to Octal and Vice Versa",
+                    code: "CS_011",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_011.json"
+                  },
+                  {
+                    id: "CS_012",
+                    name: "Converting Binary to Hexadecimal and Vice Versa",
+                    code: "CS_012",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_012.json"
+                  },
+                  {
+                    id: "CS_013",
+                    name: "Converting Decimal to Octal and Vice Versa",
+                    code: "CS_013",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_013.json"
+                  },
+                  {
+                    id: "CS_014",
+                    name: "Converting Decimal to Hexadecimal and Vice Versa",
+                    code: "CS_014",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_014.json"
+                  },
+                  {
+                    id: "CS_015",
+                    name: "Converting Octal to Hexadecimal and Vice Versa",
+                    code: "CS_015",
+                    duration: "No Timer",
+                    questions: 10,
+                    jsonFile: "/quizzes/Computer System/CS_015.json"
+                  },
+                  {
+                    id: "CS_016",
+                    name: "Converting Gray Code to Binary and Vice Versa",
+                    code: "CS_016",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_016.json"
+                  },
+                  {
+                    id: "CS_017",
+                    name: "Converting BCD to Decimal and Vice Versa",
+                    code: "CS_017",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_017.json"
+                  }
+                ],
               },
             },
             {
@@ -3334,6 +4272,88 @@ export const departmentData: { [key: string]: Department } = {
                 lectures: "https://drive.google.com/drive/folders/data-sciences-hi-lectures",
                 sections: "https://drive.google.com/drive/folders/data-sciences-hi-sections",
                 videos: "https://youtube.com/playlist?list=data-sciences-hi-videos",
+                quizzes: [
+                  {
+                    id: "DS_001",
+                    name: "Lecture 1 - Introduction to Data Science",
+                    code: "DS_001",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
+                  },
+                  {
+                    id: "DS_002",
+                    name: "Lecture 2 - Big Data",
+                    code: "DS_002",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
+                  },
+                  {
+                    id: "DS_003",
+                    name: "Lecture 3 - Data Analytics lifecycle (Characters)",
+                    code: "DS_003",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
+                  },
+                  {
+                    id: "DS_004",
+                    name: "Lecture 4 - Data Analytics lifecycle (Phases)",
+                    code: "DS_004",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
+                  },
+                  {
+                    id: "DS_005",
+                    name: "Lecture 5 - Clustering Analysis",
+                    code: "DS_005",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
+                  },
+                  {
+                    id: "DS_006",
+                    name: "Lecture 6 - Introduction Association Rules (1/2)",
+                    code: "DS_006",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
+                  },
+                  {
+                    id: "DS_007",
+                    name: "Lecture 7 - Introduction Association Rules (2/2)",
+                    code: "DS_007",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
+                  },
+                  {
+                    id: "DS_008",
+                    name: "Lecture 8 - Data Visualization",
+                    code: "DS_008",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
+                  },
+                  {
+                    id: "DS_009",
+                    name: "Lecture 9 - Classification Analysis",
+                    code: "DS_009",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
+                  },
+                  {
+                    id: "DS_010",
+                    name: "Lecture 10 - Decision Trees",
+                    code: "DS_010",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
+                  }
+                ],
               },
             },
             {
@@ -3933,20 +4953,140 @@ export const departmentData: { [key: string]: Department } = {
                 exams: "https://drive.google.com/drive/folders/1hTVXduWW2Icy8HY-uOc5lEiUUM42RSkB?usp=drive_link",
                 quizzes: [
                   {
-                    id: "CS101_quiz1",
-                    name: "Quiz 1: Computer Systems Basics",
-                    code: "CS101_quiz1",
+                    id: "CS_001",
+                    name: "Chapter 1 : Introduction to Computer Systems",
+                    code: "CS_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/computer-systems/CS101_quiz1.json"
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
                   {
-                    id: "CS101_quiz2",
-                    name: "Quiz 2: Computer Architecture",
-                    code: "CS101_quiz2",
+                    id: "CS_002",
+                    name: "Chapter 2 : Processing and Memory Management",
+                    code: "CS_002",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_002.json"
+                  },
+                  {
+                    id: "CS_003",
+                    name: "Chapter 3 : Storage",
+                    code: "CS_003",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_003.json"
+                  },
+                  {
+                    id: "CS_004",
+                    name: "Chapter 4 : Input and Output",
+                    code: "CS_004",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_004.json"
+                  },
+                  {
+                    id: "CS_005",
+                    name: "Chapter 5 : System Software",
+                    code: "CS_005",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_005.json"
+                  },
+                  {
+                    id: "CS_006",
+                    name: "Chapter 6 : Applications Software (1/2)",
+                    code: "CS_006",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_006.json"
+                  }
+                  ,{
+                    id: "CS_007",
+                    name: "Chapter 6 : Applications Software (2/2)",
+                    code: "CS_007",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_007.json"
+                  }
+                  ,{
+                    id: "CS_008",
+                    name: "Chapter 7 : Computer Networks",
+                    code: "CS_008",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_008.json"
+                  },
+                  {
+                    id: "CS_009",
+                    name: "Chapter 13 : Program Dev & Programming Languages",
+                    code: "CS_009",
+                    duration: "No Timer",
+                    questions: 50,
+                    jsonFile: "/quizzes/Computer System/CS_009.json"
+                  },
+                  {
+                    id: "CS_010",
+                    name: "Converting Binary to Decimal and Vice Versa",
+                    code: "CS_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_010.json"
+                  },
+                  {
+                    id: "CS_011",
+                    name: "Converting Binary to Octal and Vice Versa",
+                    code: "CS_011",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_011.json"
+                  },
+                  {
+                    id: "CS_012",
+                    name: "Converting Binary to Hexadecimal and Vice Versa",
+                    code: "CS_012",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_012.json"
+                  },
+                  {
+                    id: "CS_013",
+                    name: "Converting Decimal to Octal and Vice Versa",
+                    code: "CS_013",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_013.json"
+                  },
+                  {
+                    id: "CS_014",
+                    name: "Converting Decimal to Hexadecimal and Vice Versa",
+                    code: "CS_014",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer System/CS_014.json"
+                  },
+                  {
+                    id: "CS_015",
+                    name: "Converting Octal to Hexadecimal and Vice Versa",
+                    code: "CS_015",
                     duration: "No Timer",
                     questions: 10,
-                    jsonFile: "/quizzes/computer-systems/CS101_quiz2.json"
+                    jsonFile: "/quizzes/Computer System/CS_015.json"
+                  },
+                  {
+                    id: "CS_016",
+                    name: "Converting Gray Code to Binary and Vice Versa",
+                    code: "CS_016",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_016.json"
+                  },
+                  {
+                    id: "CS_017",
+                    name: "Converting BCD to Decimal and Vice Versa",
+                    code: "CS_017",
+                    duration: "No Timer",
+                    questions: 40,
+                    jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
                 ],
               },
@@ -3965,12 +5105,84 @@ export const departmentData: { [key: string]: Department } = {
                 exams: "https://drive.google.com/drive/folders/1adpsd15n6hieC29aQECkrftCHNz20U9c?usp=drive_link",
                 quizzes: [
                   {
-                    id: "DS101_10001",
-                    name: "Quiz 1: Data Science Basics",
-                    code: "DS101_10001",
+                    id: "DS_001",
+                    name: "Lecture 1 - Introduction to Data Science",
+                    code: "DS_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/data-sciences/DS101_10001.json"
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
+                  },
+                  {
+                    id: "DS_002",
+                    name: "Lecture 2 - Big Data",
+                    code: "DS_002",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
+                  },
+                  {
+                    id: "DS_003",
+                    name: "Lecture 3 - Data Analytics lifecycle (Characters)",
+                    code: "DS_003",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
+                  },
+                  {
+                    id: "DS_004",
+                    name: "Lecture 4 - Data Analytics lifecycle (Phases)",
+                    code: "DS_004",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
+                  },
+                  {
+                    id: "DS_005",
+                    name: "Lecture 5 - Clustering Analysis",
+                    code: "DS_005",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
+                  },
+                  {
+                    id: "DS_006",
+                    name: "Lecture 6 - Introduction Association Rules (1/2)",
+                    code: "DS_006",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
+                  },
+                  {
+                    id: "DS_007",
+                    name: "Lecture 7 - Introduction Association Rules (2/2)",
+                    code: "DS_007",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
+                  },
+                  {
+                    id: "DS_008",
+                    name: "Lecture 8 - Data Visualization",
+                    code: "DS_008",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
+                  },
+                  {
+                    id: "DS_009",
+                    name: "Lecture 9 - Classification Analysis",
+                    code: "DS_009",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
+                  },
+                  {
+                    id: "DS_010",
+                    name: "Lecture 10 - Decision Trees",
+                    code: "DS_010",
+                    duration: "No Timer",
+                    questions: 25,
+                    jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
                 ],
               },
@@ -4647,4 +5859,3 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
-
