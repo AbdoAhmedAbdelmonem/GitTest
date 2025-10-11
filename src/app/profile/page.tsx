@@ -785,7 +785,7 @@ export default function ProfilePage() {
                           style={{ color: themeColor }}
                           />
                           <span className="text-xs text-white/60">
-                          {attempt.how_finished === "in-progress" ? "Completed" : "Timed Out"}
+                          {attempt.how_finished === "in-progress" ? "Timed Out" : "Completed"}
                           </span>
                         </div>
                         <div className="flex items-center gap-1">
@@ -879,3 +879,4 @@ export default function ProfilePage() {
     </div>
   )
 }
+
