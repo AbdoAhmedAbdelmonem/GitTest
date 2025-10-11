@@ -30,13 +30,15 @@ import {
   Infinity,
   User,
   Code,
-  AlertCircle
+  AlertCircle,
+  Calculator as CalculatorIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createBrowserClient } from "@/lib/supabase/client";
 import { getStudentSession } from "@/lib/auth";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Dialog as ImageDialog, DialogContent as ImageDialogContent } from "@/components/ui/dialog";
+import Calculator from "@/components/Calculator";
 
 interface QuizQuestion {
   numb: number;
@@ -106,7 +108,7 @@ const themes = [
 ];
 
 const durations = [
-  { label: "Lightning", value: 1, icon: Zap, description: "1 Minute" },
+  { label: "Lightning", value: 0.1, icon: Zap, description: "1 Minute" },
   { label: "Short", value: 5, icon: Star, description: "5 Minutes" },
   { label: "Standard (DEF)", value: 15, icon: Cable, description: "15 Minutes" },
   { label: "Extended", value: 30, icon: Clock, description: "30 Minutes" },
@@ -179,6 +181,7 @@ export default function QuizInterface({
   const [attemptsToday, setAttemptsToday] = useState(0);
   const [maxAttemptsReached, setMaxAttemptsReached] = useState(false);
   const [showAttemptsDialog, setShowAttemptsDialog] = useState(false);
+  const [showCalculator, setShowCalculator] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const submissionInProgress = useRef(false);
   const supabase = createBrowserClient();
@@ -1203,7 +1206,7 @@ export default function QuizInterface({
 
         {/* Navigation */}
         <div className="relative z-10 px-6 pb-6">
-          <div className="max-w-4xl mx-auto flex justify-between">
+          <div className="max-w-4xl mx-auto flex justify-between items-center">
             <Button
               variant="outline"
               onClick={prevQuestion}
@@ -1213,6 +1216,16 @@ export default function QuizInterface({
               <ArrowLeft className="w-5 h-5 mr-2" />
               Previous
             </Button>
+
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                onClick={() => setShowCalculator(!showCalculator)}
+                className="px-6 py-3 mx-4 border-white/[0.15] text-white hover:bg-white hover:text-black bg-transparent transition-colors duration-200"
+                variant="outline"
+              >
+                <CalculatorIcon className="w-5 h-5" />
+              </Button>
+            </motion.div>
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
@@ -1236,6 +1249,52 @@ export default function QuizInterface({
             </motion.div>
           </div>
         </div>
+
+        {/* Calculator Overlay */}
+        <AnimatePresence>
+          {showCalculator && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 backdrop-blur-sm"
+              onClick={() => setShowCalculator(false)}
+            >
+              <motion.div
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "100%", opacity: 0 }}
+                transition={{
+                  type: "spring",
+                  damping: 25,
+                  stiffness: 300,
+                  duration: 0.4
+                }}
+                className="w-full max-w-md mx-4 mb-6"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="bg-black/90 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-2xl">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-white font-semibold text-lg flex items-center gap-2">
+                      <CalculatorIcon className="w-5 h-5" />
+                      Calculator
+                    </h3>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setShowCalculator(false)}
+                      className="text-white/70 hover:text-white hover:bg-white/10 rounded-full w-8 h-8 p-0"
+                    >
+                      ✕
+                    </Button>
+                  </div>
+                  <Calculator />
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Image Dialog */}
         <ImageDialog open={showImageDialog} onOpenChange={setShowImageDialog}>
