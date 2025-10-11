@@ -52,8 +52,8 @@ export async function getLeaderboardData(level: 1 | 2): Promise<{
     }
 
     // DEBUG: Log the date range we're querying
-    const tournamentStart = new Date('2025-09-22T00:00:00.000Z')
-    const tournamentEnd = new Date('2025-11-22T23:59:59.999Z') // End of November 22nd
+    const tournamentStart = new Date('2025-10-12T00:00:00.000Z')
+    const tournamentEnd = new Date('2026-01-11T23:59:59.999Z') // End of January 11th
     
     console.log(`Querying level ${level} from ${tournamentStart.toISOString()} to ${tournamentEnd.toISOString()}`)
 
@@ -236,8 +236,8 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
   currentUserEntry?: LeaderboardEntry
 }> {
   // Use the same date range
-  const tournamentStart = new Date('2025-09-22T00:00:00.000Z')
-  const tournamentEnd = new Date('2025-11-22T23:59:59.999Z')
+  const tournamentStart = new Date('2025-10-12T00:00:00.000Z')
+  const tournamentEnd = new Date('2026-01-11T23:59:59.999Z')
 
   const { data: quizData, error } = await supabase
     .from("quiz_data")
