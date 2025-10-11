@@ -1,5 +1,4 @@
 "use client"
-import { redirect } from "next/navigation"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -43,7 +42,7 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    const tournamentEnd = new Date('2025-11-22T23:59:59.999Z');
+    const tournamentEnd = new Date('2026-01-11T23:59:59.999Z');
 
     const timer = setInterval(() => {
       const now = new Date();
@@ -71,15 +70,13 @@ const CountdownTimer = () => {
       transition={{ duration: 0.8, delay: 0.5 }}
       className="bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-2xl p-4 md:p-6 backdrop-blur-xl"
     >
-      <div className="text-center mb-3 md:mb-4">
-        <div className="flex items-center justify-center gap-2 mb-1 md:mb-2">
-          <Timer className="w-4 h-4 md:w-5 md:h-5 text-orange-400" />
-          <span className="text-orange-400 font-semibold text-sm md:text-base">Tournament Ends In</span>
-        </div>
-        <div className="text-white/60 text-xs md:text-sm">November 7th, 2025</div>
-      </div>
-
-      <div className="grid grid-cols-4 gap-2 md:gap-3">
+        <div className="text-center mb-3 md:mb-4">
+          <div className="flex items-center justify-center gap-2 mb-1 md:mb-2">
+            <Timer className="w-4 h-4 md:w-5 md:h-5 text-orange-400" />
+            <span className="text-orange-400 font-semibold text-sm md:text-base">Tournament Ends In</span>
+          </div>
+          <div className="text-white/60 text-xs md:text-sm">January 11th, 2026</div>
+        </div>      <div className="grid grid-cols-4 gap-2 md:gap-3">
         {[
           { value: timeLeft.days, label: 'Days' },
           { value: timeLeft.hours, label: 'Hours' },
@@ -128,15 +125,6 @@ export default function TournamentPage() {
   const [error, setError] = useState<string | null>(null)
   const [showCurrentUserOnly, setShowCurrentUserOnly] = useState(false)
   const [activeTab, setActiveTab] = useState<"level1" | "level2">("level1")
-
-  // ✅ Run on the server before rendering
-  const currentDate = new Date()
-  const month = currentDate.getMonth() + 1 // 0 = Jan
-  const day = currentDate.getDate()
-
-  if (!(month === 9 && day === 23)) {
-    redirect("/") // instant server-side redirect, no flash
-  }
 
   useEffect(() => {
     const fetchLeaderboardData = async () => {
@@ -700,11 +688,6 @@ export default function TournamentPage() {
                       </p>
                     </div>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-2 text-xs md:text-sm text-white/70 pt-3 md:pt-4 border-t border-white/10">
-                  <Users className="w-3 h-3 md:w-4 md:h-4 text-green-400" />
-                  <span>25 champions currently battling</span>
                 </div>
               </CardContent>
             </Card>
