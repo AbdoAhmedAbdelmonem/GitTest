@@ -80,100 +80,100 @@ export default function Calculator() {
   }
 
   const buttons = [
-    { label: "C", action: clear, className: "bg-red-500/20 border-red-400/30 text-red-300 hover:bg-red-500/30" },
+    { label: "C", action: clear, className: "bg-red-500/20 border-red-400/30 text-red-300 hover:bg-white hover:text-black transition-colors duration-200" },
     {
       label: "CE",
       action: clearEntry,
-      className: "bg-orange-500/20 border-orange-400/30 text-orange-300 hover:bg-orange-500/30",
+      className: "bg-orange-500/20 border-orange-400/30 text-orange-300 hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "⌫",
       action: () => setDisplay(display.slice(0, -1) || "0"),
-      className: "bg-gray-500/20 border-gray-400/30 text-gray-300 hover:bg-gray-500/30",
+      className: "bg-gray-500/20 border-gray-400/30 text-gray-300 hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "÷",
       action: () => inputOperation("÷"),
-      className: "bg-blue-500/20 border-blue-400/30 text-blue-300 hover:bg-blue-500/30",
+      className: "bg-blue-500/20 border-blue-400/30 text-blue-300 hover:bg-white hover:text-black transition-colors duration-200",
     },
 
     {
       label: "7",
       action: () => inputNumber("7"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "8",
       action: () => inputNumber("8"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "9",
       action: () => inputNumber("9"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "×",
       action: () => inputOperation("×"),
-      className: "bg-blue-500/20 border-blue-400/30 text-blue-300 hover:bg-blue-500/30",
+      className: "bg-blue-500/20 border-blue-400/30 text-blue-300 hover:bg-white hover:text-black transition-colors duration-200",
     },
 
     {
       label: "4",
       action: () => inputNumber("4"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "5",
       action: () => inputNumber("5"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "6",
       action: () => inputNumber("6"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "-",
       action: () => inputOperation("-"),
-      className: "bg-blue-500/20 border-blue-400/30 text-blue-300 hover:bg-blue-500/30",
+      className: "bg-blue-500/20 border-blue-400/30 text-blue-300 hover:bg-white hover:text-black transition-colors duration-200",
     },
 
     {
       label: "1",
       action: () => inputNumber("1"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "2",
       action: () => inputNumber("2"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "3",
       action: () => inputNumber("3"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "+",
       action: () => inputOperation("+"),
-      className: "bg-blue-500/20 border-blue-400/30 text-blue-300 hover:bg-blue-500/30",
+      className: "bg-blue-500/20 border-blue-400/30 text-blue-300 hover:bg-white hover:text-black transition-colors duration-200",
     },
 
     {
       label: "0",
       action: () => inputNumber("0"),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10 col-span-2",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200 col-span-2",
     },
     {
       label: ".",
       action: () => inputNumber("."),
-      className: "bg-white/5 border-white/15 text-white hover:bg-white/10",
+      className: "bg-white/5 border-white/15 text-white hover:bg-white hover:text-black transition-colors duration-200",
     },
     {
       label: "=",
       action: performCalculation,
-      className: "bg-green-500/20 border-green-400/30 text-green-300 hover:bg-green-500/30",
+      className: "bg-green-500/20 border-green-400/30 text-green-300 hover:bg-white hover:text-black transition-colors duration-200",
     },
   ]
 
