@@ -1,0 +1,652 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "Which component was used in first-generation computers?",
+    "options": [
+      "A) Vacuum tubes",
+      "B) Transistors",
+      "C) Integrated Circuits",
+      "D) Microprocessors"
+    ],
+    "answer": "A) Vacuum tubes",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What was a key characteristic of second-generation computers?",
+    "options": [
+      "A) Used vacuum tubes",
+      "B) Used transistors",
+      "C) Used integrated circuits",
+      "D) Used microprocessors"
+    ],
+    "answer": "B) Used transistors",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Which input/output devices were introduced in third-generation computers?",
+    "options": [
+      "A) Mice and printers",
+      "B) Touchscreens and microphones",
+      "C) Keyboards and monitors",
+      "D) Joysticks and cameras"
+    ],
+    "answer": "C) Keyboards and monitors",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "Which of the following describes fourth-generation computers?",
+    "options": [
+      "A) Use vacuum tubes",
+      "B) Use transistors",
+      "C) Use integrated circuits",
+      "D) Use microprocessors"
+    ],
+    "answer": "D) Use microprocessors",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is a possible characteristic of fifth-generation computers?",
+    "options": [
+      "A) Based on artificial intelligence (AI)",
+      "B) Based on microprocessors",
+      "C) Based on integrated circuits",
+      "D) Based on transistors"
+    ],
+    "answer": "A) Based on artificial intelligence (AI)",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "How fast is 1 GHz?",
+    "options": [
+      "A) 1 million cycles per second",
+      "B) 100 million cycles per second",
+      "C) 1 billion cycles per second",
+      "D) 10 billion cycles per second"
+    ],
+    "answer": "C) 1 billion cycles per second",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is an embedded computer?",
+    "options": [
+      "A) A general-purpose computer",
+      "B) A computer embedded into a product to perform specific tasks",
+      "C) A computer used for scientific research",
+      "D) A computer that cannot store data"
+    ],
+    "answer": "B) A computer embedded into a product to perform specific tasks",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which of the following is an example of a mobile device?",
+    "options": [
+      "A) Smartphone",
+      "B) Desktop computer",
+      "C) Mainframe computer",
+      "D) Supercomputer"
+    ],
+    "answer": "A) Smartphone",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is a personal computer (PC) designed for?",
+    "options": [
+      "A) Used by many people simultaneously",
+      "B) Used for large-scale data processing",
+      "C) Used by one person at a time",
+      "D) Used only for gaming"
+    ],
+    "answer": "C) Used by one person at a time",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which of the following best describes a midrange server?",
+    "options": [
+      "A) A medium-sized computer used to host programs and data for a small network",
+      "B) A large computer used for centralized data storage",
+      "C) A portable computer",
+      "D) A personal computer"
+    ],
+    "answer": "A) A medium-sized computer used to host programs and data for a small network",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is a mainframe computer typically used for?",
+    "options": [
+      "A) Gaming",
+      "B) Managing large amounts of centralized data",
+      "C) Portable computing",
+      "D) Personal tasks"
+    ],
+    "answer": "B) Managing large amounts of centralized data",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What is the fastest, most expensive, and most powerful type of computer?",
+    "options": [
+      "A) Mainframe computer",
+      "B) Personal computer",
+      "C) Supercomputer",
+      "D) Midrange server"
+    ],
+    "answer": "C) Supercomputer",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is the primary function of input devices?",
+    "options": [
+      "A) To input data into the computer",
+      "B) To output data from the computer",
+      "C) To store data permanently",
+      "D) To process data"
+    ],
+    "answer": "A) To input data into the computer",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which of the following is an example of an output device?",
+    "options": [
+      "A) Keyboard",
+      "B) Mouse",
+      "C) Scanner",
+      "D) Monitor"
+    ],
+    "answer": "D) Monitor",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the role of processing devices in a computer?",
+    "options": [
+      "A) To store data",
+      "B) To perform calculations and control the computer’s operation",
+      "C) To input data",
+      "D) To communicate with other devices"
+    ],
+    "answer": "B) To perform calculations and control the computer’s operation",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a primary storage device?",
+    "options": [
+      "A) Hard drive",
+      "B) Printer",
+      "C) Monitor",
+      "D) Keyboard"
+    ],
+    "answer": "A) Hard drive",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What type of memory is typically used for permanent data storage?",
+    "options": [
+      "A) RAM",
+      "B) Cache",
+      "C) ROM",
+      "D) Registers"
+    ],
+    "answer": "C) ROM",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which device is used to connect multiple computers into a network?",
+    "options": [
+      "A) Printer",
+      "B) Router",
+      "C) Scanner",
+      "D) Monitor"
+    ],
+    "answer": "B) Router",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What does an operating system primarily manage?",
+    "options": [
+      "A) Internet connectivity",
+      "B) Peripheral devices",
+      "C) Hardware resources and software applications",
+      "D) User data"
+    ],
+    "answer": "C) Hardware resources and software applications",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "Which type of software allows users to perform specific tasks like document editing?",
+    "options": [
+      "A) System software",
+      "B) Utility software",
+      "C) Firmware",
+      "D) Application software"
+    ],
+    "answer": "D) Application software",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a function of system software?",
+    "options": [
+      "A) Managing hardware resources",
+      "B) Editing documents",
+      "C) Browsing the internet",
+      "D) Designing graphics"
+    ],
+    "answer": "A) Managing hardware resources",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What type of software would be used to protect a computer from viruses?",
+    "options": [
+      "A) System software",
+      "B) Antivirus software",
+      "C) Productivity software",
+      "D) Development software"
+    ],
+    "answer": "B) Antivirus software",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "What does 'machine learning' enable a computer to do?",
+    "options": [
+      "A) Execute instructions faster",
+      "B) Store more data",
+      "C) Learn from data and improve without being explicitly programmed",
+      "D) Connect to the internet"
+    ],
+    "answer": "C) Learn from data and improve without being explicitly programmed",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "In artificial neural networks (ANN), what mimics the human brain's structure?",
+    "options": [
+      "A) CPU cores",
+      "B) Neurons and layers",
+      "C) Transistors and circuits",
+      "D) Data storage units"
+    ],
+    "answer": "B) Neurons and layers",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which technology is integral to the functioning of the Internet of Things (IoT)?",
+    "options": [
+      "A) Connected sensors and devices",
+      "B) High-speed processors",
+      "C) Large storage systems",
+      "D) Virtual reality headsets"
+    ],
+    "answer": "A) Connected sensors and devices",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What does 'Big Data' typically refer to?",
+    "options": [
+      "A) Small, simple datasets",
+      "B) Large volumes of unstructured data that require advanced tools to analyze",
+      "C) Large volumes of structured data in a single database",
+      "D) Data that is only stored locally"
+    ],
+    "answer": "B) Large volumes of unstructured data that require advanced tools to analyze",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What is a key benefit of cloud computing?",
+    "options": [
+      "A) Higher costs",
+      "B) Limited storage",
+      "C) Scalability and flexibility of resources",
+      "D) Offline access only"
+    ],
+    "answer": "C) Scalability and flexibility of resources",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What type of computer is commonly used for complex simulations and data analysis?",
+    "options": [
+      "A) Personal computer",
+      "B) Supercomputer",
+      "C) Midrange server",
+      "D) Embedded computer"
+    ],
+    "answer": "B) Supercomputer",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What does a firewall primarily protect against?",
+    "options": [
+      "A) Unauthorized access to or from a private network",
+      "B) Data loss",
+      "C) Hardware failure",
+      "D) Power surges"
+    ],
+    "answer": "A) Unauthorized access to or from a private network",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "Which type of memory is considered volatile and is used for temporary data storage?",
+    "options": [
+      "A) Hard drive",
+      "B) SSD",
+      "C) ROM",
+      "D) RAM"
+    ],
+    "answer": "D) RAM",
+    "image": null
+  },
+  {
+    "numb": 31,
+    "type": "Multiple Choices",
+    "question": "What is the primary purpose of utility software?",
+    "options": [
+      "A) To create content",
+      "B) To maintain and optimize computer performance",
+      "C) To manage network connections",
+      "D) To visualize data"
+    ],
+    "answer": "B) To maintain and optimize computer performance",
+    "image": null
+  },
+  {
+    "numb": 32,
+    "type": "Multiple Choices",
+    "question": "What component connects and allows communication between all other hardware components in a computer?",
+    "options": [
+      "A) CPU",
+      "B) Power supply",
+      "C) Motherboard",
+      "D) Hard drive"
+    ],
+    "answer": "C) Motherboard",
+    "image": null
+  },
+  {
+    "numb": 33,
+    "type": "Multiple Choices",
+    "question": "Which type of device is typically used for entering handwritten data into a computer?",
+    "options": [
+      "A) Stylus and tablet",
+      "B) Keyboard",
+      "C) Mouse",
+      "D) Scanner"
+    ],
+    "answer": "A) Stylus and tablet",
+    "image": null
+  },
+  {
+    "numb": 34,
+    "type": "Multiple Choices",
+    "question": "What is the role of a GPU (Graphics Processing Unit) in a computer?",
+    "options": [
+      "A) Processing audio",
+      "B) Rendering images and video",
+      "C) Managing system memory",
+      "D) Executing network operations"
+    ],
+    "answer": "B) Rendering images and video",
+    "image": null
+  },
+  {
+    "numb": 35,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a common feature of fifth-generation computers?",
+    "options": [
+      "A) Use of vacuum tubes",
+      "B) Large physical size",
+      "C) Voice and gesture-based interactions",
+      "D) Lack of internet connectivity"
+    ],
+    "answer": "C) Voice and gesture-based interactions",
+    "image": null
+  },
+  {
+    "numb": 36,
+    "type": "Multiple Choices",
+    "question": "What is the main function of a router in a network?",
+    "options": [
+      "A) Directing data packets between different networks",
+      "B) Storing data",
+      "C) Rendering graphics",
+      "D) Managing power supply"
+    ],
+    "answer": "A) Directing data packets between different networks",
+    "image": null
+  },
+  {
+    "numb": 37,
+    "type": "Multiple Choices",
+    "question": "In the context of computing, what does AI stand for?",
+    "options": [
+      "A) Automated Interface",
+      "B) Applied Integration",
+      "C) Artificial Intelligence",
+      "D) Algorithmic Infrastructure"
+    ],
+    "answer": "C) Artificial Intelligence",
+    "image": null
+  },
+  {
+    "numb": 38,
+    "type": "Multiple Choices",
+    "question": "Which device is commonly used for long-term storage of data?",
+    "options": [
+      "A) RAM",
+      "B) Hard drive",
+      "C) Cache",
+      "D) CPU"
+    ],
+    "answer": "B) Hard drive",
+    "image": null
+  },
+  {
+    "numb": 39,
+    "type": "Multiple Choices",
+    "question": "What does 'data visualization' refer to?",
+    "options": [
+      "A) Storing data in the cloud",
+      "B) Processing data with high-speed CPUs",
+      "C) Securing data with encryption",
+      "D) The graphical representation of data to understand trends and patterns"
+    ],
+    "answer": "D) The graphical representation of data to understand trends and patterns",
+    "image": null
+  },
+  {
+    "numb": 40,
+    "type": "Multiple Choices",
+    "question": "What is the primary purpose of an operating system?",
+    "options": [
+      "A) To manage computer hardware and software resources",
+      "B) To design web pages",
+      "C) To edit photos",
+      "D) To connect to the internet"
+    ],
+    "answer": "A) To manage computer hardware and software resources",
+    "image": null
+  },
+  {
+    "numb": 41,
+    "type": "Multiple Choices",
+    "question": "What does 'IoT' stand for in computing?",
+    "options": [
+      "A) Information of Technology",
+      "B) Internet of Things",
+      "C) Integrated Operating Technology",
+      "D) Interface of Telecommunications"
+    ],
+    "answer": "B) Internet of Things",
+    "image": null
+  },
+  {
+    "numb": 42,
+    "type": "Multiple Choices",
+    "question": "What is the main characteristic of an embedded computer?",
+    "options": [
+      "A) Designed to perform specific tasks within a product",
+      "B) Capable of running multiple operating systems",
+      "C) Used primarily for personal computing",
+      "D) Can be easily upgraded"
+    ],
+    "answer": "A) Designed to perform specific tasks within a product",
+    "image": null
+  },
+  {
+    "numb": 43,
+    "type": "Multiple Choices",
+    "question": "Which type of computer is often embedded into household appliances?",
+    "options": [
+      "A) Supercomputer",
+      "B) Mainframe computer",
+      "C) Embedded computer",
+      "D) Personal computer"
+    ],
+    "answer": "C) Embedded computer",
+    "image": null
+  },
+  {
+    "numb": 44,
+    "type": "Multiple Choices",
+    "question": "What is the primary function of a mobile device?",
+    "options": [
+      "A) To replace desktop computers",
+      "B) To provide computing or internet capability in a portable form",
+      "C) To store large amounts of data",
+      "D) To control industrial machines"
+    ],
+    "answer": "B) To provide computing or internet capability in a portable form",
+    "image": null
+  },
+  {
+    "numb": 45,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a common use for supercomputers?",
+    "options": [
+      "A) Web browsing",
+      "B) Word processing",
+      "C) Weather forecasting",
+      "D) Playing video games"
+    ],
+    "answer": "C) Weather forecasting",
+    "image": null
+  },
+  {
+    "numb": 46,
+    "type": "Multiple Choices",
+    "question": "What type of computer is typically used by one person at a time and can be easily transported?",
+    "options": [
+      "A) Personal computer",
+      "B) Mainframe computer",
+      "C) Supercomputer",
+      "D) Embedded computer"
+    ],
+    "answer": "A) Personal computer",
+    "image": null
+  },
+  {
+    "numb": 47,
+    "type": "Multiple Choices",
+    "question": "What does 'CPU' stand for in computing?",
+    "options": [
+      "A) Computer Processing Unit",
+      "B) Central Peripheral Unit",
+      "C) Control Processing Unit",
+      "D) Central Processing Unit"
+    ],
+    "answer": "D) Central Processing Unit",
+    "image": null
+  },
+  {
+    "numb": 48,
+    "type": "Multiple Choices",
+    "question": "Which generation of computers introduced integrated circuits?",
+    "options": [
+      "A) Second-generation computers",
+      "B) Third-generation computers",
+      "C) Fourth-generation computers",
+      "D) First-generation computers"
+    ],
+    "answer": "B) Third-generation computers",
+    "image": null
+  },
+  {
+    "numb": 49,
+    "type": "Multiple Choices",
+    "question": "What is the primary advantage of transistors over vacuum tubes in computers?",
+    "options": [
+      "A) Transistors are smaller, more energy-efficient, and reliable",
+      "B) Transistors generate more heat",
+      "C) Transistors are larger in size",
+      "D) Transistors are more expensive"
+    ],
+    "answer": "A) Transistors are smaller, more energy-efficient, and reliable",
+    "image": null
+  },
+  {
+    "numb": 50,
+    "type": "Multiple Choices",
+    "question": "Which generation of computers is associated with the use of microprocessors?",
+    "options": [
+      "A) First-generation computers",
+      "B) Second-generation computers",
+      "C) Fourth-generation computers",
+      "D) Fifth-generation computers"
+    ],
+    "answer": "C) Fourth-generation computers",
+    "image": null
+  }
+]
