@@ -625,12 +625,92 @@ export const departmentData: { [key: string]: Department } = {
                 summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
                 quizzes: [
                   {
-                    id: "ECO_005_10001",
-                    name: "Quiz 1: Economy Science Basics",
-                    code: "ECO_005_10001",
+                    id: "ECO_001",
+                    name: "الفصل الاول - مقدمة في علم الاقتصاد",
+                    code: "ECO_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_001.json"
+                  },
+                  {
+                    id: "ECO_002",
+                    name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
+                    code: "ECO_002",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_002.json"
+                  },
+                  {
+                    id: "ECO_003",
+                    name: "الفصل الثالث - نظرية طلب المستهلك",
+                    code: "ECO_003",
+                    duration: "No Timer",
+                    questions: 19,
+                    jsonFile: "/quizzes/Economic/ECO_003.json"
+                  },
+                  {
+                    id: "ECO_004",
+                    name: "الفصل الرابع - العرض في السوق",
+                    code: "ECO_004",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_004.json"
+                  },
+                  {
+                    id: "ECO_005",
+                    name: "الفصل الخامس - التوازن في السوق",
+                    code: "ECO_005",
+                    duration: "No Timer",
+                    questions: 12,
+                    jsonFile: "/quizzes/Economic/ECO_005.json"
+                  },
+                  {
+                    id: "ECO_006",
+                    name: "الفصل السادس - مرونات العرض والطلب",
+                    code: "ECO_006",
+                    duration: "No Timer",
+                    questions: 27,
+                    jsonFile: "/quizzes/Economic/ECO_006.json"
+                  },
+                  {
+                    id: "ECO_007",
+                    name: "الفصل السابع - نظرية المنفعة الحدية",
+                    code: "ECO_007",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_007.json"
+                  },
+                  {
+                    id: "ECO_008",
+                    name: "الفصل التاسع - نظرية الإنتاج",
+                    code: "ECO_008",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_008.json"
+                  },
+                  {
+                    id: "ECO_009",
+                    name: "الفصل العاشر - تكاليف الإنتاج",
+                    code: "ECO_009",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_009.json"
+                  },
+                  {
+                    id: "ECO_010",
+                    name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
+                    code: "ECO_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_010.json"
+                  },
+                  {
+                    id: "ECO_011",
+                    name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
+                    code: "ECO_011",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
                 ],
               },
@@ -1743,12 +1823,92 @@ export const departmentData: { [key: string]: Department } = {
                 summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
                 quizzes: [
                   {
-                    id: "ECO_005_10001",
-                    name: "Quiz 1: Economy Science Basics",
-                    code: "ECO_005_10001",
+                    id: "ECO_001",
+                    name: "الفصل الاول - مقدمة في علم الاقتصاد",
+                    code: "ECO_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_001.json"
+                  },
+                  {
+                    id: "ECO_002",
+                    name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
+                    code: "ECO_002",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_002.json"
+                  },
+                  {
+                    id: "ECO_003",
+                    name: "الفصل الثالث - نظرية طلب المستهلك",
+                    code: "ECO_003",
+                    duration: "No Timer",
+                    questions: 19,
+                    jsonFile: "/quizzes/Economic/ECO_003.json"
+                  },
+                  {
+                    id: "ECO_004",
+                    name: "الفصل الرابع - العرض في السوق",
+                    code: "ECO_004",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_004.json"
+                  },
+                  {
+                    id: "ECO_005",
+                    name: "الفصل الخامس - التوازن في السوق",
+                    code: "ECO_005",
+                    duration: "No Timer",
+                    questions: 12,
+                    jsonFile: "/quizzes/Economic/ECO_005.json"
+                  },
+                  {
+                    id: "ECO_006",
+                    name: "الفصل السادس - مرونات العرض والطلب",
+                    code: "ECO_006",
+                    duration: "No Timer",
+                    questions: 27,
+                    jsonFile: "/quizzes/Economic/ECO_006.json"
+                  },
+                  {
+                    id: "ECO_007",
+                    name: "الفصل السابع - نظرية المنفعة الحدية",
+                    code: "ECO_007",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_007.json"
+                  },
+                  {
+                    id: "ECO_008",
+                    name: "الفصل التاسع - نظرية الإنتاج",
+                    code: "ECO_008",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_008.json"
+                  },
+                  {
+                    id: "ECO_009",
+                    name: "الفصل العاشر - تكاليف الإنتاج",
+                    code: "ECO_009",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_009.json"
+                  },
+                  {
+                    id: "ECO_010",
+                    name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
+                    code: "ECO_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_010.json"
+                  },
+                  {
+                    id: "ECO_011",
+                    name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
+                    code: "ECO_011",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
                 ],
               },
@@ -2793,12 +2953,92 @@ export const departmentData: { [key: string]: Department } = {
                 summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
                 quizzes: [
                   {
-                    id: "ECO_005_10001",
-                    name: "Quiz 1: Economy Science Basics",
-                    code: "ECO_005_10001",
+                    id: "ECO_001",
+                    name: "الفصل الاول - مقدمة في علم الاقتصاد",
+                    code: "ECO_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_001.json"
+                  },
+                  {
+                    id: "ECO_002",
+                    name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
+                    code: "ECO_002",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_002.json"
+                  },
+                  {
+                    id: "ECO_003",
+                    name: "الفصل الثالث - نظرية طلب المستهلك",
+                    code: "ECO_003",
+                    duration: "No Timer",
+                    questions: 19,
+                    jsonFile: "/quizzes/Economic/ECO_003.json"
+                  },
+                  {
+                    id: "ECO_004",
+                    name: "الفصل الرابع - العرض في السوق",
+                    code: "ECO_004",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_004.json"
+                  },
+                  {
+                    id: "ECO_005",
+                    name: "الفصل الخامس - التوازن في السوق",
+                    code: "ECO_005",
+                    duration: "No Timer",
+                    questions: 12,
+                    jsonFile: "/quizzes/Economic/ECO_005.json"
+                  },
+                  {
+                    id: "ECO_006",
+                    name: "الفصل السادس - مرونات العرض والطلب",
+                    code: "ECO_006",
+                    duration: "No Timer",
+                    questions: 27,
+                    jsonFile: "/quizzes/Economic/ECO_006.json"
+                  },
+                  {
+                    id: "ECO_007",
+                    name: "الفصل السابع - نظرية المنفعة الحدية",
+                    code: "ECO_007",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_007.json"
+                  },
+                  {
+                    id: "ECO_008",
+                    name: "الفصل التاسع - نظرية الإنتاج",
+                    code: "ECO_008",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_008.json"
+                  },
+                  {
+                    id: "ECO_009",
+                    name: "الفصل العاشر - تكاليف الإنتاج",
+                    code: "ECO_009",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_009.json"
+                  },
+                  {
+                    id: "ECO_010",
+                    name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
+                    code: "ECO_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_010.json"
+                  },
+                  {
+                    id: "ECO_011",
+                    name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
+                    code: "ECO_011",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
                 ],
               },
@@ -3698,12 +3938,92 @@ export const departmentData: { [key: string]: Department } = {
                 summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
                 quizzes: [
                   {
-                    id: "ECO_005_10001",
-                    name: "Quiz 1: Economy Science Basics",
-                    code: "ECO_005_10001",
+                    id: "ECO_001",
+                    name: "الفصل الاول - مقدمة في علم الاقتصاد",
+                    code: "ECO_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_001.json"
+                  },
+                  {
+                    id: "ECO_002",
+                    name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
+                    code: "ECO_002",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_002.json"
+                  },
+                  {
+                    id: "ECO_003",
+                    name: "الفصل الثالث - نظرية طلب المستهلك",
+                    code: "ECO_003",
+                    duration: "No Timer",
+                    questions: 19,
+                    jsonFile: "/quizzes/Economic/ECO_003.json"
+                  },
+                  {
+                    id: "ECO_004",
+                    name: "الفصل الرابع - العرض في السوق",
+                    code: "ECO_004",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_004.json"
+                  },
+                  {
+                    id: "ECO_005",
+                    name: "الفصل الخامس - التوازن في السوق",
+                    code: "ECO_005",
+                    duration: "No Timer",
+                    questions: 12,
+                    jsonFile: "/quizzes/Economic/ECO_005.json"
+                  },
+                  {
+                    id: "ECO_006",
+                    name: "الفصل السادس - مرونات العرض والطلب",
+                    code: "ECO_006",
+                    duration: "No Timer",
+                    questions: 27,
+                    jsonFile: "/quizzes/Economic/ECO_006.json"
+                  },
+                  {
+                    id: "ECO_007",
+                    name: "الفصل السابع - نظرية المنفعة الحدية",
+                    code: "ECO_007",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_007.json"
+                  },
+                  {
+                    id: "ECO_008",
+                    name: "الفصل التاسع - نظرية الإنتاج",
+                    code: "ECO_008",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_008.json"
+                  },
+                  {
+                    id: "ECO_009",
+                    name: "الفصل العاشر - تكاليف الإنتاج",
+                    code: "ECO_009",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_009.json"
+                  },
+                  {
+                    id: "ECO_010",
+                    name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
+                    code: "ECO_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_010.json"
+                  },
+                  {
+                    id: "ECO_011",
+                    name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
+                    code: "ECO_011",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
                 ],
               },
@@ -5477,12 +5797,92 @@ export const departmentData: { [key: string]: Department } = {
                 summaries: "https://drive.google.com/drive/folders/1qI0ElMk-nNfGv8hH9h3M51Mz9KvEKhIZ?usp=drive_link",
                 quizzes: [
                   {
-                    id: "ECO_005_10001",
-                    name: "Quiz 1: Economy Science Basics",
-                    code: "ECO_005_10001",
+                    id: "ECO_001",
+                    name: "الفصل الاول - مقدمة في علم الاقتصاد",
+                    code: "ECO_001",
                     duration: "No Timer",
-                    questions: 10,
-                    jsonFile: "/quizzes/economy-science/ECO_005_10001.json"
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_001.json"
+                  },
+                  {
+                    id: "ECO_002",
+                    name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
+                    code: "ECO_002",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_002.json"
+                  },
+                  {
+                    id: "ECO_003",
+                    name: "الفصل الثالث - نظرية طلب المستهلك",
+                    code: "ECO_003",
+                    duration: "No Timer",
+                    questions: 19,
+                    jsonFile: "/quizzes/Economic/ECO_003.json"
+                  },
+                  {
+                    id: "ECO_004",
+                    name: "الفصل الرابع - العرض في السوق",
+                    code: "ECO_004",
+                    duration: "No Timer",
+                    questions: 17,
+                    jsonFile: "/quizzes/Economic/ECO_004.json"
+                  },
+                  {
+                    id: "ECO_005",
+                    name: "الفصل الخامس - التوازن في السوق",
+                    code: "ECO_005",
+                    duration: "No Timer",
+                    questions: 12,
+                    jsonFile: "/quizzes/Economic/ECO_005.json"
+                  },
+                  {
+                    id: "ECO_006",
+                    name: "الفصل السادس - مرونات العرض والطلب",
+                    code: "ECO_006",
+                    duration: "No Timer",
+                    questions: 27,
+                    jsonFile: "/quizzes/Economic/ECO_006.json"
+                  },
+                  {
+                    id: "ECO_007",
+                    name: "الفصل السابع - نظرية المنفعة الحدية",
+                    code: "ECO_007",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_007.json"
+                  },
+                  {
+                    id: "ECO_008",
+                    name: "الفصل التاسع - نظرية الإنتاج",
+                    code: "ECO_008",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_008.json"
+                  },
+                  {
+                    id: "ECO_009",
+                    name: "الفصل العاشر - تكاليف الإنتاج",
+                    code: "ECO_009",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_009.json"
+                  },
+                  {
+                    id: "ECO_010",
+                    name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
+                    code: "ECO_010",
+                    duration: "No Timer",
+                    questions: 20,
+                    jsonFile: "/quizzes/Economic/ECO_010.json"
+                  },
+                  {
+                    id: "ECO_011",
+                    name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
+                    code: "ECO_011",
+                    duration: "No Timer",
+                    questions: 18,
+                    jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
                 ],
               },
