@@ -729,7 +729,7 @@ export default function ProfilePage() {
                             size="sm" 
                             className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 hover:bg-yellow-500/30"
                           >
-                            <Link href="/Tournment">View</Link>
+                            <Link href="/Tournament">View</Link>
                           </Button>
                         </div>
                       )}
@@ -751,7 +751,7 @@ export default function ProfilePage() {
                             size="sm" 
                             className="bg-purple-500/20 text-purple-400 border-purple-500/30 hover:bg-purple-500/30"
                           >
-                            <Link href="/Tournment">View Tournament</Link>
+                            <Link href="/Tournament">View</Link>
                           </Button>
                         </div>
                       )}
@@ -771,7 +771,7 @@ export default function ProfilePage() {
                         size="sm" 
                         className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
                       >
-                        <Link href="/Tournment">Join Tournament</Link>
+                        <Link href="/Tournament">Join</Link>
                       </Button>
                     </div>
                   )}
