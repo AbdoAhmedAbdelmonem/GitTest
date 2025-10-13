@@ -157,6 +157,7 @@ export default function ProfilePage() {
     level2Points?: number;
   }>({})
   const [loading, setLoading] = useState(true)
+  const [tournamentLoading, setTournamentLoading] = useState(false)
   const [isRedirecting, setIsRedirecting] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [editForm, setEditForm] = useState({
@@ -202,8 +203,14 @@ export default function ProfilePage() {
         .order("solved_at", { ascending: false })
 
       setQuizData(attemptsData || [])
+      setLoading(false)
 
-      // Get tournament data for both levels
+      // Load tournament data asynchronously after main profile loads
+      loadTournamentData(session, supabase)
+    }
+
+    const loadTournamentData = async (session: any, supabase: any) => {
+      setTournamentLoading(true)
       try {
         // Get user's tournament quiz data directly
         const tournamentStart = new Date('2025-10-11T00:00:00.000Z')
@@ -223,7 +230,7 @@ export default function ProfilePage() {
 
         if (tournamentQuizzes && tournamentQuizzes.length > 0) {
           // Calculate points for each level
-          tournamentQuizzes.forEach(quiz => {
+          tournamentQuizzes.forEach((quiz: any) => {
             const points = calculateTournamentPoints(
               quiz.score || 0,
               quiz.duration_selected || "15 minutes",
@@ -283,9 +290,9 @@ export default function ProfilePage() {
         
       } catch (error) {
         console.error("Error fetching tournament data:", error)
+      } finally {
+        setTournamentLoading(false)
       }
-
-      setLoading(false)
     }
 
     loadProfileData()
@@ -693,7 +700,17 @@ export default function ProfilePage() {
                     </h4>
                   </div>
                   
-                  {(tournamentData.level1Points || tournamentData.level2Points) ? (
+                  {tournamentLoading ? (
+                    <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
+                      <div className="p-3 rounded-full bg-yellow-500/20">
+                        <Trophy className="w-5 h-5 text-yellow-400" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm text-white/60">Loading tournament data...</p>
+                        <LoadingSpinner size="sm" />
+                      </div>
+                    </div>
+                  ) : (tournamentData.level1Points || tournamentData.level2Points) ? (
                     <>
                       {tournamentData.level1Points && (
                         <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20">
