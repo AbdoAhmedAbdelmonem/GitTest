@@ -971,6 +971,20 @@ export const departmentData: { [key: string]: Department } = {
               },
             },
             {
+              id: "faculty-elective-4",
+              name: "System Analysis and Design",
+              code: "02-24-00301",
+              description: "Explore system development life cycle and design methodologies",
+              creditHours: 3,
+              materials: {
+                lectures: "https://drive.google.com/drive/folders/1XCk9YrAfo70uV9hfybNmvLvJn69lHFiZ?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/10ttM9_EA2sEAPEj6_fsyKEaxP2AItRcP?usp=drive_link",
+                videos: [""],
+                summaries: "https://drive.google.com/drive/folders/1-TUMlZnHgD5NSahx8Ab5v8tR4gBZ_bGy?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1bYzfL7z6ce132wz5wAEYxWP29khFj81k?usp=drive_link"
+              },
+            },
+            {
               id: "university-elective-3",
               name: "Fitness and Health",
               code: "02-24-HS001",
@@ -6259,3 +6273,4 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
