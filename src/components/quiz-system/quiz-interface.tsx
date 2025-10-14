@@ -108,7 +108,7 @@ const themes = [
 ];
 
 const durations = [
-  { label: "Lightning", value: 1, icon: Zap, description: "1 Minute" },
+  { label: "Lightning", value: 0.1, icon: Zap, description: "1 Minute" },
   { label: "Short", value: 5, icon: Star, description: "5 Minutes" },
   { label: "Standard (DEF)", value: 15, icon: Cable, description: "15 Minutes" },
   { label: "Extended", value: 30, icon: Clock, description: "30 Minutes" },
@@ -260,7 +260,7 @@ export default function QuizInterface({
 
       const attemptsCount = count || 0;
       setAttemptsToday(attemptsCount);
-      setMaxAttemptsReached(attemptsCount >= 2);
+      setMaxAttemptsReached(attemptsCount >= 1);
     } catch (error) {
       console.error("Unexpected error checking attempts:", error);
     }
@@ -427,7 +427,7 @@ export default function QuizInterface({
         console.log("Quiz data saved successfully:", data);
         // Update attempts count after successful submission
         setAttemptsToday(prev => prev + 1);
-        setMaxAttemptsReached(attemptsToday + 1 >= 2);
+        setMaxAttemptsReached(attemptsToday + 1 >= 1);
       }
     } catch (error) {
       console.error("Unexpected error saving quiz data:", error);
@@ -652,7 +652,7 @@ export default function QuizInterface({
             Maximum Attempts Reached
           </DialogTitle>
           <DialogDescription className="text-white/70">
-            You have already used {attemptsToday} out of 2 attempts for this quiz today. 
+            You have already used {attemptsToday} out of 1 attempt for this quiz today. 
             Please try again tomorrow.
           </DialogDescription>
         </DialogHeader>
@@ -922,7 +922,7 @@ export default function QuizInterface({
                     <div className="mt-6 pt-4 border-t border-white/20">
                       <div className="flex items-center justify-center gap-2 text-white/70">
                         <Clock className="w-4 h-4" />
-                        <span>Attempts today: {attemptsToday}/2</span>
+                        <span>Attempts today: {attemptsToday}/1</span>
                         {maxAttemptsReached && (
                           <Badge variant="destructive" className="ml-2">
                             Limit Reached
