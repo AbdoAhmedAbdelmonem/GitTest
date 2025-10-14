@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import CountUp from "@/components/CountUp"
 import { BookOpen, Shield, Brain, Database, Award, Hospital, Cloud, ServerCrash, BookOpenCheck } from "lucide-react"
-import CreativeFeatureSlider from "@/components/creative-feature-slider"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
 import Link from "next/link"
@@ -95,7 +94,6 @@ export default function HomePage() {
       {/* Hero Section - Using the exact design without changes */}
       <HeroGeometric badge="Chameleon FCDS" title1="Master Your" title2="Future Skills" />
 
-      {/* Stats Section */}
       <ScrollAnimatedSection className="py-20 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -122,8 +120,81 @@ export default function HomePage() {
         </div>
       </ScrollAnimatedSection>
 
-      {/* Creative Feature Slider */}
-      <CreativeFeatureSlider />
+      {/* Creative Video Section */}
+      <ScrollAnimatedSection className="py-20 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <ScrollAnimatedSection animation="fadeIn" className="text-center mb-16">
+            <Badge variant="outline" className="mb-4 bg-white/5 border-white/10 text-white/60">
+              Creative Designs
+            </Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Most <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Creative Designs</span>
+            </h2>
+            <p className="text-lg text-white/40 max-w-2xl mx-auto mb-12">
+              Discover the power of innovative design and modern educational technology
+            </p>
+          </ScrollAnimatedSection>
+
+          <ScrollAnimatedSection animation="scaleIn" className="max-w-4xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden border border-white/20 bg-white/5 backdrop-blur-sm shadow-2xl">
+              <video
+                className="w-full h-auto"
+                controls
+                preload="metadata"
+                poster="/images/thumbnail.png"
+              >
+                <source 
+                  src="https://res.cloudinary.com/dv6rj0dgj/video/upload/v1760357217/Chameleon_-_Master_Your_Future_Skills_Presentations_jtxcjx.mp4" 
+                  type="video/mp4" 
+                />
+                Your browser does not support the video tag.
+              </video>
+              
+              {/* Video overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
+              
+              {/* Decorative elements */}
+              <div className="absolute top-4 left-4 w-3 h-3 bg-red-500 rounded-full shadow-lg"></div>
+              <div className="absolute top-4 left-10 w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
+              <div className="absolute top-4 left-16 w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
+            </div>
+          </ScrollAnimatedSection>
+
+          {/* Feature highlights below video */}
+          <ScrollAnimatedSection animation="slideUp" delay={0.3} className="mt-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {[
+                {
+                  title: "Modern Interface",
+                  description: "Clean, intuitive design that enhances learning experience",
+                  icon: "🎨"
+                },
+                {
+                  title: "Interactive Elements",
+                  description: "Engaging components that make learning more effective",
+                  icon: "⚡"
+                },
+                {
+                  title: "Responsive Design",
+                  description: "Perfect experience across all devices and screen sizes",
+                  icon: "📱"
+                }
+              ].map((feature, index) => (
+                <ScrollAnimatedSection 
+                  key={index} 
+                  animation="slideInFromBottom" 
+                  delay={index * 0.1}
+                  className="text-center p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
+                >
+                  <div className="text-3xl mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                  <p className="text-white/60 text-sm">{feature.description}</p>
+                </ScrollAnimatedSection>
+              ))}
+            </div>
+          </ScrollAnimatedSection>
+        </div>
+      </ScrollAnimatedSection>
 
       {/* Specializations Section */}
       <ScrollAnimatedSection className="py-20 bg-[#030303]" id="specializations" data-testid="specializations-section">
@@ -176,7 +247,6 @@ export default function HomePage() {
                       }}
                     />
                     
-                    {/* Your existing card */}
                     <Link href={`/specialization/${spec.id}`}>
                       <Card className="bg-white/[0.02] border-white/10 hover:bg-white/[0.04] transition-all duration-300 h-full relative z-10 cursor-pointer">
                         <CardHeader>
@@ -220,7 +290,6 @@ export default function HomePage() {
         </div>
       </ScrollAnimatedSection>
 
-      {/* CTA Section */}
       <ScrollAnimatedSection className="py-20 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4 text-center">
           <ScrollAnimatedSection animation="scaleIn" className="max-w-3xl mx-auto">
