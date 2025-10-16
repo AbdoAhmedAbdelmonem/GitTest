@@ -205,7 +205,7 @@ export const departmentData: { [key: string]: Department } = {
                     name: "Converting Octal to Hexadecimal and Vice Versa",
                     code: "CS_015",
                     duration: "No Timer",
-                    questions: 10,
+                    questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_015.json"
                   },
                   {
@@ -448,6 +448,20 @@ export const departmentData: { [key: string]: Department } = {
                 videos: ["https://youtube.com/playlist?list=PL2y4AZEEnQLmigukmMl5lD0CkewT1pBQ3&si=GijvUZQgn4vO1gdR"],
                 summaries: "https://drive.google.com/drive/folders/1He5H59nOzExcoG5GYaujPWQVnKTZwD2Z?usp=drive_link",
                 exams: "https://drive.google.com/drive/folders/1ZfnkRMneHYU5wYlq4738XZt1NvGlRbt6?usp=drive_link"
+              },
+            },
+            {
+              id: "math-0",
+              name: "Math 0",
+              code: "02-00-000XX",
+              description: "A special material for science students in high school",
+              creditHours: 0,
+              materials: {
+                lectures: "https://drive.google.com/drive/folders/1YrNrKQC_tGwSoNuESo8xx31dpJNL7Kat?usp=drive_link",
+                sections: 'https://drive.google.com/drive/folders/1bGm1W2on979HuF1b618GI4S7UJ8ngkFK?usp=drive_link',
+                videos: [""],
+                summaries: "https://drive.google.com/drive/folders/1mQ6p7lVfmr_fKKYOYP9aBWwVeGEVGa4N?usp=drive_link",
+                exams: ""
               },
             },
           ],
@@ -959,7 +973,7 @@ export const departmentData: { [key: string]: Department } = {
             {
               id: "faculty-elective-3",
               name: "Dist Processing",
-              code: "02-24-00304",
+              code: "02-24-00302",
               description: "Explore distributed systems and parallel computing concepts",
               creditHours: 3,
               materials: {
@@ -973,7 +987,7 @@ export const departmentData: { [key: string]: Department } = {
             {
               id: "faculty-elective-4",
               name: "System Analysis and Design",
-              code: "02-24-00301",
+              code: "02-24-00304",
               description: "Explore system development life cycle and design methodologies",
               creditHours: 3,
               materials: {
@@ -6273,4 +6287,3 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
-
