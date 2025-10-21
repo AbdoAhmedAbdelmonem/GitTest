@@ -104,7 +104,12 @@ export default function HomePage() {
   useEffect(() => {
     async function fetchUserStats() {
       try {
-        const response = await fetch('/api/stats/users')
+        const response = await fetch('/api/stats/users', {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        })
         if (response.ok) {
           const data = await response.json()
           setUserStats(data)
