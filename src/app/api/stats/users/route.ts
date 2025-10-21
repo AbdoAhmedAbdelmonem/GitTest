@@ -5,6 +5,7 @@ export const dynamic = 'force-dynamic'
 
 export async function GET() {
   try {
+    // Use service role to bypass RLS and get ALL users
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!,
@@ -16,6 +17,7 @@ export async function GET() {
       }
     )
 
+    // Fetch ALL users by paginating (Supabase default limit is 1000)
     let allUsers: { current_level: number | null }[] = []
     let from = 0
     const pageSize = 1000
@@ -46,10 +48,12 @@ export async function GET() {
 
     const totalUsers = allUsers.length
 
+    // Calculate level statistics - handle NULL and undefined
     const levelStats: Record<number, number> = {}
     
     allUsers?.forEach((user) => {
-      const level = user.current_level ?? 0
+      // Handle NULL, undefined, or use the actual value
+      const level = user.current_level ?? 0  // Use nullish coalescing
       levelStats[level] = (levelStats[level] || 0) + 1
     })
 
@@ -61,6 +65,7 @@ export async function GET() {
       }))
       .sort((a, b) => a.level - b.level)
 
+    // Verify totals match
     const sumOfLevels = levels.reduce((sum, l) => sum + l.count, 0)
     
     console.log('Total users:', totalUsers)
