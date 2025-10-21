@@ -89,11 +89,16 @@ interface UserStats {
   timestamp: string
 }
 
+// Force dynamic rendering and disable caching
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default function HomePage() {
   const [username, setUsername] = useState<string>("")
   const [userStats, setUserStats] = useState<UserStats | null>(null)
   const [isLoadingStats, setIsLoadingStats] = useState(true)
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const [key, setKey] = useState(0) // Force re-render key
 
   useEffect(() => {
     const session = getStudentSession()
@@ -104,19 +109,19 @@ export default function HomePage() {
 
   const fetchUserStats = async () => {
     try {
-      // Use absolute URL in production, relative in development
-      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '')
-      const url = `${baseUrl}/api/stats/users`
-      
-      const response = await fetch(url, {
+      // Add timestamp to prevent caching
+      const timestamp = new Date().getTime()
+      const response = await fetch(`/api/stats/users?t=${timestamp}`, {
         cache: 'no-store',
         headers: {
           'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache',
         },
       })
       if (response.ok) {
         const data = await response.json()
         setUserStats(data)
+        setKey(prev => prev + 1) // Force CountUp to re-render with new value
       }
     } catch (error) {
       console.error('Failed to fetch user stats:', error)
@@ -181,6 +186,7 @@ export default function HomePage() {
                           <span className="text-white/40">Loading...</span>
                         ) : (
                           <CountUp
+                            key={key}
                             from={0}
                             to={userStats?.totalUsers || 0}
                             separator=","
