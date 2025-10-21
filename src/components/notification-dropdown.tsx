@@ -196,61 +196,76 @@ export function NotificationDropdown({ isOpen, onClose }: NotificationDropdownPr
                             } last:border-b-0`}
                             role="listitem"
                           >
-                            <div className="flex items-start justify-between gap-3">
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-2">
-                                  <h4 className="text-sm font-medium text-white truncate">
-                                    {notification.title || 'Notification'}
-                                  </h4>
-                                  {notification.type && (
-                                    <span
-                                      className={`text-xs px-2 py-1 rounded-full ${styles.bg} ${styles.text} border ${styles.border}`}
-                                      aria-label={`Type: ${notification.type}`}
-                                    >
-                                      {notification.type}
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="max-h-32 overflow-y-auto notification-content-scroll relative">
-                                  <p className="text-xs text-white/70 mt-1 whitespace-pre-wrap break-words pr-2">
-                                    {notification.message_content || 'No content'}
-                                  </p>
-                                  {/* Scroll indicator for long content */}
-                                  {notification.message_content && notification.message_content.length > 200 && (
-                                    <div className="absolute bottom-0 right-0 bg-gradient-to-l from-white/10 to-transparent h-4 w-8 pointer-events-none rounded-bl" />
-                                  )}
-                                </div>
-                                <div className="flex items-center gap-2 mt-2">
-                                  {notification.provider && (
-                                    <span className="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded">
-                                      {notification.provider}
-                                    </span>
-                                  )}
-                                </div>
-                                <p className="text-xs text-white/50 mt-2">
-                                  {formatTime(notification.created_at)}
+                            <div className="flex flex-col gap-2">
+                              {/* Header with title and type badge */}
+                              <div className="flex items-center gap-2">
+                                <h4 className="text-sm font-medium text-white truncate">
+                                  {notification.title || 'Notification'}
+                                </h4>
+                                {notification.type && (
+                                  <span
+                                    className={`text-xs px-2 py-1 rounded-full ${styles.bg} ${styles.text} border ${styles.border}`}
+                                    aria-label={`Type: ${notification.type}`}
+                                  >
+                                    {notification.type}
+                                  </span>
+                                )}
+                              </div>
+                              
+                              {/* Message content - auto-expanding without overflow */}
+                              <div className="w-full">
+                                <p className="text-xs text-white/70 whitespace-pre-wrap break-words">
+                                  {notification.message_content || 'No content'}
                                 </p>
                               </div>
-                              <div className="flex items-center gap-2 flex-shrink-0">
+                              
+                              {/* Provider badge if exists */}
+                              {notification.provider && (
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded">
+                                    {notification.provider}
+                                  </span>
+                                </div>
+                              )}
+                              
+                              {/* Time */}
+                              <p className="text-xs text-white/50">
+                                {formatTime(notification.created_at)}
+                              </p>
+                              
+                              {/* Action buttons - bottom left */}
+                              <div className="flex items-center gap-2 mt-2">
                                 {notification.seen === 'true' ? (
-                                  <CheckCheck
-                                    className="w-4 h-4 text-green-400"
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="h-7 px-2 text-green-400 hover:text-green-300 hover:bg-green-500/20 transition-colors duration-150 flex items-center gap-1"
                                     aria-label="Read"
-                                  />
+                                    disabled
+                                  >
+                                    <CheckCheck className="w-3.5 h-3.5" />
+                                    <span className="text-xs">Read</span>
+                                  </Button>
                                 ) : (
-                                  <div
-                                    className="w-2 h-2 bg-blue-500 rounded-full"
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="h-7 px-2 text-blue-400 hover:text-blue-300 hover:bg-blue-500/20 transition-colors duration-150 flex items-center gap-1"
                                     aria-label="Unread"
-                                  />
+                                  >
+                                    <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                                    <span className="text-xs">Unread</span>
+                                  </Button>
                                 )}
                                 <Button
                                   variant="ghost"
-                                  size="icon"
+                                  size="sm"
                                   onClick={(e) => handleDelete(notification.id, e)}
-                                  className="w-6 h-6 text-white/50 hover:text-red-400 hover:bg-red-500/20 transition-colors duration-150"
+                                  className="h-7 px-2 text-white/50 hover:text-red-400 hover:bg-red-500/20 transition-colors duration-150 flex items-center gap-1"
                                   aria-label={`Delete notification: ${notification.title || 'Notification'}`}
                                 >
-                                  <Trash2 className="w-3 h-3" />
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                  <span className="text-xs">Delete</span>
                                 </Button>
                               </div>
                             </div>
