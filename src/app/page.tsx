@@ -134,6 +134,13 @@ export default function HomePage() {
 
   useEffect(() => {
     fetchUserStats()
+    
+    // Auto-refresh every 5 minutes to keep data fresh
+    const intervalId = setInterval(() => {
+      fetchUserStats()
+    }, 5 * 60 * 1000) // 5 minutes
+
+    return () => clearInterval(intervalId)
   }, [])
 
   return (
