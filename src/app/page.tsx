@@ -183,7 +183,14 @@ export default function HomePage() {
                   <div className="flex items-center gap-3">
                     <Users className="w-5 h-5 text-white/60" />
                     <div className="text-left">
-                      <div className="text-sm text-white/40">Total Enrolled Students</div>
+                      <div className="text-sm text-white/40 flex items-center gap-2">
+                        Total Enrolled Students
+                        {userStats && (
+                          <span className="text-xs text-white/20">
+                            • Updated {new Date(userStats.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </span>
+                        )}
+                      </div>
                       <div className="text-2xl font-bold text-white">
                         {isLoadingStats ? (
                           <span className="text-white/40">Loading...</span>
