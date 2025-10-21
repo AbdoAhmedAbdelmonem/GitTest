@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import CountUp from "@/components/CountUp"
-import { BookOpen, Shield, Brain, Database, Award, Hospital, Cloud, ServerCrash, BookOpenCheck, ChevronDown, Users } from "lucide-react"
+import { BookOpen, Shield, Brain, Database, Award, Hospital, Cloud, ServerCrash, BookOpenCheck, ChevronDown, Users, RefreshCw } from "lucide-react"
 import CreativeFeatureSlider from "@/components/creative-feature-slider"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
@@ -93,6 +93,7 @@ export default function HomePage() {
   const [username, setUsername] = useState<string>("")
   const [userStats, setUserStats] = useState<UserStats | null>(null)
   const [isLoadingStats, setIsLoadingStats] = useState(true)
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   useEffect(() => {
     const session = getStudentSession()
@@ -101,26 +102,36 @@ export default function HomePage() {
     }
   }, [])
 
-  useEffect(() => {
-    async function fetchUserStats() {
-      try {
-        const response = await fetch('/api/stats/users', {
-          cache: 'no-store',
-          headers: {
-            'Cache-Control': 'no-cache',
-          },
-        })
-        if (response.ok) {
-          const data = await response.json()
-          setUserStats(data)
-        }
-      } catch (error) {
-        console.error('Failed to fetch user stats:', error)
-      } finally {
-        setIsLoadingStats(false)
+  const fetchUserStats = async () => {
+    try {
+      // Use absolute URL in production, relative in development
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '')
+      const url = `${baseUrl}/api/stats/users`
+      
+      const response = await fetch(url, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        setUserStats(data)
       }
+    } catch (error) {
+      console.error('Failed to fetch user stats:', error)
+    } finally {
+      setIsLoadingStats(false)
+      setIsRefreshing(false)
     }
+  }
 
+  const handleRefresh = async () => {
+    setIsRefreshing(true)
+    await fetchUserStats()
+  }
+
+  useEffect(() => {
     fetchUserStats()
   }, [])
 
@@ -186,10 +197,20 @@ export default function HomePage() {
               </PopoverTrigger>
               <PopoverContent className="w-80 bg-[#0a0a0a] border-white/10 p-4">
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    Students by Level
-                  </h4>
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-white flex items-center gap-2">
+                      <Users className="w-4 h-4" />
+                      Students by Level
+                    </h4>
+                    <button
+                      onClick={handleRefresh}
+                      disabled={isRefreshing}
+                      className="p-1.5 rounded-md hover:bg-white/10 transition-colors disabled:opacity-50"
+                      title="Refresh data"
+                    >
+                      <RefreshCw className={`w-4 h-4 text-white/60 ${isRefreshing ? 'animate-spin' : ''}`} />
+                    </button>
+                  </div>
                   {isLoadingStats ? (
                     <p className="text-sm text-white/40">Loading breakdown...</p>
                   ) : userStats?.levels && userStats.levels.length > 0 ? (
