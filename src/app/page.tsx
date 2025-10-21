@@ -3,8 +3,10 @@ import HeroGeometric from "@/components/hero-geometric"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import CountUp from "@/components/CountUp"
-import { BookOpen, Shield, Brain, Database, Award, Hospital, Cloud, ServerCrash, BookOpenCheck } from "lucide-react"
+import { BookOpen, Shield, Brain, Database, Award, Hospital, Cloud, ServerCrash, BookOpenCheck, ChevronDown, Users } from "lucide-react"
+import CreativeFeatureSlider from "@/components/creative-feature-slider"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
 import Link from "next/link"
@@ -76,14 +78,45 @@ const stats = [
   { icon: ServerCrash , label: "Million Requests", value: 1.25, suffix: "M" },
 ]
 
+interface LevelStat {
+  level: number
+  count: number
+}
+
+interface UserStats {
+  totalUsers: number
+  levels: LevelStat[]
+  timestamp: string
+}
+
 export default function HomePage() {
   const [username, setUsername] = useState<string>("")
+  const [userStats, setUserStats] = useState<UserStats | null>(null)
+  const [isLoadingStats, setIsLoadingStats] = useState(true)
 
   useEffect(() => {
     const session = getStudentSession()
     if (session) {
       setUsername(session.username)
     }
+  }, [])
+
+  useEffect(() => {
+    async function fetchUserStats() {
+      try {
+        const response = await fetch('/api/stats/users')
+        if (response.ok) {
+          const data = await response.json()
+          setUserStats(data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch user stats:', error)
+      } finally {
+        setIsLoadingStats(false)
+      }
+    }
+
+    fetchUserStats()
   }, [])
 
   return (
@@ -117,84 +150,95 @@ export default function HomePage() {
               </ScrollAnimatedSection>
             ))}
           </div>
+
+          {/* Dynamic User Stats with Level Breakdown */}
+          <div className="mt-12 flex justify-center">
+            <Popover>
+              <PopoverTrigger asChild>
+                <button className="group relative px-6 py-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300">
+                  <div className="flex items-center gap-3">
+                    <Users className="w-5 h-5 text-white/60" />
+                    <div className="text-left">
+                      <div className="text-sm text-white/40">Total Enrolled Students</div>
+                      <div className="text-2xl font-bold text-white">
+                        {isLoadingStats ? (
+                          <span className="text-white/40">Loading...</span>
+                        ) : (
+                          <CountUp
+                            from={0}
+                            to={userStats?.totalUsers || 0}
+                            separator=","
+                            direction="up"
+                            duration={1}
+                            className="count-up-text"
+                          />
+                        )}
+                      </div>
+                    </div>
+                    <ChevronDown className="w-4 h-4 text-white/40 group-hover:text-white/60 transition-colors" />
+                  </div>
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80 bg-[#0a0a0a] border-white/10 p-4">
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
+                    <Users className="w-4 h-4" />
+                    Students by Level
+                  </h4>
+                  {isLoadingStats ? (
+                    <p className="text-sm text-white/40">Loading breakdown...</p>
+                  ) : userStats?.levels && userStats.levels.length > 0 ? (
+                    <>
+                      <div className="space-y-2 max-h-64 overflow-y-auto custom-scrollbar pr-1">
+                        {userStats.levels.map((levelStat) => (
+                          <div
+                            key={levelStat.level}
+                            className="flex items-center justify-between p-2 rounded-md bg-white/5 hover:bg-white/10 transition-colors"
+                          >
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center">
+                                <span className="text-xs font-bold text-white/80">L{levelStat.level}</span>
+                              </div>
+                              <span className="text-sm text-white/60">Level {levelStat.level}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-semibold text-white">
+                                {levelStat.count.toLocaleString()}
+                              </span>
+                              <span className="text-xs text-white/40">
+                                ({((levelStat.count / (userStats?.totalUsers || 1)) * 100).toFixed(1)}%)
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      {/* Verification Total */}
+                      <div className="mt-3 pt-3 border-t border-white/10">
+                        <div className="flex items-center justify-between p-2 rounded-md bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20">
+                          <span className="text-sm font-semibold text-white/80">Total Verified</span>
+                          <span className="text-sm font-bold text-green-400">
+                            {userStats.levels.reduce((sum, level) => sum + level.count, 0).toLocaleString()} / {userStats.totalUsers.toLocaleString()}
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-sm text-white/40">No data available</p>
+                  )}
+                  {userStats && (
+                    <div className="pt-3 border-t border-white/10 text-xs text-white/30 flex items-center justify-between">
+                      <span>Last updated: {new Date(userStats.timestamp).toLocaleTimeString()}</span>
+                      <span className="text-white/20">{userStats.levels.length} levels</span>
+                    </div>
+                  )}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
       </ScrollAnimatedSection>
 
-      {/* Creative Video Section */}
-      <ScrollAnimatedSection className="py-20 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <ScrollAnimatedSection animation="fadeIn" className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 bg-white/5 border-white/10 text-white/60">
-              Creative Designs
-            </Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Most <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Creative Designs</span>
-            </h2>
-            <p className="text-lg text-white/40 max-w-2xl mx-auto mb-12">
-              Discover the power of innovative design and modern educational technology
-            </p>
-          </ScrollAnimatedSection>
-
-          <ScrollAnimatedSection animation="scaleIn" className="max-w-4xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden border border-white/20 bg-white/5 backdrop-blur-sm shadow-2xl">
-              <video
-                className="w-full h-auto"
-                controls
-                preload="metadata"
-                poster="/images/thumbnail.png"
-              >
-                <source 
-                  src="https://res.cloudinary.com/dv6rj0dgj/video/upload/v1760357217/Chameleon_-_Master_Your_Future_Skills_Presentations_jtxcjx.mp4" 
-                  type="video/mp4" 
-                />
-                Your browser does not support the video tag.
-              </video>
-              
-              {/* Video overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-              
-              {/* Decorative elements */}
-              <div className="absolute top-4 left-4 w-3 h-3 bg-red-500 rounded-full shadow-lg"></div>
-              <div className="absolute top-4 left-10 w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
-              <div className="absolute top-4 left-16 w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
-            </div>
-          </ScrollAnimatedSection>
-
-          {/* Feature highlights below video */}
-          <ScrollAnimatedSection animation="slideUp" delay={0.3} className="mt-16">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {[
-                {
-                  title: "Modern Interface",
-                  description: "Clean, intuitive design that enhances learning experience",
-                  icon: "🎨"
-                },
-                {
-                  title: "Interactive Elements",
-                  description: "Engaging components that make learning more effective",
-                  icon: "⚡"
-                },
-                {
-                  title: "Responsive Design",
-                  description: "Perfect experience across all devices and screen sizes",
-                  icon: "📱"
-                }
-              ].map((feature, index) => (
-                <ScrollAnimatedSection 
-                  key={index} 
-                  animation="slideInFromBottom" 
-                  delay={index * 0.1}
-                  className="text-center p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
-                >
-                  <div className="text-3xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                  <p className="text-white/60 text-sm">{feature.description}</p>
-                </ScrollAnimatedSection>
-              ))}
-            </div>
-          </ScrollAnimatedSection>
-        </div>
-      </ScrollAnimatedSection>
+      <CreativeFeatureSlider />
 
       {/* Specializations Section */}
       <ScrollAnimatedSection className="py-20 bg-[#030303]" id="specializations" data-testid="specializations-section">
