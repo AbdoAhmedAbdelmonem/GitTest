@@ -647,6 +647,18 @@ export default function TournamentPage() {
                     </p>
                   </div>
 
+                  <div className="p-3 md:p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/20">
+                    <h3 className="font-semibold text-purple-400 flex items-center gap-2 mb-1 md:mb-2 text-sm md:text-base">
+                      <Info className="w-3 h-3 md:w-4 md:h-4" /> Tournament Rules
+                    </h3>
+                    <ul className="text-xs md:text-sm space-y-1">
+                      <li>• <span className="text-purple-400 font-semibold">First Attempt Only:</span> Only your first attempt on each quiz counts toward tournament standings</li>
+                      <li>• <span className="text-purple-400 font-semibold">Tournament Period:</span> October 11, 2025 - January 11, 2026</li>
+                      <li>• Retakes and practice runs won&apos;t affect your tournament score</li>
+                      <li>• <span className="text-purple-400 font-semibold">Scoring:</span> Points are reduced (÷10) for balanced competition</li>
+                    </ul>
+                  </div>
+
                   <div className="p-3 md:p-4 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-lg border border-orange-500/20">
                     <h3 className="font-semibold text-orange-400 flex items-center gap-2 mb-1 md:mb-2 text-sm md:text-base">
                       <Sparkles className="w-3 h-3 md:w-4 md:h-4" /> How We Calculate Your Score?
@@ -655,31 +667,34 @@ export default function TournamentPage() {
                       <p className="text-white/90 font-medium mb-1 md:mb-2">Your tournament score is calculated using this formula:</p>
                       <div className="bg-black/20 p-2 md:p-3 rounded border border-white/10">
                         <code className="text-orange-300 text-xs md:text-sm">
-                          Total Points = Correct Answers + Duration Points + Mode Points + Completion Points
+                          Total Points = (Correct Answers + Duration + Mode + Completion) ÷ 10
                         </code>
+                      </div>
+                      <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 p-2 rounded border border-yellow-500/20 mb-2">
+                        <p className="text-yellow-400 text-xs font-semibold">⚠️ All points are divided by 10 and rounded for balanced scoring</p>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 mt-2 md:mt-3">
                         <div>
                           <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">Duration Points:</p>
                           <ul className="text-xs space-y-1 text-white/70">
-                            <li>• 1 minute: +50 pts</li>
-                            <li>• 5 minutes: +45 pts</li>
-                            <li>• 15 minutes: +40 pts</li>
-                            <li>• 30 minutes: +35 pts</li>
-                            <li>• 60 minutes: +30 pts</li>
-                            <li>• Unlimited: +25 pts</li>
+                            <li>• 1 minute: +5 pts</li>
+                            <li>• 5 minutes: +4.5 pts</li>
+                            <li>• 15 minutes: +4 pts</li>
+                            <li>• 30 minutes: +3.5 pts</li>
+                            <li>• 60 minutes: +3 pts</li>
+                            <li>• Unlimited: +2.5 pts</li>
                           </ul>
                         </div>
                         <div>
                           <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">Mode Points:</p>
                           <ul className="text-xs space-y-1 text-white/70">
-                            <li>• Instant Feedback: +15 pts</li>
-                            <li>• Traditional: +12 pts</li>
+                            <li>• Instant Feedback: +1.5 pts</li>
+                            <li>• Traditional: +1.2 pts</li>
                           </ul>
                           <p className="text-white/80 font-medium mb-1 mt-1 md:mt-2 text-xs md:text-sm">Completion Points:</p>
                           <ul className="text-xs space-y-1 text-white/70">
-                            <li>• Completed: +20 pts</li>
-                            <li>• Timed Out: +15 pts</li>
+                            <li>• Completed: +2 pts</li>
+                            <li>• Timed Out: +1.5 pts</li>
                           </ul>
                         </div>
                       </div>
