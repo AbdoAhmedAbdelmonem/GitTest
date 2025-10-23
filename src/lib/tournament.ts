@@ -52,7 +52,7 @@ export async function getLeaderboardData(level: 1 | 2): Promise<{
     }
 
     // DEBUG: Log the date range we're querying
-    const tournamentStart = new Date('2025-10-11T00:00:00.000Z')
+    const tournamentStart = new Date('2025-10-11T00:00:00.000Z') // Changed to October 11, 2025
     const tournamentEnd = new Date('2026-01-11T23:59:59.999Z') // End of January 11th
     
     console.log(`Querying level ${level} from ${tournamentStart.toISOString()} to ${tournamentEnd.toISOString()}`)
@@ -108,6 +108,8 @@ export async function getLeaderboardData(level: 1 | 2): Promise<{
       return { leaderboard: [] }
     }
 
+    console.log(`Tournament date range: ${tournamentStart.toISOString()} to ${tournamentEnd.toISOString()}`)
+    console.log(`Looking for level ${level} quizzes with non-null scores in this date range`)
     console.log(`Filtered quiz entries for level ${level}: ${quizData?.length || 0}`)
 
     if (!quizData || quizData.length === 0) {
@@ -152,12 +154,30 @@ export async function getLeaderboardData(level: 1 | 2): Promise<{
       quizCount: number
     }>()
 
+    // Track first attempt for each quiz per user
+    const userQuizFirstAttempt = new Map<string, QuizDataEntry>()
+
+    // First pass: identify first attempt for each quiz_id per user_id
     quizData.forEach((entry: QuizDataEntry) => {
+      const key = `${entry.user_id}_${entry.quiz_id}`
+      const existing = userQuizFirstAttempt.get(key)
+      
+      // Keep the earliest attempt (oldest solved_at timestamp)
+      if (!existing || new Date(entry.solved_at) < new Date(existing.solved_at)) {
+        userQuizFirstAttempt.set(key, entry)
+      }
+    })
+
+    console.log(`First attempts found: ${userQuizFirstAttempt.size} unique quiz attempts`)
+
+    // Second pass: calculate points only for first attempts
+    userQuizFirstAttempt.forEach((entry: QuizDataEntry) => {
       const userId = entry.user_id
       const userProfile = userProfileMap.get(userId)
       
       // Only count quizzes where the quiz level matches the user's current level
       if (!userProfile || userProfile.current_level !== entry.quiz_level) {
+        console.log(`Skipping quiz entry: user_id=${userId}, quiz_id=${entry.quiz_id}, quiz_level=${entry.quiz_level}, user_current_level=${userProfile?.current_level}, solved_at=${entry.solved_at}`)
         return // Skip this quiz entry
       }
       
@@ -165,14 +185,17 @@ export async function getLeaderboardData(level: 1 | 2): Promise<{
       const profile_image = userProfile?.profile_image
       const specialization = userProfile?.specialization
       
-      const points = calculateTournamentPoints(
+      const rawPoints = calculateTournamentPoints(
         entry.score || 0,
         entry.duration_selected || "15 minutes",
         entry.answering_mode || "traditional",
         entry.how_finished || "completed"
       )
 
-      console.log(`Adding points for ${username} (level ${userProfile.current_level}): score=${entry.score}, duration=${entry.duration_selected}, mode=${entry.answering_mode}, finished=${entry.how_finished} => ${points} points`)
+      // Reduce points by dividing by 10 and rounding
+      const points = Math.round(rawPoints / 10)
+
+      console.log(`Adding points for ${username} (level ${userProfile.current_level}): quiz_id=${entry.quiz_id}, score=${entry.score}, duration=${entry.duration_selected}, mode=${entry.answering_mode}, finished=${entry.how_finished} => ${rawPoints} raw points / 10 = ${points} points (FIRST ATTEMPT)`)
 
       if (!userTotalScores.has(userId)) {
         userTotalScores.set(userId, {
@@ -235,7 +258,7 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
   leaderboard: LeaderboardEntry[]
   currentUserEntry?: LeaderboardEntry
 }> {
-  // Use the same date range
+  // Use the same date range - Updated to October 11, 2025
   const tournamentStart = new Date('2025-10-11T00:00:00.000Z')
   const tournamentEnd = new Date('2026-01-11T23:59:59.999Z')
 
@@ -293,7 +316,22 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
     totalPoints: number
   }>()
 
+  // Track first attempt for each quiz per user
+  const userQuizFirstAttempt = new Map<string, QuizDataEntry>()
+
+  // First pass: identify first attempt for each quiz_id per user_id
   quizData.forEach((entry: QuizDataEntry) => {
+    const key = `${entry.user_id}_${entry.quiz_id}`
+    const existing = userQuizFirstAttempt.get(key)
+    
+    // Keep the earliest attempt (oldest solved_at timestamp)
+    if (!existing || new Date(entry.solved_at) < new Date(existing.solved_at)) {
+      userQuizFirstAttempt.set(key, entry)
+    }
+  })
+
+  // Second pass: calculate points only for first attempts
+  userQuizFirstAttempt.forEach((entry: QuizDataEntry) => {
     const userId = entry.user_id
     const userProfile = userProfileMap.get(userId)
     
@@ -305,12 +343,15 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
     const username = userProfile?.username || `User ${userId}`
     const profile_image = userProfile?.profile_image
     const specialization = userProfile?.specialization
-    const points = calculateTournamentPoints(
+    const rawPoints = calculateTournamentPoints(
       entry.score || 0,
       entry.duration_selected || "15 minutes",
       entry.answering_mode || "traditional",
       entry.how_finished || "completed"
     )
+
+    // Reduce points by dividing by 10 and rounding
+    const points = Math.round(rawPoints / 10)
 
     if (!userTotalScores.has(userId)) {
       userTotalScores.set(userId, {
@@ -343,4 +384,3 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
     leaderboard: sortedUsers
   }
 }
-
