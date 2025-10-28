@@ -737,10 +737,6 @@ Contributions are welcome! Please follow these steps:
 
 ## 🐛 Troubleshooting
 
----
-
-## 🐛 Troubleshooting
-
 ### **Common Issues**
 
 #### **Token Refresh Fails**
