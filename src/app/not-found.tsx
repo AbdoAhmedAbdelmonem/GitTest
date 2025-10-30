@@ -104,21 +104,12 @@ export default function NotFound() {
               404
             </h1>
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <Ghost className="w-12 h-12 sm:w-16 sm:h-16 text-white/20 animate-bounce group-hover:text-white/40 transition-colors" />
             </div>
           </div>
 
           {/* Fun Emoji Row */}
           <div className="flex justify-center gap-2 sm:gap-4 text-xl sm:text-2xl md:text-3xl">
-            {['🤷', '🔍', '❓', '🗺️', '😅'].map((emoji, i) => (
-              <span
-                key={i}
-                className="animate-bounce cursor-pointer hover:scale-150 transition-transform"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              >
-                {emoji}
-              </span>
-            ))}
+            
           </div>
 
           {/* Dynamic Title */}
