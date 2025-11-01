@@ -431,3 +431,16 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(139, 92, 246, 0.5) rgba(255, 255, 255, 0.1);
 }
+
+
+/* Registered Subjects Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
