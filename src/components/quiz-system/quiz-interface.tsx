@@ -47,6 +47,7 @@ interface QuizQuestion {
   answer: string;
   options: string[];
   image?: string | null;
+  explanation?: string | null;
 }
 
 interface QuizData {
@@ -108,7 +109,7 @@ const themes = [
 ];
 
 const durations = [
-  { label: "Lightning", value: 0.1, icon: Zap, description: "1 Minute" },
+  { label: "Lightning", value: 1, icon: Zap, description: "1 Minute" },
   { label: "Short", value: 5, icon: Star, description: "5 Minutes" },
   { label: "Standard (DEF)", value: 15, icon: Cable, description: "15 Minutes" },
   { label: "Extended", value: 30, icon: Clock, description: "30 Minutes" },
@@ -260,7 +261,7 @@ export default function QuizInterface({
 
       const attemptsCount = count || 0;
       setAttemptsToday(attemptsCount);
-      setMaxAttemptsReached(attemptsCount >= 1);
+      setMaxAttemptsReached(attemptsCount >= 4); // Limit to 4 attempts per day
     } catch (error) {
       console.error("Unexpected error checking attempts:", error);
     }
@@ -427,7 +428,7 @@ export default function QuizInterface({
         console.log("Quiz data saved successfully:", data);
         // Update attempts count after successful submission
         setAttemptsToday(prev => prev + 1);
-        setMaxAttemptsReached(attemptsToday + 1 >= 1);
+        setMaxAttemptsReached(attemptsToday + 1 >= 4);
       }
     } catch (error) {
       console.error("Unexpected error saving quiz data:", error);
@@ -652,7 +653,7 @@ export default function QuizInterface({
             Maximum Attempts Reached
           </DialogTitle>
           <DialogDescription className="text-white/70">
-            You have already used {attemptsToday} out of 1 attempt for this quiz today. 
+            You have already used {attemptsToday} out of 4 attempts for this quiz today. 
             Please try again tomorrow.
           </DialogDescription>
         </DialogHeader>
@@ -922,7 +923,7 @@ export default function QuizInterface({
                     <div className="mt-6 pt-4 border-t border-white/20">
                       <div className="flex items-center justify-center gap-2 text-white/70">
                         <Clock className="w-4 h-4" />
-                        <span>Attempts today: {attemptsToday}/1</span>
+                        <span>Attempts today: {attemptsToday}/4</span>
                         {maxAttemptsReached && (
                           <Badge variant="destructive" className="ml-2">
                             Limit Reached
@@ -1188,12 +1189,32 @@ export default function QuizInterface({
                               {isCorrect ? "Correct! Well done!" : "Incorrect"}
                             </span>
                           </div>
-                          <p className="text-white/80">
+                          <p className="text-white/80 mb-3">
                             The correct answer is:{" "}
                             <span className="font-semibold text-white">
                               {currentQ?.answer}
                             </span>
                           </p>
+                          {currentQ?.explanation && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              transition={{ delay: 0.2 }}
+                              className="mt-4 pt-4 border-t border-white/[0.1]"
+                            >
+                              <div className="flex items-start gap-2">
+                                <Lightbulb className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
+                                <div>
+                                  <p className="text-sm font-semibold text-yellow-400 mb-2">
+                                    Explanation:
+                                  </p>
+                                  <p className="text-white/70 text-sm leading-relaxed">
+                                    {currentQ.explanation}
+                                  </p>
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -1741,6 +1762,28 @@ export default function QuizInterface({
                           <p className="text-lg font-medium text-green-400">
                             {question.answer}
                           </p>
+                        </motion.div>
+                      )}
+
+                      {/* Explanation section */}
+                      {question.explanation && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.1 + 0.6 }}
+                          className="p-4 rounded-lg border border-yellow-500/[0.3] bg-yellow-500/[0.05]"
+                        >
+                          <div className="flex items-start gap-3">
+                            <Lightbulb className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <span className="text-sm font-medium text-yellow-400 block mb-2">
+                                Explanation:
+                              </span>
+                              <p className="text-white/80 text-sm leading-relaxed">
+                                {question.explanation}
+                              </p>
+                            </div>
+                          </div>
                         </motion.div>
                       )}
                     </div>
