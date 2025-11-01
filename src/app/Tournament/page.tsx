@@ -119,26 +119,31 @@ const OwnershipBadge = ({ rank, className }: { rank: number, className?: string 
 export default function TournamentPage() {
   const [leaderboardLevel1, setLeaderboardLevel1] = useState<LeaderboardEntry[]>([])
   const [leaderboardLevel2, setLeaderboardLevel2] = useState<LeaderboardEntry[]>([])
+  const [leaderboardLevel3, setLeaderboardLevel3] = useState<LeaderboardEntry[]>([])
   const [currentUserEntry1, setCurrentUserEntry1] = useState<LeaderboardEntry | undefined>()
   const [currentUserEntry2, setCurrentUserEntry2] = useState<LeaderboardEntry | undefined>()
+  const [currentUserEntry3, setCurrentUserEntry3] = useState<LeaderboardEntry | undefined>()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [showCurrentUserOnly, setShowCurrentUserOnly] = useState(false)
-  const [activeTab, setActiveTab] = useState<"level1" | "level2">("level1")
+  const [activeTab, setActiveTab] = useState<"level1" | "level2" | "level3">("level1")
 
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       try {
         setLoading(true)
-        const [level1Data, level2Data] = await Promise.all([
+        const [level1Data, level2Data, level3Data] = await Promise.all([
           getLeaderboardData(1),
-          getLeaderboardData(2)
+          getLeaderboardData(2),
+          getLeaderboardData(3)
         ])
 
         setLeaderboardLevel1(level1Data.leaderboard)
         setCurrentUserEntry1(level1Data.currentUserEntry)
         setLeaderboardLevel2(level2Data.leaderboard)
         setCurrentUserEntry2(level2Data.currentUserEntry)
+        setLeaderboardLevel3(level3Data.leaderboard)
+        setCurrentUserEntry3(level3Data.currentUserEntry)
       } catch (err) {
         console.error("Error fetching leaderboard:", err)
         setError("Failed to load leaderboard data")
@@ -161,7 +166,9 @@ export default function TournamentPage() {
 
   const currentUserRank = activeTab === "level1" 
     ? getCurrentUserRank(leaderboardLevel1, currentUserEntry1)
-    : getCurrentUserRank(leaderboardLevel2, currentUserEntry2)
+    : activeTab === "level2"
+    ? getCurrentUserRank(leaderboardLevel2, currentUserEntry2)
+    : getCurrentUserRank(leaderboardLevel3, currentUserEntry3)
 
   const renderLeaderboard = (data: LeaderboardEntry[], currentUserEntry?: LeaderboardEntry) => {
     if (loading) {
@@ -452,7 +459,7 @@ export default function TournamentPage() {
   }
 
   const handleTabChange = (value: string) => {
-    setActiveTab(value as "level1" | "level2")
+    setActiveTab(value as "level1" | "level2" | "level3")
   }
 
   return (
@@ -513,7 +520,7 @@ export default function TournamentPage() {
                   <Crown className="w-5 h-5 text-blue-400" />
                   <span className="text-white/80 text-sm md:text-base font-medium">your rank is :</span>
                   <span className="text-blue-400 text-lg md:text-2xl font-bold">{currentUserRank}</span>
-                  <span className="text-white/60 text-sm">out of {activeTab === "level1" ? leaderboardLevel1.length : leaderboardLevel2.length} players</span>
+                  <span className="text-white/60 text-sm">out of {activeTab === "level1" ? leaderboardLevel1.length : activeTab === "level2" ? leaderboardLevel2.length : leaderboardLevel3.length} players</span>
                   <User className="w-4 h-4 text-blue-400 ml-1" />
                 </div>
               </motion.div>
@@ -587,7 +594,7 @@ export default function TournamentPage() {
               </CardHeader>
               <CardContent className="p-3 md:p-6">
                 <Tabs defaultValue="level1" className="w-full" onValueChange={handleTabChange}>
-                  <TabsList className="grid grid-cols-2 mb-4 md:mb-6 bg-white/10 p-1 rounded-lg">
+                  <TabsList className="grid grid-cols-3 mb-4 md:mb-6 bg-white/10 p-1 rounded-lg">
                     <TabsTrigger
                       value="level1"
                       className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white rounded-md transition-all duration-300 text-xs md:text-sm px-2 py-1 md:px-4 md:py-2"
@@ -602,6 +609,13 @@ export default function TournamentPage() {
                       <Star className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                       Level 2
                     </TabsTrigger>
+                    <TabsTrigger
+                      value="level3"
+                      className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white rounded-md transition-all duration-300 text-xs md:text-sm px-2 py-1 md:px-4 md:py-2"
+                    >
+                      <Gem className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
+                      Level 3
+                    </TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="level1">
@@ -609,6 +623,9 @@ export default function TournamentPage() {
                   </TabsContent>
                   <TabsContent value="level2">
                     {renderLeaderboard(leaderboardLevel2, currentUserEntry2)}
+                  </TabsContent>
+                  <TabsContent value="level3">
+                    {renderLeaderboard(leaderboardLevel3, currentUserEntry3)}
                   </TabsContent>
                 </Tabs>
               </CardContent>
@@ -643,7 +660,7 @@ export default function TournamentPage() {
                       <Users className="w-3 h-3 md:w-4 md:h-4" /> Competition Levels
                     </h3>
                     <p className="text-xs md:text-sm">
-                      Two separate leaderboards for Level 1 and Level 2 competitors. Points calculated independently.
+                      Three separate leaderboards for Level 1, Level 2, and Level 3 competitors. Points calculated independently.
                     </p>
                   </div>
 
