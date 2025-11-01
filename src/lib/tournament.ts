@@ -24,7 +24,7 @@ interface QuizDataEntry {
   solved_at: string
 }
 
-export async function getLeaderboardData(level: 1 | 2): Promise<{
+export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
   leaderboard: LeaderboardEntry[]
   currentUserEntry?: LeaderboardEntry
 }> {
@@ -254,7 +254,7 @@ export async function getLeaderboardData(level: 1 | 2): Promise<{
   }
 }
 
-async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof createServerClient>>, level: 1 | 2): Promise<{
+async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof createServerClient>>, level: 1 | 2 | 3): Promise<{
   leaderboard: LeaderboardEntry[]
   currentUserEntry?: LeaderboardEntry
 }> {
