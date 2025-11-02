@@ -243,6 +243,8 @@ export default function ProfilePage() {
     level1Points?: number;
     level2Rank?: number;
     level2Points?: number;
+    level3Rank?: number;
+    level3Points?: number;
   }>({})
   const [loading, setLoading] = useState(true)
   const [tournamentLoading, setTournamentLoading] = useState(false)
@@ -314,7 +316,7 @@ export default function ProfilePage() {
 
         console.log("User tournament quizzes:", tournamentQuizzes)
 
-        let level1Points = 0, level2Points = 0
+        let level1Points = 0, level2Points = 0, level3Points = 0
 
         if (tournamentQuizzes && tournamentQuizzes.length > 0) {
           // Track first attempt for each quiz per user (same logic as tournament.ts)
@@ -349,17 +351,20 @@ export default function ProfilePage() {
               level1Points += points
             } else if (quiz.quiz_level === 2 && session.current_level === 2) {
               level2Points += points
+            } else if (quiz.quiz_level === 3 && session.current_level === 3) {
+              level3Points += points
             }
           })
         }
 
         // Get leaderboard data to find ranks
-        const [level1Data, level2Data] = await Promise.all([
+        const [level1Data, level2Data, level3Data] = await Promise.all([
           getLeaderboardData(1),
-          getLeaderboardData(2)
+          getLeaderboardData(2),
+          getLeaderboardData(3)
         ])
 
-        let level1Rank, level2Rank
+        let level1Rank, level2Rank, level3Rank
 
         // Find rank for level 1
         if (level1Points > 0) {
@@ -384,15 +389,28 @@ export default function ProfilePage() {
           }
         }
 
+        // Find rank for level 3  
+        if (level3Points > 0) {
+          const level3UserInTop10 = level3Data.leaderboard.find(entry => entry.id === session.user_id)
+          if (level3UserInTop10) {
+            level3Rank = level3Data.leaderboard.indexOf(level3UserInTop10) + 1
+          } else if (level3Data.currentUserEntry) {
+            const allUsersAbove = level3Data.leaderboard.filter(entry => entry.points > level3Points).length
+            level3Rank = allUsersAbove + 1
+          }
+        }
+
         setTournamentData({
           level1Rank: level1Points > 0 ? level1Rank : undefined,
           level1Points: level1Points > 0 ? level1Points : undefined,
           level2Rank: level2Points > 0 ? level2Rank : undefined,
-          level2Points: level2Points > 0 ? level2Points : undefined
+          level2Points: level2Points > 0 ? level2Points : undefined,
+          level3Rank: level3Points > 0 ? level3Rank : undefined,
+          level3Points: level3Points > 0 ? level3Points : undefined
         })
 
         console.log("Tournament data set:", {
-          level1Rank, level1Points, level2Rank, level2Points
+          level1Rank, level1Points, level2Rank, level2Points, level3Rank, level3Points
         })
         
       } catch (error) {
@@ -817,7 +835,7 @@ export default function ProfilePage() {
                         <LoadingSpinner size="sm" />
                       </div>
                     </div>
-                  ) : (tournamentData.level1Points || tournamentData.level2Points) ? (
+                  ) : (tournamentData.level1Points || tournamentData.level2Points || tournamentData.level3Points) ? (
                     <>
                       {tournamentData.level1Points && (
                         <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20">
@@ -857,6 +875,28 @@ export default function ProfilePage() {
                             asChild 
                             size="sm" 
                             className="bg-purple-500/20 text-purple-400 border-purple-500/30 hover:bg-purple-500/30"
+                          >
+                            <Link href="/Tournament">View</Link>
+                          </Button>
+                        </div>
+                      )}
+
+                      {tournamentData.level3Points && (
+                        <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
+                          <div className="p-3 rounded-full bg-blue-500/20">
+                            <Award className="w-5 h-5 text-blue-400" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-sm text-white/60">Level 3 Tournament</p>
+                            <p className="text-white font-medium">
+                              {tournamentData.level3Points} points
+                              {tournamentData.level3Rank && ` • Rank #${tournamentData.level3Rank}`}
+                            </p>
+                          </div>
+                          <Button 
+                            asChild 
+                            size="sm" 
+                            className="bg-blue-500/20 text-blue-400 border-blue-500/30 hover:bg-blue-500/30"
                           >
                             <Link href="/Tournament">View</Link>
                           </Button>
