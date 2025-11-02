@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What does HTML stand for?",
+    "options": [
+      "A) Hyper Text Markup Language",
+      "B) High Tech Modern Language",
+      "C) Hyperlink and Text Markup Language",
+      "D) Home Tool Markup Language"
+    ],
+    "answer": "A) Hyper Text Markup Language",
+    "explanation": "HTML stands for Hyper Text Markup Language. It is the standard markup language used to create web pages. 'Hyper Text' refers to the ability to link between documents, and 'Markup Language' means it uses tags to structure and format content.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "Which protocol is primarily used for transferring web pages over the internet?",
+    "options": [
+      "A) FTP",
+      "B) SMTP",
+      "C) HTTP",
+      "D) IMAP"
+    ],
+    "answer": "C) HTTP",
+    "explanation": "HTTP (Hypertext Transfer Protocol) is the primary protocol used for transferring web pages over the internet. FTP is for file transfers, SMTP is for email sending, and IMAP is for email retrieval. HTTP defines how messages are formatted and transmitted between web browsers and servers.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is the correct HTML element for the largest heading?",
+    "options": [
+      "A) <heading>",
+      "B) <h6>",
+      "C) <h1>",
+      "D) <head>"
+    ],
+    "answer": "C) <h1>",
+    "explanation": "<h1> is the HTML element for the largest and most important heading. HTML provides six heading levels from <h1> (largest) to <h6> (smallest). The <head> element is completely different - it contains metadata about the document, not visible content.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What does CSS stand for?",
+    "options": [
+      "A) Computer Style Sheets",
+      "B) Cascading Style Sheets",
+      "C) Creative Style Sheets",
+      "D) Colorful Style Sheets"
+    ],
+    "answer": "B) Cascading Style Sheets",
+    "explanation": "CSS stands for Cascading Style Sheets. 'Cascading' refers to the way styles can be applied at multiple levels (inline, internal, external) and how they cascade down with specific rules of precedence. CSS is used to control the visual presentation and layout of HTML elements.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which HTML attribute is used to define inline styles?",
+    "options": [
+      "A) class",
+      "B) styles",
+      "C) style",
+      "D) font"
+    ],
+    "answer": "C) style",
+    "explanation": "The 'style' attribute is used to apply inline CSS styles directly to an HTML element. For example: <p style='color: red;'>Text</p>. The 'class' attribute is used to reference CSS classes defined elsewhere, not for inline styling.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is the correct HTML tag for inserting a line break?",
+    "options": [
+      "A) <break>",
+      "B) <lb>",
+      "C) <br>",
+      "D) <newline>"
+    ],
+    "answer": "C) <br>",
+    "explanation": "The <br> tag is the correct HTML element for inserting a line break. It is a self-closing tag that creates a single line break in the text flow. Unlike <p> which creates a paragraph, <br> simply moves content to the next line without adding extra spacing.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "In the client-server architecture, which component initiates the request?",
+    "options": [
+      "A) Server",
+      "B) Database",
+      "C) Client",
+      "D) Router"
+    ],
+    "answer": "C) Client",
+    "explanation": "In client-server architecture, the client always initiates the request. The client (typically a web browser) sends a request to the server, and the server processes it and sends back a response. This request-response model is fundamental to how the web works.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which HTML tag is used to define an internal style sheet?",
+    "options": [
+      "A) <css>",
+      "B) <script>",
+      "C) <style>",
+      "D) <styles>"
+    ],
+    "answer": "C) <style>",
+    "explanation": "The <style> tag is used to define internal (embedded) CSS styles within an HTML document. It is typically placed in the <head> section and contains CSS rules that apply to the current document. The <script> tag is for JavaScript, not CSS.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the DOCTYPE declaration in HTML?",
+    "options": [
+      "A) To specify the HTML version",
+      "B) To link CSS files",
+      "C) To include JavaScript",
+      "D) To create a comment"
+    ],
+    "answer": "A) To specify the HTML version",
+    "explanation": "The DOCTYPE declaration (<!DOCTYPE html>) tells the browser which version of HTML the document is using. This ensures the browser renders the page in standards mode rather than quirks mode. For HTML5, the declaration is simply <!DOCTYPE html>.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to change the text color of an element?",
+    "options": [
+      "A) text-color",
+      "B) font-color",
+      "C) color",
+      "D) text-style"
+    ],
+    "answer": "C) color",
+    "explanation": "The 'color' property in CSS is used to set the text color of an element. For example: color: blue; or color: #FF0000;. Properties like 'text-color' or 'font-color' do not exist in CSS. The 'text-style' property is also not valid.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is the default port number for HTTP?",
+    "options": [
+      "A) 21",
+      "B) 443",
+      "C) 8080",
+      "D) 80"
+    ],
+    "answer": "D) 80",
+    "explanation": "Port 80 is the default port for HTTP (unencrypted web traffic). Port 443 is for HTTPS (encrypted), port 21 is for FTP, and port 8080 is commonly used as an alternative HTTP port for development or proxy servers.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "Which HTML tag is used to create a hyperlink?",
+    "options": [
+      "A) <link>",
+      "B) <a>",
+      "C) <href>",
+      "D) <url>"
+    ],
+    "answer": "B) <a>",
+    "explanation": "The <a> (anchor) tag is used to create hyperlinks in HTML. The 'href' attribute within the <a> tag specifies the destination URL. Example: <a href='https://example.com'>Click here</a>. The <link> tag is used to link external resources like CSS files, not for clickable links.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What does the 'href' attribute specify in an anchor tag?",
+    "options": [
+      "A) The text color",
+      "B) The destination URL",
+      "C) The font size",
+      "D) The alignment"
+    ],
+    "answer": "B) The destination URL",
+    "explanation": "The 'href' (hypertext reference) attribute in an <a> tag specifies the URL of the page or resource that the link goes to. For example: <a href='page.html'>Link</a>. It is the most important attribute of the anchor tag.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which of the following is NOT a valid HTTP request method?",
+    "options": [
+      "A) GET",
+      "B) POST",
+      "C) FETCH",
+      "D) DELETE"
+    ],
+    "answer": "C) FETCH",
+    "explanation": "FETCH is not an HTTP request method. The standard HTTP methods include GET (retrieve data), POST (submit data), PUT (update data), DELETE (remove data), PATCH, HEAD, and OPTIONS. 'fetch' is actually a JavaScript API for making HTTP requests, not an HTTP method itself.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "Which HTML element is used to display an image?",
+    "options": [
+      "A) <image>",
+      "B) <img>",
+      "C) <picture>",
+      "D) <src>"
+    ],
+    "answer": "B) <img>",
+    "explanation": "The <img> tag is used to embed images in HTML. It requires the 'src' attribute to specify the image source. Example: <img src='photo.jpg' alt='Description'>. While <picture> exists for responsive images, <img> is the standard element. <image> and <src> are not valid HTML tags.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the alt attribute in an img tag?",
+    "options": [
+      "A) To specify image alignment",
+      "B) To provide alternative text if the image cannot be displayed",
+      "C) To set the image width",
+      "D) To add a border to the image"
+    ],
+    "answer": "B) To provide alternative text if the image cannot be displayed",
+    "explanation": "The 'alt' attribute provides alternative text for an image when it cannot be displayed (due to slow connection, error, or screen readers). This is crucial for accessibility, allowing visually impaired users to understand the image content. Example: <img src='logo.png' alt='Company Logo'>.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to change the background color?",
+    "options": [
+      "A) bgcolor",
+      "B) background-color",
+      "C) color-background",
+      "D) bg-color"
+    ],
+    "answer": "B) background-color",
+    "explanation": "The 'background-color' property in CSS is used to set the background color of an element. Example: background-color: yellow; or background-color: #FF5733;. Note that 'bgcolor' was an old HTML attribute (now deprecated), not a CSS property.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What is the correct way to comment in HTML?",
+    "options": [
+      "A) // This is a comment",
+      "B) /* This is a comment */",
+      "C) <!-- This is a comment -->",
+      "D) # This is a comment"
+    ],
+    "answer": "C) <!-- This is a comment -->",
+    "explanation": "HTML comments use <!-- to begin and --> to end. Anything between these tags is ignored by the browser. // is for JavaScript, /* */ is for CSS and JavaScript, and # is for Python and some config files, but none are valid HTML comments.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which HTML tag is used to create an ordered list?",
+    "options": [
+      "A) <ul>",
+      "B) <ol>",
+      "C) <list>",
+      "D) <dl>"
+    ],
+    "answer": "B) <ol>",
+    "explanation": "The <ol> (ordered list) tag creates a numbered list. Each list item is defined with <li>. <ul> creates an unordered (bulleted) list, and <dl> creates a definition list. <list> is not a valid HTML tag.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What does HTTPS stand for?",
+    "options": [
+      "A) Hyper Text Transfer Protocol Secure",
+      "B) High Transfer Text Protocol System",
+      "C) Hyperlink Transfer Protocol Secure",
+      "D) Hyper Transfer Text Protocol Safe"
+    ],
+    "answer": "A) Hyper Text Transfer Protocol Secure",
+    "explanation": "HTTPS stands for Hyper Text Transfer Protocol Secure. It is the encrypted version of HTTP, using SSL/TLS to secure data transmission between the browser and server. This encryption protects sensitive information like passwords and credit card numbers from being intercepted.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "Which HTML tag is used to define a table?",
+    "options": [
+      "A) <tab>",
+      "B) <table>",
+      "C) <tbl>",
+      "D) <grid>"
+    ],
+    "answer": "B) <table>",
+    "explanation": "The <table> tag is used to create tables in HTML. It contains child elements like <tr> (table row), <td> (table data/cell), and <th> (table header). Tables are useful for displaying structured, tabular data in rows and columns.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is the correct HTML element for inserting a line break?",
+    "options": [
+      "A) <lb>",
+      "B) <br>",
+      "C) <break>",
+      "D) <line>"
+    ],
+    "answer": "B) <br>",
+    "explanation": "The <br> tag creates a line break in HTML. It's a self-closing tag (void element) that doesn't require a closing tag. Use it to break lines within text without starting a new paragraph. Example: Line 1<br>Line 2 will display on separate lines.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which programming language is primarily used for web page behavior and interactivity?",
+    "options": [
+      "A) HTML",
+      "B) CSS",
+      "C) JavaScript",
+      "D) Python"
+    ],
+    "answer": "C) JavaScript",
+    "explanation": "JavaScript is the primary programming language for adding behavior and interactivity to web pages. While HTML structures content and CSS styles it, JavaScript enables dynamic features like form validation, animations, interactive maps, and responding to user actions. It runs in the browser on the client side.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "What does the <head> element in HTML contain?",
+    "options": [
+      "A) The main content of the page",
+      "B) Metadata and links to external resources",
+      "C) The footer information",
+      "D) The navigation menu"
+    ],
+    "answer": "B) Metadata and links to external resources",
+    "explanation": "The <head> element contains metadata about the document, such as the page title (<title>), character encoding, links to CSS files, JavaScript files, and other information that isn't displayed directly on the page. The visible content goes in the <body> element.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which attribute is used to uniquely identify an HTML element?",
+    "options": [
+      "A) class",
+      "B) name",
+      "C) id",
+      "D) key"
+    ],
+    "answer": "C) id",
+    "explanation": "The 'id' attribute provides a unique identifier for an HTML element. Each id must be unique within the page and can be used for CSS styling (#idname), JavaScript manipulation, or as an anchor link target. The 'class' attribute can be shared by multiple elements, while 'id' must be unique.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <title> tag in HTML?",
+    "options": [
+      "A) To create a heading on the page",
+      "B) To define the document title shown in the browser tab",
+      "C) To add a tooltip",
+      "D) To create a subtitle"
+    ],
+    "answer": "B) To define the document title shown in the browser tab",
+    "explanation": "The <title> tag, placed inside the <head> section, defines the title that appears in the browser tab, bookmarks, and search engine results. It's important for SEO and user experience. For visible headings on the page, use <h1> to <h6> tags instead.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "Which CSS selector is used to select all elements with a specific class?",
+    "options": [
+      "A) #classname",
+      "B) .classname",
+      "C) *classname",
+      "D) classname"
+    ],
+    "answer": "B) .classname",
+    "explanation": "In CSS, a dot (.) followed by the class name selects all elements with that class. Example: .highlight { color: yellow; } applies to all elements with class='highlight'. The # symbol is used for id selectors, not classes.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What is a web browser's primary function?",
+    "options": [
+      "A) To create web pages",
+      "B) To store data",
+      "C) To interpret and display HTML documents",
+      "D) To host websites"
+    ],
+    "answer": "C) To interpret and display HTML documents",
+    "explanation": "A web browser's primary function is to retrieve HTML documents from web servers and render them for users to view and interact with. It interprets HTML, applies CSS styling, executes JavaScript, and displays the final result. Examples include Chrome, Firefox, Safari, and Edge.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "Which HTML tag is used to create a form for user input?",
+    "options": [
+      "A) <input>",
+      "B) <form>",
+      "C) <submit>",
+      "D) <data>"
+    ],
+    "answer": "B) <form>",
+    "explanation": "The <form> tag is the container element for creating forms that collect user input. It contains form controls like <input>, <textarea>, <select>, and buttons. The form has attributes like 'action' (where to send data) and 'method' (GET or POST). The <input> tag is used within forms but doesn't create the form itself.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <meta> tag in HTML?",
+    "options": [
+      "A) To create metadata about the document",
+      "B) To add animations",
+      "C) To create tables",
+      "D) To define functions"
+    ],
+    "answer": "A) To create metadata about the document",
+    "explanation": "The <meta> tag provides metadata (information about data) about the HTML document, such as character encoding, viewport settings for responsive design, author information, and page descriptions for search engines. Examples: <meta charset='UTF-8'> and <meta name='description' content='Page description'>. It's placed in the <head> section.",
+    "image": null
+  }
+]

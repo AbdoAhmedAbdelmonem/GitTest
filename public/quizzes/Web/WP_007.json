@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is a 'block' in programming languages like JavaScript?",
+    "options": [
+      "A) A section of HTML",
+      "B) A group of statements enclosed in curly braces",
+      "C) A CSS property",
+      "D) A data type"
+    ],
+    "answer": "B) A group of statements enclosed in curly braces",
+    "explanation": "A block, or compound statement, is a group of 0 or more statements surrounded by { }.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What type of scope does 'let' and 'const' have in JavaScript?",
+    "options": [
+      "A) Global scope",
+      "B) Function scope",
+      "C) Block scope",
+      "D) File scope"
+    ],
+    "answer": "C) Block scope",
+    "explanation": "Variables declared with let or const are only accessible within the nearest enclosing block.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What type of scope does 'var' have in JavaScript?",
+    "options": [
+      "A) Block scope",
+      "B) Function scope",
+      "C) Global scope only",
+      "D) Module scope"
+    ],
+    "answer": "B) Function scope",
+    "explanation": "Variables declared with var are function-scoped and exist throughout the entire function.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "Which of the following statements about arrays in JavaScript is true?",
+    "options": [
+      "A) Arrays are immutable",
+      "B) Arrays start at index 1",
+      "C) Arrays are 0-indexed and mutable",
+      "D) Arrays can only store numbers"
+    ],
+    "answer": "C) Arrays are 0-indexed and mutable",
+    "explanation": "JavaScript arrays begin at index 0 and can be modified after creation.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which loop is best for iterating through an array's values directly?",
+    "options": [
+      "A) for...in",
+      "B) while",
+      "C) for...of",
+      "D) do...while"
+    ],
+    "answer": "C) for...of",
+    "explanation": "The for...of loop iterates over iterable objects like arrays and strings, returning values directly.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which loop should you use to iterate over an object's keys?",
+    "options": [
+      "A) for...in",
+      "B) for...of",
+      "C) forEach",
+      "D) while"
+    ],
+    "answer": "A) for...in",
+    "explanation": "The for...in loop iterates over the keys (property names) of an object.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which of these statements about JavaScript objects is true?",
+    "options": [
+      "A) They store key-value pairs",
+      "B) Keys must be numbers",
+      "C) Keys cannot be changed",
+      "D) They are immutable"
+    ],
+    "answer": "A) They store key-value pairs",
+    "explanation": "Objects are collections of key-value pairs, where keys are usually strings.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which notation accesses the 'name' property of an object called 'user'?",
+    "options": [
+      "A) user['name']",
+      "B) user(name)",
+      "C) user->name",
+      "D) user#name"
+    ],
+    "answer": "A) user['name']",
+    "explanation": "Properties can be accessed via bracket notation or dot notation in JavaScript.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is the preferred way to access a string-named property of an object?",
+    "options": [
+      "A) object.property",
+      "B) object{'property'}",
+      "C) object(property)",
+      "D) property.object"
+    ],
+    "answer": "A) object.property",
+    "explanation": "Dot notation is preferred when the property name is known and a valid identifier.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "How do you remove a property from a JavaScript object?",
+    "options": [
+      "A) delete object.property",
+      "B) remove(object.property)",
+      "C) object.remove('property')",
+      "D) deleteProperty(object, 'property')"
+    ],
+    "answer": "A) delete object.property",
+    "explanation": "The delete operator removes a property from an object.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What does 'document.querySelectorAll()' return?",
+    "options": [
+      "A) A single element",
+      "B) A list of all matching elements",
+      "C) The last matching element",
+      "D) Only visible elements"
+    ],
+    "answer": "B) A list of all matching elements",
+    "explanation": "querySelectorAll returns a NodeList of all matching elements for a CSS selector.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "How do you stop listening to an event in JavaScript?",
+    "options": [
+      "A) stopEvent()",
+      "B) cancelEventListener()",
+      "C) removeEventListener()",
+      "D) disableListener()"
+    ],
+    "answer": "C) removeEventListener()",
+    "explanation": "removeEventListener(event, handler) stops the function from responding to that event.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What does 'event.currentTarget' refer to in an event handler?",
+    "options": [
+      "A) The parent of the clicked element",
+      "B) The element that triggered the event handler",
+      "C) The first element in the DOM",
+      "D) The global window object"
+    ],
+    "answer": "B) The element that triggered the event handler",
+    "explanation": "event.currentTarget references the element the event listener is attached to.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is the difference between 'event.target' and 'event.currentTarget'?",
+    "options": [
+      "A) They are identical",
+      "B) target is the source element; currentTarget is where the handler is attached",
+      "C) target is always null",
+      "D) currentTarget always refers to the document"
+    ],
+    "answer": "B) target is the source element; currentTarget is where the handler is attached",
+    "explanation": "event.target may refer to a child element; currentTarget refers to the element handling the event.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "Which property returns the inner HTML code of an element?",
+    "options": [
+      "A) innerText",
+      "B) htmlCode",
+      "C) innerHTML",
+      "D) content"
+    ],
+    "answer": "C) innerHTML",
+    "explanation": "innerHTML returns or sets the HTML content inside an element.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of 'textContent' property?",
+    "options": [
+      "A) Returns the HTML markup inside an element",
+      "B) Returns only the visible text content",
+      "C) Returns the computed CSS of an element",
+      "D) Returns element attributes"
+    ],
+    "answer": "B) Returns only the visible text content",
+    "explanation": "textContent returns the plain text of an element and its descendants, excluding HTML tags.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which method dynamically creates a new HTML element?",
+    "options": [
+      "A) createNode()",
+      "B) document.createElement()",
+      "C) appendChild()",
+      "D) addElement()"
+    ],
+    "answer": "B) document.createElement()",
+    "explanation": "document.createElement('tag') creates a new element node of the specified type.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which method adds a node to the end of another node’s children?",
+    "options": [
+      "A) appendChild()",
+      "B) addChild()",
+      "C) insertNode()",
+      "D) attachElement()"
+    ],
+    "answer": "A) appendChild()",
+    "explanation": "appendChild() attaches a new element as the last child of the parent element.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which method removes an element from the DOM?",
+    "options": [
+      "A) deleteElement()",
+      "B) element.remove()",
+      "C) destroy()",
+      "D) element.clear()"
+    ],
+    "answer": "B) element.remove()",
+    "explanation": "Calling remove() deletes the element from the DOM tree entirely.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "Which CSS property can hide an element but still load its content?",
+    "options": [
+      "A) visibility: hidden;",
+      "B) display: none;",
+      "C) opacity: 0;",
+      "D) content: none;"
+    ],
+    "answer": "B) display: none;",
+    "explanation": "display: none removes the element from layout but still loads its resources.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "Which property allows adding or removing CSS classes via JavaScript?",
+    "options": [
+      "A) class",
+      "B) classList",
+      "C) style",
+      "D) elementClass"
+    ],
+    "answer": "B) classList",
+    "explanation": "The classList property provides methods like add(), remove(), and toggle() for managing CSS classes.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "Why should you avoid using 'innerHTML' to add new elements?",
+    "options": [
+      "A) It’s slow",
+      "B) It resets event listeners",
+      "C) It poses a security risk (XSS)",
+      "D) It breaks the DOM tree"
+    ],
+    "answer": "C) It poses a security risk (XSS)",
+    "explanation": "Using innerHTML with user input can expose sites to cross-site scripting attacks.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which HTML attribute ensures a script runs only after the DOM has loaded?",
+    "options": [
+      "A) async",
+      "B) defer",
+      "C) wait",
+      "D) delay"
+    ],
+    "answer": "B) defer",
+    "explanation": "The defer attribute delays script execution until after the HTML document has been parsed.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "What does 'document.querySelector()' return if no match is found?",
+    "options": [
+      "A) An empty list",
+      "B) null",
+      "C) undefined",
+      "D) Error"
+    ],
+    "answer": "B) null",
+    "explanation": "If querySelector finds no matching element, it returns null.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which DOM property holds an element’s id value?",
+    "options": [
+      "A) element.id",
+      "B) element.name",
+      "C) element.identifier",
+      "D) element.tag"
+    ],
+    "answer": "A) element.id",
+    "explanation": "The id property gives the value of an element’s HTML id attribute.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "Which is safer to remove all children of an element?",
+    "options": [
+      "A) element.innerHTML = '';",
+      "B) element.clearChildren();",
+      "C) element.removeAll();",
+      "D) element.destroy();"
+    ],
+    "answer": "A) element.innerHTML = '';",
+    "explanation": "Setting innerHTML to an empty string safely clears all child elements.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What does 'display: none;' do to an element’s child nodes?",
+    "options": [
+      "A) Deletes them from the DOM",
+      "B) Hides them visually but keeps them in the DOM",
+      "C) Converts them into text",
+      "D) Reloads them on demand"
+    ],
+    "answer": "B) Hides them visually but keeps them in the DOM",
+    "explanation": "display: none hides elements visually and removes them from layout but they remain in the DOM tree.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "Which method attaches an event listener to an image element?",
+    "options": [
+      "A) image.addEventListener('click', handler)",
+      "B) image.attach(handler)",
+      "C) image.on('click', handler)",
+      "D) image.click(handler)"
+    ],
+    "answer": "A) image.addEventListener('click', handler)",
+    "explanation": "addEventListener is the standard method to attach handlers to DOM elements for specific events.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What is the data type returned by 'document.querySelectorAll()'?",
+    "options": [
+      "A) Array",
+      "B) NodeList",
+      "C) HTMLCollection",
+      "D) Object"
+    ],
+    "answer": "B) NodeList",
+    "explanation": "querySelectorAll returns a NodeList, which is similar to an array but not a true array.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "Which of the following is NOT a good strategy for updating HTML with JavaScript?",
+    "options": [
+      "A) Changing textContent",
+      "B) Adding elements via createElement",
+      "C) Using innerHTML with user input",
+      "D) Toggling visibility with display: none"
+    ],
+    "answer": "C) Using innerHTML with user input",
+    "explanation": "Using innerHTML with user-provided data can introduce security vulnerabilities (XSS).",
+    "image": null
+  }
+]

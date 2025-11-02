@@ -1,0 +1,392 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "Which language is the only one browsers can execute natively?",
+    "options": [
+      "A) Python",
+      "B) Java",
+      "C) JavaScript",
+      "D) PHP"
+    ],
+    "answer": "C) JavaScript",
+    "explanation": "Browsers natively execute JavaScript; other languages require transpilation or plugins."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "Who created JavaScript?",
+    "options": [
+      "A) Tim Berners-Lee",
+      "B) Brendan Eich",
+      "C) Bill Gates",
+      "D) Guido van Rossum"
+    ],
+    "answer": "B) Brendan Eich",
+    "explanation": "Brendan Eich created JavaScript in 1995 while at Netscape (Mozilla co-founder)."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "JavaScript was named after Java because:",
+    "options": [
+      "A) It shares the same syntax and runtime",
+      "B) It was written by Sun Microsystems",
+      "C) Marketing reasons",
+      "D) It compiles into Java bytecode"
+    ],
+    "answer": "C) Marketing reasons",
+    "explanation": "The name was chosen purely for marketing; JavaScript and Java are unrelated."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What does the 'console.log()' function do?",
+    "options": [
+      "A) Displays an alert box",
+      "B) Writes a message to the web console",
+      "C) Prints text on the web page",
+      "D) Saves data to a file"
+    ],
+    "answer": "B) Writes a message to the web console",
+    "explanation": "console.log outputs debugging messages to the browser’s console."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "JavaScript code inside a <script> tag executes:",
+    "options": [
+      "A) On the server",
+      "B) On the client’s browser",
+      "C) After compilation",
+      "D) Only when user clicks"
+    ],
+    "answer": "B) On the client’s browser",
+    "explanation": "JavaScript runs client-side by default in the browser environment."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which statement about JavaScript execution is correct?",
+    "options": [
+      "A) It requires a main() method",
+      "B) It compiles manually before running",
+      "C) It runs top-to-bottom automatically",
+      "D) It can’t execute without HTML"
+    ],
+    "answer": "C) It runs top-to-bottom automatically",
+    "explanation": "JavaScript executes sequentially from the first line to the last."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "In JavaScript, 'function declarations' can be used before they appear because of:",
+    "options": [
+      "A) Callbacks",
+      "B) Hoisting",
+      "C) Closures",
+      "D) Promises"
+    ],
+    "answer": "B) Hoisting",
+    "explanation": "Function declarations are hoisted, meaning they’re processed before code execution."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which variable keyword has function scope?",
+    "options": [
+      "A) const",
+      "B) let",
+      "C) var",
+      "D) static"
+    ],
+    "answer": "C) var",
+    "explanation": "Variables declared with var are function-scoped and not limited to block scope."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "Which variable keyword should generally be avoided in modern JavaScript?",
+    "options": [
+      "A) let",
+      "B) const",
+      "C) var",
+      "D) static"
+    ],
+    "answer": "C) var",
+    "explanation": "Modern style guides recommend using let and const instead of var."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is the scope of a variable declared with 'let'?",
+    "options": [
+      "A) Global",
+      "B) Function",
+      "C) Block",
+      "D) Module"
+    ],
+    "answer": "C) Block",
+    "explanation": "Variables declared with let are limited to the block in which they are defined."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What happens if you try to reassign a 'const' variable?",
+    "options": [
+      "A) It creates a new variable",
+      "B) It throws an error",
+      "C) It changes silently",
+      "D) It converts to let"
+    ],
+    "answer": "B) It throws an error",
+    "explanation": "const variables cannot be reassigned, though their internal objects may still be mutated."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "Which of the following are JavaScript’s primitive types?",
+    "options": [
+      "A) Boolean, Number, String, Null, Undefined, Symbol",
+      "B) Int, Float, Char, Boolean, Null",
+      "C) Object, Array, Function, String",
+      "D) Integer, Double, Char"
+    ],
+    "answer": "A) Boolean, Number, String, Null, Undefined, Symbol",
+    "explanation": "JavaScript defines six primitive types; everything else is an object."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "In JavaScript, all numeric values are:",
+    "options": [
+      "A) Integers",
+      "B) Floats (64-bit doubles)",
+      "C) BigInts by default",
+      "D) Strings internally"
+    ],
+    "answer": "B) Floats (64-bit doubles)",
+    "explanation": "JavaScript uses double-precision floating-point numbers for all numeric operations."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which of these is NOT falsy in JavaScript?",
+    "options": [
+      "A) 0",
+      "B) '' (empty string)",
+      "C) null",
+      "D) 'false'"
+    ],
+    "answer": "D) 'false'",
+    "explanation": "The string 'false' is a non-empty string, which evaluates to true in Boolean contexts."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the difference between '==' and '===' in JavaScript?",
+    "options": [
+      "A) No difference",
+      "B) '==' checks value only; '===' checks value and type",
+      "C) '===' does type coercion",
+      "D) '==' compares memory references"
+    ],
+    "answer": "B) '==' checks value only; '===' checks value and type",
+    "explanation": "'===' enforces strict equality with no type conversion."
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which values are considered falsy in JavaScript?",
+    "options": [
+      "A) undefined, null, 0, NaN, ''",
+      "B) false, true, 0, 1",
+      "C) null, [], {}",
+      "D) undefined, true, NaN"
+    ],
+    "answer": "A) undefined, null, 0, NaN, ''",
+    "explanation": "These values evaluate to false in Boolean contexts; all others are truthy."
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What does NaN stand for?",
+    "options": [
+      "A) Not a Null",
+      "B) Not a Number",
+      "C) No assigned Number",
+      "D) Null and Number"
+    ],
+    "answer": "B) Not a Number",
+    "explanation": "NaN is returned when a mathematical operation fails to produce a valid number."
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which property returns the number of elements in an array?",
+    "options": [
+      "A) count()",
+      "B) length",
+      "C) size()",
+      "D) items"
+    ],
+    "answer": "B) length",
+    "explanation": "Arrays expose a length property indicating the number of elements."
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which operator is used for string concatenation?",
+    "options": [
+      "A) *",
+      "B) +",
+      "C) &",
+      "D) concat() only"
+    ],
+    "answer": "B) +",
+    "explanation": "The + operator joins strings or adds numbers depending on operand types."
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "Which statement about JavaScript arrays is correct?",
+    "options": [
+      "A) They are immutable",
+      "B) They are 0-indexed and mutable",
+      "C) They store only numbers",
+      "D) They are a primitive type"
+    ],
+    "answer": "B) They are 0-indexed and mutable",
+    "explanation": "Arrays in JavaScript start at index 0 and can be modified after creation."
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "JavaScript in HTML is added using which tag?",
+    "options": [
+      "A) <js>",
+      "B) <code>",
+      "C) <script>",
+      "D) <javascript>"
+    ],
+    "answer": "C) <script>",
+    "explanation": "JavaScript is included using the <script> tag, optionally with a src attribute."
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What does adding the 'defer' attribute to a script tag do?",
+    "options": [
+      "A) Delays script until after DOM loads",
+      "B) Stops script from running",
+      "C) Loads script asynchronously without order",
+      "D) Runs script before CSS"
+    ],
+    "answer": "A) Delays script until after DOM loads",
+    "explanation": "defer ensures the script executes only after the full HTML document has been parsed."
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "How can you access an HTML element by its CSS selector?",
+    "options": [
+      "A) document.getElement()",
+      "B) document.querySelector()",
+      "C) document.elementById()",
+      "D) window.selector()"
+    ],
+    "answer": "B) document.querySelector()",
+    "explanation": "querySelector() returns the first element matching a given CSS selector."
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "Which function attaches an event handler to a DOM element?",
+    "options": [
+      "A) addListener()",
+      "B) onEvent()",
+      "C) addEventListener()",
+      "D) handleEvent()"
+    ],
+    "answer": "C) addEventListener()",
+    "explanation": "addEventListener() is the standard method for attaching event handlers in JavaScript."
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What is an event handler?",
+    "options": [
+      "A) A variable that stores DOM data",
+      "B) A function triggered when an event occurs",
+      "C) The HTML element being clicked",
+      "D) A JavaScript object storing all events"
+    ],
+    "answer": "B) A function triggered when an event occurs",
+    "explanation": "An event handler executes automatically in response to a specific user event."
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "Where does JavaScript code usually run?",
+    "options": [
+      "A) In the browser on the client",
+      "B) In the server hardware",
+      "C) Inside a database",
+      "D) As part of the operating system"
+    ],
+    "answer": "A) In the browser on the client",
+    "explanation": "JavaScript runs client-side within the user’s web browser."
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What is the DOM in JavaScript?",
+    "options": [
+      "A) Document Object Model",
+      "B) Data Object Machine",
+      "C) Document Oriented Mapping",
+      "D) Dynamic Object Management"
+    ],
+    "answer": "A) Document Object Model",
+    "explanation": "The DOM represents the HTML structure as a tree of JavaScript-accessible objects."
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "Which property changes an image’s source dynamically?",
+    "options": [
+      "A) element.href",
+      "B) element.src",
+      "C) element.source",
+      "D) element.path"
+    ],
+    "answer": "B) element.src",
+    "explanation": "Modifying the src property of an <img> tag changes the displayed image."
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "How do you add a CSS class to an HTML element via JavaScript?",
+    "options": [
+      "A) element.addClass()",
+      "B) element.classList.add()",
+      "C) element.class = 'name'",
+      "D) element.setClass()"
+    ],
+    "answer": "B) element.classList.add()",
+    "explanation": "classList.add() appends a new class to the element’s existing class list."
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "Which method removes a class from an element?",
+    "options": [
+      "A) element.deleteClass()",
+      "B) element.classList.remove()",
+      "C) element.removeAttribute('class')",
+      "D) element.classList.delete()"
+    ],
+    "answer": "B) element.classList.remove()",
+    "explanation": "classList.remove() removes a specified class without affecting other classes."
+  }
+]

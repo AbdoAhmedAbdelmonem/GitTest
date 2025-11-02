@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "what is the definition of data visualization?",
+    "answer": "B) A nontext-based representation of data that enhances understanding",
+    "options": [
+      "A) A text-based representation of numerical data",
+      "B) A nontext-based representation of data that enhances understanding",
+      "C) A computer program for analyzing statistics",
+      "D) A mathematical model for data processing"
+    ],
+    "image": null,
+    "explanation": "visualization defined as 'A nontext-based representation of data that enhances the understanding of that data.'"
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "Which of the following is the correct definition of Scientific Visualization?",
+    "answer": "B) The use of computers for comprehending data or extracting knowledge from simulations and measurements",
+    "options": [
+      "A) Visualization applied to abstract quantities and relations",
+      "B) The use of computers for comprehending data or extracting knowledge from simulations and measurements",
+      "C) The science of analytical reasoning with interactive visual interfaces",
+      "D) The depiction of information using spatial representations"
+    ],
+    "image": null,
+    "explanation": "Scientific Visualization is defined as 'The use of computers or techniques for comprehending data or to extract knowledge from the results of simulations, computations, or measurements.'"
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "Visual Analytics is best described as:",
+    "answer": "C) The science of analytical reasoning facilitated by interactive visual interfaces",
+    "options": [
+      "A) The use of computers for simulations",
+      "B) Visualization applied to abstract data",
+      "C) The science of analytical reasoning facilitated by interactive visual interfaces",
+      "D) The depiction of spatial relationships"
+    ],
+    "image": null,
+    "explanation": "Visual Analytics is defined in the lecture as 'The science of analytical reasoning facilitated by interactive visual interfaces.'"
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "Which field does NOT typically use Information Visualization?",
+    "answer": "B) Engineering",
+    "options": [
+      "A) Finance & business",
+      "B) Engineering",
+      "C) Social sciences",
+      "D) E-government"
+    ],
+    "image": null,
+    "explanation": "Engineering is listed under Scientific Visualization applications, not Information Visualization. Information Visualization is used for finance & business, social sciences, and e-government."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "What are the 'four V' challenges of big data?",
+    "answer": "A) Volume, Velocity, Variety, Veracity",
+    "options": [
+      "A) Volume, Velocity, Variety, Veracity",
+      "B) Vision, Value, Velocity, Volume",
+      "C) Variety, Vision, Veracity, Value",
+      "D) Volume, Value, Variety, Vision"
+    ],
+    "image": null,
+    "explanation": "The four V challenges are explicitly listed as Volume, Velocity, Variety, and Veracity."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "between 2010-2012, humanity created:",
+    "answer": "C) More data than it had previously in its history",
+    "options": [
+      "A) Less data than in previous decades",
+      "B) About the same amount of data as before",
+      "C) More data than it had previously in its history",
+      "D) Data only in numerical formats"
+    ],
+    "image": null,
+    "explanation": "The lecture states that 'in 2010-2012, the humanity has created more data than it has previously in its history.'"
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "Which statement about data visualization benefits is FALSE?",
+    "answer": "B) It makes data less accessible to wider audiences",
+    "options": [
+      "A) It helps uncover trends and patterns",
+      "B) It makes data less accessible to wider audiences",
+      "C) It communicates insights clearly",
+      "D) It makes data more memorable"
+    ],
+    "image": null,
+    "explanation": "Data visualization makes data MORE accessible to wider audiences, not less. This contradicts the stated benefit."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "What TWO types of questions does visualization help answer?",
+    "answer": "A) Quantitative and qualitative",
+    "options": [
+      "A) Quantitative and qualitative",
+      "B) Simple and complex",
+      "C) Mathematical and statistical",
+      "D) Digital and analog"
+    ],
+    "image": null,
+    "explanation": "The lecture distinguishes between quantitative questions (precise, numerical) and qualitative questions (vague, exploratory)."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "Which scenario describes using visualization to 'confirm the known'?",
+    "answer": "B) Validating the fit of a given model with a dataset",
+    "options": [
+      "A) Finding anomalies in medical images",
+      "B) Validating the fit of a given model with a dataset",
+      "C) Discovering new patterns",
+      "D) Exploring data without a goal"
+    ],
+    "image": null,
+    "explanation": "'Confirm the known' includes '(in)validate the fit of a given model with a dataset' - this is about confirming existing hypotheses."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "In the cholera epidemic example (London, 1854), what did visualization reveal?",
+    "answer": "B) Deaths correlated with proximity to a water pump",
+    "options": [
+      "A) Deaths were random across the city",
+      "B) Deaths correlated with proximity to a water pump",
+      "C) Deaths occurred only in wealthy areas",
+      "D) Deaths were caused by air pollution"
+    ],
+    "image": null,
+    "explanation": "The cholera epidemic visualization revealed that 'deaths correlated with proximity to water pump.'"
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "The two main visualization scenarios mentioned are:",
+    "answer": "A) Exploration and Explanation",
+    "options": [
+      "A) Exploration and Explanation",
+      "B) Analysis and Synthesis",
+      "C) Collection and Distribution",
+      "D) Creation and Deletion"
+    ],
+    "image": null,
+    "explanation": "The two main scenarios are Exploration (finding hidden stories) and Explanation (telling stories to audiences)."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "In the US states education example, the scatterplot showed that:",
+    "answer": "B) Per-capita income is roughly proportional with education",
+    "options": [
+      "A) Education has no correlation with income",
+      "B) Per-capita income is roughly proportional with education",
+      "C) Nevada has the highest education levels",
+      "D) All states follow the exact same pattern"
+    ],
+    "image": null,
+    "explanation": "The scatterplot example shows that 'per-capita income is roughly proportional with education,' though Nevada was an outlier."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "The London metro map evolution (1927 to 1993) demonstrates visualization for:",
+    "answer": "C) Clarification",
+    "options": [
+      "A) Storytelling",
+      "B) Problem solving",
+      "C) Clarification",
+      "D) Exploration"
+    ],
+    "image": null,
+    "explanation": "The London metro map evolution demonstrates 'Visualization for clarification' by simplifying and schematizing information."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "What is the key distinction between data visualization and infographics?",
+    "answer": "B) DATA plus visual",
+    "options": [
+      "A) Color usage",
+      "B) DATA plus visual",
+      "C) Size of the graphic",
+      "D) Software used"
+    ],
+    "image": null,
+    "explanation": "The key distinction is 'DATA plus visual' – data visualization requires actual data-driven elements."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "How does Google interpret infographics?",
+    "answer": "B) A collection of facts, icons, and text driven",
+    "options": [
+      "A) Pure data visualization",
+      "B) A collection of facts, icons, and text driven",
+      "C) Interactive dashboards",
+      "D) Statistical charts only"
+    ],
+    "image": null,
+    "explanation": "Google interprets infographics as 'a collection of facts, icons, and text driven' rather than data-focused visualizations."
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "When is visualization useful?",
+    "answer": "B) Too much data, qualitative questions, communication needed",
+    "options": [
+      "A) Only for scientific research",
+      "B) Too much data, qualitative questions, communication needed",
+      "C) Only for business analytics",
+      "D) When you have colorful data"
+    ],
+    "image": null,
+    "explanation": "Visualization is useful when you have 'too much data, qualitative questions, and need to communicate findings.'"
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "The Visualization Pipeline Communication View includes:",
+    "answer": "B) Messenger, receiver, and message",
+    "options": [
+      "A) Only data and graphics",
+      "B) Messenger, receiver, and message",
+      "C) Hardware and software",
+      "D) Input and output devices"
+    ],
+    "image": null,
+    "explanation": "The Communication View includes 'messenger, receiver, and message' as key components of visualization communication."
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "Which is NOT part of the Technical View?",
+    "answer": "C) Data deletion",
+    "options": [
+      "A) Data transformation",
+      "B) Visual mapping",
+      "C) Data deletion",
+      "D) Rendering"
+    ],
+    "image": null,
+    "explanation": "The Technical View includes data transformation, visual mapping, and rendering. 'Data deletion' is NOT part of this view."
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "The Perceptual View includes layers of:",
+    "answer": "A) Low-level vision, pattern recognition, and high-level sensemaking",
+    "options": [
+      "A) Low-level vision, pattern recognition, and high-level sensemaking",
+      "B) Colors, shapes, and sizes",
+      "C) Input, process, and output",
+      "D) Hardware, software, and user"
+    ],
+    "image": null,
+    "explanation": "The Perceptual View has three layers: 'low-level vision (pre-attentive), pattern recognition, and high-level sensemaking.'"
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "The Functional View describes:",
+    "answer": "B) Function mapping data to images; analysis is its inverse",
+    "options": [
+      "A) Only the creation of charts",
+      "B) Function mapping data to images; analysis is its inverse",
+      "C) User interface design",
+      "D) Color theory applications"
+    ],
+    "image": null,
+    "explanation": "The Functional View describes 'a function that maps data to images, and analysis as the inverse of this function.'"
+  }
+]

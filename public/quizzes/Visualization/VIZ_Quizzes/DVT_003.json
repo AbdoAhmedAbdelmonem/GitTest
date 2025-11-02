@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What is the key difference between Scientific Visualization and Information Visualization data?",
+    "answer": "B) SciVis data is defined over familiar 2D/3D spatial domains, InfoVis data is abstract",
+    "options": [
+      "A) SciVis uses colors, InfoVis doesn't",
+      "B) SciVis data is defined over familiar 2D/3D spatial domains, InfoVis data is abstract",
+      "C) SciVis is newer than InfoVis",
+      "D) InfoVis only works with text data"
+    ],
+    "image": null,
+    "explanation": "SciVis data is 'defined on a 2D/3D spatial domain' showing 'stuff happening in familiar 3D space,' while InfoVis data is 'abstract, high-dimensional, heterogeneous, non-spatial.'"
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "In the dimensionality classification, what does a 1D data value represent?",
+    "answer": "B) A single value like temperature or pressure",
+    "options": [
+      "A) No data, just a shape",
+      "B) A single value like temperature or pressure",
+      "C) Two related values like coordinates",
+      "D) Three related values like wind speed"
+    ],
+    "image": null,
+    "explanation": "The lecture explicitly states that 1D data values represent 'a single value (e.g. temperature, pressure, height)' and are called scalar."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "Which attribute type is the MOST general in the hierarchy?",
+    "answer": "D) Quantitative",
+    "options": [
+      "A) Categorical",
+      "B) Ordinal",
+      "C) Discrete",
+      "D) Quantitative"
+    ],
+    "image": null,
+    "explanation": "The hierarchy shows quantitative as the most general, followed by discrete, ordinal, then categorical (least general), with 'less general' to 'more general' indicated."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "Which operations can be performed on quantitative attributes?",
+    "answer": "D) Equality, comparison, addition, subtraction, multiplication, division",
+    "options": [
+      "A) Only equality",
+      "B) Equality and comparison (<, >)",
+      "C) Equality, comparison, addition, subtraction",
+      "D) Equality, comparison, addition, subtraction, multiplication, division"
+    ],
+    "image": null,
+    "explanation": "Quantitative attributes support all operations: '=, ≠, <, >, +, -, *, /' as shown in the attribute type table."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "In Scientific Visualization, data mapping is typically:",
+    "answer": "A) Implicit - draw values on their given 2D/3D domain",
+    "options": [
+      "A) Implicit - draw values on their given 2D/3D domain",
+      "B) Explicit - designer chooses the domain",
+      "C) Random",
+      "D) Not possible"
+    ],
+    "image": null,
+    "explanation": "For SciVis data, mapping is 'implicit for scivis data (draw values on their given 2D/3D domain),' while InfoVis requires explicit design decisions."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "What distinguishes \"Big Data\" from \"Little Data\" according to the lecture?",
+    "answer": "B) Big Data has millions of items and tens to hundreds of dimensions",
+    "options": [
+      "A) Big Data has colorful visualizations",
+      "B) Big Data has millions of items and tens to hundreds of dimensions",
+      "C) Big Data is always better quality",
+      "D) Big Data uses only 3D visualizations"
+    ],
+    "image": null,
+    "explanation": "Big Data is characterized by '(tens of) millions of items' and 'tens..hundreds of dimensions' compared to Little Data's 'hundreds..thousands of items' and '1..3 dimensions.'"
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "What happens when you remove one character from InfoVis data (like C++ code)?",
+    "answer": "B) The semantics becomes fully different",
+    "options": [
+      "A) The semantics stays the same",
+      "B) The semantics becomes fully different",
+      "C) Nothing changes",
+      "D) The data improves"
+    ],
+    "image": null,
+    "explanation": "When removing one character from C++ code, 'the semantics becomes fully different!' demonstrating the challenge with discrete, non-numerical data."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "The first InfoVis data challenge mentioned is \"Size.\" What problem does this create?",
+    "answer": "B) Number of data points much higher than screen resolution",
+    "options": [
+      "A) Data takes too long to collect",
+      "B) Number of data points much higher than screen resolution",
+      "C) Data is too small to see",
+      "D) Data costs too much to store"
+    ],
+    "image": null,
+    "explanation": "The Size challenge is described as 'number of data points in the input data much higher than screen resolution' creating the question 'where to draw all those data points?'"
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "Which statement about dimensionality is TRUE?",
+    "answer": "A) 1000 points with 1 attribute is easier to visualize than 100 points with 10 attributes",
+    "options": [
+      "A) 1000 points with 1 attribute is easier to visualize than 100 points with 10 attributes",
+      "B) Dimensionality doesn't affect visualization difficulty",
+      "C) More dimensions are always easier to visualize",
+      "D) 2D data cannot be visualized"
+    ],
+    "image": null,
+    "explanation": "The lecture asks 'What is harder to visualize' and shows that 100 samples × 10 attributes presents 'many chart kinds, many problems' while 1000 samples × 1 attribute works well with 1D graphs."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "What challenge does \"non-spatiality\" present for InfoVis data?",
+    "answer": "A) Data points don't have a 'natural' place in 2D or 3D space",
+    "options": [
+      "A) Data points don't have a 'natural' place in 2D or 3D space",
+      "B) Data cannot be measured",
+      "C) Data is always in 3D",
+      "D) Data has too many colors"
+    ],
+    "image": null,
+    "explanation": "Non-spatiality means 'data points do not have a \"natural\" place in 2D or 3D space' requiring decisions about 'how to draw the data.'"
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "According to good data normalization practices, axes should use which orientation?",
+    "answer": "C) Left-to-right, bottom-to-top",
+    "options": [
+      "A) Right-to-left, top-to-bottom",
+      "B) Random orientation",
+      "C) Left-to-right, bottom-to-top",
+      "D) Always vertical only"
+    ],
+    "image": null,
+    "explanation": "Good practices state: 'use natural axis orientations: low-to-large: left-to-right, bottom-to-top.'"
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "What caution does the lecture give about 3D visualizations in InfoVis?",
+    "answer": "C) Use 3D with great caution and only if really needed",
+    "options": [
+      "A) Never use 3D",
+      "B) Always use 3D",
+      "C) Use 3D with great caution and only if really needed",
+      "D) 3D is always better than 2D"
+    ],
+    "image": null,
+    "explanation": "The lecture explicitly states: 'Use 3D with great caution in infovis, and only if really needed.'"
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "Which visual variable is described as \"Associative\"?",
+    "answer": "B) Shape",
+    "options": [
+      "A) Position",
+      "B) Shape",
+      "C) Color",
+      "D) Size"
+    ],
+    "image": null,
+    "explanation": "Shape is given as the example of Associative: 'shape is associative (we can perceive it regardless of position and/or color).'"
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "Which visual variable is described as \"Selective\"?",
+    "answer": "C) Categorical color",
+    "options": [
+      "A) Length",
+      "B) Size",
+      "C) Categorical color",
+      "D) Brightness"
+    ],
+    "image": null,
+    "explanation": "'Categorical color is selective since we can easily find the yellow shape in the full set of color shapes.'"
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "Which visual variable is described as \"Quantitative\"?",
+    "answer": "C) Length",
+    "options": [
+      "A) Shape",
+      "B) Texture",
+      "C) Length",
+      "D) Hue"
+    ],
+    "image": null,
+    "explanation": "'Length is quantitative since it lets us tell how much a bar in the image is shorter/longer than another bar.'"
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "Which background color is described as \"most commonly used and in general best\"?",
+    "answer": "C) White",
+    "options": [
+      "A) Black",
+      "B) Gray",
+      "C) White",
+      "D) Blue"
+    ],
+    "image": null,
+    "explanation": "White background is described as 'most commonly used (and in general best)' and 'works well for all media (print, computer screen, projector).'"
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "What are the THREE main disadvantages (con's) of 3D visualizations for InfoVis?",
+    "answer": "B) Perspective deformation, occlusion, loss of orientation",
+    "options": [
+      "A) Cost, complexity, color limitations",
+      "B) Perspective deformation, occlusion, loss of orientation",
+      "C) Speed, size, scale",
+      "D) Price, performance, portability"
+    ],
+    "image": null,
+    "explanation": "The 3D con's listed are: 'perspective deformation, occlusion, loss of orientation' plus 'complex interaction' and developer familiarity issues."
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "What operations can be performed on Nominal (N) data types?",
+    "answer": "C) =, ≠",
+    "options": [
+      "A) =, ≠, <, >",
+      "B) Only =",
+      "C) =, ≠",
+      "D) =, ≠, <, >, -, ×"
+    ],
+    "image": null,
+    "explanation": "Nominal data types support only 'Operations: =, ≠' as they represent labels or categories like fruits."
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "What operations can be performed on Ordinal (O) data types?",
+    "answer": "B) =, ≠, <, >",
+    "options": [
+      "A) =, ≠",
+      "B) =, ≠, <, >",
+      "C) =, ≠, <, >, -, %",
+      "D) Only ="
+    ],
+    "image": null,
+    "explanation": "Ordinal data types support 'Operations: =, ≠, <, >' for ordered data like quality grades (Grade A, AA, AAA)."
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "In a data table, what are \"Dimensions\" typically?",
+    "answer": "B) Independent variables, often discrete, describing data categories",
+    "options": [
+      "A) Dependent variables that can be aggregated",
+      "B) Independent variables, often discrete, describing data categories",
+      "C) Only numerical values",
+      "D) Always continuous measurements"
+    ],
+    "image": null,
+    "explanation": "Dimensions are defined as '~ independent variables, Often discrete variables describing data (N, O), Categories, dates, binned quantities.'"
+  }
+]

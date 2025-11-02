@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What are the two interpretation bottlenecks in perceiving visualizations?",
+    "answer": "B) Low-level vision and high-level sensemaking",
+    "options": [
+      "A) Data collection and data storage",
+      "B) Low-level vision and high-level sensemaking",
+      "C) Hardware and software",
+      "D) Input and output"
+    ],
+    "image": null,
+    "explanation": "The lecture explicitly identifies two bottlenecks: 'low-level vision: must know how the eye sees colors, contrasts, textures' and 'high-level sensemaking: must know how the brain assigns meaning to shapes.'"
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "The Fraser's spiral illusion shows:",
+    "answer": "B) A set of concentric circles",
+    "options": [
+      "A) An actual spiral",
+      "B) A set of concentric circles",
+      "C) Random shapes",
+      "D) Intersecting lines"
+    ],
+    "image": null,
+    "explanation": "The lecture reveals: 'Fraser's spiral... is not a spiral, but a set of circles!'"
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "In the Cornsweet illusion, two rectangles with the same brightness appear:",
+    "answer": "B) To have different brightness",
+    "options": [
+      "A) Exactly the same",
+      "B) To have different brightness",
+      "C) To be different colors",
+      "D) To change over time"
+    ],
+    "image": null,
+    "explanation": "The Cornsweet illusion shows two rectangles with 'the same brightness' but they appear different due to edge effects."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "What visualization technique uses the Cornsweet illusion with asymmetric shading?",
+    "answer": "C) Cushion treemaps",
+    "options": [
+      "A) Scatter plots",
+      "B) Bar charts",
+      "C) Cushion treemaps",
+      "D) Pie charts"
+    ],
+    "image": null,
+    "explanation": "'Cushion Treemaps' use the Cornsweet illusion principle where 'light falls at an angle with the surface, so cushions are asymmetrically shaded.'"
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "Change blindness occurs when changes are NOT noticed because of all EXCEPT:",
+    "answer": "D) The change is in color only",
+    "options": [
+      "A) The change is very slow",
+      "B) The change is very fast",
+      "C) The observer pays attention to other aspects",
+      "D) The change is in color only"
+    ],
+    "image": null,
+    "explanation": "Change blindness occurs because: '(1) The change is very slow, or (2) The change is very fast, or (3) The observer pays attention to other aspects.' Color is not mentioned as a required condition."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "What does \"Gestalt\" mean?",
+    "answer": "B) Unified whole",
+    "options": [
+      "A) German psychology",
+      "B) Unified whole",
+      "C) Visual pattern",
+      "D) Data structure"
+    ],
+    "image": null,
+    "explanation": "Gestalt is defined as 'unified whole (term developed by German psychologists in the 1920's).'"
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "The Gestalt principle of \"Continuation\" is the basis for which visualization technique?",
+    "answer": "C) Edge bundling",
+    "options": [
+      "A) Pie charts ",
+      "B) Bar charts",
+      "C) Edge bundling",
+      "D) Heat maps"
+    ],
+    "image": null,
+    "explanation": "The Continuation principle states 'the eye follows \"natural\" trajectories visible in the image' and 'this is the principle behind edge bundling!'"
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "The Gestalt principle of \"Proximity\" is the basis for which visualization type?",
+    "answer": "A) Scatterplots and printing",
+    "options": [
+      "A) Scatterplots and printing",
+      "B) Edge bundles and sketches",
+      "C) Only 3D visualizations",
+      "D) Only text-based displays "
+    ],
+    "image": null,
+    "explanation": "The Proximity principle states 'elements drawn close to each other are perceived as a group' and 'this is the principle behind scatterplots and printing!'"
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "How much has attention span fallen from 2000 to 2015?",
+    "answer": "B) From 12 seconds to 8 seconds",
+    "options": [
+      "A) From 15 seconds to 10 seconds",
+      "B) From 12 seconds to 8 seconds",
+      "C) From 15 seconds to 10 seconds",
+      "D) From 20 seconds to 15 seconds"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Attention span has FALLEN from 12 seconds in 2000 to 8 seconds in 2015.'"
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "Which data relationship tracks changes in values of a consistent metric over time?",
+    "answer": "B) Time series",
+    "options": [
+      "A) Nominal comparison",
+      "B) Time series",
+      "C) Correlation",
+      "D) Distribution"
+    ],
+    "image": null,
+    "explanation": "Time series is defined as: 'This tracks changes in values of a consistent metric over time. Example – Monthly sales.'"
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "What is the best practice for starting the y-axis value in bar charts?",
+    "answer": "C) Start at 0",
+    "options": [
+      "A) Start at 1",
+      "B) Start at the minimum data value",
+      "C) Start at 0",
+      "D) Start at the median"
+    ],
+    "image": null,
+    "explanation": "Bar chart best practices state: 'Start the y-axis value at 0. Starting at a value above zero truncates the bars.'"
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "How many lines should you plot on a line chart according to best practices?",
+    "answer": "B) No more than 4",
+    "options": [
+      "A) No more than 2",
+      "B) No more than 4",
+      "C) No more than 6",
+      "D) As many as needed"
+    ],
+    "image": null,
+    "explanation": "[Add explanation for answer from the PDF]"
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "What is the maximum recommended number of categories for pie charts?",
+    "answer": "B) 5",
+    "options": [
+      "A) 3",
+      "B) 5",
+      "C) 7",
+      "D) 10"
+    ],
+    "image": null,
+    "explanation": "Pie chart best practices state: 'Limit chart categories to 5. Depicting too many slices decreases the impact.'"
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "Where should the largest slice be placed in a pie chart?",
+    "answer": "D) At 12 o'clock",
+    "options": [
+      "A) At 3 o'clock",
+      "B) At 6 o'clock",
+      "C) At 9 o'clock",
+      "D) At 12 o'clock"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Largest section at 12 o'clock and place remaining sections in descending order, going clockwise.'"
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "Which role identifies a problem in the application domain and owns it?",
+    "answer": "B) Initiator",
+    "options": [
+      "A) Computer Scientist",
+      "B) Initiator",
+      "C) Designer",
+      "D) Project Manager"
+    ],
+    "image": null,
+    "explanation": "The Initiator role 'identifies a problem in some application domain' and 'typically owns the problem (needs to get it solved).'"
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "Which role translates from problem domain to a data model?",
+    "answer": "B) Data Scientist",
+    "options": [
+      "A) Journalist",
+      "B) Data Scientist",
+      "C) Designer",
+      "D) Communicator"
+    ],
+    "image": null,
+    "explanation": "The Data Scientist 'translates from problem domain and requirements to a data model.'"
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "Which role is described as the \"storyteller of the project\"?",
+    "answer": "C) Journalist",
+    "options": [
+      "A) Designer",
+      "B) Communicator",
+      "C) Journalist",
+      "D) Cognitive Scientist"
+    ],
+    "image": null,
+    "explanation": "The Journalist role 'is the storyteller of the project' and 'establishes the analytical narrative.'"
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "Which role creates programs to query, aggregate, and filter data?",
+    "answer": "B) Computer Scientist",
+    "options": [
+      "A) Data Scientist",
+      "B) Computer Scientist",
+      "C) Designer",
+      "D) Initiator"
+    ],
+    "image": null,
+    "explanation": "The Computer Scientist 'creates/uses programs to query, aggregate, filter the data.'"
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "Which role supports the designer with effective visual encodings and evaluates solutions via user studies?",
+    "answer": "C) Cognitive Scientist",
+    "options": [
+      "A) Journalist",
+      "B) Project Manager",
+      "C) Cognitive Scientist",
+      "D) Communicator"
+    ],
+    "image": null,
+    "explanation": "The Cognitive Scientist 'supports designer with effective visual encodings' and 'evaluates the proposed solution (e.g. via user studies).'"
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "What is the main disadvantage of the rainbow colormap?",
+    "answer": "A) It is not isoluminant and certain hues are hard to separate",
+    "options": [
+      "A) It is not isoluminant and certain hues are hard to separate",
+      "B) It uses too many colors",
+      "C) It cannot show any data",
+      "D) It only works in 3D"
+    ],
+    "image": null,
+    "explanation": "The rainbow colormap cons include: 'not isoluminant (blue and green are perceived as darker than yellow and cyan)' and 'certain hues are hard to separate (cyan..green).'"
+  }
+]

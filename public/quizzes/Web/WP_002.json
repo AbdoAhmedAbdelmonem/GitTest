@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "Which HTML5 semantic element is used to define a header for a document or section?",
+    "options": [
+      "A) <head>",
+      "B) <header>",
+      "C) <top>",
+      "D) <section>"
+    ],
+    "answer": "B) <header>",
+    "explanation": "The <header> element is a semantic HTML5 tag used to define introductory content or navigational links for a document or section. It typically contains heading elements, logos, or navigation. The <head> element is different - it contains metadata, not visible content.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <nav> element in HTML5?",
+    "options": [
+      "A) To create a navigation bar visually",
+      "B) To define a set of navigation links",
+      "C) To navigate between pages",
+      "D) To create a menu button"
+    ],
+    "answer": "B) To define a set of navigation links",
+    "explanation": "The <nav> element is a semantic HTML5 tag that defines a section containing navigation links. It helps screen readers and search engines identify the main navigation areas of a website. Not all links need to be in <nav>, only major navigation blocks.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Which CSS box model property adds space inside an element's border?",
+    "options": [
+      "A) margin",
+      "B) padding",
+      "C) border-spacing",
+      "D) spacing"
+    ],
+    "answer": "B) padding",
+    "explanation": "Padding adds space inside an element's border, between the border and the content. Margin, in contrast, adds space outside the border. The CSS box model consists of: content, padding, border, and margin (from inside to outside).",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the correct HTML element for defining emphasized text?",
+    "options": [
+      "A) <i>",
+      "B) <italic>",
+      "C) <em>",
+      "D) <strong>"
+    ],
+    "answer": "C) <em>",
+    "explanation": "The <em> element defines emphasized text with semantic meaning, typically displayed in italics. <i> also makes text italic but without semantic emphasis. <strong> indicates strong importance (usually bold). Using semantic tags like <em> helps screen readers convey proper meaning.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which input type is used to create a date picker in HTML5?",
+    "options": [
+      "A) <input type='calendar'>",
+      "B) <input type='date'>",
+      "C) <input type='datetime'>",
+      "D) <input type='picker'>"
+    ],
+    "answer": "B) <input type='date'>",
+    "explanation": "The <input type='date'> creates a date picker control in HTML5 forms. Modern browsers provide a built-in calendar interface. Other date-related types include 'datetime-local', 'time', 'month', and 'week'. This provides better user experience than requiring manual date entry.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What does the CSS 'display: flex' property do?",
+    "options": [
+      "A) Makes text flexible",
+      "B) Enables flexbox layout on the element",
+      "C) Displays the element flexibly",
+      "D) Creates a flexible border"
+    ],
+    "answer": "B) Enables flexbox layout on the element",
+    "explanation": "Setting 'display: flex' on an element makes it a flex container, enabling the flexbox layout model. This allows powerful alignment and distribution of child elements in one dimension (row or column). Flexbox is essential for modern responsive web layouts.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which attribute makes an input field required in HTML5?",
+    "options": [
+      "A) required='true'",
+      "B) mandatory",
+      "C) required",
+      "D) validate"
+    ],
+    "answer": "C) required",
+    "explanation": "The 'required' attribute is a boolean attribute that makes an input field mandatory. Simply adding 'required' to an input element prevents form submission if the field is empty. Example: <input type='text' required>. No value is needed for boolean attributes.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <article> element?",
+    "options": [
+      "A) To create blog posts only",
+      "B) To define independent, self-contained content",
+      "C) To style articles",
+      "D) To create news sections"
+    ],
+    "answer": "B) To define independent, self-contained content",
+    "explanation": "The <article> element represents self-contained content that could be independently distributed or reused, such as blog posts, news articles, forum posts, or comments. The content within an <article> should make sense on its own.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "Which CSS property controls the stacking order of positioned elements?",
+    "options": [
+      "A) layer",
+      "B) stack",
+      "C) z-index",
+      "D) position-level"
+    ],
+    "answer": "C) z-index",
+    "explanation": "The z-index property controls the stacking order of positioned elements (elements with position: relative, absolute, fixed, or sticky). Higher z-index values appear in front of lower values. Default is 'auto' (0). It only works on positioned elements.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is the correct way to include an external CSS file?",
+    "options": [
+      "A) <style src='styles.css'>",
+      "B) <link rel='stylesheet' href='styles.css'>",
+      "C) <css href='styles.css'>",
+      "D) <stylesheet>styles.css</stylesheet>"
+    ],
+    "answer": "B) <link rel='stylesheet' href='styles.css'>",
+    "explanation": "The <link> tag with rel='stylesheet' is the correct way to include external CSS files. It should be placed in the <head> section. This approach separates content from presentation and allows CSS reuse across multiple pages.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "Which CSS selector has the highest specificity?",
+    "options": [
+      "A) Element selector",
+      "B) Class selector",
+      "C) ID selector",
+      "D) Universal selector"
+    ],
+    "answer": "C) ID selector",
+    "explanation": "ID selectors have higher specificity than class and element selectors. Specificity order (low to high): universal (*), element (div), class (.class), ID (#id), and inline styles. Higher specificity rules override lower ones when there's a conflict.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What does the <section> element represent in HTML5?",
+    "options": [
+      "A) A page section with styling",
+      "B) A thematic grouping of content",
+      "C) A division for layout",
+      "D) A section tag for CSS"
+    ],
+    "answer": "B) A thematic grouping of content",
+    "explanation": "The <section> element represents a thematic grouping of content, typically with a heading. It's used to divide a page into related content areas. Unlike <div> which is generic, <section> has semantic meaning indicating related content grouped together.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which form attribute specifies where to send form data when submitted?",
+    "options": [
+      "A) method",
+      "B) action",
+      "C) submit",
+      "D) destination"
+    ],
+    "answer": "B) action",
+    "explanation": "The 'action' attribute in a <form> tag specifies the URL where the form data should be sent when submitted. Example: <form action='/submit-form.php' method='POST'>. If omitted, the form submits to the current page URL.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is the default value of the CSS 'position' property?",
+    "options": [
+      "A) relative",
+      "B) absolute",
+      "C) static",
+      "D) fixed"
+    ],
+    "answer": "C) static",
+    "explanation": "The default position value is 'static'. Static positioned elements follow the normal document flow and are not affected by top, bottom, left, or right properties. Other values (relative, absolute, fixed, sticky) enable positioning and z-index control.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "Which HTML5 input type is used for email addresses?",
+    "options": [
+      "A) <input type='text'>",
+      "B) <input type='email'>",
+      "C) <input type='mail'>",
+      "D) <input type='address'>"
+    ],
+    "answer": "B) <input type='email'>",
+    "explanation": "The type='email' attribute creates an input field specifically for email addresses. It provides automatic validation to ensure the input contains a valid email format (like user@example.com). On mobile devices, it displays an email-optimized keyboard.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What does the CSS 'box-sizing: border-box' property do?",
+    "options": [
+      "A) Creates a border box",
+      "B) Makes the box fit the border",
+      "C) Includes padding and border in the element's total width and height",
+      "D) Removes the box model"
+    ],
+    "answer": "C) Includes padding and border in the element's total width and height",
+    "explanation": "With 'box-sizing: border-box', padding and border are included in the element's specified width and height, making sizing more intuitive. The default 'content-box' adds padding and border to the specified width, which can cause unexpected layout issues.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which element is used to define the footer of a document or section?",
+    "options": [
+      "A) <bottom>",
+      "B) <footer>",
+      "C) <foot>",
+      "D) <end>"
+    ],
+    "answer": "B) <footer>",
+    "explanation": "The <footer> element is a semantic HTML5 tag that defines footer content for a document or section. It typically contains copyright information, contact details, site maps, or related links. A document can have multiple footers (one per section).",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the 'placeholder' attribute in input elements?",
+    "options": [
+      "A) To set the default value",
+      "B) To provide a hint about the expected input",
+      "C) To validate the input",
+      "D) To make the field required"
+    ],
+    "answer": "B) To provide a hint about the expected input",
+    "explanation": "The 'placeholder' attribute displays hint text inside an input field that disappears when the user starts typing. Example: <input type='text' placeholder='Enter your name'>. It's different from the 'value' attribute which sets an actual default value.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to change the font size?",
+    "options": [
+      "A) text-size",
+      "B) font-size",
+      "C) text-style",
+      "D) size"
+    ],
+    "answer": "B) font-size",
+    "explanation": "The 'font-size' property sets the size of text. It can use various units like pixels (px), ems (em), rems (rem), percentages (%), or keywords (small, medium, large). Example: font-size: 16px; or font-size: 1.2em;",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What does the <aside> element represent?",
+    "options": [
+      "A) Content placed to the side",
+      "B) Content indirectly related to the main content",
+      "C) A sidebar only",
+      "D) Additional styling"
+    ],
+    "answer": "B) Content indirectly related to the main content",
+    "explanation": "The <aside> element represents content that is tangentially related to the main content, such as sidebars, pull quotes, or related links. The content should be relevant but could be considered separate from the main content flow.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "Which CSS property controls text alignment?",
+    "options": [
+      "A) align",
+      "B) text-align",
+      "C) alignment",
+      "D) text-position"
+    ],
+    "answer": "B) text-align",
+    "explanation": "The 'text-align' property controls horizontal text alignment within an element. Values include: left, right, center, and justify. Example: text-align: center; centers the text. This property only affects inline content within block-level elements.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <label> element in forms?",
+    "options": [
+      "A) To style form inputs",
+      "B) To create form labels visually",
+      "C) To associate text with a form control for accessibility",
+      "D) To validate form inputs"
+    ],
+    "answer": "C) To associate text with a form control for accessibility",
+    "explanation": "The <label> element creates an accessible label for form controls. Using the 'for' attribute with the input's 'id' links them: <label for='username'>Name:</label> <input id='username'>. Clicking the label focuses the input, improving usability and accessibility.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which CSS unit is relative to the root element's font size?",
+    "options": [
+      "A) em",
+      "B) rem",
+      "C) px",
+      "D) %"
+    ],
+    "answer": "B) rem",
+    "explanation": "The 'rem' (root em) unit is relative to the root element's (<html>) font size. Unlike 'em' which is relative to the parent element, 'rem' provides consistency across nested elements. If root font-size is 16px, 1rem = 16px, 2rem = 32px.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "What is the correct way to create a multi-line text input?",
+    "options": [
+      "A) <input type='textarea'>",
+      "B) <textarea></textarea>",
+      "C) <input type='text' multiline>",
+      "D) <textbox></textbox>"
+    ],
+    "answer": "B) <textarea></textarea>",
+    "explanation": "The <textarea> element creates a multi-line text input field. Unlike <input>, <textarea> uses opening and closing tags: <textarea rows='5' cols='30'></textarea>. The 'rows' and 'cols' attributes control the visible size, and CSS can be used for additional styling.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to add space between letters?",
+    "options": [
+      "A) letter-spacing",
+      "B) character-spacing",
+      "C) text-spacing",
+      "D) space"
+    ],
+    "answer": "A) letter-spacing",
+    "explanation": "The 'letter-spacing' property increases or decreases the space between characters in text. Example: letter-spacing: 2px; adds 2 pixels between each letter. Negative values decrease spacing. For word spacing, use the 'word-spacing' property instead.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What does the 'method' attribute in a form specify?",
+    "options": [
+      "A) The validation method",
+      "B) The HTTP method to use when sending form data",
+      "C) The form processing method",
+      "D) The submission method"
+    ],
+    "answer": "B) The HTTP method to use when sending form data",
+    "explanation": "The 'method' attribute specifies the HTTP method (GET or POST) to use when submitting the form. GET appends data to the URL (visible, limited size), while POST sends data in the request body (more secure, no size limit). Example: <form method='POST'>.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "Which CSS property controls the space between lines of text?",
+    "options": [
+      "A) line-spacing",
+      "B) line-height",
+      "C) text-height",
+      "D) spacing"
+    ],
+    "answer": "B) line-height",
+    "explanation": "The 'line-height' property controls the vertical spacing between lines of text. It can be specified as a number (multiplier), length (px, em), or percentage. Example: line-height: 1.5; creates 1.5 times the font size as line spacing, improving readability.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <main> element in HTML5?",
+    "options": [
+      "A) To define the main stylesheet",
+      "B) To specify the dominant content of the document body",
+      "C) To create the main navigation",
+      "D) To define the main heading"
+    ],
+    "answer": "B) To specify the dominant content of the document body",
+    "explanation": "The <main> element represents the dominant content of the document body. There should be only one <main> element per page, and it should not be nested inside <article>, <aside>, <header>, <footer>, or <nav>. It helps assistive technologies identify the main content.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "Which attribute is used to disable a form input?",
+    "options": [
+      "A) disabled='true'",
+      "B) enabled='false'",
+      "C) disabled",
+      "D) readonly"
+    ],
+    "answer": "C) disabled",
+    "explanation": "The 'disabled' attribute is a boolean attribute that disables a form control, making it uneditable and preventing its value from being submitted. Example: <input type='text' disabled>. The 'readonly' attribute allows viewing but not editing, and the value is still submitted.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "What is the CSS 'overflow' property used for?",
+    "options": [
+      "A) To handle content that exceeds an element's box",
+      "B) To create overflow effects",
+      "C) To flow text around images",
+      "D) To control text overflow only"
+    ],
+    "answer": "A) To handle content that exceeds an element's box",
+    "explanation": "The 'overflow' property controls what happens when content is too large for its container. Values include: 'visible' (default, content overflows), 'hidden' (clips excess), 'scroll' (adds scrollbars), and 'auto' (scrollbars only when needed). It works on block elements with specified dimensions.",
+    "image": null
+  }
+]

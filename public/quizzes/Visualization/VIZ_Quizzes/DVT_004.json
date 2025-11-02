@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What are the two fundamental design criteria for data visualization?",
+    "answer": "B) Tell the truth and nothing but the truth; Use encodings people decode better",
+    "options": [
+      "A) Use bright colors and large fonts",
+      "B) Tell the truth and nothing but the truth; Use encodings people decode better",
+      "C) Make it pretty and fast",
+      "D) Use 3D and animations"
+    ],
+    "image": null,
+    "explanation": "The lecture explicitly states the two design criteria: 'Tell the truth and nothing but the truth (don't lie, and don't lie by omission)' and 'Use encodings that people decode better (where better = faster and/or more accurate).'"
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "What controls the hue (tint) of a color?",
+    "answer": "C) Frequency",
+    "options": [
+      "A) Amplitude",
+      "B) Brightness",
+      "C) Frequency",
+      "D) Intensity"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'frequency: controls the hue, or tint, of the color.'"
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "What controls the brightness (intensity) of a color?",
+    "answer": "B) Amplitude",
+    "options": [
+      "A) Frequency",
+      "B) Amplitude",
+      "C) Wavelength",
+      "D) Hue"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'amplitude: controls the brightness, or intensity, of the color.'"
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "What is the visible spectrum range for humans?",
+    "answer": "B) 390-700 nm",
+    "options": [
+      "A) 100-500 nm",
+      "B) 390-700 nm",
+      "C) 500-1000 nm",
+      "D) 700-1500 nm"
+    ],
+    "image": null,
+    "explanation": "The visible spectrum diagram shows the range as '390 nm as violet' to '700 nm as red' which humans typically see."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "In the RGB color cube, what color is at the origin (0,0,0)?",
+    "answer": "B) Black",
+    "options": [
+      "A) White",
+      "B) Black",
+      "C) Gray",
+      "D) Red"
+    ],
+    "image": null,
+    "explanation": "In the RGB cube explanation: 'cube origin (B): black' where B = (0,0,0)."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "In the RGB additive model, what color results from R(1,0,0) + G(0,1,0)?",
+    "answer": "C) Yellow",
+    "options": [
+      "A) Blue",
+      "B) Cyan",
+      "C) Yellow",
+      "D) Magenta"
+    ],
+    "image": null,
+    "explanation": "The example explicitly shows: 'R(1,0,0) + G(0,1,0) = Y(1,1,0) OR (255,255,0)' where Y stands for Yellow."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "What does the diagonal from black to white in the RGB cube represent?",
+    "answer": "C) All gray values",
+    "options": [
+      "A) All red values",
+      "B) All saturated colors",
+      "C) All gray values",
+      "D) All primary colors"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'diagonal BW: all gray values' where B is black and W is white."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "What does the \"S\" stand for in the HSV color model?",
+    "answer": "B) Saturation",
+    "options": [
+      "A) Spectrum",
+      "B) Saturation",
+      "C) Shade",
+      "D) Scale"
+    ],
+    "image": null,
+    "explanation": "HSV stands for Hue, Saturation, Value, so 'S' represents Saturation."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "In the HSV model, what does saturation = 0 represent?",
+    "answer": "B) A gray color",
+    "options": [
+      "A) A bright color",
+      "B) A gray color",
+      "C) White",
+      "D) Black"
+    ],
+    "image": null,
+    "explanation": "The lecture explains: 'saturation: strong color (s=1), grayish color (0<s<1) or gray (s=0).'"
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "In the HSV model, what does value = 0 represent?",
+    "answer": "C) Black",
+    "options": [
+      "A) White",
+      "B) Gray",
+      "C) Black",
+      "D) Transparent"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'value: luminance; white (v=1), dark (0<v<1), or black (v=0).'"
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "How many primary colors does the CMYK color space use?",
+    "answer": "B) 4",
+    "options": [
+      "A) 3",
+      "B) 4",
+      "C) 5",
+      "D) 6"
+    ],
+    "image": null,
+    "explanation": "CMYK uses '4 primary colors (cyan, magenta, yellow, black).'"
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "Why is black (K) included in the CMYK model when it can be made from other colors?",
+    "answer": "B) It's cheaper than mixing colored inks",
+    "options": [
+      "A) It creates brighter colors",
+      "B) It's cheaper than mixing colored inks",
+      "C) It's required for digital displays",
+      "D) It improves saturation"
+    ],
+    "image": null,
+    "explanation": "The lecture explains: 'black: not needed strictly speaking, but used since it's cheaper than mixing colored inks.'"
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "What does \"invertibility - unicity\" mean in data encoding?",
+    "answer": "B) Any two different data values should map to two different visual variable-values",
+    "options": [
+      "A) All colors should be the same",
+      "B) Any two different data values should map to two different visual variable-values",
+      "C) Data should be encrypted",
+      "D) Colors should be reversed"
+    ],
+    "image": null,
+    "explanation": "Unicity is defined as: 'any two different data values should map to two different visual variable-values' to make answers unambiguous."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "What does \"invertibility - coverage\" require?",
+    "answer": "B) Any visual variable-value should map to a data value",
+    "options": [
+      "A) The entire screen should be filled",
+      "B) Any visual variable-value should map to a data value",
+      "C) C) All data must be visible at once",
+      "D) D) Multiple colors per data point"
+    ],
+    "image": null,
+    "explanation": "Coverage means: 'any visual variable-value maps to a data value' ensuring all colors in the visualization have meaning."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "According to the \"distance preservation\" property, what should be proportional?",
+    "answer": "B) Perceived distance between visual values to distance between data values",
+    "options": [
+      "A) Data size to image size",
+      "B) Perceived distance between visual values to distance between data values",
+      "C) Color brightness to data importance",
+      "D) Font size to data complexity"
+    ],
+    "image": null,
+    "explanation": "Distance preservation states: 'The perceived distance between two visual variable-values should be (ideally) proportional with the distance between the corresponding data values.'"
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "What major problem is identified with the rainbow colormap?",
+    "answer": "B) It doesn't have a monotonic perceptual ordering",
+    "options": [
+      "A) It uses too few colors",
+      "B) It doesn't have a monotonic perceptual ordering",
+      "C) It's too expensive to compute",
+      "D) It only works in 2D"
+    ],
+    "image": null,
+    "explanation": "The first problem listed is: 'It is confusing because it doesn't have a monotonic perceptual ordering.'"
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "What does a perceptual colormap explicitly identify that rainbow colormaps don't?",
+    "answer": "B) The \"0\" in the data (like sea level)",
+    "options": [
+      "A) The maximum value",
+      "B) The \"0\" in the data (like sea level)",
+      "C) The average value",
+      "D) The outliers"
+    ],
+    "image": null,
+    "explanation": "The perceptual colormap 'explicitly identifies the \"0\" in the data, which is sea level.'"
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "In a perceptual colormap, what characterizes the color scheme above and below zero?",
+    "answer": "B) Monotonic luminance variations",
+    "options": [
+      "A) Random color variations",
+      "B) Monotonic luminance variations",
+      "C) Constant brightness",
+      "D) Rainbow colors"
+    ],
+    "image": null,
+    "explanation": "perceptual colormaps have 'two different hues, one on each side of '0', with monotonic luminance variations.'"
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "Which data type can be visualized without using color?",
+    "answer": "A) Organization charts showing parent/child relations",
+    "options": [
+      "A) Organization charts showing parent/child relations",
+      "B) All data types require color",
+      "C) Only 3D data can be visualized without color",
+      "D) Only temporal data "
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'structure (organization charts showing parent/child relations) can be visualized without color.'"
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "What is the purpose of the iCAM color appearance model?",
+    "answer": "B) Describing how humans perceive color and handling image-specific phenomena",
+    "options": [
+      "A) Converting RGB to CMYK only",
+      "B) Describing how humans perceive color and handling image-specific phenomena",
+      "C) Compressing image file sizes",
+      "D) Removing color from images"
+    ],
+    "image": null,
+    "explanation": "iCAM is: 'A color appearance model describing how humans perceive color... accounting for image-specific phenomena like chromatic adaptation.'"
+  }
+]

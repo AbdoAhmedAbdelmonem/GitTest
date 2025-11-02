@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What are the four components of the CSS Box Model in order from innermost to outermost?",
+    "options": [
+      "Content, Padding, Border, Margin",
+      "Margin, Border, Padding, Content",
+      "Content, Border, Padding, Margin",
+      "Padding, Content, Margin, Border"
+    ],
+    "answer": "Content, Padding, Border, Margin",
+    "explanation": "The CSS Box Model consists of four layers: Content (innermost - the actual content), Padding (space between content and border), Border (surrounds the padding), and Margin (outermost - space between the border and other elements). Understanding this order is crucial for proper layout control.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "Which CSS property changes the calculation of an element's total width and height to include padding and border?",
+    "options": [
+      "box-sizing: border-box;",
+      "box-model: content-box;",
+      "sizing: border-box;",
+      "box-calc: padding-border;"
+    ],
+    "answer": "box-sizing: border-box;",
+    "explanation": "The box-sizing: border-box; property makes an element's specified width and height include the content, padding, and border. This is often preferred over the default content-box because it makes sizing more intuitive and predictable when adding padding or borders.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is the default value of the position property in CSS?",
+    "options": [
+      "static",
+      "relative",
+      "absolute",
+      "fixed"
+    ],
+    "answer": "static",
+    "explanation": "The default position value is 'static', which means the element follows the normal document flow and is not affected by top, right, bottom, or left properties. Elements with static positioning cannot be repositioned using these directional properties.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "If an element has position: absolute;, to which element will it be positioned relative?",
+    "options": [
+      "The nearest positioned ancestor (not static)",
+      "The body element always",
+      "The parent element always",
+      "The viewport"
+    ],
+    "answer": "The nearest positioned ancestor (not static)",
+    "explanation": "An absolutely positioned element is positioned relative to its nearest positioned ancestor (any ancestor with position set to relative, absolute, or fixed). If no positioned ancestor exists, it positions relative to the initial containing block (usually the viewport).",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What does the display: none; property do to an element?",
+    "options": [
+      "Makes the element invisible",
+      "Makes the element invisible but keeps its space",
+      "Makes the element transparent",
+      "Hides the element's content only"
+    ],
+    "answer": "Makes the element invisible",
+    "explanation": "display: none; completely removes the element from the document flow as if it doesn't exist. It doesn't take up any space and screen readers won't announce it. This is different from visibility: hidden; which hides the element but preserves its space in the layout.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which display value creates a block-level flex container?",
+    "options": [
+      "display: flex;",
+      "display: flexbox;",
+      "display: block-flex;",
+      "display: flex-container;"
+    ],
+    "answer": "display: flex;",
+    "explanation": "display: flex; creates a flex container that is block-level (takes full width available). Its direct children become flex items and can be arranged using flexbox properties like justify-content and align-items. There's also display: inline-flex; for inline-level flex containers.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is the difference between margin and padding?",
+    "options": [
+      "Margin is outside the border, padding is inside the border",
+      "Margin is inside the border, padding is outside the border",
+      "Margin affects horizontal space, padding affects vertical space",
+      "There is no difference, they are aliases"
+    ],
+    "answer": "Margin is outside the border, padding is inside the border",
+    "explanation": "Margin creates space outside an element's border, separating it from other elements. Padding creates space inside an element's border, between the border and the content. Margin is transparent and doesn't inherit the element's background color, while padding does.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which CSS property controls the stacking order of overlapping elements?",
+    "options": [
+      "z-index",
+      "stack-order",
+      "layer-index",
+      "position-depth"
+    ],
+    "answer": "z-index",
+    "explanation": "The z-index property specifies the stack order of positioned elements (elements with position other than static). Higher z-index values are placed in front of lower values. If two elements have the same z-index, the one that appears later in the HTML is on top.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What happens when you apply position: fixed; to an element?",
+    "options": [
+      "The element is positioned relative to the viewport and doesn't move when scrolling",
+      "The element is fixed in place and cannot be moved",
+      "The element is positioned relative to its parent",
+      "The element becomes sticky at the top when scrolling"
+    ],
+    "answer": "The element is positioned relative to the viewport and doesn't move when scrolling",
+    "explanation": "position: fixed; positions an element relative to the browser viewport. It stays in the same position even when the page is scrolled, making it useful for navigation bars or buttons that should remain visible. The element is removed from the normal document flow.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which shorthand property can set margin values for all four sides in one declaration?",
+    "options": [
+      "margin: top right bottom left;",
+      "margins: top right bottom left;",
+      "margin-all: top right bottom left;",
+      "set-margin: top right bottom left;"
+    ],
+    "answer": "margin: top right bottom left;",
+    "explanation": "The margin shorthand property accepts 1-4 values: margin: 10px; (all sides), margin: 10px 20px; (vertical horizontal), margin: 10px 20px 30px; (top horizontal bottom), or margin: 10px 20px 30px 40px; (top right bottom left - clockwise from top).",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What does display: inline-block; do?",
+    "options": [
+      "Makes an element inline but allows width and height to be set",
+      "Makes an element display as a block inside and inline outside",
+      "Creates a block element that flows inline",
+      "Makes an element half inline and half block"
+    ],
+    "answer": "Makes an element inline but allows width and height to be set",
+    "explanation": "display: inline-block; combines characteristics of both inline and block elements. Like inline elements, they flow with text and don't force line breaks. Like block elements, they respect width, height, and vertical margins/padding. This is useful for creating grid-like layouts with inline flow.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "Which positioning value makes an element positioned relative to its normal position?",
+    "options": [
+      "position: relative;",
+      "position: offset;",
+      "position: shifted;",
+      "position: adjusted;"
+    ],
+    "answer": "position: relative;",
+    "explanation": "position: relative; positions an element relative to where it would normally be in the document flow. Using top, right, bottom, or left moves it from that normal position, but the space it originally occupied is preserved. It also establishes a positioning context for absolutely positioned children.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is the default value of box-sizing in most browsers?",
+    "options": [
+      "content-box",
+      "border-box",
+      "padding-box",
+      "margin-box"
+    ],
+    "answer": "content-box",
+    "explanation": "The default box-sizing value is 'content-box', which means the width and height properties apply only to the content area. Padding and border are added outside the specified width/height. Many developers prefer to set box-sizing: border-box; globally for more intuitive sizing behavior.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "How do you center a block element horizontally using margin?",
+    "options": [
+      "margin: 0 auto;",
+      "margin: auto 0;",
+      "margin: center;",
+      "margin: 0 center;"
+    ],
+    "answer": "margin: 0 auto;",
+    "explanation": "margin: 0 auto; sets top/bottom margins to 0 and left/right margins to auto, which centers a block element horizontally if it has a defined width. The 'auto' value causes the browser to calculate equal left and right margins, centering the element within its parent.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the overflow property?",
+    "options": [
+      "Controls what happens when content is too large for its container",
+      "Controls the flow direction of text",
+      "Sets the maximum content size",
+      "Defines how elements wrap around each other"
+    ],
+    "answer": "Controls what happens when content is too large for its container",
+    "explanation": "The overflow property specifies what happens when content exceeds the size of its container. Values include: visible (default, content spills out), hidden (clips excess content), scroll (always shows scrollbars), and auto (shows scrollbars only when needed).",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which display value makes an element behave like a <span> tag?",
+    "options": [
+      "display: inline;",
+      "display: span;",
+      "display: text;",
+      "display: inline-text;"
+    ],
+    "answer": "display: inline;",
+    "explanation": "display: inline; makes an element behave like inline elements such as <span>, <a>, or <strong>. Inline elements flow with text, don't start on a new line, and don't respect width, height, or vertical margins. They only take up as much width as necessary.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What does position: sticky; do?",
+    "options": [
+      "Acts like relative until a scroll threshold, then acts like fixed",
+      "Makes an element permanently stuck to the page",
+      "Prevents scrolling past the element",
+      "Makes an element follow the mouse cursor"
+    ],
+    "answer": "Acts like relative until a scroll threshold, then acts like fixed",
+    "explanation": "position: sticky; is a hybrid of relative and fixed positioning. The element is treated as relatively positioned until it crosses a specified threshold (using top, right, bottom, or left), then it's treated as fixed. This is commonly used for headers that stick to the top when scrolling.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which CSS property would you use to add space between the content and border of an element?",
+    "options": [
+      "padding",
+      "margin",
+      "spacing",
+      "gap"
+    ],
+    "answer": "padding",
+    "explanation": "The padding property adds space between an element's content and its border. Unlike margin (which adds space outside the border), padding is inside the border and adopts the element's background color. Padding can be set individually for each side or using shorthand notation.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What does display: block; do to an element?",
+    "options": [
+      "Makes it take up the full width available and start on a new line",
+      "Makes it display as an inline element",
+      "Makes it invisible",
+      "Makes it float to the left"
+    ],
+    "answer": "Makes it take up the full width available and start on a new line",
+    "explanation": "display: block; makes an element behave like block-level elements such as <div>, <p>, or <h1>. Block elements start on a new line, take up the full width available by default, and respect width, height, and all margins. You can stack block elements vertically.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "If an element has width: 200px; padding: 20px; border: 5px; and box-sizing: content-box;, what is its total width?",
+    "options": [
+      "250px",
+      "200px",
+      "240px",
+      "230px"
+    ],
+    "answer": "250px",
+    "explanation": "With box-sizing: content-box (default), the total width is calculated as: content width (200px) + left padding (20px) + right padding (20px) + left border (5px) + right border (5px) = 250px. The specified width applies only to the content area.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "Which property controls whether an element floats to the left or right?",
+    "options": [
+      "float",
+      "align",
+      "position",
+      "side"
+    ],
+    "answer": "float",
+    "explanation": "The float property makes an element float to the left or right of its container, allowing other content to wrap around it. Values include left, right, and none. Floated elements are removed from the normal document flow but remain part of the flow (unlike absolutely positioned elements).",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the clear property?",
+    "options": [
+      "Prevents an element from wrapping around floated elements",
+      "Removes all styles from an element",
+      "Clears the content of an element",
+      "Makes an element transparent"
+    ],
+    "answer": "Prevents an element from wrapping around floated elements",
+    "explanation": "The clear property specifies which sides of an element cannot be adjacent to floated elements. Values include left (no floats on left), right (no floats on right), both (no floats on either side), and none (default). It's commonly used to prevent layout issues caused by floats.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which overflow value shows scrollbars only when content overflows?",
+    "options": [
+      "overflow: auto;",
+      "overflow: scroll;",
+      "overflow: hidden;",
+      "overflow: visible;"
+    ],
+    "answer": "overflow: auto;",
+    "explanation": "overflow: auto; shows scrollbars only when the content actually overflows its container. overflow: scroll; always shows scrollbars even if content fits. overflow: hidden; clips overflow content without scrollbars. overflow: visible; (default) allows content to overflow the container visibly.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "What does the visibility: hidden; property do differently than display: none;?",
+    "options": [
+      "It hides the element but preserves its space in the layout",
+      "It removes the element completely from the page",
+      "It makes the element transparent",
+      "It has no difference from display: none;"
+    ],
+    "answer": "It hides the element but preserves its space in the layout",
+    "explanation": "visibility: hidden; makes an element invisible but it still occupies space in the layout, affecting the positioning of other elements. display: none; removes the element from the document flow entirely, as if it doesn't exist. visibility: hidden; elements are not read by screen readers.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which CSS unit is relative to the font-size of the root element (<html>)?",
+    "options": [
+      "rem",
+      "em",
+      "px",
+      "pt"
+    ],
+    "answer": "rem",
+    "explanation": "rem (root em) units are relative to the font-size of the root element (usually <html>). If the root font-size is 16px, then 1rem = 16px, 2rem = 32px, etc. This is different from em units, which are relative to the font-size of the parent element and can compound.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What is the default display value for a <div> element?",
+    "options": [
+      "block",
+      "inline",
+      "inline-block",
+      "flex"
+    ],
+    "answer": "block",
+    "explanation": "The <div> element has a default display value of 'block', making it a block-level element. It starts on a new line, takes up the full width available, and respects width, height, and all margins. This is why divs are commonly used as container elements for layout.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "How do you make an absolutely positioned element centered both horizontally and vertically?",
+    "options": [
+      "top: 50%; left: 50%; transform: translate(-50%, -50%);",
+      "margin: auto;",
+      "position: center;",
+      "align: center; vertical-align: middle;"
+    ],
+    "answer": "top: 50%; left: 50%; transform: translate(-50%, -50%);",
+    "explanation": "For absolute positioning, set top: 50%; and left: 50%; to position the element's top-left corner at the center, then use transform: translate(-50%, -50%); to shift it back by half its own width and height. This centers the element regardless of its size. Alternatively, you can use margin: auto with all four directions set to 0 if the element has defined dimensions.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What is the effect of min-width and max-width properties?",
+    "options": [
+      "They set constraints on how small or large an element can be",
+      "They set the exact width of an element",
+      "They control the minimum and maximum content inside",
+      "They determine responsive breakpoints"
+    ],
+    "answer": "They set constraints on how small or large an element can be",
+    "explanation": "min-width sets the minimum width an element can shrink to, while max-width sets the maximum width it can expand to. These properties are useful for responsive design, allowing elements to resize within specified limits. If width conflicts with min-width or max-width, the constraints take priority.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "Which property would you use to control the space between lines of text?",
+    "options": [
+      "line-height",
+      "line-spacing",
+      "text-spacing",
+      "vertical-spacing"
+    ],
+    "answer": "line-height",
+    "explanation": "The line-height property controls the vertical spacing between lines of text. It can be specified as a unitless number (multiplier of font-size), a length value (px, em, rem), or a percentage. A line-height of 1.5 means each line is 1.5 times the font-size in height, which improves readability.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "What does the aspect-ratio CSS property do?",
+    "options": [
+      "Defines a preferred width-to-height ratio for an element",
+      "Changes the image resolution",
+      "Sets the screen aspect ratio",
+      "Controls font proportions"
+    ],
+    "answer": "Defines a preferred width-to-height ratio for an element",
+    "explanation": "The aspect-ratio property sets a preferred aspect ratio for an element's box, which the browser uses to calculate automatic sizes. For example, aspect-ratio: 16 / 9; creates a 16:9 ratio. If width is set, height adjusts automatically and vice versa. This is especially useful for responsive images and video containers.",
+    "image": null
+  }
+]

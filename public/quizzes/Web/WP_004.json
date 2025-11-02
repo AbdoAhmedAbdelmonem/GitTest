@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What are the four layers of the CSS Box Model?",
+    "options": [
+      "A) Padding, border, text, background",
+      "B) Margin, border, padding, content",
+      "C) Content, layout, frame, border",
+      "D) Padding, layout, frame, content"
+    ],
+    "answer": "B) Margin, border, padding, content",
+    "explanation": "The CSS Box Model defines each element as a box consisting of content, padding, border, and margin in that order.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What happens when the top and bottom margins of two block elements meet?",
+    "options": [
+      "A) They are added together",
+      "B) They cancel each other out",
+      "C) They collapse into a single margin",
+      "D) They remain separate"
+    ],
+    "answer": "C) They collapse into a single margin",
+    "explanation": "When block-level siblings have adjacent vertical margins, they collapse into one margin equal to the larger of the two.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "How can you center a block element horizontally using CSS?",
+    "options": [
+      "A) margin: 0 auto;",
+      "B) text-align: center;",
+      "C) display: inline;",
+      "D) align-items: center;"
+    ],
+    "answer": "A) margin: 0 auto;",
+    "explanation": "Setting margin-left and margin-right to auto centers a block element within its container.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "Does the box model apply to inline elements?",
+    "options": [
+      "A) No, it only applies to block elements",
+      "B) Yes, but margin-top and margin-bottom are ignored",
+      "C) Yes, and all margins work the same way",
+      "D) Only padding applies"
+    ],
+    "answer": "B) Yes, but margin-top and margin-bottom are ignored",
+    "explanation": "Inline elements have a box model, but vertical margins are ignored; only horizontal margins and padding affect layout.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What does setting 'body { margin: 0; }' do?",
+    "options": [
+      "A) It adds default margins to body content",
+      "B) It removes browser default margins",
+      "C) It makes all text centered",
+      "D) It prevents margin collapsing"
+    ],
+    "answer": "B) It removes browser default margins",
+    "explanation": "Browsers apply default margins to the <body>. Setting margin: 0 removes them for precise layout control.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which CSS property controls the horizontal alignment of flex items?",
+    "options": [
+      "A) align-items",
+      "B) justify-content",
+      "C) align-content",
+      "D) flex-wrap"
+    ],
+    "answer": "B) justify-content",
+    "explanation": "In flexbox with row direction, justify-content controls horizontal alignment of items within the container.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which CSS property controls vertical alignment of items in a flex container?",
+    "options": [
+      "A) justify-content",
+      "B) align-items",
+      "C) text-align",
+      "D) flex-direction"
+    ],
+    "answer": "B) align-items",
+    "explanation": "The align-items property determines how items are vertically aligned in a row-based flex layout.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What does 'justify-content: space-between;' do in flexbox?",
+    "options": [
+      "A) Puts all items at the start",
+      "B) Adds equal space around all items",
+      "C) Puts first item at start, last at end, even space in between",
+      "D) Centers all items with equal spacing"
+    ],
+    "answer": "C) Puts first item at start, last at end, even space in between",
+    "explanation": "‘space-between’ distributes flex items evenly with no space at container edges.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What does 'display: flex;' do?",
+    "options": [
+      "A) Makes an element float",
+      "B) Turns an element into a flex container",
+      "C) Converts inline items to block items",
+      "D) Aligns text inside the element"
+    ],
+    "answer": "B) Turns an element into a flex container",
+    "explanation": "‘display: flex’ changes the element’s layout mode to flex, allowing flex properties to apply to its children.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which property sets the direction of items in a flex container?",
+    "options": [
+      "A) flex-wrap",
+      "B) flex-direction",
+      "C) align-items",
+      "D) display"
+    ],
+    "answer": "B) flex-direction",
+    "explanation": "The flex-direction property defines whether items are laid out in rows, columns, or reversed.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is the effect of 'flex-direction: column;'?",
+    "options": [
+      "A) Items are arranged horizontally",
+      "B) Items are stacked vertically",
+      "C) Items overlap each other",
+      "D) Items align at the top only"
+    ],
+    "answer": "B) Items are stacked vertically",
+    "explanation": "Setting flex-direction to column makes flex items align vertically from top to bottom.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What happens if you use 'justify-content' on a column flex container?",
+    "options": [
+      "A) It controls horizontal alignment",
+      "B) It controls vertical alignment",
+      "C) It centers text only",
+      "D) It has no effect"
+    ],
+    "answer": "B) It controls vertical alignment",
+    "explanation": "In column direction, justify-content moves items vertically instead of horizontally.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which property allows flexible space distribution inside a flex container?",
+    "options": [
+      "A) flex-wrap",
+      "B) justify-content",
+      "C) align-items",
+      "D) flex-grow"
+    ],
+    "answer": "D) flex-grow",
+    "explanation": "flex-grow defines how much a flex item should expand relative to others when extra space is available.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which HTML element is best used for navigation links?",
+    "options": [
+      "A) <section>",
+      "B) <header>",
+      "C) <nav>",
+      "D) <aside>"
+    ],
+    "answer": "C) <nav>",
+    "explanation": "The <nav> element semantically represents a navigation section containing links.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "Which element defines the introductory section of a page or article?",
+    "options": [
+      "A) <header>",
+      "B) <section>",
+      "C) <article>",
+      "D) <footer>"
+    ],
+    "answer": "A) <header>",
+    "explanation": "The <header> tag contains introductory content or navigational aids for a section or page.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which HTML element should you use for the bottom section of a webpage?",
+    "options": [
+      "A) <section>",
+      "B) <footer>",
+      "C) <aside>",
+      "D) <div>"
+    ],
+    "answer": "B) <footer>",
+    "explanation": "The <footer> tag represents the closing section of a page, often containing copyright or links.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which element represents an independent piece of content in a webpage?",
+    "options": [
+      "A) <article>",
+      "B) <div>",
+      "C) <section>",
+      "D) <span>"
+    ],
+    "answer": "A) <article>",
+    "explanation": "The <article> tag defines self-contained content such as a blog post or news entry.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which HTML tag is used for generic grouping when no semantic tag fits?",
+    "options": [
+      "A) <div>",
+      "B) <section>",
+      "C) <article>",
+      "D) <p>"
+    ],
+    "answer": "A) <div>",
+    "explanation": "<div> is a generic block container used for grouping content when no specific semantic element applies.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What’s the difference between block and inline elements?",
+    "options": [
+      "A) Inline elements start on new lines",
+      "B) Block elements respect height/width; inline do not",
+      "C) Inline elements have margins",
+      "D) They behave the same"
+    ],
+    "answer": "B) Block elements respect height/width; inline do not",
+    "explanation": "Block elements occupy full width and accept height/width; inline elements flow within text.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What does 'display: inline-block;' do?",
+    "options": [
+      "A) Makes a block element behave like text",
+      "B) Allows block layout but on same line",
+      "C) Removes box model",
+      "D) Centers all elements"
+    ],
+    "answer": "B) Allows block layout but on same line",
+    "explanation": "‘inline-block’ keeps elements inline but allows width, height, and box model properties to apply.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What CSS property controls the spacing inside an element’s border?",
+    "options": [
+      "A) margin",
+      "B) padding",
+      "C) border-spacing",
+      "D) line-height"
+    ],
+    "answer": "B) padding",
+    "explanation": "Padding adds space between content and border, inside the element box.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "Which CSS shorthand sets all four margins in one declaration?",
+    "options": [
+      "A) margin: 2px 4px 3px 1px;",
+      "B) margin-left: 4px;",
+      "C) margin-top-bottom: 10px;",
+      "D) margin-4: 1px;"
+    ],
+    "answer": "A) margin: 2px 4px 3px 1px;",
+    "explanation": "The shorthand margin syntax sets top, right, bottom, left in one rule (clockwise).",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which element defines a logical grouping of related content within a page?",
+    "options": [
+      "A) <article>",
+      "B) <section>",
+      "C) <header>",
+      "D) <div>"
+    ],
+    "answer": "B) <section>",
+    "explanation": "A <section> groups related content and typically includes a heading.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "What happens to inline elements when placed in a flex container?",
+    "options": [
+      "A) They disappear",
+      "B) They become flex items and gain box properties",
+      "C) They remain unchanged",
+      "D) They overflow the container"
+    ],
+    "answer": "B) They become flex items and gain box properties",
+    "explanation": "Flexbox changes inline elements into flex items, allowing them to have height and width.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which flexbox value evenly distributes items with equal space around them?",
+    "options": [
+      "A) justify-content: space-between;",
+      "B) justify-content: center;",
+      "C) justify-content: space-around;",
+      "D) align-items: stretch;"
+    ],
+    "answer": "C) justify-content: space-around;",
+    "explanation": "‘space-around’ adds equal space on both sides of each item inside the container.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What is the default flex-direction value?",
+    "options": [
+      "A) column",
+      "B) row",
+      "C) row-reverse",
+      "D) none"
+    ],
+    "answer": "B) row",
+    "explanation": "By default, flex containers lay out items in a row (horizontally).",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "Which tool in Chrome helps inspect element margins and layout visually?",
+    "options": [
+      "A) Chrome Memory Profiler",
+      "B) Chrome Inspector",
+      "C) Console Logs",
+      "D) Chrome Extensions"
+    ],
+    "answer": "B) Chrome Inspector",
+    "explanation": "Chrome Inspector visualizes box model, margins, and layout for debugging CSS.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What is a negative margin in CSS used for?",
+    "options": [
+      "A) Increasing space around elements",
+      "B) Overlapping elements by reducing space",
+      "C) Centering block elements",
+      "D) Adding extra padding"
+    ],
+    "answer": "B) Overlapping elements by reducing space",
+    "explanation": "Negative margins pull elements closer or cause them to overlap adjacent content.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "Why use semantic HTML tags like <header> or <section> instead of <div>?",
+    "options": [
+      "A) They load faster",
+      "B) They make HTML more readable and accessible",
+      "C) They require less CSS",
+      "D) They are deprecated tags"
+    ],
+    "answer": "B) They make HTML more readable and accessible",
+    "explanation": "Semantic tags convey meaning to browsers and assistive technologies, improving readability and SEO.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "Which layout model is most suited for creating responsive flexible designs?",
+    "options": [
+      "A) Table layout",
+      "B) Float layout",
+      "C) Flexbox layout",
+      "D) Inline-block layout"
+    ],
+    "answer": "C) Flexbox layout",
+    "explanation": "Flexbox simplifies responsive layouts by allowing flexible alignment and spacing of items.",
+    "image": null
+  }
+]

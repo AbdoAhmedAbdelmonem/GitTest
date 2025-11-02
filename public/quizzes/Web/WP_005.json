@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "In CSS, what is the correct order for the padding shorthand 'padding: 2px 4px 3px 1px;'?",
+    "options": [
+      "A) left | bottom | right | top",
+      "B) top | right | bottom | left",
+      "C) right | top | left | bottom",
+      "D) top | left | right | bottom"
+    ],
+    "answer": "B) top | right | bottom | left",
+    "explanation": "Padding and margin shorthand values follow the clockwise order: top, right, bottom, left.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What happens to inline elements when 'display: flex' is applied to their container?",
+    "options": [
+      "A) They remain inline and keep their original behavior",
+      "B) They become flex items and can have height and width",
+      "C) They disappear completely",
+      "D) They act like block elements automatically"
+    ],
+    "answer": "B) They become flex items and can have height and width",
+    "explanation": "When a container uses display: flex, its children become flex items that follow new layout rules and can have defined width and height.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Which CSS property defines the initial size of a flex item before it grows or shrinks?",
+    "options": [
+      "A) flex-grow",
+      "B) flex-basis",
+      "C) align-items",
+      "D) flex-shrink"
+    ],
+    "answer": "B) flex-basis",
+    "explanation": "The flex-basis property defines the initial main size of a flex item before free space is distributed.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "By default, what value does the 'flex-shrink' property have?",
+    "options": [
+      "A) 0",
+      "B) 1",
+      "C) auto",
+      "D) inherit"
+    ],
+    "answer": "B) 1",
+    "explanation": "By default, flex items can shrink if needed, since flex-shrink defaults to 1.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What effect does 'flex-shrink: 0;' have on a flex item?",
+    "options": [
+      "A) The item disappears",
+      "B) The item grows beyond the container",
+      "C) The item does not shrink below its flex-basis",
+      "D) The item always aligns to the start"
+    ],
+    "answer": "C) The item does not shrink below its flex-basis",
+    "explanation": "Setting flex-shrink to 0 prevents the item from reducing its size when there’s not enough space.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which property allows flex items to expand and fill the available space in the flex container?",
+    "options": [
+      "A) flex-grow",
+      "B) flex-basis",
+      "C) flex-wrap",
+      "D) align-content"
+    ],
+    "answer": "A) flex-grow",
+    "explanation": "flex-grow defines how much a flex item should grow relative to the rest when free space is available.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is the default value of 'align-items' in a flex container?",
+    "options": [
+      "A) center",
+      "B) stretch",
+      "C) flex-start",
+      "D) baseline"
+    ],
+    "answer": "B) stretch",
+    "explanation": "By default, align-items is 'stretch', which makes all flex items stretch to fill the container’s cross axis.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "If 'align-items' is set to 'stretch' and no height is defined on flex items, what happens?",
+    "options": [
+      "A) Flex items will collapse to zero height",
+      "B) Flex items will stretch to match the container height",
+      "C) Flex items will overflow the container",
+      "D) No effect; only width changes"
+    ],
+    "answer": "B) Flex items will stretch to match the container height",
+    "explanation": "align-items: stretch causes flex items to stretch along the cross axis if no size is explicitly defined.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "Which property controls horizontal alignment of flex items when 'flex-direction: row'?",
+    "options": [
+      "A) align-items",
+      "B) justify-content",
+      "C) align-content",
+      "D) text-align"
+    ],
+    "answer": "B) justify-content",
+    "explanation": "justify-content distributes items along the main axis — horizontally for rows.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What happens if a flex item has both 'width' and 'flex-basis' defined?",
+    "options": [
+      "A) Width overrides flex-basis",
+      "B) flex-basis overrides width",
+      "C) Both are ignored",
+      "D) The smaller value is chosen automatically"
+    ],
+    "answer": "B) flex-basis overrides width",
+    "explanation": "When both are defined, flex-basis takes precedence as the initial size of the flex item.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What type of elements typically have no height or width by default?",
+    "options": [
+      "A) Block elements",
+      "B) Inline elements",
+      "C) Flex items",
+      "D) Absolute elements"
+    ],
+    "answer": "B) Inline elements",
+    "explanation": "Inline elements do not have intrinsic height or width; their size depends on their content.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "Which CSS property controls space between letters?",
+    "options": [
+      "A) word-spacing",
+      "B) letter-spacing",
+      "C) text-indent",
+      "D) line-height"
+    ],
+    "answer": "B) letter-spacing",
+    "explanation": "letter-spacing adjusts the spacing between characters in text.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which of the following can change text case in CSS?",
+    "options": [
+      "A) text-transform",
+      "B) font-variant",
+      "C) text-decoration",
+      "D) text-style"
+    ],
+    "answer": "A) text-transform",
+    "explanation": "text-transform changes text case, e.g. uppercase, lowercase, or capitalize.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What value of 'flex-grow' means the item will not grow at all?",
+    "options": [
+      "A) 0",
+      "B) 1",
+      "C) auto",
+      "D) none"
+    ],
+    "answer": "A) 0",
+    "explanation": "The default flex-grow value is 0, meaning the item won’t expand beyond its flex-basis.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "For a flex container with 'flex-direction: column', what does 'flex-basis' represent?",
+    "options": [
+      "A) Initial width of the item",
+      "B) Initial height of the item",
+      "C) Margin value",
+      "D) Border width"
+    ],
+    "answer": "B) Initial height of the item",
+    "explanation": "In column direction, the main axis is vertical, so flex-basis refers to the height.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What does 'justify-content: center;' do in a flex container?",
+    "options": [
+      "A) Vertically centers the items",
+      "B) Horizontally centers the items",
+      "C) Aligns text in the center",
+      "D) Does nothing if align-items is set"
+    ],
+    "answer": "B) Horizontally centers the items",
+    "explanation": "justify-content aligns items along the main axis; for rows, it’s horizontal centering.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "If a flex container’s direction is set to column, how does 'align-items' behave?",
+    "options": [
+      "A) It aligns items horizontally",
+      "B) It aligns items vertically",
+      "C) It aligns text inside items",
+      "D) It has no effect"
+    ],
+    "answer": "A) It aligns items horizontally",
+    "explanation": "In column direction, the cross axis is horizontal, so align-items affects horizontal alignment.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which of these correctly removes underlines from links?",
+    "options": [
+      "A) text-transform: none;",
+      "B) text-decoration: none;",
+      "C) font-style: normal;",
+      "D) text-align: none;"
+    ],
+    "answer": "B) text-decoration: none;",
+    "explanation": "text-decoration: none removes underlines, while text-transform affects letter casing.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What happens if no 'flex-grow' or 'flex-shrink' are defined?",
+    "options": [
+      "A) The item grows infinitely",
+      "B) The item stays at its flex-basis size",
+      "C) The item disappears",
+      "D) The item overflows the container"
+    ],
+    "answer": "B) The item stays at its flex-basis size",
+    "explanation": "Without growth or shrink, the item remains fixed at its initial flex-basis size.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What unit represents 1% of the viewport height in CSS?",
+    "options": [
+      "A) vh",
+      "B) vw",
+      "C) vmin",
+      "D) vmax"
+    ],
+    "answer": "A) vh",
+    "explanation": "1vh equals 1% of the viewport’s height; vw represents the width.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "Which property determines whether flex items are laid out in a row or a column?",
+    "options": [
+      "A) align-items",
+      "B) justify-content",
+      "C) flex-direction",
+      "D) flex-flow"
+    ],
+    "answer": "C) flex-direction",
+    "explanation": "The flex-direction property defines the main axis, controlling whether items are arranged horizontally (row) or vertically (column).",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is the default value of the 'flex-direction' property?",
+    "options": [
+      "A) column",
+      "B) row",
+      "C) column-reverse",
+      "D) row-reverse"
+    ],
+    "answer": "B) row",
+    "explanation": "By default, flex items are arranged horizontally in a row from left to right.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "When 'justify-content: space-between' is used, how are items positioned?",
+    "options": [
+      "A) All items are centered with equal space around them",
+      "B) Items are evenly spaced with no gap at the ends",
+      "C) Items are pushed to the edges with equal space between them",
+      "D) Items are aligned to the start of the container"
+    ],
+    "answer": "C) Items are pushed to the edges with equal space between them",
+    "explanation": "space-between places the first item at the start, the last at the end, and equal space between others.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "Which CSS property specifies how flex items wrap when they exceed the container’s space?",
+    "options": [
+      "A) flex-flow",
+      "B) flex-wrap",
+      "C) overflow",
+      "D) align-content"
+    ],
+    "answer": "B) flex-wrap",
+    "explanation": "flex-wrap determines whether items stay on one line (nowrap) or wrap to multiple lines when space runs out.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What does 'align-content' affect in a flex container?",
+    "options": [
+      "A) Single line of items",
+      "B) Multiple lines of items",
+      "C) Text inside items",
+      "D) Font alignment"
+    ],
+    "answer": "B) Multiple lines of items",
+    "explanation": "align-content distributes space between multiple flex lines when wrapping occurs.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "If 'flex-direction: row', what axis is considered the main axis?",
+    "options": [
+      "A) Vertical axis",
+      "B) Horizontal axis",
+      "C) Diagonal axis",
+      "D) No specific axis"
+    ],
+    "answer": "B) Horizontal axis",
+    "explanation": "With row direction, the main axis runs horizontally, and the cross axis runs vertically.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What will happen if you set 'display: block' on a <span> element?",
+    "options": [
+      "A) It remains inline",
+      "B) It becomes a block element and can have height/width",
+      "C) It disappears",
+      "D) It becomes a flex container automatically"
+    ],
+    "answer": "B) It becomes a block element and can have height/width",
+    "explanation": "Changing display to block allows inline elements like <span> to occupy full width and define height.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "Which property would you use to make text italic?",
+    "options": [
+      "A) font-weight",
+      "B) font-style",
+      "C) text-decoration",
+      "D) text-transform"
+    ],
+    "answer": "B) font-style",
+    "explanation": "font-style: italic is used to slant text; it can also be set to normal to remove italics.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "Which value of 'justify-content' evenly distributes items with equal space around each one?",
+    "options": [
+      "A) space-between",
+      "B) space-around",
+      "C) space-evenly",
+      "D) stretch"
+    ],
+    "answer": "B) space-around",
+    "explanation": "space-around gives equal space on both sides of each item, resulting in half-sized space at the container’s edges.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "Which CSS property controls whether box sizing includes borders and padding in element width calculations?",
+    "options": [
+      "A) box-sizing",
+      "B) border-collapse",
+      "C) display",
+      "D) box-shadow"
+    ],
+    "answer": "A) box-sizing",
+    "explanation": "box-sizing determines how the browser calculates an element’s total width and height. 'border-box' includes padding and border in the set dimensions.",
+    "image": null
+  }
+]

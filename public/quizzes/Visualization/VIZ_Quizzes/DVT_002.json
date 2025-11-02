@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What relationship was identified between mCPR and % demand satisfied in the multi-country data?",
+    "answer": "B) Lower mCPR countries have lower % demand satisfied",
+    "options": [
+      "A) No relationship exists",
+      "B) Lower mCPR countries have lower % demand satisfied",
+      "C) Higher mCPR countries have lower % demand satisfied",
+      "D) The relationship is random"
+    ],
+    "image": null,
+    "explanation": "The story identified in the reordered data was that 'lower mCPR countries have lower % demand satisfied.'"
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "Which of the following is NOT mentioned as an important audience consideration?",
+    "answer": "B) Their favorite color",
+    "options": [
+      "A) Where they are from",
+      "B) Their favorite color",
+      "C) Their demographic",
+      "D) Whether they are skeptics"
+    ],
+    "image": null,
+    "explanation": "The lecture lists many audience considerations (where they're from, demographics, whether they're skeptics, etc.) but does not mention their favorite color."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "When tailoring content to a knowledgeable audience from Burkina Faso, what specific approach was demonstrated?",
+    "answer": "B) Highlighting Burkina Faso specifically in the visualization",
+    "options": [
+      "A) Using complex statistical models",
+      "B) Highlighting Burkina Faso specifically in the visualization",
+      "C) Removing all context",
+      "D) Adding more countries to compare"
+    ],
+    "image": null,
+    "explanation": "The example shows highlighting Burkina Faso specifically when the audience is knowledgeable and from that country, making the data more relevant to them."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "What is data storytelling defined as?",
+    "answer": "B) A method that allows sharing data through a story for easier understanding",
+    "options": [
+      "A) A method for collecting data",
+      "B) A method that allows sharing data through a story for easier understanding",
+      "C) A technique for hiding data",
+      "D) A way to make data more complex"
+    ],
+    "image": null,
+    "explanation": "Data storytelling is explicitly defined as 'a method that allows sharing data through a story that provides for easier understanding.'"
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "Before doing storytelling or analysis, what is critical to understand?",
+    "answer": "B) Your data and its limitations",
+    "options": [
+      "A) The audience's preferences only",
+      "B) Your data and its limitations",
+      "C) The presentation software",
+      "D) Color theory"
+    ],
+    "image": null,
+    "explanation": "The lecture emphasizes: 'Prior to doing any storytelling or analysis, it is critical to understand your data and its limitations.'"
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "Which question is NOT mentioned as important when understanding your data?",
+    "answer": "C) How much did the data cost?",
+    "options": [
+      "A) How was the information collected?",
+      "B) What is the source?",
+      "C) How much did the data cost?",
+      "D) What is missing from the data?"
+    ],
+    "image": null,
+    "explanation": "The lecture asks about collection methods, sources, and missing data, but does not mention the cost of data."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "When considering context, which question should you ask?",
+    "answer": "A) What's in it for me? (from the audience's perspective)",
+    "options": [
+      "A) What's in it for me? (from the audience's perspective)",
+      "B) How long should the presentation be?",
+      "C) What colors should I use?",
+      "D) How many slides do I need?"
+    ],
+    "image": null,
+    "explanation": "'What's in it for me?' is specifically mentioned as an important context question from the audience's perspective."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "What is the main problem with complex visuals?",
+    "answer": "B) They confuse the audience and distract from the point",
+    "options": [
+      "A) They are too colorful",
+      "B) They confuse the audience and distract from the point",
+      "C) They take too long to create",
+      "D) They are too expensive to produce"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Complex visuals will confuse the audience and distract them from the point of the presentation.'"
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "According to the \"Use Your Ink Strategically\" principle, what should you do if an element doesn't aid understanding?",
+    "answer": "C) Delete it",
+    "options": [
+      "A) Make it bigger",
+      "B) Change its color",
+      "C) Delete it",
+      "D) Move it to another slide"
+    ],
+    "image": null,
+    "explanation": "The principle states: 'Every single line, word, and shape should aid in the understanding of the graphic. If not, delete.'"
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "What type of fonts are recommended for data visualizations?",
+    "answer": "B) Sans serif fonts like Helvetica, Arial, Gill Sans",
+    "options": [
+      "A) Serif fonts like Times New Roman",
+      "B) Sans serif fonts like Helvetica, Arial, Gill Sans",
+      "C) Script fonts",
+      "D) Decorative fonts"
+    ],
+    "image": null,
+    "explanation": "The text tips specifically recommend 'sans serif fonts (Helvetica, Arial, Gill Sans are good options).'"
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "Which of the following is NOT mentioned as a way to create text emphasis?",
+    "answer": "C) Underlining",
+    "options": [
+      "A) ALL CAPS",
+      "B) Bold",
+      "C) Underlining",
+      "D) Bigger size"
+    ],
+    "image": null,
+    "explanation": "The ways listed to create emphasis are 'ALL CAPS, bold, italics, bigger' - underlining is not mentioned."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "what can title text be used for?",
+    "answer": "B) The takeaway message",
+    "options": [
+      "A) Decoration only",
+      "B) The takeaway message",
+      "C) Author's name",
+      "D) Date and time"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Can use title text for takeaway message' and demonstrates this with 'Put the Key Message Right in the Title.'"
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "When is it appropriate to use text instead of a graph?",
+    "answer": "C) When a single number tells the story effectively (like \"110% growth\")",
+    "options": [
+      "A) Never",
+      "B) When you have complex data",
+      "C) When a single number tells the story effectively (like \"110% growth\")",
+      "D) Always"
+    ],
+    "image": null,
+    "explanation": "The example shows 'Exoalgio's revenue grew 110% between 2013 and 2014' as an effective use of text instead of a graph when a single powerful number tells the story."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "What color tip suggests using a specific color for neutral or unimportant data?",
+    "answer": "C) Use gray",
+    "options": [
+      "A) Use red",
+      "B) Use blue",
+      "C) Use gray",
+      "D) Use black"
+    ],
+    "image": null,
+    "explanation": "The color tips explicitly state: 'Use gray to denote neutral or unimportant data.'"
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "According to color principles, what will darker/brighter colors be read as?",
+    "answer": "B) More",
+    "options": [
+      "A) Less important",
+      "B) More",
+      "C) Neutral",
+      "D) Background elements"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Darker/brighter colors will read as \"more\".'"
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "What does higher contrast between objects lead to?",
+    "answer": "B) They are perceived as more different",
+    "options": [
+      "A) They are perceived as more similar",
+      "B) They are perceived as more different",
+      "C) They become invisible",
+      "D) They lose meaning"
+    ],
+    "image": null,
+    "explanation": "The principle states: 'The higher the contrast between objects, the more differently they are perceived.'"
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "In Western culture, which color combination has an implicit correlation?",
+    "answer": "B) Pink and Blue",
+    "options": [
+      "A) Yellow and Green",
+      "B) Pink and Blue",
+      "C) Orange and Purple",
+      "D) Brown and Gray"
+    ],
+    "image": null,
+    "explanation": "Pink and Blue is listed as an example of implicit correlations with color combinations (gender associations)."
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "What societal connotation does RED typically have?",
+    "answer": "C) Bad",
+    "options": [
+      "A) Good",
+      "B) Neutral",
+      "C) Bad",
+      "D) Unknown"
+    ],
+    "image": null,
+    "explanation": "Under societal connotations, the lecture states 'Red= bad' and 'Green= good.'"
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "Which type of color palette is NOT mentioned for visualizations?",
+    "answer": "D) Alphabetical",
+    "options": [
+      "A) Sequential",
+      "B) Divergent",
+      "C) Categorical",
+      "D) Alphabetical"
+    ],
+    "image": null,
+    "explanation": "The three types of color palettes mentioned are Sequential, Divergent, and Categorical - not Alphabetical."
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "Which tool is NOT listed as a tool for creating data visualizations?",
+    "answer": "C) Microsoft Word",
+    "options": [
+      "A) Tableau",
+      "B) Infogram",
+      "C) Microsoft Word",
+      "D) Piktochart"
+    ],
+    "image": null,
+    "explanation": "The tools listed are Excel/Powerpoint, Infogram, Tableau, Piktochart, Easely, and Visage. Microsoft Word is not mentioned as a visualization tool."
+  }
+]
