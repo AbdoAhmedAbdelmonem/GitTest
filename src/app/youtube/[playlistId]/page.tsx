@@ -145,47 +145,70 @@ export default function YouTubePlaylistPage() {
       setLoading(true)
       setError(null)
 
-      const playlistResponse = await fetch(
-        `${YOUTUBE_API_BASE}/playlistItems?` +
-          new URLSearchParams({
-            key: YOUTUBE_API_KEY,
-            playlistId: playlistId,
-            part: "snippet",
-            maxResults: "50",
-          }),
-      )
+      // Fetch all playlist items with pagination
+      let allPlaylistItems: any[] = []
+      let nextPageToken: string | undefined = undefined
 
-      if (!playlistResponse.ok) {
-        throw new Error(`Failed to fetch playlist: ${playlistResponse.status}`)
-      }
+      do {
+        const params: any = {
+          key: YOUTUBE_API_KEY,
+          playlistId: playlistId,
+          part: "snippet",
+          maxResults: "50", // YouTube API maximum per request
+        }
 
-      const playlistData = await playlistResponse.json()
-      const videoIds = playlistData.items
+        if (nextPageToken) {
+          params.pageToken = nextPageToken
+        }
+
+        const playlistResponse = await fetch(
+          `${YOUTUBE_API_BASE}/playlistItems?` + new URLSearchParams(params),
+        )
+
+        if (!playlistResponse.ok) {
+          throw new Error(`Failed to fetch playlist: ${playlistResponse.status}`)
+        }
+
+        const playlistData = await playlistResponse.json()
+        allPlaylistItems = allPlaylistItems.concat(playlistData.items || [])
+        nextPageToken = playlistData.nextPageToken
+      } while (nextPageToken)
+
+      const videoIds = allPlaylistItems
         .map((item: any) => item.snippet.resourceId.videoId)
         .filter(Boolean)
-        .join(",")
 
-      if (!videoIds) {
+      if (videoIds.length === 0) {
         setVideos([])
         setFilteredVideos([])
         return
       }
 
-      const videosResponse = await fetch(
-        `${YOUTUBE_API_BASE}/videos?` +
-          new URLSearchParams({
-            key: YOUTUBE_API_KEY,
-            id: videoIds,
-            part: "snippet,contentDetails,statistics",
-          }),
-      )
+      // Fetch video details in batches (YouTube API accepts max 50 IDs at once)
+      const allVideos: any[] = []
+      const batchSize = 50
 
-      if (!videosResponse.ok) {
-        throw new Error(`Failed to fetch video details: ${videosResponse.status}`)
+      for (let i = 0; i < videoIds.length; i += batchSize) {
+        const batchIds = videoIds.slice(i, i + batchSize).join(",")
+
+        const videosResponse = await fetch(
+          `${YOUTUBE_API_BASE}/videos?` +
+            new URLSearchParams({
+              key: YOUTUBE_API_KEY,
+              id: batchIds,
+              part: "snippet,contentDetails,statistics",
+            }),
+        )
+
+        if (!videosResponse.ok) {
+          throw new Error(`Failed to fetch video details: ${videosResponse.status}`)
+        }
+
+        const videosData = await videosResponse.json()
+        allVideos.push(...(videosData.items || []))
       }
 
-      const videosData = await videosResponse.json()
-      const processedVideos: YouTubeVideo[] = videosData.items.map((video: any) => ({
+      const processedVideos: YouTubeVideo[] = allVideos.map((video: any) => ({
         id: video.id,
         videoId: video.id,
         title: video.snippet.title,
