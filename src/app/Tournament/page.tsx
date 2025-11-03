@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Trophy, Users, Info, Crown, Star, Timer, Sparkles, Award, Gem, Eye, User } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo, memo } from "react"
 import { getLeaderboardData, LeaderboardEntry } from "@/lib/tournament"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
@@ -33,7 +33,8 @@ const FloatingIcon = ({ icon: Icon, className, delay = 0 }: { icon: React.Compon
   );
 };
 
-const CountdownTimer = () => {
+// Memoize the countdown timer to prevent unnecessary re-renders
+const CountdownTimer = memo(() => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -82,27 +83,26 @@ const CountdownTimer = () => {
           { value: timeLeft.hours, label: 'Hours' },
           { value: timeLeft.minutes, label: 'Min' },
           { value: timeLeft.seconds, label: 'Sec' }
-        ].map((item, index) => (
-          <motion.div
+        ].map((item) => (
+          <div
             key={item.label}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
             className="text-center"
           >
             <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg p-2 md:p-3 border border-orange-500/30">
               <div className="text-lg md:text-2xl font-bold text-white">{item.value.toString().padStart(2, '0')}</div>
               <div className="text-xs text-orange-400 font-medium">{item.label}</div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </motion.div>
   );
-};
+});
 
-// Ownership Badge Component
-const OwnershipBadge = ({ rank, className }: { rank: number, className?: string }) => {
+CountdownTimer.displayName = 'CountdownTimer';
+
+// Memoize the ownership badge
+const OwnershipBadge = memo(({ rank, className }: { rank: number, className?: string }) => {
   return (
     <motion.div
       initial={{ scale: 0, opacity: 0 }}
@@ -114,7 +114,9 @@ const OwnershipBadge = ({ rank, className }: { rank: number, className?: string 
       <span className="text-blue-400 text-xs font-medium">Your Rank: {rank}</span>
     </motion.div>
   );
-};
+});
+
+OwnershipBadge.displayName = 'OwnershipBadge';
 
 export default function TournamentPage() {
   const [leaderboardLevel1, setLeaderboardLevel1] = useState<LeaderboardEntry[]>([])
@@ -164,22 +166,22 @@ export default function TournamentPage() {
     return userIndex !== -1 ? userIndex + 1 : undefined
   }
 
-  const currentUserRank = activeTab === "level1" 
-    ? getCurrentUserRank(leaderboardLevel1, currentUserEntry1)
-    : activeTab === "level2"
-    ? getCurrentUserRank(leaderboardLevel2, currentUserEntry2)
-    : getCurrentUserRank(leaderboardLevel3, currentUserEntry3)
+  // Memoize current user rank calculation
+  const currentUserRank = useMemo(() => {
+    return activeTab === "level1" 
+      ? getCurrentUserRank(leaderboardLevel1, currentUserEntry1)
+      : activeTab === "level2"
+      ? getCurrentUserRank(leaderboardLevel2, currentUserEntry2)
+      : getCurrentUserRank(leaderboardLevel3, currentUserEntry3)
+  }, [activeTab, leaderboardLevel1, leaderboardLevel2, leaderboardLevel3, currentUserEntry1, currentUserEntry2, currentUserEntry3])
 
   const renderLeaderboard = (data: LeaderboardEntry[], currentUserEntry?: LeaderboardEntry) => {
     if (loading) {
       return (
         <div className="space-y-3 md:space-y-4">
           {[...Array(5)].map((_, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
               className="flex items-center justify-between p-3 md:p-4 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm"
             >
               <div className="flex items-center gap-2 md:gap-3">
@@ -187,7 +189,7 @@ export default function TournamentPage() {
                 <div className="w-16 md:w-24 h-3 md:h-4 bg-white/20 rounded animate-pulse"></div>
               </div>
               <div className="w-12 md:w-16 h-3 md:h-4 bg-white/20 rounded animate-pulse"></div>
-            </motion.div>
+            </div>
           ))}
         </div>
       )
@@ -195,13 +197,9 @@ export default function TournamentPage() {
 
     if (error) {
       return (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center py-6 md:py-8"
-        >
+        <div className="text-center py-6 md:py-8">
           <p className="text-red-400 text-sm md:text-base">{error}</p>
-        </motion.div>
+        </div>
       )
     }
 
@@ -265,13 +263,11 @@ export default function TournamentPage() {
     return (
       <motion.div
         key={player.id}
-        initial={{ opacity: 0, x: -30, scale: 0.95 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{
-          duration: 0.6,
-          delay: index * 0.1,
-          type: "spring",
-          stiffness: 100
+          duration: 0.3,
+          delay: Math.min(index * 0.05, 0.5), // Cap delay at 0.5s
         }}
         whileHover={{
           scale: 1.02,
@@ -282,9 +278,9 @@ export default function TournamentPage() {
         {/* Ownership Crown for Current User */}
         {isCurrentUser && (
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 200, delay: 0.5 }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.3 }}
             className="absolute -top-2 -left-2 z-10"
           >
             <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-1 shadow-lg">
@@ -296,113 +292,73 @@ export default function TournamentPage() {
         <div className="flex items-center gap-2 md:gap-4">
           <div className="flex items-center gap-1 md:gap-3">
             {styling.medal && (
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: index * 0.1 + 0.3, type: "spring" }}
-                className="text-xl md:text-2xl"
-              >
-                {styling.medal}
-              </motion.span>
+              <span className="text-xl md:text-2xl">{styling.medal}</span>
             )}
-            <motion.span
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: index * 0.1 + 0.2, type: "spring" }}
-              className={`text-lg md:text-xl font-bold ${styling.rank}`}
-            >
+            <span className={`text-lg md:text-xl font-bold ${styling.rank}`}>
               {rank}.
-            </motion.span>
+            </span>
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
             {player.profile_image ? (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: index * 0.1 + 0.4, type: "spring" }}
-                className="relative"
-              >
+              <div className="relative">
                 <Image
                   src={player.profile_image}
                   alt={`${player.name}'s profile`}
                   width={40}
                   height={40}
+                  loading={index < 3 ? "eager" : "lazy"}
                   className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white/20 object-cover shadow-lg"
                 />
                 {isCurrentUser && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.6 }}
-                    className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1 border-2 border-white"
-                  >
+                  <div className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1 border-2 border-white">
                     <User className="w-2 h-2 text-white" />
-                  </motion.div>
+                  </div>
                 )}
-              </motion.div>
+              </div>
             ) : (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: index * 0.1 + 0.4, type: "spring" }}
-                className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center border-2 border-white/20 shadow-lg relative"
-              >
+              <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center border-2 border-white/20 shadow-lg relative">
                 <span className="text-white font-bold text-sm md:text-lg">
                   {player.name.charAt(0).toUpperCase()}
                 </span>
                 {isCurrentUser && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.6 }}
-                    className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1 border-2 border-white"
-                  >
+                  <div className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1 border-2 border-white">
                     <User className="w-2 h-2 text-white" />
-                  </motion.div>
+                  </div>
                 )}
-              </motion.div>
+              </div>
             )}
 
             <div className="max-w-[120px] md:max-w-none">
               <div className="flex items-center gap-2">
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 + 0.5 }}
+                <span
                   className={`${styling.name} text-sm md:text-lg truncate block`}
                   title={player.name || 'Anonymous User'}
                 >
                   {player.name || 'Anonymous User'}
-                </motion.span>
+                </span>
                 {isCurrentUser && (
                   <OwnershipBadge rank={rank} />
                 )}
               </div>
               {player.specialization && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.1 + 0.6 }}
+                <div
                   className="text-xs md:text-sm text-white/60 mt-1 truncate"
                   title={player.specialization}
                 >
                   {player.specialization}
-                </motion.div>
+                </div>
               )}
             </div>
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: index * 0.1 + 0.8, type: "spring" }}
+        <div
           className="flex items-center gap-1 md:gap-2 text-yellow-400 bg-yellow-500/10 px-2 md:px-4 py-1 md:py-2 rounded-full border border-yellow-500/20"
         >
           <Star className="w-3 h-3 md:w-5 md:h-5" />
           <span className="font-bold text-white text-sm md:text-lg">{player.points}</span>
-        </motion.div>
+        </div>
       </motion.div>
     )
   }
@@ -462,8 +418,18 @@ export default function TournamentPage() {
     setActiveTab(value as "level1" | "level2" | "level3")
   }
 
+  // Memoize the active leaderboard data to prevent recalculation
+  const activeLeaderboardData = useMemo(() => {
+    switch(activeTab) {
+      case "level1": return { leaderboard: leaderboardLevel1, currentUserEntry: currentUserEntry1 };
+      case "level2": return { leaderboard: leaderboardLevel2, currentUserEntry: currentUserEntry2 };
+      case "level3": return { leaderboard: leaderboardLevel3, currentUserEntry: currentUserEntry3 };
+      default: return { leaderboard: leaderboardLevel1, currentUserEntry: currentUserEntry1 };
+    }
+  }, [activeTab, leaderboardLevel1, leaderboardLevel2, leaderboardLevel3, currentUserEntry1, currentUserEntry2, currentUserEntry3])
+
   return (
-    <div className="min-h-screen bg-[#030303] relative overflow-hidden">
+    <div className="min-h-screen bg-[#030303] relative overflow-hidden font-rubik">
       {/* Animated Background */}
       <Navigation />
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -487,9 +453,9 @@ export default function TournamentPage() {
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 mb-4 md:mb-6"
             >
               <Trophy className="w-3 h-3 md:w-4 md:h-4 text-yellow-400" />
@@ -497,9 +463,9 @@ export default function TournamentPage() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="text-2xl md:text-4xl lg:text-6xl font-bold text-white mb-4 md:mb-6"
             >
               Ultimate{" "}
@@ -513,7 +479,7 @@ export default function TournamentPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
                 className="mb-4 md:mb-6"
               >
                 <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-400/20 rounded-2xl px-6 py-3 backdrop-blur-sm">
@@ -527,18 +493,18 @@ export default function TournamentPage() {
             )}
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               className="text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-6 md:mb-8 px-2"
             >
               Compete with the best minds in computer science and data science. Show your skills, climb the leaderboard, and claim victory in this epic battle of knowledge!
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
               className="flex flex-wrap items-center justify-center gap-2 md:gap-4"
             >
               <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm">
@@ -619,13 +585,13 @@ export default function TournamentPage() {
                   </TabsList>
 
                   <TabsContent value="level1">
-                    {renderLeaderboard(leaderboardLevel1, currentUserEntry1)}
+                    {renderLeaderboard(activeLeaderboardData.leaderboard, activeLeaderboardData.currentUserEntry)}
                   </TabsContent>
                   <TabsContent value="level2">
-                    {renderLeaderboard(leaderboardLevel2, currentUserEntry2)}
+                    {renderLeaderboard(activeLeaderboardData.leaderboard, activeLeaderboardData.currentUserEntry)}
                   </TabsContent>
                   <TabsContent value="level3">
-                    {renderLeaderboard(leaderboardLevel3, currentUserEntry3)}
+                    {renderLeaderboard(activeLeaderboardData.leaderboard, activeLeaderboardData.currentUserEntry)}
                   </TabsContent>
                 </Tabs>
               </CardContent>
@@ -684,7 +650,7 @@ export default function TournamentPage() {
                       <p className="text-white/90 font-medium mb-1 md:mb-2">Your tournament score is calculated using this formula:</p>
                       <div className="bg-black/20 p-2 md:p-3 rounded border border-white/10">
                         <code className="text-orange-300 text-xs md:text-sm">
-                          Total Points = Round ((Correct Answers + Duration + Mode + Completion) ÷ 10)
+                          Total Points = (Correct Answers + Duration + Mode + Completion) ÷ 10
                         </code>
                       </div>
                       <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 p-2 rounded border border-yellow-500/20 mb-2">
@@ -729,4 +695,3 @@ export default function TournamentPage() {
     </div>
   )
 }
-
