@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { LoadingSpinner } from "@/components/ui/loading-spinner"
+import { useToast } from "@/components/ToastProvider"
 
 // Helper function to save student session
 const saveStudentSession = (userData: {
@@ -26,6 +27,7 @@ const saveStudentSession = (userData: {
 export default function CompleteLoginPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { addToast } = useToast()
 
   useEffect(() => {
     const sessionParam = searchParams.get("session")
@@ -43,6 +45,9 @@ export default function CompleteLoginPage() {
           detail: { userId: sessionData.user_id }
         }))
         
+        // Show welcome toast
+        addToast(`Welcome back, ${sessionData.username}!`, "info")
+        
         // Redirect to main page
         router.replace("/")
       } catch (error) {
@@ -54,7 +59,7 @@ export default function CompleteLoginPage() {
       // No session data, redirect to auth
       router.replace("/auth")
     }
-  }, [router, searchParams])
+  }, [router, searchParams, addToast])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#030303]">
