@@ -321,7 +321,7 @@ export default function AuthPage() {
 
       // Redirect to the previous page instead of always going to home
       router.push(previousPath)
-      addToast(`Welcome back, ${userData.username}!`, "success")
+      addToast(`Welcome back, ${userData.username}!`, "info")
     } catch (err) {
       console.error("Unexpected error:", err)
       setError("An error occurred. Please try again.")
@@ -481,7 +481,7 @@ export default function AuthPage() {
         // Redirect after a brief success message
         setTimeout(() => {
           router.push(previousPath)
-          addToast(`Welcome, ${newUser.username}!`, "success")
+          addToast(`Welcome, ${newUser.username}!`, "info")
         }, 2000)
       }
     } catch (err) {
@@ -517,6 +517,10 @@ export default function AuthPage() {
       // Validate name and phone before proceeding
       if (!signupData.username.trim()) {
         setError("Username is required")
+        return
+      }
+      if (signupData.username.trim().length < 3) {
+        setError("Username must be at least 3 characters")
         return
       }
       if (!signupData.phoneNumber.trim() || signupData.phoneNumber.length < 11) {
@@ -968,6 +972,7 @@ export default function AuthPage() {
                                   id="username"
                                   type="text"
                                   placeholder="Enter your username"
+                                  minLength={3}
                                   value={signupData.username}
                                   onChange={(e) => setSignupData({ ...signupData, username: e.target.value })}
                                   className="pl-10 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:ring-purple-500/20"
@@ -1016,8 +1021,8 @@ export default function AuthPage() {
                               <Input
                                 id="age"
                                 type="number"
-                                maxLength={2}
                                 placeholder="Enter your age"
+                                maxLength={2}
                                 value={signupData.age}
                                 onChange={(e) => setSignupData({ ...signupData, age: e.target.value })}
                                 className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:ring-purple-500/20"
