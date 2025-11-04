@@ -1067,7 +1067,57 @@ export const departmentData: { [key: string]: Department } = {
                 sections: "https://drive.google.com/drive/folders/1XV94AxwvlgXikzZ3qbYR5QtJqNIIe-LI?usp=drive_link",
                 videos: ["https://youtube.com/playlist?list=PL8v_bZALWLKE9Lo2BIy8nsdsakbSvQlEo&si=jBAfivc5JJCLnv5-"],
                 summaries: "https://drive.google.com/drive/folders/1y_ZHb47S0RCveSEoWc17PsXEsQDH019K?usp=drive_link",
-                exams: "https://drive.google.com/drive/folders/1qPJuDNlabxV5IctxPU1_0tomDLmZIEVR?usp=drive_link"
+                exams: "https://drive.google.com/drive/folders/1qPJuDNlabxV5IctxPU1_0tomDLmZIEVR?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "CN_001",
+                    name: "Network Devices & Standards",
+                    code: "CN_001",
+                    duration: "Optional", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_001.json"
+                  },
+                  {
+                    id: "CN_002",
+                    name: "OSI Model",
+                    code: "CN_002",
+                    duration: "Optional", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_002.json"
+                  },
+                  {
+                    id: "CN_003",
+                    name: "Network Protocols and Subnetting",
+                    code: "CN_003",
+                    duration: "Optional", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_003.json"
+                  },
+                  {
+                    id: "CN_004",
+                    name: "Ethernet and LAN Technologies",
+                    code: "CN_004",
+                    duration: "Optional", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_004.json"
+                  },
+                  {
+                    id: "CN_005",
+                    name: "Network Address Translation (NAT)",
+                    code: "CN_005",
+                    duration: "Optional", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_005.json"
+                  },
+                  {
+                    id: "CN_006",
+                    name: "Transport Layer Protocols (TCP/UDP)",
+                    code: "CN_006",
+                    duration: "Optional", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_006.json"
+                  },
+                ]
               },
             },
             {
