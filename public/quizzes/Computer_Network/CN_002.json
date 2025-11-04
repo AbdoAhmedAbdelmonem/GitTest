@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "How many layers does the OSI model have?",
+    "options": [
+      "A) 5 layers",
+      "B) 6 layers",
+      "C) 7 layers",
+      "D) 8 layers"
+    ],
+    "answer": "C) 7 layers",
+    "explanation": "The OSI (Open Systems Interconnection) model has 7 layers. From bottom to top: Physical, Data Link, Network, Transport, Session, Presentation, and Application. This model was developed by the International Organization for Standardization (ISO) to standardize network communication and provide a framework for understanding how different network protocols interact.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What does OSI stand for?",
+    "options": [
+      "A) Open Standard Interface",
+      "B) Open Systems Interconnection",
+      "C) Operating System Interface",
+      "D) Optical Signal Integration"
+    ],
+    "answer": "B) Open Systems Interconnection",
+    "explanation": "OSI stands for Open Systems Interconnection. It is a conceptual framework created by ISO (International Organization for Standardization) to standardize the functions of a communication system. The model divides network communication into seven distinct layers, each with specific responsibilities.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Which layer of the OSI model is responsible for physical transmission of raw bit streams?",
+    "options": [
+      "A) Data Link Layer",
+      "B) Physical Layer",
+      "C) Network Layer",
+      "D) Transport Layer"
+    ],
+    "answer": "B) Physical Layer",
+    "explanation": "The Physical Layer (Layer 1) is responsible for the physical transmission of raw bit streams over a physical medium. It deals with the electrical, mechanical, and functional specifications of the physical connection, including voltage levels, cable types, connectors, and signaling methods. This layer converts digital bits into electrical, optical, or radio signals.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "At which OSI layer does MAC addressing occur?",
+    "options": [
+      "A) Physical Layer",
+      "B) Data Link Layer",
+      "C) Network Layer",
+      "D) Transport Layer"
+    ],
+    "answer": "B) Data Link Layer",
+    "explanation": "MAC (Media Access Control) addressing occurs at the Data Link Layer (Layer 2). This layer is responsible for node-to-node data transfer and provides error detection and correction. The Data Link Layer uses MAC addresses to identify devices on the local network and is further divided into two sublayers: LLC (Logical Link Control) and MAC (Media Access Control).",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which OSI layer is responsible for logical addressing and routing?",
+    "options": [
+      "A) Data Link Layer",
+      "B) Network Layer",
+      "C) Transport Layer",
+      "D) Session Layer"
+    ],
+    "answer": "B) Network Layer",
+    "explanation": "The Network Layer (Layer 3) is responsible for logical addressing (IP addresses) and routing of packets between different networks. It determines the best path for data transmission from source to destination across multiple networks. Routers operate at this layer, and protocols like IP, ICMP, and routing protocols (OSPF, BGP, RIP) function here.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which two transport layer protocols operate at Layer 4 of the OSI model?",
+    "options": [
+      "A) IP and ICMP",
+      "B) TCP and UDP",
+      "C) HTTP and FTP",
+      "D) ARP and RARP"
+    ],
+    "answer": "B) TCP and UDP",
+    "explanation": "TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are the two main protocols operating at the Transport Layer (Layer 4). TCP provides reliable, connection-oriented communication with error checking and flow control, while UDP offers faster, connectionless communication without guaranteed delivery. The Transport Layer is responsible for end-to-end communication and data segmentation.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is the primary function of the Session Layer?",
+    "options": [
+      "A) Physical signal transmission",
+      "B) Establishing, managing, and terminating sessions between applications",
+      "C) Routing packets between networks",
+      "D) Data encryption"
+    ],
+    "answer": "B) Establishing, managing, and terminating sessions between applications",
+    "explanation": "The Session Layer (Layer 5) is responsible for establishing, managing, and terminating sessions (connections) between applications. It handles dialog control (determining which device can transmit at what time), synchronization (adding checkpoints to data streams), and session recovery. This layer ensures that data exchange between applications is organized and controlled.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which OSI layer is responsible for data encryption and compression?",
+    "options": [
+      "A) Application Layer",
+      "B) Presentation Layer",
+      "C) Session Layer",
+      "D) Transport Layer"
+    ],
+    "answer": "B) Presentation Layer",
+    "explanation": "The Presentation Layer (Layer 6) is responsible for data translation, encryption, and compression. It acts as a translator between the application and the network, converting data into a format that the receiving application can understand. This layer handles encryption/decryption for security, data compression to reduce transmission size, and format conversion (like ASCII to EBCDIC).",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "Which layer is closest to the end user and provides network services to applications?",
+    "options": [
+      "A) Transport Layer",
+      "B) Session Layer",
+      "C) Presentation Layer",
+      "D) Application Layer"
+    ],
+    "answer": "D) Application Layer",
+    "explanation": "The Application Layer (Layer 7) is the topmost layer and closest to the end user. It provides network services directly to user applications and supports services like email, file transfer, web browsing, and remote access. Protocols operating at this layer include HTTP, FTP, SMTP, DNS, and Telnet. It's important to note that the Application Layer is not the application itself, but the layer that provides services to applications.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is the correct order of OSI layers from bottom to top?",
+    "options": [
+      "A) Physical, Data Link, Network, Transport, Session, Presentation, Application",
+      "B) Application, Presentation, Session, Transport, Network, Data Link, Physical",
+      "C) Physical, Network, Data Link, Transport, Session, Application, Presentation",
+      "D) Data Link, Physical, Network, Transport, Session, Presentation, Application"
+    ],
+    "answer": "A) Physical, Data Link, Network, Transport, Session, Presentation, Application",
+    "explanation": "The correct order from bottom (Layer 1) to top (Layer 7) is: Physical, Data Link, Network, Transport, Session, Presentation, Application. A common mnemonic to remember this is 'Please Do Not Throw Sausage Pizza Away' or from top to bottom 'All People Seem To Need Data Processing'.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "Which device operates primarily at the Network Layer (Layer 3)?",
+    "options": [
+      "A) Hub",
+      "B) Switch",
+      "C) Router",
+      "D) Repeater"
+    ],
+    "answer": "C) Router",
+    "explanation": "Routers operate primarily at the Network Layer (Layer 3) of the OSI model. They use logical addresses (IP addresses) to make routing decisions and forward packets between different networks. Hubs and repeaters operate at Layer 1 (Physical), while traditional switches operate at Layer 2 (Data Link). Routers are essential for internetworking and connecting LANs to WANs.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What type of addressing is used at the Network Layer?",
+    "options": [
+      "A) MAC addresses",
+      "B) Port numbers",
+      "C) IP addresses",
+      "D) Physical addresses"
+    ],
+    "answer": "C) IP addresses",
+    "explanation": "The Network Layer (Layer 3) uses logical addressing in the form of IP addresses (IPv4 or IPv6). These addresses are hierarchical and allow for routing across multiple networks. MAC addresses are used at Layer 2 (Data Link), port numbers are used at Layer 4 (Transport), and physical addresses refer to the hardware-specific addressing at Layer 2.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is the Protocol Data Unit (PDU) called at the Transport Layer?",
+    "options": [
+      "A) Bits",
+      "B) Frames",
+      "C) Packets",
+      "D) Segments"
+    ],
+    "answer": "D) Segments",
+    "explanation": "At the Transport Layer (Layer 4), the Protocol Data Unit is called a segment (for TCP) or datagram (for UDP). Each layer has its own PDU name: Physical Layer uses bits, Data Link Layer uses frames, Network Layer uses packets, and Transport Layer uses segments. This encapsulation process adds layer-specific headers as data moves down the OSI stack.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which layer is responsible for flow control and error recovery?",
+    "options": [
+      "A) Network Layer",
+      "B) Transport Layer",
+      "C) Data Link Layer",
+      "D) Both B and C"
+    ],
+    "answer": "D) Both B and C",
+    "explanation": "Both the Transport Layer (Layer 4) and Data Link Layer (Layer 2) handle flow control and error recovery, but at different scopes. The Data Link Layer provides node-to-node error detection and flow control within a local network segment. The Transport Layer provides end-to-end flow control and error recovery across the entire network path, ensuring reliable data delivery between source and destination applications.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the main difference between TCP and UDP at the Transport Layer?",
+    "options": [
+      "A) TCP is connection-oriented and reliable, UDP is connectionless and unreliable",
+      "B) TCP is faster than UDP",
+      "C) UDP uses IP addresses, TCP uses MAC addresses",
+      "D) TCP operates at Layer 3, UDP at Layer 4"
+    ],
+    "answer": "A) TCP is connection-oriented and reliable, UDP is connectionless and unreliable",
+    "explanation": "TCP (Transmission Control Protocol) is connection-oriented, meaning it establishes a connection before data transfer, provides reliable delivery with error checking, acknowledgments, and retransmission. UDP (User Datagram Protocol) is connectionless, offering faster but unreliable delivery without guarantees. TCP is used when reliability is critical (web browsing, email), while UDP is used for speed-sensitive applications (streaming, gaming, DNS).",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which OSI layer adds both a header and a trailer to the data?",
+    "options": [
+      "A) Network Layer",
+      "B) Transport Layer",
+      "C) Data Link Layer",
+      "D) Physical Layer"
+    ],
+    "answer": "C) Data Link Layer",
+    "explanation": "The Data Link Layer (Layer 2) is unique in that it adds both a header and a trailer to create a frame. The header contains source and destination MAC addresses and control information, while the trailer typically contains the Frame Check Sequence (FCS) for error detection using CRC (Cyclic Redundancy Check). Other layers only add headers to their respective PDUs.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What is encapsulation in the OSI model?",
+    "options": [
+      "A) Removing headers as data moves up the layers",
+      "B) Adding layer-specific headers as data moves down the layers",
+      "C) Encrypting data for security",
+      "D) Compressing data to reduce size"
+    ],
+    "answer": "B) Adding layer-specific headers as data moves down the layers",
+    "explanation": "Encapsulation is the process of adding layer-specific headers (and sometimes trailers) to data as it moves down the OSI layers from Application to Physical. Each layer adds its own control information. The reverse process, moving up the layers and removing headers, is called de-encapsulation. This process allows each layer to perform its specific function while treating the upper layer's data as payload.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which protocol operates at the Application Layer?",
+    "options": [
+      "A) IP",
+      "B) TCP",
+      "C) HTTP",
+      "D) ARP"
+    ],
+    "answer": "C) HTTP",
+    "explanation": "HTTP (Hypertext Transfer Protocol) operates at the Application Layer (Layer 7). Other Application Layer protocols include FTP, SMTP, DNS, Telnet, and SNMP. IP operates at Layer 3 (Network), TCP at Layer 4 (Transport), and ARP at Layer 2 (Data Link). Application Layer protocols provide specific services to end-user applications.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is the primary purpose of the OSI model?",
+    "options": [
+      "A) To provide physical network cables",
+      "B) To standardize network communication and provide a reference framework",
+      "C) To encrypt all network traffic",
+      "D) To replace the TCP/IP model"
+    ],
+    "answer": "B) To standardize network communication and provide a reference framework",
+    "explanation": "The primary purpose of the OSI model is to standardize network communication and provide a universal reference framework for understanding how different network protocols and technologies interact. It helps network professionals troubleshoot issues, design networks, and understand where specific protocols operate. The model promotes interoperability between different vendors' equipment and allows for modular network design.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "Which layer is responsible for converting data into a format suitable for transmission?",
+    "options": [
+      "A) Physical Layer",
+      "B) Data Link Layer",
+      "C) Presentation Layer",
+      "D) Application Layer"
+    ],
+    "answer": "C) Presentation Layer",
+    "explanation": "The Presentation Layer (Layer 6) is responsible for data representation and conversion. It translates data between the format used by the application and the format suitable for network transmission. This includes character encoding conversion (ASCII, EBCDIC, Unicode), data compression to reduce bandwidth usage, and encryption/decryption for security. It ensures that data sent by one system's application layer can be read by another system's application layer.",
+    "image": null
+  }
+]

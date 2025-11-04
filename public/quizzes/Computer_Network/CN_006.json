@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "At which layer of the OSI model does the Transport Layer operate?",
+    "options": [
+      "A) Layer 2",
+      "B) Layer 3",
+      "C) Layer 4",
+      "D) Layer 5"
+    ],
+    "answer": "C) Layer 4",
+    "explanation": "The Transport Layer operates at Layer 4 of the OSI model. It sits between the Network Layer (Layer 3) below and the Session Layer (Layer 5) above. The Transport Layer is responsible for end-to-end communication, providing reliable or unreliable delivery of data segments between applications running on different hosts, and includes protocols like TCP and UDP.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What are the two main protocols operating at the Transport Layer?",
+    "options": [
+      "A) HTTP and FTP",
+      "B) IP and ICMP",
+      "C) TCP and UDP",
+      "D) ARP and RARP"
+    ],
+    "answer": "C) TCP and UDP",
+    "explanation": "TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are the two main protocols operating at the Transport Layer. TCP provides connection-oriented, reliable communication with error checking, flow control, and guaranteed delivery. UDP provides connectionless, unreliable communication that is faster but without delivery guarantees. Applications choose between them based on their specific requirements.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What does TCP stand for?",
+    "options": [
+      "A) Transfer Control Protocol",
+      "B) Transmission Control Protocol",
+      "C) Transport Connection Protocol",
+      "D) Technical Control Protocol"
+    ],
+    "answer": "B) Transmission Control Protocol",
+    "explanation": "TCP stands for Transmission Control Protocol. It is a connection-oriented protocol that provides reliable, ordered, and error-checked delivery of data between applications. TCP establishes a connection before data transfer using a three-way handshake, ensures data arrives in the correct order, retransmits lost packets, and provides flow control to prevent overwhelming the receiver.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What type of communication does TCP provide?",
+    "options": [
+      "A) Connectionless and unreliable",
+      "B) Connection-oriented and reliable",
+      "C) Broadcast-based",
+      "D) Multicast-only"
+    ],
+    "answer": "B) Connection-oriented and reliable",
+    "explanation": "TCP provides connection-oriented and reliable communication. Connection-oriented means TCP establishes a connection before transmitting data (using a three-way handshake) and maintains it throughout the session. Reliable means TCP guarantees data delivery through acknowledgments, retransmissions of lost packets, sequencing to maintain order, and error checking using checksums. This makes TCP suitable for applications requiring guaranteed delivery like web browsing, email, and file transfers.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is the three-way handshake in TCP used for?",
+    "options": [
+      "A) Encrypting data",
+      "B) Establishing a connection between client and server",
+      "C) Routing packets",
+      "D) Assigning IP addresses"
+    ],
+    "answer": "B) Establishing a connection between client and server",
+    "explanation": "The three-way handshake is the process TCP uses to establish a connection between client and server before data transmission. The process involves three steps: 1) Client sends SYN (synchronize) to server, 2) Server responds with SYN-ACK (synchronize-acknowledge), 3) Client sends ACK (acknowledge) back to server. After this handshake completes, a reliable connection is established and data transfer can begin.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What does UDP stand for?",
+    "options": [
+      "A) Universal Data Protocol",
+      "B) User Datagram Protocol",
+      "C) Unified Delivery Protocol",
+      "D) User Data Packet"
+    ],
+    "answer": "B) User Datagram Protocol",
+    "explanation": "UDP stands for User Datagram Protocol. It is a connectionless, unreliable transport protocol that sends data without establishing a connection or guaranteeing delivery. UDP is faster than TCP because it has less overhead - no handshake, no acknowledgments, no retransmissions. It's used for applications where speed is more important than reliability, such as streaming, gaming, DNS queries, and VoIP.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What type of communication does UDP provide?",
+    "options": [
+      "A) Connection-oriented and reliable",
+      "B) Connectionless and unreliable",
+      "C) Connection-oriented and unreliable",
+      "D) Connectionless and reliable"
+    ],
+    "answer": "B) Connectionless and unreliable",
+    "explanation": "UDP provides connectionless and unreliable communication. Connectionless means UDP sends data without establishing a connection first - it just sends datagrams to the destination. Unreliable means UDP does not guarantee delivery, does not ensure packets arrive in order, and does not retransmit lost packets. However, this simplicity makes UDP faster and more efficient for applications that can tolerate some data loss, like live video streaming or online gaming.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which protocol is faster: TCP or UDP?",
+    "options": [
+      "A) TCP is faster",
+      "B) UDP is faster",
+      "C) They have the same speed",
+      "D) It depends on the network hardware"
+    ],
+    "answer": "B) UDP is faster",
+    "explanation": "UDP is faster than TCP because it has much less overhead. UDP doesn't establish connections, doesn't wait for acknowledgments, doesn't retransmit lost packets, and doesn't perform flow control. This minimal processing means data can be sent immediately without the delays associated with TCP's reliability mechanisms. UDP is ideal for time-sensitive applications where occasional data loss is acceptable, such as video streaming, VoIP, and online gaming.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is a port number used for?",
+    "options": [
+      "A) To identify the physical network interface",
+      "B) To identify specific applications or services on a host",
+      "C) To assign IP addresses",
+      "D) To encrypt network traffic"
+    ],
+    "answer": "B) To identify specific applications or services on a host",
+    "explanation": "Port numbers are used to identify specific applications or services running on a host. They work in combination with IP addresses to create a complete socket address (IP:port). While the IP address identifies the device, the port number identifies which application on that device should receive the data. For example, web servers typically use port 80 (HTTP) or 443 (HTTPS), while email servers use port 25 (SMTP).",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "How many well-known port numbers are there?",
+    "options": [
+      "A) 0 to 255",
+      "B) 0 to 1023",
+      "C) 0 to 49151",
+      "D) 0 to 65535"
+    ],
+    "answer": "B) 0 to 1023",
+    "explanation": "Well-known ports range from 0 to 1023. These ports are assigned by IANA (Internet Assigned Numbers Authority) for standard services and protocols. Examples include port 80 for HTTP, port 443 for HTTPS, port 21 for FTP, port 22 for SSH, and port 25 for SMTP. Applications typically need administrative privileges to bind to well-known ports. The complete port range is 0-65535 (16 bits).",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is the port number for HTTP?",
+    "options": [
+      "A) 21",
+      "B) 22",
+      "C) 80",
+      "D) 443"
+    ],
+    "answer": "C) 80",
+    "explanation": "Port 80 is the standard port number for HTTP (Hypertext Transfer Protocol), which is used for unencrypted web traffic. When you access a website using http:// in your browser, it connects to port 80 on the web server by default. Port 443 is used for HTTPS (encrypted web traffic), port 21 for FTP, and port 22 for SSH. These well-known ports are standardized to ensure interoperability between different systems.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What is the port number for HTTPS?",
+    "options": [
+      "A) 80",
+      "B) 443",
+      "C) 8080",
+      "D) 8443"
+    ],
+    "answer": "B) 443",
+    "explanation": "Port 443 is the standard port number for HTTPS (Hypertext Transfer Protocol Secure), which is HTTP over TLS/SSL encryption. When you access a secure website using https:// in your browser, it connects to port 443 by default. HTTPS encrypts the communication between the browser and server, protecting sensitive information like passwords and credit card numbers from interception. Port 80 is used for unencrypted HTTP traffic.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of TCP over UDP?",
+    "options": [
+      "A) TCP is faster",
+      "B) TCP uses less bandwidth",
+      "C) TCP provides reliable, ordered delivery with error checking",
+      "D) TCP works on wireless networks only"
+    ],
+    "answer": "C) TCP provides reliable, ordered delivery with error checking",
+    "explanation": "The main advantage of TCP over UDP is that it provides reliable, ordered delivery with error checking. TCP ensures all data arrives at the destination, retransmits lost packets, delivers data in the correct sequence, detects and corrects errors using checksums, and provides flow control. This makes TCP ideal for applications where data integrity is critical, such as web browsing, email, file transfers, and database transactions.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of UDP over TCP?",
+    "options": [
+      "A) UDP guarantees delivery",
+      "B) UDP is faster and has lower latency due to minimal overhead",
+      "C) UDP provides error correction",
+      "D) UDP establishes connections before sending data"
+    ],
+    "answer": "B) UDP is faster and has lower latency due to minimal overhead",
+    "explanation": "The main advantage of UDP over TCP is its speed and lower latency due to minimal overhead. UDP doesn't establish connections, wait for acknowledgments, or retransmit lost data, which eliminates delays. This makes UDP ideal for real-time applications where speed is more important than perfect reliability, such as live video/audio streaming, online gaming, VoIP calls, and DNS queries, where occasional packet loss is acceptable.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is flow control in TCP?",
+    "options": [
+      "A) Controlling the physical flow of electricity",
+      "B) Managing the rate of data transmission to prevent overwhelming the receiver",
+      "C) Routing data through the network",
+      "D) Encrypting data packets"
+    ],
+    "answer": "B) Managing the rate of data transmission to prevent overwhelming the receiver",
+    "explanation": "Flow control in TCP is the mechanism that manages the rate of data transmission between sender and receiver to prevent the sender from overwhelming the receiver with too much data too quickly. TCP uses a sliding window protocol where the receiver advertises its available buffer space (receive window), and the sender adjusts its transmission rate accordingly. This ensures efficient data transfer without packet loss due to buffer overflow.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is a segment in the context of the Transport Layer?",
+    "options": [
+      "A) A physical network cable section",
+      "B) The Protocol Data Unit (PDU) at the Transport Layer",
+      "C) A type of network switch",
+      "D) A routing table entry"
+    ],
+    "answer": "B) The Protocol Data Unit (PDU) at the Transport Layer",
+    "explanation": "A segment is the Protocol Data Unit (PDU) at the Transport Layer. When data from the upper layers is passed to the Transport Layer, it is encapsulated into segments (for TCP) or datagrams (for UDP). A segment includes the Transport Layer header (containing source and destination ports, sequence numbers, acknowledgments, flags, etc.) plus the data payload. These segments are then passed to the Network Layer for further encapsulation into packets.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which applications typically use TCP?",
+    "options": [
+      "A) DNS queries and DHCP",
+      "B) Web browsing, email, and file transfer",
+      "C) Video streaming and online gaming",
+      "D) Network broadcasts"
+    ],
+    "answer": "B) Web browsing, email, and file transfer",
+    "explanation": "Applications that require reliable, ordered data delivery typically use TCP. This includes web browsing (HTTP/HTTPS), email (SMTP, POP3, IMAP), file transfer (FTP, SFTP), remote access (SSH, Telnet), and database connections. These applications cannot tolerate data loss or out-of-order delivery, so they benefit from TCP's reliability mechanisms including acknowledgments, retransmissions, and sequencing.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which applications typically use UDP?",
+    "options": [
+      "A) File transfer and email",
+      "B) Web browsing and database access",
+      "C) Video streaming, VoIP, and online gaming",
+      "D) Secure shell connections"
+    ],
+    "answer": "C) Video streaming, VoIP, and online gaming",
+    "explanation": "Applications that prioritize speed over reliability typically use UDP. This includes video and audio streaming, Voice over IP (VoIP), online gaming, DNS queries, DHCP, SNMP (network management), and TFTP (Trivial File Transfer Protocol). These applications can tolerate occasional packet loss because retransmitting old data would be pointless (for real-time streams) or because the data is time-sensitive. UDP's low latency is more valuable than guaranteed delivery for these use cases.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of sequence numbers in TCP?",
+    "options": [
+      "A) To encrypt the data",
+      "B) To ensure data arrives in the correct order and detect missing segments",
+      "C) To identify the application port",
+      "D) To calculate checksums"
+    ],
+    "answer": "B) To ensure data arrives in the correct order and detect missing segments",
+    "explanation": "Sequence numbers in TCP ensure that data arrives in the correct order and help detect missing segments. Each byte of data in a TCP stream is assigned a sequence number. The receiver uses these numbers to reassemble segments in the proper order, even if they arrive out of sequence. Sequence numbers also allow the receiver to detect missing segments (gaps in the sequence) and request retransmission through acknowledgment numbers.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What does an acknowledgment (ACK) in TCP indicate?",
+    "options": [
+      "A) That the connection should be terminated",
+      "B) That data has been successfully received",
+      "C) That an error occurred",
+      "D) That the receiver is busy"
+    ],
+    "answer": "B) That data has been successfully received",
+    "explanation": "An acknowledgment (ACK) in TCP indicates that data has been successfully received by the receiver. The ACK contains an acknowledgment number that specifies the next sequence number the receiver expects to receive, implicitly confirming receipt of all prior bytes. If the sender doesn't receive an ACK within a timeout period, it assumes the data was lost and retransmits it. This acknowledgment mechanism is fundamental to TCP's reliability.",
+    "image": null
+  }
+]

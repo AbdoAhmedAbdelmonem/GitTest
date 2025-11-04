@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is the primary function of a Network Interface Card (NIC)?",
+    "options": [
+      "A) To store network configurations",
+      "B) To provide a physical connection between a computer and the network",
+      "C) To encrypt network traffic",
+      "D) To manage IP addresses"
+    ],
+    "answer": "B) To provide a physical connection between a computer and the network",
+    "explanation": "A Network Interface Card (NIC) is a hardware component that provides the physical interface between a computer and a network. It converts data from the computer into signals that can be transmitted over the network medium (cables or wireless) and vice versa. Each NIC has a unique MAC address for identification on the network.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "At which OSI layer does a hub operate?",
+    "options": [
+      "A) Layer 1 - Physical Layer",
+      "B) Layer 2 - Data Link Layer",
+      "C) Layer 3 - Network Layer",
+      "D) Layer 4 - Transport Layer"
+    ],
+    "answer": "A) Layer 1 - Physical Layer",
+    "explanation": "A hub operates at Layer 1 (Physical Layer) of the OSI model. It is a simple device that receives electrical signals on one port and broadcasts them to all other ports without any intelligence. Hubs do not examine MAC addresses or make any forwarding decisions - they simply regenerate and repeat signals to all connected devices.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is a major disadvantage of using a hub in a network?",
+    "options": [
+      "A) It is too expensive",
+      "B) It creates a single collision domain for all connected devices",
+      "C) It requires manual configuration",
+      "D) It only works with fiber optic cables"
+    ],
+    "answer": "B) It creates a single collision domain for all connected devices",
+    "explanation": "A hub creates a single collision domain, meaning all connected devices share the same bandwidth and only one device can transmit at a time. When multiple devices try to transmit simultaneously, collisions occur, reducing network efficiency. This makes hubs unsuitable for modern networks with high traffic. Switches solve this problem by creating separate collision domains for each port.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "At which OSI layer does a switch operate?",
+    "options": [
+      "A) Layer 1 - Physical Layer",
+      "B) Layer 2 - Data Link Layer",
+      "C) Layer 3 - Network Layer",
+      "D) Layer 7 - Application Layer"
+    ],
+    "answer": "B) Layer 2 - Data Link Layer",
+    "explanation": "A switch operates at Layer 2 (Data Link Layer) of the OSI model. Unlike hubs, switches are intelligent devices that examine the MAC addresses in data frames to make forwarding decisions. They maintain a MAC address table to learn which devices are connected to which ports and forward frames only to the destination port, reducing unnecessary traffic and collisions.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "How does a switch learn MAC addresses?",
+    "options": [
+      "A) Through manual configuration by a network administrator",
+      "B) By examining the source MAC address of incoming frames",
+      "C) Through DHCP server",
+      "D) By broadcasting requests to all devices"
+    ],
+    "answer": "B) By examining the source MAC address of incoming frames",
+    "explanation": "A switch learns MAC addresses dynamically through a process called 'learning'. When a frame enters a port, the switch examines the source MAC address and associates it with that port in its MAC address table (CAM table). Over time, the switch builds a complete map of which devices are connected to which ports, enabling efficient frame forwarding.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What happens when a switch receives a frame destined for an unknown MAC address?",
+    "options": [
+      "A) It drops the frame",
+      "B) It floods the frame to all ports except the source port",
+      "C) It sends an error message back to the source",
+      "D) It stores the frame until the address is learned"
+    ],
+    "answer": "B) It floods the frame to all ports except the source port",
+    "explanation": "When a switch receives a frame for a MAC address not in its MAC address table, it floods the frame to all ports except the incoming port. This ensures the frame reaches its destination even if the switch hasn't learned where that device is located yet. When the destination device responds, the switch will learn its MAC address and port location for future communications.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is the primary function of a router?",
+    "options": [
+      "A) To connect devices within the same network",
+      "B) To forward data packets between different networks based on IP addresses",
+      "C) To amplify network signals",
+      "D) To provide wireless connectivity"
+    ],
+    "answer": "B) To forward data packets between different networks based on IP addresses",
+    "explanation": "A router's primary function is to forward data packets between different networks (internetworking). Routers operate at Layer 3 (Network Layer) and use IP addresses to make forwarding decisions. They maintain routing tables to determine the best path for packets to reach their destination network, connecting LANs to WANs and enabling communication across the internet.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "At which OSI layer does a router primarily operate?",
+    "options": [
+      "A) Layer 1 - Physical Layer",
+      "B) Layer 2 - Data Link Layer",
+      "C) Layer 3 - Network Layer",
+      "D) Layer 4 - Transport Layer"
+    ],
+    "answer": "C) Layer 3 - Network Layer",
+    "explanation": "Routers operate primarily at Layer 3 (Network Layer) of the OSI model, where they work with IP addresses to route packets between different networks. While routers also interact with lower layers to physically transmit data, their key intelligence and routing decisions are made at Layer 3 using protocols like IP, ICMP, and routing protocols such as OSPF, BGP, and RIP.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is a broadcast domain?",
+    "options": [
+      "A) The physical area covered by a wireless network",
+      "B) A network segment where broadcast frames are propagated to all devices",
+      "C) The time period during which broadcasts are allowed",
+      "D) A domain name used for broadcasting"
+    ],
+    "answer": "B) A network segment where broadcast frames are propagated to all devices",
+    "explanation": "A broadcast domain is a logical network segment in which any device can directly reach any other device by broadcasting at the data link layer. When a device sends a broadcast frame, it reaches all devices within that broadcast domain. Routers segment broadcast domains by not forwarding broadcast traffic between networks, while switches and hubs keep broadcasts within the same domain.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which device segments both collision domains and broadcast domains?",
+    "options": [
+      "A) Hub",
+      "B) Switch",
+      "C) Router",
+      "D) Repeater"
+    ],
+    "answer": "C) Router",
+    "explanation": "A router segments both collision domains and broadcast domains. Each router interface creates a separate broadcast domain, preventing broadcast traffic from propagating between networks. This reduces network congestion and improves security. Switches segment collision domains but not broadcast domains (broadcasts are forwarded to all switch ports), while hubs segment neither.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of a MAC address table in a switch?",
+    "options": [
+      "A) To store IP addresses of connected devices",
+      "B) To map MAC addresses to specific switch ports",
+      "C) To configure switch security settings",
+      "D) To store routing information"
+    ],
+    "answer": "B) To map MAC addresses to specific switch ports",
+    "explanation": "The MAC address table (also called CAM table - Content Addressable Memory) in a switch maps MAC addresses to specific physical ports. This table is built dynamically as the switch learns which devices are connected to which ports by examining source MAC addresses of incoming frames. The switch uses this table to forward frames only to the correct destination port rather than flooding to all ports.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What is a collision domain?",
+    "options": [
+      "A) A network segment where data collisions can occur when devices transmit simultaneously",
+      "B) A physical area where devices are likely to collide",
+      "C) A security zone in a network",
+      "D) A domain name that conflicts with another"
+    ],
+    "answer": "A) A network segment where data collisions can occur when devices transmit simultaneously",
+    "explanation": "A collision domain is a network segment where data packet collisions can occur when two or more devices attempt to transmit at the same time. In a hub-based network, all connected devices are in one collision domain. Switches create separate collision domains for each port, allowing simultaneous transmissions without collisions and significantly improving network performance.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which of the following is NOT a characteristic of a switch?",
+    "options": [
+      "A) Operates at Layer 2 of the OSI model",
+      "B) Forwards frames based on MAC addresses",
+      "C) Creates a single collision domain for all ports",
+      "D) Learns MAC addresses dynamically"
+    ],
+    "answer": "C) Creates a single collision domain for all ports",
+    "explanation": "A switch creates separate collision domains for each port, NOT a single collision domain. This is one of the key advantages of switches over hubs. Each port on a switch is its own collision domain, allowing full-duplex communication and simultaneous transmissions without collisions. Switches do operate at Layer 2, forward frames based on MAC addresses, and learn MAC addresses dynamically.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What type of switching method involves the switch reading the entire frame before forwarding it?",
+    "options": [
+      "A) Cut-through switching",
+      "B) Store-and-forward switching",
+      "C) Fragment-free switching",
+      "D) Fast-forward switching"
+    ],
+    "answer": "B) Store-and-forward switching",
+    "explanation": "Store-and-forward switching requires the switch to receive and check the entire frame (including CRC error checking) before forwarding it. This method ensures error-free transmission and allows the switch to filter out damaged frames. While it introduces slight latency, it provides the most reliable switching method and is the most commonly used in modern networks.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What advantage does a switch have over a hub?",
+    "options": [
+      "A) Lower cost",
+      "B) Simpler configuration",
+      "C) Dedicated bandwidth per port and reduced collisions",
+      "D) Operates at a higher voltage"
+    ],
+    "answer": "C) Dedicated bandwidth per port and reduced collisions",
+    "explanation": "A switch provides dedicated bandwidth to each port and creates separate collision domains, significantly reducing collisions and improving network performance. Unlike a hub where all devices share the same bandwidth and collision domain, each switch port gets the full bandwidth, and devices can transmit simultaneously in full-duplex mode without collisions. This makes switches far superior for modern network performance.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What does CSMA/CD stand for in Ethernet networks?",
+    "options": [
+      "A) Carrier Sense Multiple Access with Collision Detection",
+      "B) Central System Multiple Access with Data Control",
+      "C) Computer System Management and Control Device",
+      "D) Carrier Signal Modulation and Collision Delay"
+    ],
+    "answer": "A) Carrier Sense Multiple Access with Collision Detection",
+    "explanation": "CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is the media access control method used in traditional Ethernet networks. Devices listen (carrier sense) before transmitting to avoid collisions. If a collision is detected, devices stop transmitting, wait a random time, and retry. Modern switched full-duplex networks don't need CSMA/CD since each port is a separate collision domain.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of a default gateway in a network?",
+    "options": [
+      "A) To assign IP addresses to devices",
+      "B) To provide the address of the router for accessing other networks",
+      "C) To filter network traffic",
+      "D) To manage switch ports"
+    ],
+    "answer": "B) To provide the address of the router for accessing other networks",
+    "explanation": "A default gateway is the IP address of the router interface that devices use to send traffic destined for networks outside their local subnet. When a device needs to communicate with an IP address not on its local network, it forwards the packet to the default gateway (router), which then routes the packet to the appropriate destination network.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which device would you use to connect multiple devices within the same LAN efficiently?",
+    "options": [
+      "A) Hub",
+      "B) Router",
+      "C) Switch",
+      "D) Modem"
+    ],
+    "answer": "C) Switch",
+    "explanation": "A switch is the best device for connecting multiple devices within the same LAN efficiently. It provides dedicated bandwidth per port, creates separate collision domains, intelligently forwards frames based on MAC addresses, and supports full-duplex communication. While hubs can also connect LAN devices, they are inefficient due to shared bandwidth and collisions. Routers connect different networks, not devices within the same LAN.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What happens to the MAC address table entry in a switch if no frames are received from that MAC address for a certain period?",
+    "options": [
+      "A) It is permanently stored",
+      "B) It is aged out and removed from the table",
+      "C) It is moved to a backup table",
+      "D) It triggers an alert"
+    ],
+    "answer": "B) It is aged out and removed from the table",
+    "explanation": "MAC address table entries in switches have an aging timer (typically 300 seconds or 5 minutes). If no frames are received from a particular MAC address within this period, the entry is aged out and removed from the table. This prevents the table from filling up with stale entries from devices that have been disconnected or moved, keeping the table current and efficient.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What is the main difference between a Layer 2 switch and a Layer 3 switch?",
+    "options": [
+      "A) Layer 3 switches can perform routing functions using IP addresses",
+      "B) Layer 2 switches are faster than Layer 3 switches",
+      "C) Layer 3 switches only work with fiber optic cables",
+      "D) Layer 2 switches have more ports than Layer 3 switches"
+    ],
+    "answer": "A) Layer 3 switches can perform routing functions using IP addresses",
+    "explanation": "A Layer 3 switch (also called a multilayer switch) can perform both switching and routing functions. It operates at both Layer 2 (switching frames based on MAC addresses) and Layer 3 (routing packets based on IP addresses). This allows faster inter-VLAN routing and improved performance compared to using separate switches and routers. Layer 2 switches only forward based on MAC addresses and cannot route between different networks.",
+    "image": null
+  }
+]

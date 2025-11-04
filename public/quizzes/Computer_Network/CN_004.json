@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What does Ethernet primarily operate at in the OSI model?",
+    "options": [
+      "A) Physical Layer only",
+      "B) Data Link Layer only",
+      "C) Both Physical Layer and Data Link Layer",
+      "D) Network Layer"
+    ],
+    "answer": "C) Both Physical Layer and Data Link Layer",
+    "explanation": "Ethernet operates at both the Physical Layer (Layer 1) and Data Link Layer (Layer 2) of the OSI model. At the Physical Layer, it defines the physical medium, signaling, and cable specifications. At the Data Link Layer, it handles MAC addressing, frame formatting, and media access control using CSMA/CD. This dual-layer operation makes Ethernet a complete LAN technology.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "How many bytes (octets) is a MAC address?",
+    "options": [
+      "A) 4 bytes",
+      "B) 6 bytes",
+      "C) 8 bytes",
+      "D) 12 bytes"
+    ],
+    "answer": "B) 6 bytes",
+    "explanation": "A MAC (Media Access Control) address is 6 bytes (48 bits) long. It is typically written as 12 hexadecimal digits, often separated by colons or hyphens (e.g., 00:1A:2B:3C:4D:5E). The first 3 bytes identify the manufacturer (OUI - Organizationally Unique Identifier), and the last 3 bytes are the device-specific identifier assigned by the manufacturer.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What does CSMA/CD stand for?",
+    "options": [
+      "A) Carrier Sense Multiple Access with Collision Detection",
+      "B) Central System Multiple Access with Data Control",
+      "C) Computer System Media Access and Collision Delay",
+      "D) Carrier Signal Management and Collision Detector"
+    ],
+    "answer": "A) Carrier Sense Multiple Access with Collision Detection",
+    "explanation": "CSMA/CD stands for Carrier Sense Multiple Access with Collision Detection. It is the media access control method used in traditional Ethernet networks. Devices listen to the network (carrier sense) before transmitting, multiple devices can access the medium, and if a collision is detected, devices stop transmitting, wait a random time, and retry. Modern switched full-duplex Ethernet doesn't require CSMA/CD.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the minimum Ethernet frame size?",
+    "options": [
+      "A) 46 bytes",
+      "B) 64 bytes",
+      "C) 128 bytes",
+      "D) 1500 bytes"
+    ],
+    "answer": "B) 64 bytes",
+    "explanation": "The minimum Ethernet frame size is 64 bytes (excluding the preamble and Start Frame Delimiter). This includes a 14-byte header (6-byte destination MAC, 6-byte source MAC, 2-byte Type/Length) and a 4-byte FCS (Frame Check Sequence), leaving a minimum of 46 bytes for the data payload. If data is less than 46 bytes, padding is added to meet the minimum frame size requirement.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is the maximum Ethernet frame size (MTU)?",
+    "options": [
+      "A) 1024 bytes",
+      "B) 1500 bytes",
+      "C) 1518 bytes",
+      "D) 2048 bytes"
+    ],
+    "answer": "C) 1518 bytes",
+    "explanation": "The maximum standard Ethernet frame size is 1518 bytes (excluding preamble and SFD). This includes: 14 bytes for the header (destination and source MAC addresses and Type/Length field), up to 1500 bytes for the data payload (MTU - Maximum Transmission Unit), and 4 bytes for the FCS trailer. Jumbo frames can exceed this size, supporting up to 9000 bytes in some implementations.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the preamble in an Ethernet frame?",
+    "options": [
+      "A) To encrypt the data",
+      "B) To synchronize the receiver's clock and signal frame arrival",
+      "C) To identify the frame type",
+      "D) To perform error checking"
+    ],
+    "answer": "B) To synchronize the receiver's clock and signal frame arrival",
+    "explanation": "The preamble is a 7-byte field of alternating 1s and 0s (10101010...) that precedes every Ethernet frame. Its purpose is to alert receiving stations that a frame is arriving and to synchronize their clocks with the sender's timing. It is followed by a 1-byte Start Frame Delimiter (SFD) that marks the actual beginning of the frame. The preamble and SFD are not considered part of the frame itself.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What does FCS stand for in Ethernet frames?",
+    "options": [
+      "A) Frame Control System",
+      "B) Fast Connection Service",
+      "C) Frame Check Sequence",
+      "D) Full Connection Standard"
+    ],
+    "answer": "C) Frame Check Sequence",
+    "explanation": "FCS stands for Frame Check Sequence. It is a 4-byte field at the end of an Ethernet frame used for error detection. The FCS contains a CRC (Cyclic Redundancy Check) value calculated from the frame's contents. The receiving device recalculates the CRC and compares it with the FCS value. If they don't match, the frame is considered corrupted and is discarded.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which Ethernet standard supports 1 Gigabit per second data rates over copper cables?",
+    "options": [
+      "A) 10BASE-T",
+      "B) 100BASE-TX",
+      "C) 1000BASE-T",
+      "D) 10GBASE-T"
+    ],
+    "answer": "C) 1000BASE-T",
+    "explanation": "1000BASE-T (also known as Gigabit Ethernet) supports data rates of 1 Gigabit per second (1000 Mbps) over copper twisted-pair cables (Category 5e or better). The naming convention breaks down as: 1000 = speed in Mbps, BASE = baseband signaling, T = twisted pair copper cable. It can transmit up to 100 meters and uses all four pairs of wires in the cable.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What type of cable is used for 10BASE-T Ethernet?",
+    "options": [
+      "A) Coaxial cable",
+      "B) Fiber optic cable",
+      "C) Twisted pair cable",
+      "D) Serial cable"
+    ],
+    "answer": "C) Twisted pair cable",
+    "explanation": "10BASE-T uses twisted pair copper cable (the 'T' stands for twisted pair). It typically uses Category 3 or better UTP (Unshielded Twisted Pair) cable with RJ-45 connectors. 10BASE-T operates at 10 Mbps and can transmit up to 100 meters. It uses two pairs of wires: one for transmitting and one for receiving, operating in half-duplex or full-duplex mode.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of full-duplex Ethernet over half-duplex?",
+    "options": [
+      "A) Lower cost",
+      "B) Simultaneous transmission and reception, eliminating collisions",
+      "C) Longer cable distances",
+      "D) Better encryption"
+    ],
+    "answer": "B) Simultaneous transmission and reception, eliminating collisions",
+    "explanation": "Full-duplex Ethernet allows simultaneous transmission and reception on the same connection, effectively doubling the bandwidth and eliminating collisions. In full-duplex mode, each device has a dedicated path to the switch port, so CSMA/CD is not needed. A device can send and receive at the same time (e.g., 100 Mbps in each direction = 200 Mbps aggregate). Half-duplex only allows one-way communication at a time.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is the IEEE standard for traditional Ethernet?",
+    "options": [
+      "A) IEEE 802.1",
+      "B) IEEE 802.3",
+      "C) IEEE 802.11",
+      "D) IEEE 802.5"
+    ],
+    "answer": "B) IEEE 802.3",
+    "explanation": "IEEE 802.3 is the standard for traditional Ethernet networks. It defines the physical layer and data link layer's MAC sublayer for wired Ethernet. IEEE 802.11 is for wireless LANs (Wi-Fi), IEEE 802.1 covers bridging and management, and IEEE 802.5 was for Token Ring networks. The 802.3 standard has evolved to include various Ethernet speeds from 10 Mbps to 400 Gbps.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What does the MAC address FF:FF:FF:FF:FF:FF represent?",
+    "options": [
+      "A) A private MAC address",
+      "B) A broadcast address",
+      "C) A multicast address",
+      "D) An invalid address"
+    ],
+    "answer": "B) A broadcast address",
+    "explanation": "FF:FF:FF:FF:FF:FF (all bits set to 1) is the broadcast MAC address. When a frame is sent to this address, it is delivered to all devices on the local network segment. Broadcasts are used for protocols like ARP (Address Resolution Protocol) when a device needs to discover the MAC address associated with an IP address. Switches forward broadcast frames to all ports except the source port.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which field in the Ethernet frame identifies the protocol of the data payload?",
+    "options": [
+      "A) Preamble",
+      "B) Source MAC Address",
+      "C) EtherType/Length",
+      "D) FCS"
+    ],
+    "answer": "C) EtherType/Length",
+    "explanation": "The EtherType (or Type/Length) field is a 2-byte field in the Ethernet header that identifies the protocol encapsulated in the frame's payload. Common values include 0x0800 for IPv4, 0x0806 for ARP, and 0x86DD for IPv6. In Ethernet II frames, this field indicates the protocol type. In IEEE 802.3 frames, values less than 1536 indicate the payload length.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is the maximum distance for 100BASE-TX Fast Ethernet over copper?",
+    "options": [
+      "A) 50 meters",
+      "B) 100 meters",
+      "C) 185 meters",
+      "D) 500 meters"
+    ],
+    "answer": "B) 100 meters",
+    "explanation": "100BASE-TX (Fast Ethernet) supports a maximum cable distance of 100 meters over Category 5 or better UTP (Unshielded Twisted Pair) cable. This 100-meter limitation is standard for most twisted-pair Ethernet implementations (10BASE-T, 100BASE-TX, 1000BASE-T) and is due to signal attenuation and timing constraints. Using fiber optic cables can extend distances significantly.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What happens when an Ethernet collision is detected?",
+    "options": [
+      "A) The frame is automatically resent immediately",
+      "B) Both devices stop transmitting, send a jam signal, wait a random time, then retry",
+      "C) The switch drops the frame permanently",
+      "D) The collision is ignored and transmission continues"
+    ],
+    "answer": "B) Both devices stop transmitting, send a jam signal, wait a random time, then retry",
+    "explanation": "When a collision is detected in CSMA/CD, both transmitting devices immediately stop sending data and transmit a jam signal to ensure all devices are aware of the collision. Then, each device waits a random amount of time (determined by a backoff algorithm) before attempting to retransmit. This random delay reduces the probability of another collision. Modern switched full-duplex Ethernet eliminates collisions entirely.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is Auto-Negotiation in Ethernet?",
+    "options": [
+      "A) Automatic IP address assignment",
+      "B) A process where devices automatically configure speed and duplex settings",
+      "C) Automatic routing configuration",
+      "D) Automatic MAC address generation"
+    ],
+    "answer": "B) A process where devices automatically configure speed and duplex settings",
+    "explanation": "Auto-Negotiation is an Ethernet feature where connected devices automatically negotiate and configure the best common speed (10/100/1000 Mbps) and duplex mode (half/full) they both support. This eliminates the need for manual configuration and prevents speed/duplex mismatches that can cause performance issues. Auto-Negotiation uses Fast Link Pulses (FLP) to exchange capability information between devices.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which category of UTP cable is required for Gigabit Ethernet (1000BASE-T)?",
+    "options": [
+      "A) Category 3",
+      "B) Category 5",
+      "C) Category 5e or higher",
+      "D) Category 7 only"
+    ],
+    "answer": "C) Category 5e or higher",
+    "explanation": "Gigabit Ethernet (1000BASE-T) requires Category 5e (enhanced) or higher quality cables. While Category 5 cables might work over short distances, Cat 5e is the minimum specification that guarantees reliable 1 Gbps performance up to 100 meters. Cat 5e has improved specifications for crosstalk and signal-to-noise ratio. Category 6, 6a, and 7 cables can also be used and are required for higher speeds like 10GBASE-T.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What is a VLAN in Ethernet networks?",
+    "options": [
+      "A) A type of cable",
+      "B) A Virtual Local Area Network that logically segments a network",
+      "C) A virus protection system",
+      "D) A wireless access point"
+    ],
+    "answer": "B) A Virtual Local Area Network that logically segments a network",
+    "explanation": "A VLAN (Virtual Local Area Network) is a logical network segmentation that groups devices together regardless of their physical location. VLANs operate at Layer 2 and are configured on switches. They improve security by isolating traffic, reduce broadcast domains, simplify network management, and enable flexible network design. VLAN tags (IEEE 802.1Q) are added to Ethernet frames to identify VLAN membership.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is the primary difference between Ethernet II and IEEE 802.3 frame formats?",
+    "options": [
+      "A) The size of MAC addresses",
+      "B) The EtherType/Length field interpretation",
+      "C) The FCS calculation method",
+      "D) The preamble length"
+    ],
+    "answer": "B) The EtherType/Length field interpretation",
+    "explanation": "The primary difference between Ethernet II and IEEE 802.3 frames is the interpretation of the 2-byte field after the source MAC address. In Ethernet II (more commonly used), this is the EtherType field indicating the protocol (e.g., 0x0800 for IPv4). In IEEE 802.3, values less than 1536 indicate the length of the payload. Ethernet II is the dominant format used in modern networks for IP traffic.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What does PoE stand for in Ethernet technology?",
+    "options": [
+      "A) Protocol over Ethernet",
+      "B) Power over Ethernet",
+      "C) Port of Entry",
+      "D) Packet on Equipment"
+    ],
+    "answer": "B) Power over Ethernet",
+    "explanation": "PoE stands for Power over Ethernet. It is a technology defined by IEEE 802.3af and 802.3at standards that allows electrical power to be transmitted over Ethernet cables along with data. This eliminates the need for separate power cables for devices like IP cameras, VoIP phones, wireless access points, and IoT devices. PoE can deliver up to 15.4W (802.3af) or 30W (802.3at/PoE+) or even 60-100W (802.3bt/PoE++) per port.",
+    "image": null
+  }
+]

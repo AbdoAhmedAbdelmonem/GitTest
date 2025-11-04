@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What does IP stand for in networking?",
+    "options": [
+      "A) Internet Provider",
+      "B) Internet Protocol",
+      "C) Internal Protocol",
+      "D) Integrated Protocol"
+    ],
+    "answer": "B) Internet Protocol",
+    "explanation": "IP stands for Internet Protocol. It is a set of rules governing the format of data sent over the internet or local network. IP addresses are used to identify devices on a network and enable routing of data packets from source to destination across interconnected networks.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "How many bits are in an IPv4 address?",
+    "options": [
+      "A) 16 bits",
+      "B) 32 bits",
+      "C) 64 bits",
+      "D) 128 bits"
+    ],
+    "answer": "B) 32 bits",
+    "explanation": "An IPv4 address consists of 32 bits, divided into four octets (8 bits each). Each octet can range from 0 to 255 when represented in decimal notation, separated by dots (e.g., 192.168.1.1). The 32-bit address space allows for approximately 4.3 billion unique addresses.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a valid Class A IP address range?",
+    "options": [
+      "A) 1.0.0.0 to 126.0.0.0",
+      "B) 128.0.0.0 to 191.255.0.0",
+      "C) 192.0.0.0 to 223.255.255.0",
+      "D) 224.0.0.0 to 239.255.255.255"
+    ],
+    "answer": "A) 1.0.0.0 to 126.0.0.0",
+    "explanation": "Class A addresses range from 1.0.0.0 to 126.0.0.0 (127.x.x.x is reserved for loopback). Class A uses the first octet for the network portion and the remaining three octets for host addresses, supporting large networks with up to 16 million hosts per network. The first bit of a Class A address is always 0.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the default subnet mask for a Class B network?",
+    "options": [
+      "A) 255.0.0.0",
+      "B) 255.255.0.0",
+      "C) 255.255.255.0",
+      "D) 255.255.255.255"
+    ],
+    "answer": "B) 255.255.0.0",
+    "explanation": "The default subnet mask for Class B networks is 255.255.0.0 or /16 in CIDR notation. This means the first two octets (16 bits) are used for the network portion, and the last two octets (16 bits) are available for host addresses, providing approximately 65,534 usable host addresses per network.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which IP address is reserved for loopback testing?",
+    "options": [
+      "A) 192.168.1.1",
+      "B) 127.0.0.1",
+      "C) 255.255.255.255",
+      "D) 0.0.0.0"
+    ],
+    "answer": "B) 127.0.0.1",
+    "explanation": "127.0.0.1 is the loopback address used for testing the TCP/IP stack on the local machine. The entire 127.0.0.0/8 range is reserved for loopback purposes. When you ping 127.0.0.1 (or localhost), the traffic never leaves your computer - it loops back internally, making it useful for testing network software without requiring a physical network connection.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What does CIDR stand for?",
+    "options": [
+      "A) Classless Inter-Domain Routing",
+      "B) Class Internet Domain Routing",
+      "C) Central Internet Data Routing",
+      "D) Classified IP Domain Range"
+    ],
+    "answer": "A) Classless Inter-Domain Routing",
+    "explanation": "CIDR stands for Classless Inter-Domain Routing. It is a method of IP address allocation and routing that replaced the older classful network design. CIDR notation uses a slash followed by the number of network bits (e.g., 192.168.1.0/24), providing more flexible and efficient use of IP address space by allowing variable-length subnet masking.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is the subnet mask 255.255.255.0 in CIDR notation?",
+    "options": [
+      "A) /16",
+      "B) /24",
+      "C) /25",
+      "D) /32"
+    ],
+    "answer": "B) /24",
+    "explanation": "The subnet mask 255.255.255.0 is represented as /24 in CIDR notation. This indicates that the first 24 bits (three octets) are used for the network portion, leaving 8 bits for host addresses. This provides 256 total addresses, with 254 usable host addresses (excluding network and broadcast addresses).",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a private IP address range?",
+    "options": [
+      "A) 8.8.8.0 to 8.8.8.255",
+      "B) 172.16.0.0 to 172.31.255.255",
+      "C) 200.100.50.0 to 200.100.50.255",
+      "D) 11.0.0.0 to 11.255.255.255"
+    ],
+    "answer": "B) 172.16.0.0 to 172.31.255.255",
+    "explanation": "172.16.0.0 to 172.31.255.255 is one of the three private IP address ranges defined in RFC 1918. The three private ranges are: 10.0.0.0/8 (Class A), 172.16.0.0/12 (Class B), and 192.168.0.0/16 (Class C). Private IP addresses are not routable on the public internet and are used for internal networks, with NAT (Network Address Translation) providing internet access.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "How many usable host addresses are available in a /28 subnet?",
+    "options": [
+      "A) 8",
+      "B) 14",
+      "C) 16",
+      "D) 30"
+    ],
+    "answer": "B) 14",
+    "explanation": "A /28 subnet has 4 bits available for host addresses (32 - 28 = 4). This gives 2^4 = 16 total addresses. However, two addresses are reserved: the network address (all host bits 0) and the broadcast address (all host bits 1). Therefore, 16 - 2 = 14 usable host addresses. The formula is: 2^(host bits) - 2.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of a subnet mask?",
+    "options": [
+      "A) To encrypt network traffic",
+      "B) To determine which portion of an IP address is the network and which is the host",
+      "C) To assign IP addresses automatically",
+      "D) To filter malicious traffic"
+    ],
+    "answer": "B) To determine which portion of an IP address is the network and which is the host",
+    "explanation": "A subnet mask is used to divide an IP address into network and host portions. By performing a bitwise AND operation between the IP address and subnet mask, devices can determine if a destination is on the local network or requires routing. Bits set to 1 in the mask indicate the network portion, while bits set to 0 indicate the host portion.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is the broadcast address for the network 192.168.10.0/24?",
+    "options": [
+      "A) 192.168.10.0",
+      "B) 192.168.10.1",
+      "C) 192.168.10.254",
+      "D) 192.168.10.255"
+    ],
+    "answer": "D) 192.168.10.255",
+    "explanation": "For the network 192.168.10.0/24, the broadcast address is 192.168.10.255. The broadcast address is calculated by setting all host bits to 1. In a /24 network, the last octet represents the host portion, so the broadcast address is x.x.x.255. Broadcast messages sent to this address are received by all devices in that subnet.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "Which class of IP address is 172.16.50.10?",
+    "options": [
+      "A) Class A",
+      "B) Class B",
+      "C) Class C",
+      "D) Class D"
+    ],
+    "answer": "B) Class B",
+    "explanation": "172.16.50.10 is a Class B address. Class B addresses range from 128.0.0.0 to 191.255.255.255, with the first two bits being 10 in binary. The first octet (172) falls within this range. Additionally, this is a private IP address from the 172.16.0.0/12 range, commonly used in internal networks.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is subnetting?",
+    "options": [
+      "A) Combining multiple networks into one large network",
+      "B) Dividing a larger network into smaller, more manageable sub-networks",
+      "C) Encrypting network traffic",
+      "D) Assigning static IP addresses"
+    ],
+    "answer": "B) Dividing a larger network into smaller, more manageable sub-networks",
+    "explanation": "Subnetting is the practice of dividing a larger network into smaller sub-networks (subnets). This improves network performance by reducing broadcast traffic, enhances security by isolating network segments, allows better IP address management, and enables more efficient use of IP address space. Subnetting is accomplished by borrowing bits from the host portion to create additional network segments.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "How many bits are in an IPv6 address?",
+    "options": [
+      "A) 32 bits",
+      "B) 64 bits",
+      "C) 128 bits",
+      "D) 256 bits"
+    ],
+    "answer": "C) 128 bits",
+    "explanation": "An IPv6 address consists of 128 bits, providing an enormously larger address space than IPv4 (approximately 340 undecillion addresses). IPv6 addresses are written as eight groups of four hexadecimal digits separated by colons (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334). IPv6 was developed to solve the IPv4 address exhaustion problem.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the first usable host address in the network 192.168.5.0/26?",
+    "options": [
+      "A) 192.168.5.0",
+      "B) 192.168.5.1",
+      "C) 192.168.5.64",
+      "D) 192.168.5.65"
+    ],
+    "answer": "B) 192.168.5.1",
+    "explanation": "For the network 192.168.5.0/26, the first usable host address is 192.168.5.1. The /26 subnet mask means 26 bits for network, leaving 6 bits for hosts. The network address is 192.168.5.0 (all host bits 0), and the broadcast is 192.168.5.63 (all host bits 1). The first usable host is always the network address + 1, which is 192.168.5.1.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What does NAT stand for?",
+    "options": [
+      "A) Network Address Translation",
+      "B) Network Access Technology",
+      "C) Network Authentication Token",
+      "D) Network Application Transfer"
+    ],
+    "answer": "A) Network Address Translation",
+    "explanation": "NAT stands for Network Address Translation. It is a method used by routers to translate private IP addresses used within a local network to a public IP address for communication over the internet. NAT helps conserve public IP addresses, provides a layer of security by hiding internal network structure, and allows multiple devices to share a single public IP address.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which subnet mask provides 62 usable host addresses?",
+    "options": [
+      "A) 255.255.255.0 (/24)",
+      "B) 255.255.255.128 (/25)",
+      "C) 255.255.255.192 (/26)",
+      "D) 255.255.255.224 (/27)"
+    ],
+    "answer": "C) 255.255.255.192 (/26)",
+    "explanation": "A /26 subnet mask (255.255.255.192) provides 62 usable host addresses. With 6 host bits (32 - 26 = 6), you get 2^6 = 64 total addresses. Subtract 2 for the network and broadcast addresses: 64 - 2 = 62 usable hosts. This subnet mask is commonly used for small to medium-sized network segments.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What is the network address for IP 10.20.30.45 with subnet mask 255.255.255.240?",
+    "options": [
+      "A) 10.20.30.0",
+      "B) 10.20.30.32",
+      "C) 10.20.30.40",
+      "D) 10.20.30.48"
+    ],
+    "answer": "B) 10.20.30.32",
+    "explanation": "With subnet mask 255.255.255.240 (/28), the last octet has 4 host bits, creating subnets in increments of 16 (256 - 240 = 16). The subnets are: .0, .16, .32, .48, .64, etc. The IP 10.20.30.45 falls in the range 10.20.30.32 to 10.20.30.47, making 10.20.30.32 the network address. To verify: 45 is between 32 (network) and 47 (broadcast).",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which IP address range is designated for Class C networks?",
+    "options": [
+      "A) 1.0.0.0 to 126.255.255.255",
+      "B) 128.0.0.0 to 191.255.255.255",
+      "C) 192.0.0.0 to 223.255.255.255",
+      "D) 224.0.0.0 to 239.255.255.255"
+    ],
+    "answer": "C) 192.0.0.0 to 223.255.255.255",
+    "explanation": "Class C networks range from 192.0.0.0 to 223.255.255.255. The first three bits of a Class C address are 110 in binary. Class C uses three octets for the network portion and one octet for hosts, providing 254 usable host addresses per network. The default subnet mask for Class C is 255.255.255.0 (/24).",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What is VLSM?",
+    "options": [
+      "A) Virtual LAN Subnet Masking",
+      "B) Variable Length Subnet Masking",
+      "C) Very Large Subnet Method",
+      "D) Virtual Link Subnet Management"
+    ],
+    "answer": "B) Variable Length Subnet Masking",
+    "explanation": "VLSM stands for Variable Length Subnet Masking. It is a subnetting technique that allows network administrators to use different subnet masks for different subnets within the same network, enabling more efficient use of IP address space. VLSM is part of CIDR and allows you to allocate IP addresses based on actual network requirements rather than fixed class boundaries, reducing IP address waste.",
+    "image": null
+  }
+]

@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What does NAT stand for? لو ركزت في اسم الكويز هتعرف الإجابة",
+    "options": [
+      "A) Network Access Technology",
+      "B) Network Address Translation",
+      "C) Network Application Transfer",
+      "D) Network Authentication Token"
+    ],
+    "answer": "B) Network Address Translation",
+    "explanation": "NAT stands for Network Address Translation. It is a method used by routers to translate private (unregistered) IP addresses used within a local network to public (registered) IP addresses for communication over the internet. NAT was developed primarily to solve the problem of IPv4 address depletion and to provide an additional layer of security.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What is the primary purpose of NAT?",
+    "options": [
+      "A) To increase network speed",
+      "B) To solve the problem of IP address depletion",
+      "C) To encrypt network traffic",
+      "D) To configure DNS servers"
+    ],
+    "answer": "B) To solve the problem of IP address depletion",
+    "explanation": "The primary purpose of NAT is to solve the problem of IPv4 address depletion. By allowing multiple devices on a private network to share one or more public IP addresses, NAT conserves the limited number of available public IPv4 addresses. This enables organizations to use private IP addresses internally while still accessing the internet through a smaller number of public addresses.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is an inside local address in NAT terminology?",
+    "options": [
+      "A) The public IP address assigned by the ISP",
+      "B) The private IP address of a host on the internal network",
+      "C) The IP address of the router's external interface",
+      "D) The broadcast address of the network"
+    ],
+    "answer": "B) The private IP address of a host on the internal network",
+    "explanation": "An inside local address is the private IP address assigned to a device on the internal network. These addresses are not advertised to or routable on the public internet. Examples include addresses from the private ranges like 192.168.x.x, 10.x.x.x, or 172.16.x.x to 172.31.x.x. The inside local address is what the device uses within the organization's network.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is an inside global address in NAT terminology?",
+    "options": [
+      "A) The private IP address used internally",
+      "B) The public IP address by which inside devices are known to the outside world",
+      "C) The subnet mask of the internal network",
+      "D) The MAC address of the device"
+    ],
+    "answer": "B) The public IP address by which inside devices are known to the outside world",
+    "explanation": "An inside global address is the public (registered) IP address by which inside devices are known to the outside world. This is the address that external networks see when communicating with devices behind the NAT router. The NAT device translates the inside local (private) address to the inside global (public) address when packets leave the network.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "How many types of NAT are commonly used?",
+    "options": [
+      "A) 2 types",
+      "B) 3 types",
+      "C) 4 types",
+      "D) 5 types"
+    ],
+    "answer": "B) 3 types",
+    "explanation": "There are three main types of NAT: 1) Static NAT - one-to-one mapping between private and public addresses, 2) Dynamic NAT - mapping from a pool of public addresses on a first-come, first-served basis, and 3) PAT (Port Address Translation), also known as NAT Overload - many-to-one mapping using port numbers. Each type serves different purposes and use cases in network design.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is Static NAT?",
+    "options": [
+      "A) Mapping multiple private IPs to one public IP using port numbers",
+      "B) A one-to-one mapping between local and global addresses",
+      "C) Automatically assigning IP addresses from a pool",
+      "D) A temporary address assignment method"
+    ],
+    "answer": "B) A one-to-one mapping between local and global addresses",
+    "explanation": "Static NAT provides a one-to-one mapping between a private (inside local) IP address and a public (inside global) IP address. Each internal device with a static NAT entry always translates to the same public IP address. This configuration is permanent and requires one registered public IP address for every host that needs external access. It's commonly used for servers that need to be consistently accessible from the internet.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is a disadvantage of Static NAT?",
+    "options": [
+      "A) It is too complex to configure",
+      "B) It provides no benefit in terms of IP address conservation",
+      "C) It cannot hide internal IP addresses",
+      "D) It is incompatible with TCP/IP"
+    ],
+    "answer": "B) It provides no benefit in terms of IP address conservation",
+    "explanation": "Static NAT provides no benefit in terms of IP address conservation because it requires a one-to-one mapping - you need one public IP address for each internal host. However, Static NAT does provide a degree of security by hiding the actual inside IP addresses from the outside world, and it's useful when you need a consistent public address for specific devices like servers.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What is Dynamic NAT?",
+    "options": [
+      "A) Permanent one-to-one IP address mapping",
+      "B) Mapping private IP addresses to public IP addresses from a pool of available addresses",
+      "C) Using port numbers to share one public IP",
+      "D) Automatic DNS configuration"
+    ],
+    "answer": "B) Mapping private IP addresses to public IP addresses from a pool of available addresses",
+    "explanation": "Dynamic NAT maps private (unregistered) IP addresses to public (registered) IP addresses from a pool of available public addresses. The mapping is done on a first-come, first-served basis. When an internal host initiates a connection, the router assigns an available public IP from the pool. Unlike Static NAT, the mapping is temporary and can change over time based on availability.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What happens in Dynamic NAT if all inside global IP addresses are exhausted?",
+    "options": [
+      "A) The router automatically requests more IPs from the ISP",
+      "B) New requests from new hosts will be discarded",
+      "C) The oldest connection is terminated to free up an address",
+      "D) The router switches to Static NAT mode"
+    ],
+    "answer": "B) New requests from new hosts will be discarded",
+    "explanation": "In Dynamic NAT, if all inside global IP addresses in the pool are currently in use (exhausted), any new connection request from a new host will be discarded or denied. The host must wait until an IP address becomes available in the pool, which happens when an existing translation times out or is released. This is a limitation of Dynamic NAT when the pool size is smaller than the number of potential users.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is a timeout value in Dynamic NAT?",
+    "options": [
+      "A) The maximum time a packet can stay in the router queue",
+      "B) The period after which the router removes an unused inside global address from the NAT table",
+      "C) The time it takes to translate an address",
+      "D) The delay before establishing a connection"
+    ],
+    "answer": "B) The period after which the router removes an unused inside global address from the NAT table",
+    "explanation": "In Dynamic NAT, the timeout value is a configurable period after which the router removes an inside global address mapping from the NAT table if it is not actively being used. This allows the public IP address to be returned to the pool and made available for other hosts. The timeout mechanism ensures efficient use of the limited pool of public IP addresses.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What does PAT stand for?",
+    "options": [
+      "A) Private Address Technology",
+      "B) Port Address Translation",
+      "C) Protocol Address Transfer",
+      "D) Public Access Translation"
+    ],
+    "answer": "B) Port Address Translation",
+    "explanation": "PAT stands for Port Address Translation. It is also known as NAT Overload and is the most popular type of NAT. PAT allows multiple devices on a private network to share a single public IP address by using different port numbers to distinguish between connections. This provides maximum conservation of public IP addresses.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What type of mapping does PAT use?",
+    "options": [
+      "A) One-to-one mapping between IP addresses",
+      "B) Many-to-many mapping using IP addresses only",
+      "C) Many-to-one mapping using different port numbers",
+      "D) One-to-many mapping using subnet masks"
+    ],
+    "answer": "C) Many-to-one mapping using different port numbers",
+    "explanation": "PAT uses a many-to-one mapping between private and public IP addresses, accomplished using different port numbers. Multiple internal devices can share a single public IP address because PAT uses unique source port numbers to identify and track each connection. When a packet returns from the internet, PAT uses the destination port number to determine which internal device should receive it.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "How many bits are in a port number?",
+    "options": [
+      "A) 8 bits",
+      "B) 16 bits",
+      "C) 32 bits",
+      "D) 64 bits"
+    ],
+    "answer": "B) 16 bits",
+    "explanation": "A port number is 16 bits in length, which allows for port numbers ranging from 0 to 65,535 (2^16 - 1 = 65,535). Port numbers are divided into three ranges: Well-Known Ports (0-1023) used by system services, Registered Ports (1024-49151) used by applications, and Dynamic/Private Ports (49152-65535) used for temporary connections. This 16-bit field enables PAT to support thousands of simultaneous connections.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is the range of port numbers?",
+    "options": [
+      "A) 0 to 1023",
+      "B) 0 to 32767",
+      "C) 0 to 65535",
+      "D) 1 to 65536"
+    ],
+    "answer": "C) 0 to 65535",
+    "explanation": "Port numbers range from 0 to 65,535, providing 65,536 possible port values. This range is made possible by the 16-bit port number field in TCP and UDP headers. Port 0 is reserved, ports 1-1023 are well-known ports for standard services, ports 1024-49151 are registered ports, and ports 49152-65535 are dynamic or private ports used for temporary connections.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "How many users can typically be supported by PAT using a single public IP address?",
+    "options": [
+      "A) Up to 255 users",
+      "B) Up to 1,000 users",
+      "C) Hundreds or even thousands of users",
+      "D) Only 64 users"
+    ],
+    "answer": "C) Hundreds or even thousands of users",
+    "explanation": "By using PAT, hundreds or even thousands of users can be connected to the Internet using only one real global IP address. This is possible because PAT uses the combination of IP address and port number to uniquely identify each connection. With approximately 65,000 available ports, PAT can theoretically support many simultaneous connections from different internal hosts, making it extremely efficient for IP address conservation.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which type of NAT is the most popular?",
+    "options": [
+      "A) Static NAT",
+      "B) Dynamic NAT",
+      "C) PAT (Port Address Translation)",
+      "D) All are equally popular"
+    ],
+    "answer": "C) PAT (Port Address Translation)",
+    "explanation": "PAT (Port Address Translation) is the most popular type of NAT. Its popularity stems from its efficiency in conserving IP addresses - it allows multiple devices to share a single public IP address using port numbers. This makes it ideal for home networks, small businesses, and even large organizations where many users need internet access but public IP addresses are limited and expensive.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What information does PAT use to differentiate between multiple internal hosts using the same public IP?",
+    "options": [
+      "A) MAC addresses",
+      "B) Subnet masks",
+      "C) Port numbers",
+      "D) DNS names"
+    ],
+    "answer": "C) Port numbers",
+    "explanation": "PAT uses port numbers to differentiate between multiple internal hosts sharing the same public IP address. When an internal device initiates a connection, PAT assigns a unique source port number and records the mapping in its translation table. When response packets arrive at the public IP address, PAT examines the destination port number to determine which internal device should receive the packet, then translates it back to the appropriate private IP address.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which private IP address range belongs to Class A?",
+    "options": [
+      "A) 192.168.0.0 to 192.168.255.255",
+      "B) 172.16.0.0 to 172.31.255.255",
+      "C) 10.0.0.0 to 10.255.255.255",
+      "D) 169.254.0.0 to 169.254.255.255"
+    ],
+    "answer": "C) 10.0.0.0 to 10.255.255.255",
+    "explanation": "The Class A private IP address range is 10.0.0.0 to 10.255.255.255 (10.0.0.0/8). This is the largest private address space, providing over 16 million addresses. The Class B private range is 172.16.0.0 to 172.31.255.255, and the Class C private range is 192.168.0.0 to 192.168.255.255. These ranges are defined in RFC 1918 and are not routable on the public internet.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What security benefit does NAT provide?",
+    "options": [
+      "A) It encrypts all network traffic",
+      "B) It hides internal IP addresses from the outside world",
+      "C) It prevents all types of malware",
+      "D) It automatically updates firewall rules"
+    ],
+    "answer": "B) It hides internal IP addresses from the outside world",
+    "explanation": "NAT provides a degree of security by hiding the internal (private) IP addresses from the outside world. External networks only see the public IP address(es) of the NAT device, not the private addresses of individual internal hosts. This obscurity makes it more difficult for attackers to directly target specific internal devices and provides a basic level of protection, though it should not be considered a replacement for a proper firewall.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "In a PAT scenario with three internal hosts (192.168.1.10, 192.168.1.11, 192.168.1.12) sharing one public IP (67.210.97.1), what distinguishes their connections?",
+    "options": [
+      "A) Different subnet masks",
+      "B) Different MAC addresses",
+      "C) Different port numbers assigned by PAT",
+      "D) Different public IP addresses"
+    ],
+    "answer": "C) Different port numbers assigned by PAT",
+    "explanation": "When three internal hosts share one public IP address through PAT, their connections are distinguished by different port numbers. For example, host 192.168.1.10 might use port 3001, host 192.168.1.11 might use port 3002, and host 192.168.1.12 might use port 3003, all mapped to the same public IP 67.210.97.1. The PAT device maintains a translation table mapping each internal IP:port combination to the public IP:port combination, enabling proper routing of return traffic.",
+    "image": null
+  }
+]
