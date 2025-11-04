@@ -339,6 +339,13 @@ export default function QuizInterface({
   };
 
   const selectAnswer = (answer: string) => {
+  // 🔒 STRICT BUG FIX: Prevent re-answering already answered questions
+  // Check if the question has already been answered
+  if (userAnswers[currentQuestion] !== undefined) {
+    console.log("Question already answered. Re-answering is not allowed.");
+    return; // Exit early, don't allow changing the answerHpr
+  }
+
   // Batch multiple state updates
   if (selectedMode === "instant") {
     setUserAnswers(prev => ({
@@ -538,6 +545,7 @@ export default function QuizInterface({
         timerRef.current = null;
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft, currentStep, selectedDuration]);
 
   const handleTimeExpired = () => {
@@ -1088,6 +1096,7 @@ export default function QuizInterface({
                         const isCorrectOption = option === currentQ.answer;
                         const showFeedback =
                           selectedMode === "instant" && showAnswer;
+                        const isQuestionAnswered = userAnswers[currentQuestion] !== undefined;
 
                         return (
                           <motion.button
@@ -1096,14 +1105,14 @@ export default function QuizInterface({
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.1 }}
                             whileHover={{
-                              scale: showFeedback ? 1 : 1.02,
-                              x: showFeedback ? 0 : 8,
+                              scale: showFeedback || isQuestionAnswered ? 1 : 1.02,
+                              x: showFeedback || isQuestionAnswered ? 0 : 8,
                             }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() =>
-                              !showFeedback && selectAnswer(option)
+                              !isQuestionAnswered && selectAnswer(option)
                             }
-                            disabled={showFeedback}
+                            disabled={isQuestionAnswered}
                             className={cn(
                               "w-full p-6 text-left rounded-xl border-2 transition-all backdrop-blur-sm relative overflow-hidden",
                               showFeedback
@@ -1114,7 +1123,8 @@ export default function QuizInterface({
                                   : "border-white/[0.15] bg-white/[0.02]"
                                 : isSelected
                                 ? "border-white bg-white/[0.1] shadow-lg"
-                                : "border-white/[0.15] hover:border-white/[0.3] hover:bg-white/[0.03]"
+                                : "border-white/[0.15] hover:border-white/[0.3] hover:bg-white/[0.03]",
+                              isQuestionAnswered && "cursor-not-allowed opacity-80"
                             )}
                             style={{
                               backgroundColor:
@@ -1232,7 +1242,7 @@ export default function QuizInterface({
               variant="outline"
               onClick={prevQuestion}
               disabled={currentQuestion === 0}
-              className="border-white/[0.15] text-white hover:bg-white/[0.05] px-8 py-3 bg-transparent"
+              className="border-white/[0.15] text-white hover:bg-white/[0.05] px-8 py-3 bg-transparent hover:text-white"
             >
               <ArrowLeft className="w-5 h-5 mr-2" />
               Previous
