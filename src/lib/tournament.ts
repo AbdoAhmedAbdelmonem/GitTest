@@ -57,60 +57,62 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
     
     console.log(`Querying level ${level} from ${tournamentStart.toISOString()} to ${tournamentEnd.toISOString()}`)
 
-    // First, let's check what quiz data exists without filters
-    const { data: allQuizData, error: allError } = await supabase
-      .from("quiz_data")
-      .select(`
-        quiz_id,
-        user_id,
-        score,
-        quiz_level,
-        duration_selected,
-        answering_mode,
-        how_finished,
-        total_questions,
-        solved_at
-      `)
-      .order("solved_at", { ascending: false })
-
-    if (allError) {
-      console.error("Error fetching all quiz data:", allError)
-    } else if (allQuizData) {
-      console.log(`Total quiz entries found: ${allQuizData.length}`)
-      // Log recent entries to see dates
-      allQuizData.slice(0, 5).forEach((entry: QuizDataEntry) => {
-        console.log(`Quiz: level=${entry.quiz_level}, solved_at=${entry.solved_at}, user_id=${entry.user_id}`)
-      })
-    }
-
-    // Now query with our filters
-    const { data: quizData, error } = await supabase
-      .from("quiz_data")
-      .select(`
-        quiz_id,
-        user_id,
-        score,
-        quiz_level,
-        duration_selected,
-        answering_mode,
-        how_finished,
-        total_questions,
-        solved_at
-      `)
-      .eq("quiz_level", level)
-      .not("score", "is", null)
-      .gte("solved_at", tournamentStart.toISOString())
-      .lte("solved_at", tournamentEnd.toISOString())
-      .order("solved_at", { ascending: false })
-
-    if (error) {
-      console.error("Error fetching filtered quiz data:", error)
-      return { leaderboard: [] }
-    }
-
     console.log(`Tournament date range: ${tournamentStart.toISOString()} to ${tournamentEnd.toISOString()}`)
     console.log(`Looking for level ${level} quizzes with non-null scores in this date range`)
-    console.log(`Filtered quiz entries for level ${level}: ${quizData?.length || 0}`)
+    
+    // Fetch ALL data using pagination to bypass Supabase's 1000 row limit
+    // This ensures we get all tournament data even if there are more than 1000 quiz entries
+    let allQuizData: QuizDataEntry[] = []
+    let page = 0
+    const pageSize = 1000
+    const maxPages = 100 // Safety limit: max 100,000 rows (increase if needed)
+    let hasMore = true
+    
+    while (hasMore && page < maxPages) {
+      const { data: pageData, error: pageError } = await supabase
+        .from("quiz_data")
+        .select(`
+          quiz_id,
+          user_id,
+          score,
+          quiz_level,
+          duration_selected,
+          answering_mode,
+          how_finished,
+          total_questions,
+          solved_at
+        `)
+        .eq("quiz_level", level)
+        .not("score", "is", null)
+        .gte("solved_at", tournamentStart.toISOString())
+        .lte("solved_at", tournamentEnd.toISOString())
+        .order("solved_at", { ascending: false })
+        .range(page * pageSize, (page + 1) * pageSize - 1)
+      
+      if (pageError) {
+        console.error(`Error fetching page ${page}:`, pageError)
+        break
+      }
+      
+      if (!pageData || pageData.length === 0) {
+        hasMore = false
+      } else {
+        allQuizData = [...allQuizData, ...pageData]
+        console.log(`Fetched page ${page + 1}: ${pageData.length} rows (total so far: ${allQuizData.length})`)
+        
+        if (pageData.length < pageSize) {
+          hasMore = false
+        }
+        page++
+      }
+    }
+    
+    if (page >= maxPages) {
+      console.warn(`⚠️ Reached maximum page limit (${maxPages} pages). Some data might be missing. Consider using RPC function for better performance.`)
+    }
+    
+    const quizData = allQuizData
+    console.log(`Total quiz entries fetched for level ${level}: ${quizData.length}`)
 
     if (!quizData || quizData.length === 0) {
       console.log("No quiz data found for the specified date range and level")
@@ -262,26 +264,53 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
   const tournamentStart = new Date('2025-10-11T00:00:00.000Z')
   const tournamentEnd = new Date('2026-01-11T23:59:59.999Z')
 
-  const { data: quizData, error } = await supabase
-    .from("quiz_data")
-    .select(`
-      quiz_id,
-      user_id,
-      score,
-      quiz_level,
-      duration_selected,
-      answering_mode,
-      how_finished,
-      total_questions,
-      solved_at
-    `)
-    .eq("quiz_level", level)
-    .not("score", "is", null)
-    .gte("solved_at", tournamentStart.toISOString())
-    .lte("solved_at", tournamentEnd.toISOString())
-    .order("solved_at", { ascending: false })
+  // Fetch ALL data using pagination
+  let allQuizData: QuizDataEntry[] = []
+  let page = 0
+  const pageSize = 1000
+  let hasMore = true
+  
+  while (hasMore) {
+    const { data: pageData, error: pageError } = await supabase
+      .from("quiz_data")
+      .select(`
+        quiz_id,
+        user_id,
+        score,
+        quiz_level,
+        duration_selected,
+        answering_mode,
+        how_finished,
+        total_questions,
+        solved_at
+      `)
+      .eq("quiz_level", level)
+      .not("score", "is", null)
+      .gte("solved_at", tournamentStart.toISOString())
+      .lte("solved_at", tournamentEnd.toISOString())
+      .order("solved_at", { ascending: false })
+      .range(page * pageSize, (page + 1) * pageSize - 1)
+    
+    if (pageError) {
+      console.error(`Error fetching page ${page}:`, pageError)
+      break
+    }
+    
+    if (!pageData || pageData.length === 0) {
+      hasMore = false
+    } else {
+      allQuizData = [...allQuizData, ...pageData]
+      
+      if (pageData.length < pageSize) {
+        hasMore = false
+      }
+      page++
+    }
+  }
+  
+  const quizData = allQuizData
 
-  if (error || !quizData) {
+  if (!quizData || quizData.length === 0) {
     return { leaderboard: [] }
   }
 
