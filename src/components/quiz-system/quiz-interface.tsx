@@ -339,11 +339,11 @@ export default function QuizInterface({
   };
 
   const selectAnswer = (answer: string) => {
-  // 🔒 STRICT BUG FIX: Prevent re-answering already answered questions
-  // Check if the question has already been answered
-  if (userAnswers[currentQuestion] !== undefined) {
-    console.log("Question already answered. Re-answering is not allowed.");
-    return; // Exit early, don't allow changing the answerHpr
+  // 🔒 في Instant Mode: ممنوع تغيير الإجابة بعد ما تجاوب
+  // في Traditional Mode: ممكن تغير إجابتك عادي
+  if (selectedMode === "instant" && userAnswers[currentQuestion] !== undefined) {
+    console.log("Instant Mode: Question already answered. Re-answering is not allowed.");
+    return; // في الـ Instant Mode، أول إجابة تتقفل
   }
 
   // Batch multiple state updates
@@ -364,6 +364,7 @@ export default function QuizInterface({
       setTimeout(() => setShowCelebration(false), 1000); // Reduced time
     }
   } else {
+    // Traditional Mode: يقدر يغير إجابته براحته
     setUserAnswers(prev => ({
       ...prev,
       [currentQuestion]: answer,
@@ -1096,7 +1097,8 @@ export default function QuizInterface({
                         const isCorrectOption = option === currentQ.answer;
                         const showFeedback =
                           selectedMode === "instant" && showAnswer;
-                        const isQuestionAnswered = userAnswers[currentQuestion] !== undefined;
+                        // في Instant Mode بس نمنع تغيير الإجابة
+                        const isQuestionAnswered = selectedMode === "instant" && userAnswers[currentQuestion] !== undefined;
 
                         return (
                           <motion.button
