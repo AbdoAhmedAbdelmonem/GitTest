@@ -35,7 +35,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createBrowserClient } from "@/lib/supabase/client";
-import { getStudentSession } from "@/lib/auth";
+import { getStudentSession, clearStudentSession } from "@/lib/auth";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Dialog as ImageDialog, DialogContent as ImageDialogContent } from "@/components/ui/dialog";
 import Calculator from "@/components/Calculator";
@@ -289,6 +289,8 @@ export default function QuizInterface({
 
   // Check authentication status
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isBanned, setIsBanned] = useState(false);
+  const [showBannedDialog, setShowBannedDialog] = useState(false);
   
   // Memoize checkQuizAttempts to avoid unnecessary recreations
   const checkQuizAttempts = useCallback(async (): Promise<void> => {
@@ -328,12 +330,26 @@ export default function QuizInterface({
       setIsAuthenticated(!!session);
       
       if (session) {
+        // ✅ Check if user is banned
+        if (session.is_banned) {
+          console.log("🚫 User is banned, forcing logout");
+          setIsBanned(true);
+          setShowBannedDialog(true);
+          return;
+        }
+        
         await checkQuizAttempts();
       }
     };
     
     checkAuth();
   }, [checkQuizAttempts]);
+  
+  // ✅ Force logout if banned
+  const handleBannedLogout = () => {
+    clearStudentSession();
+    window.location.href = "/auth";
+  };
 
   // Memoize loadQuestions
   const loadQuestions = useCallback(async () => {
