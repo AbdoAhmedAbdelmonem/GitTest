@@ -662,9 +662,9 @@ export default function TournamentPage() {
                           <ul className="text-xs space-y-1 text-white/70">
                             <li>• 1 minute: +5 pts</li>
                             <li>• 5 minutes: +4.5 pts</li>
-                            <li>• 15 minutes: +4 pts</li>
-                            <li>• 30 minutes: +3.5 pts</li>
-                            <li>• 60 minutes: +3 pts</li>
+                            <li>• 10 minutes: +4 pts</li>
+                            <li>• 15 minutes: +3.5 pts</li>
+                            <li>• 30 minutes: +3 pts</li>
                             <li>• Unlimited: +2.5 pts</li>
                           </ul>
                         </div>
@@ -695,3 +695,4 @@ export default function TournamentPage() {
     </div>
   )
 }
+
