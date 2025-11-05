@@ -161,11 +161,11 @@ export default function HomePage() {
                 <Sparkles className="w-3 h-3 mr-1 inline" />
                 Smart Search
               </Badge>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+              <h2 className="text-2xl md:text-5xl font-bold text-white mb-3">
                 Find Anything in <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Seconds</span>
               </h2>
               <p className="text-white/60 mb-6">
-                Search across courses, quizzes, certifications, and more with our intelligent search
+                Search across courses from any specialization with our intelligent search
               </p>
             </div>
             <MagicSearch />
