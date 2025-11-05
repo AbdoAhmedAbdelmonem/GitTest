@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef, useMemo, useCallback, memo } from "react";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -134,26 +134,128 @@ const quizModes = [
   },
 ];
 
-// First, add a motion reduction detection
+// Detect mobile devices and reduced motion
 function useReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent));
+    };
+    checkMobile();
     
-    const listener = (event: MediaQueryListEvent) => setPrefersReducedMotion(event.matches);
+    // Check reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches || isMobile);
+    
+    const listener = (event: MediaQueryListEvent) => setPrefersReducedMotion(event.matches || isMobile);
     mediaQuery.addEventListener('change', listener);
-    return () => mediaQuery.removeEventListener('change', listener);
-  }, []);
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      mediaQuery.removeEventListener('change', listener);
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, [isMobile]);
   
-  return prefersReducedMotion;
+  return { prefersReducedMotion: prefersReducedMotion || isMobile, isMobile };
 }
+
+// Memoized Option Button Component
+const OptionButton = memo(function OptionButton({ 
+  option, 
+  index, 
+  isSelected, 
+  isCorrectOption, 
+  showFeedback, 
+  isQuestionAnswered, 
+  onSelect, 
+  selectedTheme,
+  isMobile 
+}: {
+  option: string;
+  index: number;
+  isSelected: boolean;
+  isCorrectOption: boolean;
+  showFeedback: boolean;
+  isQuestionAnswered: boolean;
+  onSelect: (option: string) => void;
+  selectedTheme: typeof themes[0];
+  isMobile: boolean;
+}) {
+  return (
+    <motion.button
+      key={index}
+      initial={!isMobile ? { opacity: 0, y: 20 } : false}
+      animate={!isMobile ? { opacity: 1, y: 0 } : {}}
+      transition={!isMobile ? { delay: index * 0.05 } : {}}
+      whileHover={!showFeedback && !isQuestionAnswered && !isMobile ? { scale: 1.02, x: 8 } : {}}
+      whileTap={!isMobile ? { scale: 0.98 } : {}}
+      onClick={() => !isQuestionAnswered && onSelect(option)}
+      disabled={isQuestionAnswered}
+      className={cn(
+        "w-full p-4 md:p-6 text-left rounded-xl border-2 transition-all backdrop-blur-sm relative overflow-hidden",
+        showFeedback
+          ? isCorrectOption
+            ? "border-green-400 bg-green-500/[0.2] shadow-lg shadow-green-500/[0.3]"
+            : isSelected
+            ? "border-red-400 bg-red-500/[0.2] shadow-lg shadow-red-500/[0.3]"
+            : "border-white/[0.15] bg-white/[0.02]"
+          : isSelected
+          ? "border-white bg-white/[0.1] shadow-lg"
+          : "border-white/[0.15] hover:border-white/[0.3] hover:bg-white/[0.03]",
+        isQuestionAnswered && "cursor-not-allowed opacity-80"
+      )}
+      style={{
+        backgroundColor:
+          !showFeedback && isSelected
+            ? `${selectedTheme.primary}20`
+            : undefined,
+      }}
+    >
+      <AnimatePresence>
+        {showFeedback && isCorrectOption && !isMobile && (
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            className="absolute top-4 right-4"
+          >
+            <CheckCircle className="w-8 h-8 text-green-400" />
+          </motion.div>
+        )}
+        {showFeedback && isSelected && !isCorrectOption && !isMobile && (
+          <motion.div
+            initial={{ scale: 0, rotate: 180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            className="absolute top-4 right-4"
+          >
+            <XCircle className="w-8 h-8 text-red-400" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="flex items-center justify-between">
+        <span className="text-base md:text-lg">{option}</span>
+        {showFeedback && isCorrectOption && isMobile && (
+          <CheckCircle className="w-6 h-6 text-green-400" />
+        )}
+        {showFeedback && isSelected && !isCorrectOption && isMobile && (
+          <XCircle className="w-6 h-6 text-red-400" />
+        )}
+      </div>
+    </motion.button>
+  );
+});
 
 export default function QuizInterface({
   quizData,
   onExit,
 }: QuizInterfaceProps) {
+  // Detect mobile and reduced motion
+  const { prefersReducedMotion, isMobile } = useReducedMotion();
+  
   const [currentStep, setCurrentStep] = useState<
     "setup" | "quiz" | "results" | "review"
   >("setup");
@@ -170,13 +272,11 @@ export default function QuizInterface({
   const [answerRevealed, setAnswerRevealed] = useState<{
     [key: number]: boolean;
   }>({});
-  const [showCelebration, setShowCelebration] = useState(false);
   const [quizStatus, setQuizStatus] = useState<
     "completed" | "timed-out"
   >("completed");
   const [showAuthDialog, setShowAuthDialog] = useState(false);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
-  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [showImageDialog, setShowImageDialog] = useState(false);
   const [currentImage, setCurrentImage] = useState<string | null>(null);
   const [attemptsToday, setAttemptsToday] = useState(0);
@@ -190,19 +290,71 @@ export default function QuizInterface({
   // Check authentication status
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
+  // Memoize checkQuizAttempts to avoid unnecessary recreations
+  const checkQuizAttempts = useCallback(async (): Promise<void> => {
+    try {
+      const session = getStudentSession();
+      if (!session) {
+        return;
+      }
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const todayISO = today.toISOString();
+
+      const { error, count } = await supabase
+        .from("quiz_data")
+        .select("*", { count: "exact" })
+        .eq("user_id", session.user_id)
+        .eq("quiz_id", quizData.code)
+        .gte("solved_at", todayISO);
+
+      if (error) {
+        console.error("Error checking quiz attempts:", error);
+        return;
+      }
+
+      const attemptsCount = count || 0;
+      setAttemptsToday(attemptsCount);
+      setMaxAttemptsReached(attemptsCount >= 4);
+    } catch (error) {
+      console.error("Unexpected error checking attempts:", error);
+    }
+  }, [supabase, quizData.code]);
+  
   useEffect(() => {
     const checkAuth = async () => {
       const session = getStudentSession();
       setIsAuthenticated(!!session);
       
-      // Check quiz attempts if authenticated
       if (session) {
         await checkQuizAttempts();
       }
     };
     
     checkAuth();
-  }, []);
+  }, [checkQuizAttempts]);
+
+  // Memoize loadQuestions
+  const loadQuestions = useCallback(async () => {
+    try {
+      const response = await fetch(quizData.jsonFile);
+      const data = await response.json();
+      setQuestions(data);
+    } catch (error) {
+      console.error("Failed to load questions:", error);
+      setQuestions([
+        {
+          numb: 1,
+          question: "Sample question - What is 2 + 2?",
+          type: "Mathematics",
+          answer: "4",
+          options: ["2", "3", "4", "5"],
+          image: null,
+        },
+      ]);
+    }
+  }, [quizData.jsonFile]);
 
   useEffect(() => {
     loadQuestions();
@@ -211,7 +363,7 @@ export default function QuizInterface({
         clearInterval(timerRef.current);
       }
     };
-  }, []);
+  }, [loadQuestions]);
 
   // Debounce theme changes
   useEffect(() => {
@@ -233,67 +385,10 @@ export default function QuizInterface({
     return () => clearTimeout(handler);
   }, [selectedTheme]);
 
-  // Function to check quiz attempts
-  const checkQuizAttempts = async (): Promise<void> => {
-    try {
-      const session = getStudentSession();
-      if (!session) {
-        return;
-      }
-
-      // Get today's date at midnight for comparison
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const todayISO = today.toISOString();
-
-      // Query Supabase for today's attempts for this specific quiz
-      const { data, error, count } = await supabase
-        .from("quiz_data")
-        .select("*", { count: "exact" })
-        .eq("user_id", session.user_id)
-        .eq("quiz_id", quizData.code)
-        .gte("solved_at", todayISO);
-
-      if (error) {
-        console.error("Error checking quiz attempts:", error);
-        return;
-      }
-
-      const attemptsCount = count || 0;
-      setAttemptsToday(attemptsCount);
-      setMaxAttemptsReached(attemptsCount >= 4); // Limit to 4 attempts per day
-    } catch (error) {
-      console.error("Unexpected error checking attempts:", error);
-    }
-  };
-
-  const loadQuestions = async () => {
-    try {
-      const response = await fetch(quizData.jsonFile);
-      const data = await response.json();
-      setQuestions(data);
-    } catch (error) {
-      console.error("Failed to load questions:", error);
-      setQuestions([
-        {
-          numb: 1,
-          question: "Sample question - What is 2 + 2?",
-          type: "Mathematics",
-          answer: "4",
-          options: ["2", "3", "4", "5"],
-          image: null,
-        },
-      ]);
-    }
-  };
+  // checkQuizAttempts and loadQuestions moved to useCallback above
 
   // Function to handle image display
-  const handleShowImage = (imageUrl: string | null | undefined) => {
-    if (imageUrl) {
-      setCurrentImage(imageUrl);
-      setShowImageDialog(true);
-    }
-  };
+  // Moved to useCallback above
 
   const startQuiz = async () => {
     if (!isAuthenticated) {
@@ -338,41 +433,29 @@ export default function QuizInterface({
     }, 1000);
   };
 
-  const selectAnswer = (answer: string) => {
-  // 🔒 في Instant Mode: ممنوع تغيير الإجابة بعد ما تجاوب
-  // في Traditional Mode: ممكن تغير إجابتك عادي
-  if (selectedMode === "instant" && userAnswers[currentQuestion] !== undefined) {
-    console.log("Instant Mode: Question already answered. Re-answering is not allowed.");
-    return; // في الـ Instant Mode، أول إجابة تتقفل
-  }
-
-  // Batch multiple state updates
-  if (selectedMode === "instant") {
-    setUserAnswers(prev => ({
-      ...prev,
-      [currentQuestion]: answer,
-    }));
-    setShowAnswer(true);
-    setAnswerRevealed(prev => ({
-      ...prev,
-      [currentQuestion]: true,
-    }));
-    
-    // Show celebration only for correct answers
-    if (answer === questions[currentQuestion].answer) {
-      setShowCelebration(true);
-      setTimeout(() => setShowCelebration(false), 1000); // Reduced time
+  // Memoized callbacks for better performance
+  const selectAnswer = useCallback((answer: string) => {
+    // 🔒 في Instant Mode: ممنوع تغيير الإجابة بعد ما تجاوب
+    if (selectedMode === "instant" && userAnswers[currentQuestion] !== undefined) {
+      return;
     }
-  } else {
-    // Traditional Mode: يقدر يغير إجابته براحته
+
+    // Batch state updates using functional updates
     setUserAnswers(prev => ({
       ...prev,
       [currentQuestion]: answer,
     }));
-  }
-};
 
-  const nextQuestion = () => {
+    if (selectedMode === "instant") {
+      setShowAnswer(true);
+      setAnswerRevealed(prev => ({
+        ...prev,
+        [currentQuestion]: true,
+      }));
+    }
+  }, [selectedMode, currentQuestion, userAnswers]);
+
+  const nextQuestion = useCallback(() => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
       setShowAnswer(false);
@@ -380,14 +463,39 @@ export default function QuizInterface({
       setQuizStatus("completed");
       finishQuiz();
     }
-  };
+  }, [currentQuestion, questions.length]);
 
-  const prevQuestion = () => {
+  const prevQuestion = useCallback(() => {
     if (currentQuestion > 0) {
       setCurrentQuestion((prev) => prev - 1);
       setShowAnswer(answerRevealed[currentQuestion - 1] || false);
     }
-  };
+  }, [currentQuestion, answerRevealed]);
+
+  const handleShowImage = useCallback((imageUrl: string | null | undefined) => {
+    if (imageUrl) {
+      console.log('🖼️ Opening image:', imageUrl);
+      // Check if image exists
+      fetch(imageUrl, { method: 'HEAD' })
+        .then(res => {
+          if (res.ok) {
+            console.log('✅ Image exists');
+          } else {
+            console.error('❌ Image not found:', res.status);
+          }
+        })
+        .catch(err => console.error('❌ Error checking image:', err));
+      
+      setCurrentImage(imageUrl);
+      setShowImageDialog(true);
+    }
+  }, []);
+
+  const formatTime = useCallback((seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  }, []);
 
   // Updated saveScoreToSupabase function with all required fields
   const saveScoreToSupabase = async (finalScore: number, status: "completed" | "timed-out") => {
@@ -463,7 +571,7 @@ export default function QuizInterface({
     );
   };
 
-  const finishQuiz = () => {
+  const finishQuiz = useCallback(() => {
     // Use ref to prevent double execution
     if (submissionInProgress.current) {
       console.log("Submission already in progress");
@@ -492,13 +600,10 @@ export default function QuizInterface({
     // Save to localStorage and database
     saveScore(correctAnswers, quizStatus);
     saveScoreToSupabase(correctAnswers, quizStatus);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questions, userAnswers, quizStatus]);
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
+  // formatTime moved to useCallback above
 
   const getScoreMessage = () => {
     const percentage = Math.round((score / questions.length) * 100);
@@ -692,6 +797,7 @@ export default function QuizInterface({
 
   if (currentStep === "setup") {
     return (
+      <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
       <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
         <AuthDialog />
         <AttemptsDialog />
@@ -965,6 +1071,7 @@ export default function QuizInterface({
           </div>
         </div>
       </div>
+      </MotionConfig>
     );
   }
 
@@ -974,6 +1081,7 @@ export default function QuizInterface({
     const isCorrect = userAnswers[currentQuestion] === currentQ?.answer;
 
     return (
+      <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
       <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
@@ -1090,89 +1198,28 @@ export default function QuizInterface({
                   </CardHeader>
 
                   <CardContent>
-                    <div className="space-y-4">
+                    <div className="space-y-3 md:space-y-4">
                       {currentQ?.options.map((option, index) => {
                         const isSelected =
                           userAnswers[currentQuestion] === option;
                         const isCorrectOption = option === currentQ.answer;
                         const showFeedback =
                           selectedMode === "instant" && showAnswer;
-                        // في Instant Mode بس نمنع تغيير الإجابة
                         const isQuestionAnswered = selectedMode === "instant" && userAnswers[currentQuestion] !== undefined;
 
                         return (
-                          <motion.button
+                          <OptionButton
                             key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{
-                              scale: showFeedback || isQuestionAnswered ? 1 : 1.02,
-                              x: showFeedback || isQuestionAnswered ? 0 : 8,
-                            }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() =>
-                              !isQuestionAnswered && selectAnswer(option)
-                            }
-                            disabled={isQuestionAnswered}
-                            className={cn(
-                              "w-full p-6 text-left rounded-xl border-2 transition-all backdrop-blur-sm relative overflow-hidden",
-                              showFeedback
-                                ? isCorrectOption
-                                  ? "border-green-400 bg-green-500/[0.2] shadow-lg shadow-green-500/[0.3]"
-                                  : isSelected
-                                  ? "border-red-400 bg-red-500/[0.2] shadow-lg shadow-red-500/[0.3]"
-                                  : "border-white/[0.15] bg-white/[0.02]"
-                                : isSelected
-                                ? "border-white bg-white/[0.1] shadow-lg"
-                                : "border-white/[0.15] hover:border-white/[0.3] hover:bg-white/[0.03]",
-                              isQuestionAnswered && "cursor-not-allowed opacity-80"
-                            )}
-                            style={{
-                              backgroundColor:
-                                !showFeedback && isSelected
-                                  ? `${selectedTheme.primary}20`
-                                  : undefined,
-                            }}
-                          >
-                            {/* Creative feedback animations */}
-                            <AnimatePresence>
-                              {showFeedback && isCorrectOption && (
-                                <motion.div
-                                  initial={{ scale: 0, rotate: -180 }}
-                                  animate={{ scale: 1, rotate: 0 }}
-                                  className="absolute top-4 right-4"
-                                >
-                                  <CheckCircle className="w-8 h-8 text-green-400" />
-                                </motion.div>
-                              )}
-                              {showFeedback &&
-                                isSelected &&
-                                !isCorrectOption && (
-                                  <motion.div
-                                    initial={{ scale: 0, rotate: 180 }}
-                                    animate={{ scale: 1, rotate: 0 }}
-                                    className="absolute top-4 right-4"
-                                  >
-                                    <XCircle className="w-8 h-8 text-red-400" />
-                                  </motion.div>
-                                )}
-                            </AnimatePresence>
-
-                            <div className="flex items-center">
-                              <span className="text-lg">{option}</span>
-                            </div>
-
-                            {/* Ripple effect for correct answers */}
-                            {showFeedback && isCorrectOption && (
-                              <motion.div
-                                initial={{ scale: 0, opacity: 0.8 }}
-                                animate={{ scale: 4, opacity: 0 }}
-                                transition={{ duration: 1 }}
-                                className="absolute inset-0 bg-green-400/[0.3] rounded-xl"
-                              />
-                            )}
-                          </motion.button>
+                            option={option}
+                            index={index}
+                            isSelected={isSelected}
+                            isCorrectOption={isCorrectOption}
+                            showFeedback={showFeedback}
+                            isQuestionAnswered={isQuestionAnswered}
+                            onSelect={selectAnswer}
+                            selectedTheme={selectedTheme}
+                            isMobile={isMobile}
+                          />
                         );
                       })}
                     </div>
@@ -1356,14 +1403,29 @@ export default function QuizInterface({
                 </Button>
             </div>
             {currentImage && (
-              <div className="relative w-full h-96 bg-gray-900 rounded-lg overflow-hidden">
+              <div className="relative w-full h-96 bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={currentImage}
                   alt="Code reference"
-                  className="w-full h-full object-contain"
-                  loading="lazy"
-                  width="800"
-                  height="600"
+                  className="max-w-full max-h-full object-contain"
+                  loading="eager"
+                  style={{ imageRendering: 'crisp-edges' }}
+                  onError={(e) => {
+                    console.error('Failed to load image:', currentImage);
+                    const target = e.currentTarget;
+                    target.style.display = 'none';
+                    const parent = target.parentElement;
+                    if (parent) {
+                      parent.innerHTML = `
+                        <div class="text-white text-center p-8">
+                          <p class="text-red-400 mb-2">❌ Failed to load image</p>
+                          <p class="text-sm text-white/60">${currentImage}</p>
+                        </div>
+                      `;
+                    }
+                  }}
+                  onLoad={() => console.log('✅ Image loaded:', currentImage)}
                 />
               </div>
             )}
@@ -1373,6 +1435,7 @@ export default function QuizInterface({
           </ImageDialogContent>
         </ImageDialog>
       </div>
+      </MotionConfig>
     );
   }
 
@@ -1381,6 +1444,7 @@ export default function QuizInterface({
     const scoreInfo = getScoreMessage();
 
     return (
+      <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
       <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
@@ -1604,11 +1668,13 @@ export default function QuizInterface({
           </motion.div>
         </div>
       </div>
+      </MotionConfig>
     );
   }
 
   if (currentStep === "review") {
     return (
+      <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
       <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
@@ -1900,14 +1966,29 @@ export default function QuizInterface({
           </Button>
         </DialogHeader>
         {currentImage && (
-          <div className="relative w-full h-96 bg-gray-900 rounded-lg overflow-hidden">
+          <div className="relative w-full h-96 bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={currentImage}
               alt="Code reference"
-              className="w-full h-full object-contain"
-              loading="lazy"
-              width="800"
-              height="600"
+              className="max-w-full max-h-full object-contain"
+              loading="eager"
+              style={{ imageRendering: 'crisp-edges' }}
+              onError={(e) => {
+                console.error('Failed to load image:', currentImage);
+                const target = e.currentTarget;
+                target.style.display = 'none';
+                const parent = target.parentElement;
+                if (parent) {
+                  parent.innerHTML = `
+                    <div class="text-white text-center p-8">
+                      <p class="text-red-400 mb-2">❌ Failed to load image</p>
+                      <p class="text-sm text-white/60">${currentImage}</p>
+                    </div>
+                  `;
+                }
+              }}
+              onLoad={() => console.log('✅ Image loaded:', currentImage)}
             />
           </div>
         )}
@@ -1917,6 +1998,7 @@ export default function QuizInterface({
       </ImageDialogContent>
     </ImageDialog>
   </div>
+  </MotionConfig>
 );
   }
   return null;
