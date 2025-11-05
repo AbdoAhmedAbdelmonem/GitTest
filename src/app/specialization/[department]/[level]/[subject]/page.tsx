@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import {
   ArrowLeft,
   FileText,
@@ -17,10 +17,12 @@ import {
   ExternalLink,
   Play,
   Layers,
+  Share2,
+  Check,
 } from "lucide-react";
 import { departmentData, type Department, type Subject } from "@/lib/department-data";
 import { cn } from "@/lib/utils";
-import React, { Suspense } from "react";
+import React, { Suspense, memo, useState, useEffect } from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navigation from "@/components/navigation";
 
@@ -28,14 +30,31 @@ interface Props {
   params: Promise<{ department: string; level: string; subject: string }>;
 }
 
+interface SectionType {
+  id: string;
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  color: string;
+  iconColor: string;
+  content: string | string[] | boolean | null | undefined;
+  description: string;
+  buttonText: string;
+  redirectToDrive: boolean;
+}
+
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 10 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+  },
 };
 
 const tabVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+  },
 };
 
 export default function SubjectPage({ params }: Props) {
@@ -47,6 +66,371 @@ export default function SubjectPage({ params }: Props) {
     </ErrorBoundary>
   );
 }
+
+// Memoized tab button component for better performance
+const TabButton = memo(({ section, currentTab, onTabChange }: { 
+  section: SectionType; 
+  currentTab: string;
+  onTabChange: (tab: string) => void;
+}) => {
+  const IconComponent = section.icon;
+  const isActive = currentTab === section.id;
+  
+  return (
+    <button
+      onClick={() => onTabChange(section.id)}
+      className={cn(
+        "flex-1 flex items-center justify-center gap-2 h-full px-2 py-2 transition-colors",
+        isActive 
+          ? "bg-white/[0.1] text-white" 
+          : "text-white/60 hover:text-white hover:bg-white/[0.05]"
+      )}
+    >
+      <IconComponent className="w-4 h-4 flex-shrink-0" />
+      <span className="hidden sm:inline truncate text-xs">{section.title}</span>
+    </button>
+  );
+});
+
+TabButton.displayName = "TabButton";
+
+// Memoized copy link button
+const CopyLinkButton = memo(({ tabId }: { tabId: string }) => {
+  const [copied, setCopied] = useState(false);
+
+  const copyTabLink = () => {
+    const url = `${window.location.origin}${window.location.pathname}?tab=${tabId}`;
+    navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <Button
+      onClick={copyTabLink}
+      variant="ghost"
+      size="sm"
+      className="text-white/60 hover:text-white hover:bg-white/[0.05] border border-white/[0.08]"
+    >
+      {copied ? (
+        <>
+          <Check className="w-4 h-4 mr-2" />
+          Copied!
+        </>
+      ) : (
+        <>
+          <Share2 className="w-4 h-4 mr-2" />
+          Share Tab Link
+        </>
+      )}
+    </Button>
+  );
+});
+
+CopyLinkButton.displayName = "CopyLinkButton";
+
+// Client-side tabs wrapper component
+function TabsWrapper({ 
+  sections, 
+  subject, 
+  resolvedParams 
+}: { 
+  sections: SectionType[]; 
+  subject: Subject; 
+  resolvedParams: { department: string; level: string; subject: string };
+}) {
+  const [currentTab, setCurrentTab] = useState("lectures");
+  const [mounted, setMounted] = useState(false);
+
+  // Get tab from URL on mount
+  useEffect(() => {
+    setMounted(true);
+    const searchParams = new URLSearchParams(window.location.search);
+    const tabParam = searchParams.get("tab");
+    if (tabParam && sections.some(s => s.id === tabParam)) {
+      setCurrentTab(tabParam);
+    }
+  }, [sections]);
+
+  const handleTabChange = (tabId: string) => {
+    setCurrentTab(tabId);
+    // Update URL without page reload
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", tabId);
+    window.history.pushState({}, "", url);
+  };
+
+  if (!mounted) {
+    return null; // Prevent hydration mismatch
+  }
+
+  return (
+    <Tabs value={currentTab} onValueChange={handleTabChange} className="w-full">
+      <TabsList className="flex w-full mb-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm h-12">
+        {sections.map((section) => (
+          <TabButton 
+            key={section.id} 
+            section={section} 
+            currentTab={currentTab}
+            onTabChange={handleTabChange}
+          />
+        ))}
+      </TabsList>
+
+      {sections.map((section, index) => {
+        const IconComponent = section.icon;
+        return (
+          <TabsContent key={section.id} value={section.id}>
+            <motion.div
+              custom={index}
+              variants={tabVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <Card className="bg-white/[0.02] border-white/[0.08] backdrop-blur-sm">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="flex items-center gap-3 text-white">
+                      <motion.div
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.3 }}
+                        className={cn(
+                          "w-12 h-12 rounded-lg flex items-center justify-center",
+                          "bg-gradient-to-r to-transparent border border-white/[0.15]",
+                          "backdrop-blur-sm shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
+                          section.color
+                        )}
+                      >
+                        <IconComponent
+                          className={cn("w-6 h-6", section.iconColor)}
+                        />
+                      </motion.div>
+                      {section.title}
+                    </CardTitle>
+                    <CopyLinkButton tabId={section.id} />
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <TabContentRenderer 
+                    section={section}
+                    subject={subject}
+                    resolvedParams={resolvedParams}
+                  />
+                </CardContent>
+              </Card>
+            </motion.div>
+          </TabsContent>
+        );
+      })}
+    </Tabs>
+  );
+}
+
+// Memoized content renderer for better performance
+const TabContentRenderer = memo(({ 
+  section, 
+  subject, 
+  resolvedParams 
+}: { 
+  section: SectionType; 
+  subject: Subject; 
+  resolvedParams: { department: string; level: string; subject: string };
+}) => {
+  // Function to extract drive ID from Google Drive URL
+  const extractDriveId = (url: string): string => {
+    try {
+      const urlObj = new URL(url);
+      if (urlObj.hostname.includes("drive.google.com")) {
+        if (urlObj.pathname.includes("/file/d/")) {
+          const match = url.match(/\/file\/d\/([^\/]+)/);
+          return match ? match[1] : url;
+        } else if (urlObj.pathname.includes("/folders/")) {
+          const match = url.match(/\/folders\/([^\/\?]+)/);
+          return match ? match[1] : url;
+        } else if (urlObj.searchParams.has("id")) {
+          return urlObj.searchParams.get("id") || url;
+        }
+      }
+      return url;
+    } catch {
+      return url;
+    }
+  };
+
+  // Function to extract playlist ID from YouTube URL
+  const extractPlaylistId = (url: string): string => {
+    try {
+      const urlObj = new URL(url);
+      if (urlObj.hostname.includes("youtube.com") || urlObj.hostname.includes("youtu.be")) {
+        if (urlObj.pathname.includes("/playlist")) {
+          return urlObj.searchParams.get("list") || "";
+        } else if (urlObj.pathname.includes("/watch")) {
+          return urlObj.searchParams.get("list") || "";
+        }
+      }
+      return "";
+    } catch {
+      return "";
+    }
+  };
+
+  const IconComponent = section.icon;
+
+  if (!section.content) {
+    return (
+      <div className="text-center py-12">
+        <motion.div
+          animate={{ y: [0, -5, 0] }}
+          transition={{
+            duration: 1.5,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
+          className={cn(
+            "w-16 h-16 rounded-lg mx-auto mb-4 flex items-center justify-center",
+            "bg-gradient-to-r to-transparent border border-white/[0.15]",
+            "backdrop-blur-sm",
+            section.color
+          )}
+        >
+          <IconComponent
+            className={cn("w-8 h-8", section.iconColor)}
+          />
+        </motion.div>
+        <p className="text-white/50 mb-4 leading-relaxed">
+          {section.description}.
+        </p>
+        <p className="text-sm text-white/30">
+          This section is currently being prepared and will be available soon.
+        </p>
+      </div>
+    );
+  }
+
+  if (section.id === "quizzes") {
+    return (
+      <div className="space-y-4">
+        <p className="text-white/60 mb-4 leading-relaxed">
+          {section.description} for {subject.name}.
+        </p>
+        <div className="grid gap-4">
+          {subject.materials.quizzes?.map((quiz, idx: number) => (
+            <motion.div
+              key={quiz.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.05 }}
+              className="p-4 bg-white/[0.05] rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-white font-semibold mb-1">
+                    {quiz.name}
+                  </h4>
+                  <div className="flex gap-4 text-sm text-white/60">
+                    <span>{quiz.code}</span>
+                    <span>{quiz.duration}</span>
+                    <span>{quiz.questions} Q-tion</span>
+                  </div>
+                </div>
+                <Button
+                  asChild
+                  className="bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+                >
+                  <Link
+                    href={`/quiz/${resolvedParams.department}/${resolvedParams.subject}/${quiz.id}`}
+                  >
+                    <Play className="w-4 h-4 mr-2" />
+                    Start Quiz
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (section.redirectToDrive) {
+    return (
+      <div className="space-y-4">
+        <p className="text-white/60 mb-4 leading-relaxed">
+          {section.description} for {subject.name}.
+        </p>
+        <Button
+          asChild
+          className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+        >
+          <Link
+            href={`/drive/${extractDriveId(
+              typeof section.content === 'string' ? section.content : ''
+            )}`}
+          >
+            <ExternalLink className="w-4 h-4 mr-2" />
+            {section.buttonText}
+          </Link>
+        </Button>
+      </div>
+    );
+  }
+
+  // Videos section
+  return (
+    <div className="space-y-4">
+      <p className="text-white/60 mb-4 leading-relaxed">
+        {section.description} for {subject.name}.
+      </p>
+      {(() => {
+        const videoContent = section.content;
+        if (Array.isArray(videoContent)) {
+          return (
+            <div className="grid gap-3">
+              {videoContent.map((videoUrl, idx) => {
+                const url = typeof videoUrl === 'string' ? videoUrl : '';
+                const playlistId = extractPlaylistId(url);
+                return (
+                  <Button
+                    key={idx}
+                    asChild
+                    className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+                  >
+                    <Link
+                      href={playlistId ? `/youtube/${playlistId}` : '#'}
+                      className="flex items-center gap-2"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      {videoContent.length > 1 ? `Video Playlist ${idx + 1}` : section.buttonText}
+                    </Link>
+                  </Button>
+                );
+              })}
+            </div>
+          );
+        } else {
+          const videoUrl = typeof videoContent === 'string' ? videoContent : '';
+          const playlistId = extractPlaylistId(videoUrl);
+          return (
+            <Button
+              asChild
+              className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
+            >
+              <Link
+                href={playlistId ? `/youtube/${playlistId}` : '#'}
+                className="flex items-center gap-2"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                {section.buttonText}
+              </Link>
+            </Button>
+          );
+        }
+      })()}
+    </div>
+  );
+});
+
+TabContentRenderer.displayName = "TabContentRenderer";
 
 async function SubjectContent({ params }: Props) {
   const resolvedParams = await params;
@@ -74,46 +458,6 @@ async function SubjectContent({ params }: Props) {
       : levelNum === 3
       ? "rd"
       : "th";
-
-  // Function to extract drive ID from Google Drive URL
-  const extractDriveId = (url: string): string => {
-    try {
-      const urlObj = new URL(url);
-      // Handle different Google Drive URL formats
-      if (urlObj.hostname.includes("drive.google.com")) {
-        if (urlObj.pathname.includes("/file/d/")) {
-          const match = url.match(/\/file\/d\/([^\/]+)/);
-          return match ? match[1] : url;
-        } else if (urlObj.pathname.includes("/folders/")) {
-          const match = url.match(/\/folders\/([^\/\?]+)/);
-          return match ? match[1] : url;
-        } else if (urlObj.searchParams.has("id")) {
-          return urlObj.searchParams.get("id") || url;
-        }
-      }
-      return url;
-    } catch {
-      return url;
-    }
-  };
-
-  // Function to extract playlist ID from YouTube URL
-  const extractPlaylistId = (url: string): string => {
-    try {
-      const urlObj = new URL(url);
-      if (urlObj.hostname.includes("youtube.com") || urlObj.hostname.includes("youtu.be")) {
-        // Handle different YouTube URL formats
-        if (urlObj.pathname.includes("/playlist")) {
-          return urlObj.searchParams.get("list") || "";
-        } else if (urlObj.pathname.includes("/watch")) {
-          return urlObj.searchParams.get("list") || "";
-        }
-      }
-      return "";
-    } catch {
-      return "";
-    }
-  };
 
   // Function to find prerequisite subjects
   const getPrerequisiteSubjects = () => {
@@ -373,211 +717,11 @@ async function SubjectContent({ params }: Props) {
             initial="hidden"
             animate="visible"
           >
-            <Tabs defaultValue="lectures" className="w-full">
-              <TabsList className="flex w-full mb-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm h-12">
-                {sections.map((section) => {
-                  const IconComponent = section.icon;
-                  return (
-                    <TabsTrigger
-                      key={section.id}
-                      value={section.id}
-                      className="flex-1 flex items-center justify-center gap-2 data-[state=active]:bg-white/[0.1] data-[state=active]:text-white text-white/60 h-full px-2 py-2"
-                    >
-                      <IconComponent className="w-4 h-4 flex-shrink-0" />
-                      <span className="hidden sm:inline truncate text-xs">{section.title}</span>
-                    </TabsTrigger>
-                  );
-                })}
-              </TabsList>
-
-              {sections.map((section, index) => {
-                const IconComponent = section.icon;
-                return (
-                  <TabsContent key={section.id} value={section.id}>
-                    <motion.div
-                      custom={index}
-                      variants={tabVariants}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <Card className="bg-white/[0.02] border-white/[0.08] backdrop-blur-sm">
-                        <CardHeader>
-                          <CardTitle className="flex items-center gap-3 text-white">
-                            <motion.div
-                              whileHover={{ scale: 1.1, rotate: 5 }}
-                              transition={{ duration: 0.3 }}
-                              className={cn(
-                                "w-12 h-12 rounded-lg flex items-center justify-center",
-                                "bg-gradient-to-r to-transparent border border-white/[0.15]",
-                                "backdrop-blur-sm shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
-                                section.color
-                              )}
-                            >
-                              <IconComponent
-                                className={cn("w-6 h-6", section.iconColor)}
-                              />
-                            </motion.div>
-                            {section.title}
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          {section.content ? (
-                            section.id === "quizzes" ? (
-                              <div className="space-y-4">
-                                <p className="text-white/60 mb-4 leading-relaxed">
-                                  {section.description} for {subject.name}.
-                                </p>
-                                <div className="grid gap-4">
-                                  {subject.materials.quizzes?.map(
-                                    (quiz, idx: number) => (
-                                      <motion.div
-                                        key={quiz.id}
-                                        initial={{ opacity: 0, y: 10 }} // Reduced y value from 20 to 10
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: idx * 0.05 }} // Reduced from 0.1 to 0.05
-                                        className="p-4 bg-white/[0.05] rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all"
-                                      >
-                                        <div className="flex items-center justify-between">
-                                          <div>
-                                            <h4 className="text-white font-semibold mb-1">
-                                              {quiz.name}
-                                            </h4>
-                                            <div className="flex gap-4 text-sm text-white/60">
-                                              <span>{quiz.code}</span>
-                                              <span>{quiz.duration}</span>
-                                              <span>
-                                                {quiz.questions} Question
-                                              </span>
-                                            </div>
-                                          </div>
-                                          <Button
-                                            asChild
-                                            className="bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
-                                          >
-                                            <Link
-                                              href={`/quiz/${resolvedParams.department}/${resolvedParams.subject}/${quiz.id}`}
-                                            >
-                                              <Play className="w-4 h-4 mr-2" />
-                                              Start Quiz
-                                            </Link>
-                                          </Button>
-                                        </div>
-                                      </motion.div>
-                                    )
-                                  )}
-                                </div>
-                              </div>
-                            ) : section.redirectToDrive ? (
-                              // Redirect to drive page for lectures, sections, and exams
-                              <div className="space-y-4">
-                                <p className="text-white/60 mb-4 leading-relaxed">
-                                  {section.description} for {subject.name}.
-                                </p>
-                                <Button
-                                  asChild
-                                  className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
-                                >
-                                  <Link
-                                    href={`/drive/${extractDriveId(
-                                      typeof section.content === 'string' ? section.content : ''
-                                    )}`}
-                                  >
-                                    <ExternalLink className="w-4 h-4 mr-2" />
-                                    {section.buttonText}
-                                  </Link>
-                                </Button>
-                              </div>
-                            ) : (
-                              // Direct link for videos (supports multiple playlists)
-                              <div className="space-y-4">
-                                <p className="text-white/60 mb-4 leading-relaxed">
-                                  {section.description} for {subject.name}.
-                                </p>
-                                {(() => {
-                                  const videoContent = section.content;
-                                  if (Array.isArray(videoContent)) {
-                                    // Handle multiple video playlists
-                                    return (
-                                      <div className="grid gap-3">
-                                        {videoContent.map((videoUrl, idx) => {
-                                          const url = typeof videoUrl === 'string' ? videoUrl : '';
-                                          const playlistId = extractPlaylistId(url);
-                                          return (
-                                            <Button
-                                              key={idx}
-                                              asChild
-                                              className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
-                                            >
-                                              <Link
-                                                href={playlistId ? `/youtube/${playlistId}` : '#'}
-                                                className="flex items-center gap-2"
-                                              >
-                                                <ExternalLink className="w-4 h-4 mr-2" />
-                                                {videoContent.length > 1 ? `Video Playlist ${idx + 1}` : section.buttonText}
-                                              </Link>
-                                            </Button>
-                                          );
-                                        })}
-                                      </div>
-                                    );
-                                  } else {
-                                    // Handle single video URL
-                                    const videoUrl = typeof videoContent === 'string' ? videoContent : '';
-                                    const playlistId = extractPlaylistId(videoUrl);
-                                    return (
-                                      <Button
-                                        asChild
-                                        className="w-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] backdrop-blur-sm"
-                                      >
-                                        <Link
-                                          href={playlistId ? `/youtube/${playlistId}` : '#'}
-                                          className="flex items-center gap-2"
-                                        >
-                                          <ExternalLink className="w-4 h-4 mr-2" />
-                                          {section.buttonText}
-                                        </Link>
-                                      </Button>
-                                    );
-                                  }
-                                })()}
-                              </div>
-                            )
-                          ) : (
-                            <div className="text-center py-12">
-                              <motion.div
-                                animate={{ y: [0, -5, 0] }} // Reduced range from [-10, 0] to [-5, 0]
-                                transition={{
-                                  duration: 1.5, // Reduced from 2 to 1.5
-                                  repeat: Number.POSITIVE_INFINITY,
-                                  ease: "easeInOut",
-                                }}
-                                className={cn(
-                                  "w-16 h-16 rounded-lg mx-auto mb-4 flex items-center justify-center",
-                                  "bg-gradient-to-r to-transparent border border-white/[0.15]",
-                                  "backdrop-blur-sm",
-                                  section.color
-                                )}
-                              >
-                                <IconComponent
-                                  className={cn("w-8 h-8", section.iconColor)}
-                                />
-                              </motion.div>
-                              <p className="text-white/50 mb-4 leading-relaxed">
-                                {section.description}.
-                              </p>
-                              <p className="text-sm text-white/30">
-                                This section is currently being prepared and
-                                will be available soon.
-                              </p>
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  </TabsContent>
-                );
-              })}
-            </Tabs>
+            <TabsWrapper 
+              sections={sections}
+              subject={subject}
+              resolvedParams={resolvedParams}
+            />
           </motion.div>
         </div>
       </div>
