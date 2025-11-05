@@ -460,8 +460,10 @@ export default function QuizInterface({
       setCurrentQuestion((prev) => prev + 1);
       setShowAnswer(false);
     } else {
+      // ✅ On last question, finish the quiz
       setQuizStatus("completed");
-      finishQuiz();
+      // Use a ref or direct call without dependency
+      setCurrentStep("results");
     }
   }, [currentQuestion, questions.length]);
 
@@ -536,7 +538,6 @@ export default function QuizInterface({
         quiz_level: determineQuizLevel(quizId), // Use the imported function here
       };
 
-      console.log("Saving quiz data:", quizResult);
       
       const { data, error } = await supabase
         .from("quiz_data")
@@ -546,7 +547,6 @@ export default function QuizInterface({
       if (error) {
         console.error("Error saving quiz data to Supabase:", error.message);
       } else {
-        console.log("Quiz data saved successfully:", data);
         // Update attempts count after successful submission
         setAttemptsToday(prev => prev + 1);
         setMaxAttemptsReached(attemptsToday + 1 >= 4);
@@ -576,7 +576,7 @@ export default function QuizInterface({
     );
   };
 
-  const finishQuiz = useCallback(() => {
+  const finishQuiz = useCallback((answersToUse = userAnswers) => {
     // Use ref to prevent double execution
     if (submissionInProgress.current) {
       console.log("Submission already in progress");
@@ -591,21 +591,26 @@ export default function QuizInterface({
       timerRef.current = null;
     }
 
-    // Calculate score
+    // Calculate score using the passed answers
     let correctAnswers = 0;
+    
     questions.forEach((question, index) => {
-      const userAnswer = userAnswers[index];
+      const userAnswer = answersToUse[index];
       const correctAnswer = question.answer;
-      const isMatch = userAnswer === correctAnswer;
       
-      console.log(`❓ Q${index + 1}: User="${userAnswer}" | Correct="${correctAnswer}" | Match=${isMatch}`);
+      // Check for whitespace issues
+      const userAnswerLength = userAnswer?.length || 0;
+      const correctAnswerLength = correctAnswer?.length || 0;
       
+      // Trim whitespace from both answers
+      const trimmedUserAnswer = userAnswer?.trim();
+      const trimmedCorrectAnswer = correctAnswer?.trim();
+      const isMatch = trimmedUserAnswer === trimmedCorrectAnswer;
+            
       if (isMatch) {
         correctAnswers++;
       }
     });
-
-    console.log(`📊 Final Score: ${correctAnswers} out of ${questions.length}`);
 
     setScore(correctAnswers);
     setCurrentStep("results");
@@ -678,24 +683,52 @@ export default function QuizInterface({
     submissionInProgress.current = true;
     console.log("Time expired, handling quiz completion");
     
-    // Calculate score
-    let correctAnswers = 0;
-    questions.forEach((question, index) => {
-      if (userAnswers[index] === question.answer) {
-        correctAnswers++;
-      }
-    });
+    // Use functional update to get the latest userAnswers
+    setUserAnswers(currentAnswers => {
+      // Calculate score using current answers
+      let correctAnswers = 0;
+      questions.forEach((question, index) => {
+        const userAnswer = currentAnswers[index];
+        const correctAnswer = question.answer;
+        const trimmedUserAnswer = userAnswer?.trim();
+        const trimmedCorrectAnswer = correctAnswer?.trim();
+        const isMatch = trimmedUserAnswer === trimmedCorrectAnswer;
+        
+        
+        if (isMatch) {
+          correctAnswers++;
+        }
+      });
 
-    // Update state
-    setQuizStatus("timed-out");
-    setScore(correctAnswers);
-    setCurrentStep("results");
-    
-    // Save to localStorage first (this is synchronous)
-    saveScore(correctAnswers, "timed-out");
-    
-    // Then save to database
-    saveScoreToSupabase(correctAnswers, "timed-out");
+      console.log(`⏰ Final Score (Timed Out): ${correctAnswers} out of ${questions.length}`);
+
+      // Update state
+      setQuizStatus("timed-out");
+      setScore(correctAnswers);
+      setCurrentStep("results");
+      
+      // Save to localStorage
+      const quizResult = {
+        quizId: quizData.code,
+        score: correctAnswers,
+        totalQuestions: questions.length,
+        status: "timed-out" as const,
+        timestamp: new Date().toISOString(),
+        answers: currentAnswers,
+        theme: selectedTheme.name,
+        mode: selectedMode,
+        duration: selectedDuration,
+      };
+      localStorage.setItem(
+        `quiz_${quizData.id}_result`,
+        JSON.stringify(quizResult)
+      );
+      
+      // Save to database
+      saveScoreToSupabase(correctAnswers, "timed-out");
+      
+      return currentAnswers;
+    });
   };
 
   useEffect(() => {
@@ -714,6 +747,13 @@ export default function QuizInterface({
       setScore(correctAnswers); // Update score in real-time
     }
   }, [userAnswers, selectedMode, currentStep, questions]);
+
+  // ✅ Handle quiz completion when moving to results
+  useEffect(() => {
+    if (currentStep === "results" && quizStatus === "completed" && !submissionInProgress.current) {
+      finishQuiz(userAnswers);
+    }
+  }, [currentStep, quizStatus, userAnswers, finishQuiz]);
 
   // Authentication Dialog Component
   const AuthDialog = () => (
