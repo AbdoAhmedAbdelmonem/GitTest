@@ -519,10 +519,15 @@ export default function QuizInterface({
       // Use the quiz code directly instead of trying to parse it as an integer
       const quizId = quizData.code;
       
+      // ✅ Calculate percentage correctly to avoid rounding issues
+      const scorePercentage = Math.round((finalScore / questions.length) * 100);
+      
+      console.log(`📊 Score Calculation: ${finalScore} correct out of ${questions.length} = ${scorePercentage}%`);
+      
       const quizResult = {
         user_id: session.user_id,
         quiz_id: quizId,
-        score: Math.round((finalScore / questions.length) * 100),
+        score: scorePercentage,
         how_finished: status,
         chosen_theme: selectedTheme.name,
         answering_mode: selectedMode,
@@ -589,10 +594,18 @@ export default function QuizInterface({
     // Calculate score
     let correctAnswers = 0;
     questions.forEach((question, index) => {
-      if (userAnswers[index] === question.answer) {
+      const userAnswer = userAnswers[index];
+      const correctAnswer = question.answer;
+      const isMatch = userAnswer === correctAnswer;
+      
+      console.log(`❓ Q${index + 1}: User="${userAnswer}" | Correct="${correctAnswer}" | Match=${isMatch}`);
+      
+      if (isMatch) {
         correctAnswers++;
       }
     });
+
+    console.log(`📊 Final Score: ${correctAnswers} out of ${questions.length}`);
 
     setScore(correctAnswers);
     setCurrentStep("results");
@@ -690,7 +703,11 @@ export default function QuizInterface({
       // Calculate current score based on all answered questions
       let correctAnswers = 0;
       questions.forEach((question, index) => {
-        if (userAnswers[index] === question.answer) {
+        // ✅ Normalize answers by trimming whitespace for accurate comparison
+        const userAnswer = userAnswers[index]?.trim();
+        const correctAnswer = question.answer?.trim();
+        
+        if (userAnswer === correctAnswer) {
           correctAnswers++;
         }
       });
