@@ -551,21 +551,19 @@ async function SubjectContent({ params }: Props) {
 
   return (
     <div
-      className="relative h-full w-full overflow-auto bg-[#030303]"
+      className="relative min-h-screen w-full overflow-auto bg-[#030303]"
       style={{
         backgroundImage: "url('/images/Background.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed", // makes background static
+        backgroundAttachment: "fixed",
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
       <Navigation />
 
-<div
-  className="relative z-10 py-12 px-4 h-[759px] md:h-auto"
->
-        <div className="max-w-7xl mx-auto">
+      <div className="relative z-10 py-12 px-4 min-h-screen">
+        <div className="max-w-7xl mx-auto pb-20">
           {/* Back Button */}
           <motion.div
             initial={{ opacity: 0, x: -10 }} // Reduced x value from -20 to -10
