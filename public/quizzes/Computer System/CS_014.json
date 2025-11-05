@@ -102,7 +102,7 @@
     "answer": "A) FF",
     "options": [
       "A) FF",
-      "B) FF",
+      "B) F4",
       "C) FE",
       "D) F7"
     ]
@@ -231,10 +231,10 @@
     "numb": 20,
     "type": "Multiple Choices",
     "question": "Convert the hexadecimal number 9C to its decimal form.",
-    "answer": "B) 158",
+    "answer": "B) 156",
     "options": [
-      "A) 156",
-      "B) 158",
+      "A) 158",
+      "B) 156",
       "C) 160",
       "D) 162"
     ]
