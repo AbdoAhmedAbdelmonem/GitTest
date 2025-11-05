@@ -92,7 +92,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_001",
                     name: "Chapter 1 : Introduction to Computer Systems",
                     code: "CS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
@@ -100,7 +100,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_002",
                     name: "Chapter 2 : Processing and Memory Management",
                     code: "CS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_002.json"
                   },
@@ -108,7 +108,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_003",
                     name: "Chapter 3 : Storage",
                     code: "CS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_003.json"
                   },
@@ -116,7 +116,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_004",
                     name: "Chapter 4 : Input and Output",
                     code: "CS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_004.json"
                   },
@@ -124,7 +124,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_005",
                     name: "Chapter 5 : System Software",
                     code: "CS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_005.json"
                   },
@@ -132,7 +132,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_006",
                     name: "Chapter 6 : Applications Software (1/2)",
                     code: "CS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_006.json"
                   }
@@ -140,7 +140,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_007",
                     name: "Chapter 6 : Applications Software (2/2)",
                     code: "CS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_007.json"
                   }
@@ -148,7 +148,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_008",
                     name: "Chapter 7 : Computer Networks",
                     code: "CS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_008.json"
                   },
@@ -156,7 +156,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_009",
                     name: "Chapter 13 : Program Dev & Programming Languages",
                     code: "CS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_009.json"
                   },
@@ -164,7 +164,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_010",
                     name: "Converting Binary to Decimal and Vice Versa",
                     code: "CS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_010.json"
                   },
@@ -172,7 +172,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_011",
                     name: "Converting Binary to Octal and Vice Versa",
                     code: "CS_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_011.json"
                   },
@@ -180,7 +180,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_012",
                     name: "Converting Binary to Hexadecimal and Vice Versa",
                     code: "CS_012",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_012.json"
                   },
@@ -188,7 +188,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_013",
                     name: "Converting Decimal to Octal and Vice Versa",
                     code: "CS_013",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_013.json"
                   },
@@ -196,7 +196,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_014",
                     name: "Converting Decimal to Hexadecimal and Vice Versa",
                     code: "CS_014",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_014.json"
                   },
@@ -204,7 +204,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_015",
                     name: "Converting Octal to Hexadecimal and Vice Versa",
                     code: "CS_015",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_015.json"
                   },
@@ -212,7 +212,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_016",
                     name: "Converting Gray Code to Binary and Vice Versa",
                     code: "CS_016",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_016.json"
                   },
@@ -220,7 +220,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_017",
                     name: "Converting BCD to Decimal and Vice Versa",
                     code: "CS_017",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
@@ -244,7 +244,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_001",
                     name: "Lecture 1 - Introduction to Data Science",
                     code: "DS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
                   },
@@ -252,7 +252,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_002",
                     name: "Lecture 2 - Big Data",
                     code: "DS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
                   },
@@ -260,7 +260,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_003",
                     name: "Lecture 3 - Data Analytics lifecycle (Characters)",
                     code: "DS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
                   },
@@ -268,7 +268,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_004",
                     name: "Lecture 4 - Data Analytics lifecycle (Phases)",
                     code: "DS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
                   },
@@ -276,7 +276,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_005",
                     name: "Lecture 5 - Clustering Analysis",
                     code: "DS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
                   },
@@ -284,7 +284,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_006",
                     name: "Lecture 6 - Introduction Association Rules (1/2)",
                     code: "DS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
                   },
@@ -292,7 +292,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_007",
                     name: "Lecture 7 - Introduction Association Rules (2/2)",
                     code: "DS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
                   },
@@ -300,7 +300,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_008",
                     name: "Lecture 8 - Data Visualization",
                     code: "DS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
                   },
@@ -308,7 +308,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_009",
                     name: "Lecture 9 - Classification Analysis",
                     code: "DS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
                   },
@@ -316,7 +316,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_010",
                     name: "Lecture 10 - Decision Trees",
                     code: "DS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
@@ -340,7 +340,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30001",
                     name: "Chapter 1 : Introduction to Programming",
                     code: "PR1_30001",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30001.json"
                   },
@@ -348,7 +348,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30002",
                     name: "Chapter 2-1 : Introduction to Java Programming",
                     code: "PR1_30002",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30002.json"
                   },
@@ -356,7 +356,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30003",
                     name: "Chapter 2-2 : Java Basics",
                     code: "PR1_30003",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30003.json"
                   },
@@ -364,7 +364,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30004",
                     name: "Chapter 2-3 : Java Basics",
                     code: "PR1_30004",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30004.json"
                   },
@@ -372,7 +372,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30005",
                     name: "Chapter 2-4 : Deep Dive into Java",
                     code: "PR1_30005",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30005.json"
                   },
@@ -380,7 +380,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30006",
                     name: "Chapter 3-1 : Controlling Program Flow",
                     code: "PR1_30006",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30006.json"
                   },
@@ -388,7 +388,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30007",
                     name: "Chapter 3-2 : Controlling Program Flow",
                     code: "PR1_30007",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 25,
                     jsonFile: "/quizzes/programming/programming1/PR1_30007.json"
                   },
@@ -396,7 +396,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30008",
                     name: "Chapter 4-1 : One Dimensional Arrays",
                     code: "PR1_30008",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30008.json"
                   },
@@ -404,7 +404,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30009",
                     name: "Chapter 4-2 : Multi Dimensional Arrays",
                     code: "PR1_30009",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30009.json"
                   },
@@ -412,7 +412,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30010",
                     name: "Review 1",
                     code: "PR1_30010",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 50,
                     jsonFile: "/quizzes/programming/programming1/PR1_30010.json"
                   },
@@ -420,7 +420,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30011",
                     name: "Review 2",
                     code: "PR1_30011",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/programming/programming1/PR1_30011.json"
                   },
@@ -428,7 +428,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30012",
                     name: "Tracing and Debugging",
                     code: "PR1_30012",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 50,
                     jsonFile: "/quizzes/programming/programming1/PR1_30012.json"
                   },
@@ -627,7 +627,7 @@ export const departmentData: { [key: string]: Department } = {
               },
             },
             {
-              id: "university-elective-1",
+              id: "Economic-science",
               name: "Economy Science",
               code: "HE_005",
               description: "Study of economic principles and their applications",
@@ -642,7 +642,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_001",
                     name: "الفصل الاول - مقدمة في علم الاقتصاد",
                     code: "ECO_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_001.json"
                   },
@@ -650,7 +650,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_002",
                     name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
                     code: "ECO_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_002.json"
                   },
@@ -658,7 +658,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_003",
                     name: "الفصل الثالث - نظرية طلب المستهلك",
                     code: "ECO_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 19,
                     jsonFile: "/quizzes/Economic/ECO_003.json"
                   },
@@ -666,7 +666,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_004",
                     name: "الفصل الرابع - العرض في السوق",
                     code: "ECO_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_004.json"
                   },
@@ -674,7 +674,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_005",
                     name: "الفصل الخامس - التوازن في السوق",
                     code: "ECO_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 12,
                     jsonFile: "/quizzes/Economic/ECO_005.json"
                   },
@@ -682,7 +682,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_006",
                     name: "الفصل السادس - مرونات العرض والطلب",
                     code: "ECO_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 27,
                     jsonFile: "/quizzes/Economic/ECO_006.json"
                   },
@@ -690,7 +690,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_007",
                     name: "الفصل السابع - نظرية المنفعة الحدية",
                     code: "ECO_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_007.json"
                   },
@@ -698,7 +698,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_008",
                     name: "الفصل التاسع - نظرية الإنتاج",
                     code: "ECO_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_008.json"
                   },
@@ -706,7 +706,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_009",
                     name: "الفصل العاشر - تكاليف الإنتاج",
                     code: "ECO_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_009.json"
                   },
@@ -714,7 +714,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_010",
                     name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
                     code: "ECO_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_010.json"
                   },
@@ -722,7 +722,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_011",
                     name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
                     code: "ECO_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
@@ -760,7 +760,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CLC_10661",
                     name: "Introduction to Cloud Computing",
                     code: "CLC_10661",
-                    duration: "Optional", // <-- CHANGED THIS LINE
+                    duration: "OP", // <-- CHANGED THIS LINE
                     questions: 50,
                     jsonFile: "/quizzes/cloud computing/CLC_10661.json"
                   },
@@ -768,7 +768,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CLC_10662",
                     name: "Platform and Infrastructure Services",
                     code: "CLC_10662",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 30,
                     jsonFile: "/quizzes/cloud computing/CLC_10662.json"
                   },
@@ -776,7 +776,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CLC_10663",
                     name: "Virtualization",
                     code: "CLC_10663",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 30,
                     jsonFile: "/quizzes/cloud computing/CLC_10663.json"
                   },
@@ -784,7 +784,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CLC_10664",
                     name: "Parallel Programming",
                     code: "CLC_10664",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 30,
                     jsonFile: "/quizzes/cloud computing/CLC_10664.json"
                   },
@@ -792,7 +792,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CLC_10665",
                     name: "Distributed Storage Systems",
                     code: "CLC_10665",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 30,
                     jsonFile: "/quizzes/cloud computing/CLC_10665.json"
                   },
@@ -800,7 +800,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CLC_10666",
                     name: "Cloud Security",
                     code: "CLC_10666",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 30,
                     jsonFile: "/quizzes/cloud computing/CLC_10666.json"
                   },
@@ -808,7 +808,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CLC_10667",
                     name: "Cloud Performance",
                     code: "CLC_10667",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 30,
                     jsonFile: "/quizzes/cloud computing/CLC_10667.json"
                   },
@@ -816,7 +816,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CLC_10668",
                     name: "General Overview + 20Q of 2025's Midterm",
                     code: "CLC_10668",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/cloud computing/CLC_10668_TOT.json"
                   }
@@ -945,7 +945,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DVT_001",
                     name: "Introduction to Data Visualization",
                     code: "DVT_001",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Visualization/VIZ_Quizzes/DVT_001.json"
                   },
@@ -953,7 +953,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DVT_002",
                     name: "Story telling with Data",
                     code: "DVT_002",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Visualization/VIZ_Quizzes/DVT_002.json"
                   },
@@ -961,7 +961,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DVT_003",
                     name: "Data Encoding Principles (1)",
                     code: "DVT_003",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Visualization/VIZ_Quizzes/DVT_003.json"
                   },
@@ -969,7 +969,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DVT_004",
                     name: "Data Encoding Principles (2)",
                     code: "DVT_004",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Visualization/VIZ_Quizzes/DVT_004.json"
                   },
@@ -977,7 +977,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DVT_005",
                     name: "Data Vision",
                     code: "DVT_005",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Visualization/VIZ_Quizzes/DVT_005.json"
                   },
@@ -985,7 +985,7 @@ export const departmentData: { [key: string]: Department } = {
               },
             },
             {
-              id: "faculty-elective-1",
+              id: "Web-Programming",
               name: "Web Programming",
               code: "02-24-00306",
               description: "Explore web development technologies and frameworks to build the next chameleon",
@@ -1001,7 +1001,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "WP_001",
                     name: "HTML & CSS Basics - P1",
                     code: "WP_001",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/Web/WP_001.json"
                   },
@@ -1009,7 +1009,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "WP_002",
                     name: "HTML & CSS Basics - P2",
                     code: "WP_002",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/Web/WP_002.json"
                   },
@@ -1017,7 +1017,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "WP_003",
                     name: "HTML & CSS Basics - P3",
                     code: "WP_003",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/Web/WP_003.json"
                   },
@@ -1025,7 +1025,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "WP_004",
                     name: "HTML & CSS Basics - P4",
                     code: "WP_004",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/Web/WP_004.json"
                   },
@@ -1033,7 +1033,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "WP_005",
                     name: "HTML & CSS Basics - P5",
                     code: "WP_005",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/Web/WP_005.json"
                   },
@@ -1041,7 +1041,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "WP_006",
                     name: "Java Script Basics - P1",
                     code: "WP_006",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/Web/WP_006.json"
                   },
@@ -1049,7 +1049,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "WP_007",
                     name: "Java Script Basics - P2",
                     code: "WP_007",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/Web/WP_007.json"
                   },
@@ -1057,7 +1057,7 @@ export const departmentData: { [key: string]: Department } = {
               },
             },
             {
-              id: "faculty-elective-2",
+              id: "Computer-Networks",
               name: "Computer Networks",
               code: "02-24-00308",
               description: "Fundamentals of computer networking and communication protocols",
@@ -1073,7 +1073,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CN_001",
                     name: "Network Devices & Standards",
                     code: "CN_001",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Computer_Network/CN_001.json"
                   },
@@ -1081,7 +1081,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CN_002",
                     name: "OSI Model",
                     code: "CN_002",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Computer_Network/CN_002.json"
                   },
@@ -1089,7 +1089,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CN_003",
                     name: "Network Protocols and Subnetting",
                     code: "CN_003",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Computer_Network/CN_003.json"
                   },
@@ -1097,7 +1097,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CN_004",
                     name: "Ethernet and LAN Technologies",
                     code: "CN_004",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Computer_Network/CN_004.json"
                   },
@@ -1105,7 +1105,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CN_005",
                     name: "Network Address Translation (NAT)",
                     code: "CN_005",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Computer_Network/CN_005.json"
                   },
@@ -1113,7 +1113,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CN_006",
                     name: "Transport Layer Protocols (TCP/UDP)",
                     code: "CN_006",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 20,
                     jsonFile: "/quizzes/Computer_Network/CN_006.json"
                   },
@@ -1121,7 +1121,7 @@ export const departmentData: { [key: string]: Department } = {
               },
             },
             {
-              id: "faculty-elective-3",
+              id: "Dist-Processing",
               name: "Dist Processing",
               code: "02-24-00302",
               description: "Explore distributed systems and parallel computing concepts",
@@ -1135,7 +1135,7 @@ export const departmentData: { [key: string]: Department } = {
               },
             },
             {
-              id: "faculty-elective-4",
+              id: "System-Analysis-Design",
               name: "System Analysis and Design",
               code: "02-24-00304",
               description: "Explore system development life cycle and design methodologies",
@@ -1149,7 +1149,7 @@ export const departmentData: { [key: string]: Department } = {
               },
             },
             {
-              id: "university-elective-3",
+              id: "Fitness-and-Health",
               name: "Fitness and Health",
               code: "02-24-HS001",
               description: "Promoting physical fitness and healthy lifestyle choices",
@@ -1468,7 +1468,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_001",
                     name: "Chapter 1 : Introduction to Computer Systems",
                     code: "CS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
@@ -1476,7 +1476,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_002",
                     name: "Chapter 2 : Processing and Memory Management",
                     code: "CS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_002.json"
                   },
@@ -1484,7 +1484,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_003",
                     name: "Chapter 3 : Storage",
                     code: "CS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_003.json"
                   },
@@ -1492,7 +1492,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_004",
                     name: "Chapter 4 : Input and Output",
                     code: "CS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_004.json"
                   },
@@ -1500,7 +1500,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_005",
                     name: "Chapter 5 : System Software",
                     code: "CS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_005.json"
                   },
@@ -1508,7 +1508,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_006",
                     name: "Chapter 6 : Applications Software (1/2)",
                     code: "CS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_006.json"
                   }
@@ -1516,7 +1516,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_007",
                     name: "Chapter 6 : Applications Software (2/2)",
                     code: "CS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_007.json"
                   }
@@ -1524,7 +1524,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_008",
                     name: "Chapter 7 : Computer Networks",
                     code: "CS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_008.json"
                   },
@@ -1532,7 +1532,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_009",
                     name: "Chapter 13 : Program Dev & Programming Languages",
                     code: "CS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_009.json"
                   },
@@ -1540,7 +1540,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_010",
                     name: "Converting Binary to Decimal and Vice Versa",
                     code: "CS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_010.json"
                   },
@@ -1548,7 +1548,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_011",
                     name: "Converting Binary to Octal and Vice Versa",
                     code: "CS_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_011.json"
                   },
@@ -1556,7 +1556,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_012",
                     name: "Converting Binary to Hexadecimal and Vice Versa",
                     code: "CS_012",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_012.json"
                   },
@@ -1564,7 +1564,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_013",
                     name: "Converting Decimal to Octal and Vice Versa",
                     code: "CS_013",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_013.json"
                   },
@@ -1572,7 +1572,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_014",
                     name: "Converting Decimal to Hexadecimal and Vice Versa",
                     code: "CS_014",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_014.json"
                   },
@@ -1580,7 +1580,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_015",
                     name: "Converting Octal to Hexadecimal and Vice Versa",
                     code: "CS_015",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 10,
                     jsonFile: "/quizzes/Computer System/CS_015.json"
                   },
@@ -1588,7 +1588,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_016",
                     name: "Converting Gray Code to Binary and Vice Versa",
                     code: "CS_016",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_016.json"
                   },
@@ -1596,7 +1596,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_017",
                     name: "Converting BCD to Decimal and Vice Versa",
                     code: "CS_017",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
@@ -1620,7 +1620,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_001",
                     name: "Lecture 1 - Introduction to Data Science",
                     code: "DS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
                   },
@@ -1628,7 +1628,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_002",
                     name: "Lecture 2 - Big Data",
                     code: "DS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
                   },
@@ -1636,7 +1636,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_003",
                     name: "Lecture 3 - Data Analytics lifecycle (Characters)",
                     code: "DS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
                   },
@@ -1644,7 +1644,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_004",
                     name: "Lecture 4 - Data Analytics lifecycle (Phases)",
                     code: "DS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
                   },
@@ -1652,7 +1652,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_005",
                     name: "Lecture 5 - Clustering Analysis",
                     code: "DS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
                   },
@@ -1660,7 +1660,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_006",
                     name: "Lecture 6 - Introduction Association Rules (1/2)",
                     code: "DS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
                   },
@@ -1668,7 +1668,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_007",
                     name: "Lecture 7 - Introduction Association Rules (2/2)",
                     code: "DS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
                   },
@@ -1676,7 +1676,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_008",
                     name: "Lecture 8 - Data Visualization",
                     code: "DS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
                   },
@@ -1684,7 +1684,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_009",
                     name: "Lecture 9 - Classification Analysis",
                     code: "DS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
                   },
@@ -1692,7 +1692,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_010",
                     name: "Lecture 10 - Decision Trees",
                     code: "DS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
@@ -1716,7 +1716,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30001",
                     name: "Chapter 1 : Introduction to Programming",
                     code: "PR1_30001",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30001.json"
                   },
@@ -1724,7 +1724,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30002",
                     name: "Chapter 2-1 : Introduction to Java Programming",
                     code: "PR1_30002",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30002.json"
                   },
@@ -1732,7 +1732,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30003",
                     name: "Chapter 2-2 : Java Basics",
                     code: "PR1_30003",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30003.json"
                   },
@@ -1740,7 +1740,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30004",
                     name: "Chapter 2-3 : Java Basics",
                     code: "PR1_30004",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30004.json"
                   },
@@ -1748,7 +1748,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30005",
                     name: "Chapter 2-4 : Deep Dive into Java",
                     code: "PR1_30005",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30005.json"
                   },
@@ -1756,7 +1756,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30006",
                     name: "Chapter 3-1 : Controlling Program Flow",
                     code: "PR1_30006",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30006.json"
                   },
@@ -1764,7 +1764,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30007",
                     name: "Chapter 3-2 : Controlling Program Flow",
                     code: "PR1_30007",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30007.json"
                   },
@@ -1772,7 +1772,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30008",
                     name: "Chapter 4-1 : One Dimensional Arrays",
                     code: "PR1_30008",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30008.json"
                   },
@@ -1780,7 +1780,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30009",
                     name: "Chapter 4-2 : Multi Dimensional Arrays",
                     code: "PR1_30009",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30009.json"
                   },
@@ -1788,7 +1788,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30010",
                     name: "Review 1",
                     code: "PR1_30010",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30010.json"
                   },
@@ -1796,7 +1796,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30011",
                     name: "Review 2",
                     code: "PR1_30011",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30011.json"
                   },
@@ -1804,7 +1804,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30012",
                     name: "Tracing and Debugging",
                     code: "PR1_30012",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30012.json"
                   },
@@ -2004,7 +2004,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_001",
                     name: "الفصل الاول - مقدمة في علم الاقتصاد",
                     code: "ECO_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_001.json"
                   },
@@ -2012,7 +2012,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_002",
                     name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
                     code: "ECO_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_002.json"
                   },
@@ -2020,7 +2020,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_003",
                     name: "الفصل الثالث - نظرية طلب المستهلك",
                     code: "ECO_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 19,
                     jsonFile: "/quizzes/Economic/ECO_003.json"
                   },
@@ -2028,7 +2028,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_004",
                     name: "الفصل الرابع - العرض في السوق",
                     code: "ECO_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_004.json"
                   },
@@ -2036,7 +2036,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_005",
                     name: "الفصل الخامس - التوازن في السوق",
                     code: "ECO_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 12,
                     jsonFile: "/quizzes/Economic/ECO_005.json"
                   },
@@ -2044,7 +2044,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_006",
                     name: "الفصل السادس - مرونات العرض والطلب",
                     code: "ECO_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 27,
                     jsonFile: "/quizzes/Economic/ECO_006.json"
                   },
@@ -2052,7 +2052,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_007",
                     name: "الفصل السابع - نظرية المنفعة الحدية",
                     code: "ECO_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_007.json"
                   },
@@ -2060,7 +2060,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_008",
                     name: "الفصل التاسع - نظرية الإنتاج",
                     code: "ECO_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_008.json"
                   },
@@ -2068,7 +2068,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_009",
                     name: "الفصل العاشر - تكاليف الإنتاج",
                     code: "ECO_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_009.json"
                   },
@@ -2076,7 +2076,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_010",
                     name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
                     code: "ECO_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_010.json"
                   },
@@ -2084,7 +2084,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_011",
                     name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
                     code: "ECO_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
@@ -2598,7 +2598,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_001",
                     name: "Chapter 1 : Introduction to Computer Systems",
                     code: "CS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
@@ -2606,7 +2606,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_002",
                     name: "Chapter 2 : Processing and Memory Management",
                     code: "CS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_002.json"
                   },
@@ -2614,7 +2614,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_003",
                     name: "Chapter 3 : Storage",
                     code: "CS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_003.json"
                   },
@@ -2622,7 +2622,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_004",
                     name: "Chapter 4 : Input and Output",
                     code: "CS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_004.json"
                   },
@@ -2630,7 +2630,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_005",
                     name: "Chapter 5 : System Software",
                     code: "CS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_005.json"
                   },
@@ -2638,7 +2638,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_006",
                     name: "Chapter 6 : Applications Software (1/2)",
                     code: "CS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_006.json"
                   }
@@ -2646,7 +2646,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_007",
                     name: "Chapter 6 : Applications Software (2/2)",
                     code: "CS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_007.json"
                   }
@@ -2654,7 +2654,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_008",
                     name: "Chapter 7 : Computer Networks",
                     code: "CS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_008.json"
                   },
@@ -2662,7 +2662,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_009",
                     name: "Chapter 13 : Program Dev & Programming Languages",
                     code: "CS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_009.json"
                   },
@@ -2670,7 +2670,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_010",
                     name: "Converting Binary to Decimal and Vice Versa",
                     code: "CS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_010.json"
                   },
@@ -2678,7 +2678,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_011",
                     name: "Converting Binary to Octal and Vice Versa",
                     code: "CS_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_011.json"
                   },
@@ -2686,7 +2686,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_012",
                     name: "Converting Binary to Hexadecimal and Vice Versa",
                     code: "CS_012",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_012.json"
                   },
@@ -2694,7 +2694,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_013",
                     name: "Converting Decimal to Octal and Vice Versa",
                     code: "CS_013",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_013.json"
                   },
@@ -2702,7 +2702,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_014",
                     name: "Converting Decimal to Hexadecimal and Vice Versa",
                     code: "CS_014",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_014.json"
                   },
@@ -2710,7 +2710,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_015",
                     name: "Converting Octal to Hexadecimal and Vice Versa",
                     code: "CS_015",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 10,
                     jsonFile: "/quizzes/Computer System/CS_015.json"
                   },
@@ -2718,7 +2718,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_016",
                     name: "Converting Gray Code to Binary and Vice Versa",
                     code: "CS_016",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_016.json"
                   },
@@ -2726,7 +2726,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_017",
                     name: "Converting BCD to Decimal and Vice Versa",
                     code: "CS_017",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
@@ -2750,7 +2750,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_001",
                     name: "Lecture 1 - Introduction to Data Science",
                     code: "DS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
                   },
@@ -2758,7 +2758,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_002",
                     name: "Lecture 2 - Big Data",
                     code: "DS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
                   },
@@ -2766,7 +2766,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_003",
                     name: "Lecture 3 - Data Analytics lifecycle (Characters)",
                     code: "DS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
                   },
@@ -2774,7 +2774,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_004",
                     name: "Lecture 4 - Data Analytics lifecycle (Phases)",
                     code: "DS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
                   },
@@ -2782,7 +2782,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_005",
                     name: "Lecture 5 - Clustering Analysis",
                     code: "DS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
                   },
@@ -2790,7 +2790,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_006",
                     name: "Lecture 6 - Introduction Association Rules (1/2)",
                     code: "DS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
                   },
@@ -2798,7 +2798,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_007",
                     name: "Lecture 7 - Introduction Association Rules (2/2)",
                     code: "DS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
                   },
@@ -2806,7 +2806,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_008",
                     name: "Lecture 8 - Data Visualization",
                     code: "DS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
                   },
@@ -2814,7 +2814,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_009",
                     name: "Lecture 9 - Classification Analysis",
                     code: "DS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
                   },
@@ -2822,7 +2822,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_010",
                     name: "Lecture 10 - Decision Trees",
                     code: "DS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
@@ -2846,7 +2846,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30001",
                     name: "Chapter 1 : Introduction to Programming",
                     code: "PR1_30001",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30001.json"
                   },
@@ -2854,7 +2854,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30002",
                     name: "Chapter 2-1 : Introduction to Java Programming",
                     code: "PR1_30002",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30002.json"
                   },
@@ -2862,7 +2862,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30003",
                     name: "Chapter 2-2 : Java Basics",
                     code: "PR1_30003",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30003.json"
                   },
@@ -2870,7 +2870,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30004",
                     name: "Chapter 2-3 : Java Basics",
                     code: "PR1_30004",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30004.json"
                   },
@@ -2878,7 +2878,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30005",
                     name: "Chapter 2-4 : Deep Dive into Java",
                     code: "PR1_30005",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30005.json"
                   },
@@ -2886,7 +2886,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30006",
                     name: "Chapter 3-1 : Controlling Program Flow",
                     code: "PR1_30006",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30006.json"
                   },
@@ -2894,7 +2894,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30007",
                     name: "Chapter 3-2 : Controlling Program Flow",
                     code: "PR1_30007",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30007.json"
                   },
@@ -2902,7 +2902,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30008",
                     name: "Chapter 4-1 : One Dimensional Arrays",
                     code: "PR1_30008",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30008.json"
                   },
@@ -2910,7 +2910,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30009",
                     name: "Chapter 4-2 : Multi Dimensional Arrays",
                     code: "PR1_30009",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30009.json"
                   },
@@ -2918,7 +2918,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30010",
                     name: "Review 1",
                     code: "PR1_30010",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30010.json"
                   },
@@ -2926,7 +2926,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30011",
                     name: "Review 2",
                     code: "PR1_30011",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30011.json"
                   },
@@ -2934,7 +2934,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30012",
                     name: "Tracing and Debugging",
                     code: "PR1_30012",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30012.json"
                   },
@@ -3134,7 +3134,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_001",
                     name: "الفصل الاول - مقدمة في علم الاقتصاد",
                     code: "ECO_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_001.json"
                   },
@@ -3142,7 +3142,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_002",
                     name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
                     code: "ECO_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_002.json"
                   },
@@ -3150,7 +3150,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_003",
                     name: "الفصل الثالث - نظرية طلب المستهلك",
                     code: "ECO_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 19,
                     jsonFile: "/quizzes/Economic/ECO_003.json"
                   },
@@ -3158,7 +3158,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_004",
                     name: "الفصل الرابع - العرض في السوق",
                     code: "ECO_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_004.json"
                   },
@@ -3166,7 +3166,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_005",
                     name: "الفصل الخامس - التوازن في السوق",
                     code: "ECO_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 12,
                     jsonFile: "/quizzes/Economic/ECO_005.json"
                   },
@@ -3174,7 +3174,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_006",
                     name: "الفصل السادس - مرونات العرض والطلب",
                     code: "ECO_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 27,
                     jsonFile: "/quizzes/Economic/ECO_006.json"
                   },
@@ -3182,7 +3182,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_007",
                     name: "الفصل السابع - نظرية المنفعة الحدية",
                     code: "ECO_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_007.json"
                   },
@@ -3190,7 +3190,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_008",
                     name: "الفصل التاسع - نظرية الإنتاج",
                     code: "ECO_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_008.json"
                   },
@@ -3198,7 +3198,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_009",
                     name: "الفصل العاشر - تكاليف الإنتاج",
                     code: "ECO_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_009.json"
                   },
@@ -3206,7 +3206,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_010",
                     name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
                     code: "ECO_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_010.json"
                   },
@@ -3214,7 +3214,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_011",
                     name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
                     code: "ECO_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
@@ -3700,7 +3700,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_001",
                     name: "Chapter 1 : Introduction to Computer Systems",
                     code: "CS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
@@ -3708,7 +3708,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_002",
                     name: "Chapter 2 : Processing and Memory Management",
                     code: "CS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_002.json"
                   },
@@ -3716,7 +3716,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_003",
                     name: "Chapter 3 : Storage",
                     code: "CS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_003.json"
                   },
@@ -3724,7 +3724,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_004",
                     name: "Chapter 4 : Input and Output",
                     code: "CS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_004.json"
                   },
@@ -3732,7 +3732,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_005",
                     name: "Chapter 5 : System Software",
                     code: "CS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_005.json"
                   },
@@ -3740,7 +3740,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_006",
                     name: "Chapter 6 : Applications Software (1/2)",
                     code: "CS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_006.json"
                   }
@@ -3748,7 +3748,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_007",
                     name: "Chapter 6 : Applications Software (2/2)",
                     code: "CS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_007.json"
                   }
@@ -3756,7 +3756,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_008",
                     name: "Chapter 7 : Computer Networks",
                     code: "CS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_008.json"
                   },
@@ -3764,7 +3764,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_009",
                     name: "Chapter 13 : Program Dev & Programming Languages",
                     code: "CS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_009.json"
                   },
@@ -3772,7 +3772,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_010",
                     name: "Converting Binary to Decimal and Vice Versa",
                     code: "CS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_010.json"
                   },
@@ -3780,7 +3780,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_011",
                     name: "Converting Binary to Octal and Vice Versa",
                     code: "CS_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_011.json"
                   },
@@ -3788,7 +3788,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_012",
                     name: "Converting Binary to Hexadecimal and Vice Versa",
                     code: "CS_012",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_012.json"
                   },
@@ -3796,7 +3796,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_013",
                     name: "Converting Decimal to Octal and Vice Versa",
                     code: "CS_013",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_013.json"
                   },
@@ -3804,7 +3804,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_014",
                     name: "Converting Decimal to Hexadecimal and Vice Versa",
                     code: "CS_014",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_014.json"
                   },
@@ -3812,7 +3812,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_015",
                     name: "Converting Octal to Hexadecimal and Vice Versa",
                     code: "CS_015",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 10,
                     jsonFile: "/quizzes/Computer System/CS_015.json"
                   },
@@ -3820,7 +3820,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_016",
                     name: "Converting Gray Code to Binary and Vice Versa",
                     code: "CS_016",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_016.json"
                   },
@@ -3828,7 +3828,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_017",
                     name: "Converting BCD to Decimal and Vice Versa",
                     code: "CS_017",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
@@ -3850,7 +3850,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_001",
                     name: "Lecture 1 - Introduction to Data Science",
                     code: "DS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
                   },
@@ -3858,7 +3858,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_002",
                     name: "Lecture 2 - Big Data",
                     code: "DS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
                   },
@@ -3866,7 +3866,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_003",
                     name: "Lecture 3 - Data Analytics lifecycle (Characters)",
                     code: "DS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
                   },
@@ -3874,7 +3874,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_004",
                     name: "Lecture 4 - Data Analytics lifecycle (Phases)",
                     code: "DS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
                   },
@@ -3882,7 +3882,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_005",
                     name: "Lecture 5 - Clustering Analysis",
                     code: "DS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
                   },
@@ -3890,7 +3890,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_006",
                     name: "Lecture 6 - Introduction Association Rules (1/2)",
                     code: "DS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
                   },
@@ -3898,7 +3898,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_007",
                     name: "Lecture 7 - Introduction Association Rules (2/2)",
                     code: "DS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
                   },
@@ -3906,7 +3906,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_008",
                     name: "Lecture 8 - Data Visualization",
                     code: "DS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
                   },
@@ -3914,7 +3914,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_009",
                     name: "Lecture 9 - Classification Analysis",
                     code: "DS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
                   },
@@ -3922,7 +3922,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_010",
                     name: "Lecture 10 - Decision Trees",
                     code: "DS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
@@ -4119,7 +4119,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_001",
                     name: "الفصل الاول - مقدمة في علم الاقتصاد",
                     code: "ECO_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_001.json"
                   },
@@ -4127,7 +4127,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_002",
                     name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
                     code: "ECO_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_002.json"
                   },
@@ -4135,7 +4135,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_003",
                     name: "الفصل الثالث - نظرية طلب المستهلك",
                     code: "ECO_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 19,
                     jsonFile: "/quizzes/Economic/ECO_003.json"
                   },
@@ -4143,7 +4143,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_004",
                     name: "الفصل الرابع - العرض في السوق",
                     code: "ECO_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_004.json"
                   },
@@ -4151,7 +4151,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_005",
                     name: "الفصل الخامس - التوازن في السوق",
                     code: "ECO_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 12,
                     jsonFile: "/quizzes/Economic/ECO_005.json"
                   },
@@ -4159,7 +4159,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_006",
                     name: "الفصل السادس - مرونات العرض والطلب",
                     code: "ECO_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 27,
                     jsonFile: "/quizzes/Economic/ECO_006.json"
                   },
@@ -4167,7 +4167,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_007",
                     name: "الفصل السابع - نظرية المنفعة الحدية",
                     code: "ECO_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_007.json"
                   },
@@ -4175,7 +4175,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_008",
                     name: "الفصل التاسع - نظرية الإنتاج",
                     code: "ECO_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_008.json"
                   },
@@ -4183,7 +4183,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_009",
                     name: "الفصل العاشر - تكاليف الإنتاج",
                     code: "ECO_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_009.json"
                   },
@@ -4191,7 +4191,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_010",
                     name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
                     code: "ECO_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_010.json"
                   },
@@ -4199,7 +4199,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_011",
                     name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
                     code: "ECO_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
@@ -4625,7 +4625,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_001",
                     name: "Chapter 1 : Introduction to Computer Systems",
                     code: "CS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
@@ -4633,7 +4633,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_002",
                     name: "Chapter 2 : Processing and Memory Management",
                     code: "CS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_002.json"
                   },
@@ -4641,7 +4641,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_003",
                     name: "Chapter 3 : Storage",
                     code: "CS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_003.json"
                   },
@@ -4649,7 +4649,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_004",
                     name: "Chapter 4 : Input and Output",
                     code: "CS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_004.json"
                   },
@@ -4657,7 +4657,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_005",
                     name: "Chapter 5 : System Software",
                     code: "CS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_005.json"
                   },
@@ -4665,7 +4665,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_006",
                     name: "Chapter 6 : Applications Software (1/2)",
                     code: "CS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_006.json"
                   }
@@ -4673,7 +4673,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_007",
                     name: "Chapter 6 : Applications Software (2/2)",
                     code: "CS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_007.json"
                   }
@@ -4681,7 +4681,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_008",
                     name: "Chapter 7 : Computer Networks",
                     code: "CS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_008.json"
                   },
@@ -4689,7 +4689,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_009",
                     name: "Chapter 13 : Program Dev & Programming Languages",
                     code: "CS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_009.json"
                   },
@@ -4697,7 +4697,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_010",
                     name: "Converting Binary to Decimal and Vice Versa",
                     code: "CS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_010.json"
                   },
@@ -4705,7 +4705,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_011",
                     name: "Converting Binary to Octal and Vice Versa",
                     code: "CS_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_011.json"
                   },
@@ -4713,7 +4713,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_012",
                     name: "Converting Binary to Hexadecimal and Vice Versa",
                     code: "CS_012",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_012.json"
                   },
@@ -4721,7 +4721,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_013",
                     name: "Converting Decimal to Octal and Vice Versa",
                     code: "CS_013",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_013.json"
                   },
@@ -4729,7 +4729,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_014",
                     name: "Converting Decimal to Hexadecimal and Vice Versa",
                     code: "CS_014",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_014.json"
                   },
@@ -4737,7 +4737,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_015",
                     name: "Converting Octal to Hexadecimal and Vice Versa",
                     code: "CS_015",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 10,
                     jsonFile: "/quizzes/Computer System/CS_015.json"
                   },
@@ -4745,7 +4745,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_016",
                     name: "Converting Gray Code to Binary and Vice Versa",
                     code: "CS_016",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_016.json"
                   },
@@ -4753,7 +4753,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_017",
                     name: "Converting BCD to Decimal and Vice Versa",
                     code: "CS_017",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
@@ -4775,7 +4775,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_001",
                     name: "Lecture 1 - Introduction to Data Science",
                     code: "DS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
                   },
@@ -4783,7 +4783,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_002",
                     name: "Lecture 2 - Big Data",
                     code: "DS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
                   },
@@ -4791,7 +4791,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_003",
                     name: "Lecture 3 - Data Analytics lifecycle (Characters)",
                     code: "DS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
                   },
@@ -4799,7 +4799,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_004",
                     name: "Lecture 4 - Data Analytics lifecycle (Phases)",
                     code: "DS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
                   },
@@ -4807,7 +4807,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_005",
                     name: "Lecture 5 - Clustering Analysis",
                     code: "DS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
                   },
@@ -4815,7 +4815,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_006",
                     name: "Lecture 6 - Introduction Association Rules (1/2)",
                     code: "DS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
                   },
@@ -4823,7 +4823,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_007",
                     name: "Lecture 7 - Introduction Association Rules (2/2)",
                     code: "DS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
                   },
@@ -4831,7 +4831,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_008",
                     name: "Lecture 8 - Data Visualization",
                     code: "DS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
                   },
@@ -4839,7 +4839,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_009",
                     name: "Lecture 9 - Classification Analysis",
                     code: "DS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
                   },
@@ -4847,7 +4847,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_010",
                     name: "Lecture 10 - Decision Trees",
                     code: "DS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
@@ -5454,7 +5454,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_001",
                     name: "Chapter 1 : Introduction to Computer Systems",
                     code: "CS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_001.json"
                   },
@@ -5462,7 +5462,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_002",
                     name: "Chapter 2 : Processing and Memory Management",
                     code: "CS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_002.json"
                   },
@@ -5470,7 +5470,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_003",
                     name: "Chapter 3 : Storage",
                     code: "CS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_003.json"
                   },
@@ -5478,7 +5478,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_004",
                     name: "Chapter 4 : Input and Output",
                     code: "CS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_004.json"
                   },
@@ -5486,7 +5486,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_005",
                     name: "Chapter 5 : System Software",
                     code: "CS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_005.json"
                   },
@@ -5494,7 +5494,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_006",
                     name: "Chapter 6 : Applications Software (1/2)",
                     code: "CS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_006.json"
                   }
@@ -5502,7 +5502,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_007",
                     name: "Chapter 6 : Applications Software (2/2)",
                     code: "CS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_007.json"
                   }
@@ -5510,7 +5510,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_008",
                     name: "Chapter 7 : Computer Networks",
                     code: "CS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_008.json"
                   },
@@ -5518,7 +5518,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_009",
                     name: "Chapter 13 : Program Dev & Programming Languages",
                     code: "CS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 50,
                     jsonFile: "/quizzes/Computer System/CS_009.json"
                   },
@@ -5526,7 +5526,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_010",
                     name: "Converting Binary to Decimal and Vice Versa",
                     code: "CS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_010.json"
                   },
@@ -5534,7 +5534,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_011",
                     name: "Converting Binary to Octal and Vice Versa",
                     code: "CS_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_011.json"
                   },
@@ -5542,7 +5542,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_012",
                     name: "Converting Binary to Hexadecimal and Vice Versa",
                     code: "CS_012",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_012.json"
                   },
@@ -5550,7 +5550,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_013",
                     name: "Converting Decimal to Octal and Vice Versa",
                     code: "CS_013",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_013.json"
                   },
@@ -5558,7 +5558,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_014",
                     name: "Converting Decimal to Hexadecimal and Vice Versa",
                     code: "CS_014",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Computer System/CS_014.json"
                   },
@@ -5566,7 +5566,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_015",
                     name: "Converting Octal to Hexadecimal and Vice Versa",
                     code: "CS_015",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 10,
                     jsonFile: "/quizzes/Computer System/CS_015.json"
                   },
@@ -5574,7 +5574,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_016",
                     name: "Converting Gray Code to Binary and Vice Versa",
                     code: "CS_016",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_016.json"
                   },
@@ -5582,7 +5582,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "CS_017",
                     name: "Converting BCD to Decimal and Vice Versa",
                     code: "CS_017",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 40,
                     jsonFile: "/quizzes/Computer System/CS_017.json"
                   }
@@ -5606,7 +5606,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_001",
                     name: "Lecture 1 - Introduction to Data Science",
                     code: "DS_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_001.json"
                   },
@@ -5614,7 +5614,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_002",
                     name: "Lecture 2 - Big Data",
                     code: "DS_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_002.json"
                   },
@@ -5622,7 +5622,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_003",
                     name: "Lecture 3 - Data Analytics lifecycle (Characters)",
                     code: "DS_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_003.json"
                   },
@@ -5630,7 +5630,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_004",
                     name: "Lecture 4 - Data Analytics lifecycle (Phases)",
                     code: "DS_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_004.json"
                   },
@@ -5638,7 +5638,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_005",
                     name: "Lecture 5 - Clustering Analysis",
                     code: "DS_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_005.json"
                   },
@@ -5646,7 +5646,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_006",
                     name: "Lecture 6 - Introduction Association Rules (1/2)",
                     code: "DS_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_006.json"
                   },
@@ -5654,7 +5654,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_007",
                     name: "Lecture 7 - Introduction Association Rules (2/2)",
                     code: "DS_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_007.json"
                   },
@@ -5662,7 +5662,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_008",
                     name: "Lecture 8 - Data Visualization",
                     code: "DS_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_008.json"
                   },
@@ -5670,7 +5670,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_009",
                     name: "Lecture 9 - Classification Analysis",
                     code: "DS_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_009.json"
                   },
@@ -5678,7 +5678,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "DS_010",
                     name: "Lecture 10 - Decision Trees",
                     code: "DS_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 25,
                     jsonFile: "/quizzes/Data Science/DS_Quizzes/DS_010.json"
                   }
@@ -5702,7 +5702,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30001",
                     name: "Chapter 1 : Introduction to Programming",
                     code: "PR1_30001",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30001.json"
                   },
@@ -5710,7 +5710,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30002",
                     name: "Chapter 2-1 : Introduction to Java Programming",
                     code: "PR1_30002",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30002.json"
                   },
@@ -5718,7 +5718,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30003",
                     name: "Chapter 2-2 : Java Basics",
                     code: "PR1_30003",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30003.json"
                   },
@@ -5726,7 +5726,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30004",
                     name: "Chapter 2-3 : Java Basics",
                     code: "PR1_30004",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30004.json"
                   },
@@ -5734,7 +5734,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30005",
                     name: "Chapter 2-4 : Deep Dive into Java",
                     code: "PR1_30005",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30005.json"
                   },
@@ -5742,7 +5742,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30006",
                     name: "Chapter 3-1 : Controlling Program Flow",
                     code: "PR1_30006",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30006.json"
                   },
@@ -5750,7 +5750,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30007",
                     name: "Chapter 3-2 : Controlling Program Flow",
                     code: "PR1_30007",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30007.json"
                   },
@@ -5758,7 +5758,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30008",
                     name: "Chapter 4-1 : One Dimensional Arrays",
                     code: "PR1_30008",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30008.json"
                   },
@@ -5766,7 +5766,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30009",
                     name: "Chapter 4-2 : Multi Dimensional Arrays",
                     code: "PR1_30009",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30009.json"
                   },
@@ -5774,7 +5774,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30010",
                     name: "Review 1",
                     code: "PR1_30010",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30010.json"
                   },
@@ -5782,7 +5782,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30011",
                     name: "Review 2",
                     code: "PR1_30011",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30011.json"
                   },
@@ -5790,7 +5790,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "PR1_30012",
                     name: "Tracing and Debugging",
                     code: "PR1_30012",
-                    duration: "Optional", // in minutes
+                    duration: "OP", // in minutes
                     questions: 30,
                     jsonFile: "/quizzes/programming/programming1/PR1_30012.json"
                   },
@@ -5978,7 +5978,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_001",
                     name: "الفصل الاول - مقدمة في علم الاقتصاد",
                     code: "ECO_001",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_001.json"
                   },
@@ -5986,7 +5986,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_002",
                     name: "الفصل الثاني -المشكلة الاقتصادية والنظم الاقتصادية",
                     code: "ECO_002",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_002.json"
                   },
@@ -5994,7 +5994,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_003",
                     name: "الفصل الثالث - نظرية طلب المستهلك",
                     code: "ECO_003",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 19,
                     jsonFile: "/quizzes/Economic/ECO_003.json"
                   },
@@ -6002,7 +6002,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_004",
                     name: "الفصل الرابع - العرض في السوق",
                     code: "ECO_004",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 17,
                     jsonFile: "/quizzes/Economic/ECO_004.json"
                   },
@@ -6010,7 +6010,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_005",
                     name: "الفصل الخامس - التوازن في السوق",
                     code: "ECO_005",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 12,
                     jsonFile: "/quizzes/Economic/ECO_005.json"
                   },
@@ -6018,7 +6018,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_006",
                     name: "الفصل السادس - مرونات العرض والطلب",
                     code: "ECO_006",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 27,
                     jsonFile: "/quizzes/Economic/ECO_006.json"
                   },
@@ -6026,7 +6026,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_007",
                     name: "الفصل السابع - نظرية المنفعة الحدية",
                     code: "ECO_007",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_007.json"
                   },
@@ -6034,7 +6034,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_008",
                     name: "الفصل التاسع - نظرية الإنتاج",
                     code: "ECO_008",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_008.json"
                   },
@@ -6042,7 +6042,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_009",
                     name: "الفصل العاشر - تكاليف الإنتاج",
                     code: "ECO_009",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_009.json"
                   },
@@ -6050,7 +6050,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_010",
                     name: "الفصل الحادي عشر - اسواق المنافسة الكاملة",
                     code: "ECO_010",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 20,
                     jsonFile: "/quizzes/Economic/ECO_010.json"
                   },
@@ -6058,7 +6058,7 @@ export const departmentData: { [key: string]: Department } = {
                     id: "ECO_011",
                     name: "الفصل الثاني عشر - اسواق المنافسة غير الكاملة",
                     code: "ECO_011",
-                    duration: "Optional",
+                    duration: "OP",
                     questions: 18,
                     jsonFile: "/quizzes/Economic/ECO_011.json"
                   },
