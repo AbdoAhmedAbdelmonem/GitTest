@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import CountUp from "@/components/CountUp"
-import { BookOpen, Shield, Brain, Database, Award, Hospital, Cloud, ServerCrash, BookOpenCheck, ChevronDown, Users, RefreshCw } from "lucide-react"
+import { BookOpen, Shield, Brain, Database, Award, Hospital, Cloud, ServerCrash, BookOpenCheck, ChevronDown, Users, RefreshCw, Sparkles } from "lucide-react"
 import CreativeFeatureSlider from "@/components/creative-feature-slider"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
+import MagicSearch from "@/components/magic-search"
 import Link from "next/link"
 import { getStudentSession } from "@/lib/auth"
 import { useEffect, useState } from "react"
@@ -150,6 +151,27 @@ export default function HomePage() {
 
       {/* Hero Section - Using the exact design without changes */}
       <HeroGeometric badge="Chameleon FCDS" title1="Master Your" title2="Future Skills" />
+
+      {/* Magic Search Section */}
+      <ScrollAnimatedSection className="py-12 bg-[#030303] border-t border-white/5">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center gap-6 max-w-4xl mx-auto">
+            <div className="text-center">
+              <Badge variant="outline" className="mb-4 bg-white/5 border-white/10 text-white/60">
+                <Sparkles className="w-3 h-3 mr-1 inline" />
+                Smart Search
+              </Badge>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                Find Anything in <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Seconds</span>
+              </h2>
+              <p className="text-white/60 mb-6">
+                Search across courses, quizzes, certifications, and more with our intelligent search
+              </p>
+            </div>
+            <MagicSearch />
+          </div>
+        </div>
+      </ScrollAnimatedSection>
 
       <ScrollAnimatedSection className="py-20 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4">
