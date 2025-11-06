@@ -2,281 +2,281 @@
   {
     "numb": 1,
     "type": "Multiple Choices",
-    "question": "What does Ethernet primarily operate at in the OSI model?",
+    "question": "Ethernet is the most famous protocol used in:",
     "options": [
-      "A) Physical Layer only",
-      "B) Data Link Layer only",
-      "C) Both Physical Layer and Data Link Layer",
-      "D) Network Layer"
+      "A) Wide Area Networks (WANs)",
+      "B) Local Area Networks (LANs)",
+      "C) Metropolitan Area Networks (MANs)",
+      "D) Virtual Private Networks (VPNs)"
     ],
-    "answer": "C) Both Physical Layer and Data Link Layer",
-    "explanation": "Ethernet operates at both the Physical Layer (Layer 1) and Data Link Layer (Layer 2) of the OSI model. At the Physical Layer, it defines the physical medium, signaling, and cable specifications. At the Data Link Layer, it handles MAC addressing, frame formatting, and media access control using CSMA/CD. This dual-layer operation makes Ethernet a complete LAN technology.",
+    "answer": "B) Local Area Networks (LANs)",
+    "explanation": "Ethernet is primarily designed for and most widely used in Local Area Networks (LANs). It was developed to connect computers and devices within a limited geographical area such as homes, offices, or buildings. While Ethernet technology has evolved and can be used in other contexts, its primary application remains in LANs where it provides high-speed, reliable communication between devices on the same local network.",
     "image": null
   },
   {
     "numb": 2,
     "type": "Multiple Choices",
-    "question": "How many bytes (octets) is a MAC address?",
+    "question": "According to the document, on which OSI model layers does Ethernet operate?",
     "options": [
-      "A) 4 bytes",
-      "B) 6 bytes",
-      "C) 8 bytes",
-      "D) 12 bytes"
+      "A) Layer 1 and Layer 2",
+      "B) Layer 2 and Layer 3",
+      "C) Layer 1 and Layer 3",
+      "D) Layer 3 and Layer 4"
     ],
-    "answer": "B) 6 bytes",
-    "explanation": "A MAC (Media Access Control) address is 6 bytes (48 bits) long. It is typically written as 12 hexadecimal digits, often separated by colons or hyphens (e.g., 00:1A:2B:3C:4D:5E). The first 3 bytes identify the manufacturer (OUI - Organizationally Unique Identifier), and the last 3 bytes are the device-specific identifier assigned by the manufacturer.",
+    "answer": "A) Layer 1 and Layer 2",
+    "explanation": "Ethernet operates at both Layer 1 (Physical Layer) and Layer 2 (Data Link Layer) of the OSI model. At the Physical Layer, it handles the actual transmission of signals over the physical medium (cables, connectors, voltage levels). At the Data Link Layer, it manages addressing (MAC addresses), framing, and preparing packets for transmission. This dual-layer operation makes Ethernet a complete link-layer technology.",
     "image": null
   },
   {
     "numb": 3,
     "type": "Multiple Choices",
-    "question": "What does CSMA/CD stand for?",
+    "question": "At the Data Link layer, Ethernet is responsible for all of the following EXCEPT:",
     "options": [
-      "A) Carrier Sense Multiple Access with Collision Detection",
-      "B) Central System Multiple Access with Data Control",
-      "C) Computer System Media Access and Collision Delay",
-      "D) Carrier Signal Management and Collision Detector"
+      "A) Addressing",
+      "B) Framing packets",
+      "C) Actual signal transmission",
+      "D) Preparing packets for transmission"
     ],
-    "answer": "A) Carrier Sense Multiple Access with Collision Detection",
-    "explanation": "CSMA/CD stands for Carrier Sense Multiple Access with Collision Detection. It is the media access control method used in traditional Ethernet networks. Devices listen to the network (carrier sense) before transmitting, multiple devices can access the medium, and if a collision is detected, devices stop transmitting, wait a random time, and retry. Modern switched full-duplex Ethernet doesn't require CSMA/CD.",
+    "answer": "C) Actual signal transmission",
+    "explanation": "Actual signal transmission is the responsibility of the Physical Layer (Layer 1), not the Data Link Layer (Layer 2). The Data Link Layer handles logical functions such as MAC addressing, framing packets into proper Ethernet frames, and preparing packets for transmission. The Physical Layer then takes these prepared frames and handles the actual electrical, optical, or radio signal transmission over the physical medium.",
     "image": null
   },
   {
     "numb": 4,
     "type": "Multiple Choices",
-    "question": "What is the minimum Ethernet frame size?",
+    "question": "The addressing used by Ethernet at the Data Link layer is called a:",
     "options": [
-      "A) 46 bytes",
-      "B) 64 bytes",
-      "C) 128 bytes",
-      "D) 1500 bytes"
+      "A) IP Address",
+      "B) MAC Address",
+      "C) Port Address",
+      "D) Sequence Number"
     ],
-    "answer": "B) 64 bytes",
-    "explanation": "The minimum Ethernet frame size is 64 bytes (excluding the preamble and Start Frame Delimiter). This includes a 14-byte header (6-byte destination MAC, 6-byte source MAC, 2-byte Type/Length) and a 4-byte FCS (Frame Check Sequence), leaving a minimum of 46 bytes for the data payload. If data is less than 46 bytes, padding is added to meet the minimum frame size requirement.",
+    "answer": "B) MAC Address",
+    "explanation": "MAC (Media Access Control) Address is the addressing scheme used by Ethernet at the Data Link Layer. MAC addresses are hardware addresses that uniquely identify network interface cards. IP addresses operate at Layer 3 (Network Layer), port addresses are used at Layer 4 (Transport Layer), and sequence numbers are used for flow control. The MAC address is burned into the network interface hardware and is used for local network communication.",
     "image": null
   },
   {
     "numb": 5,
     "type": "Multiple Choices",
-    "question": "What is the maximum Ethernet frame size (MTU)?",
+    "question": "How long is a MAC address?",
     "options": [
-      "A) 1024 bytes",
-      "B) 1500 bytes",
-      "C) 1518 bytes",
-      "D) 2048 bytes"
+      "A) 32 bits (4 bytes)",
+      "B) 48 bits (6 bytes)",
+      "C) 64 bits (8 bytes)",
+      "D) 128 bits (16 bytes)"
     ],
-    "answer": "C) 1518 bytes",
-    "explanation": "The maximum standard Ethernet frame size is 1518 bytes (excluding preamble and SFD). This includes: 14 bytes for the header (destination and source MAC addresses and Type/Length field), up to 1500 bytes for the data payload (MTU - Maximum Transmission Unit), and 4 bytes for the FCS trailer. Jumbo frames can exceed this size, supporting up to 9000 bytes in some implementations.",
+    "answer": "B) 48 bits (6 bytes)",
+    "explanation": "A MAC address is 48 bits long, which equals 6 bytes. It is typically represented as 12 hexadecimal digits, often grouped in pairs separated by colons, hyphens, or periods (e.g., 50:22:AB:5B:63:A9 or 5022.ab5b.63a9). This length provides enough unique combinations to assign a unique address to every network device manufactured. For comparison, IPv4 addresses are 32 bits and IPv6 addresses are 128 bits.",
     "image": null
   },
   {
     "numb": 6,
     "type": "Multiple Choices",
-    "question": "What is the purpose of the preamble in an Ethernet frame?",
+    "question": "The first half of a MAC address represents the:",
     "options": [
-      "A) To encrypt the data",
-      "B) To synchronize the receiver's clock and signal frame arrival",
-      "C) To identify the frame type",
-      "D) To perform error checking"
+      "A) Device Serial Number",
+      "B) Host Identifier",
+      "C) Organization Unique Identifier (OUI)",
+      "D) Network IP Address"
     ],
-    "answer": "B) To synchronize the receiver's clock and signal frame arrival",
-    "explanation": "The preamble is a 7-byte field of alternating 1s and 0s (10101010...) that precedes every Ethernet frame. Its purpose is to alert receiving stations that a frame is arriving and to synchronize their clocks with the sender's timing. It is followed by a 1-byte Start Frame Delimiter (SFD) that marks the actual beginning of the frame. The preamble and SFD are not considered part of the frame itself.",
+    "answer": "C) Organization Unique Identifier (OUI)",
+    "explanation": "The first 24 bits (3 bytes) of a MAC address represent the Organizationally Unique Identifier (OUI), which identifies the manufacturer or vendor of the network interface card. The IEEE assigns these OUI values to manufacturers. For example, all Cisco devices might share the same OUI prefix. This allows network administrators to identify the manufacturer of a device by examining its MAC address.",
     "image": null
   },
   {
     "numb": 7,
     "type": "Multiple Choices",
-    "question": "What does FCS stand for in Ethernet frames?",
+    "question": "Who assigns the second half of a MAC address?",
     "options": [
-      "A) Frame Control System",
-      "B) Fast Connection Service",
-      "C) Frame Check Sequence",
-      "D) Full Connection Standard"
+      "A) IEEE",
+      "B) The End User",
+      "C) The Network Administrator",
+      "D) The Manufacturer"
     ],
-    "answer": "C) Frame Check Sequence",
-    "explanation": "FCS stands for Frame Check Sequence. It is a 4-byte field at the end of an Ethernet frame used for error detection. The FCS contains a CRC (Cyclic Redundancy Check) value calculated from the frame's contents. The receiving device recalculates the CRC and compares it with the FCS value. If they don't match, the frame is considered corrupted and is discarded.",
+    "answer": "D) The Manufacturer",
+    "explanation": "The manufacturer assigns the second half (last 24 bits or 3 bytes) of a MAC address. While the IEEE assigns the first half (OUI) to identify the manufacturer, the manufacturer is responsible for ensuring that each device they produce has a unique second half, creating a globally unique MAC address for each network interface. The manufacturer maintains their own database to ensure no duplicates are created.",
     "image": null
   },
   {
     "numb": 8,
     "type": "Multiple Choices",
-    "question": "Which Ethernet standard supports 1 Gigabit per second data rates over copper cables?",
+    "question": "What is the correct format for a MAC address?",
     "options": [
-      "A) 10BASE-T",
-      "B) 100BASE-TX",
-      "C) 1000BASE-T",
-      "D) 10GBASE-T"
+      "A) 192.168.1.1",
+      "B) 5022.ab5b.63a9",
+      "C) http://www.example.com",
+      "D) 5A:2B"
     ],
-    "answer": "C) 1000BASE-T",
-    "explanation": "1000BASE-T (also known as Gigabit Ethernet) supports data rates of 1 Gigabit per second (1000 Mbps) over copper twisted-pair cables (Category 5e or better). The naming convention breaks down as: 1000 = speed in Mbps, BASE = baseband signaling, T = twisted pair copper cable. It can transmit up to 100 meters and uses all four pairs of wires in the cable.",
+    "answer": "B) 5022.ab5b.63a9",
+    "explanation": "The correct format for a MAC address is 5022.ab5b.63a9, which shows 12 hexadecimal digits representing 6 bytes. MAC addresses can be written in various formats including colon-separated (50:22:AB:5B:63:A9), hyphen-separated (50-22-AB-5B-63-A9), or dot-separated in groups of 4 (5022.ab5b.63a9). Option A is an IP address format, option C is a URL, and option D doesn't have enough digits to be a complete MAC address.",
     "image": null
   },
   {
     "numb": 9,
     "type": "Multiple Choices",
-    "question": "What type of cable is used for 10BASE-T Ethernet?",
+    "question": "What is the value of a broadcast MAC address?",
     "options": [
-      "A) Coaxial cable",
-      "B) Fiber optic cable",
-      "C) Twisted pair cable",
-      "D) Serial cable"
+      "A) 0000.0000.0000",
+      "B) 255.255.255.255",
+      "C) FFFF.FFFF.FFFF",
+      "D) 0100.5E00.0000"
     ],
-    "answer": "C) Twisted pair cable",
-    "explanation": "10BASE-T uses twisted pair copper cable (the 'T' stands for twisted pair). It typically uses Category 3 or better UTP (Unshielded Twisted Pair) cable with RJ-45 connectors. 10BASE-T operates at 10 Mbps and can transmit up to 100 meters. It uses two pairs of wires: one for transmitting and one for receiving, operating in half-duplex or full-duplex mode.",
+    "answer": "C) FFFF.FFFF.FFFF",
+    "explanation": "The broadcast MAC address is FFFF.FFFF.FFFF (all bits set to 1). When a frame is sent to this destination address, it is delivered to all devices on the local network segment. This is different from 255.255.255.255, which is an IP broadcast address. The all-zeros address (0000.0000.0000) is invalid, and 0100.5E00.0000 is related to multicast addressing. Broadcast frames are used for network discovery and protocols like ARP.",
     "image": null
   },
   {
     "numb": 10,
     "type": "Multiple Choices",
-    "question": "What is the main advantage of full-duplex Ethernet over half-duplex?",
+    "question": "A multicast MAC address for IP multicast over Ethernet always begins with which value?",
     "options": [
-      "A) Lower cost",
-      "B) Simultaneous transmission and reception, eliminating collisions",
-      "C) Longer cable distances",
-      "D) Better encryption"
+      "A) FFFF.FF",
+      "B) 5022.AB",
+      "C) 0000.00",
+      "D) 0100.5E"
     ],
-    "answer": "B) Simultaneous transmission and reception, eliminating collisions",
-    "explanation": "Full-duplex Ethernet allows simultaneous transmission and reception on the same connection, effectively doubling the bandwidth and eliminating collisions. In full-duplex mode, each device has a dedicated path to the switch port, so CSMA/CD is not needed. A device can send and receive at the same time (e.g., 100 Mbps in each direction = 200 Mbps aggregate). Half-duplex only allows one-way communication at a time.",
+    "answer": "D) 0100.5E",
+    "explanation": "IP multicast MAC addresses over Ethernet always begin with the prefix 0100.5E (or 01:00:5E in colon notation). This is a reserved range defined by IANA for IPv4 multicast. The remaining bits map to the multicast IP address. Multicast allows efficient one-to-many communication, where a single transmission can reach multiple interested receivers without broadcasting to all devices on the network.",
     "image": null
   },
   {
     "numb": 11,
     "type": "Multiple Choices",
-    "question": "What is the IEEE standard for traditional Ethernet?",
+    "question": "How many wires are inside a standard Ethernet cable?",
     "options": [
-      "A) IEEE 802.1",
-      "B) IEEE 802.3",
-      "C) IEEE 802.11",
-      "D) IEEE 802.5"
+      "A) 4",
+      "B) 6",
+      "C) 8",
+      "D) 10"
     ],
-    "answer": "B) IEEE 802.3",
-    "explanation": "IEEE 802.3 is the standard for traditional Ethernet networks. It defines the physical layer and data link layer's MAC sublayer for wired Ethernet. IEEE 802.11 is for wireless LANs (Wi-Fi), IEEE 802.1 covers bridging and management, and IEEE 802.5 was for Token Ring networks. The 802.3 standard has evolved to include various Ethernet speeds from 10 Mbps to 400 Gbps.",
+    "answer": "C) 8",
+    "explanation": "A standard Ethernet cable contains 8 wires arranged in 4 twisted pairs. These 8 wires are color-coded and organized into pairs: Orange/White-Orange, Green/White-Green, Blue/White-Blue, and Brown/White-Brown. While 10BASE-T and 100BASE-TX only use 4 of these wires (2 pairs), Gigabit Ethernet (1000BASE-T) and higher speeds utilize all 8 wires (4 pairs) for simultaneous bidirectional transmission.",
     "image": null
   },
   {
     "numb": 12,
     "type": "Multiple Choices",
-    "question": "What does the MAC address FF:FF:FF:FF:FF:FF represent?",
+    "question": "Why are the wires inside an Ethernet cable twisted?",
     "options": [
-      "A) A private MAC address",
-      "B) A broadcast address",
-      "C) A multicast address",
-      "D) An invalid address"
+      "A) To make the cable more flexible",
+      "B) To increase the cable's length",
+      "C) To avoid internal electromagnetic interference",
+      "D) To make the cable cheaper to produce"
     ],
-    "answer": "B) A broadcast address",
-    "explanation": "FF:FF:FF:FF:FF:FF (all bits set to 1) is the broadcast MAC address. When a frame is sent to this address, it is delivered to all devices on the local network segment. Broadcasts are used for protocols like ARP (Address Resolution Protocol) when a device needs to discover the MAC address associated with an IP address. Switches forward broadcast frames to all ports except the source port.",
+    "answer": "C) To avoid internal electromagnetic interference",
+    "explanation": "The wires in an Ethernet cable are twisted to reduce electromagnetic interference (EMI) and crosstalk between wire pairs. When electrical current flows through a wire, it generates an electromagnetic field. By twisting the wires in pairs, the electromagnetic fields from each wire in the pair tend to cancel each other out, reducing interference both within the cable (crosstalk) and from external sources. This twisting is crucial for maintaining signal integrity and data transmission quality.",
     "image": null
   },
   {
     "numb": 13,
     "type": "Multiple Choices",
-    "question": "Which field in the Ethernet frame identifies the protocol of the data payload?",
+    "question": "What is the name of the connector used for Ethernet cables?",
     "options": [
-      "A) Preamble",
-      "B) Source MAC Address",
-      "C) EtherType/Length",
-      "D) FCS"
+      "A) RJ11",
+      "B) USB-C",
+      "C) RJ45",
+      "D) BNC"
     ],
-    "answer": "C) EtherType/Length",
-    "explanation": "The EtherType (or Type/Length) field is a 2-byte field in the Ethernet header that identifies the protocol encapsulated in the frame's payload. Common values include 0x0800 for IPv4, 0x0806 for ARP, and 0x86DD for IPv6. In Ethernet II frames, this field indicates the protocol type. In IEEE 802.3 frames, values less than 1536 indicate the payload length.",
+    "answer": "C) RJ45",
+    "explanation": "RJ45 (Registered Jack 45) is the standard connector used for Ethernet cables. It is an 8-position, 8-contact (8P8C) modular connector that accommodates the 8 wires in a standard Ethernet cable. RJ11 is used for telephone lines and has fewer contacts, USB-C is for USB connections, and BNC connectors were used in older coaxial Ethernet implementations. The RJ45 connector clicks into place when properly inserted into an Ethernet port.",
     "image": null
   },
   {
     "numb": 14,
     "type": "Multiple Choices",
-    "question": "What is the maximum distance for 100BASE-TX Fast Ethernet over copper?",
+    "question": "Which type of Ethernet cable is immune to external electromagnetic interference?",
     "options": [
-      "A) 50 meters",
-      "B) 100 meters",
-      "C) 185 meters",
-      "D) 500 meters"
+      "A) UTP",
+      "B) STP",
+      "C) Coaxial",
+      "D) Fiber Optic"
     ],
-    "answer": "B) 100 meters",
-    "explanation": "100BASE-TX (Fast Ethernet) supports a maximum cable distance of 100 meters over Category 5 or better UTP (Unshielded Twisted Pair) cable. This 100-meter limitation is standard for most twisted-pair Ethernet implementations (10BASE-T, 100BASE-TX, 1000BASE-T) and is due to signal attenuation and timing constraints. Using fiber optic cables can extend distances significantly.",
+    "answer": "D) Fiber Optic",
+    "explanation": "Fiber optic cables are completely immune to electromagnetic interference because they transmit data as light pulses through glass or plastic fibers rather than as electrical signals through copper wires. UTP (Unshielded Twisted Pair) and STP (Shielded Twisted Pair) copper cables can be affected by EMI, though STP has better resistance than UTP. Coaxial cables also use electrical signals and can experience some EMI. Fiber optic is ideal for environments with high electromagnetic interference or for secure communications.",
     "image": null
   },
   {
     "numb": 15,
     "type": "Multiple Choices",
-    "question": "What happens when an Ethernet collision is detected?",
+    "question": "What is the main advantage of a UTP cable over an STP cable?",
     "options": [
-      "A) The frame is automatically resent immediately",
-      "B) Both devices stop transmitting, send a jam signal, wait a random time, then retry",
-      "C) The switch drops the frame permanently",
-      "D) The collision is ignored and transmission continues"
+      "A) It is more secure",
+      "B) It is faster",
+      "C) It is cheaper",
+      "D) It is immune to interference"
     ],
-    "answer": "B) Both devices stop transmitting, send a jam signal, wait a random time, then retry",
-    "explanation": "When a collision is detected in CSMA/CD, both transmitting devices immediately stop sending data and transmit a jam signal to ensure all devices are aware of the collision. Then, each device waits a random amount of time (determined by a backoff algorithm) before attempting to retransmit. This random delay reduces the probability of another collision. Modern switched full-duplex Ethernet eliminates collisions entirely.",
+    "answer": "C) It is cheaper",
+    "explanation": "The main advantage of UTP (Unshielded Twisted Pair) cable over STP (Shielded Twisted Pair) cable is cost. UTP cables are cheaper to manufacture and install because they lack the additional shielding that STP cables have. While STP provides better protection against electromagnetic interference, UTP is sufficient for most standard office environments and is the most commonly deployed cable type. UTP is not more secure, faster, or more immune to interference than STP.",
     "image": null
   },
   {
     "numb": 16,
     "type": "Multiple Choices",
-    "question": "What is Auto-Negotiation in Ethernet?",
+    "question": "Which of the following is NOT a type of Ethernet cabling ?",
     "options": [
-      "A) Automatic IP address assignment",
-      "B) A process where devices automatically configure speed and duplex settings",
-      "C) Automatic routing configuration",
-      "D) Automatic MAC address generation"
+      "A) Straight-through cable",
+      "B) Crossover cable",
+      "C) Rolled cable",
+      "D) Fiber optic cable"
     ],
-    "answer": "B) A process where devices automatically configure speed and duplex settings",
-    "explanation": "Auto-Negotiation is an Ethernet feature where connected devices automatically negotiate and configure the best common speed (10/100/1000 Mbps) and duplex mode (half/full) they both support. This eliminates the need for manual configuration and prevents speed/duplex mismatches that can cause performance issues. Auto-Negotiation uses Fast Link Pulses (FLP) to exchange capability information between devices.",
+    "answer": "D) Fiber optic cable",
+    "explanation": "Among the options listed, fiber optic cable is NOT one of the specific cable types mentioned in the standard Ethernet cabling categories being discussed. The document focuses on copper cable configurations: straight-through cables (for connecting different device types), crossover cables (for connecting similar devices), and rolled cables (console cables for device management). While fiber optic is used in Ethernet networks, it represents a different physical medium rather than a wiring configuration type.",
     "image": null
   },
   {
     "numb": 17,
     "type": "Multiple Choices",
-    "question": "Which category of UTP cable is required for Gigabit Ethernet (1000BASE-T)?",
+    "question": "A straight-through cable is typically used to connect a PC to a:",
     "options": [
-      "A) Category 3",
-      "B) Category 5",
-      "C) Category 5e or higher",
-      "D) Category 7 only"
+      "A) Another PC",
+      "B) Router",
+      "C) Switch",
+      "D) Another Host"
     ],
-    "answer": "C) Category 5e or higher",
-    "explanation": "Gigabit Ethernet (1000BASE-T) requires Category 5e (enhanced) or higher quality cables. While Category 5 cables might work over short distances, Cat 5e is the minimum specification that guarantees reliable 1 Gbps performance up to 100 meters. Cat 5e has improved specifications for crosstalk and signal-to-noise ratio. Category 6, 6a, and 7 cables can also be used and are required for higher speeds like 10GBASE-T.",
+    "answer": "C) Switch",
+    "explanation": "A straight-through cable is used to connect different types of devices, such as a PC (host/DTE device) to a switch or hub (networking device/DCE). In a straight-through cable, the wire on pin 1 at one end connects to pin 1 at the other end, pin 2 to pin 2, and so on. This works because the PC transmits on pins 1&2 and receives on pins 3&6, while the switch receives on pins 1&2 and transmits on pins 3&6, creating a proper communication path.",
     "image": null
   },
   {
     "numb": 18,
     "type": "Multiple Choices",
-    "question": "What is a VLAN in Ethernet networks?",
+    "question": "According to the document, a crossover cable can be used to connect all of the following EXCEPT:",
     "options": [
-      "A) A type of cable",
-      "B) A Virtual Local Area Network that logically segments a network",
-      "C) A virus protection system",
-      "D) A wireless access point"
+      "A) Host to Host",
+      "B) Switch to Switch",
+      "C) PC to Switch",
+      "D) Router to Router"
     ],
-    "answer": "B) A Virtual Local Area Network that logically segments a network",
-    "explanation": "A VLAN (Virtual Local Area Network) is a logical network segmentation that groups devices together regardless of their physical location. VLANs operate at Layer 2 and are configured on switches. They improve security by isolating traffic, reduce broadcast domains, simplify network management, and enable flexible network design. VLAN tags (IEEE 802.1Q) are added to Ethernet frames to identify VLAN membership.",
+    "answer": "C) PC to Switch",
+    "explanation": "A crossover cable is used to connect similar device types (Host to Host, Switch to Switch, Router to Router) where both devices would normally transmit and receive on the same pins. The crossover cable swaps the transmit and receive pairs, allowing proper communication. A PC to Switch connection requires a straight-through cable because they are different device types with opposite transmit/receive pin configurations. Modern devices with Auto-MDIX can work with either cable type.",
     "image": null
   },
   {
     "numb": 19,
     "type": "Multiple Choices",
-    "question": "What is the primary difference between Ethernet II and IEEE 802.3 frame formats?",
+    "question": "In a straight-through cable connection from a PC to a switch, which pins are primarily used for transmitting data (TX) from the PC?",
     "options": [
-      "A) The size of MAC addresses",
-      "B) The EtherType/Length field interpretation",
-      "C) The FCS calculation method",
-      "D) The preamble length"
+      "A) 1 & 2",
+      "B) 3 & 6",
+      "C) 4 & 5",
+      "D) 7 & 8"
     ],
-    "answer": "B) The EtherType/Length field interpretation",
-    "explanation": "The primary difference between Ethernet II and IEEE 802.3 frames is the interpretation of the 2-byte field after the source MAC address. In Ethernet II (more commonly used), this is the EtherType field indicating the protocol (e.g., 0x0800 for IPv4). In IEEE 802.3, values less than 1536 indicate the length of the payload. Ethernet II is the dominant format used in modern networks for IP traffic.",
+    "answer": "A) 1 & 2",
+    "explanation": "In a standard Ethernet straight-through cable, a PC (DTE device) transmits data on pins 1 and 2 (TX+/TX-) and receives data on pins 3 and 6 (RX+/RX-). The switch or hub does the opposite: it receives on pins 1 and 2 and transmits on pins 3 and 6. This pin arrangement allows proper bidirectional communication between the PC and switch. Pins 4, 5, 7, and 8 are used for Gigabit Ethernet or Power over Ethernet in modern implementations.",
     "image": null
   },
   {
     "numb": 20,
     "type": "Multiple Choices",
-    "question": "What does PoE stand for in Ethernet technology?",
+    "question": "The primary purpose of the 'Rolled cable' is:",
     "options": [
-      "A) Protocol over Ethernet",
-      "B) Power over Ethernet",
-      "C) Port of Entry",
-      "D) Packet on Equipment"
+      "A) Connecting a router to a host",
+      "B) Connecting a switch to a hub",
+      "C) Console management of network devices",
+      "D) Extending the length of a cable"
     ],
-    "answer": "B) Power over Ethernet",
-    "explanation": "PoE stands for Power over Ethernet. It is a technology defined by IEEE 802.3af and 802.3at standards that allows electrical power to be transmitted over Ethernet cables along with data. This eliminates the need for separate power cables for devices like IP cameras, VoIP phones, wireless access points, and IoT devices. PoE can deliver up to 15.4W (802.3af) or 30W (802.3at/PoE+) or even 60-100W (802.3bt/PoE++) per port.",
+    "answer": "C) Console management of network devices",
+    "explanation": "A rolled cable (also called a rollover cable or console cable) is primarily used for console management and configuration of network devices like routers and switches. It connects a computer's serial or USB port to the console port of a network device, allowing direct access for initial configuration, troubleshooting, and management when network access is unavailable. The cable is called 'rolled' because the pin connections are completely reversed (pin 1 to pin 8, pin 2 to pin 7, etc.).",
     "image": null
   }
 ]
