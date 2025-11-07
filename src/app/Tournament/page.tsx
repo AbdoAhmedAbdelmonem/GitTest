@@ -865,6 +865,9 @@ export default function TournamentPage() {
                     <span className="text-white/70 text-xs">Quizzes</span>
                   </div>
                   <div className="text-2xl font-bold text-purple-400">{selectedUserStats.totalQuizzes}</div>
+                  <div className="text-[10px] text-white/40 mt-1 font-mono">
+                    COUNT(first_attempts)
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -878,6 +881,9 @@ export default function TournamentPage() {
                     <span className="text-white/70 text-xs">Average</span>
                   </div>
                   <div className="text-2xl font-bold text-green-400">{selectedUserStats.averageScore}%</div>
+                  <div className="text-[10px] text-white/40 mt-1 font-mono">
+                    AVG(score) of all quizzes
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -891,6 +897,9 @@ export default function TournamentPage() {
                     <span className="text-white/70 text-xs">Best</span>
                   </div>
                   <div className="text-2xl font-bold text-yellow-400">{selectedUserStats.bestScore}%</div>
+                  <div className="text-[10px] text-white/40 mt-1 font-mono">
+                    MAX(score) achieved
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -904,6 +913,9 @@ export default function TournamentPage() {
                     <span className="text-white/70 text-xs">Accuracy</span>
                   </div>
                   <div className="text-2xl font-bold text-cyan-400">{selectedUserStats.accuracy}%</div>
+                  <div className="text-[10px] text-white/40 mt-1 font-mono">
+                    (correct / total) × 100
+                  </div>
                 </motion.div>
               </div>
             </div>
