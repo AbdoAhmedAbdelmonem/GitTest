@@ -191,8 +191,8 @@
       "C) Coaxial",
       "D) Fiber Optic"
     ],
-    "answer": "D) Fiber Optic",
-    "explanation": "Fiber optic cables are completely immune to electromagnetic interference because they transmit data as light pulses through glass or plastic fibers rather than as electrical signals through copper wires. UTP (Unshielded Twisted Pair) and STP (Shielded Twisted Pair) copper cables can be affected by EMI, though STP has better resistance than UTP. Coaxial cables also use electrical signals and can experience some EMI. Fiber optic is ideal for environments with high electromagnetic interference or for secure communications.",
+    "answer": "B) STP",
+    "explanation": "Shielded Twisted Pair (STP) includes shielding around the pairs or the cable which greatly reduces susceptibility to external electromagnetic interference compared with unshielded cables. While fiber optic is inherently immune because it uses light instead of electrical signals, STP is commonly used when EMI is a concern for copper cabling.",
     "image": null
   },
   {
@@ -280,3 +280,4 @@
     "image": null
   }
 ]
+
