@@ -154,6 +154,7 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
       specialization?: string
       totalPoints: number
       quizCount: number
+      earliestQuizTime: Date
     }>()
 
     // Track first attempt for each quiz per user
@@ -199,6 +200,8 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
 
       console.log(`Adding points for ${username} (level ${userProfile.current_level}): quiz_id=${entry.quiz_id}, score=${entry.score}, duration=${entry.duration_selected}, mode=${entry.answering_mode}, finished=${entry.how_finished} => ${rawPoints} raw points / 10 = ${points} points (FIRST ATTEMPT)`)
 
+      const quizTime = new Date(entry.solved_at)
+
       if (!userTotalScores.has(userId)) {
         userTotalScores.set(userId, {
           userId,
@@ -206,20 +209,33 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
           profile_image,
           specialization,
           totalPoints: points,
-          quizCount: 1
+          quizCount: 1,
+          earliestQuizTime: quizTime
         })
       } else {
         const existing = userTotalScores.get(userId)!
         existing.totalPoints += points
         existing.quizCount += 1
+        // Track the earliest quiz time for tiebreaker
+        if (quizTime < existing.earliestQuizTime) {
+          existing.earliestQuizTime = quizTime
+        }
       }
     })
 
     console.log(`Processed ${userTotalScores.size} unique users for level ${level}`)
 
-    // Convert to array and sort by total points descending
+    // Convert to array and sort by total points descending, with earliestQuizTime as tiebreaker
+    // First come, first served: if points are equal, earlier quiz time wins
     const sortedUsers = Array.from(userTotalScores.values())
-      .sort((a, b) => b.totalPoints - a.totalPoints)
+      .sort((a, b) => {
+        // Primary sort: by points (descending)
+        if (b.totalPoints !== a.totalPoints) {
+          return b.totalPoints - a.totalPoints
+        }
+        // Secondary sort (tiebreaker): by earliest quiz time (ascending - earlier is better)
+        return a.earliestQuizTime.getTime() - b.earliestQuizTime.getTime()
+      })
       .slice(0, 10)
       .map((user) => ({
         id: user.userId,
@@ -343,6 +359,7 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
     profile_image?: string
     specialization?: string
     totalPoints: number
+    earliestQuizTime: Date
   }>()
 
   // Track first attempt for each quiz per user
@@ -366,7 +383,7 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
     
     // Only count quizzes where the quiz level matches the user's current level
     if (!userProfile || userProfile.current_level !== entry.quiz_level) {
-      return // Skip this quiz entry
+      return
     }
     
     const username = userProfile?.username || `User ${userId}`
@@ -379,8 +396,9 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
       entry.how_finished || "completed"
     )
 
-    // Reduce points by dividing by 10 and rounding
     const points = Math.round(rawPoints / 10)
+
+    const quizTime = new Date(entry.solved_at)
 
     if (!userTotalScores.has(userId)) {
       userTotalScores.set(userId, {
@@ -388,17 +406,28 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
         username,
         profile_image,
         specialization,
-        totalPoints: points
+        totalPoints: points,
+        earliestQuizTime: quizTime
       })
     } else {
       const existing = userTotalScores.get(userId)!
       existing.totalPoints += points
+      // Track the earliest quiz time for tiebreaker
+      if (quizTime < existing.earliestQuizTime) {
+        existing.earliestQuizTime = quizTime
+      }
     }
   })
 
-  // Convert to array and sort by total points descending
+  // First come, first served: if points are equal, earlier quiz time wins
   const sortedUsers = Array.from(userTotalScores.values())
-    .sort((a, b) => b.totalPoints - a.totalPoints)
+    .sort((a, b) => {
+      // Primary sort: by points (descending)
+      if (b.totalPoints !== a.totalPoints) {
+        return b.totalPoints - a.totalPoints
+      }
+      return a.earliestQuizTime.getTime() - b.earliestQuizTime.getTime()
+    })
     .slice(0, 10)
     .map((user) => ({
       id: user.userId,
