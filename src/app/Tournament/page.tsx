@@ -4,9 +4,10 @@ import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { Trophy, Users, Info, Crown, Star, Timer, Sparkles, Award, Gem, Eye, User } from "lucide-react"
-import { useEffect, useState, useMemo, memo } from "react"
-import { getLeaderboardData, LeaderboardEntry } from "@/lib/tournament"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import { Trophy, Users, Info, Crown, Star, Timer, Sparkles, Award, Gem, Eye, User, TrendingUp, Target, Zap, Calendar } from "lucide-react"
+import { useEffect, useState } from "react"
+import { getLeaderboardData, LeaderboardEntry, getUserTournamentStats, UserTournamentStats } from "@/lib/tournament"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
 
@@ -33,8 +34,7 @@ const FloatingIcon = ({ icon: Icon, className, delay = 0 }: { icon: React.Compon
   );
 };
 
-// Memoize the countdown timer to prevent unnecessary re-renders
-const CountdownTimer = memo(() => {
+const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -83,26 +83,27 @@ const CountdownTimer = memo(() => {
           { value: timeLeft.hours, label: 'Hours' },
           { value: timeLeft.minutes, label: 'Min' },
           { value: timeLeft.seconds, label: 'Sec' }
-        ].map((item) => (
-          <div
+        ].map((item, index) => (
+          <motion.div
             key={item.label}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
             className="text-center"
           >
             <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg p-2 md:p-3 border border-orange-500/30">
               <div className="text-lg md:text-2xl font-bold text-white">{item.value.toString().padStart(2, '0')}</div>
               <div className="text-xs text-orange-400 font-medium">{item.label}</div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </motion.div>
   );
-});
+};
 
-CountdownTimer.displayName = 'CountdownTimer';
-
-// Memoize the ownership badge
-const OwnershipBadge = memo(({ rank, className }: { rank: number, className?: string }) => {
+// Ownership Badge Component
+const OwnershipBadge = ({ rank, className }: { rank: number, className?: string }) => {
   return (
     <motion.div
       initial={{ scale: 0, opacity: 0 }}
@@ -114,9 +115,7 @@ const OwnershipBadge = memo(({ rank, className }: { rank: number, className?: st
       <span className="text-blue-400 text-xs font-medium">Your Rank: {rank}</span>
     </motion.div>
   );
-});
-
-OwnershipBadge.displayName = 'OwnershipBadge';
+};
 
 export default function TournamentPage() {
   const [leaderboardLevel1, setLeaderboardLevel1] = useState<LeaderboardEntry[]>([])
@@ -129,6 +128,9 @@ export default function TournamentPage() {
   const [error, setError] = useState<string | null>(null)
   const [showCurrentUserOnly, setShowCurrentUserOnly] = useState(false)
   const [activeTab, setActiveTab] = useState<"level1" | "level2" | "level3">("level1")
+  const [selectedUserStats, setSelectedUserStats] = useState<UserTournamentStats | null>(null)
+  const [statsLoading, setStatsLoading] = useState(false)
+  const [showStatsModal, setShowStatsModal] = useState(false)
 
   useEffect(() => {
     const fetchLeaderboardData = async () => {
@@ -166,22 +168,22 @@ export default function TournamentPage() {
     return userIndex !== -1 ? userIndex + 1 : undefined
   }
 
-  // Memoize current user rank calculation
-  const currentUserRank = useMemo(() => {
-    return activeTab === "level1" 
-      ? getCurrentUserRank(leaderboardLevel1, currentUserEntry1)
-      : activeTab === "level2"
-      ? getCurrentUserRank(leaderboardLevel2, currentUserEntry2)
-      : getCurrentUserRank(leaderboardLevel3, currentUserEntry3)
-  }, [activeTab, leaderboardLevel1, leaderboardLevel2, leaderboardLevel3, currentUserEntry1, currentUserEntry2, currentUserEntry3])
+  const currentUserRank = activeTab === "level1" 
+    ? getCurrentUserRank(leaderboardLevel1, currentUserEntry1)
+    : activeTab === "level2"
+    ? getCurrentUserRank(leaderboardLevel2, currentUserEntry2)
+    : getCurrentUserRank(leaderboardLevel3, currentUserEntry3)
 
   const renderLeaderboard = (data: LeaderboardEntry[], currentUserEntry?: LeaderboardEntry) => {
     if (loading) {
       return (
         <div className="space-y-3 md:space-y-4">
           {[...Array(5)].map((_, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
               className="flex items-center justify-between p-3 md:p-4 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm"
             >
               <div className="flex items-center gap-2 md:gap-3">
@@ -189,7 +191,7 @@ export default function TournamentPage() {
                 <div className="w-16 md:w-24 h-3 md:h-4 bg-white/20 rounded animate-pulse"></div>
               </div>
               <div className="w-12 md:w-16 h-3 md:h-4 bg-white/20 rounded animate-pulse"></div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )
@@ -197,9 +199,13 @@ export default function TournamentPage() {
 
     if (error) {
       return (
-        <div className="text-center py-6 md:py-8">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center py-6 md:py-8"
+        >
           <p className="text-red-400 text-sm md:text-base">{error}</p>
-        </div>
+        </motion.div>
       )
     }
 
@@ -263,11 +269,13 @@ export default function TournamentPage() {
     return (
       <motion.div
         key={player.id}
-        initial={{ opacity: 0, x: -30 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, x: -30, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{
-          duration: 0.3,
-          delay: Math.min(index * 0.05, 0.5), // Cap delay at 0.5s
+          duration: 0.6,
+          delay: index * 0.1,
+          type: "spring",
+          stiffness: 100
         }}
         whileHover={{
           scale: 1.02,
@@ -278,9 +286,9 @@ export default function TournamentPage() {
         {/* Ownership Crown for Current User */}
         {isCurrentUser && (
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.3 }}
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 200, delay: 0.5 }}
             className="absolute -top-2 -left-2 z-10"
           >
             <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-1 shadow-lg">
@@ -292,73 +300,118 @@ export default function TournamentPage() {
         <div className="flex items-center gap-2 md:gap-4">
           <div className="flex items-center gap-1 md:gap-3">
             {styling.medal && (
-              <span className="text-xl md:text-2xl">{styling.medal}</span>
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: index * 0.1 + 0.3, type: "spring" }}
+                className="text-xl md:text-2xl"
+              >
+                {styling.medal}
+              </motion.span>
             )}
-            <span className={`text-lg md:text-xl font-bold ${styling.rank}`}>
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: index * 0.1 + 0.2, type: "spring" }}
+              className={`text-lg md:text-xl font-bold ${styling.rank}`}
+            >
               {rank}.
-            </span>
+            </motion.span>
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
             {player.profile_image ? (
-              <div className="relative">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: index * 0.1 + 0.4, type: "spring" }}
+                className="relative cursor-pointer group"
+                onClick={() => handleUserClick(player.id, activeTab === "level1" ? 1 : activeTab === "level2" ? 2 : 3)}
+              >
+                <div className="absolute inset-0 bg-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <Image
                   src={player.profile_image}
                   alt={`${player.name}'s profile`}
                   width={40}
                   height={40}
-                  loading={index < 3 ? "eager" : "lazy"}
-                  className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white/20 object-cover shadow-lg"
+                  className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white/20 object-cover shadow-lg group-hover:border-blue-400/50 transition-all duration-300"
                 />
                 {isCurrentUser && (
-                  <div className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1 border-2 border-white">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1 border-2 border-white"
+                  >
                     <User className="w-2 h-2 text-white" />
-                  </div>
+                  </motion.div>
                 )}
-              </div>
+              </motion.div>
             ) : (
-              <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center border-2 border-white/20 shadow-lg relative">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: index * 0.1 + 0.4, type: "spring" }}
+                className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center border-2 border-white/20 shadow-lg relative cursor-pointer group"
+                onClick={() => handleUserClick(player.id, activeTab === "level1" ? 1 : activeTab === "level2" ? 2 : 3)}
+              >
+                <div className="absolute inset-0 bg-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="text-white font-bold text-sm md:text-lg">
                   {player.name.charAt(0).toUpperCase()}
                 </span>
                 {isCurrentUser && (
-                  <div className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1 border-2 border-white">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1 border-2 border-white"
+                  >
                     <User className="w-2 h-2 text-white" />
-                  </div>
+                  </motion.div>
                 )}
-              </div>
+              </motion.div>
             )}
 
             <div className="max-w-[120px] md:max-w-none">
               <div className="flex items-center gap-2">
-                <span
-                  className={`${styling.name} text-sm md:text-lg truncate block`}
+                <motion.span
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 + 0.5 }}
+                  className={`${styling.name} text-sm md:text-lg truncate block cursor-pointer hover:underline hover:text-blue-400 transition-colors duration-300`}
                   title={player.name || 'Anonymous User'}
+                  onClick={() => handleUserClick(player.id, activeTab === "level1" ? 1 : activeTab === "level2" ? 2 : 3)}
                 >
                   {player.name || 'Anonymous User'}
-                </span>
+                </motion.span>
                 {isCurrentUser && (
                   <OwnershipBadge rank={rank} />
                 )}
               </div>
               {player.specialization && (
-                <div
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: index * 0.1 + 0.6 }}
                   className="text-xs md:text-sm text-white/60 mt-1 truncate"
                   title={player.specialization}
                 >
                   {player.specialization}
-                </div>
+                </motion.div>
               )}
             </div>
           </div>
         </div>
 
-        <div
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: index * 0.1 + 0.8, type: "spring" }}
           className="flex items-center gap-1 md:gap-2 text-yellow-400 bg-yellow-500/10 px-2 md:px-4 py-1 md:py-2 rounded-full border border-yellow-500/20"
         >
           <Star className="w-3 h-3 md:w-5 md:h-5" />
           <span className="font-bold text-white text-sm md:text-lg">{player.points}</span>
-        </div>
+        </motion.div>
       </motion.div>
     )
   }
@@ -418,18 +471,23 @@ export default function TournamentPage() {
     setActiveTab(value as "level1" | "level2" | "level3")
   }
 
-  // Memoize the active leaderboard data to prevent recalculation
-  const activeLeaderboardData = useMemo(() => {
-    switch(activeTab) {
-      case "level1": return { leaderboard: leaderboardLevel1, currentUserEntry: currentUserEntry1 };
-      case "level2": return { leaderboard: leaderboardLevel2, currentUserEntry: currentUserEntry2 };
-      case "level3": return { leaderboard: leaderboardLevel3, currentUserEntry: currentUserEntry3 };
-      default: return { leaderboard: leaderboardLevel1, currentUserEntry: currentUserEntry1 };
+  const handleUserClick = async (userId: number, level: 1 | 2 | 3) => {
+    setStatsLoading(true)
+    setShowStatsModal(true)
+    
+    try {
+      const stats = await getUserTournamentStats(userId, level)
+      setSelectedUserStats(stats)
+    } catch (error) {
+      console.error("Error fetching user stats:", error)
+      setSelectedUserStats(null)
+    } finally {
+      setStatsLoading(false)
     }
-  }, [activeTab, leaderboardLevel1, leaderboardLevel2, leaderboardLevel3, currentUserEntry1, currentUserEntry2, currentUserEntry3])
+  }
 
   return (
-    <div className="min-h-screen bg-[#030303] relative overflow-hidden font-rubik">
+    <div className="min-h-screen bg-[#030303] relative overflow-hidden">
       {/* Animated Background */}
       <Navigation />
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -453,9 +511,9 @@ export default function TournamentPage() {
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.8 }}
               className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 mb-4 md:mb-6"
             >
               <Trophy className="w-3 h-3 md:w-4 md:h-4 text-yellow-400" />
@@ -463,9 +521,9 @@ export default function TournamentPage() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               className="text-2xl md:text-4xl lg:text-6xl font-bold text-white mb-4 md:mb-6"
             >
               Ultimate{" "}
@@ -479,7 +537,7 @@ export default function TournamentPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
                 className="mb-4 md:mb-6"
               >
                 <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-400/20 rounded-2xl px-6 py-3 backdrop-blur-sm">
@@ -493,18 +551,18 @@ export default function TournamentPage() {
             )}
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
               className="text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-6 md:mb-8 px-2"
             >
               Compete with the best minds in computer science and data science. Show your skills, climb the leaderboard, and claim victory in this epic battle of knowledge!
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-wrap items-center justify-center gap-2 md:gap-4"
             >
               <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm">
@@ -585,13 +643,13 @@ export default function TournamentPage() {
                   </TabsList>
 
                   <TabsContent value="level1">
-                    {renderLeaderboard(activeLeaderboardData.leaderboard, activeLeaderboardData.currentUserEntry)}
+                    {renderLeaderboard(leaderboardLevel1, currentUserEntry1)}
                   </TabsContent>
                   <TabsContent value="level2">
-                    {renderLeaderboard(activeLeaderboardData.leaderboard, activeLeaderboardData.currentUserEntry)}
+                    {renderLeaderboard(leaderboardLevel2, currentUserEntry2)}
                   </TabsContent>
                   <TabsContent value="level3">
-                    {renderLeaderboard(activeLeaderboardData.leaderboard, activeLeaderboardData.currentUserEntry)}
+                    {renderLeaderboard(leaderboardLevel3, currentUserEntry3)}
                   </TabsContent>
                 </Tabs>
               </CardContent>
@@ -662,9 +720,9 @@ export default function TournamentPage() {
                           <ul className="text-xs space-y-1 text-white/70">
                             <li>• 1 minute: +5 pts</li>
                             <li>• 5 minutes: +4.5 pts</li>
-                            <li>• 10 minutes: +4 pts</li>
-                            <li>• 15 minutes: +3.5 pts</li>
-                            <li>• 30 minutes: +3 pts</li>
+                            <li>• 15 minutes: +4 pts</li>
+                            <li>• 30 minutes: +3.5 pts</li>
+                            <li>• 60 minutes: +3 pts</li>
                             <li>• Unlimited: +2.5 pts</li>
                           </ul>
                         </div>
@@ -692,7 +750,297 @@ export default function TournamentPage() {
           </div>
         </div>
       </ScrollAnimatedSection>
+
+      {/* User Statistics Modal */}
+      <Dialog open={showStatsModal} onOpenChange={setShowStatsModal}>
+        <DialogContent className="tournament-stats-modal bg-gradient-to-br from-slate-950/95 via-purple-950/40 to-slate-950/95 backdrop-blur-xl border border-purple-500/30 text-white max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl shadow-purple-500/20 rounded-2xl">
+          {/* Simplified Background Effects - Static for better performance */}
+          <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
+            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
+          </div>
+
+          <DialogHeader className="relative z-10">
+            <DialogTitle className="text-3xl font-bold flex items-center gap-4 mb-2">
+              {statsLoading ? (
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/30 to-pink-500/30 animate-pulse" />
+                  <div className="space-y-2">
+                    <div className="w-48 h-8 bg-white/20 animate-pulse rounded" />
+                    <div className="w-32 h-4 bg-white/10 animate-pulse rounded" />
+                  </div>
+                </div>
+              ) : selectedUserStats ? (
+                <>
+                  <div className="relative">
+                    {selectedUserStats.profileImage ? (
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full blur-md opacity-50" />
+                        <Image
+                          src={selectedUserStats.profileImage}
+                          alt={selectedUserStats.username}
+                          width={64}
+                          height={64}
+                          className="rounded-full border-4 border-purple-400/50 relative z-10 shadow-xl"
+                        />
+                      </div>
+                    ) : (
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-md opacity-50" />
+                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center border-4 border-purple-400/50 relative z-10 shadow-xl">
+                          <span className="text-white font-bold text-2xl">
+                            {selectedUserStats.username.charAt(0).toUpperCase()}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.3, type: "spring" }}
+                      className="absolute -bottom-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-1.5 border-2 border-slate-950 shadow-lg"
+                    >
+                      <Crown className="w-4 h-4 text-white" />
+                    </motion.div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                      {selectedUserStats.username}
+                    </div>
+                    {selectedUserStats.specialization && (
+                      <div className="text-sm text-purple-300/80 font-medium flex items-center gap-1 mt-1">
+                        <Sparkles className="w-3 h-3" />
+                        {selectedUserStats.specialization}
+                      </div>
+                    )}
+                  </div>
+                </>
+              ) : (
+                "User Statistics"
+              )}
+            </DialogTitle>
+            <DialogDescription className="text-purple-300/60 text-base relative z-10">
+              🏆 Tournament Performance Dashboard
+            </DialogDescription>
+          </DialogHeader>
+
+          {statsLoading ? (
+            <div className="space-y-4 py-6 relative z-10">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="h-24 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 rounded-xl animate-pulse border border-white/5" />
+              ))}
+            </div>
+          ) : selectedUserStats ? (
+            <div className="space-y-6 py-4 relative z-10">
+              {/* Hero Rank & Points Banner */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-yellow-500/20 via-orange-500/20 to-red-500/20 border-2 border-yellow-500/40 p-6 shadow-2xl"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/5 via-orange-500/5 to-red-500/5" />
+                <div className="relative z-10 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-lg opacity-30" />
+                      <div className="relative bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full p-4 shadow-xl">
+                        <Trophy className="w-8 h-8 text-white" />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-white/70 text-sm font-medium mb-1">Tournament Rank</div>
+                      <div className="text-5xl font-black bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
+                        #{selectedUserStats.rank}
+                      </div>
+                      <div className="text-xs text-yellow-300/70 mt-1 font-medium">
+                        Top {Math.round((selectedUserStats.rank / selectedUserStats.totalParticipants) * 100)}% • {selectedUserStats.totalParticipants} Players
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-white/70 text-sm font-medium mb-1">Total Points</div>
+                    <div className="text-4xl font-black text-cyan-400">{selectedUserStats.totalPoints}</div>
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 mt-2 text-xs">
+                      Level {selectedUserStats.level}
+                    </Badge>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Statistics Grid */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.1, type: "spring" }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="relative group overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-xl p-4 shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
+                >
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/20 rounded-full blur-2xl group-hover:bg-purple-500/30 transition-all duration-300" />
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-2">
+                      <Target className="w-5 h-5 text-purple-400" />
+                      <Sparkles className="w-3 h-3 text-purple-400/50" />
+                    </div>
+                    <div className="text-xs text-purple-300/70 font-medium mb-1">Quizzes</div>
+                    <div className="text-3xl font-black text-purple-400">{selectedUserStats.totalQuizzes}</div>
+                    <div className="text-xs text-purple-400/60 mt-1">Completed</div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.15, type: "spring" }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="relative group overflow-hidden bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-xl p-4 shadow-lg hover:shadow-green-500/30 transition-all duration-300"
+                >
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-green-500/20 rounded-full blur-2xl group-hover:bg-green-500/30 transition-all duration-300" />
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-2">
+                      <TrendingUp className="w-5 h-5 text-green-400" />
+                      <Sparkles className="w-3 h-3 text-green-400/50" />
+                    </div>
+                    <div className="text-xs text-green-300/70 font-medium mb-1">Average</div>
+                    <div className="text-3xl font-black text-green-400">{selectedUserStats.averageScore}%</div>
+                    <div className="text-xs text-green-400/60 mt-1">Per Quiz</div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.2, type: "spring" }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="relative group overflow-hidden bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 rounded-xl p-4 shadow-lg hover:shadow-yellow-500/30 transition-all duration-300"
+                >
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-yellow-500/20 rounded-full blur-2xl group-hover:bg-yellow-500/30 transition-all duration-300" />
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-2">
+                      <Zap className="w-5 h-5 text-yellow-400" />
+                      <Crown className="w-3 h-3 text-yellow-400/50" />
+                    </div>
+                    <div className="text-xs text-yellow-300/70 font-medium mb-1">Best</div>
+                    <div className="text-3xl font-black text-yellow-400">{selectedUserStats.bestScore}%</div>
+                    <div className="text-xs text-yellow-400/60 mt-1">Peak Score</div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.25, type: "spring" }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="relative group overflow-hidden bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-xl p-4 shadow-lg hover:shadow-cyan-500/30 transition-all duration-300"
+                >
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-cyan-500/20 rounded-full blur-2xl group-hover:bg-cyan-500/30 transition-all duration-300" />
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-2">
+                      <Target className="w-5 h-5 text-cyan-400" />
+                      <Sparkles className="w-3 h-3 text-cyan-400/50" />
+                    </div>
+                    <div className="text-xs text-cyan-300/70 font-medium mb-1">Accuracy</div>
+                    <div className="text-3xl font-black text-cyan-400">{selectedUserStats.accuracy}%</div>
+                    <div className="text-xs text-cyan-400/60 mt-1">Overall</div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Recent Quizzes */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="relative overflow-hidden bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-cyan-500/20 rounded-2xl p-6 shadow-xl"
+              >
+                <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl" />
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold flex items-center gap-2">
+                      <div className="bg-gradient-to-br from-cyan-400 to-blue-500 p-2 rounded-lg">
+                        <Calendar className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                        Recent Performance
+                      </span>
+                    </h3>
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 text-xs">
+                      Last 5 Quizzes
+                    </Badge>
+                  </div>
+                  <div className="space-y-3">
+                    {selectedUserStats.recentQuizzes.length > 0 ? (
+                      selectedUserStats.recentQuizzes.map((quiz, idx) => (
+                        <motion.div
+                          key={quiz.quizId}
+                          initial={{ opacity: 0, x: -30 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.35 + idx * 0.08, type: "spring" }}
+                          whileHover={{ scale: 1.02, x: 5 }}
+                          className="relative group bg-gradient-to-r from-slate-800/80 to-slate-900/80 border border-cyan-500/20 rounded-xl p-4 hover:border-cyan-500/40 transition-all duration-300 shadow-lg hover:shadow-cyan-500/20"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
+                          <div className="relative z-10 flex items-center justify-between">
+                            <div className="flex items-center gap-4">
+                              <div className="relative">
+                                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur-md opacity-20" />
+                                <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg border-2 border-cyan-400/30">
+                                  <span className="text-white font-black text-base">{idx + 1}</span>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="flex items-center gap-2 mb-1">
+                                  <span className="text-white font-bold text-lg">{quiz.score}%</span>
+                                  {quiz.score >= 90 ? (
+                                    <span className="text-green-400 text-xs">🔥 Excellent</span>
+                                  ) : quiz.score >= 70 ? (
+                                    <span className="text-blue-400 text-xs">✨ Good</span>
+                                  ) : (
+                                    <span className="text-orange-400 text-xs">💪 Keep Going</span>
+                                  )}
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-white/60">
+                                  <Timer className="w-3 h-3" />
+                                  <span>{quiz.duration}</span>
+                                  <span>•</span>
+                                  <Zap className="w-3 h-3" />
+                                  <span className="capitalize">{quiz.mode}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="flex items-center gap-1 bg-yellow-500/20 border border-yellow-500/30 rounded-lg px-3 py-1 mb-1">
+                                <Star className="w-4 h-4 text-yellow-400" />
+                                <span className="text-yellow-400 font-black text-base">{quiz.points}</span>
+                              </div>
+                              <div className="text-xs text-white/50 font-medium">
+                                {new Date(quiz.solvedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))
+                    ) : (
+                      <div className="text-center py-8 text-white/50 text-sm">
+                        <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-3">
+                          <Trophy className="w-8 h-8 text-white/30" />
+                        </div>
+                        <p>No recent quizzes found</p>
+                        <p className="text-xs text-white/30 mt-1">Complete some quizzes to see stats here</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          ) : (
+            <div className="py-8 text-center text-white/60">
+              <p>Failed to load user statistics</p>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
-
