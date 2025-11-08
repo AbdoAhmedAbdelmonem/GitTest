@@ -3,6 +3,7 @@ import { Inter, Roboto_Mono, Rubik } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ToastProvider";
 import { NotificationProvider } from "@/hooks/use-notifications";
+import DevToolsProtection from "@/components/DevToolsProtection";
 
 // Inter as Geist Sans replacement
 const geistSans = Inter({
@@ -42,6 +43,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} antialiased`}
       >
+        {/* 🔒 SECURITY PRO MAX - Site-wide DevTools Protection */}
+        <DevToolsProtection />
+        
         {/* لف الـ children جوه NotificationProvider وبعدها ToastProvider */}
         <NotificationProvider>
           <ToastProvider>{children}</ToastProvider>
