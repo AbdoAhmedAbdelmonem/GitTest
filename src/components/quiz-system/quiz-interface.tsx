@@ -111,9 +111,9 @@ const themes = [
 const durations = [
   { label: "Lightning", value: 1, icon: Zap, description: "1 Minute" },
   { label: "Short", value: 5, icon: Star, description: "5 Minutes" },
-  { label: "Standard (DEF)", value: 10, icon: Cable, description: "10 Minutes" },
-  { label: "Extended", value: 15, icon: Clock, description: "15 Minutes" },
-  { label: "Indolent", value: 30, icon: Snail, description: "30 Minutes" },
+  { label: "Standard (DEF)", value: 15, icon: Cable, description: "15 Minutes" },
+  { label: "Extended", value: 30, icon: Clock, description: "30 Minutes" },
+  { label: "Indolent", value: 60, icon: Snail, description: "1 Hour" },
   { label: "Unlimited", value: 0, icon: Infinity, description: "No Time Limit" },
 ];
 
@@ -292,6 +292,70 @@ export default function QuizInterface({
   const [isBanned, setIsBanned] = useState(false);
   const [showBannedDialog, setShowBannedDialog] = useState(false);
   
+  // Prevent DevTools access
+  useEffect(() => {
+    // Disable right-click context menu
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+      return false;
+    };
+
+    // Disable specific keyboard shortcuts
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+Shift+C
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+        (e.ctrlKey && e.key === 'u')
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    // Detect if DevTools is open
+    const detectDevTools = () => {
+      const threshold = 160;
+      const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+      const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+      
+      if (widthThreshold || heightThreshold) {
+        // DevTools detected - redirect or show warning
+        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#fff;font-size:24px;text-align:center;padding:20px;">⚠️ Developer tools are not allowed during the quiz.<br/>Please close DevTools and refresh the page.</div>';
+      }
+    };
+
+    // Disable text selection
+    const disableSelect = (e: Event) => {
+      e.preventDefault();
+      return false;
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('selectstart', disableSelect);
+    
+    // Check for DevTools periodically
+    const devToolsInterval = setInterval(detectDevTools, 1000);
+
+    // Disable console
+    if (typeof window !== 'undefined') {
+      const noop = () => {};
+      ['log', 'debug', 'info', 'warn', 'error'].forEach((method) => {
+        (console as any)[method] = noop;
+      });
+    }
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('selectstart', disableSelect);
+      clearInterval(devToolsInterval);
+    };
+  }, []);
+
   // Memoize checkQuizAttempts to avoid unnecessary recreations
   const checkQuizAttempts = useCallback(async (): Promise<void> => {
     try {
@@ -409,6 +473,12 @@ export default function QuizInterface({
   const startQuiz = async () => {
     if (!isAuthenticated) {
       setShowAuthDialog(true);
+      return;
+    }
+    
+    // ✅ Check if user is banned
+    if (isBanned) {
+      setShowBannedDialog(true);
       return;
     }
     
@@ -868,12 +938,40 @@ export default function QuizInterface({
     </Dialog>
   );
 
+  // ✅ Banned User Dialog Component
+  const BannedDialog = () => (
+    <Dialog open={showBannedDialog} onOpenChange={() => {}}>
+      <DialogContent className="bg-black/80 backdrop-blur-md border-red-500/50 text-white">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold flex items-center gap-2 text-red-400">
+            <XCircle className="w-6 h-6" />
+            Account Banned
+          </DialogTitle>
+          <DialogDescription className="text-white/70">
+            Your account has been banned. You cannot access quizzes or other features. 
+            Please contact support if you believe this is a mistake.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex flex-col gap-4 mt-4">
+            <Button 
+            onClick={handleBannedLogout}
+            className="w-full py-3 text-lg bg-red-600 hover:bg-red-700"
+            >
+            <XCircle className="w-5 h-5 mr-2" />
+            Logout
+            </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+
   if (currentStep === "setup") {
     return (
       <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
       <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
         <AuthDialog />
         <AttemptsDialog />
+        <BannedDialog />
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
         {/* Elegant Shapes with Theme Colors */}
