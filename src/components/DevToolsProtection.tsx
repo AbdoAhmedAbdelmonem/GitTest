@@ -104,13 +104,26 @@ export default function DevToolsProtection() {
       }
     };
 
-    // 7. Detect DevTools Opening
+    // 7. Detect DevTools Opening (Enhanced for browsers with sidebars)
+    let isDevToolsWarningShown = false;
     const detectDevTools = () => {
-      const threshold = 160;
-      const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-      const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+      // Skip if warning already shown
+      if (isDevToolsWarningShown) return;
       
-      if (widthThreshold || heightThreshold) {
+      // More accurate detection - check both dimensions
+      const widthDiff = window.outerWidth - window.innerWidth;
+      const heightDiff = window.outerHeight - window.innerHeight;
+      
+      // Higher threshold to avoid false positives with browser sidebars (Vivaldi, Opera, etc.)
+      // Also check if BOTH dimensions are suspicious (more reliable)
+      const threshold = 250;
+      const isHeightSuspicious = heightDiff > threshold;
+      const isWidthVeryLarge = widthDiff > 400; // Very large = definitely DevTools
+      
+      // Only trigger if height is suspicious OR width is extremely large
+      // This avoids false positives from browser sidebars (usually only affect width by 200-300px)
+      if (isHeightSuspicious || isWidthVeryLarge) {
+        isDevToolsWarningShown = true;
         // Redirect to warning page or block content
         document.body.innerHTML = `
           <div style="
@@ -237,9 +250,11 @@ export default function DevToolsProtection() {
     // 11. Clear localStorage/sessionStorage on suspicious activity
     const clearStorage = () => {
       try {
-        // Only clear if DevTools detected
-        const devToolsOpen = window.outerWidth - window.innerWidth > 160 || 
-                            window.outerHeight - window.innerHeight > 160;
+        // Only clear if DevTools detected (enhanced detection)
+        const widthDiff = window.outerWidth - window.innerWidth;
+        const heightDiff = window.outerHeight - window.innerHeight;
+        const devToolsOpen = heightDiff > 250 || widthDiff > 400;
+        
         if (devToolsOpen) {
           sessionStorage.clear();
         }
