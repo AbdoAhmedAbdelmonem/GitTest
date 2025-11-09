@@ -528,9 +528,9 @@ export default function TournamentPage() {
                 <motion.h1
                   animate={{
                     textShadow: [
-                      "0 2px 10px rgba(251, 146, 60, 0.3)",
-                      "0 2px 15px rgba(234, 88, 12, 0.4)",
-                      "0 2px 10px rgba(251, 146, 60, 0.3)",
+                      "0 4px 20px rgba(251, 146, 60, 0.5)",
+                      "0 4px 25px rgba(234, 88, 12, 0.6)",
+                      "0 4px 20px rgba(251, 146, 60, 0.5)",
                     ]
                   }}
                   transition={{
@@ -538,75 +538,41 @@ export default function TournamentPage() {
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
-                  className="tracking-wide uppercase flex items-center justify-center gap-4 md:gap-6"
+                  className="tracking-[0.15em] uppercase flex items-center justify-center gap-4 md:gap-6"
                   style={{ 
                     fontFamily: "'Stalinist One', sans-serif",
+                    WebkitFontSmoothing: "antialiased",
+                    MozOsxFontSmoothing: "grayscale",
                   }}
                 >
-                  <motion.span 
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold"
-                    animate={{
-                      background: [
-                        "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)",
-                        "linear-gradient(135deg, #FF6347 0%, #FF69B4 50%, #FFD700 100%)",
-                        "linear-gradient(135deg, #00CED1 0%, #1E90FF 50%, #9370DB 100%)",
-                        "linear-gradient(135deg, #32CD32 0%, #FFD700 50%, #FF6347 100%)",
-                        "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)",
-                      ]
-                    }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
+                  <span 
+                    className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent"
                     style={{
-                      background: "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)",
-                      backgroundClip: "text",
                       WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent"
-                    } as React.CSSProperties}
+                      WebkitTextFillColor: "transparent",
+                    }}
                   >
                     SEASON
-                  </motion.span>
-                  <motion.span 
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold"
-                    animate={{
-                      background: [
-                        "linear-gradient(135deg, #FF1493 0%, #FF6347 50%, #FFD700 100%)",
-                        "linear-gradient(135deg, #9370DB 0%, #FF1493 50%, #FF6347 100%)",
-                        "linear-gradient(135deg, #1E90FF 0%, #00CED1 50%, #32CD32 100%)",
-                        "linear-gradient(135deg, #FF6347 0%, #FFA500 50%, #FFD700 100%)",
-                        "linear-gradient(135deg, #FF1493 0%, #FF6347 50%, #FFD700 100%)",
-                      ]
-                    }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: "linear",
-                      delay: 1
-                    }}
+                  </span>
+                  <span 
+                    className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-400 bg-clip-text text-transparent"
                     style={{
-                      background: "linear-gradient(135deg, #FF1493 0%, #FF6347 50%, #FFD700 100%)",
-                      backgroundClip: "text",
                       WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent"
-                    } as React.CSSProperties}
+                      WebkitTextFillColor: "transparent",
+                    }}
                   >
                     1
-                  </motion.span>
+                  </span>
                 </motion.h1>
                 <motion.div 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
-                  className="text-sm md:text-base lg:text-lg tracking-[0.25em] font-bold text-center mt-4 uppercase"
+                  className="text-base md:text-lg lg:text-xl tracking-[0.25em] font-bold text-center mt-4 uppercase text-orange-400"
                   style={{ 
                     fontFamily: "'Stalinist One', sans-serif",
-                    background: "linear-gradient(90deg, #FBBF24, #FB923C, #F59E0B)",
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent"
-                  } as React.CSSProperties}
+                    textShadow: "0 2px 10px rgba(251, 146, 60, 0.4)"
+                  }}
                 >
                   October 2025 - June 2026
                 </motion.div>
