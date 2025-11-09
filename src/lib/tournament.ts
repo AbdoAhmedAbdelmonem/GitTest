@@ -13,28 +13,17 @@ export interface LeaderboardEntry {
 }
 
 export interface UserTournamentStats {
-  userId: number
   username: string
   profileImage?: string
   specialization?: string
-  level: number
+  rank: number
   totalPoints: number
   totalQuizzes: number
   averageScore: number
   bestScore: number
-  worstScore: number
-  totalQuestions: number
   accuracy: number
-  rank: number
+  level: number
   totalParticipants: number
-  recentQuizzes: {
-    quizId: number
-    score: number
-    points: number
-    duration: string
-    mode: string
-    solvedAt: string
-  }[]
 }
 
 interface QuizDataEntry {
@@ -78,7 +67,7 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
 
     // DEBUG: Log the date range we're querying
     const tournamentStart = new Date('2025-10-11T00:00:00.000Z') // Changed to October 11, 2025
-    const tournamentEnd = new Date('2026-01-11T23:59:59.999Z') // End of January 11th
+    const tournamentEnd = new Date('2026-06-30T23:59:59.999Z') // End of June 30th, 2026
     
     console.log(`Querying level ${level} from ${tournamentStart.toISOString()} to ${tournamentEnd.toISOString()}`)
 
@@ -153,7 +142,7 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
     const userIds = [...new Set(quizData.map(entry => entry.user_id))]
 
     // Fetch user profiles for all users in the quiz data
-    const { data: userProfiles, error: userError } = await supabase
+    const { data: userProfiles } = await supabase
       .from("chameleons")
       .select("user_id, username, profile_image, current_level, specialization")
       .in("user_id", userIds)
@@ -303,7 +292,7 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
 }> {
   // Use the same date range - Updated to October 11, 2025
   const tournamentStart = new Date('2025-10-11T00:00:00.000Z')
-  const tournamentEnd = new Date('2026-01-11T23:59:59.999Z')
+  const tournamentEnd = new Date('2026-06-30T23:59:59.999Z')
 
   // Fetch ALL data using pagination
   let allQuizData: QuizDataEntry[] = []
@@ -474,27 +463,29 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
 export async function getUserTournamentStats(userId: number, level: 1 | 2 | 3): Promise<UserTournamentStats | null> {
   try {
     const supabase = await createServerClient()
-    
-    const tournamentStart = new Date('2025-10-11T00:00:00.000Z')
-    const tournamentEnd = new Date('2026-01-11T23:59:59.999Z')
 
-    // Fetch user profile
-    const { data: userProfile } = await supabase
+    // Tournament date range
+    const tournamentStart = new Date('2025-10-11T00:00:00.000Z')
+    const tournamentEnd = new Date('2026-06-30T23:59:59.999Z')
+
+    // Get user profile
+    const { data: userProfile, error: profileError } = await supabase
       .from("chameleons")
-      .select("user_id, username, profile_image, current_level, specialization")
+      .select("username, profile_image, specialization")
       .eq("user_id", userId)
       .single()
 
-    if (!userProfile) return null
+    if (profileError || !userProfile) {
+      console.error("Error fetching user profile:", profileError)
+      return null
+    }
 
-    // Fetch ALL user's quiz data for the tournament period
-    const { data: quizData } = await supabase
+    // Fetch user's quiz data
+    const { data: userQuizData, error: quizError } = await supabase
       .from("quiz_data")
       .select(`
         quiz_id,
-        user_id,
         score,
-        quiz_level,
         duration_selected,
         answering_mode,
         how_finished,
@@ -506,92 +497,95 @@ export async function getUserTournamentStats(userId: number, level: 1 | 2 | 3): 
       .not("score", "is", null)
       .gte("solved_at", tournamentStart.toISOString())
       .lte("solved_at", tournamentEnd.toISOString())
-      .order("solved_at", { ascending: false })
+      .order("solved_at", { ascending: true })
 
-    if (!quizData || quizData.length === 0) return null
+    if (quizError) {
+      console.error("Error fetching user quiz data:", quizError)
+      return null
+    }
 
-    // Track first attempt for each quiz
-    const userQuizFirstAttempt = new Map<number, QuizDataEntry>()
-    quizData.forEach((entry: QuizDataEntry) => {
-      const existing = userQuizFirstAttempt.get(entry.quiz_id)
-      if (!existing || new Date(entry.solved_at) < new Date(existing.solved_at)) {
-        userQuizFirstAttempt.set(entry.quiz_id, entry)
+    // Get first attempt for each quiz
+    const firstAttempts = new Map<number, typeof userQuizData[0]>()
+    userQuizData?.forEach((quiz) => {
+      const existing = firstAttempts.get(quiz.quiz_id)
+      if (!existing || new Date(quiz.solved_at) < new Date(existing.solved_at)) {
+        firstAttempts.set(quiz.quiz_id, quiz)
       }
     })
 
-    // Calculate statistics from first attempts only
+    // Calculate stats from first attempts
+    const quizzes = Array.from(firstAttempts.values())
+    const totalQuizzes = quizzes.length
+    
+    if (totalQuizzes === 0) {
+      return {
+        username: userProfile.username,
+        profileImage: userProfile.profile_image,
+        specialization: userProfile.specialization,
+        rank: 0,
+        totalPoints: 0,
+        totalQuizzes: 0,
+        averageScore: 0,
+        bestScore: 0,
+        accuracy: 0,
+        level,
+        totalParticipants: 0
+      }
+    }
+
+    // Calculate total points
     let totalPoints = 0
     let totalScore = 0
-    let totalQuizzes = 0
-    let totalCorrectAnswers = 0
-    let totalQuestions = 0
     let bestScore = 0
-    let worstScore = 100
-    const recentQuizzes: UserTournamentStats['recentQuizzes'] = []
+    let totalCorrect = 0
+    let totalQuestions = 0
 
-    userQuizFirstAttempt.forEach((entry: QuizDataEntry) => {
+    quizzes.forEach((quiz) => {
       const rawPoints = calculateTournamentPoints(
-        entry.score || 0,
-        entry.duration_selected || "15 minutes",
-        entry.answering_mode || "traditional",
-        entry.how_finished || "completed"
+        quiz.score || 0,
+        quiz.duration_selected || "15 minutes",
+        quiz.answering_mode || "traditional",
+        quiz.how_finished || "completed"
       )
-      const points = Math.round(rawPoints / 10)
-
-      totalPoints += points
-      totalScore += entry.score || 0
-      totalQuizzes += 1
-
-      // Calculate correct answers: score is a percentage, so (score / 100) * total_questions = correct answers
-      const questionsInQuiz = entry.total_questions || 0
-      const correctInQuiz = Math.round((entry.score || 0) / 100 * questionsInQuiz)
-      totalCorrectAnswers += correctInQuiz
-      totalQuestions += questionsInQuiz
-
-      if ((entry.score || 0) > bestScore) bestScore = entry.score || 0
-      if ((entry.score || 0) < worstScore) worstScore = entry.score || 0
-
-      recentQuizzes.push({
-        quizId: entry.quiz_id,
-        score: entry.score || 0,
-        points: points,
-        duration: entry.duration_selected || "15 minutes",
-        mode: entry.answering_mode || "traditional",
-        solvedAt: entry.solved_at
-      })
+      totalPoints += Math.round(rawPoints / 10)
+      
+      const score = quiz.score || 0
+      totalScore += score
+      bestScore = Math.max(bestScore, score)
+      
+      // Calculate correct answers
+      const questions = quiz.total_questions || 0
+      const correct = Math.round((score / 100) * questions)
+      totalCorrect += correct
+      totalQuestions += questions
     })
 
-    // Sort recent quizzes by date (most recent first) and limit to 5
-    recentQuizzes.sort((a, b) => new Date(b.solvedAt).getTime() - new Date(a.solvedAt).getTime())
-    const limitedRecentQuizzes = recentQuizzes.slice(0, 5)
+    const averageScore = Math.round(totalScore / totalQuizzes)
+    const accuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0
 
-    const averageScore = totalQuizzes > 0 ? totalScore / totalQuizzes : 0
-    // Accuracy: percentage of all questions answered correctly across all tournament quizzes
-    const accuracy = totalQuestions > 0 ? (totalCorrectAnswers / totalQuestions) * 100 : 0
-
-    // Get rank from leaderboard
+    // Get all users' data to determine rank
     const { leaderboard } = await getLeaderboardData(level)
-    const rank = leaderboard.findIndex(entry => entry.id === userId) + 1
+    const allUsers = [...leaderboard]
+    
+    // Find user's rank
+    const userRank = allUsers.findIndex(u => u.id === userId) + 1
+    const totalParticipants = allUsers.length
 
     return {
-      userId,
       username: userProfile.username,
       profileImage: userProfile.profile_image,
       specialization: userProfile.specialization,
-      level: userProfile.current_level,
+      rank: userRank || totalParticipants + 1,
       totalPoints,
-      totalQuizzes: totalQuizzes,
-      averageScore: Math.round(averageScore * 10) / 10,
+      totalQuizzes,
+      averageScore,
       bestScore,
-      worstScore: totalQuizzes > 0 ? worstScore : 0,
-      totalQuestions: totalQuizzes, // This represents total quizzes attempted
-      accuracy: Math.round(accuracy * 10) / 10,
-      rank: rank || leaderboard.length + 1,
-      totalParticipants: leaderboard.length,
-      recentQuizzes: limitedRecentQuizzes
+      accuracy,
+      level,
+      totalParticipants
     }
   } catch (error) {
-    console.error("Error fetching user tournament stats:", error)
+    console.error("Error in getUserTournamentStats:", error)
     return null
   }
 }
