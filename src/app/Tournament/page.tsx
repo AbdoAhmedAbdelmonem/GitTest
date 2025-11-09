@@ -1,20 +1,60 @@
-"use client"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
-import { Trophy, Users, Info, Crown, Star, Timer, Sparkles, Award, Gem, Eye, User, TrendingUp, Target, Zap } from "lucide-react"
-import { useEffect, useState } from "react"
-import { getLeaderboardData, LeaderboardEntry, getUserTournamentStats, UserTournamentStats } from "@/lib/tournament"
-import ScrollAnimatedSection from "@/components/scroll-animated-section"
-import Navigation from "@/components/navigation"
+"use client";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import {
+  Trophy,
+  Users,
+  Info,
+  Crown,
+  Star,
+  Timer,
+  Sparkles,
+  Award,
+  Gem,
+  Eye,
+  User,
+  TrendingUp,
+  Target,
+  Zap,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  getLeaderboardData,
+  LeaderboardEntry,
+  getUserTournamentStats,
+  UserTournamentStats,
+} from "@/lib/tournament";
+import ScrollAnimatedSection from "@/components/scroll-animated-section";
+import Navigation from "@/components/navigation";
 
 // Import Stalinist One font
-import "@fontsource/stalinist-one"
+import "@fontsource/stalinist-one";
 
-const FloatingIcon = ({ icon: Icon, className, delay = 0 }: { icon: React.ComponentType<{ className?: string }>, className?: string, delay?: number }) => {
+const FloatingIcon = ({
+  icon: Icon,
+  className,
+  delay = 0,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  className?: string;
+  delay?: number;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -22,13 +62,13 @@ const FloatingIcon = ({ icon: Icon, className, delay = 0 }: { icon: React.Compon
         opacity: [0.2, 0.6, 0.2],
         y: [0, -15, 0],
         rotate: [0, 8, -8, 0],
-        scale: [1, 1.1, 1]
+        scale: [1, 1.1, 1],
       }}
       transition={{
         duration: 5,
         repeat: Infinity,
         delay: delay,
-        ease: "easeInOut"
+        ease: "easeInOut",
       }}
       className={`absolute ${className}`}
     >
@@ -42,11 +82,11 @@ const CountdownTimer = () => {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   });
 
   useEffect(() => {
-    const tournamentEnd = new Date('2026-06-30T23:59:59.999Z');
+    const tournamentEnd = new Date("2026-06-30T23:59:59.999Z");
 
     const timer = setInterval(() => {
       const now = new Date();
@@ -57,7 +97,7 @@ const CountdownTimer = () => {
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
           hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
           minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60)
+          seconds: Math.floor((difference / 1000) % 60),
         });
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -74,18 +114,21 @@ const CountdownTimer = () => {
       transition={{ duration: 0.8, delay: 0.5 }}
       className="bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-2xl p-4 md:p-6 backdrop-blur-xl"
     >
-        <div className="text-center mb-3 md:mb-4">
-          <div className="flex items-center justify-center gap-2 mb-1 md:mb-2">
-            <Timer className="w-4 h-4 md:w-5 md:h-5 text-orange-400" />
-            <span className="text-orange-400 font-semibold text-sm md:text-base">Tournament Ends In</span>
-          </div>
-          <div className="text-white/60 text-xs md:text-sm">June 30th, 2026</div>
-        </div>      <div className="grid grid-cols-4 gap-2 md:gap-3">
+      <div className="text-center mb-3 md:mb-4">
+        <div className="flex items-center justify-center gap-2 mb-1 md:mb-2">
+          <Timer className="w-4 h-4 md:w-5 md:h-5 text-orange-400" />
+          <span className="text-orange-400 font-semibold text-sm md:text-base">
+            Tournament Ends In
+          </span>
+        </div>
+        <div className="text-white/60 text-xs md:text-sm">June 30th, 2026</div>
+      </div>{" "}
+      <div className="grid grid-cols-4 gap-2 md:gap-3">
         {[
-          { value: timeLeft.days, label: 'Days' },
-          { value: timeLeft.hours, label: 'Hours' },
-          { value: timeLeft.minutes, label: 'Min' },
-          { value: timeLeft.seconds, label: 'Sec' }
+          { value: timeLeft.days, label: "Days" },
+          { value: timeLeft.hours, label: "Hours" },
+          { value: timeLeft.minutes, label: "Min" },
+          { value: timeLeft.seconds, label: "Sec" },
         ].map((item, index) => (
           <motion.div
             key={item.label}
@@ -95,8 +138,12 @@ const CountdownTimer = () => {
             className="text-center"
           >
             <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg p-2 md:p-3 border border-orange-500/30">
-              <div className="text-lg md:text-2xl font-bold text-white">{item.value.toString().padStart(2, '0')}</div>
-              <div className="text-xs text-orange-400 font-medium">{item.label}</div>
+              <div className="text-lg md:text-2xl font-bold text-white">
+                {item.value.toString().padStart(2, "0")}
+              </div>
+              <div className="text-xs text-orange-400 font-medium">
+                {item.label}
+              </div>
             </div>
           </motion.div>
         ))}
@@ -106,7 +153,13 @@ const CountdownTimer = () => {
 };
 
 // Ownership Badge Component
-const OwnershipBadge = ({ rank, className }: { rank: number, className?: string }) => {
+const OwnershipBadge = ({
+  rank,
+  className,
+}: {
+  rank: number;
+  className?: string;
+}) => {
   return (
     <motion.div
       initial={{ scale: 0, opacity: 0 }}
@@ -115,69 +168,95 @@ const OwnershipBadge = ({ rank, className }: { rank: number, className?: string 
       className={`inline-flex items-center gap-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-400/30 rounded-full px-2 py-1 ${className}`}
     >
       <User className="w-3 h-3 text-blue-400" />
-      <span className="text-blue-400 text-xs font-medium">Your Rank: {rank}</span>
+      <span className="text-blue-400 text-xs font-medium">
+        Your Rank: {rank}
+      </span>
     </motion.div>
   );
 };
 
 export default function TournamentPage() {
-  const [leaderboardLevel1, setLeaderboardLevel1] = useState<LeaderboardEntry[]>([])
-  const [leaderboardLevel2, setLeaderboardLevel2] = useState<LeaderboardEntry[]>([])
-  const [leaderboardLevel3, setLeaderboardLevel3] = useState<LeaderboardEntry[]>([])
-  const [currentUserEntry1, setCurrentUserEntry1] = useState<LeaderboardEntry | undefined>()
-  const [currentUserEntry2, setCurrentUserEntry2] = useState<LeaderboardEntry | undefined>()
-  const [currentUserEntry3, setCurrentUserEntry3] = useState<LeaderboardEntry | undefined>()
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [showCurrentUserOnly, setShowCurrentUserOnly] = useState(false)
-  const [activeTab, setActiveTab] = useState<"level1" | "level2" | "level3">("level1")
-  const [selectedUserStats, setSelectedUserStats] = useState<UserTournamentStats | null>(null)
-  const [statsLoading, setStatsLoading] = useState(false)
-  const [showStatsModal, setShowStatsModal] = useState(false)
+  const [leaderboardLevel1, setLeaderboardLevel1] = useState<
+    LeaderboardEntry[]
+  >([]);
+  const [leaderboardLevel2, setLeaderboardLevel2] = useState<
+    LeaderboardEntry[]
+  >([]);
+  const [leaderboardLevel3, setLeaderboardLevel3] = useState<
+    LeaderboardEntry[]
+  >([]);
+  const [currentUserEntry1, setCurrentUserEntry1] = useState<
+    LeaderboardEntry | undefined
+  >();
+  const [currentUserEntry2, setCurrentUserEntry2] = useState<
+    LeaderboardEntry | undefined
+  >();
+  const [currentUserEntry3, setCurrentUserEntry3] = useState<
+    LeaderboardEntry | undefined
+  >();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [showCurrentUserOnly, setShowCurrentUserOnly] = useState(false);
+  const [activeTab, setActiveTab] = useState<"level1" | "level2" | "level3">(
+    "level1"
+  );
+  const [selectedUserStats, setSelectedUserStats] =
+    useState<UserTournamentStats | null>(null);
+  const [statsLoading, setStatsLoading] = useState(false);
+  const [showStatsModal, setShowStatsModal] = useState(false);
 
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const [level1Data, level2Data, level3Data] = await Promise.all([
           getLeaderboardData(1),
           getLeaderboardData(2),
-          getLeaderboardData(3)
-        ])
+          getLeaderboardData(3),
+        ]);
 
-        setLeaderboardLevel1(level1Data.leaderboard)
-        setCurrentUserEntry1(level1Data.currentUserEntry)
-        setLeaderboardLevel2(level2Data.leaderboard)
-        setCurrentUserEntry2(level2Data.currentUserEntry)
-        setLeaderboardLevel3(level3Data.leaderboard)
-        setCurrentUserEntry3(level3Data.currentUserEntry)
+        setLeaderboardLevel1(level1Data.leaderboard);
+        setCurrentUserEntry1(level1Data.currentUserEntry);
+        setLeaderboardLevel2(level2Data.leaderboard);
+        setCurrentUserEntry2(level2Data.currentUserEntry);
+        setLeaderboardLevel3(level3Data.leaderboard);
+        setCurrentUserEntry3(level3Data.currentUserEntry);
       } catch (err) {
-        console.error("Error fetching leaderboard:", err)
-        setError("Failed to load leaderboard data")
+        console.error("Error fetching leaderboard:", err);
+        setError("Failed to load leaderboard data");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchLeaderboardData()
-  }, [])
+    fetchLeaderboardData();
+  }, []);
 
   // Get current user's rank based on active tab
-  const getCurrentUserRank = (leaderboard: LeaderboardEntry[], currentUserEntry?: LeaderboardEntry) => {
-    if (!currentUserEntry) return undefined
-    
+  const getCurrentUserRank = (
+    leaderboard: LeaderboardEntry[],
+    currentUserEntry?: LeaderboardEntry
+  ) => {
+    if (!currentUserEntry) return undefined;
+
     // Find the user's position in the full sorted leaderboard
-    const userIndex = leaderboard.findIndex(player => player.id === currentUserEntry.id)
-    return userIndex !== -1 ? userIndex + 1 : undefined
-  }
+    const userIndex = leaderboard.findIndex(
+      (player) => player.id === currentUserEntry.id
+    );
+    return userIndex !== -1 ? userIndex + 1 : undefined;
+  };
 
-  const currentUserRank = activeTab === "level1" 
-    ? getCurrentUserRank(leaderboardLevel1, currentUserEntry1)
-    : activeTab === "level2"
-    ? getCurrentUserRank(leaderboardLevel2, currentUserEntry2)
-    : getCurrentUserRank(leaderboardLevel3, currentUserEntry3)
+  const currentUserRank =
+    activeTab === "level1"
+      ? getCurrentUserRank(leaderboardLevel1, currentUserEntry1)
+      : activeTab === "level2"
+      ? getCurrentUserRank(leaderboardLevel2, currentUserEntry2)
+      : getCurrentUserRank(leaderboardLevel3, currentUserEntry3);
 
-  const renderLeaderboard = (data: LeaderboardEntry[], currentUserEntry?: LeaderboardEntry) => {
+  const renderLeaderboard = (
+    data: LeaderboardEntry[],
+    currentUserEntry?: LeaderboardEntry
+  ) => {
     if (loading) {
       return (
         <div className="space-y-3 md:space-y-4">
@@ -197,7 +276,7 @@ export default function TournamentPage() {
             </motion.div>
           ))}
         </div>
-      )
+      );
     }
 
     if (error) {
@@ -209,12 +288,13 @@ export default function TournamentPage() {
         >
           <p className="text-red-400 text-sm md:text-base">{error}</p>
         </motion.div>
-      )
+      );
     }
 
     // If showCurrentUserOnly is true and we have current user data, show only current user
     if (showCurrentUserOnly && currentUserEntry) {
-      const actualRank = data.findIndex(player => player.id === currentUserEntry.id) + 1
+      const actualRank =
+        data.findIndex((player) => player.id === currentUserEntry.id) + 1;
       return (
         <div className="space-y-3 md:space-y-4">
           <div className="text-center mb-4">
@@ -222,52 +302,78 @@ export default function TournamentPage() {
               <Eye className="w-3 h-3 md:w-4 md:h-4 mr-1" />
               Showing Only Your Rank
             </Badge>
-            <p className="text-white/60 text-xs mt-2">Tap the button again to see full leaderboard</p>
+            <p className="text-white/60 text-xs mt-2">
+              Tap the button again to see full leaderboard
+            </p>
           </div>
-          {renderLeaderboardItem(currentUserEntry, actualRank - 1, true, actualRank)}
+          {renderLeaderboardItem(
+            currentUserEntry,
+            actualRank - 1,
+            true,
+            actualRank
+          )}
         </div>
-      )
+      );
     }
 
     // Get top 10 players
-    const topPlayers = data.slice(0, 10)
-    
+    const topPlayers = data.slice(0, 10);
+
     // Check if current user is in top 10
-    const isCurrentUserInTop10 = currentUserEntry && topPlayers.some(player => player.id === currentUserEntry.id)
-    
+    const isCurrentUserInTop10 =
+      currentUserEntry &&
+      topPlayers.some((player) => player.id === currentUserEntry.id);
+
     // Display data: top 10 + current user if not in top 10
-    const displayData = currentUserEntry && !isCurrentUserInTop10 
-      ? [...topPlayers, currentUserEntry] 
-      : [...topPlayers]
+    const displayData =
+      currentUserEntry && !isCurrentUserInTop10
+        ? [...topPlayers, currentUserEntry]
+        : [...topPlayers];
 
     return (
       <div className="space-y-3 md:space-y-4">
         {displayData.map((player, index) => {
-          const isCurrentUser = currentUserEntry ? player.id === currentUserEntry.id : false
+          const isCurrentUser = currentUserEntry
+            ? player.id === currentUserEntry.id
+            : false;
           // Use array index for ranking display (1st, 2nd, 3rd place effects)
-          const displayRank = index + 1
-          
-          return renderLeaderboardItem(player, index, isCurrentUser, displayRank)
-        })}
-        
-        {/* Show separator if current user is not in top 10 */}
-        {currentUserEntry && !isCurrentUserInTop10 && displayData.length > 10 && (
-          <div className="relative flex items-center justify-center my-4">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10"></div>
-            </div>
-            <div className="relative bg-[#030303] px-4">
-              <span className="text-white/40 text-xs">... and {data.length - 10} more competitors</span>
-            </div>
-          </div>
-        )}
-      </div>
-    )
-  }
+          const displayRank = index + 1;
 
-  const renderLeaderboardItem = (player: LeaderboardEntry, index: number, isCurrentUser: boolean, displayRank?: number) => {
-    const rank = displayRank || index + 1
-    const styling = getPositionStyling(index, isCurrentUser)
+          return renderLeaderboardItem(
+            player,
+            index,
+            isCurrentUser,
+            displayRank
+          );
+        })}
+
+        {/* Show separator if current user is not in top 10 */}
+        {currentUserEntry &&
+          !isCurrentUserInTop10 &&
+          displayData.length > 10 && (
+            <div className="relative flex items-center justify-center my-4">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-white/10"></div>
+              </div>
+              <div className="relative bg-[#030303] px-4">
+                <span className="text-white/40 text-xs">
+                  ... and {data.length - 10} more competitors
+                </span>
+              </div>
+            </div>
+          )}
+      </div>
+    );
+  };
+
+  const renderLeaderboardItem = (
+    player: LeaderboardEntry,
+    index: number,
+    isCurrentUser: boolean,
+    displayRank?: number
+  ) => {
+    const rank = displayRank || index + 1;
+    const styling = getPositionStyling(index, isCurrentUser);
 
     return (
       <motion.div
@@ -278,11 +384,11 @@ export default function TournamentPage() {
           duration: 0.6,
           delay: index * 0.1,
           type: "spring",
-          stiffness: 100
+          stiffness: 100,
         }}
         whileHover={{
           scale: 1.02,
-          transition: { duration: 0.2 }
+          transition: { duration: 0.2 },
         }}
         className={`relative flex items-center justify-between p-3 md:p-5 rounded-xl border backdrop-blur-xl shadow-lg ${styling.card} ${styling.glow} transition-all duration-300`}
       >
@@ -329,7 +435,12 @@ export default function TournamentPage() {
                 animate={{ scale: 1 }}
                 transition={{ delay: index * 0.1 + 0.4, type: "spring" }}
                 className="relative cursor-pointer group"
-                onClick={() => handleUserClick(player.id, activeTab === "level1" ? 1 : activeTab === "level2" ? 2 : 3)}
+                onClick={() =>
+                  handleUserClick(
+                    player.id,
+                    activeTab === "level1" ? 1 : activeTab === "level2" ? 2 : 3
+                  )
+                }
               >
                 <div className="absolute inset-0 bg-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <Image
@@ -356,7 +467,12 @@ export default function TournamentPage() {
                 animate={{ scale: 1 }}
                 transition={{ delay: index * 0.1 + 0.4, type: "spring" }}
                 className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center border-2 border-white/20 shadow-lg relative cursor-pointer group"
-                onClick={() => handleUserClick(player.id, activeTab === "level1" ? 1 : activeTab === "level2" ? 2 : 3)}
+                onClick={() =>
+                  handleUserClick(
+                    player.id,
+                    activeTab === "level1" ? 1 : activeTab === "level2" ? 2 : 3
+                  )
+                }
               >
                 <div className="absolute inset-0 bg-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="text-white font-bold text-sm md:text-lg">
@@ -382,14 +498,21 @@ export default function TournamentPage() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 + 0.5 }}
                   className={`${styling.name} text-sm md:text-lg truncate block cursor-pointer hover:underline hover:text-blue-400 transition-colors duration-300`}
-                  title={player.name || 'Anonymous User'}
-                  onClick={() => handleUserClick(player.id, activeTab === "level1" ? 1 : activeTab === "level2" ? 2 : 3)}
+                  title={player.name || "Anonymous User"}
+                  onClick={() =>
+                    handleUserClick(
+                      player.id,
+                      activeTab === "level1"
+                        ? 1
+                        : activeTab === "level2"
+                        ? 2
+                        : 3
+                    )
+                  }
                 >
-                  {player.name || 'Anonymous User'}
+                  {player.name || "Anonymous User"}
                 </motion.span>
-                {isCurrentUser && (
-                  <OwnershipBadge rank={rank} />
-                )}
+                {isCurrentUser && <OwnershipBadge rank={rank} />}
               </div>
               {player.specialization && (
                 <motion.div
@@ -413,11 +536,13 @@ export default function TournamentPage() {
           className="flex items-center gap-1 md:gap-2 text-yellow-400 bg-yellow-500/10 px-2 md:px-4 py-1 md:py-2 rounded-full border border-yellow-500/20"
         >
           <Star className="w-3 h-3 md:w-5 md:h-5" />
-          <span className="font-bold text-white text-sm md:text-lg">{player.points}</span>
+          <span className="font-bold text-white text-sm md:text-lg">
+            {player.points}
+          </span>
         </motion.div>
       </motion.div>
-    )
-  }
+    );
+  };
 
   const getPositionStyling = (index: number, isCurrentUser: boolean) => {
     if (isCurrentUser) {
@@ -426,8 +551,8 @@ export default function TournamentPage() {
         rank: "text-blue-400",
         name: "text-blue-400 font-semibold",
         medal: null,
-        glow: "shadow-blue-500/30"
-      }
+        glow: "shadow-blue-500/30",
+      };
     }
 
     switch (index) {
@@ -437,57 +562,57 @@ export default function TournamentPage() {
           rank: "text-yellow-400",
           name: "text-yellow-400 font-bold",
           medal: null,
-          glow: "shadow-yellow-500/40"
-        }
+          glow: "shadow-yellow-500/40",
+        };
       case 1: // 2nd place - Silver
         return {
           card: "bg-gradient-to-r from-gray-300/20 via-slate-400/20 to-gray-400/20 border-gray-300/60 shadow-gray-300/30",
           rank: "text-gray-300",
           name: "text-gray-300 font-bold",
           medal: null,
-          glow: "shadow-gray-300/40"
-        }
+          glow: "shadow-gray-300/40",
+        };
       case 2: // 3rd place - Bronze
         return {
           card: "bg-gradient-to-r from-orange-600/20 via-red-600/20 to-orange-700/20 border-orange-500/60 shadow-orange-500/30",
           rank: "text-orange-500",
           name: "text-orange-500 font-bold",
           medal: null,
-          glow: "shadow-orange-500/40"
-        }
+          glow: "shadow-orange-500/40",
+        };
       default: // Other positions - Transparent
         return {
           card: "bg-white/5 border-white/10 hover:bg-white/10 transition-all duration-300",
           rank: "text-white/70",
           name: "text-white/80",
           medal: null,
-          glow: "hover:shadow-white/20"
-        }
+          glow: "hover:shadow-white/20",
+        };
     }
-  }
+  };
 
   const toggleViewMode = () => {
-    setShowCurrentUserOnly(!showCurrentUserOnly)
-  }
+    setShowCurrentUserOnly(!showCurrentUserOnly);
+  };
 
   const handleTabChange = (value: string) => {
-    setActiveTab(value as "level1" | "level2" | "level3")
-  }
+    setActiveTab(value as "level1" | "level2" | "level3");
+  };
 
   const handleUserClick = async (userId: number, level: 1 | 2 | 3) => {
-    setStatsLoading(true)
-    setShowStatsModal(true)
-    
+    setStatsLoading(true);
+    setShowStatsModal(true);
+
     try {
-      const stats = await getUserTournamentStats(userId, level)
-      setSelectedUserStats(stats)
+      const stats = await getUserTournamentStats(userId, level);
+      setSelectedUserStats(stats);
     } catch (error) {
-      console.error("Error fetching user stats:", error)
-      setSelectedUserStats(null)
+      console.error("Error fetching user stats:", error);
+      setSelectedUserStats(null);
     } finally {
-      setStatsLoading(false)
+      setStatsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-[#030303] relative overflow-hidden">
@@ -498,17 +623,41 @@ export default function TournamentPage() {
         <div className="absolute inset-0 bg-gradient-to-tl from-purple-500/[0.05] via-transparent to-pink-500/[0.05] blur-3xl" />
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-5"
-          style={{ backgroundImage: 'url(/images/Background.png)' }}
+          style={{ backgroundImage: "url(/images/Background.png)" }}
         />
         {/* Floating Trophy Icons */}
-        <FloatingIcon icon={Trophy} className="top-10 md:top-20 left-4 md:left-10" delay={0} />
-        <FloatingIcon icon={Crown} className="top-20 md:top-40 right-10 md:right-20" delay={1} />
-        <FloatingIcon icon={Star} className="bottom-20 md:bottom-40 left-10 md:left-20" delay={2} />
-        <FloatingIcon icon={Sparkles} className="bottom-10 md:bottom-20 right-4 md:right-10" delay={3} />
-        <FloatingIcon icon={Award} className="top-32 md:top-60 left-1/2" delay={4} />
-        <FloatingIcon icon={Gem} className="bottom-32 md:bottom-60 right-1/3" delay={5} />
+        <FloatingIcon
+          icon={Trophy}
+          className="top-10 md:top-20 left-4 md:left-10"
+          delay={0}
+        />
+        <FloatingIcon
+          icon={Crown}
+          className="top-20 md:top-40 right-10 md:right-20"
+          delay={1}
+        />
+        <FloatingIcon
+          icon={Star}
+          className="bottom-20 md:bottom-40 left-10 md:left-20"
+          delay={2}
+        />
+        <FloatingIcon
+          icon={Sparkles}
+          className="bottom-10 md:bottom-20 right-4 md:right-10"
+          delay={3}
+        />
+        <FloatingIcon
+          icon={Award}
+          className="top-32 md:top-60 left-1/2"
+          delay={4}
+        />
+        <FloatingIcon
+          icon={Gem}
+          className="bottom-32 md:bottom-60 right-1/3"
+          delay={5}
+        />
       </div>
-      
+
       <ScrollAnimatedSection className="pt-24 md:pt-32 pb-12 md:pb-16 relative z-10">
         <div className="container mx-auto px-3 md:px-4">
           {/* Header */}
@@ -517,61 +666,103 @@ export default function TournamentPage() {
             <motion.div
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ 
+              transition={{
                 duration: 0.8,
-                ease: "easeOut"
+                ease: "easeOut",
               }}
               className="flex flex-col items-center justify-center mb-8"
             >
               {/* Season 1 Text - Single Line with Creative Colors */}
               <div className="text-center">
                 <motion.h1
-                  animate={{
-                    textShadow: [
-                      "0 4px 20px rgba(251, 146, 60, 0.5)",
-                      "0 4px 25px rgba(234, 88, 12, 0.6)",
-                      "0 4px 20px rgba(251, 146, 60, 0.5)",
-                    ]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
                   className="tracking-[0.15em] uppercase flex items-center justify-center gap-3 md:gap-4"
-                  style={{ 
+                  style={{
                     fontFamily: "'Stalinist One', sans-serif",
                     WebkitFontSmoothing: "antialiased",
                     MozOsxFontSmoothing: "grayscale",
                   }}
                 >
-                  <span 
-                    className="text-4xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent"
-                    style={{
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }}
+                  {/* SEASON */}
+                  <motion.span
+                    className="text-4xl md:text-6xl lg:text-7xl font-black"
+                    style={
+                      {
+                        display: "inline-block",
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      } as React.CSSProperties
+                    }
                   >
-                    SEASON
-                  </span>
-                  <span 
-                    className="text-4xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-400 bg-clip-text text-transparent"
-                    style={{
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }}
+                    <motion.div
+                      animate={{
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(135deg, #FF0000 0%, #8B00FF 100%)",
+                        backgroundSize: "200% 200%",
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        display: "inline-block",
+                      }}
+                    >
+                      SEASON
+                    </motion.div>
+                  </motion.span>
+
+                  {/* 1 */}
+                  <motion.span
+                    className="text-4xl md:text-6xl lg:text-7xl font-black"
+                    style={
+                      {
+                        display: "inline-block",
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      } as React.CSSProperties
+                    }
                   >
-                    1
-                  </span>
+                    <motion.div
+                      animate={{
+                        backgroundPosition: ["100% 50%", "0% 50%", "100% 50%"],
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: 1,
+                      }}
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(135deg, #FF0000 0%, #8B00FF 100%)",
+                        backgroundSize: "200% 200%",
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        display: "inline-block",
+                      }}
+                    >
+                      1
+                    </motion.div>
+                  </motion.span>
                 </motion.h1>
-                <motion.div 
+
+                {/* Subtitle */}
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                   className="text-base md:text-lg lg:text-xl tracking-[0.25em] font-bold text-center mt-4 uppercase text-orange-400"
-                  style={{ 
+                  style={{
                     fontFamily: "'Stalinist One', sans-serif",
-                    textShadow: "0 2px 10px rgba(251, 146, 60, 0.4)"
+                    textShadow: "0 2px 10px rgba(251, 146, 60, 0.4)",
                   }}
                 >
                   October 2025 - June 2026
@@ -586,7 +777,9 @@ export default function TournamentPage() {
               className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 mb-4 md:mb-6"
             >
               <Trophy className="w-3 h-3 md:w-4 md:h-4 text-yellow-400" />
-              <span className="text-xs md:text-sm text-white/60 tracking-wide">Championship Tournament</span>
+              <span className="text-xs md:text-sm text-white/60 tracking-wide">
+                Championship Tournament
+              </span>
             </motion.div>
 
             <motion.h1
@@ -611,9 +804,21 @@ export default function TournamentPage() {
               >
                 <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-400/20 rounded-2xl px-6 py-3 backdrop-blur-sm">
                   <Crown className="w-5 h-5 text-blue-400" />
-                  <span className="text-white/80 text-sm md:text-base font-medium">your rank is :</span>
-                  <span className="text-blue-400 text-lg md:text-2xl font-bold">{currentUserRank}</span>
-                  <span className="text-white/60 text-sm">out of {activeTab === "level1" ? leaderboardLevel1.length : activeTab === "level2" ? leaderboardLevel2.length : leaderboardLevel3.length} players</span>
+                  <span className="text-white/80 text-sm md:text-base font-medium">
+                    your rank is :
+                  </span>
+                  <span className="text-blue-400 text-lg md:text-2xl font-bold">
+                    {currentUserRank}
+                  </span>
+                  <span className="text-white/60 text-sm">
+                    out of{" "}
+                    {activeTab === "level1"
+                      ? leaderboardLevel1.length
+                      : activeTab === "level2"
+                      ? leaderboardLevel2.length
+                      : leaderboardLevel3.length}{" "}
+                    players
+                  </span>
                   <User className="w-4 h-4 text-blue-400 ml-1" />
                 </div>
               </motion.div>
@@ -625,7 +830,9 @@ export default function TournamentPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-4 md:mb-6 px-2"
             >
-              Compete with the best minds in computer science and data science. Show your skills, climb the leaderboard, and claim victory in this epic battle of knowledge!
+              Compete with the best minds in computer science and data science.
+              Show your skills, climb the leaderboard, and claim victory in this
+              epic battle of knowledge!
             </motion.p>
 
             {/* Tournament Extension Notice */}
@@ -639,12 +846,24 @@ export default function TournamentPage() {
                 <div className="flex items-start gap-3 mb-3">
                   <Info className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-blue-400 font-semibold text-sm md:text-base mb-2">Tournament Extended - Fair Competition for All!</h3>
+                    <h3 className="text-blue-400 font-semibold text-sm md:text-base mb-2">
+                      Tournament Extended - Fair Competition for All!
+                    </h3>
                     <p className="text-white/70 text-xs md:text-sm leading-relaxed">
-                      We&apos;ve extended the tournament duration to ensure fair competition across all levels. Some academic years currently have quizzes from only one subject (Economics only in Level 2), while others have 3 subjects in Level 3 and Level 1, creating an unfair competitive advantage for certain levels.
+                      We&apos;ve extended the tournament duration to ensure fair
+                      competition across all levels. Some academic years
+                      currently have quizzes from only one subject (Economics
+                      only in Level 2), while others have 3 subjects in Level 3
+                      and Level 1, creating an unfair competitive advantage for
+                      certain levels.
                     </p>
                     <p className="text-white/70 text-xs md:text-sm leading-relaxed mt-2">
-                      <span className="text-yellow-400 font-semibold">Therefore, we&apos;ve decided to extend the duration to include the second semester as well</span>, making this an annual tournament with fiercer and more balanced competition for everyone!
+                      <span className="text-yellow-400 font-semibold">
+                        Therefore, we&apos;ve decided to extend the duration to
+                        include the second semester as well
+                      </span>
+                      , making this an annual tournament with fiercer and more
+                      balanced competition for everyone!
                     </p>
                   </div>
                 </div>
@@ -695,25 +914,31 @@ export default function TournamentPage() {
                       Battle across levels and claim your throne
                     </CardDescription>
                   </div>
-                  
+
                   {/* Toggle View Button */}
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={toggleViewMode}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition-all duration-300 ${
-                      showCurrentUserOnly 
-                        ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' 
-                        : 'bg-white/10 text-white/80 border border-white/20 hover:bg-white/20'
+                      showCurrentUserOnly
+                        ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                        : "bg-white/10 text-white/80 border border-white/20 hover:bg-white/20"
                     }`}
                   >
                     <Eye className="w-3 h-3 md:w-4 md:h-4" />
-                    {showCurrentUserOnly ? 'Show Full Leaderboard' : 'Show My Rank Only'}
+                    {showCurrentUserOnly
+                      ? "Show Full Leaderboard"
+                      : "Show My Rank Only"}
                   </motion.button>
                 </div>
               </CardHeader>
               <CardContent className="p-3 md:p-6">
-                <Tabs defaultValue="level1" className="w-full" onValueChange={handleTabChange}>
+                <Tabs
+                  defaultValue="level1"
+                  className="w-full"
+                  onValueChange={handleTabChange}
+                >
                   <TabsList className="grid grid-cols-3 mb-4 md:mb-6 bg-white/10 p-1 rounded-lg">
                     <TabsTrigger
                       value="level1"
@@ -766,52 +991,97 @@ export default function TournamentPage() {
                 <div className="space-y-3 md:space-y-4">
                   <div className="p-3 md:p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20">
                     <h3 className="font-semibold text-green-400 flex items-center gap-2 mb-1 md:mb-2 text-sm md:text-base">
-                      <Crown className="w-3 h-3 md:w-4 md:h-4" /> Victory Rewards
+                      <Crown className="w-3 h-3 md:w-4 md:h-4" /> Victory
+                      Rewards
                     </h3>
                     <ul className="text-xs md:text-sm space-y-1">
-                      <li>• Win: <span className="text-green-400 font-bold">Chameleon 2026 Ultimate Edition Hoodie</span></li>
-                      <li>• Participation: <span className="text-green-400 font-bold">Get Administration Access to full Chameleon 2026</span></li>
+                      <li>
+                        • Win:{" "}
+                        <span className="text-green-400 font-bold">
+                          Chameleon 2026 Ultimate Edition Hoodie
+                        </span>
+                      </li>
+                      <li>
+                        • Participation:{" "}
+                        <span className="text-green-400 font-bold">
+                          Get Administration Access to full Chameleon 2026
+                        </span>
+                      </li>
                     </ul>
                   </div>
 
                   <div className="p-3 md:p-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-500/20">
                     <h3 className="font-semibold text-blue-400 flex items-center gap-2 mb-1 md:mb-2 text-sm md:text-base">
-                      <Users className="w-3 h-3 md:w-4 md:h-4" /> Competition Levels
+                      <Users className="w-3 h-3 md:w-4 md:h-4" /> Competition
+                      Levels
                     </h3>
                     <p className="text-xs md:text-sm">
-                      Three separate leaderboards for Level 1, Level 2, and Level 3 competitors. Points calculated independently.
+                      Three separate leaderboards for Level 1, Level 2, and
+                      Level 3 competitors. Points calculated independently.
                     </p>
                   </div>
 
                   <div className="p-3 md:p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/20">
                     <h3 className="font-semibold text-purple-400 flex items-center gap-2 mb-1 md:mb-2 text-sm md:text-base">
-                      <Info className="w-3 h-3 md:w-4 md:h-4" /> Tournament Rules
+                      <Info className="w-3 h-3 md:w-4 md:h-4" /> Tournament
+                      Rules
                     </h3>
                     <ul className="text-xs md:text-sm space-y-1">
-                      <li>• <span className="text-purple-400 font-semibold">First Attempt Only:</span> Only your first attempt on each quiz counts toward tournament standings</li>
-                      <li>• <span className="text-purple-400 font-semibold">Tournament Period:</span> October 11, 2025 - June 30, 2026</li>
-                      <li>• Retakes and practice runs won&apos;t affect your tournament score</li>
-                      <li>• <span className="text-purple-400 font-semibold">Scoring:</span> Points are reduced (÷10) for balanced competition</li>
+                      <li>
+                        •{" "}
+                        <span className="text-purple-400 font-semibold">
+                          First Attempt Only:
+                        </span>{" "}
+                        Only your first attempt on each quiz counts toward
+                        tournament standings
+                      </li>
+                      <li>
+                        •{" "}
+                        <span className="text-purple-400 font-semibold">
+                          Tournament Period:
+                        </span>{" "}
+                        October 11, 2025 - June 30, 2026
+                      </li>
+                      <li>
+                        • Retakes and practice runs won&apos;t affect your
+                        tournament score
+                      </li>
+                      <li>
+                        •{" "}
+                        <span className="text-purple-400 font-semibold">
+                          Scoring:
+                        </span>{" "}
+                        Points are reduced (÷10) for balanced competition
+                      </li>
                     </ul>
                   </div>
 
                   <div className="p-3 md:p-4 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-lg border border-orange-500/20">
                     <h3 className="font-semibold text-orange-400 flex items-center gap-2 mb-1 md:mb-2 text-sm md:text-base">
-                      <Sparkles className="w-3 h-3 md:w-4 md:h-4" /> How We Calculate Your Score?
+                      <Sparkles className="w-3 h-3 md:w-4 md:h-4" /> How We
+                      Calculate Your Score?
                     </h3>
                     <div className="text-xs md:text-sm space-y-2">
-                      <p className="text-white/90 font-medium mb-1 md:mb-2">Your tournament score is calculated using this formula:</p>
+                      <p className="text-white/90 font-medium mb-1 md:mb-2">
+                        Your tournament score is calculated using this formula:
+                      </p>
                       <div className="bg-black/20 p-2 md:p-3 rounded border border-white/10">
                         <code className="text-orange-300 text-xs md:text-sm">
-                          Total Points = (Correct Answers + Duration + Mode + Completion) ÷ 10
+                          Total Points = (Correct Answers + Duration + Mode +
+                          Completion) ÷ 10
                         </code>
                       </div>
                       <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 p-2 rounded border border-yellow-500/20 mb-2">
-                        <p className="text-yellow-400 text-xs font-semibold">⚠️ All points are divided by 10 and rounded for balanced scoring</p>
+                        <p className="text-yellow-400 text-xs font-semibold">
+                          ⚠️ All points are divided by 10 and rounded for
+                          balanced scoring
+                        </p>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 mt-2 md:mt-3">
                         <div>
-                          <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">Duration Points:</p>
+                          <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">
+                            Duration Points:
+                          </p>
                           <ul className="text-xs space-y-1 text-white/70">
                             <li>• 1 minute: +5 pts</li>
                             <li>• 5 minutes: +4.5 pts</li>
@@ -822,12 +1092,16 @@ export default function TournamentPage() {
                           </ul>
                         </div>
                         <div>
-                          <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">Mode Points:</p>
+                          <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">
+                            Mode Points:
+                          </p>
                           <ul className="text-xs space-y-1 text-white/70">
                             <li>• Instant Feedback: +1.5 pts</li>
                             <li>• Traditional: +1.2 pts</li>
                           </ul>
-                          <p className="text-white/80 font-medium mb-1 mt-1 md:mt-2 text-xs md:text-sm">Completion Points:</p>
+                          <p className="text-white/80 font-medium mb-1 mt-1 md:mt-2 text-xs md:text-sm">
+                            Completion Points:
+                          </p>
                           <ul className="text-xs space-y-1 text-white/70">
                             <li>• Completed: +2 pts</li>
                             <li>• Timed Out: +1.5 pts</li>
@@ -835,7 +1109,8 @@ export default function TournamentPage() {
                         </div>
                       </div>
                       <p className="text-white/60 text-xs mt-1 md:mt-2">
-                        Higher scores from faster completion and instant mode give you an edge in the tournament!
+                        Higher scores from faster completion and instant mode
+                        give you an edge in the tournament!
                       </p>
                     </div>
                   </div>
@@ -907,7 +1182,10 @@ export default function TournamentPage() {
           {statsLoading ? (
             <div className="space-y-3 py-4 relative z-10">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="h-20 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 rounded-xl animate-pulse border border-white/5" />
+                <div
+                  key={i}
+                  className="h-20 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 rounded-xl animate-pulse border border-white/5"
+                />
               ))}
             </div>
           ) : selectedUserStats ? (
@@ -924,7 +1202,9 @@ export default function TournamentPage() {
                     <Trophy className="w-5 h-5 text-yellow-400" />
                     <span className="text-white/70 text-xs">Rank</span>
                   </div>
-                  <div className="text-3xl font-black text-yellow-400">#{selectedUserStats.rank}</div>
+                  <div className="text-3xl font-black text-yellow-400">
+                    #{selectedUserStats.rank}
+                  </div>
                   <div className="text-xs text-white/50 mt-1">
                     of {selectedUserStats.totalParticipants} players
                   </div>
@@ -940,7 +1220,9 @@ export default function TournamentPage() {
                     <Star className="w-5 h-5 text-cyan-400" />
                     <span className="text-white/70 text-xs">Points</span>
                   </div>
-                  <div className="text-3xl font-black text-cyan-400">{selectedUserStats.totalPoints}</div>
+                  <div className="text-3xl font-black text-cyan-400">
+                    {selectedUserStats.totalPoints}
+                  </div>
                   <div className="text-xs text-white/50 mt-1">
                     Level {selectedUserStats.level}
                   </div>
@@ -959,7 +1241,9 @@ export default function TournamentPage() {
                     <Target className="w-4 h-4 text-purple-400" />
                     <span className="text-white/70 text-xs">Quizzes</span>
                   </div>
-                  <div className="text-2xl font-bold text-purple-400">{selectedUserStats.totalQuizzes}</div>
+                  <div className="text-2xl font-bold text-purple-400">
+                    {selectedUserStats.totalQuizzes}
+                  </div>
                   <div className="text-[10px] text-white/40 mt-1 font-mono">
                     COUNT(first_attempts)
                   </div>
@@ -975,7 +1259,9 @@ export default function TournamentPage() {
                     <TrendingUp className="w-4 h-4 text-green-400" />
                     <span className="text-white/70 text-xs">Average</span>
                   </div>
-                  <div className="text-2xl font-bold text-green-400">{selectedUserStats.averageScore}%</div>
+                  <div className="text-2xl font-bold text-green-400">
+                    {selectedUserStats.averageScore}%
+                  </div>
                   <div className="text-[10px] text-white/40 mt-1 font-mono">
                     AVG(score) of all quizzes
                   </div>
@@ -991,7 +1277,9 @@ export default function TournamentPage() {
                     <Zap className="w-4 h-4 text-yellow-400" />
                     <span className="text-white/70 text-xs">Best</span>
                   </div>
-                  <div className="text-2xl font-bold text-yellow-400">{selectedUserStats.bestScore}%</div>
+                  <div className="text-2xl font-bold text-yellow-400">
+                    {selectedUserStats.bestScore}%
+                  </div>
                   <div className="text-[10px] text-white/40 mt-1 font-mono">
                     MAX(score) achieved
                   </div>
@@ -1007,7 +1295,9 @@ export default function TournamentPage() {
                     <Target className="w-4 h-4 text-cyan-400" />
                     <span className="text-white/70 text-xs">Accuracy</span>
                   </div>
-                  <div className="text-2xl font-bold text-cyan-400">{selectedUserStats.accuracy}%</div>
+                  <div className="text-2xl font-bold text-cyan-400">
+                    {selectedUserStats.accuracy}%
+                  </div>
                   <div className="text-[10px] text-white/40 mt-1 font-mono">
                     (correct / total) × 100
                   </div>
@@ -1022,5 +1312,5 @@ export default function TournamentPage() {
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
