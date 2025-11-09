@@ -11,6 +11,9 @@ import { getLeaderboardData, LeaderboardEntry, getUserTournamentStats, UserTourn
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
 
+// Import Stalinist One font
+import "@fontsource/stalinist-one"
+
 const FloatingIcon = ({ icon: Icon, className, delay = 0 }: { icon: React.ComponentType<{ className?: string }>, className?: string, delay?: number }) => {
   return (
     <motion.div
@@ -43,7 +46,7 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    const tournamentEnd = new Date('2026-01-11T23:59:59.999Z');
+    const tournamentEnd = new Date('2026-06-30T23:59:59.999Z');
 
     const timer = setInterval(() => {
       const now = new Date();
@@ -76,7 +79,7 @@ const CountdownTimer = () => {
             <Timer className="w-4 h-4 md:w-5 md:h-5 text-orange-400" />
             <span className="text-orange-400 font-semibold text-sm md:text-base">Tournament Ends In</span>
           </div>
-          <div className="text-white/60 text-xs md:text-sm">January 11th, 2026</div>
+          <div className="text-white/60 text-xs md:text-sm">June 30th, 2026</div>
         </div>      <div className="grid grid-cols-4 gap-2 md:gap-3">
         {[
           { value: timeLeft.days, label: 'Days' },
@@ -422,7 +425,7 @@ export default function TournamentPage() {
         card: "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-400/50 shadow-blue-500/20 relative",
         rank: "text-blue-400",
         name: "text-blue-400 font-semibold",
-        medal: "👑",
+        medal: null,
         glow: "shadow-blue-500/30"
       }
     }
@@ -433,7 +436,7 @@ export default function TournamentPage() {
           card: "bg-gradient-to-r from-yellow-500/20 via-orange-500/20 to-yellow-600/20 border-yellow-400/60 shadow-yellow-500/30",
           rank: "text-yellow-400",
           name: "text-yellow-400 font-bold",
-          medal: "🥇",
+          medal: null,
           glow: "shadow-yellow-500/40"
         }
       case 1: // 2nd place - Silver
@@ -441,7 +444,7 @@ export default function TournamentPage() {
           card: "bg-gradient-to-r from-gray-300/20 via-slate-400/20 to-gray-400/20 border-gray-300/60 shadow-gray-300/30",
           rank: "text-gray-300",
           name: "text-gray-300 font-bold",
-          medal: "🥈",
+          medal: null,
           glow: "shadow-gray-300/40"
         }
       case 2: // 3rd place - Bronze
@@ -449,7 +452,7 @@ export default function TournamentPage() {
           card: "bg-gradient-to-r from-orange-600/20 via-red-600/20 to-orange-700/20 border-orange-500/60 shadow-orange-500/30",
           rank: "text-orange-500",
           name: "text-orange-500 font-bold",
-          medal: "🥉",
+          medal: null,
           glow: "shadow-orange-500/40"
         }
       default: // Other positions - Transparent
@@ -510,6 +513,106 @@ export default function TournamentPage() {
         <div className="container mx-auto px-3 md:px-4">
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
+            {/* Season 1 Badge - Creative Colorful Design */}
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.8,
+                ease: "easeOut"
+              }}
+              className="flex flex-col items-center justify-center mb-8"
+            >
+              {/* Season 1 Text - Single Line with Creative Colors */}
+              <div className="text-center">
+                <motion.h1
+                  animate={{
+                    textShadow: [
+                      "0 2px 10px rgba(251, 146, 60, 0.3)",
+                      "0 2px 15px rgba(234, 88, 12, 0.4)",
+                      "0 2px 10px rgba(251, 146, 60, 0.3)",
+                    ]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="tracking-wide uppercase flex items-center justify-center gap-4 md:gap-6"
+                  style={{ 
+                    fontFamily: "'Stalinist One', sans-serif",
+                  }}
+                >
+                  <motion.span 
+                    className="text-5xl md:text-7xl lg:text-8xl font-bold"
+                    animate={{
+                      background: [
+                        "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)",
+                        "linear-gradient(135deg, #FF6347 0%, #FF69B4 50%, #FFD700 100%)",
+                        "linear-gradient(135deg, #00CED1 0%, #1E90FF 50%, #9370DB 100%)",
+                        "linear-gradient(135deg, #32CD32 0%, #FFD700 50%, #FF6347 100%)",
+                        "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)",
+                      ]
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                    style={{
+                      background: "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)",
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent"
+                    } as React.CSSProperties}
+                  >
+                    SEASON
+                  </motion.span>
+                  <motion.span 
+                    className="text-5xl md:text-7xl lg:text-8xl font-bold"
+                    animate={{
+                      background: [
+                        "linear-gradient(135deg, #FF1493 0%, #FF6347 50%, #FFD700 100%)",
+                        "linear-gradient(135deg, #9370DB 0%, #FF1493 50%, #FF6347 100%)",
+                        "linear-gradient(135deg, #1E90FF 0%, #00CED1 50%, #32CD32 100%)",
+                        "linear-gradient(135deg, #FF6347 0%, #FFA500 50%, #FFD700 100%)",
+                        "linear-gradient(135deg, #FF1493 0%, #FF6347 50%, #FFD700 100%)",
+                      ]
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear",
+                      delay: 1
+                    }}
+                    style={{
+                      background: "linear-gradient(135deg, #FF1493 0%, #FF6347 50%, #FFD700 100%)",
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent"
+                    } as React.CSSProperties}
+                  >
+                    1
+                  </motion.span>
+                </motion.h1>
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-sm md:text-base lg:text-lg tracking-[0.25em] font-bold text-center mt-4 uppercase"
+                  style={{ 
+                    fontFamily: "'Stalinist One', sans-serif",
+                    background: "linear-gradient(90deg, #FBBF24, #FB923C, #F59E0B)",
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent"
+                  } as React.CSSProperties}
+                >
+                  October 2025 - June 2026
+                </motion.div>
+              </div>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -554,10 +657,37 @@ export default function TournamentPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-6 md:mb-8 px-2"
+              className="text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-4 md:mb-6 px-2"
             >
               Compete with the best minds in computer science and data science. Show your skills, climb the leaderboard, and claim victory in this epic battle of knowledge!
             </motion.p>
+
+            {/* Tournament Extension Notice */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="max-w-4xl mx-auto mb-6 md:mb-8 px-2"
+            >
+              <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-blue-400/30 rounded-xl p-4 md:p-6 backdrop-blur-sm">
+                <div className="flex items-start gap-3 mb-3">
+                  <Info className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-blue-400 font-semibold text-sm md:text-base mb-2">Tournament Extended - Fair Competition for All!</h3>
+                    <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                      We&apos;ve extended the tournament duration to ensure fair competition across all levels. Some academic years currently have quizzes from only one subject (Economics only in Level 2), while others have 3 subjects in Level 3 and Level 1, creating an unfair competitive advantage for certain levels.
+                    </p>
+                    <p className="text-white/70 text-xs md:text-sm leading-relaxed mt-2">
+                      <span className="text-yellow-400 font-semibold">Therefore, we&apos;ve decided to extend the duration to include the second semester as well</span>, making this an annual tournament with fiercer and more balanced competition for everyone!
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-white/50 mt-3 pt-3 border-t border-white/10">
+                  <Sparkles className="w-4 h-4" />
+                  <span>More time, more quizzes, more fair competition!</span>
+                </div>
+              </div>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -675,7 +805,6 @@ export default function TournamentPage() {
                     <ul className="text-xs md:text-sm space-y-1">
                       <li>• Win: <span className="text-green-400 font-bold">Chameleon 2026 Ultimate Edition Hoodie</span></li>
                       <li>• Participation: <span className="text-green-400 font-bold">Get Administration Access to full Chameleon 2026</span></li>
-                      <li>• Streak: <span className="text-green-400 font-bold">3 Times Streak will win 1000 L.E</span></li>
                     </ul>
                   </div>
 
@@ -694,7 +823,7 @@ export default function TournamentPage() {
                     </h3>
                     <ul className="text-xs md:text-sm space-y-1">
                       <li>• <span className="text-purple-400 font-semibold">First Attempt Only:</span> Only your first attempt on each quiz counts toward tournament standings</li>
-                      <li>• <span className="text-purple-400 font-semibold">Tournament Period:</span> October 11, 2025 - January 11, 2026</li>
+                      <li>• <span className="text-purple-400 font-semibold">Tournament Period:</span> October 11, 2025 - June 30, 2026</li>
                       <li>• Retakes and practice runs won&apos;t affect your tournament score</li>
                       <li>• <span className="text-purple-400 font-semibold">Scoring:</span> Points are reduced (÷10) for balanced competition</li>
                     </ul>
