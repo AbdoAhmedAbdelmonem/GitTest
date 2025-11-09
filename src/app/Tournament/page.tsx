@@ -538,7 +538,7 @@ export default function TournamentPage() {
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
-                  className="tracking-[0.15em] uppercase flex items-center justify-center gap-4 md:gap-6"
+                  className="tracking-[0.15em] uppercase flex items-center justify-center gap-3 md:gap-4"
                   style={{ 
                     fontFamily: "'Stalinist One', sans-serif",
                     WebkitFontSmoothing: "antialiased",
@@ -546,7 +546,7 @@ export default function TournamentPage() {
                   }}
                 >
                   <span 
-                    className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent"
+                    className="text-4xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent"
                     style={{
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
@@ -555,7 +555,7 @@ export default function TournamentPage() {
                     SEASON
                   </span>
                   <span 
-                    className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-400 bg-clip-text text-transparent"
+                    className="text-4xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-400 bg-clip-text text-transparent"
                     style={{
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
