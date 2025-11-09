@@ -447,7 +447,6 @@ export default function HomePage() {
               {
                 title: "Legal Zone",
                 items: [
-                  { name: "Certifications", link: "/certifications" },
                   { name: "Terms of Service", link: "/terms" },
                   { name: "Privacy and Policies", link: "/privacy" }
                 ],
