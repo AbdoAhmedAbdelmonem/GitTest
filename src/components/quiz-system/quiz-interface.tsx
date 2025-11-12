@@ -261,7 +261,14 @@ export default function QuizInterface({
   >("setup");
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<{ [key: number]: string }>({});
+  const [userAnswers, setUserAnswers] = useState<{ [key: number]: string }>(() => {
+    // Load answers from session storage on initialization
+    if (typeof window !== 'undefined') {
+      const savedAnswers = sessionStorage.getItem(`quiz_${quizData.code}_answers`);
+      return savedAnswers ? JSON.parse(savedAnswers) : {};
+    }
+    return {};
+  });
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
   const [selectedDuration, setSelectedDuration] = useState(15);
@@ -292,70 +299,6 @@ export default function QuizInterface({
   const [isBanned, setIsBanned] = useState(false);
   const [showBannedDialog, setShowBannedDialog] = useState(false);
   
-  // Prevent DevTools access
-  useEffect(() => {
-    // Disable right-click context menu
-    const handleContextMenu = (e: MouseEvent) => {
-      e.preventDefault();
-      return false;
-    };
-
-    // Disable specific keyboard shortcuts
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+Shift+C
-      if (
-        e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'J') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
-        (e.ctrlKey && e.key === 'u')
-      ) {
-        e.preventDefault();
-        return false;
-      }
-    };
-
-    // Detect if DevTools is open
-    const detectDevTools = () => {
-      const threshold = 160;
-      const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-      const heightThreshold = window.outerHeight - window.innerHeight > threshold;
-      
-      if (widthThreshold || heightThreshold) {
-        // DevTools detected - redirect or show warning
-        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#fff;font-size:24px;text-align:center;padding:20px;">⚠️ Developer tools are not allowed during the quiz.<br/>Please close DevTools and refresh the page.</div>';
-      }
-    };
-
-    // Disable text selection
-    const disableSelect = (e: Event) => {
-      e.preventDefault();
-      return false;
-    };
-
-    document.addEventListener('contextmenu', handleContextMenu);
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('selectstart', disableSelect);
-    
-    // Check for DevTools periodically
-    const devToolsInterval = setInterval(detectDevTools, 1000);
-
-    // Disable console
-    if (typeof window !== 'undefined') {
-      const noop = () => {};
-      ['log', 'debug', 'info', 'warn', 'error'].forEach((method) => {
-        (console as any)[method] = noop;
-      });
-    }
-
-    return () => {
-      document.removeEventListener('contextmenu', handleContextMenu);
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('selectstart', disableSelect);
-      clearInterval(devToolsInterval);
-    };
-  }, []);
-
   // Memoize checkQuizAttempts to avoid unnecessary recreations
   const checkQuizAttempts = useCallback(async (): Promise<void> => {
     try {
@@ -382,7 +325,7 @@ export default function QuizInterface({
 
       const attemptsCount = count || 0;
       setAttemptsToday(attemptsCount);
-      setMaxAttemptsReached(attemptsCount >= 4);
+      setMaxAttemptsReached(attemptsCount >= 10);
     } catch (error) {
       console.error("Unexpected error checking attempts:", error);
     }
@@ -444,6 +387,13 @@ export default function QuizInterface({
       }
     };
   }, [loadQuestions]);
+
+  // Save answers to session storage whenever they change
+  useEffect(() => {
+    if (currentStep === "quiz" && Object.keys(userAnswers).length > 0) {
+      sessionStorage.setItem(`quiz_${quizData.code}_answers`, JSON.stringify(userAnswers));
+    }
+  }, [userAnswers, quizData.code, currentStep]);
 
   // Debounce theme changes
   useEffect(() => {
@@ -527,10 +477,15 @@ export default function QuizInterface({
     }
 
     // Batch state updates using functional updates
-    setUserAnswers(prev => ({
-      ...prev,
-      [currentQuestion]: answer,
-    }));
+    setUserAnswers(prev => {
+      const updated = {
+        ...prev,
+        [currentQuestion]: answer,
+      };
+      // Save to session storage immediately
+      sessionStorage.setItem(`quiz_${quizData.code}_answers`, JSON.stringify(updated));
+      return updated;
+    });
 
     if (selectedMode === "instant") {
       setShowAnswer(true);
@@ -539,7 +494,7 @@ export default function QuizInterface({
         [currentQuestion]: true,
       }));
     }
-  }, [selectedMode, currentQuestion, userAnswers]);
+  }, [selectedMode, currentQuestion, userAnswers, quizData.code]);
 
   const nextQuestion = useCallback(() => {
     if (currentQuestion < questions.length - 1) {
@@ -555,10 +510,13 @@ export default function QuizInterface({
 
   const prevQuestion = useCallback(() => {
     if (currentQuestion > 0) {
-      setCurrentQuestion((prev) => prev - 1);
-      setShowAnswer(answerRevealed[currentQuestion - 1] || false);
+      const prevQuestionIndex = currentQuestion - 1;
+      setCurrentQuestion(prevQuestionIndex);
+      // Show answer if it was revealed or if there's a saved answer in session storage
+      const hasAnswer = userAnswers[prevQuestionIndex] !== undefined;
+      setShowAnswer((selectedMode === "instant" && hasAnswer) || answerRevealed[prevQuestionIndex] || false);
     }
-  }, [currentQuestion, answerRevealed]);
+  }, [currentQuestion, answerRevealed, userAnswers, selectedMode]);
 
   const handleShowImage = useCallback((imageUrl: string | null | undefined) => {
     if (imageUrl) {
@@ -635,7 +593,7 @@ export default function QuizInterface({
       } else {
         // Update attempts count after successful submission
         setAttemptsToday(prev => prev + 1);
-        setMaxAttemptsReached(attemptsToday + 1 >= 4);
+        setMaxAttemptsReached(attemptsToday + 1 >= 10);
       }
     } catch (error) {
       console.error("Unexpected error saving quiz data:", error);
@@ -701,11 +659,14 @@ export default function QuizInterface({
     setScore(correctAnswers);
     setCurrentStep("results");
 
+    // Clear session storage after finishing
+    sessionStorage.removeItem(`quiz_${quizData.code}_answers`);
+
     // Save to localStorage and database
     saveScore(correctAnswers, quizStatus);
     saveScoreToSupabase(correctAnswers, quizStatus);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questions, userAnswers, quizStatus]);
+  }, [questions, userAnswers, quizStatus, quizData.code]);
 
   // formatTime moved to useCallback above
 
@@ -910,7 +871,7 @@ export default function QuizInterface({
             Maximum Attempts Reached
           </DialogTitle>
           <DialogDescription className="text-white/70">
-            You have already used {attemptsToday} out of 4 attempts for this quiz today. 
+            You have already used {attemptsToday} out of 10 attempts for this quiz today. 
             Please try again tomorrow.
           </DialogDescription>
         </DialogHeader>
@@ -1209,7 +1170,7 @@ export default function QuizInterface({
                     <div className="mt-6 pt-4 border-t border-white/20">
                       <div className="flex items-center justify-center gap-2 text-white/70">
                         <Clock className="w-4 h-4" />
-                        <span>Attempts today: {attemptsToday}/4</span>
+                        <span>Attempts today: {attemptsToday}/10</span>
                         {maxAttemptsReached && (
                           <Badge variant="destructive" className="ml-2">
                             Limit Reached
@@ -1799,6 +1760,8 @@ export default function QuizInterface({
                     <Button
                       variant="outline"
                       onClick={() => {
+                        // Clear session storage before reload
+                        sessionStorage.removeItem(`quiz_${quizData.code}_answers`);
                         window.location.reload(); // Refresh the page
                         setCurrentStep("setup");
                         setCurrentQuestion(0);
