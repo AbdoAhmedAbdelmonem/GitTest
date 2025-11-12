@@ -261,14 +261,7 @@ export default function QuizInterface({
   >("setup");
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<{ [key: number]: string }>(() => {
-    // Load answers from session storage on initialization
-    if (typeof window !== 'undefined') {
-      const savedAnswers = sessionStorage.getItem(`quiz_${quizData.code}_answers`);
-      return savedAnswers ? JSON.parse(savedAnswers) : {};
-    }
-    return {};
-  });
+  const [userAnswers, setUserAnswers] = useState<{ [key: number]: string }>({});
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
   const [selectedDuration, setSelectedDuration] = useState(15);
@@ -349,8 +342,11 @@ export default function QuizInterface({
       }
     };
     
+    // Clear session storage when component first mounts (on page load)
+    sessionStorage.removeItem(`quiz_${quizData.code}_answers`);
+    
     checkAuth();
-  }, [checkQuizAttempts]);
+  }, [checkQuizAttempts, quizData.code]);
   
   // ✅ Force logout if banned
   const handleBannedLogout = () => {
@@ -381,19 +377,39 @@ export default function QuizInterface({
 
   useEffect(() => {
     loadQuestions();
+    
+    // Load answers from session storage when starting quiz
+    if (currentStep === "quiz") {
+      const savedAnswers = sessionStorage.getItem(`quiz_${quizData.code}_answers`);
+      if (savedAnswers) {
+        setUserAnswers(JSON.parse(savedAnswers));
+      }
+    }
+    
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
+      // Clear session storage when component unmounts (page refresh/navigation)
+      if (currentStep === "setup") {
+        sessionStorage.removeItem(`quiz_${quizData.code}_answers`);
+      }
     };
-  }, [loadQuestions]);
+  }, [loadQuestions, currentStep, quizData.code]);
 
-  // Save answers to session storage whenever they change
+  // Save answers to session storage whenever they change during quiz
   useEffect(() => {
     if (currentStep === "quiz" && Object.keys(userAnswers).length > 0) {
       sessionStorage.setItem(`quiz_${quizData.code}_answers`, JSON.stringify(userAnswers));
     }
   }, [userAnswers, quizData.code, currentStep]);
+  
+  // Clear session storage when going back to setup
+  useEffect(() => {
+    if (currentStep === "setup") {
+      sessionStorage.removeItem(`quiz_${quizData.code}_answers`);
+    }
+  }, [currentStep, quizData.code]);
 
   // Debounce theme changes
   useEffect(() => {
@@ -439,6 +455,10 @@ export default function QuizInterface({
       setShowAttemptsDialog(true);
       return;
     }
+    
+    // Clear any previous session storage when starting a new quiz
+    sessionStorage.removeItem(`quiz_${quizData.code}_answers`);
+    setUserAnswers({});
     
     setCurrentStep("quiz");
 
@@ -946,7 +966,10 @@ export default function QuizInterface({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => window.history.back()}
+                    onClick={() => {
+                      sessionStorage.removeItem(`quiz_${quizData.code}_answers`);
+                      window.history.back();
+                    }}
                     className="text-white/90 hover:text-white hover:bg-white/10 border border-white/20 bg-black/20"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" />
