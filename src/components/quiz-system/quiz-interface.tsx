@@ -264,7 +264,7 @@ export default function QuizInterface({
   const [userAnswers, setUserAnswers] = useState<{ [key: number]: string }>({});
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
-  const [selectedDuration, setSelectedDuration] = useState(15);
+  const [selectedDuration, setSelectedDuration] = useState(10);
   const [selectedTheme, setSelectedTheme] = useState(themes[0]);
   const [selectedMode, setSelectedMode] = useState("traditional");
   const [showSettings, setShowSettings] = useState(false);
