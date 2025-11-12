@@ -111,9 +111,9 @@ const themes = [
 const durations = [
   { label: "Lightning", value: 1, icon: Zap, description: "1 Minute" },
   { label: "Short", value: 5, icon: Star, description: "5 Minutes" },
-  { label: "Standard (DEF)", value: 15, icon: Cable, description: "15 Minutes" },
-  { label: "Extended", value: 30, icon: Clock, description: "30 Minutes" },
-  { label: "Indolent", value: 60, icon: Snail, description: "1 Hour" },
+  { label: "Standard (DEF)", value: 10, icon: Cable, description: "10 Minutes" },
+  { label: "Extended", value: 15, icon: Clock, description: "15 Minutes" },
+  { label: "Indolent", value: 30, icon: Snail, description: "30 Minutes" },
   { label: "Unlimited", value: 0, icon: Infinity, description: "No Time Limit" },
 ];
 
