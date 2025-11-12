@@ -459,6 +459,8 @@ export default function QuizInterface({
     // Clear any previous session storage when starting a new quiz
     sessionStorage.removeItem(`quiz_${quizData.code}_answers`);
     setUserAnswers({});
+    setAnswerRevealed({});
+    setShowAnswer(false);
     
     setCurrentStep("quiz");
 
@@ -519,7 +521,6 @@ export default function QuizInterface({
   const nextQuestion = useCallback(() => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
-      setShowAnswer(false);
     } else {
       // ✅ On last question, finish the quiz
       setQuizStatus("completed");
@@ -532,11 +533,8 @@ export default function QuizInterface({
     if (currentQuestion > 0) {
       const prevQuestionIndex = currentQuestion - 1;
       setCurrentQuestion(prevQuestionIndex);
-      // Show answer if it was revealed or if there's a saved answer in session storage
-      const hasAnswer = userAnswers[prevQuestionIndex] !== undefined;
-      setShowAnswer((selectedMode === "instant" && hasAnswer) || answerRevealed[prevQuestionIndex] || false);
     }
-  }, [currentQuestion, answerRevealed, userAnswers, selectedMode]);
+  }, [currentQuestion]);
 
   const handleShowImage = useCallback((imageUrl: string | null | undefined) => {
     if (imageUrl) {
@@ -821,6 +819,21 @@ export default function QuizInterface({
       finishQuiz(userAnswers);
     }
   }, [currentStep, quizStatus, userAnswers, finishQuiz]);
+
+  // Update showAnswer when navigating between questions
+  useEffect(() => {
+    if (currentStep === "quiz") {
+      const hasAnswer = userAnswers[currentQuestion] !== undefined;
+      const wasRevealed = answerRevealed[currentQuestion] || false;
+      
+      // Show answer only if it was previously revealed (in instant mode)
+      if (selectedMode === "instant" && hasAnswer && wasRevealed) {
+        setShowAnswer(true);
+      } else {
+        setShowAnswer(false);
+      }
+    }
+  }, [currentQuestion, currentStep, userAnswers, answerRevealed, selectedMode]);
 
   // Authentication Dialog Component
   const AuthDialog = () => (
