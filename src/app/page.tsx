@@ -13,6 +13,7 @@ import MagicSearch from "@/components/magic-search"
 import Link from "next/link"
 import { getStudentSession } from "@/lib/auth"
 import { useEffect, useState } from "react"
+import GsapStackedCards from "@/components/gsap-stacked-cards"
 
 const specializations = [
   {
@@ -302,6 +303,8 @@ export default function HomePage() {
         </div>
       </ScrollAnimatedSection>
 
+      <GsapStackedCards />
+
       <CreativeFeatureSlider />
 
       {/* Specializations Section */}
@@ -456,6 +459,7 @@ export default function HomePage() {
               {
                 title: "Legal Zone",
                 items: [
+                  { name: "Certifications", link: "/certifications" },
                   { name: "Terms of Service", link: "/terms" },
                   { name: "Privacy and Policies", link: "/privacy" }
                 ],
