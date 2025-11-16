@@ -7,6 +7,7 @@ interface ScrollAnimatedSectionProps {
   children: ReactNode
   className?: string
   id?: string
+  style?: React.CSSProperties
   animation?:
     | "fadeIn"
     | "slideUp"
@@ -58,6 +59,8 @@ const animationVariants = {
 export default function ScrollAnimatedSection({
   children,
   className = "",
+  id,
+  style,
   animation = "fadeIn",
   delay = 0,
   duration = 0.8,
@@ -67,6 +70,8 @@ export default function ScrollAnimatedSection({
   return (
     <motion.div
       className={className}
+      id={id}
+      style={style}
       initial="hidden"
       whileInView="visible"
       viewport={{
