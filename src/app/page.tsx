@@ -428,7 +428,16 @@ export default function HomePage() {
       </ScrollAnimatedSection>
 
       {/* Footer */}
-      <ScrollAnimatedSection animation="slideUp" className="py-12 bg-[#030303] border-t border-white/5">
+      <ScrollAnimatedSection 
+        animation="slideUp" 
+        className="py-12 bg-[#030303] border-t border-white/5"
+        style={{
+          backgroundImage: "url('/images/footer.png')",
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover'
+        }}
+      >
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             {[
