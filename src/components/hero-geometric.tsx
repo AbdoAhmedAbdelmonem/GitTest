@@ -42,7 +42,7 @@ export default function HeroGeometric({
     <div
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]"
       style={{
-        backgroundImage: 'url("/images/Background.png")', // Replace with your image path
+        backgroundImage: 'url("/images/main.png")', // Replace with your image path
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
