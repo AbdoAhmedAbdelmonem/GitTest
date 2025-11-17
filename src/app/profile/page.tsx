@@ -652,21 +652,57 @@ export default function ProfilePage() {
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-20 overflow-visible">
         {/* Header */}
         <div className="text-center mb-12 animate-in fade-in duration-800">
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-6 shadow-lg overflow-hidden transition-transform hover:scale-105">
-            {userData.profile_image ? (
-              <Image
-                src={userData.profile_image}
-                alt="Profile"
-                width={96}
-                height={96}
-                className="w-full h-full object-cover"
+          <div className="relative inline-block mb-6 group">
+            {/* Spinning Border for Admin */}
+            {userData.is_admin && (
+              <div 
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: 'conic-gradient(from 0deg, #ef4444 0%, #eab308 25%, #22c55e 50%, #3b82f6 75%, #ef4444 100%)',
+                  animation: 'spin 3s linear infinite'
+                }}
               />
-            ) : (
-              <User className="w-12 h-12 text-white" />
             )}
+            
+            {/* Profile Image Container */}
+            <div 
+              className={`relative rounded-full shadow-2xl transition-all duration-500 hover:scale-110 ${
+                userData.is_admin 
+                  ? 'w-28 h-28' 
+                  : 'w-24 h-24'
+              }`}
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+                padding: '3px',
+                margin: userData.is_admin ? '3px' : '0'
+              }}
+            >
+              <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
+                {userData.profile_image ? (
+                  <Image
+                    src={userData.profile_image}
+                    alt="Profile"
+                    width={userData.is_admin ? 106 : 96}
+                    height={userData.is_admin ? 106 : 96}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <User className={`${userData.is_admin ? 'w-14 h-14' : 'w-12 h-12'} text-white`} />
+                )}
+              </div>
+            </div>
           </div>
+          
           <h1 className="text-3xl font-bold text-white mb-2">Your Profile</h1>
           <p className="text-white/60">Manage your account and view your progress</p>
+          
+          {/* Enhanced Animations */}
+          <style jsx>{`
+            @keyframes spin {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(360deg); }
+            }
+          `}</style>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
