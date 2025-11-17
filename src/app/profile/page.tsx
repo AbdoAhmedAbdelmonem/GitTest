@@ -1220,6 +1220,20 @@ export default function ProfilePage() {
                 const currentTerm = getCurrentTerm()
                 const subjects = getUserSubjects(userData.current_level, userData.specialization, currentTerm)
                 
+                // Get department key for URL construction
+                const departmentKeyMap: { [key: string]: string } = {
+                  'Computing and Data Sciences': 'computing-data-sciences',
+                  'computing and data sciences': 'computing-data-sciences',
+                  'Data Science': 'computing-data-sciences',
+                  'data science': 'computing-data-sciences',
+                  'Computing & Data Sciences': 'computing-data-sciences',
+                  'FCDS': 'computing-data-sciences',
+                  'Business Analytics': 'business-analytics',
+                  'business analytics': 'business-analytics',
+                  'BA': 'business-analytics'
+                }
+                const departmentKey = departmentKeyMap[userData.specialization] || departmentKeyMap[userData.specialization?.toLowerCase()] || 'computing-data-sciences'
+                
                 if (subjects.length === 0) {
                   return (
                     <div className="text-center py-12 text-white/60">
@@ -1311,6 +1325,20 @@ export default function ProfilePage() {
                                 <Link href={createDriveLink(subject.materials.sections)}>
                                   <FileText className="w-3 h-3 mr-1" />
                                   Sections
+                                </Link>
+                              </Button>
+                            )}
+                            
+                            {subject.materials.quizzes && subject.materials.quizzes.length > 0 && (
+                              <Button
+                                asChild
+                                size="sm"
+                                variant="outline"
+                                className="bg-white/5 border-white/20 text-white hover:bg-cyan-500/20 hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
+                              >
+                                <Link href={`/specialization/${departmentKey}/${userData.current_level}/${subject.id}?tab=quizzes`}>
+                                  <Trophy className="w-3 h-3 mr-1" />
+                                  Quizzes
                                 </Link>
                               </Button>
                             )}
