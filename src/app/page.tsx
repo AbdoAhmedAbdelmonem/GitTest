@@ -9,6 +9,7 @@ import { BookOpen, Shield, Brain, Database, Award, Hospital, Cloud, ServerCrash,
 import CreativeFeatureSlider from "@/components/creative-feature-slider"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
+import Image from "next/image"
 import MagicSearch from "@/components/magic-search"
 import Link from "next/link"
 import { getStudentSession } from "@/lib/auth"
@@ -153,6 +154,27 @@ export default function HomePage() {
       {/* Hero Section - Using the exact design without changes */}
       <HeroGeometric badge="Chameleon FCDS" title1="Master Your" title2="Future Skills" />
 
+      {/* Morx Coming Soon Marquee */}
+      <div className="w-full bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-purple-900/20 border-y border-white/10 overflow-hidden">
+        <div className="flex items-center gap-8 py-3 animate-marquee whitespace-nowrap">
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className="flex items-center gap-4 px-4">
+              <Image 
+                src="/Morx.png" 
+                alt="Morx" 
+                width={32}
+                height={32}
+                className="object-contain"
+              />
+              <span className="text-white/80 font-semibold flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-yellow-400" />
+                Coming Soon: Morx - Stay Tuned!
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+      
       {/* Magic Search Section */}
       <ScrollAnimatedSection className="py-12 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4">
