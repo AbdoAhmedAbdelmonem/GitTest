@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, User as UserIcon, LogOut, Home, Folder, HelpCircle, ChevronDown, Lock } from "lucide-react"
+import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, LogOut, Home, HelpCircle, ChevronDown, Lock } from "lucide-react"
 import Link from "next/link"
 import { getStudentSession, clearStudentSession } from "@/lib/auth"
 import { NotificationBell } from "./notification-bell"
@@ -13,7 +13,7 @@ import { User } from "@/lib/types"
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
-  { name: "Tournament", href: "/Tournament", icon: BookOpen },
+  { name: "Tournament", href: "/Tournment", icon: BookOpen },
   { name: "Specializations", href: "#", icon: SquareUserRound },
   { name: "About", href: "/about", icon: HelpCircle  },
   { name: "Explo", href: "/explo", icon: BrainCircuit, target: "_blank" }
@@ -73,7 +73,7 @@ export default function Navigation() {
     }
 
     // Check tournament lock status
-    const targetDate = new Date('2025-10-11')
+    const targetDate = new Date('2025-10-07')
     const currentDate = new Date()
     if (currentDate < targetDate) {
       setIsTournamentLocked(true)
@@ -287,9 +287,34 @@ export default function Navigation() {
                   className="flex items-center gap-4"
                 >
                   <NotificationBell />
-                  <Link href="/profile" className="flex items-center gap-2 text-white hover:text-purple-300 transition-colors">
-                    <UserIcon className="w-4 h-4" />
-                    <span>{user.username}</span>
+                  <Link href="/profile" className="relative group">
+                    <div className="relative">
+                      {/* Animated border for admin */}
+                      {user.is_admin && (
+                        <div 
+                          className="absolute -inset-1 rounded-full opacity-75 group-hover:opacity-100 transition-opacity"
+                          style={{
+                            background: 'conic-gradient(from 0deg, #ef4444, #eab308, #22c55e, #3b82f6, #ef4444)',
+                            animation: 'spin 3s linear infinite'
+                          }}
+                        />
+                      )}
+                      <div className={`relative w-10 h-10 rounded-full overflow-hidden border-2 ${user.is_admin ? 'border-transparent' : 'border-white/20'} group-hover:border-purple-500/50 transition-all duration-300`}>
+                        {user.profile_image ? (
+                          <Image
+                            src={user.profile_image}
+                            alt={user.username || 'User'}
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                            <span className="text-white font-bold text-sm">{user.username?.charAt(0)?.toUpperCase() || 'U'}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </Link>
                   <Button
                     onClick={handleLogout}
@@ -474,7 +499,32 @@ export default function Navigation() {
                           onClick={() => setIsOpen(false)}
                           className="flex items-center gap-3 text-white p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
                         >
-                          <UserIcon className="w-5 h-5" />
+                          <div className="relative">
+                            {user.is_admin && (
+                              <div 
+                                className="absolute -inset-1 rounded-full opacity-75"
+                                style={{
+                                  background: 'conic-gradient(from 0deg, #ef4444, #eab308, #22c55e, #3b82f6, #ef4444)',
+                                  animation: 'spin 3s linear infinite'
+                                }}
+                              />
+                            )}
+                            <div className={`relative w-10 h-10 rounded-full overflow-hidden border-2 ${user.is_admin ? 'border-transparent' : 'border-white/20'}`}>
+                              {user.profile_image ? (
+                                <Image
+                                  src={user.profile_image}
+                                  alt={user.username || 'User'}
+                                  width={40}
+                                  height={40}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                                  <span className="text-white font-bold text-sm">{user.username?.charAt(0)?.toUpperCase() || 'U'}</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
                           <span>{user.username}</span>
                         </Link>
                         <Button
