@@ -8,6 +8,8 @@ export interface StudentUser {
   is_admin: boolean
   is_banned: boolean
   created_at: string
+  profile_image?: string
+  email?: string
   Authorized?: boolean // Google Drive authorization status
 }
 
