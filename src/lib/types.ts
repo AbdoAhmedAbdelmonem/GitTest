@@ -8,6 +8,8 @@ export interface User {
   is_admin: boolean
   is_banned: boolean
   created_at: string
+  profile_image?: string
+  email?: string
 }
 
 export interface Quiz {
