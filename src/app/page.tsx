@@ -9,12 +9,13 @@ import { BookOpen, Shield, Brain, Database, Award, Hospital, Cloud, ServerCrash,
 import CreativeFeatureSlider from "@/components/creative-feature-slider"
 import ScrollAnimatedSection from "@/components/scroll-animated-section"
 import Navigation from "@/components/navigation"
-import Image from "next/image"
 import MagicSearch from "@/components/magic-search"
 import Link from "next/link"
+import Image from "next/image"
 import { getStudentSession } from "@/lib/auth"
 import { useEffect, useState } from "react"
 import GsapStackedCards from "@/components/gsap-stacked-cards"
+import AnimatedParticles from "@/components/animated-particles"
 
 const specializations = [
   {
@@ -147,7 +148,17 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#030303]">
+    <div className="min-h-screen bg-[#030303] relative overflow-hidden">
+      {/* Animated Particles Background */}
+      <AnimatedParticles />
+      
+      {/* Gradient Orbs */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-3/4 -right-32 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+      </div>
+
       {/* Navigation */}
       <Navigation />
 
@@ -174,7 +185,7 @@ export default function HomePage() {
           ))}
         </div>
       </div>
-      
+
       {/* Magic Search Section */}
       <ScrollAnimatedSection className="py-12 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4">
