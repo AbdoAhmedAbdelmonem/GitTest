@@ -44,17 +44,6 @@
     "day": "monday"
   },
   {
-    "level": ["3","4"],
-    "subject": "Distributed data analytics",
-    "duration": 2,
-    "start": "13:00",
-    "end": "15:00",
-    "instructor": "Prof. Hatem AbdelQader",
-    "code": "02-24-01406",
-    "date": "22 dec 2025",
-    "day": "monday"
-  },
-  {
     "level": "2",
     "subject": "Innovation & Entrepreneurship",
     "duration": 2,
@@ -362,4 +351,5 @@
     "date": "14 jan 2026",
     "day": "wednesday"
   }
+
 ]
