@@ -16,6 +16,7 @@ import { getStudentSession } from "@/lib/auth"
 import { useEffect, useState } from "react"
 import GsapStackedCards from "@/components/gsap-stacked-cards"
 import AnimatedParticles from "@/components/animated-particles"
+import NextExams from '@/components/next-exams';
 
 const specializations = [
   {
@@ -77,9 +78,9 @@ const specializations = [
 
 const stats = [
   { icon: BookOpen, label: "Courses Available", value: 200, suffix: "" },
-  { icon: Award, label: "Solved Quizzes", value: 36040, suffix: "" },
+  { icon: Award, label: "Solved Quizzes", value: 30000, suffix: "" },
   { icon: BookOpenCheck, label: "Available Quizzes", value: 140, suffix: "+" },
-  { icon: ServerCrash , label: "Million Requests", value: 3.6, suffix: "M" },
+  { icon: ServerCrash , label: "Million Requests", value: 1.25, suffix: "M" },
 ]
 
 interface LevelStat {
@@ -186,6 +187,10 @@ export default function HomePage() {
         </div>
       </div>
 
+      <div className="container mx-auto py-8">
+        <NextExams />
+      </div>
+      
       {/* Magic Search Section */}
       <ScrollAnimatedSection className="py-12 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4">
