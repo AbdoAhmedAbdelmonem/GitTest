@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Calendar, Clock, BookOpen, GraduationCap, AlertCircle, Sparkles, Timer } from 'lucide-react';
+import Image from 'next/image';
 import examsData from '@/data/final.json';
 
 interface Exam {
@@ -169,7 +170,21 @@ const NextExams = () => {
   }
 
   return (
-    <div className="space-y-8 m-8">
+    <div className="space-y-6 m-8">
+      {/* Meme Image */}
+      <div className="flex justify-center mb-6">
+        <div className="relative p-1 rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-fuchsia-500 animate-pulse">
+          <div className="relative w-32 h-32 bg-black/90 rounded-xl overflow-hidden">
+            <Image 
+              src="/time.png" 
+              alt="Time is running!" 
+              fill
+              className="object-contain drop-shadow-2xl p-2"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Premium Header */}
       <div className="relative">
         <div className="flex items-center justify-between flex-wrap gap-4">
@@ -226,16 +241,16 @@ const NextExams = () => {
               {/* Glow effect */}
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative p-6 space-y-4">
+              <div className="relative p-4 space-y-3">
                 {/* Header: Level Badge & Urgency */}
                 <div className="flex items-start justify-between gap-2">
-                  <div className={`px-3 py-1.5 rounded-lg border ${colors.badge} backdrop-blur-sm font-semibold text-xs`}>
+                  <div className={`px-2 py-1 rounded-lg border ${colors.badge} backdrop-blur-sm font-semibold text-xs`}>
                     Level {formatLevel(exam.level)}
                   </div>
                   
                   {isUrgent && (
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/30 border border-red-500/50 backdrop-blur-sm animate-pulse">
-                      <AlertCircle className="w-3.5 h-3.5 text-red-300" />
+                    <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-red-500/30 border border-red-500/50 backdrop-blur-sm animate-pulse">
+                      <AlertCircle className="w-3 h-3 text-red-300" />
                       <span className="text-xs font-bold text-red-200">URGENT</span>
                     </div>
                   )}
@@ -243,7 +258,7 @@ const NextExams = () => {
 
                 {/* Subject Title */}
                 <div>
-                  <h3 className={`text-2xl font-black leading-tight bg-gradient-to-r ${colors.text} bg-clip-text text-transparent mb-2`}>
+                  <h3 className={`text-xl font-black leading-tight bg-gradient-to-r ${colors.text} bg-clip-text text-transparent mb-1.5`}>
                     {exam.subject}
                   </h3>
                   <div className="flex items-center gap-2 text-sm text-white/60">
@@ -252,14 +267,14 @@ const NextExams = () => {
                   </div>
                 </div>
 
-                {/* Countdown Timer - Large Display */}
-                <div className="py-6 px-4 rounded-xl bg-black/20 border border-white/10 backdrop-blur-sm">
-                  <div className="text-center space-y-2">
+                {/* Countdown Timer - Compact Display */}
+                <div className="py-4 px-3 rounded-xl bg-black/20 border border-white/10 backdrop-blur-sm">
+                  <div className="text-center space-y-1.5">
                     <div className="text-xs text-white/40 uppercase tracking-wider font-semibold">Time Until Exam</div>
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex items-center justify-center gap-1.5">
                       {timeUntil.days > 0 && (
                         <div className="flex flex-col items-center">
-                          <div className={`text-3xl font-black bg-gradient-to-r ${colors.text} bg-clip-text text-transparent`}>
+                          <div className={`text-2xl font-black bg-gradient-to-r ${colors.text} bg-clip-text text-transparent`}>
                             {timeUntil.days}
                           </div>
                           <div className="text-xs text-white/40">days</div>
@@ -269,23 +284,23 @@ const NextExams = () => {
                         <>
                           <div className="text-2xl text-white/20">:</div>
                           <div className="flex flex-col items-center">
-                            <div className={`text-3xl font-black bg-gradient-to-r ${colors.text} bg-clip-text text-transparent`}>
+                            <div className={`text-2xl font-black bg-gradient-to-r ${colors.text} bg-clip-text text-transparent`}>
                               {timeUntil.hours}
                             </div>
                             <div className="text-xs text-white/40">hours</div>
                           </div>
                         </>
                       )}
-                      <div className="text-2xl text-white/20">:</div>
+                      <div className="text-xl text-white/20">:</div>
                       <div className="flex flex-col items-center">
-                        <div className={`text-3xl font-black bg-gradient-to-r ${colors.text} bg-clip-text text-transparent`}>
+                        <div className={`text-2xl font-black bg-gradient-to-r ${colors.text} bg-clip-text text-transparent`}>
                           {String(timeUntil.minutes).padStart(2, '0')}
                         </div>
                         <div className="text-xs text-white/40">min</div>
                       </div>
-                      <div className="text-2xl text-white/20">:</div>
+                      <div className="text-xl text-white/20">:</div>
                       <div className="flex flex-col items-center">
-                        <div className={`text-3xl font-black bg-gradient-to-r ${colors.text} bg-clip-text text-transparent`}>
+                        <div className={`text-2xl font-black bg-gradient-to-r ${colors.text} bg-clip-text text-transparent`}>
                           {String(timeUntil.seconds).padStart(2, '0')}
                         </div>
                         <div className="text-xs text-white/40">sec</div>
