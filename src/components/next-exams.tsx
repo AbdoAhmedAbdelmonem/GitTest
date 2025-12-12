@@ -169,7 +169,7 @@ const NextExams = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 m-8">
       {/* Premium Header */}
       <div className="relative">
         <div className="flex items-center justify-between flex-wrap gap-4">
