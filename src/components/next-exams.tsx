@@ -197,7 +197,7 @@ const NextExams = () => {
             </div>
             <div>
               <h2 className="text-4xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-fuchsia-400 bg-clip-text text-transparent">
-                Upcoming Exams 
+                Upcoming Final Exams
               </h2>
               <p className="text-sm text-purple-200/60 mt-1">
                 {upcomingExams.length} exam{upcomingExams.length > 1 ? 's' : ''} on your schedule (General Department)
