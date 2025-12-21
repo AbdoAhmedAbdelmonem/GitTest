@@ -1111,6 +1111,7 @@ export default function TournamentPage() {
                       <p className="text-white/60 text-xs mt-1 md:mt-2">
                         Higher scores from faster completion and instant mode
                         give you an edge in the tournament!
+                        <br>
                         Term *AR stands for 'After Reduction'
                       </p>
                     </div>
@@ -1315,6 +1316,7 @@ export default function TournamentPage() {
     </div>
   );
 }
+
 
 
 
