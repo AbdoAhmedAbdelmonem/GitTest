@@ -1080,39 +1080,40 @@ export default function TournamentPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 mt-2 md:mt-3">
                         <div>
                           <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">
-                            Duration Points:
+                            Duration Points (*AR):
                           </p>
                           <ul className="text-xs space-y-1 text-white/70">
-                            <li>• 1 minute: +5 pts (*AR)</li>
-                            <li>• 5 minutes: +4.5 pts (*AR)</li>
-                            <li>• 15 minutes: +4 pts (*AR)</li>
-                            <li>• 30 minutes: +3.5 pts (*AR)</li>
-                            <li>• 60 minutes: +3 pts (*AR)</li>
-                            <li>• Unlimited: +2.5 pts (*AR)</li>
+                            <li>• 1 minute: +5 pts</li>
+                            <li>• 5 minutes: +4.5 pts</li>
+                            <li>• 15 minutes: +4 pts </li>
+                            <li>• 30 minutes: +3.5 pts</li>
+                            <li>• 60 minutes: +3 pts </li>
+                            <li>• Unlimited: +2.5 pts</li>
                           </ul>
                         </div>
                         <div>
                           <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">
-                            Mode Points:
+                            Mode Points (*AR):
                           </p>
                           <ul className="text-xs space-y-1 text-white/70">
-                            <li>• Instant Feedback: +1.5 pts (*AR)</li>
-                            <li>• Traditional: +1.2 pts (*AR)</li>
+                            <li>• Instant Feedback: +1.5 pts</li>
+                            <li>• Traditional: +1.2 pts</li>
                           </ul>
                           <p className="text-white/80 font-medium mb-1 mt-1 md:mt-2 text-xs md:text-sm">
-                            Completion Points:
+                            Completion Points (*AR):
                           </p>
                           <ul className="text-xs space-y-1 text-white/70">
-                            <li>• Completed: +2 pts (*AR)</li>
-                            <li>• Timed Out: +1.5 pts (*AR)</li>
+                            <li>• Completed: +2 pts</li>
+                            <li>• Timed Out: +1.5 pts</li>
                           </ul>
                         </div>
                       </div>
                       <p className="text-white/60 text-xs mt-1 md:mt-2">
                         Higher scores from faster completion and instant mode
                         give you an edge in the tournament!
-                        <br>
-                        Term *AR stands for 'After Reduction'
+                        <br />
+                        <br />
+                         *AR stands for After Reduction
                       </p>
                     </div>
                   </div>
@@ -1316,9 +1317,3 @@ export default function TournamentPage() {
     </div>
   );
 }
-
-
-
-
-
-
