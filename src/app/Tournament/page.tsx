@@ -1083,13 +1083,16 @@ export default function TournamentPage() {
                             Duration Points:
                           </p>
                           <ul className="text-xs space-y-1 text-white/70">
-                            <li>• 1 minute: +5 pts</li>
-                            <li>• 5 minutes: +4.5 pts</li>
-                            <li>• 15 minutes: +4 pts</li>
-                            <li>• 30 minutes: +3.5 pts</li>
-                            <li>• 60 minutes: +3 pts</li>
-                            <li>• Unlimited: +2.5 pts</li>
+                            <li>• 1 minute: +5 pts (*AR)</li>
+                            <li>• 5 minutes: +4.5 pts (*AR)</li>
+                            <li>• 15 minutes: +4 pts (*AR)</li>
+                            <li>• 30 minutes: +3.5 pts (*AR)</li>
+                            <li>• 60 minutes: +3 pts (*AR)</li>
+                            <li>• Unlimited: +2.5 pts (*AR)</li>
                           </ul>
+                          <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">
+                            Term *AR stands for 'After Reduction'
+                          </p>
                         </div>
                         <div>
                           <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">
@@ -1314,3 +1317,4 @@ export default function TournamentPage() {
     </div>
   );
 }
+
