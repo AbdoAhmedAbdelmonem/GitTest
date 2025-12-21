@@ -1103,7 +1103,7 @@ export const departmentData: { [key: string]: Department } = {
                   },
                   {
                     id: "WP_MID",
-                    name: "Midterm",
+                    name: "Before Midterm Revision",
                     code: "WP_MID",
                     duration: "OP", // in minutes
                     questions: 90,
@@ -1111,7 +1111,7 @@ export const departmentData: { [key: string]: Department } = {
                   },
                   {
                     id: "WP_FINAL",
-                    name: "Final",
+                    name: "After Midterm Revesion",
                     code: "WP_FINAL",
                     duration: "OP", // in minutes
                     questions: 50,
@@ -6545,5 +6545,6 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
 
 
