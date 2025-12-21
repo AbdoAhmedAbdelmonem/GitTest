@@ -1053,6 +1053,78 @@ export const departmentData: { [key: string]: Department } = {
                     questions: 30,
                     jsonFile: "/quizzes/Web/WP_007.json"
                   },
+                  {
+                    id: "WP_008",
+                    name: "Fetch API, HTTP Methods",
+                    code: "WP_008",
+                    duration: "OP", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/Web/WP_008.json"
+                  },
+                  {
+                    id: "WP_009",
+                    name: "Promises Async/Await",
+                    code: "WP_009",
+                    duration: "OP", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/Web/WP_009.json"
+                  },
+                  {
+                    id: "WP_010",
+                    name: "Forms and Validation",
+                    code: "WP_010",
+                    duration: "OP", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/Web/WP_010.json"
+                  },
+                  {
+                    id: "WP_011",
+                    name: "JSON and Storage",
+                    code: "WP_011",
+                    duration: "OP", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/Web/WP_011.json"
+                  },
+                  {
+                    id: "WP_012",
+                    name: "Browser Object Model",
+                    code: "WP_012",
+                    duration: "OP", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/Web/WP_012.json"
+                  },
+                  {
+                    id: "WP_013",
+                    name: "ES6 and Node.js Basics",
+                    code: "WP_013",
+                    duration: "OP", // in minutes
+                    questions: 30,
+                    jsonFile: "/quizzes/Web/WP_013.json"
+                  },
+                  {
+                    id: "WP_MID",
+                    name: "Midterm",
+                    code: "WP_MID",
+                    duration: "OP", // in minutes
+                    questions: 90,
+                    jsonFile: "/quizzes/Web/WP_MID.json"
+                  },
+                  {
+                    id: "WP_FINAL",
+                    name: "Final",
+                    code: "WP_FINAL",
+                    duration: "OP", // in minutes
+                    questions: 50,
+                    jsonFile: "/quizzes/Web/WP_FINAL.json"
+                  },
+                  {
+                    id: "WP_STAR",
+                    name: "Final Revision Quiz",
+                    code: "WP_STAR",
+                    duration: "OP", // in minutes
+                    questions: 140,
+                    jsonFile: "/quizzes/Web/WP_STAR.json"
+                  },
                 ]
               },
             },
@@ -6473,4 +6545,5 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
 
