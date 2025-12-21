@@ -1,45 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+import { Card,CardContent,CardHeader,CardTitle,CardDescription } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import {
-  Trophy,
-  Users,
-  Info,
-  Crown,
-  Star,
-  Timer,
-  Sparkles,
-  Award,
-  Gem,
-  Eye,
-  User,
-  TrendingUp,
-  Target,
-  Zap,
-} from "lucide-react";
+import { Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription } from "@/components/ui/dialog";
+import { Trophy,Users,Info,Crown,Star,Timer,Sparkles,Award,Gem,Eye,User,TrendingUp,Target,Zap } from "lucide-react";
 import { useEffect, useState } from "react";
-import {
-  getLeaderboardData,
-  LeaderboardEntry,
-  getUserTournamentStats,
-  UserTournamentStats,
-} from "@/lib/tournament";
+import { getLeaderboardData,LeaderboardEntry,getUserTournamentStats,UserTournamentStats } from "@/lib/tournament";
 import ScrollAnimatedSection from "@/components/scroll-animated-section";
 import Navigation from "@/components/navigation";
 
@@ -1316,6 +1284,7 @@ export default function TournamentPage() {
     </div>
   );
 }
+
 
 
 
