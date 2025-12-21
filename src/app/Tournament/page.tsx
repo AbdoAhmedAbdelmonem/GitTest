@@ -1090,9 +1090,8 @@ export default function TournamentPage() {
                             <li>• 60 minutes: +3 pts (*AR)</li>
                             <li>• Unlimited: +2.5 pts (*AR)</li>
                           </ul>
-                          <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">
+                          <br>
                             Term *AR stands for 'After Reduction'
-                          </p>
                         </div>
                         <div>
                           <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">
@@ -1317,4 +1316,5 @@ export default function TournamentPage() {
     </div>
   );
 }
+
 
