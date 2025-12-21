@@ -1090,29 +1090,28 @@ export default function TournamentPage() {
                             <li>• 60 minutes: +3 pts (*AR)</li>
                             <li>• Unlimited: +2.5 pts (*AR)</li>
                           </ul>
-                          <br>
-                            Term *AR stands for 'After Reduction'
                         </div>
                         <div>
                           <p className="text-white/80 font-medium mb-1 text-xs md:text-sm">
                             Mode Points:
                           </p>
                           <ul className="text-xs space-y-1 text-white/70">
-                            <li>• Instant Feedback: +1.5 pts</li>
-                            <li>• Traditional: +1.2 pts</li>
+                            <li>• Instant Feedback: +1.5 pts (*AR)</li>
+                            <li>• Traditional: +1.2 pts (*AR)</li>
                           </ul>
                           <p className="text-white/80 font-medium mb-1 mt-1 md:mt-2 text-xs md:text-sm">
                             Completion Points:
                           </p>
                           <ul className="text-xs space-y-1 text-white/70">
-                            <li>• Completed: +2 pts</li>
-                            <li>• Timed Out: +1.5 pts</li>
+                            <li>• Completed: +2 pts (*AR)</li>
+                            <li>• Timed Out: +1.5 pts (*AR)</li>
                           </ul>
                         </div>
                       </div>
                       <p className="text-white/60 text-xs mt-1 md:mt-2">
                         Higher scores from faster completion and instant mode
                         give you an edge in the tournament!
+                        Term *AR stands for 'After Reduction'
                       </p>
                     </div>
                   </div>
@@ -1316,5 +1315,6 @@ export default function TournamentPage() {
     </div>
   );
 }
+
 
 
