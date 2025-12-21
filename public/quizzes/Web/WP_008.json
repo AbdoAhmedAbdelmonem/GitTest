@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is the Fetch API used for in JavaScript?",
+    "options": [
+      "A) Making HTTP requests to retrieve or send data",
+      "B) Fetching CSS styles from external sources",
+      "C) Downloading files to the user's computer",
+      "D) Creating new HTML elements"
+    ],
+    "answer": "A) Making HTTP requests to retrieve or send data",
+    "explanation": "The Fetch API provides a modern JavaScript interface for making HTTP requests. It's used to interact with servers, retrieve data, and submit information. It replaces the older XMLHttpRequest method.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What does the fetch() function return?",
+    "options": [
+      "A) A string with the response data",
+      "B) A Promise that resolves to a Response object",
+      "C) An array of data",
+      "D) undefined"
+    ],
+    "answer": "B) A Promise that resolves to a Response object",
+    "explanation": "fetch() returns a Promise that resolves to a Response object representing the response to the request. This allows for asynchronous handling of the network request.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Which method converts a Response object to JSON?",
+    "options": [
+      "A) response.toJSON()",
+      "B) response.json()",
+      "C) JSON.parse(response)",
+      "D) response.getData()"
+    ],
+    "answer": "B) response.json()",
+    "explanation": "The response.json() method reads the response body and returns a Promise that resolves with the result of parsing the body text as JSON.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is AJAX an acronym for?",
+    "options": [
+      "A) Asynchronous JavaScript And XML",
+      "B) Advanced JavaScript API eXtension",
+      "C) Automated JavaScript Application eXchange",
+      "D) Application JavaScript And XHTML"
+    ],
+    "answer": "A) Asynchronous JavaScript And XML",
+    "explanation": "AJAX stands for Asynchronous JavaScript And XML. It's a set of web development techniques that allow web applications to send and receive data asynchronously without interfering with the display and behavior of the page.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of AJAX?",
+    "options": [
+      "A) It makes pages load faster initially",
+      "B) It allows updating parts of a page without reloading the entire page",
+      "C) It reduces the amount of JavaScript needed",
+      "D) It eliminates the need for a server"
+    ],
+    "answer": "B) It allows updating parts of a page without reloading the entire page",
+    "explanation": "AJAX enables web pages to update content dynamically without requiring a full page reload. This improves user experience by making web applications feel more responsive and desktop-like.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which HTTP method is typically used to retrieve data from a server?",
+    "options": [
+      "A) POST",
+      "B) PUT",
+      "C) GET",
+      "D) DELETE"
+    ],
+    "answer": "C) GET",
+    "explanation": "GET is the HTTP method used to retrieve data from a server. It requests data from a specified resource and should only be used to request data, not to modify it.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which HTTP method is used to send data to create a new resource?",
+    "options": [
+      "A) GET",
+      "B) POST",
+      "C) PATCH",
+      "D) OPTIONS"
+    ],
+    "answer": "B) POST",
+    "explanation": "POST is used to submit data to be processed to a specified resource. It's commonly used when submitting form data or uploading files, and typically results in creating a new resource on the server.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What is the correct syntax for a basic fetch request?",
+    "options": [
+      "A) fetch.get('url')",
+      "B) fetch('url')",
+      "C) new Fetch('url')",
+      "D) Fetch.request('url')"
+    ],
+    "answer": "B) fetch('url')",
+    "explanation": "The basic syntax for a fetch request is fetch('url'). This initiates a GET request by default and returns a Promise that resolves to the Response object.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "How do you specify the HTTP method in a fetch request?",
+    "options": [
+      "A) fetch('url', { method: 'POST' })",
+      "B) fetch.post('url')",
+      "C) fetch('url').method('POST')",
+      "D) fetch('POST', 'url')"
+    ],
+    "answer": "A) fetch('url', { method: 'POST' })",
+    "explanation": "The HTTP method is specified in the options object as the second parameter to fetch(). The method property can be 'GET', 'POST', 'PUT', 'DELETE', etc.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What does the .then() method do when chained to a Promise?",
+    "options": [
+      "A) Cancels the Promise",
+      "B) Handles the resolved value of the Promise",
+      "C) Converts the Promise to a string",
+      "D) Delays the Promise execution"
+    ],
+    "answer": "B) Handles the resolved value of the Promise",
+    "explanation": "The .then() method is used to schedule callbacks to be called when the Promise is resolved successfully. It takes a function that receives the resolved value as its argument.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What does the .catch() method do in Promise chaining?",
+    "options": [
+      "A) Catches and handles any errors or rejections",
+      "B) Pauses the execution",
+      "C) Retries the failed request",
+      "D) Converts errors to warnings"
+    ],
+    "answer": "A) Catches and handles any errors or rejections",
+    "explanation": "The .catch() method handles Promise rejections and any errors thrown in the preceding .then() handlers. It's essential for proper error handling in asynchronous code.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the 'Content-Type' header in HTTP requests?",
+    "options": [
+      "A) To specify the length of the content",
+      "B) To indicate the media type of the request/response body",
+      "C) To authenticate the user",
+      "D) To set the page title"
+    ],
+    "answer": "B) To indicate the media type of the request/response body",
+    "explanation": "The Content-Type header indicates the media type of the resource or data. For example, 'application/json' indicates JSON data, and 'text/html' indicates HTML content.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which Content-Type is used when sending JSON data?",
+    "options": [
+      "A) text/json",
+      "B) application/json",
+      "C) data/json",
+      "D) json/application"
+    ],
+    "answer": "B) application/json",
+    "explanation": "The correct Content-Type for JSON data is 'application/json'. This tells the server that the request body contains JSON-formatted data that needs to be parsed accordingly.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "How do you send JSON data in the body of a fetch POST request?",
+    "options": [
+      "A) body: data",
+      "B) body: JSON.stringify(data)",
+      "C) data: JSON.stringify(data)",
+      "D) json: data"
+    ],
+    "answer": "B) body: JSON.stringify(data)",
+    "explanation": "When sending JSON data in a fetch request, you must convert the JavaScript object to a JSON string using JSON.stringify(). The body property accepts the stringified data.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What HTTP status code indicates a successful request?",
+    "options": [
+      "A) 404",
+      "B) 500",
+      "C) 200",
+      "D) 301"
+    ],
+    "answer": "C) 200",
+    "explanation": "HTTP status code 200 means 'OK' and indicates that the request was successful. 404 is 'Not Found', 500 is 'Internal Server Error', and 301 is 'Moved Permanently'.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What does HTTP status code 404 mean?",
+    "options": [
+      "A) Server Error",
+      "B) Unauthorized",
+      "C) Not Found",
+      "D) Bad Request"
+    ],
+    "answer": "C) Not Found",
+    "explanation": "HTTP 404 means the requested resource could not be found on the server. This typically occurs when a URL is incorrect or the resource has been moved or deleted.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What does HTTP status code 500 indicate?",
+    "options": [
+      "A) Client-side error",
+      "B) Internal Server Error",
+      "C) Resource moved",
+      "D) Authentication required"
+    ],
+    "answer": "B) Internal Server Error",
+    "explanation": "HTTP 500 indicates an Internal Server Error. This means something went wrong on the server side while processing the request, and the server couldn't complete it.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which property of the Response object indicates if the request was successful?",
+    "options": [
+      "A) response.success",
+      "B) response.ok",
+      "C) response.completed",
+      "D) response.valid"
+    ],
+    "answer": "B) response.ok",
+    "explanation": "The response.ok property returns true if the response status code is in the range 200-299 (successful responses), and false otherwise.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is XMLHttpRequest?",
+    "options": [
+      "A) A method to create XML files",
+      "B) The older API for making HTTP requests before Fetch",
+      "C) A library for parsing XML",
+      "D) An HTML element for requests"
+    ],
+    "answer": "B) The older API for making HTTP requests before Fetch",
+    "explanation": "XMLHttpRequest is the original JavaScript API for making asynchronous HTTP requests. While still functional, it has been largely superseded by the more modern and cleaner Fetch API.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What is the correct way to handle multiple sequential fetch requests?",
+    "options": [
+      "A) Nest multiple fetch calls inside each other",
+      "B) Chain .then() methods to handle sequential requests",
+      "C) Call all fetch requests simultaneously without chaining",
+      "D) Use a for loop with fetch"
+    ],
+    "answer": "B) Chain .then() methods to handle sequential requests",
+    "explanation": "Chaining .then() methods allows you to execute fetch requests sequentially, where each subsequent request waits for the previous one to complete before executing.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What does the response.status property contain?",
+    "options": [
+      "A) The URL of the request",
+      "B) The HTTP status code number",
+      "C) The response body",
+      "D) The request method used"
+    ],
+    "answer": "B) The HTTP status code number",
+    "explanation": "response.status contains the HTTP status code as a number (e.g., 200, 404, 500). This can be used to check the exact status of the response.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is CORS in web development?",
+    "options": [
+      "A) Cross-Origin Resource Sharing",
+      "B) Client-Origin Request System",
+      "C) Common Object Request Standard",
+      "D) Cross-Object Resource Server"
+    ],
+    "answer": "A) Cross-Origin Resource Sharing",
+    "explanation": "CORS (Cross-Origin Resource Sharing) is a security mechanism that allows or restricts web pages from making requests to a different domain than the one that served the original page.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "What happens if a CORS request is blocked?",
+    "options": [
+      "A) The page crashes",
+      "B) The browser blocks the response from being accessed",
+      "C) The server automatically allows the request",
+      "D) A popup asks for permission"
+    ],
+    "answer": "B) The browser blocks the response from being accessed",
+    "explanation": "When CORS blocks a request, the browser prevents the JavaScript code from accessing the response. The request may still be sent, but the response is not accessible to the script.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "Which method reads the response body as plain text?",
+    "options": [
+      "A) response.json()",
+      "B) response.text()",
+      "C) response.string()",
+      "D) response.read()"
+    ],
+    "answer": "B) response.text()",
+    "explanation": "The response.text() method reads the response body and returns a Promise that resolves with the text representation of the body content.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of API endpoints?",
+    "options": [
+      "A) To style web pages",
+      "B) To provide specific URLs where data or services can be accessed",
+      "C) To store local data",
+      "D) To validate forms"
+    ],
+    "answer": "B) To provide specific URLs where data or services can be accessed",
+    "explanation": "API endpoints are specific URLs that represent resources or functions on a server. They define where and how client applications can access specific data or services.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What does REST stand for?",
+    "options": [
+      "A) Representational State Transfer",
+      "B) Remote State Transmission",
+      "C) Request Server Transfer",
+      "D) Resource State Technology"
+    ],
+    "answer": "A) Representational State Transfer",
+    "explanation": "REST stands for Representational State Transfer. It's an architectural style for designing networked applications that uses standard HTTP methods to interact with resources.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "Which HTTP method is typically used to update an existing resource?",
+    "options": [
+      "A) GET",
+      "B) POST",
+      "C) PUT or PATCH",
+      "D) DELETE"
+    ],
+    "answer": "C) PUT or PATCH",
+    "explanation": "PUT is used to update an entire resource, while PATCH is used for partial updates. Both are appropriate for modifying existing resources on the server.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What is the difference between PUT and PATCH?",
+    "options": [
+      "A) No difference, they are the same",
+      "B) PUT replaces the entire resource, PATCH updates partially",
+      "C) PATCH deletes resources, PUT creates them",
+      "D) PUT is for GET requests, PATCH is for POST"
+    ],
+    "answer": "B) PUT replaces the entire resource, PATCH updates partially",
+    "explanation": "PUT replaces the entire resource with the new data provided, while PATCH only updates the specific fields that are sent, leaving other fields unchanged.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What does the DELETE HTTP method do?",
+    "options": [
+      "A) Deletes the browser history",
+      "B) Removes a specified resource from the server",
+      "C) Clears the cache",
+      "D) Removes JavaScript variables"
+    ],
+    "answer": "B) Removes a specified resource from the server",
+    "explanation": "The DELETE method requests that the server remove the specified resource. It's used to delete data on the server, such as removing a user or deleting a post.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the .finally() method in Promise chaining?",
+    "options": [
+      "A) To execute code regardless of whether the Promise was resolved or rejected",
+      "B) To cancel the Promise",
+      "C) To retry failed requests",
+      "D) To convert the Promise to synchronous code"
+    ],
+    "answer": "A) To execute code regardless of whether the Promise was resolved or rejected",
+    "explanation": "The .finally() method executes its callback whether the Promise is fulfilled or rejected. It's useful for cleanup actions like hiding loading indicators.",
+    "image": null
+  }
+]

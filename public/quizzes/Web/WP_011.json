@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is JSON?",
+    "options": [
+      "A) JavaScript Object Notation",
+      "B) Java Serialized Object Notation",
+      "C) JavaScript Online Network",
+      "D) Java Standard Object Naming"
+    ],
+    "answer": "A) JavaScript Object Notation",
+    "explanation": "JSON stands for JavaScript Object Notation. It's a lightweight data-interchange format that's easy for humans to read and write, and easy for machines to parse and generate.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What method converts a JavaScript object to a JSON string?",
+    "options": [
+      "A) JSON.parse()",
+      "B) JSON.stringify()",
+      "C) JSON.convert()",
+      "D) Object.toJSON()"
+    ],
+    "answer": "B) JSON.stringify()",
+    "explanation": "JSON.stringify() converts a JavaScript object or value to a JSON string. This is useful when sending data to a server or storing it.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What method converts a JSON string to a JavaScript object?",
+    "options": [
+      "A) JSON.parse()",
+      "B) JSON.stringify()",
+      "C) JSON.decode()",
+      "D) JSON.toObject()"
+    ],
+    "answer": "A) JSON.parse()",
+    "explanation": "JSON.parse() parses a JSON string and constructs the JavaScript value or object described by the string.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "Which of the following is valid JSON?",
+    "options": [
+      "A) {name: 'John'}",
+      "B) {\"name\": \"John\"}",
+      "C) {'name': 'John'}",
+      "D) {name: John}"
+    ],
+    "answer": "B) {\"name\": \"John\"}",
+    "explanation": "Valid JSON requires double quotes for both keys and string values. Single quotes and unquoted keys are not valid in JSON format.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is localStorage in web development?",
+    "options": [
+      "A) Server-side storage",
+      "B) Browser storage that persists even after the browser is closed",
+      "C) Temporary memory cache",
+      "D) A database system"
+    ],
+    "answer": "B) Browser storage that persists even after the browser is closed",
+    "explanation": "localStorage provides a way to store key-value pairs in the browser that persists even after the browser window is closed and reopened.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is sessionStorage?",
+    "options": [
+      "A) Permanent browser storage",
+      "B) Storage that lasts only for the duration of the page session",
+      "C) Server-side session data",
+      "D) Database storage"
+    ],
+    "answer": "B) Storage that lasts only for the duration of the page session",
+    "explanation": "sessionStorage is similar to localStorage but data is cleared when the browser tab is closed. Each tab has its own session storage.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "How do you save data to localStorage?",
+    "options": [
+      "A) localStorage.save('key', 'value')",
+      "B) localStorage.setItem('key', 'value')",
+      "C) localStorage['key'] = 'value'",
+      "D) Both B and C are correct"
+    ],
+    "answer": "D) Both B and C are correct",
+    "explanation": "You can set localStorage values using either localStorage.setItem('key', 'value') or bracket notation localStorage['key'] = 'value'. The setItem method is more commonly used.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "How do you retrieve data from localStorage?",
+    "options": [
+      "A) localStorage.getItem('key')",
+      "B) localStorage.get('key')",
+      "C) localStorage.read('key')",
+      "D) localStorage.fetch('key')"
+    ],
+    "answer": "A) localStorage.getItem('key')",
+    "explanation": "localStorage.getItem('key') retrieves the value associated with the given key. It returns null if the key doesn't exist.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "How do you remove a specific item from localStorage?",
+    "options": [
+      "A) localStorage.delete('key')",
+      "B) localStorage.removeItem('key')",
+      "C) localStorage.clear('key')",
+      "D) delete localStorage['key']"
+    ],
+    "answer": "B) localStorage.removeItem('key')",
+    "explanation": "localStorage.removeItem('key') removes the specified key-value pair from localStorage. The clear() method removes all items instead.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "How do you clear all data from localStorage?",
+    "options": [
+      "A) localStorage.removeAll()",
+      "B) localStorage.clear()",
+      "C) localStorage.deleteAll()",
+      "D) localStorage.empty()"
+    ],
+    "answer": "B) localStorage.clear()",
+    "explanation": "localStorage.clear() removes all key-value pairs from localStorage for that domain, completely clearing the storage.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What data types can localStorage store directly?",
+    "options": [
+      "A) All JavaScript data types",
+      "B) Only strings",
+      "C) Only numbers",
+      "D) Objects and arrays"
+    ],
+    "answer": "B) Only strings",
+    "explanation": "localStorage can only store strings. To store objects or arrays, you must first convert them to strings using JSON.stringify(), then parse them back with JSON.parse() when retrieving.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "How do you store an object in localStorage?",
+    "options": [
+      "A) localStorage.setItem('obj', object)",
+      "B) localStorage.setItem('obj', JSON.stringify(object))",
+      "C) localStorage.setObject('key', object)",
+      "D) localStorage.storeObject(object)"
+    ],
+    "answer": "B) localStorage.setItem('obj', JSON.stringify(object))",
+    "explanation": "Since localStorage only stores strings, you must convert objects to JSON strings using JSON.stringify() before storing them.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "How do you retrieve an object from localStorage?",
+    "options": [
+      "A) localStorage.getItem('obj')",
+      "B) JSON.parse(localStorage.getItem('obj'))",
+      "C) localStorage.getObject('obj')",
+      "D) localStorage.parseItem('obj')"
+    ],
+    "answer": "B) JSON.parse(localStorage.getItem('obj'))",
+    "explanation": "Since objects are stored as JSON strings, you must parse them back to objects using JSON.parse() when retrieving from localStorage.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is a cookie in web development?",
+    "options": [
+      "A) A small text file stored on the user's computer by the browser",
+      "B) A type of JavaScript function",
+      "C) A server-side database",
+      "D) A CSS styling property"
+    ],
+    "answer": "A) A small text file stored on the user's computer by the browser",
+    "explanation": "Cookies are small pieces of data stored by websites on a user's browser. They are sent with every HTTP request to the same domain.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the key difference between localStorage and cookies?",
+    "options": [
+      "A) Cookies are sent with every HTTP request, localStorage is not",
+      "B) localStorage is smaller in size",
+      "C) Cookies are more secure",
+      "D) There is no difference"
+    ],
+    "answer": "A) Cookies are sent with every HTTP request, localStorage is not",
+    "explanation": "Cookies are automatically sent with every HTTP request to the domain, adding overhead. localStorage data stays in the browser and must be explicitly sent via JavaScript.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is the typical storage limit for localStorage?",
+    "options": [
+      "A) 4 KB",
+      "B) 5 MB",
+      "C) 50 MB",
+      "D) 500 MB"
+    ],
+    "answer": "B) 5 MB",
+    "explanation": "Most browsers allow localStorage to store approximately 5 MB of data per domain, which is significantly more than the 4 KB limit for cookies.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which values are NOT allowed in JSON?",
+    "options": [
+      "A) undefined and functions",
+      "B) strings and numbers",
+      "C) arrays and objects",
+      "D) booleans and null"
+    ],
+    "answer": "A) undefined and functions",
+    "explanation": "JSON does not support undefined, functions, or symbols. These values are either omitted or converted to null when using JSON.stringify().",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What does JSON.stringify() return when given undefined?",
+    "options": [
+      "A) 'undefined'",
+      "B) undefined",
+      "C) null",
+      "D) An empty string"
+    ],
+    "answer": "B) undefined",
+    "explanation": "JSON.stringify(undefined) returns undefined (not a string). This is because undefined is not a valid JSON value.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is the second parameter of JSON.stringify() used for?",
+    "options": [
+      "A) Error handling",
+      "B) A replacer function or array to filter properties",
+      "C) Setting the encoding",
+      "D) Specifying the data type"
+    ],
+    "answer": "B) A replacer function or array to filter properties",
+    "explanation": "The second parameter of JSON.stringify() can be a function or array that filters and transforms the values being stringified.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What is the third parameter of JSON.stringify() used for?",
+    "options": [
+      "A) Formatting/indentation of the output",
+      "B) Setting encoding",
+      "C) Error handling",
+      "D) Maximum depth"
+    ],
+    "answer": "A) Formatting/indentation of the output",
+    "explanation": "The third parameter (space) adds indentation and line breaks to the output for readability. You can pass a number (spaces) or a string (like '\\t' for tabs).",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What happens if JSON.parse() receives invalid JSON?",
+    "options": [
+      "A) It returns null",
+      "B) It returns undefined",
+      "C) It throws a SyntaxError",
+      "D) It returns an empty object"
+    ],
+    "answer": "C) It throws a SyntaxError",
+    "explanation": "JSON.parse() throws a SyntaxError if the string is not valid JSON. This should be handled with try/catch when parsing untrusted data.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is the storage event used for?",
+    "options": [
+      "A) Detecting changes to localStorage in other windows/tabs of the same origin",
+      "B) Detecting when storage is full",
+      "C) Detecting file uploads",
+      "D) Detecting form submissions"
+    ],
+    "answer": "A) Detecting changes to localStorage in other windows/tabs of the same origin",
+    "explanation": "The storage event fires on window when localStorage is changed in another tab or window of the same origin, allowing synchronization between tabs.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "What property holds the number of items in localStorage?",
+    "options": [
+      "A) localStorage.size",
+      "B) localStorage.length",
+      "C) localStorage.count",
+      "D) localStorage.items"
+    ],
+    "answer": "B) localStorage.length",
+    "explanation": "localStorage.length returns the number of key-value pairs stored in localStorage for the current domain.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "How do you get the key name at a specific index in localStorage?",
+    "options": [
+      "A) localStorage.getKey(index)",
+      "B) localStorage.key(index)",
+      "C) localStorage.keyAt(index)",
+      "D) localStorage.keys[index]"
+    ],
+    "answer": "B) localStorage.key(index)",
+    "explanation": "localStorage.key(index) returns the key name at the specified index. Combined with localStorage.length, this allows iterating through all stored items.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What is Web Storage API?",
+    "options": [
+      "A) An API for file uploads",
+      "B) A mechanism for storing key-value pairs in browsers (localStorage/sessionStorage)",
+      "C) A cloud storage service",
+      "D) A server-side database API"
+    ],
+    "answer": "B) A mechanism for storing key-value pairs in browsers (localStorage/sessionStorage)",
+    "explanation": "The Web Storage API provides mechanisms for storing key-value pairs in browsers more intuitively than using cookies. It includes localStorage and sessionStorage.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "Is localStorage data shared across different browsers on the same computer?",
+    "options": [
+      "A) Yes, all browsers share the same localStorage",
+      "B) No, each browser has its own localStorage",
+      "C) Only if the user is logged in",
+      "D) Only in incognito mode"
+    ],
+    "answer": "B) No, each browser has its own localStorage",
+    "explanation": "Each browser maintains its own localStorage. Data stored in Chrome won't be available in Firefox or other browsers, even for the same domain.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What is IndexedDB used for?",
+    "options": [
+      "A) Simple key-value storage",
+      "B) Storing larger amounts of structured data in the browser",
+      "C) Server-side indexing",
+      "D) Search engine optimization"
+    ],
+    "answer": "B) Storing larger amounts of structured data in the browser",
+    "explanation": "IndexedDB is a low-level API for storing significant amounts of structured data, including files and blobs. It's more powerful than localStorage but more complex.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "Which JSON data type represents true/false values?",
+    "options": [
+      "A) string",
+      "B) number",
+      "C) boolean",
+      "D) binary"
+    ],
+    "answer": "C) boolean",
+    "explanation": "JSON supports boolean values, represented as true or false (lowercase, without quotes). These are valid JSON primitive values.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What does JSON.stringify() do with Date objects?",
+    "options": [
+      "A) Throws an error",
+      "B) Converts them to ISO string format",
+      "C) Ignores them",
+      "D) Converts them to timestamps"
+    ],
+    "answer": "B) Converts them to ISO string format",
+    "explanation": "JSON.stringify() converts Date objects to their ISO 8601 string representation. When parsing back, you need to manually convert them back to Date objects.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "What is the scope of localStorage data?",
+    "options": [
+      "A) Global across all websites",
+      "B) Specific to the origin (protocol, domain, and port)",
+      "C) Specific to each page",
+      "D) Shared across all sub-domains"
+    ],
+    "answer": "B) Specific to the origin (protocol, domain, and port)",
+    "explanation": "localStorage is scoped to the origin, meaning data stored on https://example.com is separate from http://example.com or https://sub.example.com.",
+    "image": null
+  }
+]

@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What are ES6 modules in JavaScript?",
+    "options": [
+      "A) A way to include CSS in JavaScript",
+      "B) A native way to organize code into reusable modules with import/export",
+      "C) A testing framework",
+      "D) A package manager"
+    ],
+    "answer": "B) A native way to organize code into reusable modules with import/export",
+    "explanation": "ES6 modules provide a native JavaScript module system that allows you to export functions, objects, or values from one file and import them into another.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What keyword is used to export a function in ES6 modules?",
+    "options": [
+      "A) module",
+      "B) export",
+      "C) public",
+      "D) share"
+    ],
+    "answer": "B) export",
+    "explanation": "The 'export' keyword is used to make functions, variables, or classes available to other modules. You can use named exports or default exports.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What keyword is used to import from another module?",
+    "options": [
+      "A) require",
+      "B) include",
+      "C) import",
+      "D) use"
+    ],
+    "answer": "C) import",
+    "explanation": "The 'import' keyword is used to bring exported values from another module into the current file. It can import default exports, named exports, or both.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the difference between named and default exports?",
+    "options": [
+      "A) No difference",
+      "B) A module can have multiple named exports but only one default export",
+      "C) Named exports are faster",
+      "D) Default exports work in all browsers"
+    ],
+    "answer": "B) A module can have multiple named exports but only one default export",
+    "explanation": "Named exports allow multiple exports per file using their exact names. Default export allows only one per file and can be imported with any name.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "How do you import a default export?",
+    "options": [
+      "A) import { name } from 'module'",
+      "B) import name from 'module'",
+      "C) import * as name from 'module'",
+      "D) import default from 'module'"
+    ],
+    "answer": "B) import name from 'module'",
+    "explanation": "Default exports are imported without curly braces: import name from 'module'. You can use any name when importing a default export.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "How do you import named exports?",
+    "options": [
+      "A) import name from 'module'",
+      "B) import { name } from 'module'",
+      "C) import (name) from 'module'",
+      "D) import [name] from 'module'"
+    ],
+    "answer": "B) import { name } from 'module'",
+    "explanation": "Named exports are imported using curly braces: import { name } from 'module'. The imported name must match the exported name exactly.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What attribute is required to use ES6 modules in HTML script tags?",
+    "options": [
+      "A) type='javascript'",
+      "B) type='module'",
+      "C) module='true'",
+      "D) es6='true'"
+    ],
+    "answer": "B) type='module'",
+    "explanation": "To use ES6 modules in HTML, add type='module' to the script tag: <script type='module' src='app.js'></script>. This enables import/export syntax.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What is destructuring in JavaScript?",
+    "options": [
+      "A) Deleting objects",
+      "B) Extracting values from arrays or objects into variables",
+      "C) Destroying functions",
+      "D) Removing DOM elements"
+    ],
+    "answer": "B) Extracting values from arrays or objects into variables",
+    "explanation": "Destructuring is a syntax that allows you to unpack values from arrays or properties from objects into distinct variables in a concise way.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is the correct syntax for array destructuring?",
+    "options": [
+      "A) let {a, b} = [1, 2]",
+      "B) let [a, b] = [1, 2]",
+      "C) let (a, b) = [1, 2]",
+      "D) let a, b = [1, 2]"
+    ],
+    "answer": "B) let [a, b] = [1, 2]",
+    "explanation": "Array destructuring uses square brackets on the left side of the assignment: let [a, b] = [1, 2]. Here, a = 1 and b = 2.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is the correct syntax for object destructuring?",
+    "options": [
+      "A) let [name, age] = person",
+      "B) let {name, age} = person",
+      "C) let (name, age) = person",
+      "D) let name, age = person"
+    ],
+    "answer": "B) let {name, age} = person",
+    "explanation": "Object destructuring uses curly braces on the left side: let {name, age} = person. The variable names must match the object property names.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What are template literals in JavaScript?",
+    "options": [
+      "A) HTML templates",
+      "B) Strings using backticks that allow embedded expressions",
+      "C) CSS templates",
+      "D) JSON templates"
+    ],
+    "answer": "B) Strings using backticks that allow embedded expressions",
+    "explanation": "Template literals (template strings) use backticks (`) and allow embedded expressions using ${expression} syntax, as well as multi-line strings.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "How do you embed an expression in a template literal?",
+    "options": [
+      "A) {expression}",
+      "B) ${expression}",
+      "C) #{expression}",
+      "D) @{expression}"
+    ],
+    "answer": "B) ${expression}",
+    "explanation": "Inside template literals (backticks), expressions are embedded using ${expression}. For example: `Hello, ${name}!` where name is a variable.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is the spread operator in JavaScript?",
+    "options": [
+      "A) ...",
+      "B) ***",
+      "C) >>>",
+      "D) :::"
+    ],
+    "answer": "A) ...",
+    "explanation": "The spread operator (...) expands an iterable (array, string) into individual elements. For example, [...arr] creates a shallow copy of arr.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What does the rest parameter do?",
+    "options": [
+      "A) Pauses function execution",
+      "B) Collects remaining arguments into an array",
+      "C) Returns a function",
+      "D) Resets variables"
+    ],
+    "answer": "B) Collects remaining arguments into an array",
+    "explanation": "The rest parameter (...args) collects all remaining arguments passed to a function into an array. For example: function sum(...numbers) { }",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is an arrow function?",
+    "options": [
+      "A) A function that returns arrows",
+      "B) A concise syntax for writing functions using =>",
+      "C) A navigation function",
+      "D) A pointer function"
+    ],
+    "answer": "B) A concise syntax for writing functions using =>",
+    "explanation": "Arrow functions provide a shorter syntax: (params) => expression. They also don't have their own 'this', making them useful for callbacks.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is a key difference between arrow functions and regular functions?",
+    "options": [
+      "A) Arrow functions are faster",
+      "B) Arrow functions don't have their own 'this' context",
+      "C) Regular functions can't return values",
+      "D) Arrow functions can't take parameters"
+    ],
+    "answer": "B) Arrow functions don't have their own 'this' context",
+    "explanation": "Arrow functions inherit 'this' from the enclosing scope (lexical this). They don't have their own 'this', 'arguments', 'super', or 'new.target'.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What are default parameters in functions?",
+    "options": [
+      "A) Parameters that are always required",
+      "B) Parameters with default values if not provided",
+      "C) The first parameter of any function",
+      "D) Parameters that can't be changed"
+    ],
+    "answer": "B) Parameters with default values if not provided",
+    "explanation": "Default parameters allow you to specify default values for function parameters: function greet(name = 'Guest') { }. If no argument is passed, the default is used.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What does Object.keys() return?",
+    "options": [
+      "A) An array of the object's values",
+      "B) An array of the object's keys (property names)",
+      "C) The number of keys",
+      "D) A copy of the object"
+    ],
+    "answer": "B) An array of the object's keys (property names)",
+    "explanation": "Object.keys(obj) returns an array containing the names of all enumerable properties of the object.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What does Object.values() return?",
+    "options": [
+      "A) An array of the object's keys",
+      "B) An array of the object's values",
+      "C) A boolean",
+      "D) A new object"
+    ],
+    "answer": "B) An array of the object's values",
+    "explanation": "Object.values(obj) returns an array containing the values of all enumerable properties of the object.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What does Object.entries() return?",
+    "options": [
+      "A) An array of key-value pairs",
+      "B) Only the first entry",
+      "C) The number of entries",
+      "D) A string representation"
+    ],
+    "answer": "A) An array of key-value pairs",
+    "explanation": "Object.entries(obj) returns an array of [key, value] pairs for each enumerable property of the object.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What does the Array.map() method do?",
+    "options": [
+      "A) Filters array elements",
+      "B) Creates a new array with results of calling a function on each element",
+      "C) Sorts the array",
+      "D) Finds an element"
+    ],
+    "answer": "B) Creates a new array with results of calling a function on each element",
+    "explanation": "map() creates a new array by calling a provided function on every element in the array. The original array remains unchanged.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What does Array.filter() do?",
+    "options": [
+      "A) Modifies the original array",
+      "B) Creates a new array with elements that pass a test",
+      "C) Returns the first matching element",
+      "D) Removes duplicates"
+    ],
+    "answer": "B) Creates a new array with elements that pass a test",
+    "explanation": "filter() creates a new array with all elements that pass the test implemented by the provided function (return true to keep the element).",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "What does Array.reduce() do?",
+    "options": [
+      "A) Reduces array size",
+      "B) Executes a reducer function to produce a single output value",
+      "C) Removes elements",
+      "D) Reverses the array"
+    ],
+    "answer": "B) Executes a reducer function to produce a single output value",
+    "explanation": "reduce() executes a reducer function on each element, resulting in a single output value. It's commonly used for summing values, flattening arrays, etc.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "What does Array.find() return?",
+    "options": [
+      "A) All matching elements",
+      "B) The first element that passes a test",
+      "C) The index of the found element",
+      "D) True or false"
+    ],
+    "answer": "B) The first element that passes a test",
+    "explanation": "find() returns the first element in the array that satisfies the provided testing function. If no element passes, it returns undefined.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What does Array.includes() do?",
+    "options": [
+      "A) Adds elements to an array",
+      "B) Checks if an array contains a specific value",
+      "C) Includes another array",
+      "D) Creates a new array"
+    ],
+    "answer": "B) Checks if an array contains a specific value",
+    "explanation": "includes() determines whether an array contains a specified value, returning true or false. It's a simpler way to check for element existence than indexOf.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What is optional chaining (?.) used for?",
+    "options": [
+      "A) Creating chains of promises",
+      "B) Safely accessing nested properties without checking each level",
+      "C) Linking arrays",
+      "D) Creating method chains"
+    ],
+    "answer": "B) Safely accessing nested properties without checking each level",
+    "explanation": "Optional chaining (?.) allows reading nested properties without explicitly checking if each reference is valid. It returns undefined if a reference is nullish.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What is the nullish coalescing operator (??) used for?",
+    "options": [
+      "A) Checking for errors",
+      "B) Providing a default value when left operand is null or undefined",
+      "C) Comparing objects",
+      "D) Creating conditions"
+    ],
+    "answer": "B) Providing a default value when left operand is null or undefined",
+    "explanation": "The nullish coalescing operator (??) returns the right operand when the left is null or undefined. Unlike ||, it doesn't trigger for falsy values like 0 or ''.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What is a class in JavaScript?",
+    "options": [
+      "A) A CSS selector",
+      "B) A template for creating objects with methods and properties",
+      "C) A type of function",
+      "D) A module type"
+    ],
+    "answer": "B) A template for creating objects with methods and properties",
+    "explanation": "A class is a template for creating objects. It encapsulates data with code to work on that data. Classes are syntactic sugar over JavaScript's prototype-based inheritance.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What keyword is used to create a new instance of a class?",
+    "options": [
+      "A) create",
+      "B) new",
+      "C) instance",
+      "D) make"
+    ],
+    "answer": "B) new",
+    "explanation": "The 'new' keyword is used to create an instance of a class: const person = new Person('John'). It calls the constructor and returns the new object.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "What is the constructor method in a class?",
+    "options": [
+      "A) A method to destroy the object",
+      "B) A special method called when creating a new instance",
+      "C) A method to copy objects",
+      "D) A static method"
+    ],
+    "answer": "B) A special method called when creating a new instance",
+    "explanation": "The constructor method is a special method for creating and initializing objects created with a class. It's called automatically when using 'new' to create an instance.",
+    "image": null
+  }
+]

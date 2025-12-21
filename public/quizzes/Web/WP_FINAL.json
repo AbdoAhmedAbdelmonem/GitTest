@@ -1,0 +1,702 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "How do you write an arrow function?",
+    "options": [
+      "A) function => () {}",
+      "B) => function() {}",
+      "C) () => {}",
+      "D) { => }"
+    ],
+    "answer": "C) () => {}",
+    "explanation": "Arrow functions use the syntax () => {} where parentheses contain parameters and the arrow points to the function body.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "Which is the correct statement to change the following: <p id=\"demo\">This is a demonstration.</p>",
+    "options": [
+      "A) #demo.innerHTML = \"Hello World!\";",
+      "B) document.appendChild(\"p\").innerHTML = \"Hello World!\";",
+      "C) document.getElement(\"p\").innerHTML = \"Hello World!\";",
+      "D) document.querySelector(\"#demo\").innerHTML = \"Hello World!\";"
+    ],
+    "answer": "D) document.querySelector(\"#demo\").innerHTML = \"Hello World!\";",
+    "explanation": "document.querySelector('#demo') selects the element with id='demo' using CSS selector syntax, then innerHTML modifies its content.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Which of the following lines of JavaScript code will change the HTML inside of an element with the attribute id=\"myElement\" to \"AG2303\"?",
+    "options": [
+      "A) document.getElementById(\"myElement\").innerHTML = \"AG2303\";",
+      "B) html[\"myElement\"] = \"AG2303\";",
+      "C) html[\"myElement\"].innerHTML = \"AG2303\";",
+      "D) document.html[\"myElement\"].innerHTML = \"AG2303\";"
+    ],
+    "answer": "A) document.getElementById(\"myElement\").innerHTML = \"AG2303\";",
+    "explanation": "document.getElementById() is the correct method to select an element by its ID, and innerHTML is used to modify its content.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is JavaScript primarily used for?",
+    "options": [
+      "A) Server-side scripting",
+      "B) Client-side scripting",
+      "C) Database management",
+      "D) Operating system development"
+    ],
+    "answer": "B) Client-side scripting",
+    "explanation": "JavaScript is primarily used for client-side scripting in web browsers to create interactive web pages.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is Node.js primarily used for?",
+    "options": [
+      "A) Server-side scripting",
+      "B) Client-side scripting",
+      "C) Database management",
+      "D) Operating system development"
+    ],
+    "answer": "A) Server-side scripting",
+    "explanation": "Node.js is a JavaScript runtime that allows JavaScript to be used for server-side scripting, running outside the browser.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which of the following links to a CSS style sheet?",
+    "options": [
+      "A) <link href=\"url\" rel=\"stylesheet\" />",
+      "B) <script src=\"url\"></script>",
+      "C) <title> text </title>",
+      "D) <meta attribute=\"value\" ... />"
+    ],
+    "answer": "A) <link href=\"url\" rel=\"stylesheet\" />",
+    "explanation": "The <link> tag with rel='stylesheet' is used to link external CSS files to an HTML document.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which of the following link to JavaScript program?",
+    "options": [
+      "A) <link href=\"url\" rel=\"stylesheet\" />",
+      "B) <script src=\"url\"></script>",
+      "C) <title> text </title>",
+      "D) <meta attribute=\"value\" ... />"
+    ],
+    "answer": "B) <script src=\"url\"></script>",
+    "explanation": "The <script> tag with src attribute is used to link external JavaScript files to an HTML document.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which of these is the correct syntax to add an event using JavaScript?",
+    "options": [
+      "A) element.listen('click', func)",
+      "B) element.addEventListener('click', func)",
+      "C) element.addClick(func)",
+      "D) element.setEvent('click', func)"
+    ],
+    "answer": "B) element.addEventListener('click', func)",
+    "explanation": "addEventListener() is the standard DOM method for attaching event handlers to elements in JavaScript.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "Which keyword declares a variable in JavaScript?",
+    "options": [
+      "A) variable",
+      "B) var",
+      "C) int",
+      "D) string"
+    ],
+    "answer": "B) var",
+    "explanation": "The 'var' keyword is used to declare variables in JavaScript. Modern JavaScript also uses 'let' and 'const'.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "How do you apply a class selector in CSS?",
+    "options": [
+      "A) #classname",
+      "B) .classname",
+      "C) classname",
+      "D) @classname"
+    ],
+    "answer": "B) .classname",
+    "explanation": "In CSS, a dot (.) prefix is used to select elements by class name. The # symbol is used for IDs.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is commonly used to rotate an element using JavaScript?",
+    "options": [
+      "A) rotate",
+      "B) transform",
+      "C) transition",
+      "D) animation"
+    ],
+    "answer": "B) transform",
+    "explanation": "The transform property is used to apply 2D or 3D transformations like rotate, scale, translate, and skew to elements.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "In what form are CSS style rules presented?",
+    "options": [
+      "A) selector { property: value }",
+      "B) selector { property= value }",
+      "C) selector ( property: value )",
+      "D) selector ( property= value )"
+    ],
+    "answer": "A) selector { property: value }",
+    "explanation": "CSS rules use curly braces {} and colons : to separate properties from values within declarations.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which syntax correctly defines a keyframe named \"bounce\"?",
+    "options": [
+      "A) @keyframe bounce { ... }",
+      "B) @keyframes bounce { ... }",
+      "C) keyframes bounce { ... }",
+      "D) @bounce { ... }"
+    ],
+    "answer": "B) @keyframes bounce { ... }",
+    "explanation": "CSS keyframes are defined using @keyframes (plural) followed by the animation name and the keyframe rules.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "How to apply an animation named slideIn on a class selector album-view?",
+    "options": [
+      "A) .album-view { animation= slideIn 2s;}",
+      "B) #album-view { animation= slideIn 2s;}",
+      "C) .album-view { animation: slideIn 2s;}",
+      "D) #album-view { animation: slideIn 2s;}"
+    ],
+    "answer": "C) .album-view { animation: slideIn 2s;}",
+    "explanation": "Class selectors use a dot (.) and CSS properties use colon (:) not equals (=) to assign values.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "Which event is triggered when a CSS animation starts?",
+    "options": [
+      "A) animationbegin",
+      "B) animationrun",
+      "C) animationplay",
+      "D) animationstart"
+    ],
+    "answer": "D) animationstart",
+    "explanation": "The animationstart event is fired when a CSS animation starts playing on an element.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a valid JavaScript syntax to listen for an animation end event?",
+    "options": [
+      "A) element.on('animationEnd', callback)",
+      "B) element.attachAnimation('end', callback);",
+      "C) element.addEventListener('animationend', callback);",
+      "D) onAnimationEnd(element, callback)"
+    ],
+    "answer": "C) element.addEventListener('animationend', callback);",
+    "explanation": "The standard way to listen for events in JavaScript is using addEventListener(). Note that 'animationend' is all lowercase.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which method is used to create a server in Express.js?",
+    "options": [
+      "A) express()",
+      "B) express.createServer()",
+      "C) express.server()",
+      "D) express.start()"
+    ],
+    "answer": "A) express()",
+    "explanation": "In Express.js, calling express() creates an Express application instance that can be used to configure routes and start a server.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What does the following route handle? app.post('/submit', (req, res) => { ... });",
+    "options": [
+      "A) GET requests to /submit",
+      "B) All requests to /submit",
+      "C) DELETE requests to /submit",
+      "D) POST requests to /submit"
+    ],
+    "answer": "D) POST requests to /submit",
+    "explanation": "The app.post() method handles HTTP POST requests to the specified path '/submit'.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which of the following is correct for sending a JSON response?",
+    "options": [
+      "A) res.writeJSON(data)",
+      "B) res.sendJSON(data)",
+      "C) res.json(data)",
+      "D) res.send(data).json()"
+    ],
+    "answer": "C) res.json(data)",
+    "explanation": "In Express.js, res.json(data) sends a JSON response with the correct Content-Type header automatically set.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "How do you start an Express server on port 3000?",
+    "options": [
+      "A) app.listen(3000);",
+      "B) app.start(3000);",
+      "C) server.listen(3000);",
+      "D) express.listen(3000);"
+    ],
+    "answer": "A) app.listen(3000);",
+    "explanation": "The app.listen(port) method binds and listens for connections on the specified port.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What does req.query contain in an Express request?",
+    "options": [
+      "A) URL route parameters",
+      "B) Form-encoded POST body",
+      "C) JSON request body",
+      "D) Query string parameters from the URL"
+    ],
+    "answer": "D) Query string parameters from the URL",
+    "explanation": "req.query contains the query string parameters parsed from the URL (e.g., ?name=value becomes req.query.name).",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What should you pass to res.send() for plain text output?",
+    "options": [
+      "A) JSON",
+      "B) JavaScript object",
+      "C) A string",
+      "D) An HTML file path"
+    ],
+    "answer": "C) A string",
+    "explanation": "res.send() can accept a string for plain text output. The Content-Type is automatically set based on the argument type.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which function allows Express apps to listen for incoming HTTP requests?",
+    "options": [
+      "A) app.connect()",
+      "B) express.listen()",
+      "C) app.get()",
+      "D) router.get()"
+    ],
+    "answer": "C) app.get()",
+    "explanation": "app.get() defines a route handler for GET requests. To actually start listening, app.listen() is used, but app.get() sets up the request handling.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "Which of the following will make a POST request using fetch()?",
+    "options": [
+      "A) fetch('url', { method: 'POST' })",
+      "B) fetch.post('url')",
+      "C) fetch('url', { type: 'POST' })",
+      "D) fetch('url', 'POST')"
+    ],
+    "answer": "A) fetch('url', { method: 'POST' })",
+    "explanation": "To make a POST request with fetch, you pass an options object with method: 'POST' as the second argument.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What is the correct fetch() syntax using async/await?",
+    "options": [
+      "A) const res = await fetch(url); const data = await res.json();",
+      "B) const data = fetch(url).json();",
+      "C) await fetch(url).json();",
+      "D) await fetch().awaitJson();"
+    ],
+    "answer": "A) const res = await fetch(url); const data = await res.json();",
+    "explanation": "With async/await, you first await the fetch call to get the response, then await the .json() method to parse the body.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "Which of these methods will handle HTTP POST requests in an Express app?",
+    "options": [
+      "A) app.post()",
+      "B) app.get()",
+      "C) app.all()",
+      "D) app.put()"
+    ],
+    "answer": "A) app.post()",
+    "explanation": "app.post() is specifically designed to handle HTTP POST requests in Express.js.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "Which of the following best describes a callback function?",
+    "options": [
+      "A) A function that calls itself",
+      "B) A function passed as an argument to another function",
+      "C) A function that returns another function",
+      "D) A function that runs only once"
+    ],
+    "answer": "B) A function passed as an argument to another function",
+    "explanation": "A callback function is passed as an argument to another function and is executed after or during the execution of that function.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "Which of the following is correct to produce an output from: const greet = () => {console.log(\"Hi\")}; function greeting(cb) { cb(); }",
+    "options": [
+      "A) greet()",
+      "B) greeting(greet);",
+      "C) All the mentioned",
+      "D) None of the mentioned"
+    ],
+    "answer": "C) All the mentioned",
+    "explanation": "Both greet() and greeting(greet) will output 'Hi'. greet() calls it directly, greeting(greet) passes it as a callback that gets executed inside.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "Which line correctly calls a callback?",
+    "options": [
+      "A) callback;",
+      "B) callback()",
+      "C) callback.call",
+      "D) callback.run()"
+    ],
+    "answer": "B) callback()",
+    "explanation": "To execute a callback function, you use parentheses after the function name: callback(). Just writing callback; only references the function without calling it.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "A callback function is passed as a:",
+    "options": [
+      "A) String",
+      "B) Number",
+      "C) Parameter",
+      "D) Comment"
+    ],
+    "answer": "C) Parameter",
+    "explanation": "Callback functions are passed as parameters (arguments) to other functions, allowing them to be called later.",
+    "image": null
+  },
+  {
+    "numb": 31,
+    "type": "Multiple Choices",
+    "question": "Express.js is built on top of which platform?",
+    "options": [
+      "A) Python",
+      "B) PHP",
+      "C) Node.js",
+      "D) Ruby"
+    ],
+    "answer": "C) Node.js",
+    "explanation": "Express.js is a minimal and flexible Node.js web application framework that runs on the Node.js runtime.",
+    "image": null
+  },
+  {
+    "numb": 32,
+    "type": "Multiple Choices",
+    "question": "What does the following code create? const app = express();",
+    "options": [
+      "A) A new database",
+      "B) An Express application",
+      "C) A router",
+      "D) A template engine"
+    ],
+    "answer": "B) An Express application",
+    "explanation": "Calling express() creates and returns a new Express application instance that can be configured with routes and middleware.",
+    "image": null
+  },
+  {
+    "numb": 33,
+    "type": "Multiple Choices",
+    "question": "What does app.listen() do?",
+    "options": [
+      "A) Starts the database",
+      "B) Starts the server",
+      "C) Connects to an API",
+      "D) Stops the server"
+    ],
+    "answer": "B) Starts the server",
+    "explanation": "app.listen() binds and listens for connections on the specified host and port, effectively starting the Express server.",
+    "image": null
+  },
+  {
+    "numb": 34,
+    "type": "Multiple Choices",
+    "question": "What does req represent?",
+    "options": [
+      "A) The response",
+      "B) The request object",
+      "C) The router",
+      "D) The server"
+    ],
+    "answer": "B) The request object",
+    "explanation": "In Express route handlers, req represents the HTTP request object containing information about the incoming request.",
+    "image": null
+  },
+  {
+    "numb": 35,
+    "type": "Multiple Choices",
+    "question": "What does res.send(\"Hello\") do?",
+    "options": [
+      "A) Sends a file",
+      "B) Sends a JSON object",
+      "C) Sends the text \"Hello\" to the client",
+      "D) Sends a database query"
+    ],
+    "answer": "C) Sends the text \"Hello\" to the client",
+    "explanation": "res.send() sends a response to the client. When passed a string, it sends that text as the response body.",
+    "image": null
+  },
+  {
+    "numb": 36,
+    "type": "Multiple Choices",
+    "question": "Which object is used to get query parameters?",
+    "options": [
+      "A) req.body",
+      "B) req.params",
+      "C) req.query",
+      "D) req.data"
+    ],
+    "answer": "C) req.query",
+    "explanation": "req.query contains an object with the query string parameters from the URL (e.g., ?name=John becomes req.query.name).",
+    "image": null
+  },
+  {
+    "numb": 37,
+    "type": "Multiple Choices",
+    "question": "Which object contains route parameters (URL parameters)?",
+    "options": [
+      "A) req.get",
+      "B) req.query",
+      "C) req.params",
+      "D) req.route"
+    ],
+    "answer": "C) req.params",
+    "explanation": "req.params contains route parameters defined in the URL pattern (e.g., /user/:id makes the id available as req.params.id).",
+    "image": null
+  },
+  {
+    "numb": 38,
+    "type": "Multiple Choices",
+    "question": "Query parameters appear in the URL after which symbol?",
+    "options": [
+      "A) /",
+      "B) #",
+      "C) ?",
+      "D) :"
+    ],
+    "answer": "C) ?",
+    "explanation": "Query parameters appear after the ? symbol in a URL (e.g., /search?name=John&age=25).",
+    "image": null
+  },
+  {
+    "numb": 39,
+    "type": "Multiple Choices",
+    "question": "In the URL /user/10, what type of parameter is 10?",
+    "options": [
+      "A) Query parameter",
+      "B) Body parameter",
+      "C) Route parameter",
+      "D) Header parameter"
+    ],
+    "answer": "C) Route parameter",
+    "explanation": "In /user/10, the 10 is a route parameter (also called URL parameter) that is part of the URL path itself.",
+    "image": null
+  },
+  {
+    "numb": 40,
+    "type": "Multiple Choices",
+    "question": "In the URL /search?name=Ali, what type of parameter is name=Ali?",
+    "options": [
+      "A) Route parameter",
+      "B) Query parameter",
+      "C) Cookie",
+      "D) Body data"
+    ],
+    "answer": "B) Query parameter",
+    "explanation": "Parameters that appear after the ? in a URL are query parameters (or query string parameters).",
+    "image": null
+  },
+  {
+    "numb": 41,
+    "type": "Multiple Choices",
+    "question": "Which URL format uses route parameters?",
+    "options": [
+      "A) /product?id=12",
+      "B) /product/:id",
+      "C) /product?id=12&id2=15",
+      "D) /product?id=12&name=phone"
+    ],
+    "answer": "B) /product/:id",
+    "explanation": "Route parameters use the :variableName syntax in the path. /product/:id defines id as a route parameter.",
+    "image": null
+  },
+  {
+    "numb": 42,
+    "type": "Multiple Choices",
+    "question": "In Express.js, which is used to access the ID in /user/12?",
+    "options": [
+      "A) req.query.id",
+      "B) req.params.id",
+      "C) req.body.id",
+      "D) req.header.id"
+    ],
+    "answer": "B) req.params.id",
+    "explanation": "For a route defined as /user/:id, the value 12 in /user/12 is accessed via req.params.id.",
+    "image": null
+  },
+  {
+    "numb": 43,
+    "type": "Multiple Choices",
+    "question": "In Express.js, which is used to access the ID in /user?id=12?",
+    "options": [
+      "A) req.params.id",
+      "B) req.get.id",
+      "C) req.query.id",
+      "D) req.data.id"
+    ],
+    "answer": "C) req.query.id",
+    "explanation": "Query string parameters (after the ?) are accessed via req.query. So /user?id=12 gives req.query.id = '12'.",
+    "image": null
+  },
+  {
+    "numb": 44,
+    "type": "Multiple Choices",
+    "question": "Query parameters are separated using:",
+    "options": [
+      "A) /",
+      "B) :",
+      "C) &",
+      "D) #"
+    ],
+    "answer": "C) &",
+    "explanation": "Multiple query parameters are separated by the & symbol (e.g., ?name=John&age=25&city=Cairo).",
+    "image": null
+  },
+  {
+    "numb": 45,
+    "type": "Multiple Choices",
+    "question": "What is the default HTTP method used by fetch()?",
+    "options": [
+      "A) GET",
+      "B) POST",
+      "C) PUT",
+      "D) HEAD"
+    ],
+    "answer": "A) GET",
+    "explanation": "When no method is specified in the fetch options, it defaults to GET.",
+    "image": null
+  },
+  {
+    "numb": 46,
+    "type": "Multiple Choices",
+    "question": "Which fetch() syntax is correct?",
+    "options": [
+      "A) fetch.get(\"url\")",
+      "B) fetch(\"url\").then(...)",
+      "C) fetch.url(\"GET\", ...)",
+      "D) get.fetch(\"url\")"
+    ],
+    "answer": "B) fetch(\"url\").then(...)",
+    "explanation": "The correct syntax is fetch('url') which returns a Promise, allowing .then() to be chained for handling the response.",
+    "image": null
+  },
+  {
+    "numb": 47,
+    "type": "Multiple Choices",
+    "question": "Which fetch() option is used to send JSON data?",
+    "options": [
+      "A) body",
+      "B) json",
+      "C) payload",
+      "D) data"
+    ],
+    "answer": "A) body",
+    "explanation": "The body option in fetch is used to send data. For JSON, you use body: JSON.stringify(data) along with the appropriate Content-Type header.",
+    "image": null
+  },
+  {
+    "numb": 48,
+    "type": "Multiple Choices",
+    "question": "What does the async keyword do in front of a function?",
+    "options": [
+      "A) Makes the function execute faster",
+      "B) Makes the function return a Promise",
+      "C) Pauses the function until complete",
+      "D) Converts synchronous code to JSON"
+    ],
+    "answer": "B) Makes the function return a Promise",
+    "explanation": "The async keyword before a function makes it always return a Promise, enabling the use of await inside it.",
+    "image": null
+  },
+  {
+    "numb": 49,
+    "type": "Multiple Choices",
+    "question": "What does the await keyword do?",
+    "options": [
+      "A) Converts a value into a Promise",
+      "B) Pauses execution until a Promise resolves",
+      "C) Makes a function synchronous",
+      "D) Cancels a Promise"
+    ],
+    "answer": "B) Pauses execution until a Promise resolves",
+    "explanation": "The await keyword pauses the execution of an async function until the Promise is settled, then continues with the resolved value.",
+    "image": null
+  },
+  {
+    "numb": 50,
+    "type": "Multiple Choices",
+    "question": "Which keyword is REQUIRED to use await inside a function?",
+    "options": [
+      "A) wait",
+      "B) async",
+      "C) promise",
+      "D) None"
+    ],
+    "answer": "B) async",
+    "explanation": "The await keyword can only be used inside functions declared with the async keyword.",
+    "image": null
+  }
+]

@@ -1,0 +1,1262 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What does HTML stand for?",
+    "options": [
+      "A) Hyper Text Markup Language",
+      "B) Home Tool Markup Language",
+      "C) Hyperlinks and Text Markup Language",
+      "D) Highly Textual Machine Language"
+    ],
+    "answer": "A) Hyper Text Markup Language",
+    "explanation": "HTML stands for Hyper Text Markup Language. It is the standard markup language for creating web pages.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to define a paragraph in HTML?",
+    "options": [
+      "A) <p>",
+      "B) <h1>",
+      "C) <br>",
+      "D) <div>"
+    ],
+    "answer": "A) <p>",
+    "explanation": "The <p> tag defines a paragraph in HTML. It automatically adds space before and after the content.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is the correct HTML tag for inserting a line break?",
+    "options": [
+      "A) <lb>",
+      "B) <break>",
+      "C) <br>",
+      "D) <newline>"
+    ],
+    "answer": "C) <br>",
+    "explanation": "The <br> tag is used to insert a line break in HTML. It is a self-closing tag.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to create a hyperlink in HTML?",
+    "options": [
+      "A) <link>",
+      "B) <a>",
+      "C) <url>",
+      "D) <href>"
+    ],
+    "answer": "B) <a>",
+    "explanation": "The <a> (anchor) tag is used to create hyperlinks. The href attribute specifies the destination URL.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which attribute is used to specify the URL of a hyperlink?",
+    "options": [
+      "A) src",
+      "B) href",
+      "C) link",
+      "D) url"
+    ],
+    "answer": "B) href",
+    "explanation": "The href (hypertext reference) attribute specifies the URL that the link points to.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to display an image in HTML?",
+    "options": [
+      "A) <picture>",
+      "B) <img>",
+      "C) <image>",
+      "D) <src>"
+    ],
+    "answer": "B) <img>",
+    "explanation": "The <img> tag is used to embed images in HTML. It requires the src attribute to specify the image source.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which attribute is used to provide an alternative text for an image?",
+    "options": [
+      "A) src",
+      "B) href",
+      "C) alt",
+      "D) title"
+    ],
+    "answer": "C) alt",
+    "explanation": "The alt attribute provides alternative text for an image if it cannot be displayed, and is important for accessibility.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to create an unordered list?",
+    "options": [
+      "A) <ol>",
+      "B) <list>",
+      "C) <ul>",
+      "D) <dl>"
+    ],
+    "answer": "C) <ul>",
+    "explanation": "The <ul> tag creates an unordered (bulleted) list. Each item is defined with <li>.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to create an ordered list?",
+    "options": [
+      "A) <ul>",
+      "B) <ol>",
+      "C) <list>",
+      "D) <dl>"
+    ],
+    "answer": "B) <ol>",
+    "explanation": "The <ol> tag creates an ordered (numbered) list. Each item is defined with <li>.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to define a list item?",
+    "options": [
+      "A) <li>",
+      "B) <item>",
+      "C) <listitem>",
+      "D) <line>"
+    ],
+    "answer": "A) <li>",
+    "explanation": "The <li> tag defines a list item and is used inside <ul> or <ol> elements.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to define a table?",
+    "options": [
+      "A) <grid>",
+      "B) <table>",
+      "C) <row>",
+      "D) <data>"
+    ],
+    "answer": "B) <table>",
+    "explanation": "The <table> tag is used to create a table in HTML.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to define a table row?",
+    "options": [
+      "A) <td>",
+      "B) <tr>",
+      "C) <th>",
+      "D) <table row>"
+    ],
+    "answer": "B) <tr>",
+    "explanation": "The <tr> tag defines a row in a table. It contains <td> or <th> elements.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to define a table data cell?",
+    "options": [
+      "A) <tr>",
+      "B) <th>",
+      "C) <td>",
+      "D) <cell>"
+    ],
+    "answer": "C) <td>",
+    "explanation": "The <td> tag defines a standard data cell in a table. <th> is for header cells.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is the correct HTML tag for the largest heading?",
+    "options": [
+      "A) <heading>",
+      "B) <h0>",
+      "C) <h1>",
+      "D) <h6>"
+    ],
+    "answer": "C) <h1>",
+    "explanation": "HTML provides six heading levels, <h1> to <h6>. <h1> is the largest and most important.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the correct HTML tag for the smallest heading?",
+    "options": [
+      "A) <h1>",
+      "B) <h6>",
+      "C) <heading>",
+      "D) <h0>"
+    ],
+    "answer": "B) <h6>",
+    "explanation": "<h6> is the smallest heading level in HTML. Headings go from <h1> (largest) to <h6> (smallest).",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to define an input field in a form?",
+    "options": [
+      "A) <field>",
+      "B) <text>",
+      "C) <input>",
+      "D) <data>"
+    ],
+    "answer": "C) <input>",
+    "explanation": "The <input> tag is used to create various form controls like text fields, checkboxes, and buttons.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which input type is used for a text input field?",
+    "options": [
+      "A) text",
+      "B) string",
+      "C) inputtext",
+      "D) char"
+    ],
+    "answer": "A) text",
+    "explanation": "The type='text' attribute creates a single-line text input field.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which tag is used to define a button?",
+    "options": [
+      "A) <click>",
+      "B) <button>",
+      "C) <input type=\"button\">",
+      "D) <submit>"
+    ],
+    "answer": "B) <button>",
+    "explanation": "The <button> tag creates a clickable button. You can also use <input type='button'>.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which HTML element is used to define the title of a document?",
+    "options": [
+      "A) <head>",
+      "B) <title>",
+      "C) <header>",
+      "D) <meta>"
+    ],
+    "answer": "B) <title>",
+    "explanation": "The <title> tag defines the title shown in the browser tab. It goes inside the <head> section.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "Which HTML element defines the document's body?",
+    "options": [
+      "A) <head>",
+      "B) <body>",
+      "C) <main>",
+      "D) <section>"
+    ],
+    "answer": "B) <body>",
+    "explanation": "The <body> element contains all the visible content of an HTML page.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What does the \"alt\" attribute in the <img> tag specify?",
+    "options": [
+      "A) The alignment of the image",
+      "B) An alternate text for the image",
+      "C) The image's source",
+      "D) The image's size"
+    ],
+    "answer": "B) An alternate text for the image",
+    "explanation": "The alt attribute provides alternative text displayed when the image cannot be loaded and for screen readers.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <div> tag?",
+    "options": [
+      "A) Defines a paragraph",
+      "B) Creates a hyperlink",
+      "C) Defines a division or a section in an HTML document",
+      "D) Inserts a line break"
+    ],
+    "answer": "C) Defines a division or a section in an HTML document",
+    "explanation": "The <div> tag is a block-level container used to group elements for styling or layout purposes.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <head> tag?",
+    "options": [
+      "A) Defines the main content of the document",
+      "B) Contains metadata about the document",
+      "C) Defines a heading",
+      "D) Creates a header section"
+    ],
+    "answer": "B) Contains metadata about the document",
+    "explanation": "The <head> element contains metadata like title, links to stylesheets, and scripts that don't appear on the page.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "Which attribute is used to define a unique identifier for an element?",
+    "options": [
+      "A) class",
+      "B) id",
+      "C) name",
+      "D) value"
+    ],
+    "answer": "B) id",
+    "explanation": "The id attribute provides a unique identifier for an element. Each id must be unique within the page.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which attribute is used to define a class for styling elements?",
+    "options": [
+      "A) id",
+      "B) class",
+      "C) style",
+      "D) type"
+    ],
+    "answer": "B) class",
+    "explanation": "The class attribute is used to assign one or more class names to an element for CSS styling.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <section> tag?",
+    "options": [
+      "A) Defines a section in a document",
+      "B) Defines a paragraph",
+      "C) Creates a hyperlink",
+      "D) Inserts a line break"
+    ],
+    "answer": "A) Defines a section in a document",
+    "explanation": "The <section> tag represents a standalone section of content, typically with its own heading.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What does CSS stand for?",
+    "options": [
+      "A) Computer Style Sheets",
+      "B) Creative Style Sheets",
+      "C) Cascading Style Sheets",
+      "D) Colorful Style Sheets"
+    ],
+    "answer": "C) Cascading Style Sheets",
+    "explanation": "CSS stands for Cascading Style Sheets, used to style and layout web pages.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to change the text color of an element?",
+    "options": [
+      "A) text-color",
+      "B) font-color",
+      "C) color",
+      "D) foreground-color"
+    ],
+    "answer": "C) color",
+    "explanation": "The 'color' property in CSS sets the text color of an element.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to change the background color of an element?",
+    "options": [
+      "A) bg-color",
+      "B) background-color",
+      "C) color-background",
+      "D) background"
+    ],
+    "answer": "B) background-color",
+    "explanation": "The 'background-color' property sets the background color of an element.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to change the font size of text?",
+    "options": [
+      "A) text-size",
+      "B) font-size",
+      "C) size",
+      "D) font"
+    ],
+    "answer": "B) font-size",
+    "explanation": "The 'font-size' property specifies the size of the text.",
+    "image": null
+  },
+  {
+    "numb": 31,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to add space between lines of text?",
+    "options": [
+      "A) line-space",
+      "B) text-spacing",
+      "C) line-height",
+      "D) spacing"
+    ],
+    "answer": "C) line-height",
+    "explanation": "The 'line-height' property sets the height of each line of text, controlling vertical spacing.",
+    "image": null
+  },
+  {
+    "numb": 32,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to align text horizontally?",
+    "options": [
+      "A) text-align",
+      "B) align-text",
+      "C) horizontal-align",
+      "D) align"
+    ],
+    "answer": "A) text-align",
+    "explanation": "The 'text-align' property sets the horizontal alignment of text (left, right, center, justify).",
+    "image": null
+  },
+  {
+    "numb": 33,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to make text bold?",
+    "options": [
+      "A) text-bold",
+      "B) font-bold",
+      "C) font-weight",
+      "D) bold"
+    ],
+    "answer": "C) font-weight",
+    "explanation": "The 'font-weight' property sets the weight (boldness) of the font. Values include 'bold' or numeric values like 700.",
+    "image": null
+  },
+  {
+    "numb": 34,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to make text italic?",
+    "options": [
+      "A) text-italic",
+      "B) font-italic",
+      "C) font-style",
+      "D) italic"
+    ],
+    "answer": "C) font-style",
+    "explanation": "The 'font-style' property is used to make text italic, oblique, or normal.",
+    "image": null
+  },
+  {
+    "numb": 35,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to underline text?",
+    "options": [
+      "A) text-underline",
+      "B) underline-text",
+      "C) text-decoration",
+      "D) underline"
+    ],
+    "answer": "C) text-decoration",
+    "explanation": "The 'text-decoration' property adds decorations like underline, overline, or line-through to text.",
+    "image": null
+  },
+  {
+    "numb": 36,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to change the font family of text?",
+    "options": [
+      "A) text-font",
+      "B) font-family",
+      "C) font-type",
+      "D) typeface"
+    ],
+    "answer": "B) font-family",
+    "explanation": "The 'font-family' property specifies the font for text, with fallback options.",
+    "image": null
+  },
+  {
+    "numb": 37,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to set the margin of an element?",
+    "options": [
+      "A) padding",
+      "B) border",
+      "C) margin",
+      "D) space"
+    ],
+    "answer": "C) margin",
+    "explanation": "The 'margin' property sets the space outside an element's border.",
+    "image": null
+  },
+  {
+    "numb": 38,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to set the padding of an element?",
+    "options": [
+      "A) margin",
+      "B) border",
+      "C) padding",
+      "D) space"
+    ],
+    "answer": "C) padding",
+    "explanation": "The 'padding' property sets the space between an element's content and its border.",
+    "image": null
+  },
+  {
+    "numb": 39,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to set the border of an element?",
+    "options": [
+      "A) margin",
+      "B) border",
+      "C) padding",
+      "D) outline"
+    ],
+    "answer": "B) border",
+    "explanation": "The 'border' property sets the border around an element's padding and content.",
+    "image": null
+  },
+  {
+    "numb": 40,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to hide an element?",
+    "options": [
+      "A) invisible",
+      "B) hide",
+      "C) display",
+      "D) visibility"
+    ],
+    "answer": "C) display",
+    "explanation": "The 'display' property with value 'none' hides an element completely. 'visibility: hidden' hides but keeps space.",
+    "image": null
+  },
+  {
+    "numb": 41,
+    "type": "Multiple Choices",
+    "question": "Which CSS value for \"display\" property hides an element and removes it from the document flow?",
+    "options": [
+      "A) hidden",
+      "B) invisible",
+      "C) none",
+      "D) collapse"
+    ],
+    "answer": "C) none",
+    "explanation": "display: none completely removes the element from the document flow, unlike visibility: hidden which preserves space.",
+    "image": null
+  },
+  {
+    "numb": 42,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to float an element to the left or right?",
+    "options": [
+      "A) align",
+      "B) position",
+      "C) float",
+      "D) place"
+    ],
+    "answer": "C) float",
+    "explanation": "The 'float' property positions an element to the left or right, allowing text to wrap around it.",
+    "image": null
+  },
+  {
+    "numb": 43,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to set the width of an element?",
+    "options": [
+      "A) element-width",
+      "B) width",
+      "C) size-width",
+      "D) horizontal-size"
+    ],
+    "answer": "B) width",
+    "explanation": "The 'width' property sets the width of an element's content area.",
+    "image": null
+  },
+  {
+    "numb": 44,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to set the height of an element?",
+    "options": [
+      "A) element-height",
+      "B) height",
+      "C) size-height",
+      "D) vertical-size"
+    ],
+    "answer": "B) height",
+    "explanation": "The 'height' property sets the height of an element's content area.",
+    "image": null
+  },
+  {
+    "numb": 45,
+    "type": "Multiple Choices",
+    "question": "Which CSS property is used to create rounded corners?",
+    "options": [
+      "A) border-radius",
+      "B) round-corners",
+      "C) corner-radius",
+      "D) rounded-border"
+    ],
+    "answer": "A) border-radius",
+    "explanation": "The 'border-radius' property rounds the corners of an element's border.",
+    "image": null
+  },
+  {
+    "numb": 46,
+    "type": "Multiple Choices",
+    "question": "Which CSS selector selects all paragraphs on a page?",
+    "options": [
+      "A) #p",
+      "B) .p",
+      "C) p",
+      "D) element.p"
+    ],
+    "answer": "C) p",
+    "explanation": "A type selector (just the element name) selects all elements of that type. 'p' selects all paragraphs.",
+    "image": null
+  },
+  {
+    "numb": 47,
+    "type": "Multiple Choices",
+    "question": "Which CSS selector selects an element with the id \"myID\"?",
+    "options": [
+      "A) .myID",
+      "B) #myID",
+      "C) element#myID",
+      "D) myID"
+    ],
+    "answer": "B) #myID",
+    "explanation": "The # prefix is used to select elements by their id attribute.",
+    "image": null
+  },
+  {
+    "numb": 48,
+    "type": "Multiple Choices",
+    "question": "Which CSS selector selects an element with the class \"myClass\"?",
+    "options": [
+      "A) #myClass",
+      "B) .myClass",
+      "C) element.myClass",
+      "D) myClass"
+    ],
+    "answer": "B) .myClass",
+    "explanation": "The . (dot) prefix is used to select elements by their class attribute.",
+    "image": null
+  },
+  {
+    "numb": 49,
+    "type": "Multiple Choices",
+    "question": "What is JavaScript primarily used for?",
+    "options": [
+      "A) Server-side scripting",
+      "B) Client-side scripting",
+      "C) Database management",
+      "D) Operating system development"
+    ],
+    "answer": "B) Client-side scripting",
+    "explanation": "JavaScript is primarily used for client-side scripting to add interactivity to web pages.",
+    "image": null
+  },
+  {
+    "numb": 50,
+    "type": "Multiple Choices",
+    "question": "Which keyword is used to declare a variable in JavaScript?",
+    "options": [
+      "A) var",
+      "B) variable",
+      "C) string",
+      "D) int"
+    ],
+    "answer": "A) var",
+    "explanation": "The 'var' keyword declares variables in JavaScript. 'let' and 'const' are modern alternatives.",
+    "image": null
+  },
+  {
+    "numb": 51,
+    "type": "Multiple Choices",
+    "question": "Which operator is used for strict equality in JavaScript?",
+    "options": [
+      "A) ==",
+      "B) =",
+      "C) ===",
+      "D) !="
+    ],
+    "answer": "C) ===",
+    "explanation": "The === operator checks both value and type equality, unlike == which performs type coercion.",
+    "image": null
+  },
+  {
+    "numb": 52,
+    "type": "Multiple Choices",
+    "question": "How do you write a single-line comment in JavaScript?",
+    "options": [
+      "A) // comment",
+      "B) /* comment */",
+      "C) -- comment --",
+      "D) ' comment"
+    ],
+    "answer": "A) // comment",
+    "explanation": "Single-line comments in JavaScript start with //. Multi-line comments use /* */.",
+    "image": null
+  },
+  {
+    "numb": 53,
+    "type": "Multiple Choices",
+    "question": "Which function is used to print output to the console in JavaScript?",
+    "options": [
+      "A) print()",
+      "B) display()",
+      "C) console.log()",
+      "D) write()"
+    ],
+    "answer": "C) console.log()",
+    "explanation": "console.log() outputs messages to the browser's developer console for debugging.",
+    "image": null
+  },
+  {
+    "numb": 54,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the parseInt() function in JavaScript?",
+    "options": [
+      "A) To convert a string to a floating-point number",
+      "B) To convert a string to an integer",
+      "C) To convert a number to a string",
+      "D) To parse JSON data"
+    ],
+    "answer": "B) To convert a string to an integer",
+    "explanation": "parseInt() parses a string and returns an integer. parseFloat() is for floating-point numbers.",
+    "image": null
+  },
+  {
+    "numb": 55,
+    "type": "Multiple Choices",
+    "question": "Which built-in method adds one or more elements to the end of an array and returns the new length?",
+    "options": [
+      "A) add()",
+      "B) push()",
+      "C) append()",
+      "D) concat()"
+    ],
+    "answer": "B) push()",
+    "explanation": "The push() method adds elements to the end of an array and returns the new length.",
+    "image": null
+  },
+  {
+    "numb": 56,
+    "type": "Multiple Choices",
+    "question": "Which loop is used to iterate over the properties of an object?",
+    "options": [
+      "A) for loop",
+      "B) while loop",
+      "C) do-while loop",
+      "D) for...in loop"
+    ],
+    "answer": "D) for...in loop",
+    "explanation": "The for...in loop iterates over the enumerable properties (keys) of an object.",
+    "image": null
+  },
+  {
+    "numb": 57,
+    "type": "Multiple Choices",
+    "question": "What is the result of 5 + \"5\" in JavaScript?",
+    "options": [
+      "A) 10",
+      "B) \"10\"",
+      "C) \"55\"",
+      "D) Error"
+    ],
+    "answer": "C) \"55\"",
+    "explanation": "When adding a number and string, JavaScript converts the number to a string and concatenates them.",
+    "image": null
+  },
+  {
+    "numb": 58,
+    "type": "Multiple Choices",
+    "question": "Which keyword is used to define a function in JavaScript?",
+    "options": [
+      "A) func",
+      "B) function",
+      "C) def",
+      "D) method"
+    ],
+    "answer": "B) function",
+    "explanation": "The 'function' keyword is used to declare functions in JavaScript.",
+    "image": null
+  },
+  {
+    "numb": 59,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the querySelector() method?",
+    "options": [
+      "A) To select all elements that match a CSS selector",
+      "B) To select the first element that matches a CSS selector",
+      "C) To create a new element",
+      "D) To modify an element's style"
+    ],
+    "answer": "B) To select the first element that matches a CSS selector",
+    "explanation": "querySelector() returns the first element that matches the specified CSS selector.",
+    "image": null
+  },
+  {
+    "numb": 60,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the querySelectorAll() method?",
+    "options": [
+      "A) To select the first element that matches a CSS selector",
+      "B) To select all elements that match a CSS selector",
+      "C) To create a new element",
+      "D) To modify an element's style"
+    ],
+    "answer": "B) To select all elements that match a CSS selector",
+    "explanation": "querySelectorAll() returns a NodeList of all elements that match the specified CSS selector.",
+    "image": null
+  },
+  {
+    "numb": 61,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the addEventListener() method?",
+    "options": [
+      "A) To remove an event listener",
+      "B) To attach an event handler to an element",
+      "C) To create a new event",
+      "D) To trigger an event"
+    ],
+    "answer": "B) To attach an event handler to an element",
+    "explanation": "addEventListener() attaches an event handler function to an element for a specified event type.",
+    "image": null
+  },
+  {
+    "numb": 62,
+    "type": "Multiple Choices",
+    "question": "What does the \"DOM\" stand for?",
+    "options": [
+      "A) Data Object Model",
+      "B) Document Object Model",
+      "C) Dynamic Object Management",
+      "D) Digital Output Module"
+    ],
+    "answer": "B) Document Object Model",
+    "explanation": "DOM stands for Document Object Model, a programming interface for HTML documents.",
+    "image": null
+  },
+  {
+    "numb": 63,
+    "type": "Multiple Choices",
+    "question": "Which of the following is used to read an HTML page and render it?",
+    "options": [
+      "A) Web server",
+      "B) Web matrix",
+      "C) Web browser",
+      "D) None of the mentioned"
+    ],
+    "answer": "C) Web browser",
+    "explanation": "Web browsers read HTML pages and render them for display to users.",
+    "image": null
+  },
+  {
+    "numb": 64,
+    "type": "Multiple Choices",
+    "question": "What is DOM?",
+    "options": [
+      "A) Application programming interface",
+      "B) Hierarchy of objects in ASP.NET",
+      "C) Convention for representing and interacting with objects in HTML documents",
+      "D) None of the mentioned"
+    ],
+    "answer": "C) Convention for representing and interacting with objects in HTML documents",
+    "explanation": "The DOM is a programming interface that represents HTML documents as a tree of objects.",
+    "image": null
+  },
+  {
+    "numb": 65,
+    "type": "Multiple Choices",
+    "question": "Which property is used to control the space between the border and content in a table?",
+    "options": [
+      "A) border",
+      "B) padding",
+      "C) margin",
+      "D) resize"
+    ],
+    "answer": "B) padding",
+    "explanation": "Padding is the space between an element's content and its border.",
+    "image": null
+  },
+  {
+    "numb": 66,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of JavaScript in web development?",
+    "options": [
+      "A) To define the structure and content of web pages",
+      "B) To add interactivity and behavior to web pages",
+      "C) To style and format web pages",
+      "D) To manage server-side data and databases"
+    ],
+    "answer": "B) To add interactivity and behavior to web pages",
+    "explanation": "JavaScript adds interactivity and dynamic behavior to web pages.",
+    "image": null
+  },
+  {
+    "numb": 67,
+    "type": "Multiple Choices",
+    "question": "Which of the following attributes is used to specify elements to bind style rules to?",
+    "options": [
+      "A) id",
+      "B) class",
+      "C) tag",
+      "D) All of the mentioned"
+    ],
+    "answer": "D) All of the mentioned",
+    "explanation": "CSS can target elements using id selectors (#), class selectors (.), and element/tag selectors.",
+    "image": null
+  },
+  {
+    "numb": 68,
+    "type": "Multiple Choices",
+    "question": "Which selector is used to specify a rule to bind a particular unique element?",
+    "options": [
+      "A) id",
+      "B) class",
+      "C) tag",
+      "D) Both class and tag"
+    ],
+    "answer": "A) id",
+    "explanation": "The id selector targets a unique element since each id should be unique within a page.",
+    "image": null
+  },
+  {
+    "numb": 69,
+    "type": "Multiple Choices",
+    "question": "_________ selectors are used to specify a group of elements.",
+    "options": [
+      "A) id",
+      "B) class",
+      "C) tag",
+      "D) Both class and tag"
+    ],
+    "answer": "D) Both class and tag",
+    "explanation": "Both class selectors and tag selectors can select groups of elements.",
+    "image": null
+  },
+  {
+    "numb": 70,
+    "type": "Multiple Choices",
+    "question": "Which of the following tag is used to embed CSS in HTML page?",
+    "options": [
+      "A) <script>",
+      "B) <style>",
+      "C) <css>",
+      "D) <!DOCTYPE html>"
+    ],
+    "answer": "B) <style>",
+    "explanation": "The <style> tag is used to embed internal CSS within an HTML document.",
+    "image": null
+  },
+  {
+    "numb": 71,
+    "type": "Multiple Choices",
+    "question": "What type of selector is used in this case? p {line-height: 150%;}",
+    "options": [
+      "A) class Selectors",
+      "B) element Selectors",
+      "C) id Selectors",
+      "D) None of the mentioned"
+    ],
+    "answer": "B) element Selectors",
+    "explanation": "Using just 'p' is an element (type) selector that selects all paragraph elements.",
+    "image": null
+  },
+  {
+    "numb": 72,
+    "type": "Multiple Choices",
+    "question": "What type of selector is used in this case? p strong {background-color: yellow;}",
+    "options": [
+      "A) Strong have yellow background",
+      "B) Strong element within a p element have a yellow background",
+      "C) Both p and strong have yellow background",
+      "D) None of the mentioned"
+    ],
+    "answer": "B) Strong element within a p element have a yellow background",
+    "explanation": "This is a descendant selector that targets <strong> elements inside <p> elements.",
+    "image": null
+  },
+  {
+    "numb": 73,
+    "type": "Multiple Choices",
+    "question": "Where in an HTML document is the correct place to refer to an external style sheet?",
+    "options": [
+      "A) At the end of the document",
+      "B) In the <body> section",
+      "C) At the top of the document",
+      "D) In the <head> section"
+    ],
+    "answer": "D) In the <head> section",
+    "explanation": "External stylesheets are linked in the <head> section using the <link> element.",
+    "image": null
+  },
+  {
+    "numb": 74,
+    "type": "Multiple Choices",
+    "question": "How do you add a background color for all <h1> elements?",
+    "options": [
+      "A) all.h1 {background-color:#FFFFFF}",
+      "B) h1 {background-color:#FFFFFF}",
+      "C) h1.all {background-color:#FFFFFF}",
+      "D) All the mentioned"
+    ],
+    "answer": "B) h1 {background-color:#FFFFFF}",
+    "explanation": "The element selector 'h1' targets all <h1> elements on the page.",
+    "image": null
+  },
+  {
+    "numb": 75,
+    "type": "Multiple Choices",
+    "question": "What is the main difference between <div> and <span> elements in HTML?",
+    "options": [
+      "A) <div> is a block-level element, and <span> is an inline element",
+      "B) <div> is an inline element, and <span> is a block-level element",
+      "C) Both are block-level elements",
+      "D) Both are inline elements"
+    ],
+    "answer": "A) <div> is a block-level element, and <span> is an inline element",
+    "explanation": "<div> is block-level (starts on new line, takes full width), <span> is inline (flows with text).",
+    "image": null
+  },
+  {
+    "numb": 76,
+    "type": "Multiple Choices",
+    "question": "Which HTML element starts on a new line by default?",
+    "options": [
+      "A) <span>",
+      "B) <b>",
+      "C) <div>",
+      "D) <i>"
+    ],
+    "answer": "C) <div>",
+    "explanation": "<div> is a block-level element that starts on a new line by default.",
+    "image": null
+  },
+  {
+    "numb": 77,
+    "type": "Multiple Choices",
+    "question": "Which of the following statements about <div> and <span> is false?",
+    "options": [
+      "A) <div> can contain other block elements",
+      "B) <span> can contain other inline elements",
+      "C) <div> is used mainly for layout and grouping",
+      "D) <span> automatically adds a line break"
+    ],
+    "answer": "D) <span> automatically adds a line break",
+    "explanation": "<span> is an inline element and does NOT add a line break. Only block elements do.",
+    "image": null
+  },
+  {
+    "numb": 78,
+    "type": "Multiple Choices",
+    "question": "Which CSS property defines a container as a flex container?",
+    "options": [
+      "A) display: inline;",
+      "B) display: grid;",
+      "C) display: flex;",
+      "D) display: block;"
+    ],
+    "answer": "C) display: flex;",
+    "explanation": "display: flex creates a flex container, enabling flexbox layout for its children.",
+    "image": null
+  },
+  {
+    "numb": 79,
+    "type": "Multiple Choices",
+    "question": "What is the default value of the flex-direction property?",
+    "options": [
+      "A) column",
+      "B) row",
+      "C) row-reverse",
+      "D) column-reverse"
+    ],
+    "answer": "B) row",
+    "explanation": "The default flex-direction is 'row', which arranges items horizontally from left to right.",
+    "image": null
+  },
+  {
+    "numb": 80,
+    "type": "Multiple Choices",
+    "question": "Which property controls the alignment of flex items along the main axis?",
+    "options": [
+      "A) align-items",
+      "B) justify-content",
+      "C) align-content",
+      "D) flex-wrap"
+    ],
+    "answer": "B) justify-content",
+    "explanation": "justify-content aligns flex items along the main axis (horizontal in row direction).",
+    "image": null
+  },
+  {
+    "numb": 81,
+    "type": "Multiple Choices",
+    "question": "Which property controls the alignment of flex items along the cross axis?",
+    "options": [
+      "A) align-items",
+      "B) justify-content",
+      "C) flex-direction",
+      "D) align-self"
+    ],
+    "answer": "A) align-items",
+    "explanation": "align-items aligns flex items along the cross axis (vertical in row direction).",
+    "image": null
+  },
+  {
+    "numb": 82,
+    "type": "Multiple Choices",
+    "question": "Which property specifies how much a flex item will grow relative to the rest?",
+    "options": [
+      "A) flex-grow",
+      "B) flex-shrink",
+      "C) flex-basis",
+      "D) align-self"
+    ],
+    "answer": "A) flex-grow",
+    "explanation": "flex-grow specifies how much the item should grow relative to other flex items when extra space is available.",
+    "image": null
+  },
+  {
+    "numb": 83,
+    "type": "Multiple Choices",
+    "question": "Which method is used in JavaScript to change the content of an HTML element?",
+    "options": [
+      "A) getElementById()",
+      "B) querySelector()",
+      "C) innerHTML",
+      "D) document.write()"
+    ],
+    "answer": "C) innerHTML",
+    "explanation": "innerHTML is a property (not method) used to get or set the HTML content inside an element.",
+    "image": null
+  },
+  {
+    "numb": 84,
+    "type": "Multiple Choices",
+    "question": "Which JavaScript event is used when a user clicks on an HTML element?",
+    "options": [
+      "A) onchange",
+      "B) onsubmit",
+      "C) onclick",
+      "D) click"
+    ],
+    "answer": "C) onclick",
+    "explanation": "The onclick event fires when a user clicks on an element.",
+    "image": null
+  },
+  {
+    "numb": 85,
+    "type": "Multiple Choices",
+    "question": "What does document.getElementById(\"demo\").style.display = \"none\"; do?",
+    "options": [
+      "A) Removes the element permanently",
+      "B) Hides the element from view",
+      "C) Deletes the HTML element",
+      "D) Changes the background color"
+    ],
+    "answer": "B) Hides the element from view",
+    "explanation": "Setting display to 'none' hides the element but doesn't remove it from the DOM.",
+    "image": null
+  },
+  {
+    "numb": 86,
+    "type": "Multiple Choices",
+    "question": "Which JavaScript method is used to attach an event handler to an element?",
+    "options": [
+      "A) addHandler()",
+      "B) onEvent()",
+      "C) addEventListener()",
+      "D) attachEvent()"
+    ],
+    "answer": "C) addEventListener()",
+    "explanation": "addEventListener() is the standard method for attaching event handlers.",
+    "image": null
+  },
+  {
+    "numb": 87,
+    "type": "Multiple Choices",
+    "question": "To change the text color of an element with id \"title\" to red, which code is correct?",
+    "options": [
+      "A) title.color = \"red\";",
+      "B) document.getElementById(\"title\").style.color = \"red\";",
+      "C) document.style(\"title\").color = \"red\";",
+      "D) element(\"title\").color = red;"
+    ],
+    "answer": "B) document.getElementById(\"title\").style.color = \"red\";",
+    "explanation": "Use getElementById to select the element, then access its style.color property.",
+    "image": null
+  },
+  {
+    "numb": 88,
+    "type": "Multiple Choices",
+    "question": "What does document.querySelector(\".btn\") select?",
+    "options": [
+      "A) An element with the ID btn",
+      "B) All buttons on the page",
+      "C) The first element with class btn",
+      "D) The body tag"
+    ],
+    "answer": "C) The first element with class btn",
+    "explanation": "querySelector with a class selector (.btn) returns the first matching element.",
+    "image": null
+  },
+  {
+    "numb": 89,
+    "type": "Multiple Choices",
+    "question": "What does the document.createElement(\"p\") function do?",
+    "options": [
+      "A) Finds a paragraph element",
+      "B) Creates a new paragraph element",
+      "C) Deletes an existing paragraph element",
+      "D) Copies a paragraph element"
+    ],
+    "answer": "B) Creates a new paragraph element",
+    "explanation": "createElement() creates a new HTML element of the specified type, which can then be added to the DOM.",
+    "image": null
+  },
+  {
+    "numb": 90,
+    "type": "Multiple Choices",
+    "question": "Which method is used to add a newly created element to the DOM?",
+    "options": [
+      "A) document.add()",
+      "B) element.appendChild()",
+      "C) document.insert()",
+      "D) element.addElement()"
+    ],
+    "answer": "B) element.appendChild()",
+    "explanation": "appendChild() adds a node as the last child of a parent element, inserting the newly created element into the DOM.",
+    "image": null
+  }
+]

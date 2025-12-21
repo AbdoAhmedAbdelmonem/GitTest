@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is a Promise in JavaScript?",
+    "options": [
+      "A) A function that returns immediately",
+      "B) An object representing the eventual completion or failure of an asynchronous operation",
+      "C) A type of loop",
+      "D) A way to declare variables"
+    ],
+    "answer": "B) An object representing the eventual completion or failure of an asynchronous operation",
+    "explanation": "A Promise is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. It allows you to attach callbacks instead of passing them.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What are the three possible states of a Promise?",
+    "options": [
+      "A) Started, Running, Completed",
+      "B) Pending, Fulfilled, Rejected",
+      "C) Open, Closed, Error",
+      "D) Active, Inactive, Failed"
+    ],
+    "answer": "B) Pending, Fulfilled, Rejected",
+    "explanation": "A Promise can be in one of three states: Pending (initial state), Fulfilled (operation completed successfully), or Rejected (operation failed).",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What keyword is used to define an async function?",
+    "options": [
+      "A) async",
+      "B) await",
+      "C) promise",
+      "D) defer"
+    ],
+    "answer": "A) async",
+    "explanation": "The 'async' keyword is placed before a function declaration to make it an async function. Async functions always return a Promise.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What does the 'await' keyword do?",
+    "options": [
+      "A) Creates a new Promise",
+      "B) Pauses execution until the Promise resolves",
+      "C) Cancels the Promise",
+      "D) Converts a Promise to a callback"
+    ],
+    "answer": "B) Pauses execution until the Promise resolves",
+    "explanation": "The 'await' keyword pauses the execution of an async function until the Promise is settled (resolved or rejected), and then resumes with the resolved value.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Where can the 'await' keyword be used?",
+    "options": [
+      "A) Anywhere in JavaScript code",
+      "B) Only inside async functions",
+      "C) Only in callbacks",
+      "D) Only in loops"
+    ],
+    "answer": "B) Only inside async functions",
+    "explanation": "The 'await' keyword can only be used inside async functions. Using it outside will result in a syntax error.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What does an async function always return?",
+    "options": [
+      "A) undefined",
+      "B) A callback function",
+      "C) A Promise",
+      "D) The actual value directly"
+    ],
+    "answer": "C) A Promise",
+    "explanation": "An async function always returns a Promise. If the function returns a value, the Promise will be resolved with that value. If it throws an error, the Promise will be rejected.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "How do you handle errors in async/await?",
+    "options": [
+      "A) Using if/else statements",
+      "B) Using try/catch blocks",
+      "C) Using error() function",
+      "D) Errors cannot be handled in async/await"
+    ],
+    "answer": "B) Using try/catch blocks",
+    "explanation": "In async/await, errors are handled using try/catch blocks. When an awaited Promise is rejected, the error is thrown and can be caught in the catch block.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What does Promise.all() do?",
+    "options": [
+      "A) Executes promises one after another",
+      "B) Takes an array of promises and returns a single Promise that resolves when all are fulfilled",
+      "C) Cancels all pending promises",
+      "D) Creates multiple copies of a promise"
+    ],
+    "answer": "B) Takes an array of promises and returns a single Promise that resolves when all are fulfilled",
+    "explanation": "Promise.all() takes an iterable of promises and returns a single Promise that resolves to an array of results when all input promises are fulfilled, or rejects if any promise rejects.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What happens if one Promise in Promise.all() is rejected?",
+    "options": [
+      "A) Only that promise fails, others continue",
+      "B) The entire Promise.all() rejects immediately",
+      "C) It waits for all promises to complete anyway",
+      "D) It automatically retries the failed promise"
+    ],
+    "answer": "B) The entire Promise.all() rejects immediately",
+    "explanation": "If any promise in Promise.all() rejects, the entire Promise.all() rejects immediately with that error, without waiting for the other promises to complete.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What does Promise.race() do?",
+    "options": [
+      "A) Runs all promises in sequence",
+      "B) Returns as soon as any promise settles (fulfills or rejects)",
+      "C) Waits for all promises to complete",
+      "D) Compares promise values"
+    ],
+    "answer": "B) Returns as soon as any promise settles (fulfills or rejects)",
+    "explanation": "Promise.race() returns a Promise that settles as soon as any of the input promises settles, with the value or reason from that first settled promise.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "How do you create a new Promise?",
+    "options": [
+      "A) new Promise(callback)",
+      "B) new Promise((resolve, reject) => { })",
+      "C) Promise.create()",
+      "D) createPromise()"
+    ],
+    "answer": "B) new Promise((resolve, reject) => { })",
+    "explanation": "A new Promise is created using the Promise constructor with an executor function that receives resolve and reject functions as parameters.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What does the resolve function do inside a Promise?",
+    "options": [
+      "A) Ends the Promise without a value",
+      "B) Marks the Promise as fulfilled with a value",
+      "C) Throws an error",
+      "D) Restarts the Promise"
+    ],
+    "answer": "B) Marks the Promise as fulfilled with a value",
+    "explanation": "The resolve function marks the Promise as fulfilled and passes the provided value to any .then() handlers attached to the Promise.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What does the reject function do inside a Promise?",
+    "options": [
+      "A) Completes the Promise successfully",
+      "B) Marks the Promise as rejected with a reason",
+      "C) Cancels the Promise",
+      "D) Pauses the Promise"
+    ],
+    "answer": "B) Marks the Promise as rejected with a reason",
+    "explanation": "The reject function marks the Promise as rejected and passes the error or reason to any .catch() handlers attached to the Promise.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is callback hell?",
+    "options": [
+      "A) A feature of JavaScript",
+      "B) Deeply nested callbacks making code hard to read and maintain",
+      "C) An error type in JavaScript",
+      "D) A type of Promise"
+    ],
+    "answer": "B) Deeply nested callbacks making code hard to read and maintain",
+    "explanation": "Callback hell refers to the situation where callbacks are nested within callbacks, creating deeply indented, hard-to-read code. Promises and async/await help solve this problem.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of async/await over .then() chains?",
+    "options": [
+      "A) It's faster",
+      "B) It makes asynchronous code look and behave more like synchronous code",
+      "C) It uses less memory",
+      "D) It works in older browsers"
+    ],
+    "answer": "B) It makes asynchronous code look and behave more like synchronous code",
+    "explanation": "Async/await provides a more readable, synchronous-looking syntax for working with Promises. This makes the code easier to write, read, and debug.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What does Promise.allSettled() return?",
+    "options": [
+      "A) Only the fulfilled promises",
+      "B) An array of objects describing the outcome of each promise",
+      "C) The first settled promise",
+      "D) A single combined value"
+    ],
+    "answer": "B) An array of objects describing the outcome of each promise",
+    "explanation": "Promise.allSettled() returns a promise that resolves after all promises have settled, with an array of objects that each describe the outcome (status and value/reason) of each promise.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What is the event loop in JavaScript?",
+    "options": [
+      "A) A for loop that handles events",
+      "B) A mechanism that handles asynchronous operations by queuing callbacks",
+      "C) A type of event listener",
+      "D) A debugging tool"
+    ],
+    "answer": "B) A mechanism that handles asynchronous operations by queuing callbacks",
+    "explanation": "The event loop is JavaScript's mechanism for handling asynchronous operations. It manages the call stack, callback queue, and microtask queue to execute code in the correct order.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What is a microtask in JavaScript?",
+    "options": [
+      "A) A small function",
+      "B) A Promise callback that has higher priority than regular callbacks",
+      "C) A CSS animation",
+      "D) A type of variable"
+    ],
+    "answer": "B) A Promise callback that has higher priority than regular callbacks",
+    "explanation": "Microtasks (like Promise callbacks) have higher priority than regular tasks (like setTimeout callbacks). They are executed after the current task completes but before the next task begins.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which executes first: a setTimeout callback or a Promise .then() callback?",
+    "options": [
+      "A) setTimeout callback",
+      "B) Promise .then() callback",
+      "C) They execute at the same time",
+      "D) It's random"
+    ],
+    "answer": "B) Promise .then() callback",
+    "explanation": "Promise .then() callbacks are microtasks and execute before setTimeout callbacks (macrotasks). Microtasks always have priority over macrotasks in the event loop.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What is the correct way to use async/await with fetch?",
+    "options": [
+      "A) const data = fetch('url')",
+      "B) const response = await fetch('url'); const data = await response.json();",
+      "C) const data = async fetch('url')",
+      "D) await const data = fetch('url')"
+    ],
+    "answer": "B) const response = await fetch('url'); const data = await response.json();",
+    "explanation": "When using async/await with fetch, you await the fetch call to get the response, then await the .json() method to parse the response body.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What does Promise.resolve() do?",
+    "options": [
+      "A) Creates a rejected Promise",
+      "B) Creates an immediately fulfilled Promise with the given value",
+      "C) Waits for a Promise to complete",
+      "D) Cancels a Promise"
+    ],
+    "answer": "B) Creates an immediately fulfilled Promise with the given value",
+    "explanation": "Promise.resolve(value) returns a Promise that is immediately resolved with the given value. It's useful for wrapping non-Promise values in a Promise.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What does Promise.reject() do?",
+    "options": [
+      "A) Creates an immediately rejected Promise with the given reason",
+      "B) Stops a Promise from executing",
+      "C) Retries a failed Promise",
+      "D) Creates a pending Promise"
+    ],
+    "answer": "A) Creates an immediately rejected Promise with the given reason",
+    "explanation": "Promise.reject(reason) returns a Promise that is immediately rejected with the given reason. It's useful for creating error conditions or testing error handling.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Can you use await at the top level of a JavaScript module?",
+    "options": [
+      "A) No, never",
+      "B) Yes, with top-level await in ES modules",
+      "C) Only in Node.js",
+      "D) Only with a special library"
+    ],
+    "answer": "B) Yes, with top-level await in ES modules",
+    "explanation": "Top-level await is supported in ES modules, allowing you to use await at the module level without wrapping it in an async function.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "What happens if you forget to use await with an async function call?",
+    "options": [
+      "A) An error is thrown",
+      "B) You get a Promise instead of the resolved value",
+      "C) The code doesn't compile",
+      "D) The function doesn't execute"
+    ],
+    "answer": "B) You get a Promise instead of the resolved value",
+    "explanation": "If you forget await, the async function returns a Promise object instead of the resolved value. The function still executes, but you can't access the result directly.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What is Promise chaining?",
+    "options": [
+      "A) Creating multiple promises in an array",
+      "B) Linking multiple .then() calls to process values sequentially",
+      "C) Connecting promises to the DOM",
+      "D) Importing promises from other files"
+    ],
+    "answer": "B) Linking multiple .then() calls to process values sequentially",
+    "explanation": "Promise chaining is the practice of linking multiple .then() calls together. Each .then() receives the result of the previous one, allowing sequential processing of asynchronous operations.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What does returning a value from a .then() callback do?",
+    "options": [
+      "A) Ends the Promise chain",
+      "B) Passes the value to the next .then() in the chain",
+      "C) Throws an error",
+      "D) Creates a new Promise object"
+    ],
+    "answer": "B) Passes the value to the next .then() in the chain",
+    "explanation": "When you return a value from a .then() callback, it becomes the resolved value for the next .then() in the chain, enabling data transformation through the chain.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the async keyword before an arrow function?",
+    "options": [
+      "A) It has no effect on arrow functions",
+      "B) It makes the arrow function return a Promise and allows await inside",
+      "C) It makes the function synchronous",
+      "D) It creates a generator function"
+    ],
+    "answer": "B) It makes the arrow function return a Promise and allows await inside",
+    "explanation": "Using async before an arrow function (async () => {}) makes it an async function that returns a Promise and allows the use of await inside its body.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What is the correct syntax for an async arrow function?",
+    "options": [
+      "A) const fn = async () => { }",
+      "B) const fn = () async => { }",
+      "C) const async fn = () => { }",
+      "D) const fn = => async () { }"
+    ],
+    "answer": "A) const fn = async () => { }",
+    "explanation": "The async keyword is placed before the parentheses in an arrow function: const fn = async () => { }. This creates an async arrow function.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What happens if an error is thrown inside an async function without try/catch?",
+    "options": [
+      "A) The program crashes",
+      "B) The returned Promise is rejected with that error",
+      "C) The error is silently ignored",
+      "D) It's converted to undefined"
+    ],
+    "answer": "B) The returned Promise is rejected with that error",
+    "explanation": "If an error is thrown inside an async function without being caught, the Promise returned by the function is rejected with that error, which can be caught by a .catch() on the Promise.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of Promise.any()?",
+    "options": [
+      "A) Waits for all promises to fulfill",
+      "B) Returns as soon as any promise is fulfilled, ignoring rejections",
+      "C) Returns the first promise that was created",
+      "D) Combines all promise values into one"
+    ],
+    "answer": "B) Returns as soon as any promise is fulfilled, ignoring rejections",
+    "explanation": "Promise.any() takes an iterable of promises and returns a Promise that fulfills as soon as any of the input promises fulfills. It only rejects if all promises reject.",
+    "image": null
+  }
+]

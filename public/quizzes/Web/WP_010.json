@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of an HTML form?",
+    "options": [
+      "A) To style the webpage",
+      "B) To collect user input and submit data to a server",
+      "C) To display images",
+      "D) To create navigation menus"
+    ],
+    "answer": "B) To collect user input and submit data to a server",
+    "explanation": "HTML forms are used to collect user input through various form controls like text fields, checkboxes, and buttons, and submit that data to a server for processing.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "Which attribute specifies where to send form data when submitted?",
+    "options": [
+      "A) method",
+      "B) action",
+      "C) target",
+      "D) submit"
+    ],
+    "answer": "B) action",
+    "explanation": "The 'action' attribute specifies the URL where the form data should be sent when the form is submitted. If omitted, data is sent to the current page URL.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What does the method attribute in a form specify?",
+    "options": [
+      "A) The URL to send data to",
+      "B) The HTTP method (GET or POST) for sending form data",
+      "C) The type of input fields",
+      "D) The form validation rules"
+    ],
+    "answer": "B) The HTTP method (GET or POST) for sending form data",
+    "explanation": "The 'method' attribute specifies the HTTP method to use when sending form data. GET appends data to the URL, while POST sends data in the request body.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the difference between GET and POST methods in forms?",
+    "options": [
+      "A) No difference",
+      "B) GET sends data in URL, POST sends in request body",
+      "C) POST is faster than GET",
+      "D) GET is more secure than POST"
+    ],
+    "answer": "B) GET sends data in URL, POST sends in request body",
+    "explanation": "GET appends form data to the URL as query parameters (visible in browser), while POST sends data in the HTTP request body (not visible in URL). POST is preferred for sensitive data.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "Which input type creates a password field?",
+    "options": [
+      "A) <input type='hidden'>",
+      "B) <input type='password'>",
+      "C) <input type='secret'>",
+      "D) <input type='security'>"
+    ],
+    "answer": "B) <input type='password'>",
+    "explanation": "The input type='password' creates a text field that masks the characters entered, displaying dots or asterisks instead of the actual characters.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What does the 'required' attribute do on an input field?",
+    "options": [
+      "A) Makes the field read-only",
+      "B) Prevents form submission if the field is empty",
+      "C) Adds a red border to the field",
+      "D) Auto-fills the field"
+    ],
+    "answer": "B) Prevents form submission if the field is empty",
+    "explanation": "The 'required' attribute is a form validation attribute that prevents the form from being submitted if the field is left empty, showing a browser error message.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which event is fired when a form is submitted?",
+    "options": [
+      "A) click",
+      "B) submit",
+      "C) send",
+      "D) post"
+    ],
+    "answer": "B) submit",
+    "explanation": "The 'submit' event is fired when a form is submitted, either by clicking a submit button or pressing Enter in a form field. It can be used to validate or process data before sending.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "How do you prevent the default form submission behavior?",
+    "options": [
+      "A) event.stop()",
+      "B) event.preventDefault()",
+      "C) event.cancel()",
+      "D) return false"
+    ],
+    "answer": "B) event.preventDefault()",
+    "explanation": "The event.preventDefault() method prevents the default browser behavior for the event, such as page reload on form submission, allowing you to handle the submission with JavaScript.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is client-side form validation?",
+    "options": [
+      "A) Validation done on the server",
+      "B) Validation done in the browser before data is sent to the server",
+      "C) Validation done by the database",
+      "D) Validation done by email"
+    ],
+    "answer": "B) Validation done in the browser before data is sent to the server",
+    "explanation": "Client-side validation happens in the browser using HTML5 attributes or JavaScript before data is sent to the server. It provides immediate feedback but should always be combined with server-side validation.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which HTML5 input type validates email format?",
+    "options": [
+      "A) <input type='mail'>",
+      "B) <input type='email'>",
+      "C) <input type='text' validate='email'>",
+      "D) <input type='address'>"
+    ],
+    "answer": "B) <input type='email'>",
+    "explanation": "The input type='email' provides built-in browser validation for email format. The browser will show an error if the entered text doesn't match basic email pattern.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What does the 'pattern' attribute do in form validation?",
+    "options": [
+      "A) Sets the background pattern",
+      "B) Specifies a regular expression the input value must match",
+      "C) Defines the input placeholder",
+      "D) Creates radio button patterns"
+    ],
+    "answer": "B) Specifies a regular expression the input value must match",
+    "explanation": "The 'pattern' attribute accepts a regular expression that the input value must match for validation to pass. For example, pattern='[A-Za-z]{3}' requires exactly 3 letters.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the 'placeholder' attribute?",
+    "options": [
+      "A) To set the default value",
+      "B) To display hint text that disappears when user types",
+      "C) To validate the input",
+      "D) To make the field required"
+    ],
+    "answer": "B) To display hint text that disappears when user types",
+    "explanation": "The 'placeholder' attribute shows a short hint or example text in the input field that disappears when the user starts typing. It helps users understand what to enter.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "How do you access form data in JavaScript using FormData?",
+    "options": [
+      "A) new FormData(form)",
+      "B) form.getData()",
+      "C) form.values()",
+      "D) getFormData(form)"
+    ],
+    "answer": "A) new FormData(form)",
+    "explanation": "The FormData constructor takes a form element and creates a FormData object containing all the form's data as key-value pairs, making it easy to send via fetch.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which method retrieves a value from a FormData object?",
+    "options": [
+      "A) formData.getValue(key)",
+      "B) formData.get(key)",
+      "C) formData[key]",
+      "D) formData.read(key)"
+    ],
+    "answer": "B) formData.get(key)",
+    "explanation": "The formData.get(key) method retrieves the first value associated with the given key from the FormData object.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What input type is used for checkboxes?",
+    "options": [
+      "A) <input type='check'>",
+      "B) <input type='checkbox'>",
+      "C) <input type='box'>",
+      "D) <input type='toggle'>"
+    ],
+    "answer": "B) <input type='checkbox'>",
+    "explanation": "The input type='checkbox' creates a checkbox that can be checked or unchecked. Multiple checkboxes can be selected at once, unlike radio buttons.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What makes radio buttons work as a group?",
+    "options": [
+      "A) They must have the same id",
+      "B) They must have the same name attribute",
+      "C) They must be in the same div",
+      "D) They must have the same class"
+    ],
+    "answer": "B) They must have the same name attribute",
+    "explanation": "Radio buttons with the same 'name' attribute work as a group, allowing only one to be selected at a time. Different names create independent groups.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which HTML element creates a dropdown select menu?",
+    "options": [
+      "A) <dropdown>",
+      "B) <select>",
+      "C) <menu>",
+      "D) <list>"
+    ],
+    "answer": "B) <select>",
+    "explanation": "The <select> element creates a dropdown menu with <option> elements as the selectable choices. It's used when users need to choose from a predefined list.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the 'name' attribute on form inputs?",
+    "options": [
+      "A) To display a label",
+      "B) To identify the data when form is submitted",
+      "C) To style the element",
+      "D) To validate the input"
+    ],
+    "answer": "B) To identify the data when form is submitted",
+    "explanation": "The 'name' attribute provides the key for the form data when submitted. Without it, the input value won't be included in the submitted data.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "Which event fires when an input value changes?",
+    "options": [
+      "A) submit",
+      "B) input",
+      "C) modify",
+      "D) update"
+    ],
+    "answer": "B) input",
+    "explanation": "The 'input' event fires immediately every time the value of an input element changes, whether by typing, pasting, or other means.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What is the difference between 'input' and 'change' events?",
+    "options": [
+      "A) They are the same",
+      "B) 'input' fires on every keystroke, 'change' fires when input loses focus",
+      "C) 'change' fires first, then 'input'",
+      "D) 'input' only works on text fields"
+    ],
+    "answer": "B) 'input' fires on every keystroke, 'change' fires when input loses focus",
+    "explanation": "The 'input' event fires immediately with every change, while 'change' fires when the element loses focus and its value has been modified.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What does the 'minlength' attribute do?",
+    "options": [
+      "A) Sets minimum font size",
+      "B) Sets minimum number of characters required",
+      "C) Sets minimum screen width",
+      "D) Sets minimum form width"
+    ],
+    "answer": "B) Sets minimum number of characters required",
+    "explanation": "The 'minlength' attribute specifies the minimum number of characters required in an input field. The form won't submit if the value is shorter than this length.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "Which input type is used for number-only input?",
+    "options": [
+      "A) <input type='int'>",
+      "B) <input type='number'>",
+      "C) <input type='numeric'>",
+      "D) <input type='digit'>"
+    ],
+    "answer": "B) <input type='number'>",
+    "explanation": "The input type='number' creates a field that only accepts numeric values and typically includes increment/decrement buttons. It supports min, max, and step attributes.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the <label> element?",
+    "options": [
+      "A) To create a heading",
+      "B) To associate descriptive text with a form control",
+      "C) To validate the form",
+      "D) To submit the form"
+    ],
+    "answer": "B) To associate descriptive text with a form control",
+    "explanation": "The <label> element associates descriptive text with a form control. When clicked, it focuses the associated input, improving accessibility and usability.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "How do you associate a label with an input?",
+    "options": [
+      "A) Using matching id and for attributes",
+      "B) Using the same name attribute",
+      "C) Placing them in the same div",
+      "D) Using the same class"
+    ],
+    "answer": "A) Using matching id and for attributes",
+    "explanation": "A label is associated with an input by setting the label's 'for' attribute to match the input's 'id' attribute, or by nesting the input inside the label.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What does the 'disabled' attribute do to a form element?",
+    "options": [
+      "A) Hides the element",
+      "B) Makes the element non-interactive and excludes it from form submission",
+      "C) Changes the element color",
+      "D) Makes the element required"
+    ],
+    "answer": "B) Makes the element non-interactive and excludes it from form submission",
+    "explanation": "The 'disabled' attribute prevents user interaction with the element and excludes its value from form data when submitted. It's often visually styled as grayed out.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the 'readonly' attribute?",
+    "options": [
+      "A) Prevents the field from being submitted",
+      "B) Allows viewing but not editing the field value",
+      "C) Makes the field invisible",
+      "D) Validates the field as read-only"
+    ],
+    "answer": "B) Allows viewing but not editing the field value",
+    "explanation": "The 'readonly' attribute prevents users from changing the field's value while still displaying it and including it in form submission (unlike 'disabled').",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What HTML element is used for multi-line text input?",
+    "options": [
+      "A) <input type='multiline'>",
+      "B) <textarea>",
+      "C) <textbox>",
+      "D) <input type='area'>"
+    ],
+    "answer": "B) <textarea>",
+    "explanation": "The <textarea> element creates a multi-line text input area. Unlike <input>, it uses separate opening and closing tags and can have rows/cols attributes.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "Which input type creates a date picker?",
+    "options": [
+      "A) <input type='calendar'>",
+      "B) <input type='date'>",
+      "C) <input type='datetime'>",
+      "D) <input type='picker'>"
+    ],
+    "answer": "B) <input type='date'>",
+    "explanation": "The input type='date' creates a date picker in modern browsers, allowing users to select a date from a calendar interface.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the 'autocomplete' attribute?",
+    "options": [
+      "A) To auto-fill code",
+      "B) To enable or disable browser auto-fill suggestions",
+      "C) To complete form validation",
+      "D) To auto-complete the form submission"
+    ],
+    "answer": "B) To enable or disable browser auto-fill suggestions",
+    "explanation": "The 'autocomplete' attribute controls whether the browser should offer auto-fill suggestions based on previously entered values. Values include 'on', 'off', or specific hints like 'email'.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "How do you access the value of an input element in JavaScript?",
+    "options": [
+      "A) input.text",
+      "B) input.value",
+      "C) input.content",
+      "D) input.data"
+    ],
+    "answer": "B) input.value",
+    "explanation": "The 'value' property of an input element contains the current value entered by the user. It can be read or set using JavaScript: input.value = 'new value'.",
+    "image": null
+  }
+]

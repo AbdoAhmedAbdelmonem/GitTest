@@ -1,0 +1,422 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is the Browser Object Model (BOM)?",
+    "options": [
+      "A) A way to style web pages",
+      "B) Objects that provide interaction with the browser window",
+      "C) A database model",
+      "D) A JavaScript framework"
+    ],
+    "answer": "B) Objects that provide interaction with the browser window",
+    "explanation": "The BOM consists of objects that let JavaScript interact with the browser outside of the document content, including the window, navigator, screen, location, and history objects.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What does the 'window' object represent?",
+    "options": [
+      "A) A new tab",
+      "B) The browser window containing the document",
+      "C) A popup dialog",
+      "D) The screen resolution"
+    ],
+    "answer": "B) The browser window containing the document",
+    "explanation": "The window object represents the browser window and is the global object in browser JavaScript. All global variables and functions become properties and methods of window.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What does window.location contain?",
+    "options": [
+      "A) The user's physical location",
+      "B) Information about the current URL",
+      "C) The position of the window on screen",
+      "D) The browser's installation path"
+    ],
+    "answer": "B) Information about the current URL",
+    "explanation": "window.location contains information about the current page URL, including properties like href, hostname, pathname, search, and hash, and methods to navigate.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "How do you redirect to a new URL in JavaScript?",
+    "options": [
+      "A) window.goto('url')",
+      "B) window.location.href = 'url'",
+      "C) window.navigate('url')",
+      "D) document.redirect('url')"
+    ],
+    "answer": "B) window.location.href = 'url'",
+    "explanation": "Setting window.location.href to a new URL navigates the browser to that URL. You can also use window.location.assign('url') or window.location.replace('url').",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is the difference between location.assign() and location.replace()?",
+    "options": [
+      "A) No difference",
+      "B) assign() adds to history, replace() doesn't",
+      "C) replace() is faster",
+      "D) assign() only works with relative URLs"
+    ],
+    "answer": "B) assign() adds to history, replace() doesn't",
+    "explanation": "location.assign() navigates to a new URL and adds an entry to the browser history (back button works). location.replace() replaces the current entry, so you can't go back.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What does window.navigator provide?",
+    "options": [
+      "A) Navigation menus",
+      "B) Information about the browser and operating system",
+      "C) Page navigation history",
+      "D) GPS coordinates"
+    ],
+    "answer": "B) Information about the browser and operating system",
+    "explanation": "The navigator object contains information about the browser, including userAgent, platform, language, and methods like geolocation.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What does window.history allow you to do?",
+    "options": [
+      "A) See all websites the user has visited",
+      "B) Navigate through the browser's session history",
+      "C) Store data permanently",
+      "D) Track user behavior"
+    ],
+    "answer": "B) Navigate through the browser's session history",
+    "explanation": "window.history provides methods to navigate through the session history (back, forward, go) and manipulate the history stack (pushState, replaceState) for single-page applications.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What does history.back() do?",
+    "options": [
+      "A) Returns to the home page",
+      "B) Goes to the previous page in history",
+      "C) Clears the browser history",
+      "D) Creates a backup"
+    ],
+    "answer": "B) Goes to the previous page in history",
+    "explanation": "history.back() is equivalent to clicking the browser's back button. It navigates to the previous page in the session history.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of history.pushState()?",
+    "options": [
+      "A) To go back in history",
+      "B) To add a new entry to the browser history without page reload",
+      "C) To clear history",
+      "D) To bookmark a page"
+    ],
+    "answer": "B) To add a new entry to the browser history without page reload",
+    "explanation": "history.pushState() adds a new entry to the browser's history stack without causing a page reload. This is fundamental for single-page application (SPA) routing.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What does setTimeout() do?",
+    "options": [
+      "A) Sets a time limit for function execution",
+      "B) Executes a function once after a specified delay",
+      "C) Repeats a function at intervals",
+      "D) Pauses all JavaScript execution"
+    ],
+    "answer": "B) Executes a function once after a specified delay",
+    "explanation": "setTimeout(callback, delay) schedules a function to be executed once after the specified delay in milliseconds. It returns an ID that can be used to cancel it.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What does setInterval() do?",
+    "options": [
+      "A) Executes a function only once",
+      "B) Executes a function repeatedly at specified intervals",
+      "C) Sets the time between page loads",
+      "D) Measures execution time"
+    ],
+    "answer": "B) Executes a function repeatedly at specified intervals",
+    "explanation": "setInterval(callback, interval) repeatedly executes a function at specified time intervals in milliseconds until cleared with clearInterval().",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "How do you stop a setInterval timer?",
+    "options": [
+      "A) stopInterval(id)",
+      "B) clearInterval(id)",
+      "C) cancelInterval(id)",
+      "D) interval.stop()"
+    ],
+    "answer": "B) clearInterval(id)",
+    "explanation": "clearInterval(id) stops a timer that was started with setInterval(). You need to store the ID returned by setInterval() to clear it later.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is the time unit for setTimeout and setInterval delays?",
+    "options": [
+      "A) Seconds",
+      "B) Milliseconds",
+      "C) Microseconds",
+      "D) Minutes"
+    ],
+    "answer": "B) Milliseconds",
+    "explanation": "Both setTimeout and setInterval measure time in milliseconds. 1000 milliseconds equals 1 second. setTimeout(fn, 2000) waits 2 seconds before executing.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What does window.open() do?",
+    "options": [
+      "A) Opens a file",
+      "B) Opens a new browser window or tab",
+      "C) Opens a dialog box",
+      "D) Opens a form"
+    ],
+    "answer": "B) Opens a new browser window or tab",
+    "explanation": "window.open(url, name, features) opens a new browser window or tab with the specified URL. Modern browsers may block this if not triggered by a user action.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What does window.close() do?",
+    "options": [
+      "A) Closes the current window if it was opened by script",
+      "B) Shuts down the browser",
+      "C) Closes all windows",
+      "D) Minimizes the window"
+    ],
+    "answer": "A) Closes the current window if it was opened by script",
+    "explanation": "window.close() attempts to close the current window. For security, it only works on windows that were opened by JavaScript using window.open().",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What does window.alert() display?",
+    "options": [
+      "A) A confirmation dialog",
+      "B) A simple message dialog with an OK button",
+      "C) An input field",
+      "D) An error page"
+    ],
+    "answer": "B) A simple message dialog with an OK button",
+    "explanation": "window.alert(message) displays a modal dialog box with a message and an OK button. It blocks code execution until the user dismisses it.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What does window.confirm() return?",
+    "options": [
+      "A) A string",
+      "B) true or false depending on user choice",
+      "C) The window object",
+      "D) undefined"
+    ],
+    "answer": "B) true or false depending on user choice",
+    "explanation": "window.confirm(message) displays a dialog with OK and Cancel buttons. It returns true if the user clicks OK, false if they click Cancel.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What does window.prompt() return?",
+    "options": [
+      "A) Always a number",
+      "B) The text entered by the user, or null if canceled",
+      "C) true or false",
+      "D) The window object"
+    ],
+    "answer": "B) The text entered by the user, or null if canceled",
+    "explanation": "window.prompt(message) displays a dialog with a text input field. It returns the entered text as a string, or null if the user cancels.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What does window.scrollTo() do?",
+    "options": [
+      "A) Scrolls the document to specified coordinates",
+      "B) Creates a scrollbar",
+      "C) Locks scrolling",
+      "D) Measures scroll position"
+    ],
+    "answer": "A) Scrolls the document to specified coordinates",
+    "explanation": "window.scrollTo(x, y) scrolls the document to the specified x and y coordinates. You can also use an options object with behavior: 'smooth' for smooth scrolling.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What does window.scrollY represent?",
+    "options": [
+      "A) The width of the scrollbar",
+      "B) The number of pixels scrolled vertically",
+      "C) The height of the window",
+      "D) The maximum scroll position"
+    ],
+    "answer": "B) The number of pixels scrolled vertically",
+    "explanation": "window.scrollY (or window.pageYOffset) returns the number of pixels that the document has been scrolled vertically from the top.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What does window.innerWidth return?",
+    "options": [
+      "A) The screen width",
+      "B) The viewport width including scrollbar",
+      "C) The viewport width excluding scrollbar",
+      "D) The document width"
+    ],
+    "answer": "C) The viewport width excluding scrollbar",
+    "explanation": "window.innerWidth returns the interior width of the window in pixels, excluding scrollbar and other UI elements. innerHeight returns the height.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What is the resize event used for?",
+    "options": [
+      "A) Resizing images",
+      "B) Detecting when the window is resized",
+      "C) Changing font sizes",
+      "D) Resizing elements"
+    ],
+    "answer": "B) Detecting when the window is resized",
+    "explanation": "The resize event fires on the window when the browser window is resized. It's commonly used to adjust layouts or recalculate dimensions based on the new window size.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the popstate event?",
+    "options": [
+      "A) Detecting popup windows",
+      "B) Handling browser back/forward navigation with pushState",
+      "C) Closing popups",
+      "D) Creating pop-up menus"
+    ],
+    "answer": "B) Handling browser back/forward navigation with pushState",
+    "explanation": "The popstate event is fired when the active history entry changes. It's used in SPAs to respond to back/forward navigation when using pushState/replaceState.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "What does location.reload() do?",
+    "options": [
+      "A) Reloads external scripts",
+      "B) Reloads the current page",
+      "C) Resets form data",
+      "D) Clears the cache"
+    ],
+    "answer": "B) Reloads the current page",
+    "explanation": "location.reload() reloads the current page from the server. It's equivalent to the user clicking the browser's refresh button.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What is the beforeunload event used for?",
+    "options": [
+      "A) Loading content before the page",
+      "B) Showing a confirmation dialog before leaving the page",
+      "C) Caching page content",
+      "D) Preloading resources"
+    ],
+    "answer": "B) Showing a confirmation dialog before leaving the page",
+    "explanation": "The beforeunload event fires when the user is about to leave the page. It can be used to show a confirmation dialog to prevent accidental data loss.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What does navigator.userAgent contain?",
+    "options": [
+      "A) The username of the logged-in user",
+      "B) A string identifying the browser and operating system",
+      "C) The user's IP address",
+      "D) The user's location"
+    ],
+    "answer": "B) A string identifying the browser and operating system",
+    "explanation": "navigator.userAgent returns a string with information about the browser name, version, and operating system. It's often used for browser detection, though feature detection is preferred.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What does screen.width provide?",
+    "options": [
+      "A) The viewport width",
+      "B) The total width of the user's screen",
+      "C) The document width",
+      "D) The browser window width"
+    ],
+    "answer": "B) The total width of the user's screen",
+    "explanation": "screen.width returns the total width of the user's screen in pixels, regardless of the browser window size. This is the physical screen resolution.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What is requestAnimationFrame used for?",
+    "options": [
+      "A) Requesting new images",
+      "B) Creating smooth animations synchronized with display refresh",
+      "C) Loading video frames",
+      "D) Taking screenshots"
+    ],
+    "answer": "B) Creating smooth animations synchronized with display refresh",
+    "explanation": "requestAnimationFrame(callback) tells the browser to call the callback before the next repaint, resulting in smooth 60fps animations that pause when the tab is inactive.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What is the advantage of requestAnimationFrame over setInterval for animations?",
+    "options": [
+      "A) It's simpler to use",
+      "B) It synchronizes with browser repaints and pauses when tab is inactive",
+      "C) It works without JavaScript",
+      "D) It supports more browsers"
+    ],
+    "answer": "B) It synchronizes with browser repaints and pauses when tab is inactive",
+    "explanation": "requestAnimationFrame provides smoother animations by syncing with the display refresh rate, and automatically pauses when the tab is inactive, saving resources.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "How do you cancel a requestAnimationFrame callback?",
+    "options": [
+      "A) stopAnimationFrame(id)",
+      "B) cancelAnimationFrame(id)",
+      "C) clearAnimationFrame(id)",
+      "D) removeAnimationFrame(id)"
+    ],
+    "answer": "B) cancelAnimationFrame(id)",
+    "explanation": "cancelAnimationFrame(id) cancels an animation frame request previously scheduled via requestAnimationFrame(). You need the ID returned by requestAnimationFrame.",
+    "image": null
+  }
+]
