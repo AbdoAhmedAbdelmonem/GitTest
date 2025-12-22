@@ -122,7 +122,7 @@ const quizModes = [
     id: "instant",
     name: "Instant Feedback",
     icon: Lightbulb,
-    description: "See Answers Immediately With Creative Animations",
+    description: "See Answers Immediately with Explain",
     color: "from-yellow-500/[0.15]",
   },
   {
