@@ -45,6 +45,9 @@ export async function GET(request: NextRequest) {
     if (session?.user) {
       console.log('User found in session:', session.user.email)
       
+      // Check if this is a forgot password flow
+      const isForgotPassword = requestUrl.searchParams.get('mode') === 'forgot-password'
+      
       // Check if user already exists in our database
       const { data: existingUser, error: dbError } = await supabase
         .from("chameleons")
@@ -55,6 +58,13 @@ export async function GET(request: NextRequest) {
       console.log('Database query result:', !!existingUser, dbError?.message)
 
       if (existingUser) {
+        // Handle forgot password flow
+        if (isForgotPassword) {
+          console.log('Forgot password flow - redirecting to reset password')
+          const emailParam = encodeURIComponent(session.user.email || '')
+          return NextResponse.redirect(`${requestUrl.origin}/auth?step=reset-password&mode=forgot-password&email=${emailParam}`)
+        }
+        
         console.log('Existing user found, setting up session and redirecting to main page')
         
         // Create session data for existing user
@@ -76,6 +86,12 @@ export async function GET(request: NextRequest) {
         const sessionParam = encodeURIComponent(JSON.stringify(sessionData))
         return NextResponse.redirect(`${requestUrl.origin}/auth/complete-login?session=${sessionParam}`)
       } else {
+        // Handle forgot password for non-existing user
+        if (isForgotPassword) {
+          console.log('Forgot password - no account found with this email')
+          return NextResponse.redirect(`${requestUrl.origin}/auth?error=no_account&mode=forgot-password`)
+        }
+        
         console.log('New user, redirecting to profile completion')
         // New user - redirect to complete profile
         return NextResponse.redirect(`${requestUrl.origin}/auth?step=name-phone&mode=signup`)
