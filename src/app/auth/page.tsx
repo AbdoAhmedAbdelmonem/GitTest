@@ -174,7 +174,7 @@ const handleCompleteLogout = async () => {
   }
 }
 
-type AuthStep = "google" | "name-phone" | "specialization" | "password" | "complete"
+type AuthStep = "google" | "name-phone" | "specialization" | "password" | "complete" | "forgot-password" | "reset-password"
 type GoogleUserData = {
   email: string
   name: string
@@ -200,6 +200,12 @@ export default function AuthPage() {
   const [googleUserData, setGoogleUserData] = useState<GoogleUserData | null>(null)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const [oauthProvider, setOauthProvider] = useState<"google" | "github" | null>(null)
+  const [isForgotPasswordFlow, setIsForgotPasswordFlow] = useState(false)
+  const [resetPasswordEmail, setResetPasswordEmail] = useState("")
+  const [resetPasswordData, setResetPasswordData] = useState({
+    newPassword: "",
+    confirmPassword: "",
+  })
 
   // Form state
   const [loginData, setLoginData] = useState({
@@ -342,10 +348,12 @@ export default function AuthPage() {
 
       // Use explicit redirectTo to ensure it goes to our callback with proper step
       // You can customize this URL to use your preferred domain
+      // If this is forgot password flow, use forgot-password mode
+      const redirectMode = isForgotPasswordFlow ? 'forgot-password' : 'signup'
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?mode=signup&step=name-phone`,
+          redirectTo: `${window.location.origin}/auth/callback?mode=${redirectMode}&step=name-phone`,
           queryParams: {
             access_type: "offline",
             prompt: "select_account", // Force account selection instead of consent
@@ -404,12 +412,30 @@ export default function AuthPage() {
     const handleAuthFlow = async () => {
       const stepParam = searchParams.get("step")
       const modeParam = searchParams.get("mode")
+      const emailParam = searchParams.get("email")
+      const errorParam = searchParams.get("error")
 
       console.log('Auth page: stepParam =', stepParam, 'modeParam =', modeParam)
 
+      // Handle forgot password error (no account found)
+      if (errorParam === "no_account" && modeParam === "forgot-password") {
+        setError("No account found with this email address. Please sign up first.")
+        setAuthStep("forgot-password")
+        setIsForgotPasswordFlow(true)
+        return
+      }
+
+      // Handle reset password step (coming from forgot password callback)
+      if (stepParam === "reset-password" && modeParam === "forgot-password" && emailParam) {
+        console.log('Auth page: Setting up reset password for:', emailParam)
+        setResetPasswordEmail(decodeURIComponent(emailParam))
+        setAuthStep("reset-password")
+        setIsForgotPasswordFlow(true)
+        return
+      }
+
       // Only handle profile completion for new users coming from callback
-      // Also check if we haven't already set the user data to prevent infinite loops
-      if (stepParam === "name-phone" && modeParam === "signup" && !googleUserData) {
+      if (stepParam === "name-phone" && modeParam === "signup") {
         console.log('Auth page: Setting up profile completion for new user')
         
         // Get session to populate OAuth data
@@ -434,7 +460,7 @@ export default function AuthPage() {
     }
 
     handleAuthFlow()
-  }, [searchParams, googleUserData])
+  }, [searchParams])
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -517,16 +543,104 @@ export default function AuthPage() {
         saveStudentSession(sessionData)
         setAuthStep("complete")
 
-        // Add toast and redirect after a delay
-        addToast(`Welcome, ${newUser.username}!`, "success")
-        
-        // Use setTimeout to ensure the redirect happens only once
+        // Redirect after a brief success message
         setTimeout(() => {
           router.push(previousPath)
+          addToast(`Welcome, ${newUser.username}!`, "info")
         }, 2000)
       }
     } catch (err) {
       console.log("Registration catch error:", err)
+      setError("An error occurred. Please try again.")
+      setIsLoading(false)
+    }
+  }
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError("")
+
+    // Validate passwords
+    if (resetPasswordData.newPassword !== resetPasswordData.confirmPassword) {
+      setError("Passwords do not match")
+      setIsLoading(false)
+      return
+    }
+
+    if (resetPasswordData.newPassword.length < 6) {
+      setError("Password must be at least 6 characters")
+      setIsLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/auth/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: resetPasswordEmail,
+          newPassword: resetPasswordData.newPassword,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || 'Failed to reset password')
+        setIsLoading(false)
+        return
+      }
+
+      // Success - fetch user data and auto-login
+      const supabase = createBrowserClient()
+      const { data: userData, error: userError } = await supabase
+        .from("chameleons")
+        .select("*")
+        .eq("email", resetPasswordEmail)
+        .single()
+
+      if (userError || !userData) {
+        // Fallback to redirect to login if user fetch fails
+        setAuthStep("complete")
+        setIsLoading(false)
+        addToast("Password reset successfully! Please sign in.", "info")
+        setTimeout(() => {
+          router.push("/auth?mode=login")
+        }, 2000)
+        return
+      }
+
+      // Auto-login: Save user session
+      const sessionData = {
+        user_id: userData.user_id,
+        username: userData.username,
+        phone_number: userData.phone_number,
+        specialization: userData.specialization,
+        age: userData.age,
+        current_level: userData.current_level,
+        is_admin: userData.is_admin,
+        is_banned: userData.is_banned,
+        created_at: userData.created_at,
+        email: userData.email,
+        profile_image: userData.profile_image,
+      }
+
+      saveStudentSession(sessionData)
+      setAuthStep("complete")
+      setIsLoading(false)
+      addToast(`Welcome back, ${userData.username}! Your password has been reset.`, "info")
+      
+      // Redirect to home page after brief message
+      setTimeout(() => {
+        setIsForgotPasswordFlow(false)
+        setResetPasswordData({ newPassword: "", confirmPassword: "" })
+        router.push(previousPath)
+      }, 2000)
+    } catch (err) {
+      console.error("Reset password error:", err)
       setError("An error occurred. Please try again.")
       setIsLoading(false)
     }
@@ -733,30 +847,40 @@ export default function AuthPage() {
                   transition={{ duration: 0.3 }}
                 >
                   <CardTitle className="text-2xl font-bold text-white mb-2">
-                    {mode === "login"
-                      ? "Sign In"
-                      : authStep === "google"
-                        ? "Create Account"
-                        : authStep === "name-phone"
-                          ? "Personal Information"
-                          : authStep === "specialization"
-                            ? "Academic Details"
-                            : authStep === "password"
-                              ? "Set Your Password"
-                              : "Welcome!"}
+                    {authStep === "forgot-password"
+                      ? "Forgot Password"
+                      : authStep === "reset-password"
+                        ? "Reset Password"
+                        : mode === "login"
+                          ? "Sign In"
+                          : authStep === "google"
+                            ? "Create Account"
+                            : authStep === "name-phone"
+                              ? "Personal Information"
+                              : authStep === "specialization"
+                                ? "Academic Details"
+                                : authStep === "password"
+                                  ? "Set Your Password"
+                                  : "Welcome!"}
                   </CardTitle>
                   <CardDescription className="text-white/60">
-                    {mode === "login"
-                      ? "Sign in with Google, GitHub, or enter your student ID and password"
-                      : authStep === "google"
-                        ? "Sign up with Google or GitHub to get started quickly"
-                        : authStep === "name-phone"
-                          ? "Tell us your name and phone number"
-                          : authStep === "specialization"
-                            ? "Choose your specialization, level, and age"
-                            : authStep === "password"
-                              ? "Create a secure password for your account"
-                              : "Your account has been created successfully!"}
+                    {authStep === "forgot-password"
+                      ? "Verify your identity with Google to reset your password"
+                      : authStep === "reset-password"
+                        ? `Enter a new password for ${resetPasswordEmail}`
+                        : mode === "login"
+                          ? "Sign in with Google, GitHub, or enter your student ID and password"
+                          : authStep === "google"
+                            ? "Sign up with Google or GitHub to get started quickly"
+                            : authStep === "name-phone"
+                              ? "Tell us your name and phone number"
+                              : authStep === "specialization"
+                                ? "Choose your specialization, level, and age"
+                                : authStep === "password"
+                                  ? "Create a secure password for your account"
+                                  : isForgotPasswordFlow
+                                    ? "Your password has been reset successfully!"
+                                    : "Your account has been created successfully!"}
                   </CardDescription>
                 </motion.div>
               </AnimatePresence>
@@ -803,8 +927,8 @@ export default function AuthPage() {
                     />
                   </motion.div>
                 ) : (
-                  <form onSubmit={mode === "login" ? handleLogin : (authStep === "password" ? handleSignup : (e) => { e.preventDefault(); handleStepForward(); })} className="space-y-4 overflow-visible">
-                    {(mode === "login" || authStep === "google") && (
+                  <form onSubmit={authStep === "reset-password" ? handleResetPassword : (mode === "login" ? handleLogin : (authStep === "password" ? handleSignup : (e) => { e.preventDefault(); handleStepForward(); }))} className="space-y-4 overflow-visible">
+                    {(mode === "login" || authStep === "google") && authStep !== "forgot-password" && authStep !== "reset-password" && (
                       <div className="flex border border-white/10 rounded-lg p-1 bg-white/5">
                         <button
                           type="button"
@@ -858,7 +982,7 @@ export default function AuthPage() {
                         transition={{ duration: 0.3 }}
                         className="space-y-4 overflow-visible"
                       >
-                        {mode === "login" || authStep === "google" ? (
+                        {(mode === "login" || authStep === "google") && authStep !== "forgot-password" && authStep !== "reset-password" ? (
                           <>
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
@@ -991,6 +1115,19 @@ export default function AuthPage() {
                                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white/60 transition-colors"
                                     >
                                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                    </button>
+                                  </div>
+                                  <div className="flex justify-end">
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        setIsForgotPasswordFlow(true)
+                                        setAuthStep("forgot-password")
+                                        setError("")
+                                      }}
+                                      className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                                    >
+                                      Forgot Password?
                                     </button>
                                   </div>
                                 </motion.div>
@@ -1196,6 +1333,134 @@ export default function AuthPage() {
                               </div>
                             </motion.div>
                           </>
+                        ) : authStep === "forgot-password" ? (
+                          <>
+                            {/* Forgot Password - Google Auth */}
+                            <motion.div
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.1 }}
+                            >
+                              <Button
+                                type="button"
+                                onClick={handleGoogleSignIn}
+                                disabled={isGoogleLoading}
+                                className="w-full bg-white hover:bg-gray-50 text-gray-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
+                              >
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-red-500/10 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                {isGoogleLoading ? (
+                                  <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                                    className="w-5 h-5 border-2 border-gray-300 border-t-gray-900 rounded-full mr-3"
+                                  />
+                                ) : (
+                                  <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
+                                    <path
+                                      fill="#4285F4"
+                                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                    />
+                                    <path
+                                      fill="#34A853"
+                                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    />
+                                    <path
+                                      fill="#FBBC05"
+                                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66 2.84.81-.62z"
+                                    />
+                                    <path
+                                      fill="#EA4335"
+                                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    />
+                                  </svg>
+                                )}
+                                Verify with Google
+                              </Button>
+                            </motion.div>
+
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.2 }}
+                              className="text-center mt-4"
+                            >
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setIsForgotPasswordFlow(false)
+                                  setAuthStep("google")
+                                  setMode("login")
+                                  setError("")
+                                }}
+                                className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                              >
+                                ← Back to Sign In
+                              </button>
+                            </motion.div>
+                          </>
+                        ) : authStep === "reset-password" ? (
+                          <>
+                            {/* Reset Password Form */}
+                            <motion.div
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.1 }}
+                              className="space-y-2"
+                            >
+                              <Label htmlFor="newPassword" className="text-white/80">
+                                New Password
+                              </Label>
+                              <div className="relative">
+                                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
+                                <Input
+                                  id="newPassword"
+                                  type={showPassword ? "text" : "password"}
+                                  placeholder="Enter new password"
+                                  value={resetPasswordData.newPassword}
+                                  onChange={(e) => setResetPasswordData({ ...resetPasswordData, newPassword: e.target.value })}
+                                  className="pl-10 pr-10 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:ring-purple-500/20"
+                                  required
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setShowPassword(!showPassword)}
+                                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white/60 transition-colors"
+                                >
+                                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                </button>
+                              </div>
+                            </motion.div>
+
+                            <motion.div
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.2 }}
+                              className="space-y-2"
+                            >
+                              <Label htmlFor="confirmNewPassword" className="text-white/80">
+                                Confirm New Password
+                              </Label>
+                              <div className="relative">
+                                <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
+                                <Input
+                                  id="confirmNewPassword"
+                                  type={showConfirmPassword ? "text" : "password"}
+                                  placeholder="Confirm new password"
+                                  value={resetPasswordData.confirmPassword}
+                                  onChange={(e) => setResetPasswordData({ ...resetPasswordData, confirmPassword: e.target.value })}
+                                  className="pl-10 pr-10 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:ring-purple-500/20"
+                                  required
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white/60 transition-colors"
+                                >
+                                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                </button>
+                              </div>
+                            </motion.div>
+                          </>
                         ) : null}
                       </motion.div>
                     </AnimatePresence>
@@ -1207,8 +1472,8 @@ export default function AuthPage() {
                       className="pt-4"
                     >
                       <Button
-                        type={mode === "login" || authStep === "password" ? "submit" : "button"}
-                        disabled={isLoading || (mode === "signup" && authStep === "google")}
+                        type={mode === "login" || authStep === "password" || authStep === "reset-password" ? "submit" : "button"}
+                        disabled={isLoading || (mode === "signup" && authStep === "google") || authStep === "forgot-password"}
                         onClick={(e) => {
                           if (mode === "signup" && (authStep === "name-phone" || authStep === "specialization")) {
                             e.preventDefault()
@@ -1225,17 +1490,21 @@ export default function AuthPage() {
                           />
                         ) : (
                           <>
-                            {mode === "login"
-                              ? "Sign In"
-                              : authStep === "google"
-                                ? "Continue with Google"
-                                : authStep === "name-phone"
-                                  ? "Continue"
-                                  : authStep === "specialization"
-                                    ? "Continue"
-                                    : authStep === "password"
-                                      ? "Complete Registration"
-                                      : ""}
+                            {authStep === "forgot-password"
+                              ? "Verify with Google above"
+                              : authStep === "reset-password"
+                                ? "Reset Password"
+                                : mode === "login"
+                                  ? "Sign In"
+                                  : authStep === "google"
+                                    ? "Continue with Google"
+                                    : authStep === "name-phone"
+                                      ? "Continue"
+                                      : authStep === "specialization"
+                                        ? "Continue"
+                                        : authStep === "password"
+                                          ? "Complete Registration"
+                                          : ""}
                             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                           </>
                         )}
