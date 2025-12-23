@@ -684,6 +684,7 @@ export default function ProfilePage() {
                     alt="Profile"
                     width={userData.is_admin ? 106 : 96}
                     height={userData.is_admin ? 106 : 96}
+                    unoptimized
                     className="w-full h-full object-cover"
                   />
                 ) : (
@@ -1444,3 +1445,4 @@ export default function ProfilePage() {
     </div>
   )
 }
+
