@@ -448,6 +448,7 @@ export default function TournamentPage() {
                   alt={`${player.name}'s profile`}
                   width={40}
                   height={40}
+                  unoptimized
                   className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white/20 object-cover shadow-lg group-hover:border-blue-400/50 transition-all duration-300"
                 />
                 {isCurrentUser && (
@@ -1317,3 +1318,4 @@ export default function TournamentPage() {
     </div>
   );
 }
+
