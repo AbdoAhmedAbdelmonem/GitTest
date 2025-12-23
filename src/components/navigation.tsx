@@ -306,6 +306,7 @@ export default function Navigation() {
                             alt={user.username || 'User'}
                             width={40}
                             height={40}
+                            unoptimized
                             className="w-full h-full object-cover"
                           />
                         ) : (
@@ -516,6 +517,7 @@ export default function Navigation() {
                                   alt={user.username || 'User'}
                                   width={40}
                                   height={40}
+                                  unoptimized
                                   className="w-full h-full object-cover"
                                 />
                               ) : (
