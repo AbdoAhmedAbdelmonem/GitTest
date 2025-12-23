@@ -1153,6 +1153,7 @@ export default function TournamentPage() {
                         alt={selectedUserStats.username}
                         width={48}
                         height={48}
+                        unoptimized
                         className="rounded-full border-2 border-purple-400/50 shadow-lg"
                       />
                     ) : (
@@ -1318,4 +1319,5 @@ export default function TournamentPage() {
     </div>
   );
 }
+
 
