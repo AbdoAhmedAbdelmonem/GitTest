@@ -1111,7 +1111,7 @@ export const departmentData: { [key: string]: Department } = {
                   },
                   {
                     id: "WP_FINAL",
-                    name: "After Midterm Revesion",
+                    name: "After Midterm Revision",
                     code: "WP_FINAL",
                     duration: "OP", // in minutes
                     questions: 50,
@@ -6545,6 +6545,7 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
 
 
 
