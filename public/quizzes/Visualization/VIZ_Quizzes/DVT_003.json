@@ -72,7 +72,7 @@
   {
     "numb": 6,
     "type": "Multiple Choice",
-    "question": "What distinguishes \"Big Data\" from \"Little Data\" according to the lecture?",
+    "question": "What distinguishes \"Big Data\" from \"Little Data\"?",
     "answer": "B) Big Data has millions of items and tens to hundreds of dimensions",
     "options": [
       "A) Big Data has colorful visualizations",
@@ -100,7 +100,7 @@
   {
     "numb": 8,
     "type": "Multiple Choice",
-    "question": "The first InfoVis data challenge mentioned is \"Size.\" What problem does this create?",
+    "question": "The first InfoVis data challenge was the \"Size.\" What problem does this create?",
     "answer": "B) Number of data points much higher than screen resolution",
     "options": [
       "A) Data takes too long to collect",
@@ -156,16 +156,16 @@
   {
     "numb": 12,
     "type": "Multiple Choice",
-    "question": "What caution does the lecture give about 3D visualizations in InfoVis?",
-    "answer": "C) Use 3D with great caution and only if really needed",
+    "question": "What is the importance of Transparency in visuals ?",
+    "answer": "D) all the above is true",
     "options": [
-      "A) Never use 3D",
-      "B) Always use 3D",
-      "C) Use 3D with great caution and only if really needed",
-      "D) 3D is always better than 2D"
+      "A) (de)emphasize details",
+      "B) overlay annotations with limited clutter",
+      "C) reduce occlusion in 3D plots",
+      "D) all the above is true"
     ],
     "image": null,
-    "explanation": "The lecture explicitly states: 'Use 3D with great caution in infovis, and only if really needed.'"
+    "explanation": "using the transparent backgrounds help to show more details and some hidden and small data"
   },
   {
     "numb": 13,
@@ -279,4 +279,5 @@
     "image": null,
     "explanation": "Dimensions are defined as '~ independent variables, Often discrete variables describing data (N, O), Categories, dates, binned quantities.'"
   }
+
 ]
