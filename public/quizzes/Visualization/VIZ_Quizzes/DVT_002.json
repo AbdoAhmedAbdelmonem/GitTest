@@ -16,7 +16,7 @@
   {
     "numb": 2,
     "type": "Multiple Choice",
-    "question": "Which of the following is NOT mentioned as an important audience consideration?",
+    "question": "Which of the following is NOT an important audience consideration?",
     "answer": "B) Their favorite color",
     "options": [
       "A) Where they are from",
@@ -72,7 +72,7 @@
   {
     "numb": 6,
     "type": "Multiple Choice",
-    "question": "Which question is NOT mentioned as important when understanding your data?",
+    "question": "Which question is NOT important when understanding your data?",
     "answer": "C) How much did the data cost?",
     "options": [
       "A) How was the information collected?",
@@ -87,9 +87,9 @@
     "numb": 7,
     "type": "Multiple Choice",
     "question": "When considering context, which question should you ask?",
-    "answer": "A) What's in it for me? (from the audience's perspective)",
+    "answer": "A) What's in it for me?",
     "options": [
-      "A) What's in it for me? (from the audience's perspective)",
+      "A) What's in it for me?",
       "B) How long should the presentation be?",
       "C) What colors should I use?",
       "D) How many slides do I need?"
@@ -142,7 +142,7 @@
   {
     "numb": 11,
     "type": "Multiple Choice",
-    "question": "Which of the following is NOT mentioned as a way to create text emphasis?",
+    "question": "Which of the following is NOT a way to create text emphasis?",
     "answer": "C) Underlining",
     "options": [
       "A) ALL CAPS",
@@ -254,7 +254,7 @@
   {
     "numb": 19,
     "type": "Multiple Choice",
-    "question": "Which type of color palette is NOT mentioned for visualizations?",
+    "question": "Which type of color palette is NOT for visualizations?",
     "answer": "D) Alphabetical",
     "options": [
       "A) Sequential",
@@ -268,7 +268,7 @@
   {
     "numb": 20,
     "type": "Multiple Choice",
-    "question": "Which tool is NOT listed as a tool for creating data visualizations?",
+    "question": "Which tool is NOT a tool for creating data visualizations?",
     "answer": "C) Microsoft Word",
     "options": [
       "A) Tableau",
@@ -279,4 +279,5 @@
     "image": null,
     "explanation": "The tools listed are Excel/Powerpoint, Infogram, Tableau, Piktochart, Easely, and Visage. Microsoft Word is not mentioned as a visualization tool."
   }
+
 ]
