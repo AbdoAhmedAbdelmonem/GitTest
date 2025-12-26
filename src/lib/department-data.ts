@@ -981,6 +981,30 @@ export const departmentData: { [key: string]: Department } = {
                     questions: 20,
                     jsonFile: "/quizzes/Visualization/VIZ_Quizzes/DVT_005.json"
                   },
+                  {
+                    id: "DVT_006",
+                    name: "Data Visual Analytics (1)",
+                    code: "DVT_006",
+                    duration: "OP", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Visualization/VIZ_Quizzes/DVT_006.json"
+                  },
+                  {
+                    id: "DVT_007",
+                    name: "Data Visual Analytics (2)",
+                    code: "DVT_007",
+                    duration: "OP", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Visualization/VIZ_Quizzes/DVT_007.json"
+                  },
+                  {
+                    id: "VIS_STAR",
+                    name: "Data Vision",
+                    code: "VIS_STAR",
+                    duration: "OP", // in minutes
+                    questions: 140,
+                    jsonFile: "/quizzes/Visualization/VIZ_Quizzes/VIS_STAR.json"
+                  },
                 ],
               },
             },
@@ -6545,6 +6569,7 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
 
 
 
