@@ -3,10 +3,10 @@
     "numb": 1,
     "type": "Multiple Choice",
     "question": "What are the two fundamental design criteria for data visualization?",
-    "answer": "B) Tell the truth and nothing but the truth; Use encodings people decode better",
+    "answer": "B) Tell the truth",
     "options": [
       "A) Use bright colors and large fonts",
-      "B) Tell the truth and nothing but the truth; Use encodings people decode better",
+      "B) Tell the truth",
       "C) Make it pretty and fast",
       "D) Use 3D and animations"
     ],
@@ -25,7 +25,7 @@
       "D) Intensity"
     ],
     "image": null,
-    "explanation": "The lecture states: 'frequency: controls the hue, or tint, of the color.'"
+    "explanation": "The lecture states: 'frequency: controls the hue, or tint, of the color.'افتكر التردد من 390 لـ 700 نانوميتر"
   },
   {
     "numb": 3,
@@ -59,12 +59,12 @@
     "numb": 5,
     "type": "Multiple Choice",
     "question": "In the RGB color cube, what color is at the origin (0,0,0)?",
-    "answer": "B) Black",
+    "answer": "D) Black",
     "options": [
       "A) White",
-      "B) Black",
-      "C) Gray",
-      "D) Red"
+      "B) Gray",
+      "C) Red",
+      "D) Black"
     ],
     "image": null,
     "explanation": "In the RGB cube explanation: 'cube origin (B): black' where B = (0,0,0)."
@@ -157,10 +157,10 @@
     "numb": 12,
     "type": "Multiple Choice",
     "question": "Why is black (K) included in the CMYK model when it can be made from other colors?",
-    "answer": "B) It's cheaper than mixing colored inks",
+    "answer": "A) It's cheaper than mixing colored inks",
     "options": [
-      "A) It creates brighter colors",
-      "B) It's cheaper than mixing colored inks",
+      "A) It's cheaper than mixing colored inks",
+      "B) It creates brighter colors",
       "C) It's required for digital displays",
       "D) It improves saturation"
     ],
@@ -185,12 +185,12 @@
     "numb": 14,
     "type": "Multiple Choice",
     "question": "What does \"invertibility - coverage\" require?",
-    "answer": "B) Any visual variable-value should map to a data value",
+    "answer": "D) Any visual variable-value should map to a data value",
     "options": [
       "A) The entire screen should be filled",
-      "B) Any visual variable-value should map to a data value",
-      "C) C) All data must be visible at once",
-      "D) D) Multiple colors per data point"
+      "B) All data must be visible at once",
+      "C) Multiple colors per data point",
+      "D) Any visual variable-value should map to a data value",
     ],
     "image": null,
     "explanation": "Coverage means: 'any visual variable-value maps to a data value' ensuring all colors in the visualization have meaning."
@@ -227,10 +227,10 @@
     "numb": 17,
     "type": "Multiple Choice",
     "question": "What does a perceptual colormap explicitly identify that rainbow colormaps don't?",
-    "answer": "B) The \"0\" in the data (like sea level)",
+    "answer": "A) The \"0\" in the data",
     "options": [
-      "A) The maximum value",
-      "B) The \"0\" in the data (like sea level)",
+      "A) The \"0\" in the data",
+      "B) The maximum value",
       "C) The average value",
       "D) The outliers"
     ],
@@ -269,14 +269,15 @@
     "numb": 20,
     "type": "Multiple Choice",
     "question": "What is the purpose of the iCAM color appearance model?",
-    "answer": "B) Describing how humans perceive color and handling image-specific phenomena",
+    "answer": "B) Describing how humans perceive color",
     "options": [
       "A) Converting RGB to CMYK only",
-      "B) Describing how humans perceive color and handling image-specific phenomena",
+      "B) Describing how humans perceive color",
       "C) Compressing image file sizes",
       "D) Removing color from images"
     ],
     "image": null,
     "explanation": "iCAM is: 'A color appearance model describing how humans perceive color... accounting for image-specific phenomena like chromatic adaptation.'"
   }
+
 ]
