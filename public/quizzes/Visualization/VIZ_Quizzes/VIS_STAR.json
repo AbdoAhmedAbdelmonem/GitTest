@@ -1,0 +1,1962 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What do Saliency Maps highlight in LLM visualization?",
+    "answer": "B) Which tokens have the highest gradient magnitudes with respect to a prediction",
+    "options": [
+      "A) The color scheme of the model",
+      "B) Which tokens have the highest gradient magnitudes with respect to a prediction",
+      "C) The size of the vocabulary",
+      "D) The number of layers in the model"
+    ],
+    "image": null,
+    "explanation": "In tasks like sentiment classification, saliency maps highlight which tokens have the highest gradient magnitudes with respect to a prediction, indicating which parts of the input most strongly affect the model's output."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "Which is NOT a feature of a visual analytics tool?",
+    "answer": "D) Automatic data deletion without user consent",
+    "options": [
+      "A) User-friendly interface and interactivity",
+      "B) Data connectivity and customizable dashboards",
+      "C) Security and permissions control",
+      "D) Automatic data deletion without user consent"
+    ],
+    "image": null,
+    "explanation": "Features of a visual analytics tool include: User-friendly interface, Interactivity, Data connectivity, Customizable dashboards, Advanced analytics capabilities, Collaboration features, Security and permissions control, and Scalability."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "The Gestalt principle of \"Continuation\" is the basis for which visualization technique?",
+    "answer": "C) Edge bundling",
+    "options": [
+      "A) Pie charts ",
+      "B) Bar charts",
+      "C) Edge bundling",
+      "D) Heat maps"
+    ],
+    "image": null,
+    "explanation": "The Continuation principle states 'the eye follows \"natural\" trajectories visible in the image' and 'this is the principle behind edge bundling!'"
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "Which of the following is an example of Weak AI?",
+    "answer": "D) All of the above (Siri, Cortana, Netflix, ChatGPT)",
+    "options": [
+      "A) Siri and Cortana",
+      "B) Netflix and Bing",
+      "C) ChatGPT",
+      "D) All of the above (Siri, Cortana, Netflix, ChatGPT)"
+    ],
+    "image": null,
+    "explanation": "Examples of Weak AI include: Siri, Cortana, Bing, Netflix, and even ChatGPT. Weak AI is confined to narrow tasks."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "How many primary colors does the CMYK color space use?",
+    "answer": "B) 4",
+    "options": [
+      "A) 3",
+      "B) 4",
+      "C) 5",
+      "D) 6"
+    ],
+    "image": null,
+    "explanation": "CMYK uses '4 primary colors (cyan, magenta, yellow, black).'"
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "Which of the following is The two main visualization scenarios ?",
+    "answer": "A) Exploration and Explanation",
+    "options": [
+      "A) Exploration and Explanation",
+      "B) Analysis and Synthesis",
+      "C) Collection and Distribution",
+      "D) Creation and Deletion"
+    ],
+    "image": null,
+    "explanation": "The two main scenarios are Exploration (finding hidden stories) and Explanation (telling stories to audiences)."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "When tailoring content to a knowledgeable audience from Burkina Faso, what specific approach was demonstrated?",
+    "answer": "B) Highlighting Burkina Faso specifically in the visualization",
+    "options": [
+      "A) Using complex statistical models",
+      "B) Highlighting Burkina Faso specifically in the visualization",
+      "C) Removing all context",
+      "D) Adding more countries to compare"
+    ],
+    "image": null,
+    "explanation": "The example shows highlighting Burkina Faso specifically when the audience is knowledgeable and from that country, making the data more relevant to them."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "In what type of environment does AI thrive?",
+    "answer": "A) An environment with defined rules and patterns",
+    "options": [
+      "A) An environment with defined rules and patterns",
+      "B) An environment with no data",
+      "C) An environment with random chaos",
+      "D) An environment without any structure"
+    ],
+    "image": null,
+    "explanation": "AI thrives in an environment where there are defined rules and patterns that it can work with. This is where AI will seem the most 'intelligent'."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "Which role translates from problem domain to a data model?",
+    "answer": "B) Data Scientist",
+    "options": [
+      "A) Journalist",
+      "B) Data Scientist",
+      "C) Designer",
+      "D) Communicator"
+    ],
+    "image": null,
+    "explanation": "The Data Scientist 'translates from problem domain and requirements to a data model.'"
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "What is a limitation of Min-Max scaling?",
+    "answer": "C) It is sensitive to outliers",
+    "options": [
+      "A) It cannot be applied to numerical data",
+      "B) It requires categorical variables",
+      "C) It is sensitive to outliers",
+      "D) It does not preserve the original data distribution"
+    ],
+    "image": null,
+    "explanation": "Min-Max scaling is sensitive to outliers, meaning extreme values can significantly affect the scaling result."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "what is the definition of data visualization?",
+    "answer": "B) A nontext-based representation of data that enhances understanding",
+    "options": [
+      "A) A text-based representation of numerical data",
+      "B) A nontext-based representation of data that enhances understanding",
+      "C) A computer program for analyzing statistics",
+      "D) A mathematical model for data processing"
+    ],
+    "image": null,
+    "explanation": "visualization defined as 'A nontext-based representation of data that enhances the understanding of that data.'"
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "In the HSV model, what does saturation = 0 represent?",
+    "answer": "B) A gray color",
+    "options": [
+      "A) A bright color",
+      "B) A gray color",
+      "C) White",
+      "D) Black"
+    ],
+    "image": null,
+    "explanation": "The lecture explains: 'saturation: strong color (s=1), grayish color (0<s<1) or gray (s=0).'"
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "What is the key difference between visual analytics and data visualization?",
+    "answer": "A) Visual analytics combines advanced analytical techniques with interactive visualization",
+    "options": [
+      "A) Visual analytics combines advanced analytical techniques with interactive visualization",
+      "B) Data visualization requires machine learning",
+      "C) Visual analytics only uses static charts",
+      "D) Data visualization is more interactive than visual analytics"
+    ],
+    "image": null,
+    "explanation": "Visual analytics combines advanced analytical techniques with the power of data visualization, enabling users to explore complex data sets through interactive, intuitive visuals. Data visualization offers snapshots rather than deep exploration."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "What distinguishes \"Big Data\" from \"Little Data\"?",
+    "answer": "B) Big Data has millions of items and tens to hundreds of dimensions",
+    "options": [
+      "A) Big Data has colorful visualizations",
+      "B) Big Data has millions of items and tens to hundreds of dimensions",
+      "C) Big Data is always better quality",
+      "D) Big Data uses only 3D visualizations"
+    ],
+    "image": null,
+    "explanation": "Big Data is characterized by '(tens of) millions of items' and 'tens..hundreds of dimensions' compared to Little Data's 'hundreds..thousands of items' and '1..3 dimensions.'"
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "What type of fonts are recommended for data visualizations?",
+    "answer": "B) Sans serif fonts like Helvetica, Arial, Gill Sans",
+    "options": [
+      "A) Serif fonts like Times New Roman",
+      "B) Sans serif fonts like Helvetica, Arial, Gill Sans",
+      "C) Script fonts",
+      "D) Decorative fonts"
+    ],
+    "image": null,
+    "explanation": "The text tips specifically recommend 'sans serif fonts (Helvetica, Arial, Gill Sans are good options).'"
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "In Scientific Visualization, data mapping is typically:",
+    "answer": "A) Implicit - draw values on their given 2D/3D domain",
+    "options": [
+      "A) Implicit - draw values on their given 2D/3D domain",
+      "B) Explicit - designer chooses the domain",
+      "C) Random",
+      "D) Not possible"
+    ],
+    "image": null,
+    "explanation": "For SciVis data, mapping is 'implicit for scivis data (draw values on their given 2D/3D domain),' while InfoVis requires explicit design decisions."
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "When clicking on a bar in a bar chart in an interactive dashboard, what should happen to other visualizations?",
+    "answer": "B) Other visualizations should filter and update to show only data related to that selection",
+    "options": [
+      "A) Nothing changes in other visualizations",
+      "B) Other visualizations should filter and update to show only data related to that selection",
+      "C) All other charts should be deleted",
+      "D) The dashboard should close"
+    ],
+    "image": null,
+    "explanation": "When the manager clicks on a bar (e.g., 'Electronics'), the other visualizations should update to show only data related to that category, allowing for cross-filtering and deeper analysis."
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "What is Min-Max scaling used for?",
+    "answer": "B) Scales all features between a given min and max value (e.g., 0 and 1)",
+    "options": [
+      "A) Removes outliers from the dataset",
+      "B) Scales all features between a given min and max value (e.g., 0 and 1)",
+      "C) Calculates the mean of the dataset",
+      "D) Converts categorical data to numerical data"
+    ],
+    "image": null,
+    "explanation": "Min-Max scaling scales all features between a given min and max value (e.g., 0 and 1). It makes sense if min/max values have meaning in your data."
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "What is the main problem with complex visuals?",
+    "answer": "B) They confuse the audience and distract from the point",
+    "options": [
+      "A) They are too colorful",
+      "B) They confuse the audience and distract from the point",
+      "C) They take too long to create",
+      "D) They are too expensive to produce"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Complex visuals will confuse the audience and distract them from the point of the presentation.'"
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "What is the first stage in how Visual Analytics works?",
+    "answer": "A) Data Preparation: gathering, cleaning, and organizing data",
+    "options": [
+      "A) Data Preparation: gathering, cleaning, and organizing data",
+      "B) Visual Exploration: creating scatter plots and histograms",
+      "C) Data Analysis: using machine learning models",
+      "D) Interpretation and Communication: creating dashboards"
+    ],
+    "image": null,
+    "explanation": "Data Preparation is the first stage, involving gathering, cleaning, and organizing data to ensure it's ready for analysis. Well-prepared data is the foundation for effective visual exploration."
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choice",
+    "question": "What is the visible spectrum range for humans?",
+    "answer": "B) 390-700 nm",
+    "options": [
+      "A) 100-500 nm",
+      "B) 390-700 nm",
+      "C) 500-1000 nm",
+      "D) 700-1500 nm"
+    ],
+    "image": null,
+    "explanation": "The visible spectrum diagram shows the range as '390 nm as violet' to '700 nm as red' which humans typically see."
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choice",
+    "question": "What is the purpose of the iCAM color appearance model?",
+    "answer": "B) Describing how humans perceive color",
+    "options": [
+      "A) Converting RGB to CMYK only",
+      "B) Describing how humans perceive color",
+      "C) Compressing image file sizes",
+      "D) Removing color from images"
+    ],
+    "image": null,
+    "explanation": "iCAM is: 'A color appearance model describing how humans perceive color... accounting for image-specific phenomena like chromatic adaptation.'"
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choice",
+    "question": "Which of the following are types of interaction in visual analytics?",
+    "answer": "A) Sort, Filter, Drill down, Cluster",
+    "options": [
+      "A) Sort, Filter, Drill down, Cluster",
+      "B) Copy, Paste, Delete, Undo",
+      "C) Read, Write, Execute, Debug",
+      "D) Open, Close, Save, Print"
+    ],
+    "image": null,
+    "explanation": "The interaction types in visual analytics mentioned are: Sort, Filter, Drill down, and Cluster."
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choice",
+    "question": "between 2010-2012, humanity created:",
+    "answer": "C) More data than it had previously in its history",
+    "options": [
+      "A) Less data than in previous decades",
+      "B) About the same amount of data as before",
+      "C) More data than it had previously in its history",
+      "D) Data only in numerical formats"
+    ],
+    "image": null,
+    "explanation": "The lecture states that 'in 2010-2012, the humanity has created more data than it has previously in its history.'"
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choice",
+    "question": "Which role is described as the \"storyteller of the project\"?",
+    "answer": "C) Journalist",
+    "options": [
+      "A) Designer",
+      "B) Communicator",
+      "C) Journalist",
+      "D) Cognitive Scientist"
+    ],
+    "image": null,
+    "explanation": "The Journalist role 'is the storyteller of the project' and 'establishes the analytical narrative.'"
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choice",
+    "question": "Before doing storytelling or analysis, what is critical to understand?",
+    "answer": "B) Your data and its limitations",
+    "options": [
+      "A) The audience's preferences only",
+      "B) Your data and its limitations",
+      "C) The presentation software",
+      "D) Color theory"
+    ],
+    "image": null,
+    "explanation": "The lecture emphasizes: 'Prior to doing any storytelling or analysis, it is critical to understand your data and its limitations.'"
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choice",
+    "question": "Which question is NOT important when understanding your data?",
+    "answer": "C) How much did the data cost?",
+    "options": [
+      "A) How was the information collected?",
+      "B) What is the source?",
+      "C) How much did the data cost?",
+      "D) What is missing from the data?"
+    ],
+    "image": null,
+    "explanation": "The lecture asks about collection methods, sources, and missing data, but does not mention the cost of data."
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choice",
+    "question": "In Western culture, which color combination has an implicit correlation?",
+    "answer": "B) Pink and Blue",
+    "options": [
+      "A) Yellow and Green",
+      "B) Pink and Blue",
+      "C) Orange and Purple",
+      "D) Brown and Gray"
+    ],
+    "image": null,
+    "explanation": "Pink and Blue is listed as an example of implicit correlations with color combinations (gender associations)."
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choice",
+    "question": "What does \"Gestalt\" mean?",
+    "answer": "B) Unified whole",
+    "options": [
+      "A) German psychology",
+      "B) Unified whole",
+      "C) Visual pattern",
+      "D) Data structure"
+    ],
+    "image": null,
+    "explanation": "Gestalt is defined as 'unified whole (term developed by German psychologists in the 1920's).'"
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choice",
+    "question": "Which statement about dimensionality is TRUE?",
+    "answer": "A) 1000 points with 1 attribute is easier to visualize than 100 points with 10 attributes",
+    "options": [
+      "A) 1000 points with 1 attribute is easier to visualize than 100 points with 10 attributes",
+      "B) Dimensionality doesn't affect visualization difficulty",
+      "C) More dimensions are always easier to visualize",
+      "D) 2D data cannot be visualized"
+    ],
+    "image": null,
+    "explanation": "The lecture asks 'What is harder to visualize' and shows that 100 samples × 10 attributes presents 'many chart kinds, many problems' while 1000 samples × 1 attribute works well with 1D graphs."
+  },
+  {
+    "numb": 31,
+    "type": "Multiple Choice",
+    "question": "Which background color is described as \"most commonly used and in general best\"?",
+    "answer": "C) White",
+    "options": [
+      "A) Black",
+      "B) Gray",
+      "C) White",
+      "D) Blue"
+    ],
+    "image": null,
+    "explanation": "White background is described as 'most commonly used (and in general best)' and 'works well for all media (print, computer screen, projector).'"
+  },
+  {
+    "numb": 32,
+    "type": "Multiple Choice",
+    "question": "Change blindness occurs when changes are NOT noticed because of all EXCEPT:",
+    "answer": "D) The change is in color only",
+    "options": [
+      "A) The change is very slow",
+      "B) The change is very fast",
+      "C) The observer pays attention to other aspects",
+      "D) The change is in color only"
+    ],
+    "image": null,
+    "explanation": "Change blindness occurs because: '(1) The change is very slow, or (2) The change is very fast, or (3) The observer pays attention to other aspects.' Color is not mentioned as a required condition."
+  },
+  {
+    "numb": 33,
+    "type": "Multiple Choice",
+    "question": "Which statement about data visualization benefits is FALSE?",
+    "answer": "B) It makes data less accessible to wider audiences",
+    "options": [
+      "A) It helps uncover trends and patterns",
+      "B) It makes data less accessible to wider audiences",
+      "C) It communicates insights clearly",
+      "D) It makes data more memorable"
+    ],
+    "image": null,
+    "explanation": "Data visualization makes data MORE accessible to wider audiences, not less. This contradicts the stated benefit."
+  },
+  {
+    "numb": 34,
+    "type": "Multiple Choice",
+    "question": "What is the main disadvantage of the rainbow colormap?",
+    "answer": "A) It is not isoluminant and certain hues are hard to separate",
+    "options": [
+      "A) It is not isoluminant and certain hues are hard to separate",
+      "B) It uses too many colors",
+      "C) It cannot show any data",
+      "D) It only works in 3D"
+    ],
+    "image": null,
+    "explanation": "The rainbow colormap cons include: 'not isoluminant (blue and green are perceived as darker than yellow and cyan)' and 'certain hues are hard to separate (cyan..green).'"
+  },
+  {
+    "numb": 35,
+    "type": "Multiple Choice",
+    "question": "According to color principles, what will darker/brighter colors be read as?",
+    "answer": "B) More",
+    "options": [
+      "A) Less important",
+      "B) More",
+      "C) Neutral",
+      "D) Background elements"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Darker/brighter colors will read as \"more\".'"
+  },
+  {
+    "numb": 36,
+    "type": "Multiple Choice",
+    "question": "Where should the largest slice be placed in a pie chart?",
+    "answer": "D) At 12 o'clock",
+    "options": [
+      "A) At 3 o'clock",
+      "B) At 6 o'clock",
+      "C) At 9 o'clock",
+      "D) At 12 o'clock"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Largest section at 12 o'clock and place remaining sections in descending order, going clockwise.'"
+  },
+  {
+    "numb": 37,
+    "type": "Multiple Choice",
+    "question": "Which operations can be performed on quantitative attributes?",
+    "answer": "D) Equality, comparison, addition, subtraction, multiplication, division",
+    "options": [
+      "A) Only equality",
+      "B) Equality and comparison (<, >)",
+      "C) Equality, comparison, addition, subtraction",
+      "D) Equality, comparison, addition, subtraction, multiplication, division"
+    ],
+    "image": null,
+    "explanation": "Quantitative attributes support all operations: '=, ≠, <, >, +, -, *, /' as shown in the attribute type table."
+  },
+  {
+    "numb": 38,
+    "type": "Multiple Choice",
+    "question": "Why is black (K) included in the CMYK model when it can be made from other colors?",
+    "answer": "A) It's cheaper than mixing colored inks",
+    "options": [
+      "A) It's cheaper than mixing colored inks",
+      "B) It creates brighter colors",
+      "C) It's required for digital displays",
+      "D) It improves saturation"
+    ],
+    "image": null,
+    "explanation": "The lecture explains: 'black: not needed strictly speaking, but used since it's cheaper than mixing colored inks.'"
+  },
+  {
+    "numb": 39,
+    "type": "Multiple Choice",
+    "question": "How is Artificial Intelligence defined according to Doug Rose?",
+    "answer": "B) A system that shows behavior that could be interpreted as human intelligence",
+    "options": [
+      "A) A computer program that can only do calculations",
+      "B) A system that shows behavior that could be interpreted as human intelligence",
+      "C) A robot that looks exactly like a human",
+      "D) A database management system"
+    ],
+    "image": null,
+    "explanation": "AI is defined as 'A system that shows behavior that could be interpreted as human intelligence' according to Doug Rose."
+  },
+  {
+    "numb": 40,
+    "type": "Multiple Choice",
+    "question": "In a visual analytics dashboard, what does 'brushing' on a scatter plot allow you to do?",
+    "answer": "B) Highlight specific data points to reveal patterns",
+    "options": [
+      "A) Delete unwanted data points",
+      "B) Highlight specific data points to reveal patterns",
+      "C) Change the color scheme of the chart",
+      "D) Export data to a spreadsheet"
+    ],
+    "image": null,
+    "explanation": "Brushing on a scatter plot allows users to highlight specific points (like high-price, low-sales products) to reveal patterns that are not visible in static charts."
+  },
+  {
+    "numb": 41,
+    "type": "Multiple Choice",
+    "question": "Which data type can be visualized without using color?",
+    "answer": "A) Organization charts showing parent/child relations",
+    "options": [
+      "A) Organization charts showing parent/child relations",
+      "B) All data types require color",
+      "C) Only 3D data can be visualized without color",
+      "D) Only temporal data "
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'structure (organization charts showing parent/child relations) can be visualized without color.'"
+  },
+  {
+    "numb": 42,
+    "type": "Multiple Choice",
+    "question": "How are LLMs trained?",
+    "answer": "C) They learn to predict the next word in a sentence from large text datasets",
+    "options": [
+      "A) By manually programming every response",
+      "B) By copying answers from the internet",
+      "C) They learn to predict the next word in a sentence from large text datasets",
+      "D) By memorizing entire books word for word"
+    ],
+    "image": null,
+    "explanation": "LLMs are trained on large text datasets to learn to predict the next word in a sentence and, from that, generate coherent and compelling responses."
+  },
+  {
+    "numb": 43,
+    "type": "Multiple Choice",
+    "question": "Which visual variable is described as \"Quantitative\"?",
+    "answer": "C) Length",
+    "options": [
+      "A) Shape",
+      "B) Texture",
+      "C) Length",
+      "D) Hue"
+    ],
+    "image": null,
+    "explanation": "'Length is quantitative since it lets us tell how much a bar in the image is shorter/longer than another bar.'"
+  },
+  {
+    "numb": 44,
+    "type": "Multiple Choice",
+    "question": "What are the THREE main disadvantages (con's) of 3D visualizations for InfoVis?",
+    "answer": "B) Perspective deformation, occlusion, loss of orientation",
+    "options": [
+      "A) Cost, complexity, color limitations",
+      "B) Perspective deformation, occlusion, loss of orientation",
+      "C) Speed, size, scale",
+      "D) Price, performance, portability"
+    ],
+    "image": null,
+    "explanation": "The 3D con's listed are: 'perspective deformation, occlusion, loss of orientation' plus 'complex interaction' and developer familiarity issues."
+  },
+  {
+    "numb": 45,
+    "type": "Multiple Choice",
+    "question": "Prescriptive analytics helps organizations to:",
+    "answer": "C) Learn from past events to shape future strategies and improve performance",
+    "options": [
+      "A) Only describe what happened in the past",
+      "B) Predict stock market prices with 100% accuracy",
+      "C) Learn from past events to shape future strategies and improve performance",
+      "D) Eliminate the need for human decision-making"
+    ],
+    "image": null,
+    "explanation": "Prescriptive analytics strives to unlock the potential for companies to improve overall performance and profitability by learning from past events to shape future tactics and strategies."
+  },
+  {
+    "numb": 46,
+    "type": "Multiple Choice",
+    "question": "The Gestalt principle of \"Proximity\" is the basis for which visualization type?",
+    "answer": "A) Scatterplots and printing",
+    "options": [
+      "A) Scatterplots and printing",
+      "B) Edge bundles and sketches",
+      "C) Only 3D visualizations",
+      "D) Only text-based displays "
+    ],
+    "image": null,
+    "explanation": "The Proximity principle states 'elements drawn close to each other are perceived as a group' and 'this is the principle behind scatterplots and printing!'"
+  },
+  {
+    "numb": 47,
+    "type": "Multiple Choice",
+    "question": "What does a perceptual colormap explicitly identify that rainbow colormaps don't?",
+    "answer": "A) The \"0\" in the data",
+    "options": [
+      "A) The \"0\" in the data",
+      "B) The maximum value",
+      "C) The average value",
+      "D) The outliers"
+    ],
+    "image": null,
+    "explanation": "The perceptual colormap 'explicitly identifies the \"0\" in the data, which is sea level.'"
+  },
+  {
+    "numb": 48,
+    "type": "Multiple Choice",
+    "question": "Which scenario describes using visualization to 'confirm the known'?",
+    "answer": "B) Validating the fit of a given model with a dataset",
+    "options": [
+      "A) Finding anomalies in medical images",
+      "B) Validating the fit of a given model with a dataset",
+      "C) Discovering new patterns",
+      "D) Exploring data without a goal"
+    ],
+    "image": null,
+    "explanation": "'Confirm the known' includes '(in)validate the fit of a given model with a dataset' - this is about confirming existing hypotheses."
+  },
+  {
+    "numb": 49,
+    "type": "Multiple Choice",
+    "question": "Visual Analytics can be described as the combination of:",
+    "answer": "A) Data visualization + Machine learning",
+    "options": [
+      "A) Data visualization + Machine learning",
+      "B) Statistics + Databases",
+      "C) Hardware + Software",
+      "D) Charts + Tables"
+    ],
+    "image": null,
+    "explanation": "Visual Analytics = Data visualization + Machine learning. It uses machine learning and other tools to automatically sort through datasets and find patterns or trends."
+  },
+  {
+    "numb": 50,
+    "type": "Multiple Choice",
+    "question": "What is the importance of Transparency in visuals ?",
+    "answer": "D) all the above is true",
+    "options": [
+      "A) (de)emphasize details",
+      "B) overlay annotations with limited clutter",
+      "C) reduce occlusion in 3D plots",
+      "D) all the above is true"
+    ],
+    "image": null,
+    "explanation": "using the transparent backgrounds help to show more details and some hidden and small data"
+  },
+  {
+    "numb": 51,
+    "type": "Multiple Choice",
+    "question": "Which of the following is NOT a way to create text emphasis?",
+    "answer": "C) Underlining",
+    "options": [
+      "A) ALL CAPS",
+      "B) Bold",
+      "C) Underlining",
+      "D) Bigger size"
+    ],
+    "image": null,
+    "explanation": "The ways listed to create emphasis are 'ALL CAPS, bold, italics, bigger' - underlining is not mentioned."
+  },
+  {
+    "numb": 52,
+    "type": "Multiple Choice",
+    "question": "In the HSV model, what does value = 0 represent?",
+    "answer": "C) Black",
+    "options": [
+      "A) White",
+      "B) Gray",
+      "C) Black",
+      "D) Transparent"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'value: luminance; white (v=1), dark (0<v<1), or black (v=0).'"
+  },
+  {
+    "numb": 53,
+    "type": "Multiple Choice",
+    "question": "what can title text be used for?",
+    "answer": "B) The takeaway message",
+    "options": [
+      "A) Decoration only",
+      "B) The takeaway message",
+      "C) Author's name",
+      "D) Date and time"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Can use title text for takeaway message' and demonstrates this with 'Put the Key Message Right in the Title.'"
+  },
+  {
+    "numb": 54,
+    "type": "Multiple Choice",
+    "question": "Which visualization type is best for analyzing sales trends over time?",
+    "answer": "C) Line Chart",
+    "options": [
+      "A) Pie Chart",
+      "B) Scatter Plot",
+      "C) Line Chart",
+      "D) Treemap"
+    ],
+    "image": null,
+    "explanation": "Line Chart is used for showing changes over time, such as sales trends over 60 days, where users can hover to see exact values and zoom into specific periods."
+  },
+  {
+    "numb": 55,
+    "type": "Multiple Choice",
+    "question": "Which field does NOT typically use Information Visualization?",
+    "answer": "B) Engineering",
+    "options": [
+      "A) Finance & business",
+      "B) Engineering",
+      "C) Social sciences",
+      "D) E-government"
+    ],
+    "image": null,
+    "explanation": "Engineering is listed under Scientific Visualization applications, not Information Visualization. Information Visualization is used for finance & business, social sciences, and e-government."
+  },
+  {
+    "numb": 56,
+    "type": "Multiple Choice",
+    "question": "What challenge does \"non-spatiality\" present for InfoVis data?",
+    "answer": "A) Data points don't have a 'natural' place in 2D or 3D space",
+    "options": [
+      "A) Data points don't have a 'natural' place in 2D or 3D space",
+      "B) Data cannot be measured",
+      "C) Data is always in 3D",
+      "D) Data has too many colors"
+    ],
+    "image": null,
+    "explanation": "Non-spatiality means 'data points do not have a \"natural\" place in 2D or 3D space' requiring decisions about 'how to draw the data.'"
+  },
+  {
+    "numb": 57,
+    "type": "Multiple Choice",
+    "question": "The Fraser's spiral illusion shows:",
+    "answer": "B) A set of concentric circles",
+    "options": [
+      "A) An actual spiral",
+      "B) A set of concentric circles",
+      "C) Random shapes",
+      "D) Intersecting lines"
+    ],
+    "image": null,
+    "explanation": "The lecture reveals: 'Fraser's spiral... is not a spiral, but a set of circles!'"
+  },
+  {
+    "numb": 58,
+    "type": "Multiple Choice",
+    "question": "What can Large Language Models (LLMs) generate?",
+    "answer": "D) Text in multiple languages and styles, and can interpret text and images",
+    "options": [
+      "A) Only English text",
+      "B) Only numerical data",
+      "C) Only images",
+      "D) Text in multiple languages and styles, and can interpret text and images"
+    ],
+    "image": null,
+    "explanation": "Large language models such as ChatGPT can generate text in multiple languages and styles. They can also interpret text and images."
+  },
+  {
+    "numb": 59,
+    "type": "Multiple Choice",
+    "question": "Which is NOT a practical application area of visual analytics?",
+    "answer": "D) Weather forecasting without data",
+    "options": [
+      "A) Finance: Fraud detection and market trend analysis",
+      "B) Healthcare: Patient data analysis and outcome prediction",
+      "C) Cybersecurity: Threat detection and vulnerability analysis",
+      "D) Weather forecasting without data"
+    ],
+    "image": null,
+    "explanation": "Visual analytics has practical applications in Finance (fraud detection), Retail (customer segmentation), Healthcare (patient data analysis), and Cybersecurity (threat detection)."
+  },
+  {
+    "numb": 60,
+    "type": "Multiple Choice",
+    "question": "Which role supports the designer with effective visual encodings and evaluates solutions via user studies?",
+    "answer": "C) Cognitive Scientist",
+    "options": [
+      "A) Journalist",
+      "B) Project Manager",
+      "C) Cognitive Scientist",
+      "D) Communicator"
+    ],
+    "image": null,
+    "explanation": "The Cognitive Scientist 'supports designer with effective visual encodings' and 'evaluates the proposed solution (e.g. via user studies).'"
+  },
+  {
+    "numb": 61,
+    "type": "Multiple Choice",
+    "question": "What is the key advantage of visual analytics?",
+    "answer": "C) Interactivity that enables users to manipulate visuals and uncover hidden patterns",
+    "options": [
+      "A) It creates only static charts",
+      "B) It requires no user input",
+      "C) Interactivity that enables users to manipulate visuals and uncover hidden patterns",
+      "D) It eliminates the need for data preparation"
+    ],
+    "image": null,
+    "explanation": "The key advantage of visual analytics is interactivity—it enables users to manipulate the visuals, apply filters, drill into data hierarchies, and uncover hidden patterns or relationships that static charts might miss."
+  },
+  {
+    "numb": 62,
+    "type": "Multiple Choice",
+    "question": "Which of the following are examples of Generative AI tools mentioned in the lecture?",
+    "answer": "B) ChatGPT, Bing, Bard, DallE",
+    "options": [
+      "A) Microsoft Word, Excel, PowerPoint",
+      "B) ChatGPT, Bing, Bard, DallE",
+      "C) Firefox, Chrome, Safari",
+      "D) Windows, macOS, Linux"
+    ],
+    "image": null,
+    "explanation": "Examples of Generative AI tools mentioned include ChatGPT, Bing, Bard, and DallE."
+  },
+  {
+    "numb": 63,
+    "type": "Multiple Choice",
+    "question": "Which visual variable is described as \"Selective\"?",
+    "answer": "C) Categorical color",
+    "options": [
+      "A) Length",
+      "B) Size",
+      "C) Categorical color",
+      "D) Brightness"
+    ],
+    "image": null,
+    "explanation": "'Categorical color is selective since we can easily find the yellow shape in the full set of color shapes.'"
+  },
+  {
+    "numb": 64,
+    "type": "Multiple Choice",
+    "question": "Visual Analytics is best described as:",
+    "answer": "C) The science of analytical reasoning facilitated by interactive visual interfaces",
+    "options": [
+      "A) The use of computers for simulations",
+      "B) Visualization applied to abstract data",
+      "C) The science of analytical reasoning facilitated by interactive visual interfaces",
+      "D) The depiction of spatial relationships"
+    ],
+    "image": null,
+    "explanation": "Visual Analytics is defined in the lecture as 'The science of analytical reasoning facilitated by interactive visual interfaces.'"
+  },
+  {
+    "numb": 65,
+    "type": "Multiple Choice",
+    "question": "What is the key difference between Scientific Visualization and Information Visualization data?",
+    "answer": "B) SciVis data is defined over familiar 2D/3D spatial domains, InfoVis data is abstract",
+    "options": [
+      "A) SciVis uses colors, InfoVis doesn't",
+      "B) SciVis data is defined over familiar 2D/3D spatial domains, InfoVis data is abstract",
+      "C) SciVis is newer than InfoVis",
+      "D) InfoVis only works with text data"
+    ],
+    "image": null,
+    "explanation": "SciVis data is 'defined on a 2D/3D spatial domain' showing 'stuff happening in familiar 3D space,' while InfoVis data is 'abstract, high-dimensional, heterogeneous, non-spatial.'"
+  },
+  {
+    "numb": 66,
+    "type": "Multiple Choice",
+    "question": "What are the two interpretation bottlenecks in perceiving visualizations?",
+    "answer": "B) Low-level vision and high-level sensemaking",
+    "options": [
+      "A) Data collection and data storage",
+      "B) Low-level vision and high-level sensemaking",
+      "C) Hardware and software",
+      "D) Input and output"
+    ],
+    "image": null,
+    "explanation": "The lecture explicitly identifies two bottlenecks: 'low-level vision: must know how the eye sees colors, contrasts, textures' and 'high-level sensemaking: must know how the brain assigns meaning to shapes.'"
+  },
+  {
+    "numb": 67,
+    "type": "Multiple Choice",
+    "question": "What is Strong AI?",
+    "answer": "B) AI that acts exactly as a human would, exhibiting emotions and real creativity",
+    "options": [
+      "A) AI that can only process language",
+      "B) AI that acts exactly as a human would, exhibiting emotions and real creativity",
+      "C) AI that sorts pictures on your computer",
+      "D) AI that is limited to voice commands"
+    ],
+    "image": null,
+    "explanation": "Strong AI is AI that acts exactly as a human would, like the Terminator or Commander Data. They exhibit emotions, real creativity, and can even have a sense of purpose."
+  },
+  {
+    "numb": 68,
+    "type": "Multiple Choice",
+    "question": "What does Robust scaling do to handle outliers?",
+    "answer": "B) It subtracts the median and scales between quantiles q25 and q75",
+    "options": [
+      "A) It removes all outliers from the dataset",
+      "B) It subtracts the median and scales between quantiles q25 and q75",
+      "C) It calculates the mean and standard deviation",
+      "D) It uses the maximum and minimum values only"
+    ],
+    "image": null,
+    "explanation": "Robust scaling subtracts the median, scales between quantiles q25 and q75. The new feature has median 0, q25=-1, and q75=1. It is similar to standard scaler but ignores outliers."
+  },
+  {
+    "numb": 69,
+    "type": "Multiple Choice",
+    "question": "Which role identifies a problem in the application domain and owns it?",
+    "answer": "B) Initiator",
+    "options": [
+      "A) Computer Scientist",
+      "B) Initiator",
+      "C) Designer",
+      "D) Project Manager"
+    ],
+    "image": null,
+    "explanation": "The Initiator role 'identifies a problem in some application domain' and 'typically owns the problem (needs to get it solved).'"
+  },
+  {
+    "numb": 70,
+    "type": "Multiple Choice",
+    "question": "The first InfoVis data challenge was the \"Size.\" What problem does this create?",
+    "answer": "B) Number of data points much higher than screen resolution",
+    "options": [
+      "A) Data takes too long to collect",
+      "B) Number of data points much higher than screen resolution",
+      "C) Data is too small to see",
+      "D) Data costs too much to store"
+    ],
+    "image": null,
+    "explanation": "The Size challenge is described as 'number of data points in the input data much higher than screen resolution' creating the question 'where to draw all those data points?'"
+  },
+  {
+    "numb": 71,
+    "type": "Multiple Choice",
+    "question": "Which of the following is the correct definition of Scientific Visualization?",
+    "answer": "B) The use of computers for comprehending data or extracting knowledge from simulations and measurements",
+    "options": [
+      "A) Visualization applied to abstract quantities and relations",
+      "B) The use of computers for comprehending data or extracting knowledge from simulations and measurements",
+      "C) The science of analytical reasoning with interactive visual interfaces",
+      "D) The depiction of information using spatial representations"
+    ],
+    "image": null,
+    "explanation": "Scientific Visualization is defined as 'The use of computers or techniques for comprehending data or to extract knowledge from the results of simulations, computations, or measurements.'"
+  },
+  {
+    "numb": 72,
+    "type": "Multiple Choice",
+    "question": "What is LLM Code Generation capability used for in visualization?",
+    "answer": "B) Generating code to create data visualizations for image generation models",
+    "options": [
+      "A) Writing operating system code",
+      "B) Generating code to create data visualizations for image generation models",
+      "C) Creating computer viruses",
+      "D) Building hardware drivers"
+    ],
+    "image": null,
+    "explanation": "Code Writing (Code Generation) capabilities assist in generating code to create data visualizations, which are then used as input to image generation models, such as DALL-E and Latent Diffusion, to generate stylized infographics."
+  },
+  {
+    "numb": 73,
+    "type": "Multiple Choice",
+    "question": "According to Gartner, what percentage of businesses will move from traditional data reporting to interactive visual analytics by 2025?",
+    "answer": "B) 75%",
+    "options": [
+      "A) 50%",
+      "B) 75%",
+      "C) 90%",
+      "D) 100%"
+    ],
+    "image": null,
+    "explanation": "According to Gartner, 75% of businesses will move from traditional data reporting to interactive visual analytics by 2025."
+  },
+  {
+    "numb": 74,
+    "type": "Multiple Choice",
+    "question": "Which of the following is NOT a large language model mentioned in the lecture?",
+    "answer": "D) TensorFlow",
+    "options": [
+      "A) Gemini",
+      "B) LLaMA",
+      "C) Claude",
+      "D) TensorFlow"
+    ],
+    "image": null,
+    "explanation": "Large language models mentioned include GPT, Gemini, LLaMA, Claude, and DeepSeek. TensorFlow is not an LLM but a machine learning framework."
+  },
+  {
+    "numb": 75,
+    "type": "Multiple Choice",
+    "question": "According to the \"Use Your Ink Strategically\" principle, what should you do if an element doesn't aid understanding?",
+    "answer": "C) Delete it",
+    "options": [
+      "A) Make it bigger",
+      "B) Change its color",
+      "C) Delete it",
+      "D) Move it to another slide"
+    ],
+    "image": null,
+    "explanation": "The principle states: 'Every single line, word, and shape should aid in the understanding of the graphic. If not, delete.'"
+  },
+  {
+    "numb": 76,
+    "type": "Multiple Choice",
+    "question": "The Functional View describes:",
+    "answer": "B) Function mapping data to images; analysis is its inverse",
+    "options": [
+      "A) Only the creation of charts",
+      "B) Function mapping data to images; analysis is its inverse",
+      "C) User interface design",
+      "D) Color theory applications"
+    ],
+    "image": null,
+    "explanation": "The Functional View describes 'a function that maps data to images, and analysis as the inverse of this function.'"
+  },
+  {
+    "numb": 77,
+    "type": "Multiple Choice",
+    "question": "What is the maximum recommended number of categories for pie charts?",
+    "answer": "B) 5",
+    "options": [
+      "A) 3",
+      "B) 5",
+      "C) 7",
+      "D) 10"
+    ],
+    "image": null,
+    "explanation": "Pie chart best practices state: 'Limit chart categories to 5. Depicting too many slices decreases the impact.'"
+  },
+  {
+    "numb": 78,
+    "type": "Multiple Choice",
+    "question": "Which of the following is important when Using Colors :",
+    "answer": "C) Being consistent in the usage",
+    "options": [
+      "A) Color cannot have cultural influence",
+      "B) Use color to Darker attention",
+      "C) Being consistent in the usage",
+      "D) All must follow the exact same pattern"
+    ],
+    "image": null,
+    "explanation": "The consistent in the usage make the audience has more attension and make the data more understandable"
+  },
+  {
+    "numb": 79,
+    "type": "Multiple Choice",
+    "question": "In the customer satisfaction case study, what was identified as the strongest factor affecting satisfaction?",
+    "answer": "B) Long waiting time",
+    "options": [
+      "A) Customer age",
+      "B) Long waiting time",
+      "C) Product color",
+      "D) Store location size"
+    ],
+    "image": null,
+    "explanation": "The visual analytics revealed that long waiting time is the strongest factor affecting satisfaction, with a clear downward trend: longer waiting time leads to lower satisfaction."
+  },
+  {
+    "numb": 80,
+    "type": "Multiple Choice",
+    "question": "The Visualization Pipeline Communication View includes:",
+    "answer": "B) Messenger, receiver, and message",
+    "options": [
+      "A) Only data and graphics",
+      "B) Messenger, receiver, and message",
+      "C) Hardware and software",
+      "D) Input and output devices"
+    ],
+    "image": null,
+    "explanation": "The Communication View includes 'messenger, receiver, and message' as key components of visualization communication."
+  },
+  {
+    "numb": 81,
+    "type": "Multiple Choice",
+    "question": "According to the \"distance preservation\" property, what should be proportional?",
+    "answer": "B) Perceived distance between visual values to distance between data values",
+    "options": [
+      "A) Data size to image size",
+      "B) Perceived distance between visual values to distance between data values",
+      "C) Color brightness to data importance",
+      "D) Font size to data complexity"
+    ],
+    "image": null,
+    "explanation": "Distance preservation states: 'The perceived distance between two visual variable-values should be (ideally) proportional with the distance between the corresponding data values.'"
+  },
+  {
+    "numb": 82,
+    "type": "Multiple Choice",
+    "question": "Which is NOT part of the Technical View?",
+    "answer": "C) Data deletion",
+    "options": [
+      "A) Data transformation",
+      "B) Visual mapping",
+      "C) Data deletion",
+      "D) Rendering"
+    ],
+    "image": null,
+    "explanation": "The Technical View includes data transformation, visual mapping, and rendering. 'Data deletion' is NOT part of this view."
+  },
+  {
+    "numb": 83,
+    "type": "Multiple Choice",
+    "question": "What are the two fundamental design criteria for data visualization?",
+    "answer": "B) Tell the truth",
+    "options": [
+      "A) Use bright colors and large fonts",
+      "B) Tell the truth",
+      "C) Make it pretty and fast",
+      "D) Use 3D and animations"
+    ],
+    "image": null,
+    "explanation": "The lecture explicitly states the two design criteria: 'Tell the truth and nothing but the truth (don't lie, and don't lie by omission)' and 'Use encodings that people decode better (where better = faster and/or more accurate).'"
+  },
+  {
+    "numb": 84,
+    "type": "Multiple Choice",
+    "question": "What does GPT stand for?",
+    "answer": "A) Generative Pre-trained Transformer",
+    "options": [
+      "A) Generative Pre-trained Transformer",
+      "B) General Purpose Technology",
+      "C) Graphics Processing Tool",
+      "D) Global Pattern Tracker"
+    ],
+    "image": null,
+    "explanation": "GPT stands for 'Generative Pre-trained Transformer' and is the name given to a family of natural language models developed by OpenAI."
+  },
+  {
+    "numb": 85,
+    "type": "Multiple Choice",
+    "question": "In the cholera epidemic example (London, 1854), what did visualization reveal?",
+    "answer": "B) Deaths correlated with proximity to a water pump",
+    "options": [
+      "A) Deaths were random across the city",
+      "B) Deaths correlated with proximity to a water pump",
+      "C) Deaths occurred only in wealthy areas",
+      "D) Deaths were caused by air pollution"
+    ],
+    "image": null,
+    "explanation": "The cholera epidemic visualization revealed that 'deaths correlated with proximity to water pump.'"
+  },
+  {
+    "numb": 86,
+    "type": "Multiple Choice",
+    "question": "What does \"invertibility - unicity\" mean in data encoding?",
+    "answer": "B) Any two different data values should map to two different visual variable-values",
+    "options": [
+      "A) All colors should be the same",
+      "B) Any two different data values should map to two different visual variable-values",
+      "C) Data should be encrypted",
+      "D) Colors should be reversed"
+    ],
+    "image": null,
+    "explanation": "Unicity is defined as: 'any two different data values should map to two different visual variable-values' to make answers unambiguous."
+  },
+  {
+    "numb": 87,
+    "type": "Multiple Choice",
+    "question": "What is a Bigram language model?",
+    "answer": "A) A model that conditions on the previous term",
+    "options": [
+      "A) A model that conditions on the previous term",
+      "B) A model that uses only one word",
+      "C) A model that ignores all context",
+      "D) A model that uses the entire document"
+    ],
+    "image": null,
+    "explanation": "A Bigram language model conditions on the previous term, unlike a Unigram model which throws away all conditioning context."
+  },
+  {
+    "numb": 88,
+    "type": "Multiple Choice",
+    "question": "What is 'The Sensemaking Loop' in Visual Analytics?",
+    "answer": "A) Going from raw data to meaning through hypothesis validation and conclusions",
+    "options": [
+      "A) Going from raw data to meaning through hypothesis validation and conclusions",
+      "B) A process of creating colorful charts",
+      "C) A method for deleting irrelevant data",
+      "D) A technique for encrypting sensitive information"
+    ],
+    "image": null,
+    "explanation": "The Sensemaking Loop involves going from 'raw' data to meaning (semantics), through data hypothesis (in)validation to conclusions. In simple terms: combine analysis and visualization."
+  },
+  {
+    "numb": 89,
+    "type": "Multiple Choice",
+    "question": "In a perceptual colormap, what characterizes the color scheme above and below zero?",
+    "answer": "B) Monotonic luminance variations",
+    "options": [
+      "A) Random color variations",
+      "B) Monotonic luminance variations",
+      "C) Constant brightness",
+      "D) Rainbow colors"
+    ],
+    "image": null,
+    "explanation": "perceptual colormaps have 'two different hues, one on each side of '0', with monotonic luminance variations.'"
+  },
+  {
+    "numb": 90,
+    "type": "Multiple Choice",
+    "question": "How many lines should you plot on a line chart according to best practices?",
+    "answer": "B) No more than 4",
+    "options": [
+      "A) No more than 2",
+      "B) No more than 4",
+      "C) No more than 6",
+      "D) As many as needed"
+    ],
+    "image": null,
+    "explanation": "[Add explanation for answer from the PDF]"
+  },
+  {
+    "numb": 91,
+    "type": "Multiple Choice",
+    "question": "What does higher contrast between objects lead to?",
+    "answer": "B) They are perceived as more different",
+    "options": [
+      "A) They are perceived as more similar",
+      "B) They are perceived as more different",
+      "C) They become invisible",
+      "D) They lose meaning"
+    ],
+    "image": null,
+    "explanation": "The principle states: 'The higher the contrast between objects, the more differently they are perceived.'"
+  },
+  {
+    "numb": 92,
+    "type": "Multiple Choice",
+    "question": "What are the three approaches for language modelling mentioned in the lecture?",
+    "answer": "B) Sentence Correction (Denoising), Text Completion, Text Translation",
+    "options": [
+      "A) Reading, Writing, Arithmetic",
+      "B) Sentence Correction (Denoising), Text Completion, Text Translation",
+      "C) Copy, Paste, Delete",
+      "D) Create, Read, Update, Delete"
+    ],
+    "image": null,
+    "explanation": "Three approaches for language modelling: Sentence Correction (Denoising), Text Completion, and Text Translation."
+  },
+  {
+    "numb": 93,
+    "type": "Multiple Choice",
+    "question": "In the dimensionality classification, what does a 1D data value represent?",
+    "answer": "B) A single value like temperature or pressure",
+    "options": [
+      "A) No data, just a shape",
+      "B) A single value like temperature or pressure",
+      "C) Two related values like coordinates",
+      "D) Three related values like wind speed"
+    ],
+    "image": null,
+    "explanation": "The lecture explicitly states that 1D data values represent 'a single value (e.g. temperature, pressure, height)' and are called scalar."
+  },
+  {
+    "numb": 94,
+    "type": "Multiple Choice",
+    "question": "What is data storytelling defined as?",
+    "answer": "B) A method that allows sharing data through a story for easier understanding",
+    "options": [
+      "A) A method for collecting data",
+      "B) A method that allows sharing data through a story for easier understanding",
+      "C) A technique for hiding data",
+      "D) A way to make data more complex"
+    ],
+    "image": null,
+    "explanation": "Data storytelling is explicitly defined as 'a method that allows sharing data through a story that provides for easier understanding.'"
+  },
+  {
+    "numb": 95,
+    "type": "Multiple Choice",
+    "question": "Which type of analytics focuses on understanding past events?",
+    "answer": "A) Descriptive analytics",
+    "options": [
+      "A) Descriptive analytics",
+      "B) Predictive analytics",
+      "C) Prescriptive analytics",
+      "D) Real-time analytics"
+    ],
+    "image": null,
+    "explanation": "Descriptive analytics is dedicated to the meticulous study of events that have already taken place, aiming to dissect the root cause and gain useful knowledge from past performance."
+  },
+  {
+    "numb": 96,
+    "type": "Multiple Choice",
+    "question": "Which data relationship tracks changes in values of a consistent metric over time?",
+    "answer": "B) Time series",
+    "options": [
+      "A) Nominal comparison",
+      "B) Time series",
+      "C) Correlation",
+      "D) Distribution"
+    ],
+    "image": null,
+    "explanation": "Time series is defined as: 'This tracks changes in values of a consistent metric over time. Example – Monthly sales.'"
+  },
+  {
+    "numb": 97,
+    "type": "Multiple Choice",
+    "question": "How does Generative AI operate?",
+    "answer": "C) By learning patterns from large datasets and generating new content that fits those patterns",
+    "options": [
+      "A) By copying exact data from the internet",
+      "B) By randomly generating numbers",
+      "C) By learning patterns from large datasets and generating new content that fits those patterns",
+      "D) By manually typing responses from humans"
+    ],
+    "image": null,
+    "explanation": "Generative AI operates by learning patterns and structures from large datasets and then using that knowledge to produce new content that fits within those learned patterns."
+  },
+  {
+    "numb": 98,
+    "type": "Multiple Choice",
+    "question": "What controls the hue (tint) of a color?",
+    "answer": "C) Frequency",
+    "options": [
+      "A) Amplitude",
+      "B) Brightness",
+      "C) Frequency",
+      "D) Intensity"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'frequency: controls the hue, or tint, of the color.'افتكر التردد من 390 لـ 700 نانوميتر"
+  },
+  {
+    "numb": 99,
+    "type": "Multiple Choice",
+    "question": "What is the key distinction between data visualization and infographics?",
+    "answer": "B) DATA plus visual",
+    "options": [
+      "A) Color usage",
+      "B) DATA plus visual",
+      "C) Size of the graphic",
+      "D) Software used"
+    ],
+    "image": null,
+    "explanation": "The key distinction is 'DATA plus visual' – data visualization requires actual data-driven elements."
+  },
+  {
+    "numb": 100,
+    "type": "Multiple Choice",
+    "question": "What is the best practice for starting the y-axis value in bar charts?",
+    "answer": "C) Start at 0",
+    "options": [
+      "A) Start at 1",
+      "B) Start at the minimum data value",
+      "C) Start at 0",
+      "D) Start at the median"
+    ],
+    "image": null,
+    "explanation": "Bar chart best practices state: 'Start the y-axis value at 0. Starting at a value above zero truncates the bars.'"
+  },
+  {
+    "numb": 101,
+    "type": "Multiple Choice",
+    "question": "Which of the following is NOT an important audience consideration?",
+    "answer": "B) Their favorite color",
+    "options": [
+      "A) Where they are from",
+      "B) Their favorite color",
+      "C) Their demographic",
+      "D) Whether they are skeptics"
+    ],
+    "image": null,
+    "explanation": "The lecture lists many audience considerations (where they're from, demographics, whether they're skeptics, etc.) but does not mention their favorite color."
+  },
+  {
+    "numb": 102,
+    "type": "Multiple Choice",
+    "question": "What are the requirements for Visual Analytics according to the lecture?",
+    "answer": "C) Data Analysis, Visualization, Computer Vision, Machine Learning, Programming, HCI",
+    "options": [
+      "A) Only programming skills",
+      "B) Only data analysis and visualization",
+      "C) Data Analysis, Visualization, Computer Vision, Machine Learning, Programming, HCI",
+      "D) Only machine learning and AI"
+    ],
+    "image": null,
+    "explanation": "The requirements for Visual Analytics include: Data Analysis, Visualization, Computer Vision, Machine Learning, Programming skills + Software Engineering, and HCI (Human-Computer Interaction)."
+  },
+  {
+    "numb": 103,
+    "type": "Multiple Choice",
+    "question": "What does the \"S\" stand for in the HSV color model?",
+    "answer": "B) Saturation",
+    "options": [
+      "A) Spectrum",
+      "B) Saturation",
+      "C) Shade",
+      "D) Scale"
+    ],
+    "image": null,
+    "explanation": "HSV stands for Hue, Saturation, Value, so 'S' represents Saturation."
+  },
+  {
+    "numb": 104,
+    "type": "Multiple Choice",
+    "question": "Which role creates programs to query, aggregate, and filter data?",
+    "answer": "B) Computer Scientist",
+    "options": [
+      "A) Data Scientist",
+      "B) Computer Scientist",
+      "C) Designer",
+      "D) Initiator"
+    ],
+    "image": null,
+    "explanation": "The Computer Scientist 'creates/uses programs to query, aggregate, filter the data.'"
+  },
+  {
+    "numb": 105,
+    "type": "Multiple Choice",
+    "question": "What TWO types of questions does visualization help answer?",
+    "answer": "A) Quantitative and qualitative",
+    "options": [
+      "A) Quantitative and qualitative",
+      "B) Simple and complex",
+      "C) Mathematical and statistical",
+      "D) Digital and analog"
+    ],
+    "image": null,
+    "explanation": "The lecture distinguishes between quantitative questions (precise, numerical) and qualitative questions (vague, exploratory)."
+  },
+  {
+    "numb": 106,
+    "type": "Multiple Choice",
+    "question": "What does \"invertibility - coverage\" require?",
+    "answer": "D) Any visual variable-value should map to a data value",
+    "options": [
+      "A) The entire screen should be filled",
+      "B) All data must be visible at once",
+      "C) Multiple colors per data point",
+      "D) Any visual variable-value should map to a data value"
+    ],
+    "image": null,
+    "explanation": "Coverage means: 'any visual variable-value maps to a data value' ensuring all colors in the visualization have meaning."
+  },
+  {
+    "numb": 107,
+    "type": "Multiple Choice",
+    "question": "Which tool is NOT a tool for creating data visualizations?",
+    "answer": "C) Microsoft Word",
+    "options": [
+      "A) Tableau",
+      "B) Infogram",
+      "C) Microsoft Word",
+      "D) Piktochart"
+    ],
+    "image": null,
+    "explanation": "The tools listed are Excel/Powerpoint, Infogram, Tableau, Piktochart, Easely, and Visage. Microsoft Word is not mentioned as a visualization tool."
+  },
+  {
+    "numb": 108,
+    "type": "Multiple Choice",
+    "question": "What major problem is identified with the rainbow colormap?",
+    "answer": "B) It doesn't have a monotonic perceptual ordering",
+    "options": [
+      "A) It uses too few colors",
+      "B) It doesn't have a monotonic perceptual ordering",
+      "C) It's too expensive to compute",
+      "D) It only works in 2D"
+    ],
+    "image": null,
+    "explanation": "The first problem listed is: 'It is confusing because it doesn't have a monotonic perceptual ordering.'"
+  },
+  {
+    "numb": 109,
+    "type": "Multiple Choice",
+    "question": "What is a Unigram language model?",
+    "answer": "B) A model that throws away all conditioning context",
+    "options": [
+      "A) A model that considers only the previous sentence",
+      "B) A model that throws away all conditioning context",
+      "C) A model that uses three words at a time",
+      "D) A model that translates between languages"
+    ],
+    "image": null,
+    "explanation": "A Unigram language model throws away all conditioning context. It is most used in Information Retrieval."
+  },
+  {
+    "numb": 110,
+    "type": "Multiple Choice",
+    "question": "The London metro map evolution (1927 to 1993) is an example for :",
+    "answer": "C) Clarification",
+    "options": [
+      "A) Storytelling",
+      "B) Problem solving",
+      "C) Clarification",
+      "D) Exploration"
+    ],
+    "image": null,
+    "explanation": "The London metro map evolution is and example Clarification (Visualization for clarification) by simplifying and schematizing information."
+  },
+  {
+    "numb": 111,
+    "type": "Multiple Choice",
+    "question": "What are the three training stages for Language Models?",
+    "answer": "C) Pre-training, Supervised Training, Reinforcement Learning",
+    "options": [
+      "A) Input, Process, Output",
+      "B) Read, Write, Execute",
+      "C) Pre-training, Supervised Training, Reinforcement Learning",
+      "D) Compile, Build, Deploy"
+    ],
+    "image": null,
+    "explanation": "Training Language Models involves three stages: Pre-training, Supervised Training, and Reinforcement Learning."
+  },
+  {
+    "numb": 112,
+    "type": "Multiple Choice",
+    "question": "What operations can be performed on Nominal (N) data types?",
+    "answer": "C) =, ≠",
+    "options": [
+      "A) =, ≠, <, >",
+      "B) Only =",
+      "C) =, ≠",
+      "D) =, ≠, <, >, -, ×"
+    ],
+    "image": null,
+    "explanation": "Nominal data types support only 'Operations: =, ≠' as they represent labels or categories like fruits."
+  },
+  {
+    "numb": 113,
+    "type": "Multiple Choice",
+    "question": "In a data table, what are \"Dimensions\" typically?",
+    "answer": "B) Independent variables, often discrete, describing data categories",
+    "options": [
+      "A) Dependent variables that can be aggregated",
+      "B) Independent variables, often discrete, describing data categories",
+      "C) Only numerical values",
+      "D) Always continuous measurements"
+    ],
+    "image": null,
+    "explanation": "Dimensions are defined as '~ independent variables, Often discrete variables describing data (N, O), Categories, dates, binned quantities.'"
+  },
+  {
+    "numb": 114,
+    "type": "Multiple Choice",
+    "question": "In the RGB color cube, what color is at the origin (0,0,0)?",
+    "answer": "D) Black",
+    "options": [
+      "A) White",
+      "B) Gray",
+      "C) Red",
+      "D) Black"
+    ],
+    "image": null,
+    "explanation": "In the RGB cube explanation: 'cube origin (B): black' where B = (0,0,0)."
+  },
+  {
+    "numb": 115,
+    "type": "Multiple Choice",
+    "question": "What do Token Probability Plots visualize?",
+    "answer": "C) The probability distribution over vocabulary at each step of text generation",
+    "options": [
+      "A) The number of users of the model",
+      "B) The processing speed of the model",
+      "C) The probability distribution over vocabulary at each step of text generation",
+      "D) The memory usage of the model"
+    ],
+    "image": null,
+    "explanation": "When an LLM is generating text, Token Probability Plots visualize the probability distribution over the vocabulary at each step, showing which alternative tokens were close contenders to the final prediction."
+  },
+  {
+    "numb": 116,
+    "type": "Multiple Choice",
+    "question": "Which visual variable is described as \"Associative\"?",
+    "answer": "B) Shape",
+    "options": [
+      "A) Position",
+      "B) Shape",
+      "C) Color",
+      "D) Size"
+    ],
+    "image": null,
+    "explanation": "Shape is given as the example of Associative: 'shape is associative (we can perceive it regardless of position and/or color).'"
+  },
+  {
+    "numb": 117,
+    "type": "Multiple Choice",
+    "question": "Which attribute type is the MOST general in the hierarchy?",
+    "answer": "D) Quantitative",
+    "options": [
+      "A) Categorical",
+      "B) Ordinal",
+      "C) Discrete",
+      "D) Quantitative"
+    ],
+    "image": null,
+    "explanation": "The hierarchy shows quantitative as the most general, followed by discrete, ordinal, then categorical (least general), with 'less general' to 'more general' indicated."
+  },
+  {
+    "numb": 118,
+    "type": "Multiple Choice",
+    "question": "The Perceptual View includes layers of:",
+    "answer": "A) Low-level vision, pattern recognition, and high-level sensemaking",
+    "options": [
+      "A) Low-level vision, pattern recognition, and high-level sensemaking",
+      "B) Colors, shapes, and sizes",
+      "C) Input, process, and output",
+      "D) Hardware, software, and user"
+    ],
+    "image": null,
+    "explanation": "The Perceptual View has three layers: 'low-level vision (pre-attentive), pattern recognition, and high-level sensemaking.'"
+  },
+  {
+    "numb": 119,
+    "type": "Multiple Choice",
+    "question": "What societal connotation does RED typically have?",
+    "answer": "C) Bad",
+    "options": [
+      "A) Good",
+      "B) Neutral",
+      "C) Bad",
+      "D) Unknown"
+    ],
+    "image": null,
+    "explanation": "Under societal connotations, the lecture states 'Red= bad' and 'Green= good.'"
+  },
+  {
+    "numb": 120,
+    "type": "Multiple Choice",
+    "question": "What controls the brightness (intensity) of a color?",
+    "answer": "B) Amplitude",
+    "options": [
+      "A) Frequency",
+      "B) Amplitude",
+      "C) Wavelength",
+      "D) Hue"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'amplitude: controls the brightness, or intensity, of the color.'"
+  },
+  {
+    "numb": 121,
+    "type": "Multiple Choice",
+    "question": "What relationship was identified between mCPR and % demand satisfied in the multi-country data?",
+    "answer": "B) Lower mCPR countries have lower % demand satisfied",
+    "options": [
+      "A) No relationship exists",
+      "B) Lower mCPR countries have lower % demand satisfied",
+      "C) Higher mCPR countries have lower % demand satisfied",
+      "D) The relationship is random"
+    ],
+    "image": null,
+    "explanation": "The story identified in the reordered data was that 'lower mCPR countries have lower % demand satisfied.'"
+  },
+  {
+    "numb": 122,
+    "type": "Multiple Choice",
+    "question": "What visualization technique uses the Cornsweet illusion with asymmetric shading?",
+    "answer": "C) Cushion treemaps",
+    "options": [
+      "A) Scatter plots",
+      "B) Bar charts",
+      "C) Cushion treemaps",
+      "D) Pie charts"
+    ],
+    "image": null,
+    "explanation": "'Cushion Treemaps' use the Cornsweet illusion principle where 'light falls at an angle with the surface, so cushions are asymmetrically shaded.'"
+  },
+  {
+    "numb": 123,
+    "type": "Multiple Choice",
+    "question": "What happens when you remove one character from InfoVis data (like C++ code)?",
+    "answer": "B) The semantics becomes fully different",
+    "options": [
+      "A) The semantics stays the same",
+      "B) The semantics becomes fully different",
+      "C) Nothing changes",
+      "D) The data improves"
+    ],
+    "image": null,
+    "explanation": "When removing one character from C++ code, 'the semantics becomes fully different!' demonstrating the challenge with discrete, non-numerical data."
+  },
+  {
+    "numb": 124,
+    "type": "Multiple Choice",
+    "question": "What are Attention Heatmaps used for in understanding LLMs?",
+    "answer": "A) To show how much each token attends to every other token within a sequence",
+    "options": [
+      "A) To show how much each token attends to every other token within a sequence",
+      "B) To measure the temperature of the computer",
+      "C) To display error messages",
+      "D) To count the number of words in a document"
+    ],
+    "image": null,
+    "explanation": "An attention heatmap shows how much each token attends to every other token within a sequence. For example, in 'The cat sat on the mat,' the heatmap might show that 'cat' heavily attends to 'sat.'"
+  },
+  {
+    "numb": 125,
+    "type": "Multiple Choice",
+    "question": "In the IT System Assessment case study, what did the visual analytics reveal about team structure?",
+    "answer": "B) Most critical change-requests were focused in one team with communication problems",
+    "options": [
+      "A) All teams worked equally on all modules",
+      "B) Most critical change-requests were focused in one team with communication problems",
+      "C) The smallest team handled the most complex tasks",
+      "D) Teams never modified the same code files"
+    ],
+    "image": null,
+    "explanation": "The visual analytics revealed that most critical change-requests were focused in one team (Team A), and this team was reported to have deadline delays and communication problems."
+  },
+  {
+    "numb": 126,
+    "type": "Multiple Choice",
+    "question": "When is it appropriate to use text instead of a graph?",
+    "answer": "C) When a single number tells the story effectively (like \"110% growth\")",
+    "options": [
+      "A) Never",
+      "B) When you have complex data",
+      "C) When a single number tells the story effectively (like \"110% growth\")",
+      "D) Always"
+    ],
+    "image": null,
+    "explanation": "The example shows 'Exoalgio's revenue grew 110% between 2013 and 2014' as an effective use of text instead of a graph when a single powerful number tells the story."
+  },
+  {
+    "numb": 127,
+    "type": "Multiple Choice",
+    "question": "What color tip suggests using a specific color for neutral or unimportant data?",
+    "answer": "C) Use gray",
+    "options": [
+      "A) Use red",
+      "B) Use blue",
+      "C) Use gray",
+      "D) Use black"
+    ],
+    "image": null,
+    "explanation": "The color tips explicitly state: 'Use gray to denote neutral or unimportant data.'"
+  },
+  {
+    "numb": 128,
+    "type": "Multiple Choice",
+    "question": "In the RGB additive model, what color results from R(1,0,0) + G(0,1,0)?",
+    "answer": "C) Yellow",
+    "options": [
+      "A) Blue",
+      "B) Cyan",
+      "C) Yellow",
+      "D) Magenta"
+    ],
+    "image": null,
+    "explanation": "The example explicitly shows: 'R(1,0,0) + G(0,1,0) = Y(1,1,0) OR (255,255,0)' where Y stands for Yellow."
+  },
+  {
+    "numb": 129,
+    "type": "Multiple Choice",
+    "question": "When considering context, which question should you ask?",
+    "answer": "A) What's in it for me?",
+    "options": [
+      "A) What's in it for me?",
+      "B) How long should the presentation be?",
+      "C) What colors should I use?",
+      "D) How many slides do I need?"
+    ],
+    "image": null,
+    "explanation": "'What's in it for me?' is specifically mentioned as an important context question from the audience's perspective."
+  },
+  {
+    "numb": 130,
+    "type": "Multiple Choice",
+    "question": "When is visualization useful?",
+    "answer": "B) Too much data, qualitative questions, communication needed",
+    "options": [
+      "A) Only for scientific research",
+      "B) Too much data, qualitative questions, communication needed",
+      "C) Only for business analytics",
+      "D) When you have colorful data"
+    ],
+    "image": null,
+    "explanation": "Visualization is useful when you have 'too much data, qualitative questions, and need to communicate findings.'"
+  },
+  {
+    "numb": 131,
+    "type": "Multiple Choice",
+    "question": "According to good data normalization practices, axes should use which orientation?",
+    "answer": "C) Left-to-right, bottom-to-top",
+    "options": [
+      "A) Right-to-left, top-to-bottom",
+      "B) Random orientation",
+      "C) Left-to-right, bottom-to-top",
+      "D) Always vertical only"
+    ],
+    "image": null,
+    "explanation": "Good practices state: 'use natural axis orientations: low-to-large: left-to-right, bottom-to-top.'"
+  },
+  {
+    "numb": 132,
+    "type": "Multiple Choice",
+    "question": "What operations can be performed on Ordinal (O) data types?",
+    "answer": "B) =, ≠, <, >",
+    "options": [
+      "A) =, ≠",
+      "B) =, ≠, <, >",
+      "C) =, ≠, <, >, -, %",
+      "D) Only ="
+    ],
+    "image": null,
+    "explanation": "Ordinal data types support 'Operations: =, ≠, <, >' for ordered data like quality grades (Grade A, AA, AAA)."
+  },
+  {
+    "numb": 133,
+    "type": "Multiple Choice",
+    "question": "How does Google interpret infographics?",
+    "answer": "B) A collection of facts, icons, and text driven",
+    "options": [
+      "A) Pure data visualization",
+      "B) A collection of facts, icons, and text driven",
+      "C) Interactive dashboards",
+      "D) Statistical charts only"
+    ],
+    "image": null,
+    "explanation": "Google interprets infographics as 'a collection of facts, icons, and text driven' rather than data-focused visualizations."
+  },
+  {
+    "numb": 134,
+    "type": "Multiple Choice",
+    "question": "What does high code complexity (average complexity/function > 20) indicate according to the case study?",
+    "answer": "A) Testing can be hard and this might cause product problems",
+    "options": [
+      "A) Testing can be hard and this might cause product problems",
+      "B) The code is perfectly optimized",
+      "C) The team is very productive",
+      "D) Documentation is not needed"
+    ],
+    "image": null,
+    "explanation": "Average complexity/function > 20 indicates that testing can be hard. Total complexity was up 20% in R1.3, which was identified as a possible cause of the product's problems."
+  },
+  {
+    "numb": 135,
+    "type": "Multiple Choice",
+    "question": "In the Cornsweet illusion, two rectangles with the same brightness appear:",
+    "answer": "B) To have different brightness",
+    "options": [
+      "A) Exactly the same",
+      "B) To have different brightness",
+      "C) To be different colors",
+      "D) To change over time"
+    ],
+    "image": null,
+    "explanation": "The Cornsweet illusion shows two rectangles with 'the same brightness' but they appear different due to edge effects."
+  },
+  {
+    "numb": 136,
+    "type": "Multiple Choice",
+    "question": "How much has attention span fallen from 2000 to 2015?",
+    "answer": "B) From 12 seconds to 8 seconds",
+    "options": [
+      "A) From 15 seconds to 10 seconds",
+      "B) From 12 seconds to 8 seconds",
+      "C) From 15 seconds to 10 seconds",
+      "D) From 20 seconds to 15 seconds"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'Attention span has FALLEN from 12 seconds in 2000 to 8 seconds in 2015.'"
+  },
+  {
+    "numb": 137,
+    "type": "Multiple Choice",
+    "question": "What does the diagonal from black to white in the RGB cube represent?",
+    "answer": "C) All gray values",
+    "options": [
+      "A) All red values",
+      "B) All saturated colors",
+      "C) All gray values",
+      "D) All primary colors"
+    ],
+    "image": null,
+    "explanation": "The lecture states: 'diagonal BW: all gray values' where B is black and W is white."
+  },
+  {
+    "numb": 138,
+    "type": "Multiple Choice",
+    "question": "What are the 'four V' challenges of big data?",
+    "answer": "A) Volume, Velocity, Variety, Veracity",
+    "options": [
+      "A) Volume, Velocity, Variety, Veracity",
+      "B) Vision, Value, Velocity, Volume",
+      "C) Variety, Vision, Veracity, Value",
+      "D) Volume, Value, Variety, Vision"
+    ],
+    "image": null,
+    "explanation": "The four V challenges are explicitly listed as Volume, Velocity, Variety, and Veracity."
+  },
+  {
+    "numb": 139,
+    "type": "Multiple Choice",
+    "question": "Which type of color palette is NOT for visualizations?",
+    "answer": "D) Alphabetical",
+    "options": [
+      "A) Sequential",
+      "B) Divergent",
+      "C) Categorical",
+      "D) Alphabetical"
+    ],
+    "image": null,
+    "explanation": "The three types of color palettes mentioned are Sequential, Divergent, and Categorical - not Alphabetical."
+  },
+  {
+    "numb": 140,
+    "type": "Multiple Choice",
+    "question": "Which type of analytics uses historical data to forecast future outcomes?",
+    "answer": "B) Predictive analytics",
+    "options": [
+      "A) Descriptive analytics",
+      "B) Predictive analytics",
+      "C) Prescriptive analytics",
+      "D) Retrospective analytics"
+    ],
+    "image": null,
+    "explanation": "Predictive analytics uses historical data to identify patterns and behaviors, allowing organizations to plan proactively for future scenarios and make data-driven predictions."
+  }
+]

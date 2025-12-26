@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What are the requirements for Visual Analytics according to the lecture?",
+    "answer": "C) Data Analysis, Visualization, Computer Vision, Machine Learning, Programming, HCI",
+    "options": [
+      "A) Only programming skills",
+      "B) Only data analysis and visualization",
+      "C) Data Analysis, Visualization, Computer Vision, Machine Learning, Programming, HCI",
+      "D) Only machine learning and AI"
+    ],
+    "image": null,
+    "explanation": "The requirements for Visual Analytics include: Data Analysis, Visualization, Computer Vision, Machine Learning, Programming skills + Software Engineering, and HCI (Human-Computer Interaction)."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "Which of the following are types of interaction in visual analytics?",
+    "answer": "A) Sort, Filter, Drill down, Cluster",
+    "options": [
+      "A) Sort, Filter, Drill down, Cluster",
+      "B) Copy, Paste, Delete, Undo",
+      "C) Read, Write, Execute, Debug",
+      "D) Open, Close, Save, Print"
+    ],
+    "image": null,
+    "explanation": "The interaction types in visual analytics mentioned are: Sort, Filter, Drill down, and Cluster."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "How is Artificial Intelligence defined according to Doug Rose?",
+    "answer": "B) A system that shows behavior that could be interpreted as human intelligence",
+    "options": [
+      "A) A computer program that can only do calculations",
+      "B) A system that shows behavior that could be interpreted as human intelligence",
+      "C) A robot that looks exactly like a human",
+      "D) A database management system"
+    ],
+    "image": null,
+    "explanation": "AI is defined as 'A system that shows behavior that could be interpreted as human intelligence' according to Doug Rose."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "In what type of environment does AI thrive?",
+    "answer": "A) An environment with defined rules and patterns",
+    "options": [
+      "A) An environment with defined rules and patterns",
+      "B) An environment with no data",
+      "C) An environment with random chaos",
+      "D) An environment without any structure"
+    ],
+    "image": null,
+    "explanation": "AI thrives in an environment where there are defined rules and patterns that it can work with. This is where AI will seem the most 'intelligent'."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "What is Strong AI?",
+    "answer": "B) AI that acts exactly as a human would, exhibiting emotions and real creativity",
+    "options": [
+      "A) AI that can only process language",
+      "B) AI that acts exactly as a human would, exhibiting emotions and real creativity",
+      "C) AI that sorts pictures on your computer",
+      "D) AI that is limited to voice commands"
+    ],
+    "image": null,
+    "explanation": "Strong AI is AI that acts exactly as a human would, like the Terminator or Commander Data. They exhibit emotions, real creativity, and can even have a sense of purpose."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "Which of the following is an example of Weak AI?",
+    "answer": "D) All of the above (Siri, Cortana, Netflix, ChatGPT)",
+    "options": [
+      "A) Siri and Cortana",
+      "B) Netflix and Bing",
+      "C) ChatGPT",
+      "D) All of the above (Siri, Cortana, Netflix, ChatGPT)"
+    ],
+    "image": null,
+    "explanation": "Examples of Weak AI include: Siri, Cortana, Bing, Netflix, and even ChatGPT. Weak AI is confined to narrow tasks."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "How does Generative AI operate?",
+    "answer": "C) By learning patterns from large datasets and generating new content that fits those patterns",
+    "options": [
+      "A) By copying exact data from the internet",
+      "B) By randomly generating numbers",
+      "C) By learning patterns from large datasets and generating new content that fits those patterns",
+      "D) By manually typing responses from humans"
+    ],
+    "image": null,
+    "explanation": "Generative AI operates by learning patterns and structures from large datasets and then using that knowledge to produce new content that fits within those learned patterns."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "Which of the following are examples of Generative AI tools mentioned in the lecture?",
+    "answer": "B) ChatGPT, Bing, Bard, DallE",
+    "options": [
+      "A) Microsoft Word, Excel, PowerPoint",
+      "B) ChatGPT, Bing, Bard, DallE",
+      "C) Firefox, Chrome, Safari",
+      "D) Windows, macOS, Linux"
+    ],
+    "image": null,
+    "explanation": "Examples of Generative AI tools mentioned include ChatGPT, Bing, Bard, and DallE."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "What can Large Language Models (LLMs) generate?",
+    "answer": "D) Text in multiple languages and styles, and can interpret text and images",
+    "options": [
+      "A) Only English text",
+      "B) Only numerical data",
+      "C) Only images",
+      "D) Text in multiple languages and styles, and can interpret text and images"
+    ],
+    "image": null,
+    "explanation": "Large language models such as ChatGPT can generate text in multiple languages and styles. They can also interpret text and images."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "What does GPT stand for?",
+    "answer": "A) Generative Pre-trained Transformer",
+    "options": [
+      "A) Generative Pre-trained Transformer",
+      "B) General Purpose Technology",
+      "C) Graphics Processing Tool",
+      "D) Global Pattern Tracker"
+    ],
+    "image": null,
+    "explanation": "GPT stands for 'Generative Pre-trained Transformer' and is the name given to a family of natural language models developed by OpenAI."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "Which of the following is NOT a large language model mentioned in the lecture?",
+    "answer": "D) TensorFlow",
+    "options": [
+      "A) Gemini",
+      "B) LLaMA",
+      "C) Claude",
+      "D) TensorFlow"
+    ],
+    "image": null,
+    "explanation": "Large language models mentioned include GPT, Gemini, LLaMA, Claude, and DeepSeek. TensorFlow is not an LLM but a machine learning framework."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "How are LLMs trained?",
+    "answer": "C) They learn to predict the next word in a sentence from large text datasets",
+    "options": [
+      "A) By manually programming every response",
+      "B) By copying answers from the internet",
+      "C) They learn to predict the next word in a sentence from large text datasets",
+      "D) By memorizing entire books word for word"
+    ],
+    "image": null,
+    "explanation": "LLMs are trained on large text datasets to learn to predict the next word in a sentence and, from that, generate coherent and compelling responses."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "What is a Unigram language model?",
+    "answer": "B) A model that throws away all conditioning context",
+    "options": [
+      "A) A model that considers only the previous sentence",
+      "B) A model that throws away all conditioning context",
+      "C) A model that uses three words at a time",
+      "D) A model that translates between languages"
+    ],
+    "image": null,
+    "explanation": "A Unigram language model throws away all conditioning context. It is most used in Information Retrieval."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "What is a Bigram language model?",
+    "answer": "A) A model that conditions on the previous term",
+    "options": [
+      "A) A model that conditions on the previous term",
+      "B) A model that uses only one word",
+      "C) A model that ignores all context",
+      "D) A model that uses the entire document"
+    ],
+    "image": null,
+    "explanation": "A Bigram language model conditions on the previous term, unlike a Unigram model which throws away all conditioning context."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "What are the three approaches for language modelling mentioned in the lecture?",
+    "answer": "B) Sentence Correction (Denoising), Text Completion, Text Translation",
+    "options": [
+      "A) Reading, Writing, Arithmetic",
+      "B) Sentence Correction (Denoising), Text Completion, Text Translation",
+      "C) Copy, Paste, Delete",
+      "D) Create, Read, Update, Delete"
+    ],
+    "image": null,
+    "explanation": "Three approaches for language modelling: Sentence Correction (Denoising), Text Completion, and Text Translation."
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "What are the three training stages for Language Models?",
+    "answer": "C) Pre-training, Supervised Training, Reinforcement Learning",
+    "options": [
+      "A) Input, Process, Output",
+      "B) Read, Write, Execute",
+      "C) Pre-training, Supervised Training, Reinforcement Learning",
+      "D) Compile, Build, Deploy"
+    ],
+    "image": null,
+    "explanation": "Training Language Models involves three stages: Pre-training, Supervised Training, and Reinforcement Learning."
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "What are Attention Heatmaps used for in understanding LLMs?",
+    "answer": "A) To show how much each token attends to every other token within a sequence",
+    "options": [
+      "A) To show how much each token attends to every other token within a sequence",
+      "B) To measure the temperature of the computer",
+      "C) To display error messages",
+      "D) To count the number of words in a document"
+    ],
+    "image": null,
+    "explanation": "An attention heatmap shows how much each token attends to every other token within a sequence. For example, in 'The cat sat on the mat,' the heatmap might show that 'cat' heavily attends to 'sat.'"
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "What do Saliency Maps highlight in LLM visualization?",
+    "answer": "B) Which tokens have the highest gradient magnitudes with respect to a prediction",
+    "options": [
+      "A) The color scheme of the model",
+      "B) Which tokens have the highest gradient magnitudes with respect to a prediction",
+      "C) The size of the vocabulary",
+      "D) The number of layers in the model"
+    ],
+    "image": null,
+    "explanation": "In tasks like sentiment classification, saliency maps highlight which tokens have the highest gradient magnitudes with respect to a prediction, indicating which parts of the input most strongly affect the model's output."
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "What do Token Probability Plots visualize?",
+    "answer": "C) The probability distribution over vocabulary at each step of text generation",
+    "options": [
+      "A) The number of users of the model",
+      "B) The processing speed of the model",
+      "C) The probability distribution over vocabulary at each step of text generation",
+      "D) The memory usage of the model"
+    ],
+    "image": null,
+    "explanation": "When an LLM is generating text, Token Probability Plots visualize the probability distribution over the vocabulary at each step, showing which alternative tokens were close contenders to the final prediction."
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "What is LLM Code Generation capability used for in visualization?",
+    "answer": "B) Generating code to create data visualizations for image generation models",
+    "options": [
+      "A) Writing operating system code",
+      "B) Generating code to create data visualizations for image generation models",
+      "C) Creating computer viruses",
+      "D) Building hardware drivers"
+    ],
+    "image": null,
+    "explanation": "Code Writing (Code Generation) capabilities assist in generating code to create data visualizations, which are then used as input to image generation models, such as DALL-E and Latent Diffusion, to generate stylized infographics."
+  }
+]

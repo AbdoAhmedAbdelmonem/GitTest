@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What is Min-Max scaling used for?",
+    "answer": "B) Scales all features between a given min and max value (e.g., 0 and 1)",
+    "options": [
+      "A) Removes outliers from the dataset",
+      "B) Scales all features between a given min and max value (e.g., 0 and 1)",
+      "C) Calculates the mean of the dataset",
+      "D) Converts categorical data to numerical data"
+    ],
+    "image": null,
+    "explanation": "Min-Max scaling scales all features between a given min and max value (e.g., 0 and 1). It makes sense if min/max values have meaning in your data."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "What is a limitation of Min-Max scaling?",
+    "answer": "C) It is sensitive to outliers",
+    "options": [
+      "A) It cannot be applied to numerical data",
+      "B) It requires categorical variables",
+      "C) It is sensitive to outliers",
+      "D) It does not preserve the original data distribution"
+    ],
+    "image": null,
+    "explanation": "Min-Max scaling is sensitive to outliers, meaning extreme values can significantly affect the scaling result."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "What does Robust scaling do to handle outliers?",
+    "answer": "B) It subtracts the median and scales between quantiles q25 and q75",
+    "options": [
+      "A) It removes all outliers from the dataset",
+      "B) It subtracts the median and scales between quantiles q25 and q75",
+      "C) It calculates the mean and standard deviation",
+      "D) It uses the maximum and minimum values only"
+    ],
+    "image": null,
+    "explanation": "Robust scaling subtracts the median, scales between quantiles q25 and q75. The new feature has median 0, q25=-1, and q75=1. It is similar to standard scaler but ignores outliers."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "What is the key difference between visual analytics and data visualization?",
+    "answer": "A) Visual analytics combines advanced analytical techniques with interactive visualization",
+    "options": [
+      "A) Visual analytics combines advanced analytical techniques with interactive visualization",
+      "B) Data visualization requires machine learning",
+      "C) Visual analytics only uses static charts",
+      "D) Data visualization is more interactive than visual analytics"
+    ],
+    "image": null,
+    "explanation": "Visual analytics combines advanced analytical techniques with the power of data visualization, enabling users to explore complex data sets through interactive, intuitive visuals. Data visualization offers snapshots rather than deep exploration."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "What is the key advantage of visual analytics?",
+    "answer": "C) Interactivity that enables users to manipulate visuals and uncover hidden patterns",
+    "options": [
+      "A) It creates only static charts",
+      "B) It requires no user input",
+      "C) Interactivity that enables users to manipulate visuals and uncover hidden patterns",
+      "D) It eliminates the need for data preparation"
+    ],
+    "image": null,
+    "explanation": "The key advantage of visual analytics is interactivity—it enables users to manipulate the visuals, apply filters, drill into data hierarchies, and uncover hidden patterns or relationships that static charts might miss."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "According to Gartner, what percentage of businesses will move from traditional data reporting to interactive visual analytics by 2025?",
+    "answer": "B) 75%",
+    "options": [
+      "A) 50%",
+      "B) 75%",
+      "C) 90%",
+      "D) 100%"
+    ],
+    "image": null,
+    "explanation": "According to Gartner, 75% of businesses will move from traditional data reporting to interactive visual analytics by 2025."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "Visual Analytics can be described as the combination of:",
+    "answer": "A) Data visualization + Machine learning",
+    "options": [
+      "A) Data visualization + Machine learning",
+      "B) Statistics + Databases",
+      "C) Hardware + Software",
+      "D) Charts + Tables"
+    ],
+    "image": null,
+    "explanation": "Visual Analytics = Data visualization + Machine learning. It uses machine learning and other tools to automatically sort through datasets and find patterns or trends."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "Which is NOT a practical application area of visual analytics?",
+    "answer": "D) Weather forecasting without data",
+    "options": [
+      "A) Finance: Fraud detection and market trend analysis",
+      "B) Healthcare: Patient data analysis and outcome prediction",
+      "C) Cybersecurity: Threat detection and vulnerability analysis",
+      "D) Weather forecasting without data"
+    ],
+    "image": null,
+    "explanation": "Visual analytics has practical applications in Finance (fraud detection), Retail (customer segmentation), Healthcare (patient data analysis), and Cybersecurity (threat detection)."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "What is the first stage in how Visual Analytics works?",
+    "answer": "A) Data Preparation: gathering, cleaning, and organizing data",
+    "options": [
+      "A) Data Preparation: gathering, cleaning, and organizing data",
+      "B) Visual Exploration: creating scatter plots and histograms",
+      "C) Data Analysis: using machine learning models",
+      "D) Interpretation and Communication: creating dashboards"
+    ],
+    "image": null,
+    "explanation": "Data Preparation is the first stage, involving gathering, cleaning, and organizing data to ensure it's ready for analysis. Well-prepared data is the foundation for effective visual exploration."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "Which type of analytics focuses on understanding past events?",
+    "answer": "A) Descriptive analytics",
+    "options": [
+      "A) Descriptive analytics",
+      "B) Predictive analytics",
+      "C) Prescriptive analytics",
+      "D) Real-time analytics"
+    ],
+    "image": null,
+    "explanation": "Descriptive analytics is dedicated to the meticulous study of events that have already taken place, aiming to dissect the root cause and gain useful knowledge from past performance."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "Which type of analytics uses historical data to forecast future outcomes?",
+    "answer": "B) Predictive analytics",
+    "options": [
+      "A) Descriptive analytics",
+      "B) Predictive analytics",
+      "C) Prescriptive analytics",
+      "D) Retrospective analytics"
+    ],
+    "image": null,
+    "explanation": "Predictive analytics uses historical data to identify patterns and behaviors, allowing organizations to plan proactively for future scenarios and make data-driven predictions."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "Prescriptive analytics helps organizations to:",
+    "answer": "C) Learn from past events to shape future strategies and improve performance",
+    "options": [
+      "A) Only describe what happened in the past",
+      "B) Predict stock market prices with 100% accuracy",
+      "C) Learn from past events to shape future strategies and improve performance",
+      "D) Eliminate the need for human decision-making"
+    ],
+    "image": null,
+    "explanation": "Prescriptive analytics strives to unlock the potential for companies to improve overall performance and profitability by learning from past events to shape future tactics and strategies."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "In a visual analytics dashboard, what does 'brushing' on a scatter plot allow you to do?",
+    "answer": "B) Highlight specific data points to reveal patterns",
+    "options": [
+      "A) Delete unwanted data points",
+      "B) Highlight specific data points to reveal patterns",
+      "C) Change the color scheme of the chart",
+      "D) Export data to a spreadsheet"
+    ],
+    "image": null,
+    "explanation": "Brushing on a scatter plot allows users to highlight specific points (like high-price, low-sales products) to reveal patterns that are not visible in static charts."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "In the IT System Assessment case study, what did the visual analytics reveal about team structure?",
+    "answer": "B) Most critical change-requests were focused in one team with communication problems",
+    "options": [
+      "A) All teams worked equally on all modules",
+      "B) Most critical change-requests were focused in one team with communication problems",
+      "C) The smallest team handled the most complex tasks",
+      "D) Teams never modified the same code files"
+    ],
+    "image": null,
+    "explanation": "The visual analytics revealed that most critical change-requests were focused in one team (Team A), and this team was reported to have deadline delays and communication problems."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "What is 'The Sensemaking Loop' in Visual Analytics?",
+    "answer": "A) Going from raw data to meaning through hypothesis validation and conclusions",
+    "options": [
+      "A) Going from raw data to meaning through hypothesis validation and conclusions",
+      "B) A process of creating colorful charts",
+      "C) A method for deleting irrelevant data",
+      "D) A technique for encrypting sensitive information"
+    ],
+    "image": null,
+    "explanation": "The Sensemaking Loop involves going from 'raw' data to meaning (semantics), through data hypothesis (in)validation to conclusions. In simple terms: combine analysis and visualization."
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "Which visualization type is best for analyzing sales trends over time?",
+    "answer": "C) Line Chart",
+    "options": [
+      "A) Pie Chart",
+      "B) Scatter Plot",
+      "C) Line Chart",
+      "D) Treemap"
+    ],
+    "image": null,
+    "explanation": "Line Chart is used for showing changes over time, such as sales trends over 60 days, where users can hover to see exact values and zoom into specific periods."
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "In the customer satisfaction case study, what was identified as the strongest factor affecting satisfaction?",
+    "answer": "B) Long waiting time",
+    "options": [
+      "A) Customer age",
+      "B) Long waiting time",
+      "C) Product color",
+      "D) Store location size"
+    ],
+    "image": null,
+    "explanation": "The visual analytics revealed that long waiting time is the strongest factor affecting satisfaction, with a clear downward trend: longer waiting time leads to lower satisfaction."
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "What does high code complexity (average complexity/function > 20) indicate according to the case study?",
+    "answer": "A) Testing can be hard and this might cause product problems",
+    "options": [
+      "A) Testing can be hard and this might cause product problems",
+      "B) The code is perfectly optimized",
+      "C) The team is very productive",
+      "D) Documentation is not needed"
+    ],
+    "image": null,
+    "explanation": "Average complexity/function > 20 indicates that testing can be hard. Total complexity was up 20% in R1.3, which was identified as a possible cause of the product's problems."
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "Which is NOT a feature of a visual analytics tool?",
+    "answer": "D) Automatic data deletion without user consent",
+    "options": [
+      "A) User-friendly interface and interactivity",
+      "B) Data connectivity and customizable dashboards",
+      "C) Security and permissions control",
+      "D) Automatic data deletion without user consent"
+    ],
+    "image": null,
+    "explanation": "Features of a visual analytics tool include: User-friendly interface, Interactivity, Data connectivity, Customizable dashboards, Advanced analytics capabilities, Collaboration features, Security and permissions control, and Scalability."
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "When clicking on a bar in a bar chart in an interactive dashboard, what should happen to other visualizations?",
+    "answer": "B) Other visualizations should filter and update to show only data related to that selection",
+    "options": [
+      "A) Nothing changes in other visualizations",
+      "B) Other visualizations should filter and update to show only data related to that selection",
+      "C) All other charts should be deleted",
+      "D) The dashboard should close"
+    ],
+    "image": null,
+    "explanation": "When the manager clicks on a bar (e.g., 'Electronics'), the other visualizations should update to show only data related to that category, allowing for cross-filtering and deeper analysis."
+  }
+]
