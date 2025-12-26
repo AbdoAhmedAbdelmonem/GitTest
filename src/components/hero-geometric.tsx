@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion"
 import { Pacifico } from "next/font/google"
 import Image from "next/image"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { useMemo } from "react"
 
@@ -25,15 +26,10 @@ export default function HeroGeometric({
 
   const fadeUpVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 30 },
-    visible: (i: number) => ({
+    visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        delay: 0.3 + i * 0.15,
-        ease: "easeInOut",
-      },
-    }),
+    },
   }), []);
 
   const animationSettings = prefersReducedMotion ? { animate: "visible" } : { initial: "hidden", animate: "visible" };
@@ -54,12 +50,33 @@ export default function HeroGeometric({
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center">
+          {/* 2025 Recap Banner */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-3 md:mb-4 -mt-12"
+          >
+            <Link href="/recap" className="inline-block hover:scale-105 transition-transform duration-300">
+              <Image 
+                src="/images/recap-2025-logo.png" 
+                alt="2025 Recap" 
+                width={180} 
+                height={90}
+                className="object-contain"
+                priority
+                unoptimized
+              />
+            </Link>
+          </motion.div>
+
           <motion.div
             custom={0}
             variants={fadeUpVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12"
           >
             <Image 
@@ -74,7 +91,7 @@ export default function HeroGeometric({
             <span className="text-sm text-white/60 tracking-wide">{badge}</span>
           </motion.div>
 
-          <motion.div custom={1} variants={fadeUpVariants} {...animationSettings}>
+          <motion.div custom={1} variants={fadeUpVariants} {...animationSettings} transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}>
             <h1 className="text-[65px] md:text-[120px] font-bold mb-6 md:mb-8 tracking-tight leading-tight">
               <span className="text-white">
                 {title1}
@@ -89,7 +106,7 @@ export default function HeroGeometric({
             </h1>
           </motion.div>
 
-          <motion.div custom={2} variants={fadeUpVariants} {...animationSettings}>
+          <motion.div custom={2} variants={fadeUpVariants} {...animationSettings} transition={{ duration: 0.8, ease: "easeInOut", delay: 0.4 }}>
             <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
               Transforming ideas into vibrant digital experiences, adapting seamlessly like a chameleon to every challenge and vision.
             </p>
