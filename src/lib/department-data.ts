@@ -999,7 +999,7 @@ export const departmentData: { [key: string]: Department } = {
                   },
                   {
                     id: "VIS_STAR",
-                    name: "Data Vision",
+                    name: "Fully Data Visualization Revision",
                     code: "VIS_STAR",
                     duration: "OP", // in minutes
                     questions: 140,
@@ -6569,6 +6569,7 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
 
 
 
