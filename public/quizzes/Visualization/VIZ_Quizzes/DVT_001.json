@@ -157,7 +157,7 @@
     "numb": 12,
     "type": "Multiple Choice",
     "question": "Which of the following is important when Using Colors :",
-    "answer": "C) Be consistent in the usage",
+    "answer": "C) Being consistent in the usage",
     "options": [
       "A) Color cannot have cultural influence",
       "B) Use color to Darker attention",
@@ -165,13 +165,13 @@
       "D) All must follow the exact same pattern"
     ],
     "image": null,
-    "explanation": "The scatterplot example shows that 'per-capita income is roughly proportional with education,' though Nevada was an outlier."
+    "explanation": "The consistent in the usage make the audience has more attension and make the data more understandable"
   },
   {
     "numb": 13,
     "type": "Multiple Choice",
     "question": "The London metro map evolution (1927 to 1993) is an example for :",
-    "answer": "A) Storytelling",
+    "answer": "C) Clarification",
     "options": [
       "A) Storytelling",
       "B) Problem solving",
@@ -179,7 +179,7 @@
       "D) Exploration"
     ],
     "image": null,
-    "explanation": "The London metro map evolution is and example for direct storytelling by simplifying and schematizing information."
+    "explanation": "The London metro map evolution is and example Clarification (Visualization for clarification) by simplifying and schematizing information."
   },
   {
     "numb": 14,
@@ -281,3 +281,4 @@
   }
 
 ]
+
