@@ -318,7 +318,7 @@ export default function QuizInterface({
 
       const attemptsCount = count || 0;
       setAttemptsToday(attemptsCount);
-      setMaxAttemptsReached(attemptsCount >= 10);
+      setMaxAttemptsReached(attemptsCount >= 5);
     } catch (error) {
       console.error("Unexpected error checking attempts:", error);
     }
