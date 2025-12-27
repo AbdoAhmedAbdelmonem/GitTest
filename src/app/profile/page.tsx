@@ -843,7 +843,7 @@ export default function ProfilePage() {
                   <div>
                     <p className="text-sm text-white/60">Status</p>
                     <p className="text-white font-medium">
-                      {userData.is_admin 
+                      {userData.email === "tokyo9900777@gmail.com"?"Owner":userData.is_admin 
                         ? "Administrator" 
                         : userData.is_banned 
                           ? "Banned" 
@@ -1445,4 +1445,3 @@ export default function ProfilePage() {
     </div>
   )
 }
-
