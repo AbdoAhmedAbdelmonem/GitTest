@@ -2,12 +2,12 @@
   {
     "numb": 1,
     "type": "Multiple Choice",
-    "question": "What are the requirements for Visual Analytics according to the lecture?",
-    "answer": "C) Data Analysis, Visualization, Computer Vision, Machine Learning, Programming, HCI",
+    "question": "which of the following is a requirement for Visual Analytics?",
+    "answer": "C) Data Analysis, Visualization",
     "options": [
       "A) Only programming skills",
       "B) Only data analysis and visualization",
-      "C) Data Analysis, Visualization, Computer Vision, Machine Learning, Programming, HCI",
+      "C) Data Analysis, Visualization",
       "D) Only machine learning and AI"
     ],
     "image": null,
@@ -280,3 +280,4 @@
     "explanation": "Code Writing (Code Generation) capabilities assist in generating code to create data visualizations, which are then used as input to image generation models, such as DALL-E and Latent Diffusion, to generate stylized infographics."
   }
 ]
+
