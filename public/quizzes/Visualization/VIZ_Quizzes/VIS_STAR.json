@@ -165,7 +165,7 @@
       "D) Black"
     ],
     "image": null,
-    "explanation": "The lecture explains: 'saturation: strong color (s=1), grayish color (0<s<1) or gray (s=0).'"
+    "explanation": "'saturation: strong color (s=1), grayish color (0<s<1) or gray (s=0).'"
   },
   {
     "numb": 13,
@@ -263,7 +263,7 @@
       "D) They are too expensive to produce"
     ],
     "image": null,
-    "explanation": "The lecture states: 'Complex visuals will confuse the audience and distract them from the point of the presentation.'"
+    "explanation": "'Complex visuals will confuse the audience and distract them from the point of the presentation.'"
   },
   {
     "numb": 20,
@@ -333,7 +333,7 @@
       "D) Data only in numerical formats"
     ],
     "image": null,
-    "explanation": "The lecture states that 'in 2010-2012, the humanity has created more data than it has previously in its history.'"
+    "explanation": "'in 2010-2012, the humanity has created more data than it has previously in its history.'"
   },
   {
     "numb": 25,
@@ -361,7 +361,7 @@
       "D) Color theory"
     ],
     "image": null,
-    "explanation": "The lecture emphasizes: 'Prior to doing any storytelling or analysis, it is critical to understand your data and its limitations.'"
+    "explanation": "'Prior to doing any storytelling or analysis, it is critical to understand your data and its limitations.'"
   },
   {
     "numb": 27,
@@ -375,7 +375,7 @@
       "D) What is missing from the data?"
     ],
     "image": null,
-    "explanation": "The lecture asks about collection methods, sources, and missing data, but does not mention the cost of data."
+    "explanation": "The Doctor asks about collection methods, sources, and missing data, but does not mention the cost of data."
   },
   {
     "numb": 28,
@@ -417,7 +417,7 @@
       "D) 2D data cannot be visualized"
     ],
     "image": null,
-    "explanation": "The lecture asks 'What is harder to visualize' and shows that 100 samples × 10 attributes presents 'many chart kinds, many problems' while 1000 samples × 1 attribute works well with 1D graphs."
+    "explanation": "'What is harder to visualize' and shows that 100 samples × 10 attributes presents 'many chart kinds, many problems' while 1000 samples × 1 attribute works well with 1D graphs."
   },
   {
     "numb": 31,
@@ -487,7 +487,7 @@
       "D) Background elements"
     ],
     "image": null,
-    "explanation": "The lecture states: 'Darker/brighter colors will read as \"more\".'"
+    "explanation": "'Darker/brighter colors will read as \"more\".'"
   },
   {
     "numb": 36,
@@ -501,7 +501,7 @@
       "D) At 12 o'clock"
     ],
     "image": null,
-    "explanation": "The lecture states: 'Largest section at 12 o'clock and place remaining sections in descending order, going clockwise.'"
+    "explanation": "'Largest section at 12 o'clock and place remaining sections in descending order, going clockwise.'"
   },
   {
     "numb": 37,
@@ -529,7 +529,7 @@
       "D) It improves saturation"
     ],
     "image": null,
-    "explanation": "The lecture explains: 'black: not needed strictly speaking, but used since it's cheaper than mixing colored inks.'"
+    "explanation": "'black: not needed strictly speaking, but used since it's cheaper than mixing colored inks.'"
   },
   {
     "numb": 39,
@@ -571,7 +571,7 @@
       "D) Only temporal data "
     ],
     "image": null,
-    "explanation": "The lecture states: 'structure (organization charts showing parent/child relations) can be visualized without color.'"
+    "explanation": "'structure (organization charts showing parent/child relations) can be visualized without color.'"
   },
   {
     "numb": 42,
@@ -725,7 +725,7 @@
       "D) Transparent"
     ],
     "image": null,
-    "explanation": "The lecture states: 'value: luminance; white (v=1), dark (0<v<1), or black (v=0).'"
+    "explanation": "'value: luminance; white (v=1), dark (0<v<1), or black (v=0).'"
   },
   {
     "numb": 53,
@@ -739,7 +739,7 @@
       "D) Date and time"
     ],
     "image": null,
-    "explanation": "The lecture states: 'Can use title text for takeaway message' and demonstrates this with 'Put the Key Message Right in the Title.'"
+    "explanation": "'Can use title text for takeaway message' and demonstrates this with 'Put the Key Message Right in the Title.'"
   },
   {
     "numb": 54,
@@ -795,7 +795,7 @@
       "D) Intersecting lines"
     ],
     "image": null,
-    "explanation": "The lecture reveals: 'Fraser's spiral... is not a spiral, but a set of circles!'"
+    "explanation": "'Fraser's spiral... is not a spiral, but a set of circles!'"
   },
   {
     "numb": 58,
@@ -856,7 +856,7 @@
   {
     "numb": 62,
     "type": "Multiple Choice",
-    "question": "Which of the following are examples of Generative AI tools mentioned in the lecture?",
+    "question": "Which of the following are examples of Generative AI tools?",
     "answer": "B) ChatGPT, Bing, Bard, DallE",
     "options": [
       "A) Microsoft Word, Excel, PowerPoint",
@@ -921,7 +921,7 @@
       "D) Input and output"
     ],
     "image": null,
-    "explanation": "The lecture explicitly identifies two bottlenecks: 'low-level vision: must know how the eye sees colors, contrasts, textures' and 'high-level sensemaking: must know how the brain assigns meaning to shapes.'"
+    "explanation": "The Doctor explicitly identifies two bottlenecks: 'low-level vision: must know how the eye sees colors, contrasts, textures' and 'high-level sensemaking: must know how the brain assigns meaning to shapes.'"
   },
   {
     "numb": 67,
@@ -1024,7 +1024,7 @@
   {
     "numb": 74,
     "type": "Multiple Choice",
-    "question": "Which of the following is NOT a large language model mentioned in the lecture?",
+    "question": "Which of the following is NOT a large language model?",
     "answer": "D) TensorFlow",
     "options": [
       "A) Gemini",
@@ -1159,7 +1159,7 @@
       "D) Use 3D and animations"
     ],
     "image": null,
-    "explanation": "The lecture explicitly states the two design criteria: 'Tell the truth and nothing but the truth (don't lie, and don't lie by omission)' and 'Use encodings that people decode better (where better = faster and/or more accurate).'"
+    "explanation": "The Doctor explicitly states the two design criteria: 'Tell the truth and nothing but the truth (don't lie, and don't lie by omission)' and 'Use encodings that people decode better (where better = faster and/or more accurate).'"
   },
   {
     "numb": 84,
@@ -1276,7 +1276,7 @@
   {
     "numb": 92,
     "type": "Multiple Choice",
-    "question": "What are the three approaches for language modelling mentioned in the lecture?",
+    "question": "What are the three approaches for language modelling?",
     "answer": "B) Sentence Correction (Denoising), Text Completion, Text Translation",
     "options": [
       "A) Reading, Writing, Arithmetic",
@@ -1299,7 +1299,7 @@
       "D) Three related values like wind speed"
     ],
     "image": null,
-    "explanation": "The lecture explicitly states that 1D data values represent 'a single value (e.g. temperature, pressure, height)' and are called scalar."
+    "explanation": "The Doctor explicitly states that 1D data values represent 'a single value (e.g. temperature, pressure, height)' and are called scalar."
   },
   {
     "numb": 94,
@@ -1369,7 +1369,7 @@
       "D) Intensity"
     ],
     "image": null,
-    "explanation": "The lecture states: 'frequency: controls the hue, or tint, of the color.'افتكر التردد من 390 لـ 700 نانوميتر"
+    "explanation": "'frequency: controls the hue, or tint, of the color.'افتكر التردد من 390 لـ 700 نانوميتر"
   },
   {
     "numb": 99,
@@ -1411,12 +1411,12 @@
       "D) Whether they are skeptics"
     ],
     "image": null,
-    "explanation": "The lecture lists many audience considerations (where they're from, demographics, whether they're skeptics, etc.) but does not mention their favorite color."
+    "explanation": "The Doctor lists many audience considerations (where they're from, demographics, whether they're skeptics, etc.) but does not mention their favorite color."
   },
   {
     "numb": 102,
     "type": "Multiple Choice",
-    "question": "What are the requirements for Visual Analytics according to the lecture?",
+    "question": "What are the requirements for Visual Analytics?",
     "answer": "C) Data Analysis, Visualization, Computer Vision, Machine Learning, Programming, HCI",
     "options": [
       "A) Only programming skills",
@@ -1467,7 +1467,7 @@
       "D) Digital and analog"
     ],
     "image": null,
-    "explanation": "The lecture distinguishes between quantitative questions (precise, numerical) and qualitative questions (vague, exploratory)."
+    "explanation": "Doctor distinguishes between quantitative questions (precise, numerical) and qualitative questions (vague, exploratory)."
   },
   {
     "numb": 106,
@@ -1663,7 +1663,7 @@
       "D) Unknown"
     ],
     "image": null,
-    "explanation": "Under societal connotations, the lecture states 'Red= bad' and 'Green= good.'"
+    "explanation": "Under societal connotations 'Red= bad' and 'Green= good.'"
   },
   {
     "numb": 120,
@@ -1677,7 +1677,7 @@
       "D) Hue"
     ],
     "image": null,
-    "explanation": "The lecture states: 'amplitude: controls the brightness, or intensity, of the color.'"
+    "explanation": "'amplitude: controls the brightness, or intensity, of the color.'"
   },
   {
     "numb": 121,
@@ -1901,7 +1901,7 @@
       "D) From 20 seconds to 15 seconds"
     ],
     "image": null,
-    "explanation": "The lecture states: 'Attention span has FALLEN from 12 seconds in 2000 to 8 seconds in 2015.'"
+    "explanation": "'Attention span has FALLEN from 12 seconds in 2000 to 8 seconds in 2015.'"
   },
   {
     "numb": 137,
@@ -1915,7 +1915,7 @@
       "D) All primary colors"
     ],
     "image": null,
-    "explanation": "The lecture states: 'diagonal BW: all gray values' where B is black and W is white."
+    "explanation": "'diagonal BW: all gray values' where B is black and W is white."
   },
   {
     "numb": 138,
