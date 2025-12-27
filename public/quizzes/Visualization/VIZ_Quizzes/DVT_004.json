@@ -190,7 +190,7 @@
       "A) The entire screen should be filled",
       "B) All data must be visible at once",
       "C) Multiple colors per data point",
-      "D) Any visual variable-value should map to a data value",
+      "D) Any visual variable-value should map to a data value"
     ],
     "image": null,
     "explanation": "Coverage means: 'any visual variable-value maps to a data value' ensuring all colors in the visualization have meaning."
@@ -279,5 +279,5 @@
     "image": null,
     "explanation": "iCAM is: 'A color appearance model describing how humans perceive color... accounting for image-specific phenomena like chromatic adaptation.'"
   }
-
 ]
+
