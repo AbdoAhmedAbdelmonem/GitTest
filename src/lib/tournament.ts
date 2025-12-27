@@ -51,12 +51,12 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
     let currentUserId: number | null = null
     let currentUsername: string | null = null
 
-    if (!authError && user) {
-      // Get user profile from chameleons table
+    if (!authError && user && user.email) {
+      // Get user profile from chameleons table using email (this is how the auth system links users)
       const { data: userProfile, error: profileError } = await supabase
         .from("chameleons")
         .select("user_id, username, profile_image")
-        .eq("user_id", user.id)
+        .eq("email", user.email)
         .single()
 
       if (!profileError && userProfile) {
@@ -260,18 +260,26 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
         isCurrentUser: user.userId === currentUserId
       }))
 
-    // Find current user entry if not in top 10
+    // Always find and return the current user's entry if they have participated
+    // This ensures the frontend always has access to the current user's data
     let currentUserEntry: LeaderboardEntry | undefined
-    if (currentUserId && currentUsername && !sortedUsers.some(u => u.isCurrentUser)) {
-      const currentUserData = userTotalScores.get(currentUserId)
-      if (currentUserData) {
-        currentUserEntry = {
-          id: currentUserData.userId,
-          name: currentUserData.username,
-          profile_image: currentUserData.profile_image,
-          specialization: currentUserData.specialization,
-          points: currentUserData.totalPoints,
-          isCurrentUser: true
+    if (currentUserId && currentUsername) {
+      // First check if user is in the top 10
+      const userInTop10 = sortedUsers.find(u => u.isCurrentUser)
+      if (userInTop10) {
+        currentUserEntry = userInTop10
+      } else {
+        // User not in top 10, but may have participated
+        const currentUserData = userTotalScores.get(currentUserId)
+        if (currentUserData) {
+          currentUserEntry = {
+            id: currentUserData.userId,
+            name: currentUserData.username,
+            profile_image: currentUserData.profile_image,
+            specialization: currentUserData.specialization,
+            points: currentUserData.totalPoints,
+            isCurrentUser: true
+          }
         }
       }
     }
