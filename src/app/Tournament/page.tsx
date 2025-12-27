@@ -292,9 +292,14 @@ export default function TournamentPage() {
     }
 
     // If showCurrentUserOnly is true and we have current user data, show only current user
-    if (showCurrentUserOnly && currentUserEntry) {
+    // Find current user either from currentUserEntry (for users not in top 10)
+    // or from the leaderboard data itself (for users in top 10)
+    const currentUserFromLeaderboard = data.find((player) => player.isCurrentUser);
+    const effectiveCurrentUser = currentUserEntry || currentUserFromLeaderboard;
+    
+    if (showCurrentUserOnly && effectiveCurrentUser) {
       const actualRank =
-        data.findIndex((player) => player.id === currentUserEntry.id) + 1;
+        data.findIndex((player) => player.id === effectiveCurrentUser.id) + 1;
       return (
         <div className="space-y-3 md:space-y-4">
           <div className="text-center mb-4">
@@ -307,11 +312,37 @@ export default function TournamentPage() {
             </p>
           </div>
           {renderLeaderboardItem(
-            currentUserEntry,
+            effectiveCurrentUser,
             actualRank - 1,
             true,
             actualRank
           )}
+        </div>
+      );
+    }
+    
+    // If showCurrentUserOnly is true but no user is logged in or hasn't participated
+    if (showCurrentUserOnly && !effectiveCurrentUser) {
+      return (
+        <div className="space-y-3 md:space-y-4">
+          <div className="text-center py-8">
+            <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/30 px-3 py-1 text-xs md:text-sm mb-4">
+              <Eye className="w-3 h-3 md:w-4 md:h-4 mr-1" />
+              No Rank Found
+            </Badge>
+            <p className="text-white/60 text-sm mt-2">
+              You haven&apos;t participated in this level&apos;s tournament yet.
+            </p>
+            <p className="text-white/40 text-xs mt-1">
+              Complete a quiz at this level to join the leaderboard!
+            </p>
+            <button
+              onClick={() => setShowCurrentUserOnly(false)}
+              className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 text-white/80 rounded-lg text-sm transition-all duration-300"
+            >
+              View Full Leaderboard
+            </button>
+          </div>
         </div>
       );
     }
@@ -1319,5 +1350,3 @@ export default function TournamentPage() {
     </div>
   );
 }
-
-
