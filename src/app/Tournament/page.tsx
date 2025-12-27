@@ -1021,6 +1021,113 @@ export default function TournamentPage() {
               </CardHeader>
               <CardContent className="space-y-4 md:space-y-6 text-white/80 p-3 md:p-6">
                 <div className="space-y-3 md:space-y-4">
+                  {/* Current Leaders Section */}
+                  <div className="p-3 md:p-4 bg-gradient-to-r from-yellow-500/10 to-amber-500/10 rounded-lg border border-yellow-500/20">
+                    <h3 className="font-semibold text-yellow-400 flex items-center gap-2 mb-3 text-sm md:text-base">
+                      <Trophy className="w-3 h-3 md:w-4 md:h-4" /> Our Current Ultimate Leaders
+                    </h3>
+                    <div className="space-y-2">
+                      {/* Level 1 Leader */}
+                      <div className="flex items-center gap-3 bg-white/5 rounded-lg p-2 border border-blue-500/20">
+                        <span className="text-blue-400 text-xs font-bold min-w-[50px]">Level 1</span>
+                        {leaderboardLevel1[0] ? (
+                          <div className="flex items-center gap-2 flex-1">
+                            {leaderboardLevel1[0].profile_image ? (
+                              <Image
+                                src={leaderboardLevel1[0].profile_image}
+                                alt={leaderboardLevel1[0].name}
+                                width={24}
+                                height={24}
+                                unoptimized
+                                className="w-6 h-6 rounded-full border border-yellow-400/50"
+                              />
+                            ) : (
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                                <span className="text-white text-xs font-bold">
+                                  {leaderboardLevel1[0].name.charAt(0).toUpperCase()}
+                                </span>
+                              </div>
+                            )}
+                            <span className="text-white text-xs md:text-sm font-medium truncate flex-1">
+                              {leaderboardLevel1[0].name}
+                            </span>
+                            <span className="text-yellow-400 text-xs font-bold">
+                              {leaderboardLevel1[0].points} pts
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-white/40 text-xs">Loading...</span>
+                        )}
+                      </div>
+                      
+                      {/* Level 2 Leader */}
+                      <div className="flex items-center gap-3 bg-white/5 rounded-lg p-2 border border-purple-500/20">
+                        <span className="text-purple-400 text-xs font-bold min-w-[50px]">Level 2</span>
+                        {leaderboardLevel2[0] ? (
+                          <div className="flex items-center gap-2 flex-1">
+                            {leaderboardLevel2[0].profile_image ? (
+                              <Image
+                                src={leaderboardLevel2[0].profile_image}
+                                alt={leaderboardLevel2[0].name}
+                                width={24}
+                                height={24}
+                                unoptimized
+                                className="w-6 h-6 rounded-full border border-yellow-400/50"
+                              />
+                            ) : (
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                                <span className="text-white text-xs font-bold">
+                                  {leaderboardLevel2[0].name.charAt(0).toUpperCase()}
+                                </span>
+                              </div>
+                            )}
+                            <span className="text-white text-xs md:text-sm font-medium truncate flex-1">
+                              {leaderboardLevel2[0].name}
+                            </span>
+                            <span className="text-yellow-400 text-xs font-bold">
+                              {leaderboardLevel2[0].points} pts
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-white/40 text-xs">Loading...</span>
+                        )}
+                      </div>
+                      
+                      {/* Level 3 Leader */}
+                      <div className="flex items-center gap-3 bg-white/5 rounded-lg p-2 border border-orange-500/20">
+                        <span className="text-orange-400 text-xs font-bold min-w-[50px]">Level 3</span>
+                        {leaderboardLevel3[0] ? (
+                          <div className="flex items-center gap-2 flex-1">
+                            {leaderboardLevel3[0].profile_image ? (
+                              <Image
+                                src={leaderboardLevel3[0].profile_image}
+                                alt={leaderboardLevel3[0].name}
+                                width={24}
+                                height={24}
+                                unoptimized
+                                className="w-6 h-6 rounded-full border border-yellow-400/50"
+                              />
+                            ) : (
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                                <span className="text-white text-xs font-bold">
+                                  {leaderboardLevel3[0].name.charAt(0).toUpperCase()}
+                                </span>
+                              </div>
+                            )}
+                            <span className="text-white text-xs md:text-sm font-medium truncate flex-1">
+                              {leaderboardLevel3[0].name}
+                            </span>
+                            <span className="text-yellow-400 text-xs font-bold">
+                              {leaderboardLevel3[0].points} pts
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-white/40 text-xs">Loading...</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="p-3 md:p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20">
                     <h3 className="font-semibold text-green-400 flex items-center gap-2 mb-1 md:mb-2 text-sm md:text-base">
                       <Crown className="w-3 h-3 md:w-4 md:h-4" /> Victory
@@ -1350,4 +1457,3 @@ export default function TournamentPage() {
     </div>
   );
 }
-
