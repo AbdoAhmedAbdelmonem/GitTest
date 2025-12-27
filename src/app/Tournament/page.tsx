@@ -388,7 +388,7 @@ export default function TournamentPage() {
               </div>
               <div className="relative bg-[#030303] px-4">
                 <span className="text-white/40 text-xs">
-                  ... and {data.length - 10} more competitors
+                  ... and 893 more competitors
                 </span>
               </div>
             </div>
@@ -1350,3 +1350,4 @@ export default function TournamentPage() {
     </div>
   );
 }
+
