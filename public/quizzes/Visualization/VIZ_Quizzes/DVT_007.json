@@ -100,7 +100,7 @@
   {
     "numb": 8,
     "type": "Multiple Choice",
-    "question": "Which of the following are examples of Generative AI tools mentioned in the lecture?",
+    "question": "Which of the following are examples of Generative AI tools?",
     "answer": "B) ChatGPT, Bing, Bard, DallE",
     "options": [
       "A) Microsoft Word, Excel, PowerPoint",
@@ -142,7 +142,7 @@
   {
     "numb": 11,
     "type": "Multiple Choice",
-    "question": "Which of the following is NOT a large language model mentioned in the lecture?",
+    "question": "Which of the following is NOT a large language model?",
     "answer": "D) TensorFlow",
     "options": [
       "A) Gemini",
@@ -198,10 +198,10 @@
   {
     "numb": 15,
     "type": "Multiple Choice",
-    "question": "What are the three approaches for language modelling mentioned in the lecture?",
+    "question": "What are the three approaches for language modelling?",
     "answer": "B) Sentence Correction (Denoising), Text Completion, Text Translation",
     "options": [
-      "A) Reading, Writing, Arithmetic",
+      "A) Reading the Document Carefully, Writing Prompets, Arithmetic Operations on Proccesses",
       "B) Sentence Correction (Denoising), Text Completion, Text Translation",
       "C) Copy, Paste, Delete",
       "D) Create, Read, Update, Delete"
@@ -227,9 +227,9 @@
     "numb": 17,
     "type": "Multiple Choice",
     "question": "What are Attention Heatmaps used for in understanding LLMs?",
-    "answer": "A) To show how much each token attends to every other token within a sequence",
+    "answer": "A) To show how much each token attends",
     "options": [
-      "A) To show how much each token attends to every other token within a sequence",
+      "A) To show how much each token attends",
       "B) To measure the temperature of the computer",
       "C) To display error messages",
       "D) To count the number of words in a document"
@@ -255,11 +255,11 @@
     "numb": 19,
     "type": "Multiple Choice",
     "question": "What do Token Probability Plots visualize?",
-    "answer": "C) The probability distribution over vocabulary at each step of text generation",
+    "answer": "C) The probability distribution over vocabulary",
     "options": [
       "A) The number of users of the model",
       "B) The processing speed of the model",
-      "C) The probability distribution over vocabulary at each step of text generation",
+      "C) The probability distribution over vocabulary",
       "D) The memory usage of the model"
     ],
     "image": null,
@@ -269,10 +269,10 @@
     "numb": 20,
     "type": "Multiple Choice",
     "question": "What is LLM Code Generation capability used for in visualization?",
-    "answer": "B) Generating code to create data visualizations for image generation models",
+    "answer": "B) Generating code to create data visualizations",
     "options": [
-      "A) Writing operating system code",
-      "B) Generating code to create data visualizations for image generation models",
+      "A) Writing operating system code for more details",
+      "B) Generating code to create data visualizations",
       "C) Creating computer viruses",
       "D) Building hardware drivers"
     ],
@@ -280,4 +280,5 @@
     "explanation": "Code Writing (Code Generation) capabilities assist in generating code to create data visualizations, which are then used as input to image generation models, such as DALL-E and Latent Diffusion, to generate stylized infographics."
   }
 ]
+
 
