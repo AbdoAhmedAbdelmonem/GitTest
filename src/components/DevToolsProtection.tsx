@@ -97,6 +97,7 @@ function ContextMenuPortal({ x, y, onCopy, onClose }: { x: number; y: number; on
 
 export default function DevToolsProtection() {
   const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
+  const [selectedText, setSelectedText] = useState<string>('');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -105,18 +106,27 @@ export default function DevToolsProtection() {
 
   const handleCopy = async () => {
     try {
-      const selection = window.getSelection();
-      if (selection && selection.toString()) {
-        await navigator.clipboard.writeText(selection.toString());
+      if (selectedText) {
+        await navigator.clipboard.writeText(selectedText);
       }
     } catch {
-      document.execCommand('copy');
+      // Fallback: try to get current selection
+      const selection = window.getSelection();
+      if (selection && selection.toString()) {
+        try {
+          await navigator.clipboard.writeText(selection.toString());
+        } catch {
+          document.execCommand('copy');
+        }
+      }
     }
     setContextMenu(null);
+    setSelectedText('');
   };
 
   const handleClose = () => {
     setContextMenu(null);
+    setSelectedText('');
   };
 
   useEffect(() => {
@@ -129,7 +139,11 @@ export default function DevToolsProtection() {
       
       // Only show menu if there's text selected
       const selection = window.getSelection();
-      if (selection && selection.toString().trim().length > 0) {
+      const text = selection?.toString().trim() || '';
+      if (text.length > 0) {
+        // Save the selected text before showing menu
+        setSelectedText(text);
+        
         // Calculate position to keep menu in viewport
         const x = Math.min(e.clientX, window.innerWidth - 140);
         const y = Math.min(e.clientY, window.innerHeight - 50);
@@ -140,13 +154,17 @@ export default function DevToolsProtection() {
     };
 
     // 2. Auto-show menu when text is selected
-    const handleMouseUp = (e: MouseEvent) => {
+    const handleMouseUp = () => {
       // Small delay to ensure selection is complete
       setTimeout(() => {
         const selection = window.getSelection();
-        if (selection && selection.toString().trim().length > 0) {
+        const text = selection?.toString().trim() || '';
+        if (text.length > 0) {
+          // Save the selected text
+          setSelectedText(text);
+          
           // Get the selection's bounding rectangle
-          const range = selection.getRangeAt(0);
+          const range = selection!.getRangeAt(0);
           const rect = range.getBoundingClientRect();
           
           // Position menu near the end of selection
@@ -163,6 +181,7 @@ export default function DevToolsProtection() {
       const selection = window.getSelection();
       if (!selection || selection.toString().trim().length === 0) {
         setContextMenu(null);
+        setSelectedText('');
       }
     };
 
