@@ -2,7 +2,7 @@
   {
     "numb": 1,
     "type": "Multiple Choice",
-    "question": "What are the two fundamental design criteria for data visualization?",
+    "question": "Which of the following is a fundamental design criteria for data visualization?",
     "answer": "B) Tell the truth",
     "options": [
       "A) Use bright colors and large fonts",
@@ -280,4 +280,5 @@
     "explanation": "iCAM is: 'A color appearance model describing how humans perceive color... accounting for image-specific phenomena like chromatic adaptation.'"
   }
 ]
+
 
