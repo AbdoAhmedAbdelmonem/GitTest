@@ -1,7 +1,7 @@
 // Define arrays of prefixes for each level
 const first_level_prefixes = ["PR1", "DS", "CS", "DSA", "DM", "PR2"];
 const second_level_prefixes = ["ECO", "CLC", "DMA", "DTS", "OS", "FAD"];
-const third_level_prefixes = ["DVT","WP", "CN"];
+const third_level_prefixes = ["DVT","WP", "CN","VIS"];
 
 /**
  * Checks if a quiz ID starts with a specific prefix
@@ -44,5 +44,6 @@ export function determineQuizLevel(quizId: string | undefined): number {
     // If no prefix match found, default to fourth level
     return 4;
 }
+
 
 
