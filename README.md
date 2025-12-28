@@ -113,11 +113,6 @@ perfect/
 ├── app/                          # Next.js App Router
 │   ├── about/                    # About page
 │   ├── admin/                    # Admin dashboard & controls
-│   ├── api/                      # API routes
-│   │   ├── cron/                 # Cron job endpoints (token refresh)
-│   │   ├── google-drive/         # Google Drive API routes
-│   │   ├── stats/                # Statistics endpoints
-│   │   └── ...                   # Other API routes
 │   ├── auth/                     # Authentication pages
 │   ├── calculator/               # GPA calculator
 │   ├── certifications/           # Certificates page
@@ -195,20 +190,8 @@ perfect/
 - Vercel account for deployment
 - cron-job.org account for scheduling
 
-### Installation
 
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd my-shadcn-project
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Set up environment variables:
+Set up environment variables:
 Create a `.env.local` file with:
 ```env
 GOOGLE_CLIENT_ID=your_google_client_id
@@ -220,12 +203,12 @@ CRON_SECRET=your-secure-cron-secret-key
 NEXT_PUBLIC_CRON_SECRET=your-secure-cron-secret-key
 ```
 
-4. Run the development server:
+Run the development server:
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser.
+Open [chameleon-nu.tech](chameleon-nu.tech) with your browser.
 
 ---
 
@@ -440,104 +423,8 @@ Custom authentication system with multiple security layers.
 - **Admin**: Full platform management access
 
 #### **Protected Routes**
-- `/dashboard` - User dashboard
 - `/profile` - User profile
-- `/quiz` - Quiz system
-- `/admin` - Admin panel (admin only)
 - `/drive` - Google Drive files
-
----
-
-## 🗄️ Database Schema
-
-PostgreSQL database powered by Supabase.
-
-#### **Main Tables**
-
-**chameleons** - User profiles
-```sql
-- user_id (UUID, PK)
-- username (TEXT)
-- email (TEXT, UNIQUE)
-- password (TEXT, hashed)
-- current_level (INTEGER)
-- specialization (TEXT)
-- profile_image (TEXT)
-- dark_mode (BOOLEAN)
-- created_at (TIMESTAMP)
-```
-
-**quiz_data** - Quiz attempts and scores
-```sql
-- id (SERIAL, PK)
-- user_id (UUID, FK)
-- quiz_id (INTEGER)
-- quiz_level (INTEGER)
-- score (INTEGER)
-- duration_selected (TEXT)
-- answering_mode (TEXT)
-- how_finished (TEXT)
-- total_questions (INTEGER)
-- solved_at (TIMESTAMP)
-```
-
-**google_tokens** - OAuth tokens
-```sql
-- id (SERIAL, PK)
-- user_id (UUID, FK)
-- access_token (TEXT)
-- refresh_token (TEXT)
-- expires_at (TIMESTAMP)
-- updated_at (TIMESTAMP)
-```
-
-**notifications** - User notifications
-```sql
-- id (SERIAL, PK)
-- user_id (UUID, FK)
-- title (TEXT)
-- message (TEXT)
-- type (TEXT)
-- read (BOOLEAN)
-- created_at (TIMESTAMP)
-```
-
----
-
----
-
-## 🌐 API Endpoints
-
-### **Authentication**
-- `POST /api/auth/login` - User login
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/logout` - User logout
-
-### **Quiz System**
-- `GET /api/quiz/[level]/[quiz-id]` - Get quiz data
-- `POST /api/quiz/submit` - Submit quiz answers
-- `GET /api/quiz/history` - Get user quiz history
-
-### **Tournament**
-- `GET /api/tournament/leaderboard/[level]` - Get leaderboard
-- `GET /api/tournament/stats` - Tournament statistics
-
-### **Statistics**
-- `GET /api/stats/users` - Get user enrollment stats
-- `GET /api/stats/levels` - Get level distribution
-
-### **Google Drive**
-- `GET /api/google-drive/auth` - Initiate OAuth flow
-- `GET /api/google-drive/callback` - OAuth callback
-- `GET /api/google-drive/files` - List files
-- `GET /api/google-drive/folders` - List folders
-
-### **Cron Jobs**
-- `GET/POST /api/cron/token-refresh` - Automatic token refresh
-
-### **Admin**
-- `POST /api/admin/refresh-token` - Manual token refresh
-- `GET /api/admin/token-status` - Check token status
 
 ---
 
