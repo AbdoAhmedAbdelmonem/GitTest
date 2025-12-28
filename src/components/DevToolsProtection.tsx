@@ -1,19 +1,60 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 export default function DevToolsProtection() {
-  useEffect(() => {
+  const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-    // 1. Disable Right-Click Context Menu
+  // Handle copy action from custom context menu
+  const handleCopy = useCallback(async () => {
+    try {
+      const selection = window.getSelection();
+      if (selection && selection.toString()) {
+        await navigator.clipboard.writeText(selection.toString());
+      }
+    } catch {
+      // Fallback for older browsers
+      document.execCommand('copy');
+    }
+    setContextMenu(null);
+  }, []);
+
+  useEffect(() => {
+    // 🔒 SECURITY PRO MAX - Comprehensive DevTools Protection
+
+    // 1. Custom Right-Click Context Menu with only Copy button
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
+      
+      // Calculate position to keep menu in viewport
+      const x = Math.min(e.clientX, window.innerWidth - 140);
+      const y = Math.min(e.clientY, window.innerHeight - 50);
+      
+      setContextMenu({ x, y });
       return false;
     };
 
-    // 2. Disable Keyboard Shortcuts
+    // Close context menu when clicking outside of it
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setContextMenu(null);
+      }
+    };
+
+    // Close context menu on scroll
+    const handleScroll = () => {
+      setContextMenu(null);
+    };
+
+    // Close on Escape key
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setContextMenu(null);
+        return;
+      }
+
       // F12
       if (e.key === 'F12') {
         e.preventDefault();
@@ -74,18 +115,6 @@ export default function DevToolsProtection() {
         return false;
       }
     };
-
-    // // 3. Disable Text Selection
-    // const disableSelect = (e: Event) => {
-    //   e.preventDefault();
-    //   return false;
-    // };
-
-    // // 4. Disable Copy
-    // const disableCopy = (e: ClipboardEvent) => {
-    //   e.preventDefault();
-    //   return false;
-    // };
 
     // 5. Disable Cut
     const disableCut = (e: ClipboardEvent) => {
@@ -282,15 +311,15 @@ export default function DevToolsProtection() {
       }
     };
 
-    // Apply CSS to prevent text selection
+    // Apply CSS - Enable text selection everywhere
     const style = document.createElement('style');
     style.textContent = `
+      /* Allow text selection */
       * {
-        -webkit-user-select: none !important;
-        -moz-user-select: none !important;
-        -ms-user-select: none !important;
-        user-select: none !important;
-        -webkit-touch-callout: none !important;
+        -webkit-user-select: text !important;
+        -moz-user-select: text !important;
+        -ms-user-select: text !important;
+        user-select: text !important;
       }
       
       input, textarea, [contenteditable="true"] {
@@ -312,9 +341,12 @@ export default function DevToolsProtection() {
 
     // Register all event listeners
     document.addEventListener('contextmenu', handleContextMenu);
+    // Use click event with a small delay to prevent immediate closing
+    setTimeout(() => {
+      document.addEventListener('click', handleClickOutside);
+    }, 0);
+    document.addEventListener('scroll', handleScroll, true);
     document.addEventListener('keydown', handleKeyDown);
-    // document.addEventListener('selectstart', disableSelect);
-    // document.addEventListener('copy', disableCopy);
     document.addEventListener('cut', disableCut);
     document.addEventListener('paste', disablePaste);
     document.addEventListener('dragstart', disableDragDrop);
@@ -334,9 +366,9 @@ export default function DevToolsProtection() {
     // Cleanup function
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('scroll', handleScroll, true);
       document.removeEventListener('keydown', handleKeyDown);
-      // document.removeEventListener('selectstart', disableSelect);
-      // document.removeEventListener('copy', disableCopy);
       document.removeEventListener('cut', disableCut);
       document.removeEventListener('paste', disablePaste);
       document.removeEventListener('dragstart', disableDragDrop);
@@ -353,6 +385,72 @@ export default function DevToolsProtection() {
       }
     };
   }, []);
+
+  // Custom context menu component
+  if (contextMenu) {
+    return (
+      <div
+        ref={menuRef}
+        style={{
+          position: 'fixed',
+          top: contextMenu.y,
+          left: contextMenu.x,
+          zIndex: 99999,
+          backgroundColor: '#1a1a2e',
+          borderRadius: '8px',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          overflow: 'hidden',
+          minWidth: '120px',
+          animation: 'fadeIn 0.15s ease-out',
+        }}
+        onMouseDown={(e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
+        onContextMenu={(e) => e.stopPropagation()}
+      >
+        <style>{`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+          }
+        `}</style>
+        <button
+          onClick={handleCopy}
+          style={{
+            width: '100%',
+            padding: '10px 16px',
+            backgroundColor: 'transparent',
+            border: 'none',
+            color: '#fff',
+            fontSize: '14px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            transition: 'background-color 0.2s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(102, 126, 234, 0.3)')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          Copy
+        </button>
+      </div>
+    );
+  }
 
   return null;
 }
