@@ -206,7 +206,8 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
         entry.score || 0,
         entry.duration_selected || "15 minutes",
         entry.answering_mode || "traditional",
-        entry.how_finished || "completed"
+        entry.how_finished || "completed",
+        entry.total_questions || 10
       )
 
       // Reduce points by dividing by 10 and rounding
@@ -415,7 +416,8 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
       entry.score || 0,
       entry.duration_selected || "15 minutes",
       entry.answering_mode || "traditional",
-      entry.how_finished || "completed"
+      entry.how_finished || "completed",
+      entry.total_questions || 10
     )
 
     // Reduce points by dividing by 10 and rounding
@@ -553,7 +555,8 @@ export async function getUserTournamentStats(userId: number, level: 1 | 2 | 3): 
         quiz.score || 0,
         quiz.duration_selected || "15 minutes",
         quiz.answering_mode || "traditional",
-        quiz.how_finished || "completed"
+        quiz.how_finished || "completed",
+        quiz.total_questions || 10
       )
       totalPoints += Math.round(rawPoints / 10)
       
