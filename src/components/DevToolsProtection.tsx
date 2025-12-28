@@ -76,17 +76,17 @@ export default function DevToolsProtection() {
       }
     };
 
-    // 3. Disable Text Selection
-    const disableSelect = (e: Event) => {
-      e.preventDefault();
-      return false;
-    };
+    // // 3. Disable Text Selection
+    // const disableSelect = (e: Event) => {
+    //   e.preventDefault();
+    //   return false;
+    // };
 
-    // 4. Disable Copy
-    const disableCopy = (e: ClipboardEvent) => {
-      e.preventDefault();
-      return false;
-    };
+    // // 4. Disable Copy
+    // const disableCopy = (e: ClipboardEvent) => {
+    //   e.preventDefault();
+    //   return false;
+    // };
 
     // 5. Disable Cut
     const disableCut = (e: ClipboardEvent) => {
@@ -314,8 +314,8 @@ export default function DevToolsProtection() {
     // Register all event listeners
     document.addEventListener('contextmenu', handleContextMenu);
     document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('selectstart', disableSelect);
-    document.addEventListener('copy', disableCopy);
+    // document.addEventListener('selectstart', disableSelect);
+    // document.addEventListener('copy', disableCopy);
     document.addEventListener('cut', disableCut);
     document.addEventListener('paste', disablePaste);
     document.addEventListener('dragstart', disableDragDrop);
@@ -336,8 +336,8 @@ export default function DevToolsProtection() {
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu);
       document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('selectstart', disableSelect);
-      document.removeEventListener('copy', disableCopy);
+      // document.removeEventListener('selectstart', disableSelect);
+      // document.removeEventListener('copy', disableCopy);
       document.removeEventListener('cut', disableCut);
       document.removeEventListener('paste', disablePaste);
       document.removeEventListener('dragstart', disableDragDrop);
@@ -357,3 +357,4 @@ export default function DevToolsProtection() {
 
   return null;
 }
+
