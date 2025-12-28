@@ -1,60 +1,173 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
+import { createPortal } from "react-dom";
+
+// Custom Context Menu Component
+function ContextMenuPortal({ x, y, onCopy, onClose }: { x: number; y: number; onCopy: () => void; onClose: () => void }) {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    // Add listeners after a small delay to prevent immediate closing
+    const timeoutId = setTimeout(() => {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscape);
+    }, 10);
+
+    return () => {
+      clearTimeout(timeoutId);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <div
+      ref={menuRef}
+      style={{
+        position: 'fixed',
+        top: y,
+        left: x,
+        zIndex: 999999,
+        backgroundColor: '#1a1a2e',
+        borderRadius: '8px',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        overflow: 'hidden',
+        minWidth: '120px',
+        animation: 'contextMenuFadeIn 0.15s ease-out',
+      }}
+    >
+      <style>{`
+        @keyframes contextMenuFadeIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
+      <button
+        onClick={onCopy}
+        style={{
+          width: '100%',
+          padding: '10px 16px',
+          backgroundColor: 'transparent',
+          border: 'none',
+          color: '#fff',
+          fontSize: '14px',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          transition: 'background-color 0.2s',
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(102, 126, 234, 0.3)')}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        Copy
+      </button>
+    </div>,
+    document.body
+  );
+}
 
 export default function DevToolsProtection() {
   const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
 
-  // Handle copy action from custom context menu
-  const handleCopy = useCallback(async () => {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleCopy = async () => {
     try {
       const selection = window.getSelection();
       if (selection && selection.toString()) {
         await navigator.clipboard.writeText(selection.toString());
       }
     } catch {
-      // Fallback for older browsers
       document.execCommand('copy');
     }
     setContextMenu(null);
-  }, []);
+  };
+
+  const handleClose = () => {
+    setContextMenu(null);
+  };
 
   useEffect(() => {
     // 🔒 SECURITY PRO MAX - Comprehensive DevTools Protection
 
-    // 1. Custom Right-Click Context Menu with only Copy button
+    // 1. Block default right-click menu (only show custom menu if text is selected)
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
       
-      // Calculate position to keep menu in viewport
-      const x = Math.min(e.clientX, window.innerWidth - 140);
-      const y = Math.min(e.clientY, window.innerHeight - 50);
-      
-      setContextMenu({ x, y });
+      // Only show menu if there's text selected
+      const selection = window.getSelection();
+      if (selection && selection.toString().trim().length > 0) {
+        // Calculate position to keep menu in viewport
+        const x = Math.min(e.clientX, window.innerWidth - 140);
+        const y = Math.min(e.clientY, window.innerHeight - 50);
+        
+        setContextMenu({ x, y });
+      }
       return false;
     };
 
-    // Close context menu when clicking outside of it
-    const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+    // 2. Auto-show menu when text is selected
+    const handleMouseUp = (e: MouseEvent) => {
+      // Small delay to ensure selection is complete
+      setTimeout(() => {
+        const selection = window.getSelection();
+        if (selection && selection.toString().trim().length > 0) {
+          // Get the selection's bounding rectangle
+          const range = selection.getRangeAt(0);
+          const rect = range.getBoundingClientRect();
+          
+          // Position menu near the end of selection
+          const x = Math.min(rect.right + 5, window.innerWidth - 140);
+          const y = Math.min(rect.bottom + 5, window.innerHeight - 50);
+          
+          setContextMenu({ x, y });
+        }
+      }, 10);
+    };
+
+    // Close menu when selection is cleared
+    const handleSelectionChange = () => {
+      const selection = window.getSelection();
+      if (!selection || selection.toString().trim().length === 0) {
         setContextMenu(null);
       }
     };
 
-    // Close context menu on scroll
-    const handleScroll = () => {
-      setContextMenu(null);
-    };
-
-    // Close on Escape key
+    // Disable Keyboard Shortcuts
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setContextMenu(null);
-        return;
-      }
-
       // F12
       if (e.key === 'F12') {
         e.preventDefault();
@@ -116,15 +229,14 @@ export default function DevToolsProtection() {
       }
     };
 
-    // 5. Disable Cut
+    // Disable Cut
     const disableCut = (e: ClipboardEvent) => {
       e.preventDefault();
       return false;
     };
 
-    // 6. Disable Paste (optional, can be removed if needed)
+    // Disable Paste (only on non-input elements)
     const disablePaste = (e: ClipboardEvent) => {
-      // Only disable on non-input elements
       const target = e.target as HTMLElement;
       if (!target.matches('input, textarea, [contenteditable="true"]')) {
         e.preventDefault();
@@ -132,27 +244,20 @@ export default function DevToolsProtection() {
       }
     };
 
-    // 7. Detect DevTools Opening (Enhanced for browsers with sidebars)
+    // Detect DevTools Opening
     let isDevToolsWarningShown = false;
     const detectDevTools = () => {
-      // Skip if warning already shown
       if (isDevToolsWarningShown) return;
       
-      // More accurate detection - check both dimensions
       const widthDiff = window.outerWidth - window.innerWidth;
       const heightDiff = window.outerHeight - window.innerHeight;
       
-      // Higher threshold to avoid false positives with browser sidebars (Vivaldi, Opera, etc.)
-      // Also check if BOTH dimensions are suspicious (more reliable)
       const threshold = 250;
       const isHeightSuspicious = heightDiff > threshold;
-      const isWidthVeryLarge = widthDiff > 400; // Very large = definitely DevTools
+      const isWidthVeryLarge = widthDiff > 400;
       
-      // Only trigger if height is suspicious OR width is extremely large
-      // This avoids false positives from browser sidebars (usually only affect width by 200-300px)
       if (isHeightSuspicious || isWidthVeryLarge) {
         isDevToolsWarningShown = true;
-        // Redirect to warning page or block content
         document.body.innerHTML = `
           <div style="
             display: flex;
@@ -204,15 +309,14 @@ export default function DevToolsProtection() {
       }
     };
 
-    // 8. Advanced DevTools Detection using debugger
+    // Advanced DevTools Detection using debugger
     const debuggerLoop = () => {
       const start = new Date().getTime();
       // eslint-disable-next-line no-debugger
-      debugger; // This will cause a delay if DevTools is open
+      debugger;
       const end = new Date().getTime();
       
       if (end - start > 100) {
-        // DevTools is open
         document.body.innerHTML = `
           <div style="
             display: flex;
@@ -246,7 +350,7 @@ export default function DevToolsProtection() {
       }
     };
 
-    // 9. Disable Console Methods
+    // Disable Console Methods
     if (typeof window !== 'undefined') {
       const noop = () => {};
       const consoleProxy = new Proxy(console, {
@@ -261,24 +365,22 @@ export default function DevToolsProtection() {
           set: () => {}
         });
       } catch {
-        // Fallback if property is not configurable
         ['log', 'debug', 'info', 'warn', 'error', 'table', 'trace', 'dir', 'dirxml', 'group', 'groupCollapsed', 'groupEnd', 'clear', 'count', 'countReset', 'assert', 'profile', 'profileEnd', 'time', 'timeLog', 'timeEnd', 'timeStamp'].forEach((method) => {
           (console as unknown as Record<string, unknown>)[method] = noop;
         });
       }
     }
 
-    // 10. Prevent iframe injection
+    // Prevent iframe injection
     const preventIframe = () => {
       if (window.self !== window.top) {
         window.top!.location.href = window.self.location.href;
       }
     };
 
-    // 11. Clear localStorage/sessionStorage on suspicious activity
+    // Clear storage on suspicious activity
     const clearStorage = () => {
       try {
-        // Only clear if DevTools detected (enhanced detection)
         const widthDiff = window.outerWidth - window.innerWidth;
         const heightDiff = window.outerHeight - window.innerHeight;
         const devToolsOpen = heightDiff > 250 || widthDiff > 400;
@@ -291,20 +393,20 @@ export default function DevToolsProtection() {
       }
     };
 
-    // 12. Disable drag and drop
+    // Disable drag and drop
     const disableDragDrop = (e: DragEvent) => {
       e.preventDefault();
       return false;
     };
 
-    // 13. Monitor window resize (DevTools opening)
+    // Monitor window resize
     let resizeTimeout: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(detectDevTools, 500);
     };
 
-    // 14. Prevent source code viewing through protocol
+    // Prevent source code viewing
     const preventSourceView = () => {
       if (window.location.protocol === 'view-source:') {
         window.location.href = window.location.href.replace('view-source:', '');
@@ -313,6 +415,7 @@ export default function DevToolsProtection() {
 
     // Apply CSS - Enable text selection everywhere
     const style = document.createElement('style');
+    style.id = 'devtools-protection-styles';
     style.textContent = `
       /* Allow text selection */
       * {
@@ -341,11 +444,8 @@ export default function DevToolsProtection() {
 
     // Register all event listeners
     document.addEventListener('contextmenu', handleContextMenu);
-    // Use click event with a small delay to prevent immediate closing
-    setTimeout(() => {
-      document.addEventListener('click', handleClickOutside);
-    }, 0);
-    document.addEventListener('scroll', handleScroll, true);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('selectionchange', handleSelectionChange);
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('cut', disableCut);
     document.addEventListener('paste', disablePaste);
@@ -366,8 +466,8 @@ export default function DevToolsProtection() {
     // Cleanup function
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu);
-      document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('scroll', handleScroll, true);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('selectionchange', handleSelectionChange);
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('cut', disableCut);
       document.removeEventListener('paste', disablePaste);
@@ -380,79 +480,20 @@ export default function DevToolsProtection() {
       clearInterval(storageInterval);
       clearTimeout(resizeTimeout);
       
-      if (style.parentNode) {
-        style.parentNode.removeChild(style);
+      const styleEl = document.getElementById('devtools-protection-styles');
+      if (styleEl) {
+        styleEl.remove();
       }
     };
   }, []);
 
-  // Custom context menu component
-  if (contextMenu) {
-    return (
-      <div
-        ref={menuRef}
-        style={{
-          position: 'fixed',
-          top: contextMenu.y,
-          left: contextMenu.x,
-          zIndex: 99999,
-          backgroundColor: '#1a1a2e',
-          borderRadius: '8px',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          overflow: 'hidden',
-          minWidth: '120px',
-          animation: 'fadeIn 0.15s ease-out',
-        }}
-        onMouseDown={(e) => e.stopPropagation()}
-        onClick={(e) => e.stopPropagation()}
-        onContextMenu={(e) => e.stopPropagation()}
-      >
-        <style>{`
-          @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-          }
-        `}</style>
-        <button
-          onClick={handleCopy}
-          style={{
-            width: '100%',
-            padding: '10px 16px',
-            backgroundColor: 'transparent',
-            border: 'none',
-            color: '#fff',
-            fontSize: '14px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            transition: 'background-color 0.2s',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(102, 126, 234, 0.3)')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          Copy
-        </button>
-      </div>
-    );
-  }
-
-  return null;
+  // Render custom context menu using portal
+  return mounted && contextMenu ? (
+    <ContextMenuPortal
+      x={contextMenu.x}
+      y={contextMenu.y}
+      onCopy={handleCopy}
+      onClose={handleClose}
+    />
+  ) : null;
 }
-
-
