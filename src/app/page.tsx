@@ -78,9 +78,9 @@ const specializations = [
 
 const stats = [
   { icon: BookOpen, label: "Courses Available", value: 200, suffix: "" },
-  { icon: Award, label: "Solved Quizzes", value: 30000, suffix: "" },
-  { icon: BookOpenCheck, label: "Available Quizzes", value: 140, suffix: "+" },
-  { icon: ServerCrash , label: "Million Requests", value: 1.25, suffix: "M" },
+  { icon: Award, label: "Solved Quizzes", value: 30823, suffix: "" },
+  { icon: BookOpenCheck, label: "Available Quizzes", value: 200, suffix: "+" },
+  { icon: ServerCrash , label: "Million Requests", value: 4.73, suffix: "M" },
 ]
 
 interface LevelStat {
