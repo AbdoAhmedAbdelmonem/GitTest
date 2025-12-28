@@ -77,18 +77,20 @@ const FloatingIcon = ({
   );
 };
 
-const CountdownTimer = () => {
+const CountdownTimer = ({ onTournamentEnd }: { onTournamentEnd?: (ended: boolean) => void }) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
   });
+  const [isEnded, setIsEnded] = useState(false);
 
   useEffect(() => {
-    const tournamentEnd = new Date("2026-06-30T23:59:59.999Z");
+    // TEST END DATE: December 28, 2025 at 10:35 PM (Egypt time UTC+2)
+    const tournamentEnd = new Date("2026-06-30T23:59:59.999Z"); // 22:35 in UTC+2
 
-    const timer = setInterval(() => {
+    const checkTime = () => {
       const now = new Date();
       const difference = tournamentEnd.getTime() - now.getTime();
 
@@ -99,13 +101,42 @@ const CountdownTimer = () => {
           minutes: Math.floor((difference / 1000 / 60) % 60),
           seconds: Math.floor((difference / 1000) % 60),
         });
+        setIsEnded(false);
+        onTournamentEnd?.(false);
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsEnded(true);
+        onTournamentEnd?.(true);
       }
-    }, 1000);
+    };
+
+    checkTime(); // Check immediately
+    const timer = setInterval(checkTime, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [onTournamentEnd]);
+
+  if (isEnded) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 rounded-2xl p-4 md:p-6 backdrop-blur-xl text-center"
+      >
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <Trophy className="w-6 h-6 text-yellow-400" />
+          <span className="text-yellow-400 font-bold text-lg md:text-xl">
+            🎉 Tournament Has Ended! 🎉
+          </span>
+          <Trophy className="w-6 h-6 text-yellow-400" />
+        </div>
+        <p className="text-white/60 text-sm">
+          Congratulations to all winners! Check the results below.
+        </p>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -121,7 +152,7 @@ const CountdownTimer = () => {
             Tournament Ends In
           </span>
         </div>
-        <div className="text-white/60 text-xs md:text-sm">June 30th, 2026</div>
+        <div className="text-white/60 text-xs md:text-sm">December 28th, 2025 at 10:35 PM</div>
       </div>{" "}
       <div className="grid grid-cols-4 gap-2 md:gap-3">
         {[
@@ -149,6 +180,243 @@ const CountdownTimer = () => {
         ))}
       </div>
     </motion.div>
+  );
+};
+
+// Firework particle component
+const Firework = ({ delay = 0, x = 50, color = "yellow" }: { delay?: number; x?: number; color?: string }) => {
+  const colors: { [key: string]: string } = {
+    yellow: "#fbbf24",
+    orange: "#f97316", 
+    pink: "#ec4899",
+    purple: "#a855f7",
+    blue: "#3b82f6",
+    green: "#22c55e",
+  };
+  
+  return (
+    <motion.div
+      className="absolute"
+      style={{ left: `${x}%`, bottom: "20%" }}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{
+        opacity: [0, 1, 1, 0],
+        scale: [0, 1.5, 1.5, 0],
+        y: [0, -200, -300, -350],
+      }}
+      transition={{
+        duration: 2,
+        delay,
+        repeat: Infinity,
+        repeatDelay: 3,
+        ease: "easeOut",
+      }}
+    >
+      {[...Array(8)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-2 h-2 rounded-full"
+          style={{ backgroundColor: colors[color] }}
+          animate={{
+            x: [0, Math.cos((i * Math.PI * 2) / 8) * 60],
+            y: [0, Math.sin((i * Math.PI * 2) / 8) * 60],
+            opacity: [1, 0],
+            scale: [1, 0.5],
+          }}
+          transition={{
+            duration: 1,
+            delay: delay + 0.5,
+            repeat: Infinity,
+            repeatDelay: 4.5,
+          }}
+        />
+      ))}
+    </motion.div>
+  );
+};
+
+// Winner Card Component
+const WinnerCard = ({ 
+  winner, 
+  levelName, 
+  levelColor,
+  delay = 0
+}: { 
+  winner: LeaderboardEntry | null; 
+  levelName: string;
+  levelColor: string;
+  delay?: number;
+}) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50, scale: 0.8 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.8, delay, type: "spring" }}
+      className={`relative bg-gradient-to-br ${levelColor} border border-white/20 rounded-2xl p-6 md:p-8 backdrop-blur-xl shadow-2xl`}
+    >
+      {/* Sparkle Animation */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl"
+        animate={{
+          boxShadow: [
+            "0 0 20px rgba(251, 191, 36, 0.3)",
+            "0 0 40px rgba(251, 191, 36, 0.5)",
+            "0 0 20px rgba(251, 191, 36, 0.3)",
+          ],
+        }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+      
+      <div className="relative z-10 text-center">
+        {/* Gold Medal - All winners are 1st place in their level */}
+        <motion.div
+          animate={{ rotate: [-5, 5, -5], scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-5xl md:text-7xl"
+        >
+          🏆
+        </motion.div>
+        
+        {/* Level Name */}
+        <div className="text-white/80 text-sm md:text-base font-medium mt-2 mb-3">
+          {levelName}
+        </div>
+        
+        {/* Winner Info */}
+        {winner ? (
+          <>
+            {winner.profile_image ? (
+              <Image
+                src={winner.profile_image}
+                alt={winner.name}
+                width={80}
+                height={80}
+                unoptimized
+                className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-yellow-400/50 mx-auto mb-3 object-cover shadow-lg"
+              />
+            ) : (
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center border-4 border-yellow-400/50 mx-auto mb-3 shadow-lg">
+                <span className="text-white font-bold text-2xl md:text-3xl">
+                  {winner.name.charAt(0).toUpperCase()}
+                </span>
+              </div>
+            )}
+            <h3 className="text-white font-bold text-lg md:text-xl mb-1 truncate max-w-[200px] mx-auto">
+              {winner.name}
+            </h3>
+            <div className="flex items-center justify-center gap-2 text-yellow-400">
+              <Star className="w-4 h-4" />
+              <span className="font-bold">{winner.points} pts</span>
+            </div>
+          </>
+        ) : (
+          <div className="text-white/40 text-sm">No participants yet</div>
+        )}
+        
+        <div className="text-yellow-400 text-sm font-bold mt-2">🥇 Champion</div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Winners Celebration Component
+const WinnersCelebration = ({
+  level1Winner,
+  level2Winner,
+  level3Winner,
+}: {
+  level1Winner: LeaderboardEntry | null;
+  level2Winner: LeaderboardEntry | null;
+  level3Winner: LeaderboardEntry | null;
+}) => {
+  return (
+    <div className="relative">
+      {/* Fireworks */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <Firework delay={0} x={10} color="yellow" />
+        <Firework delay={0.5} x={30} color="orange" />
+        <Firework delay={1} x={50} color="pink" />
+        <Firework delay={1.5} x={70} color="purple" />
+        <Firework delay={2} x={90} color="blue" />
+        <Firework delay={2.5} x={20} color="green" />
+        <Firework delay={3} x={80} color="yellow" />
+      </div>
+
+      {/* Celebration Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-center mb-12"
+      >
+        <motion.div
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="inline-flex items-center gap-3 mb-4"
+        >
+          <span className="text-4xl md:text-6xl">🎉</span>
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
+            CONGRATULATIONS!
+          </h2>
+          <span className="text-4xl md:text-6xl">🎉</span>
+        </motion.div>
+        <p className="text-white/60 text-lg md:text-xl">
+          Season 1 Tournament Champions
+        </p>
+      </motion.div>
+
+      {/* Winners Grid */}
+      <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+        <WinnerCard
+          winner={level1Winner}
+          levelName="Level 1 Champion"
+          levelColor="from-blue-500/20 via-cyan-500/10 to-blue-600/20"
+          delay={0.3}
+        />
+        <WinnerCard
+          winner={level2Winner}
+          levelName="Level 2 Champion"
+          levelColor="from-purple-500/20 via-pink-500/10 to-purple-600/20"
+          delay={0.6}
+        />
+        <WinnerCard
+          winner={level3Winner}
+          levelName="Level 3 Champion"
+          levelColor="from-orange-500/20 via-red-500/10 to-orange-600/20"
+          delay={0.9}
+        />
+      </div>
+
+      {/* Confetti-like particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-3 h-3"
+            style={{
+              left: `${Math.random() * 100}%`,
+              backgroundColor: ["#fbbf24", "#f97316", "#ec4899", "#a855f7", "#3b82f6"][
+                Math.floor(Math.random() * 5)
+              ],
+              borderRadius: Math.random() > 0.5 ? "50%" : "0",
+            }}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{
+              y: [0, 800],
+              opacity: [0, 1, 1, 0],
+              rotate: [0, 360 * 3],
+              x: [0, Math.random() * 100 - 50],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              delay: Math.random() * 3,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -204,6 +472,7 @@ export default function TournamentPage() {
     useState<UserTournamentStats | null>(null);
   const [statsLoading, setStatsLoading] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
+  const [tournamentEnded, setTournamentEnded] = useState(false);
 
   useEffect(() => {
     const fetchLeaderboardData = async () => {
@@ -929,9 +1198,19 @@ export default function TournamentPage() {
 
           {/* Countdown Timer */}
           <ScrollAnimatedSection className="mb-8 md:mb-12">
-            <CountdownTimer />
+            <CountdownTimer onTournamentEnd={setTournamentEnded} />
           </ScrollAnimatedSection>
 
+          {/* Show Winners Celebration when tournament ends, otherwise show leaderboard */}
+          {tournamentEnded ? (
+            <ScrollAnimatedSection className="mb-8 md:mb-12">
+              <WinnersCelebration
+                level1Winner={leaderboardLevel1[0] || null}
+                level2Winner={leaderboardLevel2[0] || null}
+                level3Winner={leaderboardLevel3[0] || null}
+              />
+            </ScrollAnimatedSection>
+          ) : (
           <div className="grid lg:grid-cols-3 gap-4 md:gap-8">
             {/* Leaderboard Section */}
             <Card className="lg:col-span-2 bg-white/[0.02] border-white/10 backdrop-blur-xl shadow-2xl overflow-hidden">
@@ -1206,8 +1485,8 @@ export default function TournamentPage() {
                       </p>
                       <div className="bg-black/20 p-2 md:p-3 rounded border border-white/10">
                         <code className="text-orange-300 text-xs md:text-sm">
-                          Total Points = (Correct Answers + (Quiz Percentage * Total Questions) 
-                          + Duration + Mode + Completion) ÷ 10
+                          Total Points = (Correct Answers + Duration + Mode +
+                          Completion) ÷ 10
                         </code>
                       </div>
                       <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 p-2 rounded border border-yellow-500/20 mb-2">
@@ -1260,6 +1539,7 @@ export default function TournamentPage() {
               </CardContent>
             </Card>
           </div>
+          )}
         </div>
       </ScrollAnimatedSection>
 
@@ -1457,4 +1737,3 @@ export default function TournamentPage() {
     </div>
   );
 }
-
