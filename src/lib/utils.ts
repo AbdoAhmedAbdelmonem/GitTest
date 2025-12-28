@@ -6,12 +6,20 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // Point calculation system for tournament leaderboard based on the image
+// Score rewards more questions: base percentage + bonus for question count
 export function calculateTournamentPoints(
-  score: number, // Number of correct answers
+  scorePercentage: number, // Percentage score (0-100)
   chosenDuration: string,
   quizMode: string,
-  howFinished: string
+  howFinished: string,
+  totalQuestions: number = 10 // Default to 10 if not provided
 ): number {
+  // Calculate user score: percentage as base + bonus for more questions
+  // e.g., 80% on 20 questions = 80 + 20 = 100 points
+  // e.g., 80% on 10 questions = 80 + 10 = 90 points
+  // This rewards users who attempt quizzes with more questions
+  const userScore = scorePercentage + totalQuestions
+
   // Duration points based on image
   const durationPoints: { [key: string]: number } = {
     "1": 50,        // 1 minute -> +50 Point
@@ -57,10 +65,10 @@ export function calculateTournamentPoints(
 
   const completionPoint = completionPoints[normalizedFinished] || 15 // Default to timed out (15 points)
 
-  console.log(`Calculating points: score=${score}, duration=${normalizedDuration}(${durationPoint}), mode=${normalizedMode}(${modePoint}), finished=${normalizedFinished}(${completionPoint})`)
+  console.log(`Calculating points: score=${scorePercentage}%, totalQuestions=${totalQuestions}, userScore=${userScore}, duration=${normalizedDuration}(${durationPoint}), mode=${normalizedMode}(${modePoint}), finished=${normalizedFinished}(${completionPoint})`)
 
-  // Calculate total points: score (correct answers) + duration + mode + completion
-  const totalPoints = score + durationPoint + modePoint + completionPoint
+  // Calculate total points: userScore (based on questions) + duration + mode + completion
+  const totalPoints = userScore + durationPoint + modePoint + completionPoint
 
   console.log(`Total points: ${totalPoints}`)
 
