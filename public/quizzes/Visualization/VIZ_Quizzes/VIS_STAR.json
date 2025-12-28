@@ -1150,7 +1150,7 @@
   {
     "numb": 83,
     "type": "Multiple Choice",
-    "question": "What are the two fundamental design criteria for data visualization?",
+    "question": "Which of the following is a fundamental design criteria for data visualization?",
     "answer": "B) Tell the truth",
     "options": [
       "A) Use bright colors and large fonts",
@@ -1960,3 +1960,4 @@
     "explanation": "Predictive analytics uses historical data to identify patterns and behaviors, allowing organizations to plan proactively for future scenarios and make data-driven predictions."
   }
 ]
+
