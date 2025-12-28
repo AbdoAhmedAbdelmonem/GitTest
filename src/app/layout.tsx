@@ -44,7 +44,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} antialiased`}
       >
         {/* 🔒 SECURITY PRO MAX - Site-wide DevTools Protection */}
-        {/* <DevToolsProtection /> */}
+        <DevToolsProtection />
         
         {/* لف الـ children جوه NotificationProvider وبعدها ToastProvider */}
         <NotificationProvider>
