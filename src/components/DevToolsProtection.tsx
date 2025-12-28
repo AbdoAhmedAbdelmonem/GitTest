@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 export default function DevToolsProtection() {
   useEffect(() => {
-    // 🔒 SECURITY PRO MAX - Comprehensive DevTools Protection
 
     // 1. Disable Right-Click Context Menu
     const handleContextMenu = (e: MouseEvent) => {
@@ -357,4 +356,5 @@ export default function DevToolsProtection() {
 
   return null;
 }
+
 
