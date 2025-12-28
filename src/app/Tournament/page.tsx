@@ -1206,8 +1206,8 @@ export default function TournamentPage() {
                       </p>
                       <div className="bg-black/20 p-2 md:p-3 rounded border border-white/10">
                         <code className="text-orange-300 text-xs md:text-sm">
-                          Total Points = (Correct Answers + Duration + Mode +
-                          Completion) ÷ 10
+                          Total Points = (Correct Answers + (Quiz Percentage * Total Questions) 
+                          + Duration + Mode + Completion) ÷ 10
                         </code>
                       </div>
                       <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 p-2 rounded border border-yellow-500/20 mb-2">
@@ -1457,3 +1457,4 @@ export default function TournamentPage() {
     </div>
   );
 }
+
