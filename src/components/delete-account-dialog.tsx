@@ -110,8 +110,12 @@ export function DeleteAccountDialog({
         "success"
       )
       
+      // Update local state immediately to show countdown
       setStep("scheduled")
       setDaysRemaining(14)
+      
+      // Close dialog and reload to get fresh data
+      setOpen(false)
       onDeletionScheduled?.()
     } catch (error) {
       console.error("Error scheduling deletion:", error)
@@ -200,7 +204,7 @@ export function DeleteAccountDialog({
         </div>
       </div>
 
-      <DialogFooter className="gap-2 sm:gap-0 m-auto" style={{justifyContent: "space-between"}}>
+      <DialogFooter className="gap-4 sm:gap-4 flex-col sm:flex-row w-full" style={{justifyContent: "space-between"}}>
         <Button
           variant="outline"
           onClick={() => setOpen(false)}
@@ -259,7 +263,7 @@ export function DeleteAccountDialog({
         </p>
       </div>
 
-      <DialogFooter className="gap-2 sm:gap-0">
+      <DialogFooter className="gap-4 sm:gap-4 flex-col sm:flex-row w-full" style={{justifyContent: "space-between"}}>
         <Button
           variant="outline"
           onClick={() => {
@@ -333,11 +337,11 @@ export function DeleteAccountDialog({
         </div>
       </div>
 
-      <DialogFooter className="gap-2 sm:gap-0">
+      <DialogFooter className="gap-4 sm:gap-4 flex-col sm:flex-row w-full" style={{justifyContent: "space-between"}}>
         <Button
           variant="outline"
           onClick={() => setOpen(false)}
-          className="border-white/20 text-white/70 hover:bg-white/10"
+          className="border-white/20 text-white/70 bg-black/20 hover:bg-white/10 hover:text-white hover:border-black/20"
         >
           Close
         </Button>
