@@ -286,6 +286,21 @@ export default function ProfilePage() {
 
       const supabase = createBrowserClient()
 
+      // Fetch fresh deletion status from database (not from session cache)
+      const { data: freshUserData } = await supabase
+        .from("chameleons")
+        .select("deletion_scheduled_at")
+        .eq("user_id", session.user_id)
+        .single()
+
+      // Update userData with fresh deletion_scheduled_at
+      if (freshUserData) {
+        setUserData((prev: any) => ({
+          ...prev,
+          deletion_scheduled_at: freshUserData.deletion_scheduled_at
+        }))
+      }
+
       // Get user's quiz attempts
       const { data: attemptsData } = await supabase
         .from("quiz_data")
@@ -697,6 +712,33 @@ export default function ProfilePage() {
           
           <h1 className="text-3xl font-bold text-white mb-2">Your Profile</h1>
           <p className="text-white/60">Manage your account and view your progress</p>
+          
+          {/* Deletion Countdown Warning */}
+          {userData.deletion_scheduled_at && (
+            <div className="mt-6 animate-pulse">
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-red-500/20 to-amber-500/20 border border-red-500/50 shadow-lg shadow-red-500/20">
+                <div className="w-3 h-3 rounded-full bg-red-500 animate-ping" />
+                <div className="text-center">
+                  <p className="text-red-400 font-bold text-sm">
+                    Account Deletion Scheduled
+                  </p>
+                  <p className="text-white/80 text-lg font-bold">
+                    {(() => {
+                      const deletionDate = new Date(userData.deletion_scheduled_at)
+                      const now = new Date()
+                      const diffTime = deletionDate.getTime() - now.getTime()
+                      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+                      return diffDays > 0 ? `${diffDays} days remaining` : "Deletion imminent"
+                    })()}
+                  </p>
+                  <p className="text-white/50 text-xs mt-1">
+                    You can cancel this in the danger zone below
+                  </p>
+                </div>
+                <div className="w-3 h-3 rounded-full bg-red-500 animate-ping" />
+              </div>
+            </div>
+          )}
           
           {/* Enhanced Animations */}
           <style jsx>{`
