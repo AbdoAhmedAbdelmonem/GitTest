@@ -170,33 +170,33 @@ function getUserSubjects(level: number, specialization: string, currentTerm: 'te
   }
   
   const departmentKey = departmentKeyMap[specialization] || departmentKeyMap[specialization?.toLowerCase()]
-  console.log('✅ Mapped department key:', departmentKey, 'from specialization:', specialization)
+  console.log('Mapped department key:', departmentKey, 'from specialization:', specialization)
   
   if (!departmentKey) {
-    console.error('❌ No department key found for specialization:', specialization)
+    console.error('No department key found for specialization:', specialization)
     console.log('Available mappings:', Object.keys(departmentKeyMap))
     return []
   }
   
   if (!departmentData[departmentKey]) {
-    console.error('❌ Department not found in departmentData:', departmentKey)
+    console.error('Department not found in departmentData:', departmentKey)
     console.log('Available departments:', Object.keys(departmentData))
     return []
   }
   
   const department = departmentData[departmentKey]
-  console.log('✅ Found department:', department.name)
+  console.log('Found department:', department.name)
   
   if (!department.levels[level]) {
-    console.error('❌ Level not found:', level, 'Available levels:', Object.keys(department.levels))
+    console.error('Level not found:', level, 'Available levels:', Object.keys(department.levels))
     return []
   }
   
   const subjects = department.levels[level].subjects[currentTerm] || []
-  console.log('✅ Found subjects:', subjects.length, 'subjects for level', level, currentTerm)
+  console.log('Found subjects:', subjects.length, 'subjects for level', level, currentTerm)
   
   if (subjects.length > 0) {
-    console.log('📚 Subject names:', subjects.map(s => s.name))
+    console.log('Subject names:', subjects.map(s => s.name))
   }
   
   return subjects
@@ -1490,7 +1490,7 @@ export default function ProfilePage() {
           <Card className="bg-gradient-to-br from-red-950/40 to-red-900/20 border-red-500/30 shadow-2xl shadow-red-500/10">
             <CardHeader className="text-center pb-6">
               <CardTitle className="text-xl font-bold text-red-400 flex items-center justify-center gap-2">
-                ☢️ The Nuclear Option
+                The Nuclear Option
               </CardTitle>
               <CardDescription className="text-white/60">
                 Had enough? We get it. Sort of. Not really. But we respect your choices... mostly.
@@ -1530,3 +1530,4 @@ export default function ProfilePage() {
     </div>
   )
 }
+
