@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label"
 import { useToast  } from "@/components/ToastProvider"
 import Image from "next/image"
 import { useAddNotification } from "@/components/notification"
+import { DeleteAccountDialog } from "@/components/delete-account-dialog"
 import { departmentData, type Subject } from '@/lib/department-data'
 
 
@@ -1006,7 +1007,7 @@ export default function ProfilePage() {
                   Your recent quiz attempts and performance
                 </CardDescription>
               </CardHeader>
-              <CardContent style={{height: "64rem"}} className="overflow-y-auto custom-scrollbar">
+              <CardContent style={{height: "64.5rem"}} className="overflow-y-auto custom-scrollbar">
                 {quizData.length > 0 ? (
                   <div className="space-y-4 flex-1">
                   {quizData.map((attempt, index) => {
@@ -1441,9 +1442,49 @@ export default function ProfilePage() {
 
         {/* Progress Visualization */}
         <ProgressDotPlot quizData={quizData} />
+
+        {/* Danger Zone - Delete Account */}
+        <div className="mt-12 animate-in fade-in duration-500 delay-500">
+          <Card className="bg-gradient-to-br from-red-950/40 to-red-900/20 border-red-500/30 shadow-2xl shadow-red-500/10">
+            <CardHeader className="text-center pb-6">
+              <CardTitle className="text-xl font-bold text-red-400 flex items-center justify-center gap-2">
+                ☢️ The Nuclear Option
+              </CardTitle>
+              <CardDescription className="text-white/60">
+                Had enough? We get it. Sort of. Not really. But we respect your choices... mostly.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20">
+                <p className="text-white/70 text-sm mb-4">
+                  🦎 <span className="italic">"With great power comes great responsibility."</span> 
+                  <span className="text-white/50"> - Some chameleon, probably</span>
+                </p>
+                <p className="text-white/60 text-sm">
+                  Deleting your account will remove all your quiz attempts, notifications, and that sweet, 
+                  sweet progress you've made. We'll give you 14 days to change your mind because we're 
+                  optimists like that.
+                </p>
+              </div>
+              
+              <DeleteAccountDialog
+                userId={userData.user_id}
+                username={userData.username}
+                quizCount={quizData.length}
+                deletionScheduledAt={userData.deletion_scheduled_at}
+                onDeletionScheduled={() => {
+                  // Refresh the page to update the UI
+                  window.location.reload()
+                }}
+                onDeletionCancelled={() => {
+                  // Refresh the page to update the UI
+                  window.location.reload()
+                }}
+              />
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   )
 }
-
-
