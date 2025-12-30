@@ -287,19 +287,30 @@ export default function ProfilePage() {
       const supabase = createBrowserClient()
 
       // Fetch fresh deletion status from database (not from session cache)
-      const { data: freshUserData } = await supabase
-        .from("chameleons")
-        .select("deletion_scheduled_at")
-        .eq("user_id", session.user_id)
-        .single()
+      const { data: freshUserData, error: userCheckError } = await supabase
+          .from("chameleons")
+          .select("deletion_scheduled_at")
+          .eq("user_id", session.user_id)
+          .single()
 
-      // Update userData with fresh deletion_scheduled_at
-      if (freshUserData) {
-        setUserData((prev: any) => ({
-          ...prev,
-          deletion_scheduled_at: freshUserData.deletion_scheduled_at
-        }))
-      }
+      // Check if user account was deleted (not found in database)
+      if (!freshUserData || userCheckError?.code === 'PGRST116') {
+          console.log("User account has been deleted, clearing local storage...")
+          // Clear all local storage
+          localStorage.clear()
+          // Clear session storage
+          sessionStorage.clear()
+          // Clear all cookies
+          document.cookie.split(";").forEach((c) => {
+            const eqPos = c.indexOf("=")
+            const name = eqPos > -1 ? c.substr(0, eqPos) : c
+            document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`
+          })
+          // Redirect to auth page
+          setIsRedirecting(true)
+          router.push("/auth")
+          return
+        }
 
       // Get user's quiz attempts
       const { data: attemptsData } = await supabase
