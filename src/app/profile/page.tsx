@@ -8,7 +8,7 @@ import { calculateTournamentPoints } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { LoadingSpinner } from "@/components/ui/loading-spinner"
-import { ArrowLeft, User, BookOpen, Star, Award, Calendar, Phone, GraduationCap, Shield, Edit3, LogOut, Save, X, TrendingUp, Mail, Trophy, Video, FileText } from "lucide-react"
+import { ArrowLeft, User, BookOpen, Star, Award, Calendar, GraduationCap, Shield, Edit3, LogOut, Save, X, TrendingUp, Mail, Phone, Trophy, Video, FileText } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
@@ -170,33 +170,33 @@ function getUserSubjects(level: number, specialization: string, currentTerm: 'te
   }
   
   const departmentKey = departmentKeyMap[specialization] || departmentKeyMap[specialization?.toLowerCase()]
-  console.log('Mapped department key:', departmentKey, 'from specialization:', specialization)
+  console.log('✅ Mapped department key:', departmentKey, 'from specialization:', specialization)
   
   if (!departmentKey) {
-    console.error('No department key found for specialization:', specialization)
+    console.error('❌ No department key found for specialization:', specialization)
     console.log('Available mappings:', Object.keys(departmentKeyMap))
     return []
   }
   
   if (!departmentData[departmentKey]) {
-    console.error('Department not found in departmentData:', departmentKey)
+    console.error('❌ Department not found in departmentData:', departmentKey)
     console.log('Available departments:', Object.keys(departmentData))
     return []
   }
   
   const department = departmentData[departmentKey]
-  console.log('Found department:', department.name)
+  console.log('✅ Found department:', department.name)
   
   if (!department.levels[level]) {
-    console.error('Level not found:', level, 'Available levels:', Object.keys(department.levels))
+    console.error('❌ Level not found:', level, 'Available levels:', Object.keys(department.levels))
     return []
   }
   
   const subjects = department.levels[level].subjects[currentTerm] || []
-  console.log('Found subjects:', subjects.length, 'subjects for level', level, currentTerm)
+  console.log('✅ Found subjects:', subjects.length, 'subjects for level', level, currentTerm)
   
   if (subjects.length > 0) {
-    console.log('Subject names:', subjects.map(s => s.name))
+    console.log('📚 Subject names:', subjects.map(s => s.name))
   }
   
   return subjects
@@ -253,13 +253,11 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false)
   const [editForm, setEditForm] = useState({
     username: "",
-    age: "",
-    phone_number: ""
+    age: ""
   })
   const [validationErrors, setValidationErrors] = useState<{
     username?: string;
     age?: string;
-    phone_number?: string;
     general?: string;
   }>({})
   const { addToast } = useToast()
@@ -280,37 +278,44 @@ export default function ProfilePage() {
       // Initialize edit form with current data
       setEditForm({
         username: session.username || "",
-        age: String(session.age || ""),
-        phone_number: session.phone_number || ""
+        age: String(session.age || "")
       })
 
       const supabase = createBrowserClient()
 
       // Fetch fresh deletion status from database (not from session cache)
       const { data: freshUserData, error: userCheckError } = await supabase
-          .from("chameleons")
-          .select("deletion_scheduled_at")
-          .eq("user_id", session.user_id)
-          .single()
+        .from("chameleons")
+        .select("deletion_scheduled_at")
+        .eq("user_id", session.user_id)
+        .single()
 
       // Check if user account was deleted (not found in database)
       if (!freshUserData || userCheckError?.code === 'PGRST116') {
-          console.log("User account has been deleted, clearing local storage...")
-          // Clear all local storage
-          localStorage.clear()
-          // Clear session storage
-          sessionStorage.clear()
-          // Clear all cookies
-          document.cookie.split(";").forEach((c) => {
-            const eqPos = c.indexOf("=")
-            const name = eqPos > -1 ? c.substr(0, eqPos) : c
-            document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`
-          })
-          // Redirect to auth page
-          setIsRedirecting(true)
-          router.push("/auth")
-          return
-        }
+        console.log("🗑️ User account has been deleted, clearing local storage...")
+        // Clear all local storage
+        localStorage.clear()
+        // Clear session storage
+        sessionStorage.clear()
+        // Clear all cookies
+        document.cookie.split(";").forEach((c) => {
+          const eqPos = c.indexOf("=")
+          const name = eqPos > -1 ? c.substr(0, eqPos) : c
+          document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`
+        })
+        // Redirect to auth page
+        setIsRedirecting(true)
+        router.push("/auth")
+        return
+      }
+
+      // Update userData with fresh deletion_scheduled_at
+      if (freshUserData) {
+        setUserData((prev: any) => ({
+          ...prev,
+          deletion_scheduled_at: freshUserData.deletion_scheduled_at
+        }))
+      }
 
       // Get user's quiz attempts
       const { data: attemptsData } = await supabase
@@ -483,22 +488,20 @@ export default function ProfilePage() {
   const handleCancelEdit = () => {
     setEditForm({
       username: userData.username,
-      age: userData.age.toString(),
-      phone_number: userData.phone_number
+      age: userData.age.toString()
     })
     setIsEditing(false)
     setValidationErrors({})
   }
 
   const validateForm = () => {
-    const errors: { username?: string; age?: string; phone_number?: string; general?: string } = {}
+    const errors: { username?: string; age?: string; general?: string } = {}
 
     // Check if at least one field has been changed
     const hasUsernameChanged = editForm.username.trim() !== userData.username
     const hasAgeChanged = parseInt(editForm.age) !== userData.age
-    const hasPhoneChanged = editForm.phone_number.trim() !== userData.phone_number
 
-    if (!hasUsernameChanged && !hasAgeChanged && !hasPhoneChanged) {
+    if (!hasUsernameChanged && !hasAgeChanged) {
       errors.general = "At least one field must be changed to save"
     }
 
@@ -517,13 +520,6 @@ export default function ProfilePage() {
       errors.age = "Please enter a valid age"
     } else if (ageNum > 99) {
       errors.age = "Age cannot exceed 99 years"
-    }
-
-    // Phone number validation
-    if (!editForm.phone_number.trim()) {
-      errors.phone_number = "Phone number is required"
-    } else if (editForm.phone_number.trim().length < 11) {
-      errors.phone_number = "Phone number must be at least 11 characters long"
     }
 
     setValidationErrors(errors)
@@ -546,8 +542,7 @@ export default function ProfilePage() {
         .from("chameleons")
         .update({
           username: editForm.username.trim(),
-          age: parseInt(editForm.age),
-          phone_number: editForm.phone_number.trim()
+          age: parseInt(editForm.age)
         })
         .eq("user_id", userData.user_id)
         .select()
@@ -795,6 +790,16 @@ export default function ProfilePage() {
                 </div>
                 
                 <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
+                  <div className="p-3 rounded-full bg-green-500/20">
+                    <Phone className="w-5 h-5 text-green-400" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-white/60">Phone</p>
+                    <p className="text-white font-medium">{userData.phone_number || 'Not provided'}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
                   <div className="p-3 rounded-full bg-purple-500/20">
                     <User className="w-5 h-5 text-purple-400" />
                   </div>
@@ -815,31 +820,6 @@ export default function ProfilePage() {
                       </>
                     ) : (
                       <p className="text-white font-medium">{userData.username}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-green-500/20">
-                    <Phone className="w-5 h-5 text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <Label htmlFor="phone_number" className="text-sm text-white/60 block mb-1">Phone Number</Label>
-                    {isEditing ? (
-                      <>
-                        <Input
-                          id="phone_number"
-                          name="phone_number"
-                          value={editForm.phone_number}
-                          onChange={handleInputChange}
-                          className={`bg-white/10 border-white/20 text-white ${validationErrors.phone_number ? 'border-red-500' : ''}`}
-                        />
-                        {validationErrors.phone_number && (
-                          <p className="text-red-400 text-xs mt-1">{validationErrors.phone_number}</p>
-                        )}
-                      </>
-                    ) : (
-                      <p className="text-white font-medium">{userData.phone_number}</p>
                     )}
                   </div>
                 </div>
@@ -1510,8 +1490,8 @@ export default function ProfilePage() {
             <CardContent className="space-y-4">
               <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20">
                 <p className="text-white/70 text-sm mb-4">
-                  🌟<span className="italic">"Sometimes we need to start something over."</span> 
-                  <span className="text-white/50"> - Someone may I Love!</span>
+                  🌟<span className="italic">"Sometimes we need to start over."</span> 
+                  <span className="text-white/50"> - Some may I Love!</span>
                 </p>
                 <p className="text-white/60 text-sm">
                   Deleting your account will remove all your quiz attempts, notifications, and that sweet, 
@@ -1541,6 +1521,3 @@ export default function ProfilePage() {
     </div>
   )
 }
-
-
-
