@@ -1491,7 +1491,7 @@ export default function ProfilePage() {
               <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20">
                 <p className="text-white/70 text-sm mb-4">
                   🌟<span className="italic">"Sometimes we need to start over."</span> 
-                  <span className="text-white/50"> - Some may I Love!</span>
+                  <span className="text-white/50"> - Someone may I Love!</span>
                 </p>
                 <p className="text-white/60 text-sm">
                   Deleting your account will remove all your quiz attempts, notifications, and that sweet, 
@@ -1521,3 +1521,4 @@ export default function ProfilePage() {
     </div>
   )
 }
+
