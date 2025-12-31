@@ -172,7 +172,7 @@ const NextExams = () => {
   return (
     <div className="space-y-6 m-8">
       {/* Meme Image */}
-      <div className="flex justify-center mb-6">
+      {/* <div className="flex justify-center mb-6">
         <div className="relative p-1 rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-fuchsia-500 animate-pulse">
           <div className="relative w-32 h-32 bg-black/90 rounded-xl overflow-hidden">
             <Image 
@@ -183,7 +183,7 @@ const NextExams = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Premium Header */}
       <div className="relative">
