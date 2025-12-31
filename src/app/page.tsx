@@ -590,7 +590,7 @@ export default function HomePage() {
                   &copy; {new Date().getDate()} of {new Date().toLocaleString('default', { month: 'long' })} {new Date().getFullYear()} - Chameleon FCDS. All rights reserved.
                 </p>
                 <p className="copy mb-2">
-                  Chameleon FCDS - Educational Platform by Levi Ackerman
+                  Chameleon FCDS - Educational Platform by Abdelrahman Ahmed (Levi Ackerman)
                 </p>
                 {username && (
                   <p className="text-xs text-white/40" style={{ fontFamily: 'forte' }}>
