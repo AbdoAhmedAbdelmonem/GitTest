@@ -152,7 +152,7 @@ const CountdownTimer = ({ onTournamentEnd }: { onTournamentEnd?: (ended: boolean
             Tournament Ends In
           </span>
         </div>
-        <div className="text-white/60 text-xs md:text-sm">December 28th, 2025 at 10:35 PM</div>
+        <div className="text-white/60 text-xs md:text-sm">June 30th, 2026 at 11:59:59 PM</div>
       </div>{" "}
       <div className="grid grid-cols-4 gap-2 md:gap-3">
         {[
@@ -1737,3 +1737,4 @@ export default function TournamentPage() {
     </div>
   );
 }
+
