@@ -135,7 +135,7 @@
     "numb": 12,
     "type": "Multiple Choices",
     "question": "What is the smallest addressable area on a disk called?",
-    "answer": "B) Cluster",
+    "answer": "A) Sector",
     "options": [
       "A) Sector",
       "B) Cluster",
