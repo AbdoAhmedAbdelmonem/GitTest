@@ -134,13 +134,13 @@
   {
     "numb": 12,
     "type": "Multiple Choices",
-    "question": "What is the smallest addressable area on a disk called?",
-    "answer": "A) Sector",
+    "question": "Each track divided into small parts called called?",
+    "answer": "A) Sectors",
     "options": [
-      "A) Sector",
-      "B) Cluster",
-      "C) Track",
-      "D) Cylinder"
+      "A) Sectors",
+      "B) Clusters",
+      "C) Tracks",
+      "D) Cylinders"
     ]
   },
   {
