@@ -925,7 +925,81 @@ export const departmentData: { [key: string]: Department } = {
                 sections: "https://drive.google.com/drive/folders/1vKXnF7anmsn_vUMUCmL8geYGVFwWpz9R?usp=drive_link",
                 videos: ["https://youtube.com/playlist?list=PLAtIITWfkz9AquTyThwz7mkg6dGqIXKI3&si=kJnBpQQ--3kW-gSF"],
                 summaries: "https://drive.google.com/drive/folders/1q6Wct_XlOa-vcL5oZQmOh-M4DShs79pm?usp=drive_link",
-                exams: "https://drive.google.com/drive/folders/1yalskt-sOK3_0envMxfdiVtTXD7OfV-k?usp=drive_link"
+                exams: "https://drive.google.com/drive/folders/1yalskt-sOK3_0envMxfdiVtTXD7OfV-k?usp=drive_link",
+                quizzes: [
+                  {
+                    id: "DOE_001",
+                    name: "Introduction to Design of Experiments",
+                    code: "DOE_001",
+                    duration: "OP", // in minutes
+                    questions: 15,
+                    jsonFile: "/quizzes/DOE/DOE_Quizzes/DOE_001.json"
+                  },
+                  {
+                    id: "DOE_002",
+                    name: "DOE with Statistics",
+                    code: "DOE_002",
+                    duration: "OP", // in minutes
+                    questions: 15,
+                    jsonFile: "/quizzes/DOE/DOE_Quizzes/DOE_002.json"
+                  },
+                  {
+                    id: "DOE_003",
+                    name: "Completely Randomized Design - Testing A Hypothesis",
+                    code: "DOE_003",
+                    duration: "OP", // in minutes
+                    questions: 15,
+                    jsonFile: "/quizzes/DOE/DOE_Quizzes/DOE_003.json"
+                  },
+                  {
+                    id: "DOE_004",
+                    name: "Stratified Random Sampling",
+                    code: "DOE_004",
+                    duration: "OP", // in minutes
+                    questions: 15,
+                    jsonFile: "/quizzes/DOE/DOE_Quizzes/DOE_004.json"
+                  },
+                  {
+                    id: "DOE_005",
+                    name: "Domain Estimation",
+                    code: "DOE_005",
+                    duration: "OP", // in minutes
+                    questions: 15,
+                    jsonFile: "/quizzes/DOE/DOE_Quizzes/DOE_005.json"
+                  },
+                  {
+                    id: "DOE_006",
+                    name: "Cluster Sampling",
+                    code: "DOE_006",
+                    duration: "OP", // in minutes
+                    questions: 15,  
+                    jsonFile: "/quizzes/DOE/DOE_Quizzes/DOE_006.json"
+                  },
+                  {
+                    id: "DOE_007",
+                    name: "Cluster Sampling (continued)",
+                    code: "DOE_007",
+                    duration: "OP", // in minutes
+                    questions: 15,
+                    jsonFile: "/quizzes/DOE/DOE_Quizzes/DOE_007.json"
+                  },
+                  {
+                    id: "DOE_008",
+                    name: "Fully Design of Experiments Revision (Theoritical)",
+                    code: "DOE_008",
+                    duration: "OP", // in minutes
+                    questions: 50,
+                    jsonFile: "/quizzes/DOE/DOE_Quizzes/DOE_008.json"
+                  },
+                  {
+                    id: "DOE_009",
+                    name: "Fully Design of Experiments Revision (Practical)",
+                    code: "DOE_009",
+                    duration: "OP", // in minutes
+                    questions: 50,
+                    jsonFile: "/quizzes/DOE/DOE_Quizzes/DOE_009.json"
+                  }
+                ]
               },
             },
             {
@@ -6569,6 +6643,7 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
 
 
 
