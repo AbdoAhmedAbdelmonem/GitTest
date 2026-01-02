@@ -1,0 +1,212 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What is an Experiment?",
+    "answer": "B) A planned study with controlled variable manipulation",
+    "options": [
+      "A) A study that relies only on historical data without any intervention",
+      "B) A planned study with controlled variable manipulation",
+      "C) A statistical analysis of existing data from multiple sources",
+      "D) Observing natural phenomena without any researcher intervention"
+    ],
+    "image": null,
+    "explanation": "An experiment is a planned study in which one or more variables (factors) are manipulated to observe the effect on another variable (response)."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "What distinguishes Experiments from Observational Studies?",
+    "answer": "A) Experiments prove causation",
+    "options": [
+      "A) Experiments prove causation",
+      "B) Observational studies are always more accurate and reliable",
+      "C) There is absolutely no difference between them",
+      "D) Experiments can only use historical data from databases"
+    ],
+    "image": null,
+    "explanation": "Experiments demonstrate cause-and-effect relationships, while observational studies show only correlation."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "What are the Four Principles of Experimental Design?",
+    "answer": "C) Control, Randomization, Replication, Precision",
+    "options": [
+      "A) Analysis, Design, Testing, Validation, and Documentation",
+      "B) Planning, Execution, Monitoring, Evaluation, and Reporting",
+      "C) Control, Randomization, Replication, Precision",
+      "D) Sampling, Measuring, Recording, Reporting, and Publishing"
+    ],
+    "image": null,
+    "explanation": "The four principles are: Control, Randomization, Replication, and Precision."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "What does Control mean in experimental design?",
+    "answer": "B) Only the studied factor differs",
+    "options": [
+      "A) Increasing the number of samples as much as possible",
+      "B) Only the studied factor differs",
+      "C) Reducing experiment cost by using fewer resources",
+      "D) Speeding up data collection using automation tools"
+    ],
+    "image": null,
+    "explanation": "Control means making sure the only difference between experiments is the factor being studied."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "Why use Randomization?",
+    "answer": "A) To avoid bias",
+    "options": [
+      "A) To avoid bias",
+      "B) To speed up the experiment significantly",
+      "C) To reduce the required sample size",
+      "D) To simplify the data analysis process"
+    ],
+    "image": null,
+    "explanation": "Randomization lets chance decide to avoid bias and prevents hidden factors from consistently favoring one method."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "What is A/B Testing?",
+    "answer": "C) Comparing two versions with users",
+    "options": [
+      "A) Testing a system twice consecutively to check consistency",
+      "B) Comparing results of two completely different systems",
+      "C) Comparing two versions with users",
+      "D) Testing performance on historical data from archives"
+    ],
+    "image": null,
+    "explanation": "A/B Testing is the industry standard for testing changes by comparing two versions (A and B) with real users."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "What is Hyperparameter Tuning?",
+    "answer": "B) Testing ML model parameters",
+    "options": [
+      "A) Changing training data distribution randomly",
+      "B) Testing ML model parameters",
+      "C) Improving hardware performance through upgrades",
+      "D) Increasing test set size significantly"
+    ],
+    "image": null,
+    "explanation": "Hyperparameter Tuning is the systematic testing of ML model parameters such as learning rate, batch size, and number of layers."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "How many times should you repeat an experiment for Replication?",
+    "answer": "C) 5+ times with different seeds",
+    "options": [
+      "A) Once is enough if done correctly",
+      "B) At least twice for comparison",
+      "C) 5+ times with different seeds",
+      "D) At least 100 times minimum"
+    ],
+    "image": null,
+    "explanation": "You should train/evaluate with multiple seeds (5+) and report mean ± std."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "Which is a common mistake in Data Science experiments?",
+    "answer": "D) All of the above",
+    "options": [
+      "A) Using different datasets",
+      "B) Running once only",
+      "C) Changing many factors",
+      "D) All of the above"
+    ],
+    "image": null,
+    "explanation": "Common mistakes include: using different datasets, running experiments only once, no randomization, changing too many factors at once."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "What is a Control Group?",
+    "answer": "A) Group with no/standard treatment",
+    "options": [
+      "A) Group with no/standard treatment",
+      "B) The group receiving the experimental treatment only",
+      "C) The randomly selected group from population",
+      "D) The largest group in the experiment"
+    ],
+    "image": null,
+    "explanation": "The Control Group receives no treatment or the standard treatment, used for comparison."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "When comparing two ML models, what should be identical?",
+    "answer": "D) All of these",
+    "options": [
+      "A) Dataset and split",
+      "B) Preprocessing steps",
+      "C) Hardware/software",
+      "D) All of these"
+    ],
+    "image": null,
+    "explanation": "Apply Control: same dataset split, same preprocessing, same hardware/software stack."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "What are Factors in experimental design?",
+    "answer": "B) Manipulated variables",
+    "options": [
+      "A) The final results we obtain from the experiment",
+      "B) Manipulated variables",
+      "C) Number of replications needed for validity",
+      "D) The total sample size in the population"
+    ],
+    "image": null,
+    "explanation": "Factors are the variables that are manipulated in the experiment."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "What is the Response in experimental design?",
+    "answer": "C) Measured/observed variable",
+    "options": [
+      "A) The independent variable that we control",
+      "B) The factor we manipulate in experiments",
+      "C) Measured/observed variable",
+      "D) The effect size calculated from data"
+    ],
+    "image": null,
+    "explanation": "The Response is the dependent variable that is measured or observed."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "Why use large datasets for Precision?",
+    "answer": "A) Small sets = high variance",
+    "options": [
+      "A) Small sets = high variance",
+      "B) To reduce training time significantly",
+      "C) To save computing costs for the project",
+      "D) To simplify analysis and interpretation"
+    ],
+    "image": null,
+    "explanation": "Small test sets lead to high variance in results."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "What makes experiments good?",
+    "answer": "B) Controlled change",
+    "options": [
+      "A) Being faster than other experiments",
+      "B) Controlled change",
+      "C) Being cheaper than alternatives available",
+      "D) Needing fewer samples than others"
+    ],
+    "image": null,
+    "explanation": "Good experiments are based on controlled change, leading to stronger conclusions."
+  }
+]

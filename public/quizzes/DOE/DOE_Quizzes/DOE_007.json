@@ -1,0 +1,212 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "Cluster sample size formula?",
+    "answer": "A) n_cluster = n_STR × deff",
+    "options": [
+      "A) n_cluster = n_STR × deff",
+      "B) n_cluster = n_STR / deff always",
+      "C) n_cluster = n_STR + deff always",
+      "D) n_cluster = n_STR - deff always"
+    ],
+    "image": null,
+    "explanation": "n_cluster = n_STR × deff (multiply by design effect)."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "n_STR=1150, b=21, ρ=0.1. n_cluster=?",
+    "answer": "B) 3,450",
+    "options": [
+      "A) 383",
+      "B) 3,450",
+      "C) 1,153",
+      "D) 1,147"
+    ],
+    "image": null,
+    "explanation": "n_cluster = 1150 × (1 + (21 - 1) × 0.1) = 3,450"
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "What is PPS Sampling?",
+    "answer": "C) Selection proportional to size",
+    "options": [
+      "A) Equal probability for all units always",
+      "B) Random selection without replacement",
+      "C) Selection proportional to size",
+      "D) Systematic selection from ordered list"
+    ],
+    "image": null,
+    "explanation": "PPS = Probability Proportional to Size."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "PPS selection probability formula?",
+    "answer": "A) πₖ = n × Mₖ / M",
+    "options": [
+      "A) πₖ = n × Mₖ / M",
+      "B) πₖ = Mₖ / n always",
+      "C) πₖ = M / Mₖ always",
+      "D) πₖ = n / M always"
+    ],
+    "image": null,
+    "explanation": "πₖ = n × Mₖ / M where n=clusters selected, Mₖ=cluster size, M=total size."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "Clusters sizes: 4, 9, 6 (total=19). Select 2. π₁=?",
+    "answer": "B) 8/19",
+    "options": [
+      "A) 4/19",
+      "B) 8/19",
+      "C) 2/19",
+      "D) 18/19"
+    ],
+    "image": null,
+    "explanation": "π₁ = 2(4/19) = 8/19"
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "Same example on Question 5: π₂=?",
+    "answer": "D) 18/19",
+    "options": [
+      "A) 9/19",
+      "B) 2/19",
+      "C) 6/19",
+      "D) 18/19"
+    ],
+    "image": null,
+    "explanation": "π₂ = 2(9/19) = 18/19"
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "Same example on Question 5: π₃=?",
+    "answer": "C) 12/19",
+    "options": [
+      "A) 6/19",
+      "B) 2/19",
+      "C) 12/19",
+      "D) 18/19"
+    ],
+    "image": null,
+    "explanation": "π₃ = 2(6/19) = 12/19"
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "What is Sequential Sampling?",
+    "answer": "B) Units selected individually in order",
+    "options": [
+      "A) All units selected at once randomly",
+      "B) Units selected individually in order",
+      "C) Only first and last units selected",
+      "D) Units selected in pairs always"
+    ],
+    "image": null,
+    "explanation": "Sequential sampling: each unit's selection determined individually and in order."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "When is Sequential Sampling appropriate?",
+    "answer": "C) PPS with minimal replacement",
+    "options": [
+      "A) Extremely Small frame",
+      "B) Implicit stratification not needed",
+      "C) PPS with minimal replacement",
+      "D) Not Mentioned"
+    ],
+    "image": null,
+    "explanation": "Appropriate when: large frame, implicit stratification, PPS with minimal replacement."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "Which is a variance estimation method?",
+    "answer": "D) All listed",
+    "options": [
+      "A) Taylor Series Linearization",
+      "B) Balanced Repeated Replication",
+      "C) Delete-1 Jackknife",
+      "D) All listed"
+    ],
+    "image": null,
+    "explanation": "Methods: Taylor Series, BRR, Delete-1 Jackknife. the last slide in lecture 7."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "What results in equal weights?",
+    "answer": "D) All listed",
+    "options": [
+      "A) SRS",
+      "B) STR with constant rate",
+      "C) Cluster PPS + constant SRS",
+      "D) All listed"
+    ],
+    "image": null,
+    "explanation": "Equal weights: SRS, STR with constant sampling rate, Cluster PPS at first stage + constant SRS at second."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "Does cluster sampling increase precision?",
+    "answer": "A) No, it reduces precision",
+    "options": [
+      "A) No, it reduces precision",
+      "B) Yes, it always increases precision",
+      "C) Precision is unaffected by method",
+      "D) Only with small clusters always"
+    ],
+    "image": null,
+    "explanation": "Cluster sampling is NOT used to increase precision; it typically reduces it but saves costs."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "PPS at stage 1, SRS at stage 2 gives?",
+    "answer": "B) Equal overall probability",
+    "options": [
+      "A) Unequal probabilities always",
+      "B) Equal overall probability",
+      "C) Zero probability for some units",
+      "D) Double the design effect always"
+    ],
+    "image": null,
+    "explanation": "PPS combined with SRS at second stage gives equal overall selection probabilities."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "π₁=8/19, select 3 from 4 households. Joint probability?",
+    "answer": "C) 6/19",
+    "options": [
+      "A) 8/19",
+      "B) 3/19",
+      "C) 6/19",
+      "D) 24/76"
+    ],
+    "image": null,
+    "explanation": "Joint = (3/4)(8/19) = 24/76 = 6/19"
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "What is Chromy's method?",
+    "answer": "A) Circular zone PPS selection",
+    "options": [
+      "A) Circular zone PPS selection",
+      "B) Linear systematic selection only",
+      "C) Random without replacement only",
+      "D) Stratified proportional allocation"
+    ],
+    "image": null,
+    "explanation": "Chromy's Circular Zone Selection: a sequential PPS sampling method."
+  }
+]

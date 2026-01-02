@@ -1,0 +1,212 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What is Cluster Sampling?",
+    "answer": "A) Sampling groups, not individuals",
+    "options": [
+      "A) Sampling groups, not individuals",
+      "B) Selecting every nth individual from list",
+      "C) Stratifying then sampling each stratum",
+      "D) Selecting based on convenience only"
+    ],
+    "image": null,
+    "explanation": "Cluster sampling divides population into groups and samples entire groups."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "Why use Cluster Sampling?",
+    "answer": "B) To reduce costs",
+    "options": [
+      "A) To increase precision always",
+      "B) To reduce costs",
+      "C) To eliminate all bias completely",
+      "D) To increase sample size artificially"
+    ],
+    "image": null,
+    "explanation": "Purpose: reduce average cost per interview when elements are dispersed."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "When to use Cluster Sampling?",
+    "answer": "D) Both A and B",
+    "options": [
+      "A) No element sampling frame",
+      "B) Elements widely dispersed",
+      "C) Maximum precision needed",
+      "D) Both A and B"
+    ],
+    "image": null,
+    "explanation": "Use when: sampling frame unavailable OR data collection expensive due to dispersion."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "Two-Stage Cluster Sampling: What is Stage One?",
+    "answer": "A) Select PSUs",
+    "options": [
+      "A) Select PSUs",
+      "B) Select SSUs from all clusters",
+      "C) Calculate design effect for sample",
+      "D) Estimate population parameters directly"
+    ],
+    "image": null,
+    "explanation": "Stage One: Select Primary Sampling Units (PSU)."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "If PSU is City Block, what is SSU?",
+    "answer": "B) Household",
+    "options": [
+      "A) City",
+      "B) Household",
+      "C) State",
+      "D) Country"
+    ],
+    "image": null,
+    "explanation": "City Block→Household, Household→Family Member, Clinic→Patient, Classroom→Student."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "Cluster vs Stratified: Selection difference?",
+    "answer": "C) Cluster=some groups; Stratified=all",
+    "options": [
+      "A) No difference between them at all",
+      "B) Cluster uses all groups always",
+      "C) Cluster=some groups; Stratified=all",
+      "D) Stratified selects fewer elements always"
+    ],
+    "image": null,
+    "explanation": "Cluster: elements from selected clusters only. Stratified: elements from every stratum."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "High intra-cluster correlation means?",
+    "answer": "A) High sampling variance",
+    "options": [
+      "A) High sampling variance",
+      "B) Low sampling variance always",
+      "C) Better precision always",
+      "D) Smaller design effect always"
+    ],
+    "image": null,
+    "explanation": "High intra-cluster correlation = High similarity within = High sampling variance."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "Design Effect (Deff) formula?",
+    "answer": "B) Deff = 1 + (b-1)ρ",
+    "options": [
+      "A) Deff = b × ρ directly",
+      "B) Deff = 1 + (b-1)ρ",
+      "C) Deff = 1 - (b-1)ρ always",
+      "D) Deff = b / ρ directly"
+    ],
+    "image": null,
+    "explanation": "Deff = 1 + (b-1)ρ where b=elements per cluster, ρ=intra-cluster correlation."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "When ρ=0, Deff=?",
+    "answer": "A) 1",
+    "options": [
+      "A) 1",
+      "B) 0",
+      "C) b",
+      "D) Infinity"
+    ],
+    "image": null,
+    "explanation": "When ρ=0: Deff = 1 + (b-1)(0) = 1 (no design effect)."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "When ρ=1, Deff=?",
+    "answer": "C) b",
+    "options": [
+      "A) 1",
+      "B) 0",
+      "C) b",
+      "D) 1/b"
+    ],
+    "image": null,
+    "explanation": "When ρ=1: Deff = 1 + (b-1)(1) = b (maximum effect)."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "Cluster sampling precision depends on?",
+    "answer": "B) Variance BETWEEN clusters",
+    "options": [
+      "A) Variance within strata only",
+      "B) Variance BETWEEN clusters",
+      "C) Sample size only always",
+      "D) Population size only always"
+    ],
+    "image": null,
+    "explanation": "Cluster sampling precision depends on variance BETWEEN clusters."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "Stratified sampling precision depends on?",
+    "answer": "A) Variance WITHIN strata",
+    "options": [
+      "A) Variance WITHIN strata",
+      "B) Variance between strata only",
+      "C) Number of strata only always",
+      "D) Total population size only"
+    ],
+    "image": null,
+    "explanation": "Stratified sampling precision depends on variance WITHIN strata."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "What is intra-cluster correlation (ρ)?",
+    "answer": "C) Rate of homogeneity",
+    "options": [
+      "A) Correlation between clusters always",
+      "B) Variance between clusters always",
+      "C) Rate of homogeneity",
+      "D) Design effect directly calculated"
+    ],
+    "image": null,
+    "explanation": "ρ (roh) = rate of homogeneity = intra-cluster correlation."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "What is the purpose of Stratified Sampling?",
+    "answer": "D) Both A and B",
+    "options": [
+      "A) Subpopulation estimates",
+      "B) Variance reduction",
+      "C) Cost reduction primarily",
+      "D) Both A and B"
+    ],
+    "image": null,
+    "explanation": "Stratified: subpopulation estimates AND variance reduction."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "If Classroom is PSU, what is SSU?",
+    "answer": "B) Student",
+    "options": [
+      "A) School",
+      "B) Student",
+      "C) District",
+      "D) Teacher"
+    ],
+    "image": null,
+    "explanation": "Classroom→Student relationship in two-stage sampling."
+  }
+]

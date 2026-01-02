@@ -1,0 +1,212 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What are Domain Statistics concerned with?",
+    "answer": "A) Subpopulations",
+    "options": [
+      "A) Subpopulations",
+      "B) The entire population only always",
+      "C) Only numerical variables in data",
+      "D) Only categorical variables in data"
+    ],
+    "image": null,
+    "explanation": "Domain Statistics concern subpopulations within the larger population."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "What is Ratio Estimation used for?",
+    "answer": "B) Estimating ratios of totals",
+    "options": [
+      "A) Only for categorical variables always",
+      "B) Estimating ratios of totals",
+      "C) Only for calculating sample sizes",
+      "D) Only for variance estimation purposes"
+    ],
+    "image": null,
+    "explanation": "Ratio estimation calculates ratios from variable means or proportions."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "What is Poststratification?",
+    "answer": "C) Adjusting weights after collection",
+    "options": [
+      "A) Stratifying before data collection always",
+      "B) Removing outliers from the sample data",
+      "C) Adjusting weights after collection",
+      "D) Selecting clusters randomly from population"
+    ],
+    "image": null,
+    "explanation": "Poststratification adjusts sampling weights after data collection to match known auxiliary information."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "Ratio Estimator formula?",
+    "answer": "A) R̂ = ΣYᵢ / ΣXᵢ",
+    "options": [
+      "A) R̂ = ΣYᵢ / ΣXᵢ",
+      "B) R̂ = ΣYᵢ × ΣXᵢ",
+      "C) R̂ = ΣYᵢ - ΣXᵢ",
+      "D) R̂ = ΣYᵢ + ΣXᵢ"
+    ],
+    "image": null,
+    "explanation": "Ratio Estimator: R̂ = Total Y / Total X"
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "Farm survey: Workers (4,6,3,5,8), Acres (20,35,15,25,40). acre per worker?",
+    "answer": "D) 5.19",
+    "options": [
+      "A) 0.150",
+      "B) 0.193",
+      "C) 0.250",
+      "D) 5.192"
+    ],
+    "image": null,
+    "explanation": "Total Workers=26, Total Acres=135. Ratio=135/26=5.19 acres for every worker."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "What does Contrast Estimation test?",
+    "answer": "A) Differences between domains",
+    "options": [
+      "A) Differences between domains",
+      "B) Similarity within all domains",
+      "C) Total population mean only",
+      "D) Variance within each domain"
+    ],
+    "image": null,
+    "explanation": "Contrast estimation tests custom hypotheses comparing means for domains of interest."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "Domain A=$52K, B=$48K, C=$60K. Contrast A-B with weights (+1,-1,0)?",
+    "answer": "C) $4,000",
+    "options": [
+      "A) $-4,000",
+      "B) $12,000",
+      "C) $4,000",
+      "D) $52,000"
+    ],
+    "image": null,
+    "explanation": "Contrast = (+1)(52000) + (-1)(48000) + (0)(60000) = $4,000"
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "Poststratified Mean formula?",
+    "answer": "B) Ȳ_post = Σwₕ × Ȳₕ",
+    "options": [
+      "A) Ȳ_post = Σnₕ × Ȳₕ always",
+      "B) Ȳ_post = Σwₕ × Ȳₕ",
+      "C) Ȳ_post = Ȳₕ / wₕ always",
+      "D) Ȳ_post = wₕ - Ȳₕ always"
+    ],
+    "image": null,
+    "explanation": "Poststratified Mean = sum of (population proportion × stratum mean)"
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "Grade7: mean=4hrs, pop=40%. Grade8: mean=8hrs, pop=60%. Poststratified mean?",
+    "answer": "A) 6.4 hours",
+    "options": [
+      "A) 6.4 hours",
+      "B) 6.0 hours",
+      "C) 5.6 hours",
+      "D) 12.0 hours"
+    ],
+    "image": null,
+    "explanation": "Ȳ = (0.40)(4) + (0.60)(8) = 1.6 + 4.8 = 6.4"
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "Age 18-39: 5hrs, 40%. Age 40-59: 3hrs, 35%. Age 60+: 2hrs, 25%. Poststratified mean?",
+    "answer": "C) 3.55 hours",
+    "options": [
+      "A) 3.33 hours",
+      "B) 3.00 hours",
+      "C) 3.55 hours",
+      "D) 10.00 hours"
+    ],
+    "image": null,
+    "explanation": "Ȳ = (0.40)(5) + (0.35)(3) + (0.25)(2) = 2.0 + 1.05 + 0.5 = 3.55"
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "Why use Poststratification?",
+    "answer": "B) To improve efficiency",
+    "options": [
+      "A) To increase sample size artificially",
+      "B) To improve efficiency",
+      "C) To reduce the number of strata used",
+      "D) To eliminate all sampling bias completely"
+    ],
+    "image": null,
+    "explanation": "Poststratification improves efficiency by adjusting to known population proportions."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "What is the adjusted weight in Poststratification called?",
+    "answer": "A) Poststratification weight",
+    "options": [
+      "A) Poststratification weight",
+      "B) Sampling weight only always",
+      "C) Design weight only always",
+      "D) Base weight only always"
+    ],
+    "image": null,
+    "explanation": "The adjusted weight is called the poststratification weight."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "Poststratification uses what type of information?",
+    "answer": "C) Known auxiliary information",
+    "options": [
+      "A) Only sample data available",
+      "B) Unknown population parameters",
+      "C) Known auxiliary information",
+      "D) Random guesses about population"
+    ],
+    "image": null,
+    "explanation": "Poststratification adjusts weights to match known auxiliary information (e.g., census)."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "For categorical variables, ratio estimation uses?",
+    "answer": "B) Proportions",
+    "options": [
+      "A) Means directly always",
+      "B) Proportions",
+      "C) Variances only always",
+      "D) Standard deviations only"
+    ],
+    "image": null,
+    "explanation": "For categorical variables, ratios are calculated with proportions."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "Contrast weights must sum to?",
+    "answer": "A) Zero",
+    "options": [
+      "A) Zero",
+      "B) One always",
+      "C) The sample size n",
+      "D) The number of domains k"
+    ],
+    "image": null,
+    "explanation": "Contrast weights typically sum to zero to compare differences."
+  }
+]

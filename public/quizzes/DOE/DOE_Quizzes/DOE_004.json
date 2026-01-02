@@ -1,0 +1,212 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "When is Stratified Random Sampling appropriate?",
+    "answer": "D) All listed reasons",
+    "options": [
+      "A) Separate estimates needed per stratum only",
+      "B) Control data collection costs only",
+      "C) Correlation with auxiliary variable only",
+      "D) All listed reasons"
+    ],
+    "image": null,
+    "explanation": "STR is appropriate when: separate estimates needed, controlling costs, minimum sample sizes required, or correlation with auxiliary variable."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "Optimal Allocation formula includes?",
+    "answer": "A) Size, Std Dev, and Cost",
+    "options": [
+      "A) Size, Std Dev, and Cost",
+      "B) Only stratum size in the formula",
+      "C) Only standard deviation value",
+      "D) Only cost per unit collected"
+    ],
+    "image": null,
+    "explanation": "Optimal Allocation: nₕ = n × (Nₕ×Sₕ/√cₕ) / Σ(Nᵢ×Sᵢ/√cᵢ)"
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "When to use Neyman Allocation?",
+    "answer": "B) When costs are equal",
+    "options": [
+      "A) When variances are equal across all strata",
+      "B) When costs are equal",
+      "C) When stratum sizes are equal always",
+      "D) In all cases regardless of conditions"
+    ],
+    "image": null,
+    "explanation": "Neyman Allocation: when costs are equal, cost drops from formula."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "Proportional Allocation formula?",
+    "answer": "C) nₕ = n × Nₕ/N",
+    "options": [
+      "A) nₕ = n × Sₕ / ΣSᵢ formula",
+      "B) nₕ = n × cₕ / Σcᵢ formula",
+      "C) nₕ = n × Nₕ/N",
+      "D) nₕ = N × n / Nₕ formula"
+    ],
+    "image": null,
+    "explanation": "Proportional: sample proportional to stratum size."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "Urban (N=400, S=15, c=$10), Suburban (N=300, S=10, c=$5), Rural (N=300, S=8, c=$2). Optimal Allocation n=100. Urban sample?",
+    "answer": "B) 39",
+    "options": [
+      "A) 33",
+      "B) 39",
+      "C) 45",
+      "D) 50"
+    ],
+    "image": null,
+    "explanation": "Urban: 400×15/√10=1898.9. Total=4937.6. Urban=100×(1898.9/4937.6)≈39"
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "Same example: Suburban sample?",
+    "answer": "A) 27",
+    "options": [
+      "A) 27",
+      "B) 30",
+      "C) 35",
+      "D) 40"
+    ],
+    "image": null,
+    "explanation": "Suburban = 100 × (1341.6/4937.6) ≈ 27"
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "Same example: Rural sample?",
+    "answer": "C) 34",
+    "options": [
+      "A) 25",
+      "B) 30",
+      "C) 34",
+      "D) 40"
+    ],
+    "image": null,
+    "explanation": "Rural = 100 × (1697.1/4937.6) ≈ 34"
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "School1 (N=500, S=20), School2 (N=300, S=10), School3 (N=200, S=5). Neyman n=100. School1?",
+    "answer": "A) 71",
+    "options": [
+      "A) 71",
+      "B) 50",
+      "C) 60",
+      "D) 80"
+    ],
+    "image": null,
+    "explanation": "N×S: 10000+3000+1000=14000. School1=100×(10000/14000)≈71"
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "Same example: School2?",
+    "answer": "B) 21",
+    "options": [
+      "A) 15",
+      "B) 21",
+      "C) 30",
+      "D) 25"
+    ],
+    "image": null,
+    "explanation": "School2 = 100 × (3000/14000) ≈ 21"
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "Same example: School3?",
+    "answer": "A) 8",
+    "options": [
+      "A) 8",
+      "B) 10",
+      "C) 15",
+      "D) 20"
+    ],
+    "image": null,
+    "explanation": "School3 = 100 × (1000/14000) ≈ 8"
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "Urban (N=500), Suburban (N=300), Rural (N=200). n=100. Sampling rate?",
+    "answer": "B) 10%",
+    "options": [
+      "A) 5%",
+      "B) 10%",
+      "C) 15%",
+      "D) 20%"
+    ],
+    "image": null,
+    "explanation": "Rate = n/N = 100/1000 = 10%"
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "Same example: Urban sample (Proportional)?",
+    "answer": "C) 50",
+    "options": [
+      "A) 30",
+      "B) 40",
+      "C) 50",
+      "D) 60"
+    ],
+    "image": null,
+    "explanation": "Urban = 100 × (500/1000) = 50"
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "What to determine when constructing strata?",
+    "answer": "D) All listed",
+    "options": [
+      "A) Stratification variable only",
+      "B) Number of strata only",
+      "C) Strata boundaries only",
+      "D) All listed"
+    ],
+    "image": null,
+    "explanation": "Determine: stratification variable(s), number of strata, strata boundaries."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "Stratum A: N=600, n=60. Sampling rate?",
+    "answer": "B) 10%",
+    "options": [
+      "A) 6%",
+      "B) 10%",
+      "C) 60%",
+      "D) 100%"
+    ],
+    "image": null,
+    "explanation": "Rate = 60/600 = 10%"
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "In Proportional Allocation, sampling rate across strata?",
+    "answer": "A) Constant for all",
+    "options": [
+      "A) Constant for all",
+      "B) Varies by stratum size always",
+      "C) Varies by stratum variance always",
+      "D) Varies by stratum cost always"
+    ],
+    "image": null,
+    "explanation": "Proportional Allocation: sampling rate is constant, nₕ/Nₕ = n/N."
+  }
+]

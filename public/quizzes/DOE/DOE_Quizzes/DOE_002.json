@@ -1,0 +1,212 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What is Statistics?",
+    "answer": "B) Science of data collection and analysis",
+    "options": [
+      "A) The study of numbers only without any context",
+      "B) Science of data collection and analysis",
+      "C) A method for drawing graphs and charts only",
+      "D) A technique for calculating averages only"
+    ],
+    "image": null,
+    "explanation": "Statistics is the science of conducting studies to collect, organize, summarize, analyze, and interpret data."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "What is the difference between Population and Sample?",
+    "answer": "A) Population is all; Sample is subset",
+    "options": [
+      "A) Population is all; Sample is subset",
+      "B) Sample is larger than Population in studies",
+      "C) There is no difference between them",
+      "D) Population is randomly selected each time"
+    ],
+    "image": null,
+    "explanation": "Population is the entire collection, while Sample is a subset actually observed."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "What is a Simple Random Sample (SRS)?",
+    "answer": "C) Equal probability for all selections",
+    "options": [
+      "A) Selecting the first n items from the population",
+      "B) Selecting the most important items only",
+      "C) Equal probability for all selections",
+      "D) A sample based on researcher's opinion"
+    ],
+    "image": null,
+    "explanation": "SRS: each collection of n population items is equally likely to comprise the sample."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "Which is Numerical/Quantitative data?",
+    "answer": "B) Height, Weight, Age",
+    "options": [
+      "A) Gender and Hair color categories",
+      "B) Height, Weight, Age",
+      "C) Zip code and postal codes",
+      "D) Marital status categories"
+    ],
+    "image": null,
+    "explanation": "Numerical data assigns numerical values like Height, Weight, Age."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "Discrete vs Continuous variables?",
+    "answer": "A) Discrete = specific; Continuous = range",
+    "options": [
+      "A) Discrete = specific; Continuous = range",
+      "B) Continuous has specific values; Discrete has range values",
+      "C) There is no difference between them whatsoever",
+      "D) Discrete is for categorical data only always"
+    ],
+    "image": null,
+    "explanation": "Discrete has specific values (count); Continuous has values in a range (measurements)."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "ML model accuracy: mean=85%, std=3%. Model got 91%. Z-Score?",
+    "answer": "B) 2",
+    "options": [
+      "A) 1",
+      "B) 2",
+      "C) 3",
+      "D) 6"
+    ],
+    "image": null,
+    "explanation": "Z = (91 - 85) / 3 = 6 / 3 = 2"
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "If mean=85%, std=3%, z=-1.7, what is X?",
+    "answer": "C) 79.9%",
+    "options": [
+      "A) 83.3%",
+      "B) 86.7%",
+      "C) 79.9%",
+      "D) 90.1%"
+    ],
+    "image": null,
+    "explanation": "X = μ + z×σ = 85 + (-1.7×3) = 79.9%"
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "68-95-99.7% Rule: What % falls within μ ± 2σ?",
+    "answer": "B) 95%",
+    "options": [
+      "A) 68%",
+      "B) 95%",
+      "C) 99.7%",
+      "D) 50%"
+    ],
+    "image": null,
+    "explanation": "About 95% falls within μ ± 2σ."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "Sample Mean formula?",
+    "answer": "A) X̄ = ΣXᵢ / n",
+    "options": [
+      "A) X̄ = ΣXᵢ / n",
+      "B) X̄ = Σ(Xᵢ - X̄)²",
+      "C) X̄ = n × ΣXᵢ",
+      "D) X̄ = ΣXᵢ / (n-1)"
+    ],
+    "image": null,
+    "explanation": "Sample Mean = sum divided by count."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "Why divide by (n-1) for sample variance?",
+    "answer": "B) Unbiased estimator",
+    "options": [
+      "A) To simplify calculation steps",
+      "B) Unbiased estimator",
+      "C) Because n-1 is easier to compute",
+      "D) To always increase variance value"
+    ],
+    "image": null,
+    "explanation": "Dividing by (n-1) gives an unbiased estimator of population variance."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "Data: 3, 5, 7, 9. Mean?",
+    "answer": "C) 6",
+    "options": [
+      "A) 5",
+      "B) 5.5",
+      "C) 6",
+      "D) 7"
+    ],
+    "image": null,
+    "explanation": "(3+5+7+9)/4 = 24/4 = 6"
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "How to find Median when n is even?",
+    "answer": "B) Average of two middle values",
+    "options": [
+      "A) The middle value only",
+      "B) Average of two middle values",
+      "C) The largest value in set",
+      "D) The smallest value in set"
+    ],
+    "image": null,
+    "explanation": "If n is even, Median = average of the two middle values."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "Data: 3,8,14,5,2. Median?",
+    "answer": "C) 5",
+    "options": [
+      "A) 7",
+      "B) 6",
+      "C) 5",
+      "D) 8"
+    ],
+    "image": null,
+    "explanation": "n=5 (odd), position=(5+1)/2=3, third value=5 after sorting."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "What is Standard Deviation?",
+    "answer": "A) Square root of variance",
+    "options": [
+      "A) Square root of variance",
+      "B) The square of variance calculation",
+      "C) Mean divided by n directly",
+      "D) Max minus min value range"
+    ],
+    "image": null,
+    "explanation": "Standard deviation s = √s², measuring spread around the mean."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "Normal distribution: % within \"one\" std of mean?",
+    "answer": "A) 68%",
+    "options": [
+      "A) 68%",
+      "B) 50%",
+      "C) 95%",
+      "D) 99%"
+    ],
+    "image": null,
+    "explanation": "About 68% falls within μ ± σ."
+  }
+]

@@ -1,0 +1,226 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What is the Null Hypothesis (H₀)?",
+    "answer": "B) 'No effect' or 'no difference' claim",
+    "options": [
+      "A) The claim we want to prove is true",
+      "B) 'No effect' or 'no difference' claim",
+      "C) The hypothesis we always accept in testing",
+      "D) The hypothesis that cannot be tested ever"
+    ],
+    "image": null,
+    "explanation": "H₀ is the claim being tested, typically 'no effect' or 'no difference'."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "What is ANOVA?",
+    "answer": "C) Compares means of 3+ groups",
+    "options": [
+      "A) A test for comparing only two groups together",
+      "B) A method for calculating standard deviation",
+      "C) Compares means of 3+ groups",
+      "D) A technique for plotting data visually"
+    ],
+    "image": null,
+    "explanation": "ANOVA compares means of three or more groups by analyzing variance."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "What are ANOVA assumptions?",
+    "answer": "D) All listed",
+    "options": [
+      "A) Independence only",
+      "B) Homogeneity only",
+      "C) Normality only",
+      "D) All listed"
+    ],
+    "image": null,
+    "explanation": "ANOVA assumes: Independence, Homogeneity of variances, Normal distribution within groups."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "What is Levene's test for?",
+    "answer": "A) Testing variance homogeneity",
+    "options": [
+      "A) Testing variance homogeneity",
+      "B) Testing normal distribution assumption",
+      "C) Comparing means directly between groups",
+      "D) Testing independence of observations"
+    ],
+    "image": null,
+    "explanation": "Levene's test checks homogeneity of variances."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "One-way vs Two-way ANOVA?",
+    "answer": "B) One=1 factor; Two=2 factors",
+    "options": [
+      "A) There is no difference between them",
+      "B) One=1 factor; Two=2 factors",
+      "C) One-way is more accurate always",
+      "D) Two-way tests only two groups"
+    ],
+    "image": null,
+    "explanation": "One-way has one independent variable; Two-way has two and tests interaction."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "What does F-Statistic represent?",
+    "answer": "C) Between/Within variance ratio",
+    "options": [
+      "A) The mean of all groups combined",
+      "B) The total sum of squares value",
+      "C) Between/Within variance ratio",
+      "D) The number of groups in study"
+    ],
+    "image": null,
+    "explanation": "F = MS_Between / MS_Within"
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "4 groups: df_Between?",
+    "answer": "B) 3",
+    "options": [
+      "A) 4",
+      "B) 3",
+      "C) 5",
+      "D) 2"
+    ],
+    "image": null,
+    "explanation": "df_Between = k - 1 = 4 - 1 = 3"
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "N=50, k=5: df_Within?",
+    "answer": "C) 45",
+    "options": [
+      "A) 50",
+      "B) 49",
+      "C) 45",
+      "D) 55"
+    ],
+    "image": null,
+    "explanation": "df_Within = N - k = 50 - 5 = 45"
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "H₀: μ≥30, H₁: μ<30. n=5, x̄=20, σ=6. Find Z=?",
+    "answer": "A) -3.73",
+    "options": [
+      "A) -3.73",
+      "B) 3.73",
+      "C) -1.67",
+      "D) 1.67"
+    ],
+    "image": null,
+    "explanation": "Z = (20-30)/(6/√5) = -10/2.68 ≈ -3.73"
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "p-value=0.000123, α=0.05. Conclusion?",
+    "answer": "A) Reject H₀",
+    "options": [
+      "A) Reject H₀",
+      "B) Accept H₀ because p-value is positive",
+      "C) We cannot make any decision here",
+      "D) We need more data to conclude"
+    ],
+    "image": null,
+    "explanation": "p-value < α, so reject H₀."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "Z-Test Statistic formula?",
+    "answer": "B) z = (X̄-μ₀)/(σ/√n)",
+    "options": [
+      "A) z = (X̄-μ₀) × σ directly",
+      "B) z = (X̄-μ₀)/(σ/√n)",
+      "C) z = n × (X̄-μ₀) always",
+      "D) z = σ / (X̄-μ₀) formula"
+    ],
+    "image": null,
+    "explanation": "Z-Test: z = (X̄ - μ₀) / (σ/√n)"
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "What does Two-way ANOVA test?",
+    "answer": "D) All listed",
+    "options": [
+      "A) Factor 1 effect only",
+      "B) Factor 2 effect only",
+      "C) Interaction only",
+      "D) All listed"
+    ],
+    "image": null,
+    "explanation": "Tests main effects of both factors plus their interaction."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "SS_Between=120, df_Between=3. MS_Between?",
+    "answer": "B) 40",
+    "options": [
+      "A) 123",
+      "B) 40",
+      "C) 360",
+      "D) 117"
+    ],
+    "image": null,
+    "explanation": "MS = SS/df = 120/3 = 40"
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "MS_Between=50, MS_Within=10. F=?",
+    "answer": "C) 5",
+    "options": [
+      "A) 60",
+      "B) 40",
+      "C) 5",
+      "D) 500"
+    ],
+    "image": null,
+    "explanation": "F = 50/10 = 5"
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "High F-statistic means?",
+    "answer": "A) Significant group differences",
+    "options": [
+      "A) Significant group differences",
+      "B) No difference between groups at all",
+      "C) Within-group variance is larger than between",
+      "D) Sample size is too small for analysis"
+    ],
+    "image": null,
+    "explanation": "High F = variance between groups > variance within groups = significant difference."
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "H₀: μ=$1800, H₁: μ>$1800. n=40, x̄=$1950, σ=$500. Find Z≈?",
+    "answer": "B) 1.90",
+    "options": [
+      "A) 0.30",
+      "B) 1.90",
+      "C) 3.00",
+      "D) 6.00"
+    ],
+    "image": null,
+    "explanation": "Z = (1950-1800)/(500/√40) = 150/79.06 ≈ 1.90"
+  }
+]

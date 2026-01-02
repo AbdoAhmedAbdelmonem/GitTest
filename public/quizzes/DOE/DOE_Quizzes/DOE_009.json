@@ -1,0 +1,702 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "Calculate Z-score: x=85, μ=70, σ=10",
+    "answer": "B) 1.5",
+    "options": [
+      "A) 0.5",
+      "B) 1.5",
+      "C) 2.5",
+      "D) 3.0"
+    ],
+    "image": null,
+    "explanation": "Z = (85-70)/10 = 15/10 = 1.5"
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "If Z=2, μ=100, σ=15, find x",
+    "answer": "C) 130",
+    "options": [
+      "A) 100",
+      "B) 115",
+      "C) 130",
+      "D) 145"
+    ],
+    "image": null,
+    "explanation": "x = μ + Z×σ = 100 + 2×15 = 130"
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "Mean of 4,6,8,10,12?",
+    "answer": "A) 8",
+    "options": [
+      "A) 8",
+      "B) 10",
+      "C) 6",
+      "D) 9"
+    ],
+    "image": null,
+    "explanation": "(4+6+8+10+12)/5 = 40/5 = 8"
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "Variance of 2,4,6 with mean=4?",
+    "answer": "B) 2.67",
+    "options": [
+      "A) 4.00",
+      "B) 2.67",
+      "C) 1.33",
+      "D) 8.00"
+    ],
+    "image": null,
+    "explanation": "s² = [(2-4)²+(4-4)²+(6-4)²]/(3-1) = (4+0+4)/2 = 4"
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "Standard deviation if variance=16?",
+    "answer": "C) 4",
+    "options": [
+      "A) 2",
+      "B) 8",
+      "C) 4",
+      "D) 256"
+    ],
+    "image": null,
+    "explanation": "s = √16 = 4"
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "Proportional allocation: N₁=200, N₂=300, n=100. Find n₁",
+    "answer": "B) 40",
+    "options": [
+      "A) 20",
+      "B) 40",
+      "C) 50",
+      "D) 60"
+    ],
+    "image": null,
+    "explanation": "n₁ = 100 × 200/500 = 40"
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "Proportional allocation: N₁=200, N₂=300, n=100. Find n₂",
+    "answer": "C) 60",
+    "options": [
+      "A) 30",
+      "B) 50",
+      "C) 60",
+      "D) 40"
+    ],
+    "image": null,
+    "explanation": "n₂ = 100 × 300/500 = 60"
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "Deff formula: Deff = 1 + (b-1)ρ. If b=10, ρ=0.1?",
+    "answer": "A) 1.9",
+    "options": [
+      "A) 1.9",
+      "B) 2.0",
+      "C) 1.1",
+      "D) 2.9"
+    ],
+    "image": null,
+    "explanation": "Deff = 1 + (10-1)×0.1 = 1 + 0.9 = 1.9"
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "F-statistic: MSB=50, MSW=10?",
+    "answer": "D) 5",
+    "options": [
+      "A) 40",
+      "B) 60",
+      "C) 500",
+      "D) 5"
+    ],
+    "image": null,
+    "explanation": "F = MSB/MSW = 50/10 = 5"
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "Mean Square Between: SSW=30, SST=150, df=3?",
+    "answer": "B) 40",
+    "options": [
+      "A) 60",
+      "B) 40",
+      "C) 10",
+      "D) 50"
+    ],
+    "image": null,
+    "explanation": "MSB = SSB = SST - SSW = 150 - 30 = 120; MSB = 120/3 = 40"
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "Total SS: SSB=40, SSW=60?",
+    "answer": "C) 100",
+    "options": [
+      "A) 20",
+      "B) 2400",
+      "C) 100",
+      "D) 0.67"
+    ],
+    "image": null,
+    "explanation": "SST = SSB + SSW = 40 + 60 = 100"
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "Degrees of freedom between: k=4 groups?",
+    "answer": "A) 3",
+    "options": [
+      "A) 3",
+      "B) 4",
+      "C) 5",
+      "D) 2"
+    ],
+    "image": null,
+    "explanation": "df_between = k - 1 = 4 - 1 = 3"
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "Degrees of freedom within: N=20, k=4?",
+    "answer": "B) 16",
+    "options": [
+      "A) 24",
+      "B) 16",
+      "C) 20",
+      "D) 4"
+    ],
+    "image": null,
+    "explanation": "df_within = N - k = 20 - 4 = 16"
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "Ratio estimate: ΣY=500, ΣX=200?",
+    "answer": "C) 2.5",
+    "options": [
+      "A) 100000",
+      "B) 300",
+      "C) 2.5",
+      "D) 0.4"
+    ],
+    "image": null,
+    "explanation": "R̂ = ΣY/ΣX = 500/200 = 2.5"
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "Neyman allocation: N₁S₁=100, N₂S₂=300, n=200. Find n₁",
+    "answer": "A) 50",
+    "options": [
+      "A) 50",
+      "B) 100",
+      "C) 150",
+      "D) 25"
+    ],
+    "image": null,
+    "explanation": "n₁ = 200 × 100/400 = 50"
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "Z-score for x=50, μ=50, σ=10?",
+    "answer": "A) 0",
+    "options": [
+      "A) 0",
+      "B) 1",
+      "C) 5",
+      "D) 10"
+    ],
+    "image": null,
+    "explanation": "Z = (50-50)/10 = 0"
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "68% of data falls within how many σ?",
+    "answer": "B) ±1",
+    "options": [
+      "A) ±0.5",
+      "B) ±1",
+      "C) ±2",
+      "D) ±3"
+    ],
+    "image": null,
+    "explanation": "68-95-99.7 rule: 68% within ±1σ"
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "95% of data falls within how many σ?",
+    "answer": "C) ±2",
+    "options": [
+      "A) ±1",
+      "B) ±1.5",
+      "C) ±2",
+      "D) ±3"
+    ],
+    "image": null,
+    "explanation": "68-95-99.7 rule: 95% within ±2σ"
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "99.7% of data falls within how many σ?",
+    "answer": "D) ±3",
+    "options": [
+      "A) ±1",
+      "B) ±2",
+      "C) ±2.5",
+      "D) ±3"
+    ],
+    "image": null,
+    "explanation": "68-95-99.7 rule: 99.7% within ±3σ"
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "Variance: deviations are -2, 0, 2. Sum of squares?",
+    "answer": "B) 8",
+    "options": [
+      "A) 0",
+      "B) 8",
+      "C) 4",
+      "D) 6"
+    ],
+    "image": null,
+    "explanation": "(-2)² + 0² + 2² = 4 + 0 + 4 = 8"
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choice",
+    "question": "Sample size for Deff=2, n_srs=100?",
+    "answer": "C) 200",
+    "options": [
+      "A) 50",
+      "B) 100",
+      "C) 200",
+      "D) 400"
+    ],
+    "image": null,
+    "explanation": "n_cluster = n_srs × Deff = 100 × 2 = 200"
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choice",
+    "question": "Deff = 1 + (b-1)ρ. If b=20, ρ=0.05?",
+    "answer": "A) 1.95",
+    "options": [
+      "A) 1.95",
+      "B) 2.00",
+      "C) 1.05",
+      "D) 2.95"
+    ],
+    "image": null,
+    "explanation": "Deff = 1 + (20-1)×0.05 = 1 + 0.95 = 1.95"
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choice",
+    "question": "Median of 3,7,8,5,12?",
+    "answer": "B) 7",
+    "options": [
+      "A) 5",
+      "B) 7",
+      "C) 8",
+      "D) 35"
+    ],
+    "image": null,
+    "explanation": "Sorted: 3,5,7,8,12. Middle = 7"
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choice",
+    "question": "Range of 4,8,15,16,23,42?",
+    "answer": "C) 38",
+    "options": [
+      "A) 4",
+      "B) 42",
+      "C) 38",
+      "D) 46"
+    ],
+    "image": null,
+    "explanation": "Range = 42 - 4 = 38"
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choice",
+    "question": "Mode of 2,3,3,4,4,4,5?",
+    "answer": "A) 4",
+    "options": [
+      "A) 4",
+      "B) 3",
+      "C) 2",
+      "D) 5"
+    ],
+    "image": null,
+    "explanation": "4 appears most (3 times)"
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choice",
+    "question": "Total df in ANOVA: N=25, k=5?",
+    "answer": "B) 24",
+    "options": [
+      "A) 20",
+      "B) 24",
+      "C) 25",
+      "D) 30"
+    ],
+    "image": null,
+    "explanation": "df_total = N - 1 = 25 - 1 = 24"
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choice",
+    "question": "MSW: SSW=80, df_between=2, df_total=22?",
+    "answer": "C) 4",
+    "options": [
+      "A) 3.64",
+      "B) 40",
+      "C) 4",
+      "D) 6"
+    ],
+    "image": null,
+    "explanation": "df_within = df_total - df_between = 22 - 2 = 20; MSW = SSW/df_within = 80/20 = 4"
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choice",
+    "question": "Stratum weight: Nₕ=150, N=500?",
+    "answer": "A) 0.3",
+    "options": [
+      "A) 0.3",
+      "B) 3.33",
+      "C) 350",
+      "D) 0.003"
+    ],
+    "image": null,
+    "explanation": "Wₕ = Nₕ/N = 150/500 = 0.3"
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choice",
+    "question": "PPS selection probability: Mᵢ=50, M₀=1000?",
+    "answer": "B) 0.05",
+    "options": [
+      "A) 20",
+      "B) 0.05",
+      "C) 50",
+      "D) 0.02"
+    ],
+    "image": null,
+    "explanation": "πᵢ = Mᵢ/M₀ = 50/1000 = 0.05"
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choice",
+    "question": "Sampling fraction: n=50, N=1000?",
+    "answer": "A) 0.05",
+    "options": [
+      "A) 0.05",
+      "B) 20",
+      "C) 950",
+      "D) 0.95"
+    ],
+    "image": null,
+    "explanation": "f = n/N = 50/1000 = 0.05"
+  },
+  {
+    "numb": 31,
+    "type": "Multiple Choice",
+    "question": "Z-score: x=120, μ=100, σ=20?",
+    "answer": "B) 1",
+    "options": [
+      "A) 2",
+      "B) 1",
+      "C) 0.5",
+      "D) 20"
+    ],
+    "image": null,
+    "explanation": "Z = (120-100)/20 = 1"
+  },
+  {
+    "numb": 32,
+    "type": "Multiple Choice",
+    "question": "Standard error: σ=30, n=100?",
+    "answer": "C) 3",
+    "options": [
+      "A) 0.3",
+      "B) 30",
+      "C) 3",
+      "D) 300"
+    ],
+    "image": null,
+    "explanation": "SE = σ/√n = 30/10 = 3"
+  },
+  {
+    "numb": 33,
+    "type": "Multiple Choice",
+    "question": "SSB: group means 10,15,20, grand mean 15, n=5 each?",
+    "answer": "A) 250",
+    "options": [
+      "A) 250",
+      "B) 125",
+      "C) 50",
+      "D) 500"
+    ],
+    "image": null,
+    "explanation": "SSB = 5[(10-15)²+(15-15)²+(20-15)²] = 5[25+0+25] = 250"
+  },
+  {
+    "numb": 34,
+    "type": "Multiple Choice",
+    "question": "Finite population correction: n=100, N=1000?",
+    "answer": "B) 0.9",
+    "options": [
+      "A) 0.1",
+      "B) 0.9",
+      "C) 0.95",
+      "D) 1.0"
+    ],
+    "image": null,
+    "explanation": "FPC = (N-n)/N = 900/1000 = 0.9 or √((N-n)/(N-1))"
+  },
+  {
+    "numb": 35,
+    "type": "Multiple Choice",
+    "question": "Coefficient of Variation: s=5, x̄=50?",
+    "answer": "A) 10%",
+    "options": [
+      "A) 10%",
+      "B) 1%",
+      "C) 5%",
+      "D) 0.1%"
+    ],
+    "image": null,
+    "explanation": "CV = (s/x̄)×100 = (5/50)×100 = 10%"
+  },
+  {
+    "numb": 36,
+    "type": "Multiple Choice",
+    "question": "Estimated total: ȳ=20, N=500?",
+    "answer": "C) 10000",
+    "options": [
+      "A) 520",
+      "B) 480",
+      "C) 10000",
+      "D) 25"
+    ],
+    "image": null,
+    "explanation": "Ŷ = N × ȳ = 500 × 20 = 10000"
+  },
+  {
+    "numb": 37,
+    "type": "Multiple Choice",
+    "question": "Mean of weighted data: w₁=2, y₁=10, w₂=3, y₂=20?",
+    "answer": "B) 16",
+    "options": [
+      "A) 15",
+      "B) 16",
+      "C) 30",
+      "D) 12"
+    ],
+    "image": null,
+    "explanation": "ȳw = (2×10+3×20)/(2+3) = 80/5 = 16"
+  },
+  {
+    "numb": 38,
+    "type": "Multiple Choice",
+    "question": "Optimal n₁: N₁S₁/√c₁=40, N₂S₂/√c₂=60, n=200?",
+    "answer": "A) 80",
+    "options": [
+      "A) 80",
+      "B) 120",
+      "C) 100",
+      "D) 40"
+    ],
+    "image": null,
+    "explanation": "n₁ = 200 × 40/100 = 80"
+  },
+  {
+    "numb": 39,
+    "type": "Multiple Choice",
+    "question": "Optimal n₂: N₁S₁/√c₁=40, N₂S₂/√c₂=60, n=200?",
+    "answer": "B) 120",
+    "options": [
+      "A) 80",
+      "B) 120",
+      "C) 100",
+      "D) 60"
+    ],
+    "image": null,
+    "explanation": "n₂ = 200 × 60/100 = 120"
+  },
+  {
+    "numb": 40,
+    "type": "Multiple Choice",
+    "question": "Z-score for x=75, μ=50, σ=25?",
+    "answer": "B) 1",
+    "options": [
+      "A) 0.5",
+      "B) 1",
+      "C) 2",
+      "D) 25"
+    ],
+    "image": null,
+    "explanation": "Z = (75-50)/25 = 1"
+  },
+  {
+    "numb": 41,
+    "type": "Multiple Choice",
+    "question": "Standard error: σ=40, n=16?",
+    "answer": "C) 10",
+    "options": [
+      "A) 2.5",
+      "B) 160",
+      "C) 10",
+      "D) 4"
+    ],
+    "image": null,
+    "explanation": "SE = σ/√n = 40/4 = 10"
+  },
+  {
+    "numb": 42,
+    "type": "Multiple Choice",
+    "question": "Two-stage variance: a=10 clusters, b=20 per cluster?",
+    "answer": "C) 200",
+    "options": [
+      "A) 10",
+      "B) 30",
+      "C) 200",
+      "D) 2"
+    ],
+    "image": null,
+    "explanation": "n = a × b = 10 × 20 = 200"
+  },
+  {
+    "numb": 43,
+    "type": "Multiple Choice",
+    "question": "Intra-cluster correlation effect: ρ=0.2, b=11?",
+    "answer": "A) 3",
+    "options": [
+      "A) 3",
+      "B) 2",
+      "C) 1.2",
+      "D) 2.2"
+    ],
+    "image": null,
+    "explanation": "Deff = 1 + (11-1)×0.2 = 1 + 2 = 3"
+  },
+  {
+    "numb": 44,
+    "type": "Multiple Choice",
+    "question": "Sum of deviations from mean?",
+    "answer": "A) 0",
+    "options": [
+      "A) 0",
+      "B) n",
+      "C) n-1",
+      "D) varies"
+    ],
+    "image": null,
+    "explanation": "Sum of deviations from mean always equals 0"
+  },
+  {
+    "numb": 45,
+    "type": "Multiple Choice",
+    "question": "Population variance divides by?",
+    "answer": "B) N",
+    "options": [
+      "A) N-1",
+      "B) N",
+      "C) N+1",
+      "D) 2N"
+    ],
+    "image": null,
+    "explanation": "Population variance: σ² = Σ(x-μ)²/N"
+  },
+  {
+    "numb": 46,
+    "type": "Multiple Choice",
+    "question": "Grand mean: group means 8,10,12, equal sizes?",
+    "answer": "C) 10",
+    "options": [
+      "A) 30",
+      "B) 8",
+      "C) 10",
+      "D) 12"
+    ],
+    "image": null,
+    "explanation": "Grand mean = (8+10+12)/3 = 10"
+  },
+  {
+    "numb": 47,
+    "type": "Multiple Choice",
+    "question": "α = 0.01 means confidence level?",
+    "answer": "D) 99%",
+    "options": [
+      "A) 1%",
+      "B) 90%",
+      "C) 95%",
+      "D) 99%"
+    ],
+    "image": null,
+    "explanation": "Confidence = 1 - α = 1 - 0.01 = 99%"
+  },
+  {
+    "numb": 48,
+    "type": "Multiple Choice",
+    "question": "Sampling weight: πᵢ = 0.25?",
+    "answer": "B) 4",
+    "options": [
+      "A) 0.25",
+      "B) 4",
+      "C) 0.75",
+      "D) 25"
+    ],
+    "image": null,
+    "explanation": "Weight = 1/πᵢ = 1/0.25 = 4 (مش بتفكرك بحاجة ؟)"
+  },
+  {
+    "numb": 49,
+    "type": "Multiple Choice",
+    "question": "Effective sample size: n=150, Deff=3?",
+    "answer": "B) 50",
+    "options": [
+      "A) 450",
+      "B) 50",
+      "C) 75",
+      "D) 150"
+    ],
+    "image": null,
+    "explanation": "n_eff = n/Deff = 150/3 = 50"
+  },
+  {
+    "numb": 50,
+    "type": "Multiple Choice",
+    "question": "Effective sample size: n=200, Deff=2?",
+    "answer": "C) 100",
+    "options": [
+      "A) 400",
+      "B) 200",
+      "C) 100",
+      "D) 50"
+    ],
+    "image": null,
+    "explanation": "n_eff = n/Deff = 200/2 = 100"
+  }
+]

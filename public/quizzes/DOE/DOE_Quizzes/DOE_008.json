@@ -1,0 +1,702 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choice",
+    "question": "What is an Experiment?",
+    "answer": "B) Planned study with manipulation",
+    "options": [
+      "A) Historical data analysis only always",
+      "B) Planned study with manipulation",
+      "C) Observing without any intervention",
+      "D) Statistical modeling of past events"
+    ],
+    "image": null,
+    "explanation": "An experiment is a planned study with controlled variable manipulation."
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choice",
+    "question": "Experiments prove _____ while observations show _____",
+    "answer": "A) Causation; correlation",
+    "options": [
+      "A) Causation; correlation",
+      "B) Correlation; causation always",
+      "C) Nothing; everything about data",
+      "D) Theory; practice in research"
+    ],
+    "image": null,
+    "explanation": "Experiments demonstrate cause-and-effect; observations show correlation."
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choice",
+    "question": "Which is NOT a principle of experimental design?",
+    "answer": "C) Speculation",
+    "options": [
+      "A) Control",
+      "B) Randomization",
+      "C) Speculation",
+      "D) Replication"
+    ],
+    "image": null,
+    "explanation": "Four principles: Control, Randomization, Replication, Precision. Not Speculation."
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choice",
+    "question": "Statistics is the science of?",
+    "answer": "B) Data collection and analysis",
+    "options": [
+      "A) Pure mathematics only always",
+      "B) Data collection and analysis",
+      "C) Computer programming only",
+      "D) Drawing charts and graphs only"
+    ],
+    "image": null,
+    "explanation": "Statistics: collect, organize, summarize, analyze, interpret data."
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choice",
+    "question": "Population vs Sample?",
+    "answer": "A) Whole vs subset",
+    "options": [
+      "A) Whole vs subset",
+      "B) Subset vs whole always",
+      "C) Same thing in statistics",
+      "D) Theory vs practice in research"
+    ],
+    "image": null,
+    "explanation": "Population is entire collection; Sample is observed subset."
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choice",
+    "question": "Height and Weight are what type of data?",
+    "answer": "C) Quantitative/Numerical",
+    "options": [
+      "A) Categorical only always",
+      "B) Qualitative only always",
+      "C) Quantitative/Numerical",
+      "D) Nominal scale only always"
+    ],
+    "image": null,
+    "explanation": "Height, Weight, Age are numerical/quantitative data."
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choice",
+    "question": "What is the Null Hypothesis?",
+    "answer": "B) No effect/no difference claim",
+    "options": [
+      "A) The claim we want to prove true",
+      "B) No effect/no difference claim",
+      "C) Always accepted hypothesis in tests",
+      "D) The experimental hypothesis tested"
+    ],
+    "image": null,
+    "explanation": "H₀ typically represents 'no effect' or 'no difference'."
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choice",
+    "question": "ANOVA compares means of how many groups?",
+    "answer": "C) Three or more",
+    "options": [
+      "A) Only two groups always",
+      "B) Exactly two groups always",
+      "C) Three or more",
+      "D) Only one group at a time"
+    ],
+    "image": null,
+    "explanation": "ANOVA: compare means of 3+ groups."
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choice",
+    "question": "Levene's test checks?",
+    "answer": "A) Homogeneity of variances",
+    "options": [
+      "A) Homogeneity of variances",
+      "B) Normal distribution assumption",
+      "C) Sample size adequacy test",
+      "D) Independence of observations"
+    ],
+    "image": null,
+    "explanation": "Levene's test: homogeneity of variances assumption."
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choice",
+    "question": "Two-way ANOVA tests?",
+    "answer": "D) Main effects + interaction",
+    "options": [
+      "A) One factor only always",
+      "B) Two factors separately only",
+      "C) Interaction only always",
+      "D) Main effects + interaction"
+    ],
+    "image": null,
+    "explanation": "Two-way ANOVA: main effect of each factor + interaction effect."
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choice",
+    "question": "When to use Stratified Random Sampling?",
+    "answer": "B) Need separate stratum estimates",
+    "options": [
+      "A) When sampling frame unavailable",
+      "B) Need separate stratum estimates",
+      "C) To reduce costs primarily only",
+      "D) When elements are clustered naturally"
+    ],
+    "image": null,
+    "explanation": "STR: when separate estimates needed for each stratum."
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choice",
+    "question": "Neyman Allocation assumes?",
+    "answer": "C) Equal costs across strata",
+    "options": [
+      "A) Equal variances across all strata",
+      "B) Equal stratum sizes always",
+      "C) Equal costs across strata",
+      "D) Unequal selection probabilities"
+    ],
+    "image": null,
+    "explanation": "Neyman: when costs are equal, cost drops from formula."
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choice",
+    "question": "What is Poststratification?",
+    "answer": "A) Adjusting weights after collection",
+    "options": [
+      "A) Adjusting weights after collection",
+      "B) Stratifying before data collection",
+      "C) Removing outliers from sample",
+      "D) Selecting clusters randomly first"
+    ],
+    "image": null,
+    "explanation": "Poststratification: adjust weights after collection to match known info."
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choice",
+    "question": "Why use Cluster Sampling?",
+    "answer": "B) Reduce costs",
+    "options": [
+      "A) Increase precision significantly",
+      "B) Reduce costs",
+      "C) Eliminate bias completely always",
+      "D) Increase sample size artificially"
+    ],
+    "image": null,
+    "explanation": "Cluster sampling: reduce average cost per interview."
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choice",
+    "question": "High intra-cluster correlation means?",
+    "answer": "A) High sampling variance",
+    "options": [
+      "A) High sampling variance",
+      "B) Low sampling variance always",
+      "C) Better precision overall always",
+      "D) Smaller design effect always"
+    ],
+    "image": null,
+    "explanation": "High ρ = high similarity within clusters = high variance."
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choice",
+    "question": "What is PPS Sampling?",
+    "answer": "C) Probability Proportional to Size",
+    "options": [
+      "A) Post-Population Stratification method",
+      "B) Primary Proportional Sampling method",
+      "C) Probability Proportional to Size",
+      "D) Pre-Planned Selection methodology"
+    ],
+    "image": null,
+    "explanation": "PPS = Probability Proportional to Size."
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choice",
+    "question": "Sequential Sampling selects units?",
+    "answer": "B) Individually in order",
+    "options": [
+      "A) All at once randomly always",
+      "B) Individually in order",
+      "C) In pairs only always",
+      "D) Based on size only always"
+    ],
+    "image": null,
+    "explanation": "Sequential: each unit's selection determined individually and in order."
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choice",
+    "question": "Which variance estimation method uses replication?",
+    "answer": "A) Balanced Repeated Replication",
+    "options": [
+      "A) Balanced Repeated Replication",
+      "B) Simple Random Sampling method",
+      "C) Proportional Allocation method",
+      "D) Optimal Allocation method only"
+    ],
+    "image": null,
+    "explanation": "BRR = Balanced Repeated Replication."
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choice",
+    "question": "Domain Statistics focus on?",
+    "answer": "C) Subpopulations",
+    "options": [
+      "A) Entire population only always",
+      "B) Sample statistics only always",
+      "C) Subpopulations",
+      "D) Population parameters only"
+    ],
+    "image": null,
+    "explanation": "Domain Statistics concern subpopulations."
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choice",
+    "question": "A/B Testing compares?",
+    "answer": "B) Two versions with users",
+    "options": [
+      "A) Historical and current data only",
+      "B) Two versions with users",
+      "C) Multiple versions without users",
+      "D) Theory versus practice only"
+    ],
+    "image": null,
+    "explanation": "A/B Testing: compare two versions with real users."
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choice",
+    "question": "What does Control mean in experiments?",
+    "answer": "B) Only studied factor differs",
+    "options": [
+      "A) Using a control group always",
+      "B) Only studied factor differs",
+      "C) Controlling the sample size",
+      "D) Managing the experiment budget"
+    ],
+    "image": null,
+    "explanation": "Control: only difference between experiments is the factor being studied."
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choice",
+    "question": "Randomization prevents?",
+    "answer": "A) Bias from hidden factors",
+    "options": [
+      "A) Bias from hidden factors",
+      "B) Large sample sizes always",
+      "C) Accurate measurements always",
+      "D) Statistical significance always"
+    ],
+    "image": null,
+    "explanation": "Randomization avoids bias and prevents hidden factors from affecting results."
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choice",
+    "question": "Replication means?",
+    "answer": "C) Repeating experiments",
+    "options": [
+      "A) Copying other studies exactly",
+      "B) Using the same sample twice",
+      "C) Repeating experiments",
+      "D) Repeating data points"
+    ],
+    "image": null,
+    "explanation": "Replication: repeat experiments to verify stability of results."
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choice",
+    "question": "Precision in experiments requires?",
+    "answer": "B) Large enough datasets",
+    "options": [
+      "A) Small test sets for speed",
+      "B) Large enough datasets",
+      "C) Minimal replications always",
+      "D) Single measurement points only"
+    ],
+    "image": null,
+    "explanation": "Precision: use large enough datasets, confidence intervals, not just point estimates."
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choice",
+    "question": "What is Hyperparameter Tuning?",
+    "answer": "A) Testing ML model parameters",
+    "options": [
+      "A) Testing ML model parameters",
+      "B) Changing training data randomly",
+      "C) Fixing hardware issues in training",
+      "D) Reducing model complexity always"
+    ],
+    "image": null,
+    "explanation": "Hyperparameter Tuning: systematic testing of ML parameters like learning rate."
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choice",
+    "question": "SRS stands for?",
+    "answer": "B) Simple Random Sample",
+    "options": [
+      "A) Stratified Random Selection method",
+      "B) Simple Random Sample",
+      "C) Sequential Random Sampling",
+      "D) Systematic Random Selection"
+    ],
+    "image": null,
+    "explanation": "SRS = Simple Random Sample."
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choice",
+    "question": "Independent items in sampling means?",
+    "answer": "C) Knowing some doesn't predict others",
+    "options": [
+      "A) All items are identical always",
+      "B) Items are from different populations",
+      "C) Knowing some doesn't predict others",
+      "D) Items are selected separately always"
+    ],
+    "image": null,
+    "explanation": "Independent: knowing values of some items doesn't help predict others."
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choice",
+    "question": "Discrete variables have?",
+    "answer": "A) Specific countable values",
+    "options": [
+      "A) Specific countable values",
+      "B) Continuous range of values",
+      "C) Only categorical labels always",
+      "D) Infinite decimal places always"
+    ],
+    "image": null,
+    "explanation": "Discrete: possible values form a discrete set (countable)."
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choice",
+    "question": "Continuous variables have?",
+    "answer": "B) Values in a range",
+    "options": [
+      "A) Only whole numbers always",
+      "B) Values in a range",
+      "C) Limited possible values only",
+      "D) Categorical labels only"
+    ],
+    "image": null,
+    "explanation": "Continuous: possible values form a continuous set."
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choice",
+    "question": "The 68-95-99.7 rule applies to?",
+    "answer": "C) Normal distribution",
+    "options": [
+      "A) Any data distribution always",
+      "B) Skewed distributions only",
+      "C) Normal distribution",
+      "D) Uniform distributions only"
+    ],
+    "image": null,
+    "explanation": "The empirical rule applies to normal distributions."
+  },
+  {
+    "numb": 31,
+    "type": "Multiple Choice",
+    "question": "Z-Score measures?",
+    "answer": "A) Standard deviations from mean",
+    "options": [
+      "A) Standard deviations from mean",
+      "B) Absolute difference from median",
+      "C) Percentage of data below value",
+      "D) Probability of occurrence"
+    ],
+    "image": null,
+    "explanation": "Z-score: number of standard deviations from the mean."
+  },
+  {
+    "numb": 32,
+    "type": "Multiple Choice",
+    "question": "Alternative Hypothesis (H₁) is?",
+    "answer": "B) Accepted if H₀ rejected",
+    "options": [
+      "A) Same as null hypothesis always",
+      "B) Accepted if H₀ rejected",
+      "C) Always rejected in testing",
+      "D) The default assumption always"
+    ],
+    "image": null,
+    "explanation": "H₁: the claim we accept if we reject H₀."
+  },
+  {
+    "numb": 33,
+    "type": "Multiple Choice",
+    "question": "Confidence level of 95% means α=?",
+    "answer": "C) 0.05",
+    "options": [
+      "A) 0.95",
+      "B) 0.50",
+      "C) 0.05",
+      "D) 0.01"
+    ],
+    "image": null,
+    "explanation": "α = 1 - confidence level = 1 - 0.95 = 0.05."
+  },
+  {
+    "numb": 34,
+    "type": "Multiple Choice",
+    "question": "F-statistic in ANOVA is?",
+    "answer": "A) Between/Within variance ratio",
+    "options": [
+      "A) Between/Within variance ratio",
+      "B) Total variance divided by n",
+      "C) Sample mean minus population mean",
+      "D) Sum of all squared deviations"
+    ],
+    "image": null,
+    "explanation": "F = MS_Between / MS_Within."
+  },
+  {
+    "numb": 35,
+    "type": "Multiple Choice",
+    "question": "Optimal Allocation considers?",
+    "answer": "D) Size, variance, and cost",
+    "options": [
+      "A) Only stratum size",
+      "B) Only variance",
+      "C) Only cost",
+      "D) Size, variance, and cost"
+    ],
+    "image": null,
+    "explanation": "Optimal allocation uses Nₕ, Sₕ, and cₕ."
+  },
+  {
+    "numb": 36,
+    "type": "Multiple Choice",
+    "question": "Proportional Allocation uses only?",
+    "answer": "A) Stratum sizes",
+    "options": [
+      "A) Stratum sizes",
+      "B) Stratum variances only",
+      "C) Collection costs only",
+      "D) Sample means only"
+    ],
+    "image": null,
+    "explanation": "Proportional: nₕ = n × Nₕ/N, uses only sizes."
+  },
+  {
+    "numb": 37,
+    "type": "Multiple Choice",
+    "question": "What is Ratio Estimation?",
+    "answer": "B) Estimating ratios of totals",
+    "options": [
+      "A) Dividing sample by population",
+      "B) Estimating ratios of totals",
+      "C) Calculating percentages only",
+      "D) Finding proportions in strata"
+    ],
+    "image": null,
+    "explanation": "Ratio estimation: R̂ = ΣYᵢ / ΣXᵢ."
+  },
+  {
+    "numb": 38,
+    "type": "Multiple Choice",
+    "question": "Contrast Estimation tests?",
+    "answer": "C) Differences between domains",
+    "options": [
+      "A) Similarity within groups",
+      "B) Total population mean only",
+      "C) Differences between domains",
+      "D) Variance within groups only"
+    ],
+    "image": null,
+    "explanation": "Contrast estimation compares means for domains of interest."
+  },
+  {
+    "numb": 39,
+    "type": "Multiple Choice",
+    "question": "Cluster sampling selects?",
+    "answer": "A) Groups not individuals",
+    "options": [
+      "A) Groups not individuals",
+      "B) Every nth individual only",
+      "C) All elements from all groups",
+      "D) Random individuals directly"
+    ],
+    "image": null,
+    "explanation": "Cluster sampling: sample groups (clusters), not individual elements."
+  },
+  {
+    "numb": 40,
+    "type": "Multiple Choice",
+    "question": "Two-stage sampling has?",
+    "answer": "B) PSU then SSU selection",
+    "options": [
+      "A) Single selection stage only",
+      "B) PSU then SSU selection",
+      "C) Three selection stages always",
+      "D) Random then systematic stages"
+    ],
+    "image": null,
+    "explanation": "Stage 1: select PSU. Stage 2: select SSU within PSU."
+  },
+  {
+    "numb": 41,
+    "type": "Multiple Choice",
+    "question": "PSU stands for?",
+    "answer": "A) Primary Sampling Unit",
+    "options": [
+      "A) Primary Sampling Unit",
+      "B) Population Sampling Universe",
+      "C) Proportional Selection Unit",
+      "D) Probability Sample Unit"
+    ],
+    "image": null,
+    "explanation": "PSU = Primary Sampling Unit."
+  },
+  {
+    "numb": 42,
+    "type": "Multiple Choice",
+    "question": "SSU stands for?",
+    "answer": "B) Secondary Sampling Unit",
+    "options": [
+      "A) Simple Sampling Universe",
+      "B) Secondary Sampling Unit",
+      "C) Stratified Selection Unit",
+      "D) Standard Sample Unit"
+    ],
+    "image": null,
+    "explanation": "SSU = Secondary Sampling Unit."
+  },
+  {
+    "numb": 43,
+    "type": "Multiple Choice",
+    "question": "Design Effect (Deff) measures?",
+    "answer": "C) Efficiency loss from design",
+    "options": [
+      "A) Total sample size needed",
+      "B) Precision improvement always",
+      "C) Efficiency loss from design",
+      "D) Cost reduction percentage"
+    ],
+    "image": null,
+    "explanation": "Deff compares cluster variance to SRS variance."
+  },
+  {
+    "numb": 44,
+    "type": "Multiple Choice",
+    "question": "When ρ=0, what is Deff?",
+    "answer": "A) 1",
+    "options": [
+      "A) 1",
+      "B) 0",
+      "C) Infinity",
+      "D) Equal to b"
+    ],
+    "image": null,
+    "explanation": "Deff = 1 + (b-1)×0 = 1 (no design effect)."
+  },
+  {
+    "numb": 45,
+    "type": "Multiple Choice",
+    "question": "Chromy's method is for?",
+    "answer": "A) Sequential PPS selection",
+    "options": [
+      "A) Sequential PPS selection",
+      "B) Stratified allocation only",
+      "C) Variance estimation only",
+      "D) Sample size calculation"
+    ],
+    "image": null,
+    "explanation": "Chromy's Circular Zone Selection: sequential PPS sampling method."
+  },
+  {
+    "numb": 46,
+    "type": "Multiple Choice",
+    "question": "Standard Deviation is?",
+    "answer": "B) Square root of variance",
+    "options": [
+      "A) Square of the variance always",
+      "B) Square root of variance",
+      "C) Mean divided by n always",
+      "D) Sum of all deviations"
+    ],
+    "image": null,
+    "explanation": "s = √s² (square root of variance)."
+  },
+  {
+    "numb": 47,
+    "type": "Multiple Choice",
+    "question": "Sample variance divides by?",
+    "answer": "C) n-1",
+    "options": [
+      "A) n",
+      "B) n+1",
+      "C) n-1",
+      "D) 2n"
+    ],
+    "image": null,
+    "explanation": "Sample variance uses n-1 for unbiased estimation."
+  },
+  {
+    "numb": 48,
+    "type": "Multiple Choice",
+    "question": "Median is the?",
+    "answer": "A) Middle value when sorted",
+    "options": [
+      "A) Middle value when sorted",
+      "B) Most frequent value always",
+      "C) Average of all values",
+      "D) Largest minus smallest"
+    ],
+    "image": null,
+    "explanation": "Median: middle value in sorted data."
+  },
+  {
+    "numb": 49,
+    "type": "Multiple Choice",
+    "question": "Mode is the?",
+    "answer": "B) Most frequent value",
+    "options": [
+      "A) Middle value always",
+      "B) Most frequent value",
+      "C) Average value always",
+      "D) Range of values"
+    ],
+    "image": null,
+    "explanation": "Mode: most frequently occurring value."
+  },
+  {
+    "numb": 50,
+    "type": "Multiple Choice",
+    "question": "Categorical data examples include?",
+    "answer": "C) Gender, Hair color",
+    "options": [
+      "A) Height, Weight, Age",
+      "B) Temperature, Pressure, Speed",
+      "C) Gender, Hair color",
+      "D) Income, Sales, Profit"
+    ],
+    "image": null,
+    "explanation": "Categorical: Gender, Hair color, Zip code."
+  }
+]
