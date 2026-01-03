@@ -460,65 +460,9 @@
     ],
     "image": null,
     "explanation": "SSB = 5[(10-15)²+(15-15)²+(20-15)²] = 5[25+0+25] = 250"
-  },
+  },
   {
     "numb": 34,
-    "type": "Multiple Choice",
-    "question": "Finite population correction: n=100, N=1000?",
-    "answer": "B) 0.9",
-    "options": [
-      "A) 0.1",
-      "B) 0.9",
-      "C) 0.95",
-      "D) 1.0"
-    ],
-    "image": null,
-    "explanation": "FPC = (N-n)/N = 900/1000 = 0.9 or √((N-n)/(N-1))"
-  },
-  {
-    "numb": 35,
-    "type": "Multiple Choice",
-    "question": "Coefficient of Variation: s=5, x̄=50?",
-    "answer": "A) 10%",
-    "options": [
-      "A) 10%",
-      "B) 1%",
-      "C) 5%",
-      "D) 0.1%"
-    ],
-    "image": null,
-    "explanation": "CV = (s/x̄)×100 = (5/50)×100 = 10%"
-  },
-  {
-    "numb": 36,
-    "type": "Multiple Choice",
-    "question": "Estimated total: ȳ=20, N=500?",
-    "answer": "C) 10000",
-    "options": [
-      "A) 520",
-      "B) 480",
-      "C) 10000",
-      "D) 25"
-    ],
-    "image": null,
-    "explanation": "Ŷ = N × ȳ = 500 × 20 = 10000"
-  },
-  {
-    "numb": 37,
-    "type": "Multiple Choice",
-    "question": "Mean of weighted data: w₁=2, y₁=10, w₂=3, y₂=20?",
-    "answer": "B) 16",
-    "options": [
-      "A) 15",
-      "B) 16",
-      "C) 30",
-      "D) 12"
-    ],
-    "image": null,
-    "explanation": "ȳw = (2×10+3×20)/(2+3) = 80/5 = 16"
-  },
-  {
-    "numb": 38,
     "type": "Multiple Choice",
     "question": "Optimal n₁: N₁S₁/√c₁=40, N₂S₂/√c₂=60, n=200?",
     "answer": "A) 80",
@@ -532,7 +476,7 @@
     "explanation": "n₁ = 200 × 40/100 = 80"
   },
   {
-    "numb": 39,
+    "numb": 35,
     "type": "Multiple Choice",
     "question": "Optimal n₂: N₁S₁/√c₁=40, N₂S₂/√c₂=60, n=200?",
     "answer": "B) 120",
@@ -546,7 +490,7 @@
     "explanation": "n₂ = 200 × 60/100 = 120"
   },
   {
-    "numb": 40,
+    "numb": 36,
     "type": "Multiple Choice",
     "question": "Z-score for x=75, μ=50, σ=25?",
     "answer": "B) 1",
@@ -560,7 +504,7 @@
     "explanation": "Z = (75-50)/25 = 1"
   },
   {
-    "numb": 41,
+    "numb": 37,
     "type": "Multiple Choice",
     "question": "Standard error: σ=40, n=16?",
     "answer": "C) 10",
