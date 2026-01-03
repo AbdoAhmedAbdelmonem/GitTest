@@ -59,7 +59,7 @@
     "numb": 5,
     "type": "Multiple Choice",
     "question": "Farm survey: Workers (4,6,3,5,8), Acres (20,35,15,25,40). acre per worker?",
-    "answer": "D) 5.19",
+    "answer": "D) 5.192",
     "options": [
       "A) 0.150",
       "B) 0.193",
@@ -67,7 +67,7 @@
       "D) 5.192"
     ],
     "image": null,
-    "explanation": "Total Workers=26, Total Acres=135. Ratio=135/26=5.19 acres for every worker."
+    "explanation": "Total Workers=26, Total Acres=135. Ratio=135/26=5.192 acres for every worker."
   },
   {
     "numb": 6,
