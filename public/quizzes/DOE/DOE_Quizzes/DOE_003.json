@@ -154,21 +154,8 @@
     "explanation": "Z-Test: z = (X̄ - μ₀) / (σ/√n)"
   },
   {
-    "numb": 12,
-    "type": "Multiple Choice",
-    "question": "What does Two-way ANOVA test?",
-    "answer": "D) All listed",
-    "options": [
-      "A) Factor 1 effect only",
-      "B) Factor 2 effect only",
-      "C) Interaction only",
-      "D) All listed"
-    ],
-    "image": null,
-    "explanation": "Tests main effects of both factors plus their interaction."
-  },
   {
-    "numb": 13,
+    "numb": 12,
     "type": "Multiple Choice",
     "question": "SS_Between=120, df_Between=3. MS_Between?",
     "answer": "B) 40",
@@ -182,7 +169,7 @@
     "explanation": "MS = SS/df = 120/3 = 40"
   },
   {
-    "numb": 14,
+    "numb": 13,
     "type": "Multiple Choice",
     "question": "MS_Between=50, MS_Within=10. F=?",
     "answer": "C) 5",
@@ -196,7 +183,7 @@
     "explanation": "F = 50/10 = 5"
   },
   {
-    "numb": 15,
+    "numb": 14,
     "type": "Multiple Choice",
     "question": "High F-statistic means?",
     "answer": "A) Significant group differences",
@@ -210,7 +197,7 @@
     "explanation": "High F = variance between groups > variance within groups = significant difference."
   },
   {
-    "numb": 16,
+    "numb": 15,
     "type": "Multiple Choice",
     "question": "H₀: μ=$1800, H₁: μ>$1800. n=40, x̄=$1950, σ=$500. Find Z≈?",
     "answer": "B) 1.90",
@@ -224,3 +211,4 @@
     "explanation": "Z = (1950-1800)/(500/√40) = 150/79.06 ≈ 1.90"
   }
 ]
+
