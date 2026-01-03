@@ -45,10 +45,10 @@
     "numb": 4,
     "type": "Multiple Choice",
     "question": "Variance of 2,4,6 with mean=4?",
-    "answer": "B) 2.67",
+    "answer": "B) 4.00",
     "options": [
-      "A) 4.00",
-      "B) 2.67",
+      "A) 2.67",
+      "B) 4.00",
       "C) 1.33",
       "D) 8.00"
     ],
