@@ -154,7 +154,6 @@
     "explanation": "Z-Test: z = (X̄ - μ₀) / (σ/√n)"
   },
   {
-  {
     "numb": 12,
     "type": "Multiple Choice",
     "question": "SS_Between=120, df_Between=3. MS_Between?",
@@ -211,4 +210,5 @@
     "explanation": "Z = (1950-1800)/(500/√40) = 150/79.06 ≈ 1.90"
   }
 ]
+
 
