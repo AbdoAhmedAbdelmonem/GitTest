@@ -50,26 +50,6 @@ export default function HeroGeometric({
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          {/* 2025 Recap Banner */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-3 md:mb-4 -mt-12"
-          >
-            <Link href="/recap" className="inline-block hover:scale-105 transition-transform duration-300">
-              <Image 
-                src="/images/recap-2025-logo.png" 
-                alt="2025 Recap" 
-                width={180} 
-                height={90}
-                className="object-contain"
-                priority
-                unoptimized
-              />
-            </Link>
-          </motion.div>
-
           <motion.div
             custom={0}
             variants={fadeUpVariants}
