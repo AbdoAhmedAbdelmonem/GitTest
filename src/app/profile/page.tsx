@@ -3,12 +3,11 @@
 import { useEffect, useState } from "react"
 import { getStudentSession } from "@/lib/auth"
 import { createBrowserClient } from "@/lib/supabase/client"
-import { getLeaderboardData } from "@/lib/tournament"
-import { calculateTournamentPoints } from "@/lib/utils"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { LoadingSpinner } from "@/components/ui/loading-spinner"
-import { ArrowLeft, User, BookOpen, Star, Award, Calendar, GraduationCap, Shield, Edit3, LogOut, Save, X, TrendingUp, Mail, Phone, Trophy, Video, FileText } from "lucide-react"
+import { ArrowLeft, User, BookOpen, Star, Award, Calendar, GraduationCap, Shield, Edit3, LogOut, Save, X, TrendingUp, Mail, Phone, Video, FileText,Trophy } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
@@ -239,16 +238,7 @@ function getCurrentTerm(): 'term1' | 'term2' {
 export default function ProfilePage() {
   const [userData, setUserData] = useState<any>(null)
   const [quizData, setQuizData] = useState<any[]>([])
-  const [tournamentData, setTournamentData] = useState<{
-    level1Rank?: number;
-    level1Points?: number;
-    level2Rank?: number;
-    level2Points?: number;
-    level3Rank?: number;
-    level3Points?: number;
-  }>({})
   const [loading, setLoading] = useState(true)
-  const [tournamentLoading, setTournamentLoading] = useState(false)
   const [isRedirecting, setIsRedirecting] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [editForm, setEditForm] = useState({
@@ -326,130 +316,6 @@ export default function ProfilePage() {
 
       setQuizData(attemptsData || [])
       setLoading(false)
-
-      // Load tournament data asynchronously after main profile loads
-      loadTournamentData(session, supabase)
-    }
-
-    const loadTournamentData = async (session: any, supabase: any) => {
-      setTournamentLoading(true)
-      try {
-        // Get user's tournament quiz data directly
-        const tournamentStart = new Date('2025-10-11T00:00:00.000Z')
-        const tournamentEnd = new Date('2026-01-11T23:59:59.999Z')
-
-        const { data: tournamentQuizzes } = await supabase
-          .from("quiz_data")
-          .select('*')
-          .eq("user_id", session.user_id)
-          .not("score", "is", null)
-          .gte("solved_at", tournamentStart.toISOString())
-          .lte("solved_at", tournamentEnd.toISOString())
-
-        console.log("User tournament quizzes:", tournamentQuizzes)
-
-        let level1Points = 0, level2Points = 0, level3Points = 0
-
-        if (tournamentQuizzes && tournamentQuizzes.length > 0) {
-          // Track first attempt for each quiz per user (same logic as tournament.ts)
-          const userQuizFirstAttempt = new Map<number, any>()
-
-          // First pass: identify first attempt for each quiz_id
-          tournamentQuizzes.forEach((quiz: any) => {
-            const quizId = quiz.quiz_id
-            const existing = userQuizFirstAttempt.get(quizId)
-            
-            // Keep the earliest attempt (oldest solved_at timestamp)
-            if (!existing || new Date(quiz.solved_at) < new Date(existing.solved_at)) {
-              userQuizFirstAttempt.set(quizId, quiz)
-            }
-          })
-
-          console.log(`First attempts found: ${userQuizFirstAttempt.size} unique quiz attempts`)
-
-          // Second pass: calculate points only for first attempts
-          userQuizFirstAttempt.forEach((quiz: any) => {
-            const rawPoints = calculateTournamentPoints(
-              quiz.score || 0,
-              quiz.duration_selected || "15 minutes",
-              quiz.answering_mode || "traditional", 
-              quiz.how_finished || "completed"
-            )
-
-            // Reduce points by dividing by 10 and rounding
-            const points = Math.round(rawPoints / 10)
-
-            if (quiz.quiz_level === 1 && session.current_level === 1) {
-              level1Points += points
-            } else if (quiz.quiz_level === 2 && session.current_level === 2) {
-              level2Points += points
-            } else if (quiz.quiz_level === 3 && session.current_level === 3) {
-              level3Points += points
-            }
-          })
-        }
-
-        // Get leaderboard data to find ranks
-        const [level1Data, level2Data, level3Data] = await Promise.all([
-          getLeaderboardData(1),
-          getLeaderboardData(2),
-          getLeaderboardData(3)
-        ])
-
-        let level1Rank, level2Rank, level3Rank
-
-        // Find rank for level 1
-        if (level1Points > 0) {
-          const level1UserInTop10 = level1Data.leaderboard.find(entry => entry.id === session.user_id)
-          if (level1UserInTop10) {
-            level1Rank = level1Data.leaderboard.indexOf(level1UserInTop10) + 1
-          } else if (level1Data.currentUserEntry) {
-            // User not in top 10, get approximate rank
-            const allUsersAbove = level1Data.leaderboard.filter(entry => entry.points > level1Points).length
-            level1Rank = allUsersAbove + 1
-          }
-        }
-
-        // Find rank for level 2  
-        if (level2Points > 0) {
-          const level2UserInTop10 = level2Data.leaderboard.find(entry => entry.id === session.user_id)
-          if (level2UserInTop10) {
-            level2Rank = level2Data.leaderboard.indexOf(level2UserInTop10) + 1
-          } else if (level2Data.currentUserEntry) {
-            const allUsersAbove = level2Data.leaderboard.filter(entry => entry.points > level2Points).length
-            level2Rank = allUsersAbove + 1
-          }
-        }
-
-        // Find rank for level 3  
-        if (level3Points > 0) {
-          const level3UserInTop10 = level3Data.leaderboard.find(entry => entry.id === session.user_id)
-          if (level3UserInTop10) {
-            level3Rank = level3Data.leaderboard.indexOf(level3UserInTop10) + 1
-          } else if (level3Data.currentUserEntry) {
-            const allUsersAbove = level3Data.leaderboard.filter(entry => entry.points > level3Points).length
-            level3Rank = allUsersAbove + 1
-          }
-        }
-
-        setTournamentData({
-          level1Rank: level1Points > 0 ? level1Rank : undefined,
-          level1Points: level1Points > 0 ? level1Points : undefined,
-          level2Rank: level2Points > 0 ? level2Rank : undefined,
-          level2Points: level2Points > 0 ? level2Points : undefined,
-          level3Rank: level3Points > 0 ? level3Rank : undefined,
-          level3Points: level3Points > 0 ? level3Points : undefined
-        })
-
-        console.log("Tournament data set:", {
-          level1Rank, level1Points, level2Rank, level2Points, level3Rank, level3Points
-        })
-        
-      } catch (error) {
-        console.error("Error fetching tournament data:", error)
-      } finally {
-        setTournamentLoading(false)
-      }
     }
 
     loadProfileData()
@@ -887,113 +753,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                {/* Tournament Information */}
-                <div className="space-y-3">
-                  <div className="text-center">
-                    <h4 className="text-sm font-semibold text-yellow-400 flex items-center justify-center gap-2">
-                      <Trophy className="w-4 h-4" />
-                      Tournament Standing
-                    </h4>
-                  </div>
-                  
-                  {tournamentLoading ? (
-                    <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                      <div className="p-3 rounded-full bg-yellow-500/20">
-                        <Trophy className="w-5 h-5 text-yellow-400" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-sm text-white/60">Loading tournament data...</p>
-                        <LoadingSpinner size="sm" />
-                      </div>
-                    </div>
-                  ) : (tournamentData.level1Points || tournamentData.level2Points || tournamentData.level3Points) ? (
-                    <>
-                      {tournamentData.level1Points && (
-                        <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20">
-                          <div className="p-3 rounded-full bg-yellow-500/20">
-                            <Award className="w-5 h-5 text-yellow-400" />
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm text-white/60">Level 1 Tournament</p>
-                            <p className="text-white font-medium">
-                              {tournamentData.level1Points} points
-                              {tournamentData.level1Rank && ` • Rank #${tournamentData.level1Rank}`}
-                            </p>
-                          </div>
-                          <Button 
-                            asChild 
-                            size="sm" 
-                            className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 hover:bg-yellow-500/30"
-                          >
-                            <Link href="/Tournament">View</Link>
-                          </Button>
-                        </div>
-                      )}
-                      
-                      {tournamentData.level2Points && (
-                        <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20">
-                          <div className="p-3 rounded-full bg-purple-500/20">
-                            <Award className="w-5 h-5 text-purple-400" />
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm text-white/60">Level 2 Tournament</p>
-                            <p className="text-white font-medium">
-                              {tournamentData.level2Points} points
-                              {tournamentData.level2Rank && ` • Rank #${tournamentData.level2Rank}`}
-                            </p>
-                          </div>
-                          <Button 
-                            asChild 
-                            size="sm" 
-                            className="bg-purple-500/20 text-purple-400 border-purple-500/30 hover:bg-purple-500/30"
-                          >
-                            <Link href="/Tournament">View</Link>
-                          </Button>
-                        </div>
-                      )}
 
-                      {tournamentData.level3Points && (
-                        <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
-                          <div className="p-3 rounded-full bg-blue-500/20">
-                            <Award className="w-5 h-5 text-blue-400" />
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm text-white/60">Level 3 Tournament</p>
-                            <p className="text-white font-medium">
-                              {tournamentData.level3Points} points
-                              {tournamentData.level3Rank && ` • Rank #${tournamentData.level3Rank}`}
-                            </p>
-                          </div>
-                          <Button 
-                            asChild 
-                            size="sm" 
-                            className="bg-blue-500/20 text-blue-400 border-blue-500/30 hover:bg-blue-500/30"
-                          >
-                            <Link href="/Tournament">View</Link>
-                          </Button>
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                      <div className="p-3 rounded-full bg-gray-500/20">
-                        <Trophy className="w-5 h-5 text-gray-400" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-sm text-white/60">Tournament Status</p>
-                        <p className="text-white/80 font-medium">Not participating yet</p>
-                        <p className="text-xs text-white/50 mt-1">Take a quiz to join the tournament!</p>
-                      </div>
-                      <Button 
-                        asChild 
-                        size="sm" 
-                        className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-                      >
-                        <Link href="/Tournament">Join</Link>
-                      </Button>
-                    </div>
-                  )}
-                </div>
 
                 {isEditing ? (
                   <div className="flex gap-2">
@@ -1040,7 +800,7 @@ export default function ProfilePage() {
                   Your recent quiz attempts and performance
                 </CardDescription>
               </CardHeader>
-              <CardContent style={{height: "64.5rem"}} className="overflow-y-auto custom-scrollbar">
+              <CardContent style={{height: "53rem"}} className="overflow-y-auto custom-scrollbar">
                 {quizData.length > 0 ? (
                   <div className="space-y-4 flex-1">
                   {quizData.map((attempt, index) => {
@@ -1491,7 +1251,7 @@ export default function ProfilePage() {
               <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20">
                 <p className="text-white/70 text-sm mb-4">
                   🌟<span className="italic">"Sometimes we need to start over."</span> 
-                  <span className="text-white/50"> - Someone may I Love!</span>
+                  <span className="text-white/50"> - Some may I Love!</span>
                 </p>
                 <p className="text-white/60 text-sm">
                   Deleting your account will remove all your quiz attempts, notifications, and that sweet, 
@@ -1521,4 +1281,3 @@ export default function ProfilePage() {
     </div>
   )
 }
-
