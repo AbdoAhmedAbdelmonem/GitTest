@@ -113,7 +113,7 @@
     "numb": 10,
     "type": "Multiple Choices",
     "question": "Provide an example of modifying the first and fourth elements in an integer array.",
-    "answer": "B) int[] numbers = new int[10]; numbers[0] = 27; numbers[4] = -6;",
+    "answer": "C) int[] numbers = new int[10]; numbers[0] = 27; numbers[3] = -6;",
     "options": [
       "A) int[] numbers = new int[10]; numbers[1] = 27; numbers[4] = -6;",
       "B) int[] numbers = new int[10]; numbers[0] = 27; numbers[4] = -6;",
