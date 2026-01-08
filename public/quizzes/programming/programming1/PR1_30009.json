@@ -169,7 +169,7 @@
     "options": [
       "A) Prints each element of the array on a new line",
       "B) Prints all elements in one line",
-      "C) Prints each row on a new line",
+      "C) Prints each Column on a new line",
       "D) Causes an error"
     ],
     "image": "/quizzes/programming/programming_images/2-14 p2.png"
