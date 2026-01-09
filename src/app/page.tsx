@@ -76,11 +76,9 @@ const specializations = [
   },
 ]
 
-const stats = [
+const staticStats = [
   { icon: BookOpen, label: "Courses Available", value: 200, suffix: "" },
-  { icon: Award, label: "Solved Quizzes", value: 30823, suffix: "" },
-  { icon: BookOpenCheck, label: "Available Quizzes", value: 200, suffix: "+" },
-  { icon: ServerCrash , label: "Million Requests", value: 4.73, suffix: "M" },
+  { icon: ServerCrash , label: "Monthly Visits", value: 5.36, suffix: "M" },
 ]
 
 interface LevelStat {
@@ -100,6 +98,8 @@ export default function HomePage() {
   const [isLoadingStats, setIsLoadingStats] = useState(true)
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [key, setKey] = useState(0) // Force re-render key
+  const [quizCount, setQuizCount] = useState<number | null>(null)
+  const [solvedQuizzes, setSolvedQuizzes] = useState<number | null>(null)
 
   useEffect(() => {
     const session = getStudentSession()
@@ -139,6 +139,23 @@ export default function HomePage() {
 
   useEffect(() => {
     fetchUserStats()
+    
+    // Fetch quiz stats (available + solved)
+    const fetchQuizStats = async () => {
+      try {
+        const response = await fetch('/api/stats/quizzes')
+        if (response.ok) {
+          const data = await response.json()
+          setQuizCount(data.totalQuizzes)
+          setSolvedQuizzes(data.solvedQuizzes + 30000) //30000 from the Chameleon v1.6
+        }
+      } catch (error) {
+        console.error('Failed to fetch quiz stats:', error)
+        setQuizCount(140) // Fallback value
+        setSolvedQuizzes(30000) // Fallback value
+      }
+    }
+    fetchQuizStats()
     
     // Auto-refresh every 5 minutes to keep data fresh
     const intervalId = setInterval(() => {
@@ -215,7 +232,8 @@ export default function HomePage() {
       <ScrollAnimatedSection className="py-20 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
+            {/* Static stats */}
+            {staticStats.map((stat, index) => (
               <ScrollAnimatedSection key={index} animation="slideUp" delay={index * 0.1} className="text-center">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 mb-4">
                   <stat.icon className="w-6 h-6 text-white/60" />
@@ -234,6 +252,51 @@ export default function HomePage() {
                 <div className="text-sm text-white/40">{stat.label}</div>
               </ScrollAnimatedSection>
             ))}
+            {/* Dynamic solved quizzes count from Supabase */}
+            <ScrollAnimatedSection animation="slideUp" delay={0.1} className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 mb-4">
+                <Award className="w-6 h-6 text-white/60" />
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-white mb-2">
+                {solvedQuizzes !== null ? (
+                  <CountUp
+                    from={0}
+                    to={solvedQuizzes}
+                    separator=","
+                    direction="up"
+                    duration={1}
+                    className="count-up-text"
+                  />
+                ) : (
+                  <span className="text-white/40">...</span>
+                )}
+              </div>
+              <div className="text-sm text-white/40">Solved Quizzes</div>
+            </ScrollAnimatedSection>
+            {/* Dynamic quiz count - available quizzes */}
+            <ScrollAnimatedSection animation="slideUp" delay={0.2} className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 mb-4">
+                <BookOpenCheck className="w-6 h-6 text-white/60" />
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-white mb-2">
+                {quizCount !== null ? (
+                  <>
+                    <CountUp
+                      from={0}
+                      to={quizCount}
+                      separator=","
+                      direction="up"
+                      duration={1}
+                      className="count-up-text"
+                    />
+                    +
+                  </>
+                ) : (
+                  <span className="text-white/40">...</span>
+                )}
+              </div>
+              <div className="text-sm text-white/40">Available Quizzes</div>
+            </ScrollAnimatedSection>
           </div>
 
           {/* Dynamic User Stats with Level Breakdown */}
@@ -338,6 +401,53 @@ export default function HomePage() {
               </PopoverContent>
             </Popover>
           </div>
+
+          {/* 2025 Recap Banner - Only for logged-in users */}
+          {username && (
+            <div className="mt-8 sm:mt-12 flex justify-center px-4">
+              <Link href="/recap" className="w-full max-w-2xl">
+                <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl p-[2px] cursor-pointer transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]">
+                  {/* Animated gradient border */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 opacity-75 group-hover:opacity-100 transition-opacity" 
+                       style={{ 
+                         animation: 'gradientShift 4s ease infinite',
+                         backgroundSize: '200% 200%'
+                       }} />
+                  
+                  {/* Inner content */}
+                  <div className="relative flex flex-col sm:flex-row items-center gap-4 sm:gap-6 bg-[#0a0a0a] rounded-xl sm:rounded-2xl p-4 sm:px-8 sm:py-6">
+                    {/* Chameleon Icon */}
+                    <div className="relative shrink-0">
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-50 animate-pulse" />
+                      <span className="relative text-4xl sm:text-5xl md:text-6xl animate-float-icon block">🦎</span>
+                    </div>
+                    
+                    {/* Text Content */}
+                    <div className="text-center sm:text-left flex-1">
+                      <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
+                        <span className="text-[10px] sm:text-xs font-semibold px-2 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full text-purple-400 font-space">
+                          ✨ NEW
+                        </span>
+                        <span className="text-[10px] sm:text-xs text-white/40 font-space">End of Year Special</span>
+                      </div>
+                      <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-1 font-poppins">
+                        Your <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent">2025 Recap</span> is Ready!
+                      </h3>
+                      <p className="text-white/60 text-xs sm:text-sm font-space hidden sm:block">
+                        See your year in review with personalized stats & insights
+                      </p>
+                    </div>
+                    
+                    {/* CTA */}
+                    <div className="flex items-center gap-2 text-white group-hover:translate-x-1 transition-transform shrink-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 px-4 py-2 rounded-full border border-white/10">
+                      <span className="font-semibold text-sm sm:text-base font-poppins">View Now</span>
+                      <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          )}
         </div>
       </ScrollAnimatedSection>
 
@@ -543,7 +653,7 @@ export default function HomePage() {
                   &copy; {new Date().getDate()} of {new Date().toLocaleString('default', { month: 'long' })} {new Date().getFullYear()} - Chameleon FCDS. All rights reserved.
                 </p>
                 <p className="copy mb-2">
-                  Chameleon FCDS - Educational Platform by Abdelrahman Ahmed (Levi Ackerman)
+                  Chameleon FCDS - Educational Platform by Levi Ackerman
                 </p>
                 {username && (
                   <p className="text-xs text-white/40" style={{ fontFamily: 'forte' }}>
