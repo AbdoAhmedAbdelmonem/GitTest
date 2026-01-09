@@ -198,12 +198,12 @@
   {
     "numb": 15,
     "type": "Multiple Choices",
-    "question": "What port number is FTP?",
+    "question": "which of the following is a port number is FTP?",
     "options": [
       "A) 21",
       "B) 23",
-      "C) 20",
-      "D) 22"
+      "C) 80",
+      "D) 67"
     ],
     "answer": "A) 21",
     "explanation": "FTP control uses port 21. FTP data uses port 20. These are commonly used in Extended ACL rules to control file transfer access.",
