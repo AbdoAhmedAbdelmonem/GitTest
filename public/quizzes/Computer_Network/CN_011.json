@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is a WAN?",
+    "options": [
+      "A) A network that connects multiple LANs over large geographic distances",
+      "B) A wireless access network",
+      "C) A virtual network",
+      "D) A small office network"
+    ],
+    "answer": "A) A network that connects multiple LANs over large geographic distances",
+    "explanation": "A WAN (Wide Area Network) connects multiple LANs over large geographic distances (cities, countries, or worldwide) using technology provided by ISPs.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "Who typically owns most of the WAN infrastructure?",
+    "options": [
+      "A) Nobody - it's public",
+      "B) The Internet Service Provider",
+      "C) The end user",
+      "D) The government"
+    ],
+    "answer": "B) The Internet Service Provider",
+    "explanation": "In a WAN, you only own a small part (your LAN). Most of the network infrastructure connecting LANs together is owned and managed by ISPs.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is the demarcation point?",
+    "options": [
+      "A) The router's IP address where ISP responsibility begins and your responsibility ends",
+      "B) The point where ISP responsibility ends and your responsibility begins",
+      "C) The center of the network",
+      "D) The fastest point in the network"
+    ],
+    "answer": "B) The point where ISP responsibility ends and your responsibility begins",
+    "explanation": "The demarcation point separates ISP responsibility (before it) from your responsibility (after it). If a WAN issue occurs, each party checks their side.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the local loop?",
+    "options": [
+      "A) The physical cable connecting your network to the ISP central office",
+      "B) A wireless signal (radio frequency)",
+      "C) A broadcast domain (the area where broadcast traffic is sent)",
+      "D) A routing loop"
+    ],
+    "answer": "A) The physical cable connecting your network to the ISP central office",
+    "explanation": "The local loop is the dedicated physical cable (copper or fiber) that connects your router to the ISP's central office. The distance affects speed, quality, and price.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of CSU/DSU?",
+    "options": [
+      "A) To filter traffic",
+      "B) To synchronize clock rates between ISP and router",
+      "C) To encrypt data for security enhancement",
+      "D) To assign IP addresses to all users in the same network"
+    ],
+    "answer": "B) To synchronize clock rates between ISP and router",
+    "explanation": "CSU/DSU synchronizes the clock rate between ISP speed and router speed. Without proper synchronization, bits would be shifted and data would be corrupted. Modern routers often have this built-in.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is Circuit Switching?",
+    "options": [
+      "A) Sending packets through random paths",
+      "B) A wireless technology",
+      "C) Sharing paths with other users",
+      "D) Creating a dedicated path"
+    ],
+    "answer": "D) Creating a dedicated path",
+    "explanation": "Circuit switching provides a dedicated logical circuit (connection) for you alone. It's always available even when not in use, providing high availability but at a high cost.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is Packet Switching?",
+    "options": [
+      "A) A dedicated path for each user",
+      "B) A wireless technology",
+      "C) A backup connection method",
+      "D) Sharing network paths with other users"
+    ],
+    "answer": "D) Sharing network paths with other users",
+    "explanation": "Packet switching shares network paths with other users. It's cheaper because costs are distributed, but bandwidth is not guaranteed as it depends on network congestion.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Which is more expensive: Circuit Switching or Packet Switching?",
+    "options": [
+      "A) It depends on the distance",
+      "B) They cost the same",
+      "C) Packet Switching",
+      "D) Circuit Switching"
+    ],
+    "answer": "D) Circuit Switching",
+    "explanation": "Circuit switching is more expensive because the ISP reserves bandwidth exclusively for you, even when you're not using it. Packet switching is cheaper as resources are shared.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is a Leased Line?",
+    "options": [
+      "A) A permanent, dedicated WAN connection that is always on",
+      "B) A temporary dial-up connection",
+      "C) A wireless connection",
+      "D) A shared internet connection"
+    ],
+    "answer": "A) A permanent, dedicated WAN connection that is always on",
+    "explanation": "A leased line is a permanent, point-to-point, dedicated WAN connection. It's always on, not shared with anyone, very stable and secure, but very expensive.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What technology do traditional phone calls use?",
+    "options": [
+      "A) Frame relay",
+      "B) Packet switching",
+      "C) Circuit switching",
+      "D) Virtual Private Network"
+    ],
+    "answer": "C) Circuit switching",
+    "explanation": "Traditional phone calls create a dedicated circuit for each call that remains open even during silences. This improves availability but is costly for ISPs and users.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What does PPP stand for?",
+    "options": [
+      "A) Public Path Protocol",
+      "B) Primary Port Protocol",
+      "C) Point-to-Point Protocol",
+      "D) Private Packet Protocol"
+    ],
+    "answer": "C) Point-to-Point Protocol",
+    "explanation": "PPP (Point-to-Point Protocol) is a Layer 2 protocol used to establish logical connections, authenticate users, and encapsulate network-layer data over leased line technologies.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What are the two authentication methods used by PPP?",
+    "options": [
+      "A) TCP and UDP",
+      "B) SSH and Telnet",
+      "C) PAP and CHAP",
+      "D) HTTP and HTTPS"
+    ],
+    "answer": "C) PAP and CHAP",
+    "explanation": "PPP uses PAP (Password Authentication Protocol) which sends credentials in plain text, and CHAP (Challenge Handshake Authentication Protocol) which is more secure using encryption.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Why is PAP considered insecure?",
+    "options": [
+      "A) It's too slow",
+      "B) It sends username and password in plain text",
+      "C) It uses too much bandwidth (high latency)",
+      "D) It requires a certificate (SSL)"
+    ],
+    "answer": "B) It sends username and password in plain text",
+    "explanation": "PAP sends username and password in plain text (unencrypted), making it easy for attackers to sniff and capture credentials.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "How does CHAP improve security over PAP?",
+    "options": [
+      "A) It sends data faster",
+      "B) It uses encrypted text and hashing",
+      "C) It uses more bandwidth",
+      "D) It doesn't require a password"
+    ],
+    "answer": "B) It uses encrypted text and hashing",
+    "explanation": "CHAP uses a 3-way handshake with random challenges and hashing. The password is never sent directly - instead, a hash of the password + challenge is sent and verified.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is Frame Relay?",
+    "options": [
+      "A) A packet-switched WAN technology",
+      "B) A routing protocol that forwards packets",
+      "C) A wireless protocol that uses radio frequencies",
+      "D) A dedicated leased line that provides a permanent connection"
+    ],
+    "answer": "A) A packet-switched WAN technology",
+    "explanation": "Frame Relay is a packet-switched technology that allows one router to connect to many remote routers using one physical link with multiple logical connections (virtual circuits).",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is a Virtual Circuit in Frame Relay?",
+    "options": [
+      "A) A logical predefined path in the Frame Relay cloud between two routers",
+      "B) A physical cable",
+      "C) A backup power supply",
+      "D) A wireless connection"
+    ],
+    "answer": "A) A logical predefined path in the Frame Relay cloud between two routers",
+    "explanation": "A Virtual Circuit is a logical (not physical) predefined path in the ISP's Frame Relay cloud that connects two routers. The ISP manages the actual routing internally.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What is DLCI in Frame Relay?",
+    "options": [
+      "A) A type of cable",
+      "B) A routing protocol",
+      "C) A Layer 2 identifier",
+      "D) An encryption method"
+    ],
+    "answer": "C) A Layer 2 identifier",
+    "explanation": "DLCI (Data Link Connection Identifier) is a Layer 2 address that identifies which virtual circuit (logical path) to use for sending frames. It's locally significant - the same circuit can have different DLCI numbers on different routers.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "which of the following is a LMI Type in Frame Relay?",
+    "options": [
+      "A) ANSI",
+      "B) SVC",
+      "C) PAP",
+      "D) ABR"
+    ],
+    "answer": "A) ANSI",
+    "explanation": "ANSI - Cisco - ITU-T(Q.933A) are LMI Types in Frame Relay.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What does BECN flag with value 1 indicate in Frame Relay?",
+    "options": [
+      "A) There's no congestion",
+      "B) There's congestion in the network",
+      "C) The frame is important",
+      "D) The connection is established"
+    ],
+    "answer": "B) There's congestion in the network",
+    "explanation": "BECN (Backward Explicit Congestion Notification) notifies the source that there's congestion in the network and it should reduce its sending rate.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What does the DE bit indicate in Frame Relay?",
+    "options": [
+      "A) The frame is a management frame",
+      "B) The frame must be delivered immediately",
+      "C) The frame has low priority and can be dropped if there's congestion",
+      "D) The frame is encrypted"
+    ],
+    "answer": "C) The frame has low priority and can be dropped if there's congestion",
+    "explanation": "DE (Discard Eligibility) bit marks low-priority frames. When congestion occurs, the Frame Relay cloud can drop these frames first to reduce congestion.",
+    "image": null
+  }
+]

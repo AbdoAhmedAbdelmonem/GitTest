@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is an ACL (Access Control List)?",
+    "options": [
+      "A) A set of rules applied on a router interface to permit or deny packets",
+      "B) A list of connected devices",
+      "C) A list of MAC addresses",
+      "D) A routing table"
+    ],
+    "answer": "A) A set of rules applied on a router interface to permit or deny packets",
+    "explanation": "An ACL is a set of rules applied on a router interface that decides which packets are allowed (permit) and which packets are blocked (deny) based on specified criteria.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What happens if a packet doesn't match any rule in an ACL?",
+    "options": [
+      "A) The packet is duplicated",
+      "B) The packet is permitted by default",
+      "C) The packet is denied",
+      "D) The packet is sent back to the source"
+    ],
+    "answer": "C) The packet is denied",
+    "explanation": "ACLs have an implicit deny at the end. If a packet doesn't match any rule, it is automatically dropped. This is why you often need to add a 'permit any' rule at the end.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What does Standard IP ACL check?",
+    "options": [
+      "A) Source IP, destination IP, and port numbers",
+      "B) Only the protocol type",
+      "C) Only the source IP address",
+      "D) Only the destination IP address"
+    ],
+    "answer": "C) Only the source IP address",
+    "explanation": "Standard IP ACL only checks the source IP address. It cannot check destination IP, protocol type, or port numbers. Use Extended ACL for more detailed filtering.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What can Extended IP ACL check?",
+    "options": [
+      "A) Only source IP",
+      "B) Only port numbers",
+      "C) Source IP, destination IP, protocol, and port numbers",
+      "D) Only MAC addresses"
+    ],
+    "answer": "C) Source IP, destination IP, protocol, and port numbers",
+    "explanation": "Extended IP ACL is more powerful and can check source IP, destination IP, protocol (TCP/UDP/IP), source port, and destination port for fine-grained control.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is the number range for Standard ACL?",
+    "options": [
+      "A) 200-299",
+      "B) 1-99 and 1300-1999",
+      "C) 100-199 and 2000-2699",
+      "D) 1-1000"
+    ],
+    "answer": "B) 1-99 and 1300-1999",
+    "explanation": "Standard ACL uses numbers from 1 to 99 and 1300 to 1999. The ACL number tells the interface whether it's a standard or extended ACL.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is the number range for Extended ACL?",
+    "options": [
+      "A) 100-199 and 2000-2699",
+      "B) 200-299",
+      "C) 1-99 and 1300-1999",
+      "D) 300-399"
+    ],
+    "answer": "A) 100-199 and 2000-2699",
+    "explanation": "Extended ACL uses numbers from 100 to 199 and 2000 to 2699. This number range indicates that more detailed packet inspection will be performed.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is a Wildcard Mask used for in ACLs?",
+    "options": [
+      "A) To encrypt IP addresses",
+      "B) To compress network traffic",
+      "C) To hide the router's identity",
+      "D) To specify which bits of an IP address to examine"
+    ],
+    "answer": "D) To specify which bits of an IP address to examine",
+    "explanation": "A wildcard mask is a 32-bit mask that tells the ACL which bits to check (0 = must match) and which to ignore (1 = don't care). It's the inverse of a subnet mask.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "In a wildcard mask, what does a bit set to 0 mean?",
+    "options": [
+      "A) This bit must be compared/matched",
+      "B) This bit is reserved",
+      "C) This bit is encrypted",
+      "D) Ignore this bit"
+    ],
+    "answer": "A) This bit must be compared/matched",
+    "explanation": "In a wildcard mask, a 0 bit means the ACL must compare this bit in the IP address. A 1 bit means the ACL should ignore this bit.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What wildcard mask would you use to match a single host 192.168.1.2?",
+    "options": [
+      "A) 0.0.0.0",
+      "B) 255.255.255.255",
+      "C) 0.0.0.255",
+      "D) 255.255.255.0"
+    ],
+    "answer": "A) 0.0.0.0",
+    "explanation": "A wildcard mask of 0.0.0.0 means all 32 bits must match exactly. This is used when you want to match a single specific IP address.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What wildcard mask represents matching any IP address?",
+    "options": [
+      "A) 255.255.255.255",
+      "B) 0.0.0.0",
+      "C) 255.0.0.0",
+      "D) 0.0.0.255"
+    ],
+    "answer": "A) 255.255.255.255",
+    "explanation": "A wildcard mask of 255.255.255.255 means ignore all bits, so it matches any IP address. The keyword 'any' can be used instead of '0.0.0.0 255.255.255.255'.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What does 'ip access-group 1 out' mean?",
+    "options": [
+      "A) Apply ACL 1 to outgoing packets",
+      "B) Apply ACL 1 to incoming packets",
+      "C) Delete ACL 1",
+      "D) Create a new ACL"
+    ],
+    "answer": "A) Apply ACL 1 to outgoing packets",
+    "explanation": "The 'out' keyword means the ACL rules will be applied to packets leaving (outgoing from) the interface. 'in' would apply to incoming packets.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "In ACL processing, which rule is applied to a matching packet?",
+    "options": [
+      "A) The first matching rule",
+      "B) The last matching rule",
+      "C) All matching rules",
+      "D) A random matching rule"
+    ],
+    "answer": "A) The first matching rule",
+    "explanation": "ACLs process rules from top to bottom, and the first matching rule is applied. This is why the order of ACL rules is very important.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is the syntax for Standard ACL?",
+    "options": [
+      "A) access-list <number> permit|deny <protocol> <source>",
+      "B) access-list <number> permit|deny any",
+      "C) access-list <number> permit|deny <source> <wildcard>",
+      "D) access-list <number> permit|deny <source> <destination>"
+    ],
+    "answer": "C) access-list <number> permit|deny <source> <wildcard>",
+    "explanation": "Standard ACL syntax is: access-list <number> permit|deny <source IP> <wildcard mask>. It only specifies the source address.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "Which of the following abbreviations stands for \"Greater Than\"",
+    "options": [
+      "A) eq",
+      "B) gt",
+      "C) neq",
+      "D) lt"
+    ],
+    "answer": "B) gt",
+    "explanation": "Greater than is gt.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What port number is FTP?",
+    "options": [
+      "A) 21",
+      "B) 23",
+      "C) 20",
+      "D) 22"
+    ],
+    "answer": "A) 21",
+    "explanation": "FTP control uses port 21. FTP data uses port 20. These are commonly used in Extended ACL rules to control file transfer access.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is the advantage of Named ACL over Numbered ACL?",
+    "options": [
+      "A) Named ACL allows editing individual rules without deleting the entire ACL",
+      "B) Named ACL uses less memory",
+      "C) Named ACL is more secure",
+      "D) Named ACL is faster"
+    ],
+    "answer": "A) Named ACL allows editing individual rules without deleting the entire ACL",
+    "explanation": "With Numbered ACL, you must delete the entire ACL to modify it. Named ACL allows you to add, edit, or remove individual rules by their line number.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What command is used to view configured ACLs?",
+    "options": [
+      "A) show ip route",
+      "B) show mac-address-table",
+      "C) show running-config or show access-lists",
+      "D) show interfaces"
+    ],
+    "answer": "C) show running-config or show access-lists",
+    "explanation": "To verify configured ACLs, you can use 'show running-config' to see all router configuration including ACLs, or 'show access-lists' to see only the ACLs.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "In Extended ACL, what does 'eq 23' mean?",
+    "options": [
+      "A) ACL number 23",
+      "B) 23 packets per second",
+      "C) Equal to Telnet port",
+      "D) Equal to 23 bytes"
+    ],
+    "answer": "C) Equal to Telnet port",
+    "explanation": "The 'eq' keyword means 'equal to', followed by a port number. 'eq 23' means the rule applies to traffic on port 23, which is Telnet.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What does 'lt 1023' mean in an Extended ACL?",
+    "options": [
+      "A) Greater than port 1023",
+      "B) Less than port 1023",
+      "C) Not equal to port 1023",
+      "D) Equal to port 1023"
+    ],
+    "answer": "B) Less than port 1023",
+    "explanation": "The 'lt' keyword means 'less than'. 'lt 1023' matches all port numbers less than 1023, which are the well-known ports (0-1023).",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "In a Numbered IP ACL, what do the automatic line numbers (10, 20, 30...) allow you to do?",
+    "options": [
+      "A) Encrypt the rules",
+      "B) Nothing special",
+      "C) Speed up packet processing",
+      "D) Insert new rules between existing ones and delete specific rules"
+    ],
+    "answer": "D) Insert new rules between existing ones and delete specific rules",
+    "explanation": "The router assigns line numbers (10, 20, 30...) to each rule in Numbered IP ACL. You can insert new rules by using numbers between existing ones (e.g., 15) and delete specific rules using 'no <line number>'.",
+    "image": null
+  }
+]

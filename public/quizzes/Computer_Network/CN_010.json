@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is a VLAN?",
+    "options": [
+      "A) A logical division of one physical switch",
+      "B) A virtual router",
+      "C) A wireless network",
+      "D) A type of cable used to connect switches"
+    ],
+    "answer": "A) A logical division of one physical switch",
+    "explanation": "VLAN (Virtual LAN) divides one physical switch into multiple logical networks, allowing devices to behave as if they are on separate networks.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of VLANs?",
+    "options": [
+      "A) Faster internet speed",
+      "B) Lower electricity costs",
+      "C) Improved security and performance by limiting broadcast domains",
+      "D) Increased cable length"
+    ],
+    "answer": "C) Improved security and performance by limiting broadcast domains",
+    "explanation": "VLANs improve security by isolating traffic and improve performance by restricting broadcast frames to the same VLAN only.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "Can devices on different VLANs communicate directly without a Layer 3 device?",
+    "options": [
+      "A) Yes, always",
+      "B) Only on wireless networks",
+      "C) Only if they share the same IP",
+      "D) No, they need a router or Layer 3 switch"
+    ],
+    "answer": "D) No, they need a router or Layer 3 switch",
+    "explanation": "Different VLANs are separate logical networks, so communication between them requires routing via a router or Layer 3 switch.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is a trunk link?",
+    "options": [
+      "A) A backup cable",
+      "B) A cable connecting a PC to a switch",
+      "C) A single link between two switches that carries traffic for multiple VLANs",
+      "D) A wireless connection"
+    ],
+    "answer": "C) A single link between two switches that carries traffic for multiple VLANs",
+    "explanation": "A trunk link is used to carry traffic from multiple VLANs over one physical connection between switches.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is the standard trunking protocol?",
+    "options": [
+      "A) VTP",
+      "B) STP",
+      "C) ISL",
+      "D) IEEE 802.1Q"
+    ],
+    "answer": "D) IEEE 802.1Q",
+    "explanation": "IEEE 802.1Q is the open standard trunking protocol supported by all vendors. ISL is Cisco proprietary.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "How does IEEE 802.1Q identify VLANs?",
+    "options": [
+      "A) By modifying IP address",
+      "B) By inserting a 4-byte VLAN tag",
+      "C) By changing MAC address",
+      "D) By adding a trailer only"
+    ],
+    "answer": "B) By inserting a 4-byte VLAN tag",
+    "explanation": "IEEE 802.1Q inserts a 4-byte tag into the Ethernet frame containing the VLAN ID, known as frame tagging.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What are the administrative modes for trunk negotiation?",
+    "options": [
+      "A) Desirable and Auto",
+      "B) Master and Slave",
+      "C) Active and Passive",
+      "D) Primary and Secondary"
+    ],
+    "answer": "A) Desirable and Auto",
+    "explanation": "Desirable mode actively negotiates trunking, while Auto mode passively waits for trunk requests.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "Can a trunk form if both switches are in Auto mode?",
+    "options": [
+      "A) Yes",
+      "B) Only on Cisco switches",
+      "C) No, because neither initiates",
+      "D) Yes, but slowly"
+    ],
+    "answer": "C) No, because neither initiates",
+    "explanation": "Auto mode does not initiate trunking, so two Auto-mode switches cannot form a trunk.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What does VTP stand for?",
+    "options": [
+      "A) Virtual Transfer Protocol",
+      "B) VLAN Trunking Protocol",
+      "C) VLAN Transport Process",
+      "D) Virtual Trunk Procedure"
+    ],
+    "answer": "B) VLAN Trunking Protocol",
+    "explanation": "VTP stands for VLAN Trunking Protocol and is used to propagate VLAN configuration between switches.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is the role of a VTP Server?",
+    "options": [
+      "A) Creates, updates, deletes VLANs and sends updates",
+      "B) Only receives VLAN info",
+      "C) Forwards messages without applying",
+      "D) Disables VTP"
+    ],
+    "answer": "A) Creates, updates, deletes VLANs and sends updates",
+    "explanation": "The VTP Server is responsible for managing VLANs and distributing updates to other switches.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What can a VTP Client do?",
+    "options": [
+      "A) Ignore VTP",
+      "B) Create VLANs",
+      "C) Receive VLAN info and apply it locally",
+      "D) Disable VTP"
+    ],
+    "answer": "C) Receive VLAN info and apply it locally",
+    "explanation": "VTP Clients cannot create VLANs but they synchronize and apply VLAN information received from the server.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What does VTP Transparent mode do?",
+    "options": [
+      "A) Forwards VTP messages without applying changes",
+      "B) Becomes server",
+      "C) Blocks VTP",
+      "D) Syncs VLANs"
+    ],
+    "answer": "A) Forwards VTP messages without applying changes",
+    "explanation": "Transparent mode forwards VTP messages but does not apply received VLAN updates locally.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What does VTP Off mode do?",
+    "options": [
+      "A) Syncs only",
+      "B) Acts as server",
+      "C) Completely disables VTP",
+      "D) Forwards only"
+    ],
+    "answer": "C) Completely disables VTP",
+    "explanation": "VTP Off mode disables all VTP operations, including synchronization and forwarding.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is the VTP Revision Number?",
+    "options": [
+      "A) Switch serial number",
+      "B) Number of VLANs",
+      "C) VTP version",
+      "D) Counter that increases with VLAN changes"
+    ],
+    "answer": "D) Counter that increases with VLAN changes",
+    "explanation": "The revision number increments whenever VLANs are created, deleted, or modified.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What happens when a switch receives a higher VTP revision number?",
+    "options": [
+      "A) It ignores it",
+      "B) It reboots",
+      "C) It accepts and updates VLAN database",
+      "D) It sends error"
+    ],
+    "answer": "C) It accepts and updates VLAN database",
+    "explanation": "Switches accept VTP updates only if the incoming revision number is higher than their own.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What is required for VTP communication?",
+    "options": [
+      "A) Same hostname",
+      "B) Same MAC address",
+      "C) Same number of ports",
+      "D) Same VTP domain name and version"
+    ],
+    "answer": "D) Same VTP domain name and version",
+    "explanation": "VTP requires switches to be in the same VTP domain and use the same VTP version.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What is a VTP danger when adding a new switch?",
+    "options": [
+      "A) Power failure",
+      "B) Network slowdown",
+      "C) VLAN database overwrite",
+      "D) DR election"
+    ],
+    "answer": "C) VLAN database overwrite",
+    "explanation": "A switch with a higher revision number can overwrite VLAN configurations across the network.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "How to safely add a new switch?",
+    "options": [
+      "A) Set Transparent mode",
+      "B) Change VTP domain name",
+      "C) A & B are True",
+      "D) Connect it first"
+    ],
+    "answer": "C) A & B are True",
+    "explanation": "Both changing the VTP domain name and using Transparent mode reset the revision number and prevent overwriting.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What does VTP propagate?",
+    "options": [
+      "A) User traffic",
+      "B) Routing tables",
+      "C) VLAN configuration information",
+      "D) MAC addresses"
+    ],
+    "answer": "C) VLAN configuration information",
+    "explanation": "VTP propagates VLAN configuration data only, not user traffic.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "Through what links do VTP messages travel?",
+    "options": [
+      "A) Access links",
+      "B) Serial links",
+      "C) Wireless links",
+      "D) Trunk links"
+    ],
+    "answer": "D) Trunk links",
+    "explanation": "VTP messages are exchanged over trunk links that carry traffic for multiple VLANs.",
+    "image": null
+  }
+]

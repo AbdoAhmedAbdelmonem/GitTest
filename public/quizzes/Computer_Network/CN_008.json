@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What are the two types of networks in OSPF?",
+    "options": [
+      "A) LAN and WAN networks",
+      "B) Public and Private networks",
+      "C) Wired and Wireless networks",
+      "D) Point-to-Point and Multi-Access networks"
+    ],
+    "answer": "D) Point-to-Point and Multi-Access networks",
+    "explanation": "OSPF distinguishes between Point-to-Point networks (simple networks with just two routers connected) and Multi-Access networks (networks where more than two routers are physically connected on the same segment).",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "In a Point-to-Point network, how many neighbors does each router have?",
+    "options": [
+      "A) It depends on the configuration",
+      "B) Only one neighbor",
+      "C) Multiple neighbors",
+      "D) No neighbors"
+    ],
+    "answer": "B) Only one neighbor",
+    "explanation": "A Point-to-Point network consists of just two routers connected together, so each router has only one neighbor. This simple network doesn't require DR/BDR election.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the Designated Router (DR) in OSPF?",
+    "options": [
+      "A) To act as the central router for collecting and distributing routing information",
+      "B) To encrypt routing information",
+      "C) To block unauthorized traffic",
+      "D) To provide backup power to other routers"
+    ],
+    "answer": "A) To act as the central router for collecting and distributing routing information",
+    "explanation": "The DR is the central router responsible for collecting and distributing routing information (LSAs) in a multi-access network, reducing unnecessary communication overhead between routers.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the role of the Backup Designated Router (BDR)?",
+    "options": [
+      "A) To filter broadcast traffic",
+      "B) To replace the DR if the DR fails",
+      "C) To provide additional bandwidth",
+      "D) To encrypt packets"
+    ],
+    "answer": "B) To replace the DR if the DR fails",
+    "explanation": "The BDR is elected to take over as the DR if the current DR fails, preventing delays that would occur from having to elect a new DR from scratch.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is the first factor used to elect the DR in OSPF?",
+    "options": [
+      "A) MAC address",
+      "B) Bandwidth",
+      "C) OSPF Priority",
+      "D) IP address"
+    ],
+    "answer": "C) OSPF Priority",
+    "explanation": "The OSPF Priority is the first factor considered for DR election. It's a value assigned to each router (default is 1, range 0-255). The router with the highest priority becomes the DR.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "If OSPF priorities are equal, what is used as a tiebreaker for DR election?",
+    "options": [
+      "A) Alphabetical order of hostname",
+      "B) Random selection",
+      "C) Router ID (highest IP address)",
+      "D) MAC address"
+    ],
+    "answer": "C) Router ID (highest IP address)",
+    "explanation": "When OSPF priorities are equal, the Router ID is used as a tiebreaker. The router with the highest Router ID becomes the DR.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What happens when a router has OSPF priority = 0?",
+    "options": [
+      "A) It becomes the DR automatically",
+      "B) It cannot become DR or BDR",
+      "C) It leaves the OSPF domain",
+      "D) It becomes the BDR automatically"
+    ],
+    "answer": "B) It cannot become DR or BDR",
+    "explanation": "A router with OSPF priority = 0 is ineligible to become either DR or BDR. This can be configured intentionally to prevent certain routers from taking on these roles.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What is a DROther router?",
+    "options": [
+      "A) A router that is disconnected from OSPF",
+      "B) A backup to the BDR",
+      "C) A router that is neither DR nor BDR",
+      "D) A router that uses a different routing protocol"
+    ],
+    "answer": "C) A router that is neither DR nor BDR",
+    "explanation": "DROther is the term used for routers in a multi-access network that are not designated as DR or BDR. They communicate with the DR/BDR for routing updates.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What happens when the DR fails and comes back online?",
+    "options": [
+      "A) It automatically becomes DR again",
+      "B) It returns as a DROther",
+      "C) It must be manually reconfigured",
+      "D) It becomes BDR"
+    ],
+    "answer": "B) It returns as a DROther",
+    "explanation": "When a former DR fails and comes back online, it returns as a DROther, not as DR again. The BDR has already taken over as the new DR, and a new BDR has been elected.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is the default Hello Interval in OSPF?",
+    "options": [
+      "A) 10 seconds",
+      "B) 20 seconds",
+      "C) 40 seconds",
+      "D) 5 seconds"
+    ],
+    "answer": "A) 10 seconds",
+    "explanation": "The default Hello Interval in OSPF is 10 seconds. Routers send hello packets at this interval to discover and maintain neighbor relationships. Both routers must have the same Hello Interval for adjacency to form.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is the default Dead Interval in OSPF?",
+    "options": [
+      "A) 10 seconds",
+      "B) 20 seconds",
+      "C) 60 seconds",
+      "D) 40 seconds"
+    ],
+    "answer": "D) 40 seconds",
+    "explanation": "The default Dead Interval is 40 seconds. If a router doesn't receive a hello packet from a neighbor within this time, it declares that neighbor as down.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "Which of the following is NOT a condition for OSPF adjacency?",
+    "options": [
+      "A) Same Dead Interval",
+      "B) Same bandwidth",
+      "C) Same Hello Interval",
+      "D) Same OSPF network type"
+    ],
+    "answer": "B) Same bandwidth",
+    "explanation": "For OSPF adjacency to form, routers must have the same Hello Interval, Dead Interval, and network type. Bandwidth is not a requirement for adjacency, though it affects the OSPF cost metric.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is Area 0 also known as in OSPF?",
+    "options": [
+      "A) Transit Area",
+      "B) Backbone Area",
+      "C) Normal Area",
+      "D) Stub Area"
+    ],
+    "answer": "B) Backbone Area",
+    "explanation": "Area 0 is called the Backbone Area. It's the most important area in OSPF because all other areas must be connected to it, and all inter-area communication passes through Area 0.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is an ABR (Area Border Router)?",
+    "options": [
+      "A) A router at the edge of a LAN",
+      "B) A router that connects to the internet",
+      "C) A router that uses BGP",
+      "D) A router that connects two or more OSPF areas"
+    ],
+    "answer": "D) A router that connects two or more OSPF areas",
+    "explanation": "An ABR connects two or more OSPF areas. It must have at least one interface in Area 0 and maintains separate LSDBs for each area it's connected to.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "Which LSA type is generated by each router and floods within the same area?",
+    "options": [
+      "A) Summary LSA",
+      "B) Router LSA",
+      "C) External LSA",
+      "D) Network LSA"
+    ],
+    "answer": "B) Router LSA",
+    "explanation": "Router LSA (Type 1) is generated by each router and contains information about the router's directly connected interfaces. It floods only within the same area.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which LSA type is generated only by the DR?",
+    "options": [
+      "A) Summary LSA",
+      "B) Network LSA",
+      "C) External LSA",
+      "D) Router LSA"
+    ],
+    "answer": "B) Network LSA",
+    "explanation": "Network LSA (Type 2) is generated only by the DR in multi-access networks. It contains information about all routers connected to the shared network segment.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "Which LSA type is generated by ABRs to advertise routes from one area to another?",
+    "options": [
+      "A) External LSA",
+      "B) Summary LSA",
+      "C) Network LSA",
+      "D) Router LSA"
+    ],
+    "answer": "B) Summary LSA",
+    "explanation": "Summary LSA (Type 3) is generated by ABRs to advertise routes from one area to another area. It floods from one area to another, unlike Router and Network LSAs.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What is the default reference bandwidth in OSPF for calculating cost?",
+    "options": [
+      "A) 10 Mbps",
+      "B) 10 Gbps",
+      "C) 100 Mbps",
+      "D) 1 Gbps"
+    ],
+    "answer": "C) 100 Mbps",
+    "explanation": "The default reference bandwidth in OSPF is 100 Mbps (10^8 bits per second). Cost is calculated as Reference Bandwidth / Actual Bandwidth.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is the OSPF cost for a 10 Mbps Ethernet link using default reference bandwidth?",
+    "options": [
+      "A) 1000",
+      "B) 10",
+      "C) 1",
+      "D) 100"
+    ],
+    "answer": "B) 10",
+    "explanation": "Cost = Reference Bandwidth / Actual Bandwidth = 100 Mbps / 10 Mbps = 10. Lower cost paths are preferred in OSPF routing.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What determines the best path in OSPF?",
+    "options": [
+      "A) The oldest path",
+      "B) The path with the highest cost",
+      "C) The path with the lowest cost",
+      "D) The path with the most hops"
+    ],
+    "answer": "C) The path with the lowest cost",
+    "explanation": "OSPF uses cost as its routing metric, and the path with the lowest total cost is considered the best path. Lower cost means higher bandwidth in OSPF.",
+    "image": null
+  }
+]

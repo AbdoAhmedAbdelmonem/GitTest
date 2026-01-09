@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is Wireshark?",
+    "options": [
+      "A) A routing protocol",
+      "B) A free, open-source network protocol and traffic analyzer",
+      "C) A wireless access point",
+      "D) A type of firewall"
+    ],
+    "answer": "B) A free, open-source network protocol and traffic analyzer",
+    "explanation": "Wireshark is a free, cross-platform, open-source network protocol analyzer. It captures network traffic and presents it as individual packets for detailed analysis.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What can Wireshark be used for?",
+    "options": [
+      "A) Sending emails",
+      "B) Writing code or programming",
+      "C) Creating websites",
+      "D) Capturing network traffic"
+    ],
+    "answer": "D) Capturing network traffic",
+    "explanation": "Wireshark can capture network traffic, troubleshoot network problems, analyze protocols, and display various packet fields and headers based on the packet type.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What does Wireshark capture and display?",
+    "options": [
+      "A) Individual packets with their fields and headers",
+      "B) User passwords and private data",
+      "C) Files and folders",
+      "D) System configurations"
+    ],
+    "answer": "A) Individual packets with their fields and headers",
+    "explanation": "Wireshark captures network packets and dissects them, displaying various packet fields and headers based on the type of packet that was captured (TCP, UDP, HTTP, etc.).",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is packet capturing?",
+    "options": [
+      "A) Recording network traffic that passes through a network interface",
+      "B) Deleting network packets",
+      "C) Encrypting packets",
+      "D) Sending packets to multiple destinations"
+    ],
+    "answer": "A) Recording network traffic that passes through a network interface",
+    "explanation": "Packet capturing is the process of recording network traffic that passes through a network interface. Wireshark stores these packets for later analysis.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What platforms does Wireshark run on?",
+    "options": [
+      "A) Linux only",
+      "B) Windows only",
+      "C) Cross-platform",
+      "D) Mobile devices only"
+    ],
+    "answer": "C) Cross-platform",
+    "explanation": "Wireshark is cross-platform software that runs on Windows, Linux, and macOS, making it accessible to network administrators on various operating systems.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is granular analysis in Wireshark?",
+    "options": [
+      "A) Analyzing the entire network at once",
+      "B) Examining individual packets in detail",
+      "C) Counting total packets",
+      "D) Measuring network speed"
+    ],
+    "answer": "B) Examining individual packets in detail",
+    "explanation": "Granular analysis means examining individual packets in detail - viewing their headers, payload, protocols, source/destination addresses, and other specific fields.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What can you troubleshoot using Wireshark?",
+    "options": [
+      "A) Software installation",
+      "B) PAT Connections problems",
+      "C) Network connectivity issues",
+      "D) Hardware failures"
+    ],
+    "answer": "C) Network connectivity issues",
+    "explanation": "Wireshark helps troubleshoot various network problems including connectivity issues, latency problems, packet loss, and protocol errors by examining actual network traffic.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What is packet dissection?",
+    "options": [
+      "A) Encrypting packets",
+      "B) Breaking down packets",
+      "C) Deleting packets",
+      "D) Copying packets"
+    ],
+    "answer": "B) Breaking down packets",
+    "explanation": "Packet dissection is the process of breaking down captured packets to display their various layers, fields, and protocol information in a readable format.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What license is Wireshark distributed under?",
+    "options": [
+      "A) Monthly subscription",
+      "B) Open-source license",
+      "C) Proprietary license",
+      "D) Enterprise license only"
+    ],
+    "answer": "B) Open-source license",
+    "explanation": "Wireshark is free and open-source software. Anyone can download, use, and even modify the source code according to its open-source license.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is a capture filter in Wireshark?",
+    "options": [
+      "A) A filter applied after capturing",
+      "B) A filter that encrypts data to avoid privacy issues",
+      "C) A filter that deletes packets to reduce the amount of data captured",
+      "D) A filter that limits what traffic is captured"
+    ],
+    "answer": "D) A filter that limits what traffic is captured",
+    "explanation": "A capture filter is applied before capturing begins. It limits what traffic is captured, reducing the amount of data you need to analyze.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is a display filter in Wireshark?",
+    "options": [
+      "A) A filter that speeds up the network",
+      "B) A filter that changes packet contents",
+      "C) A filter applied to already captured packets",
+      "D) A filter applied before capturing"
+    ],
+    "answer": "C) A filter applied to already captured packets",
+    "explanation": "A display filter is applied after capturing. It filters the view of already captured packets to show only those matching your criteria, without discarding the others.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What does Wireshark show for each captured packet?",
+    "options": [
+      "A) Timestamp, source, destination, protocol, length, and info",
+      "B) Only the file name",
+      "C) Only the MAC address",
+      "D) Only the packet size"
+    ],
+    "answer": "A) Timestamp, source, destination, protocol, length, and info",
+    "explanation": "Wireshark displays various information for each packet including when it was captured (timestamp), source and destination addresses, protocol type, packet length, and summary info.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What protocol layers can Wireshark analyze?",
+    "options": [
+      "A) All layers",
+      "B) Only Layer 7",
+      "C) Only Layers 2 and 3",
+      "D) Only Layer 1"
+    ],
+    "answer": "A) All layers",
+    "explanation": "Wireshark can analyze packets at all OSI layers, from Ethernet frames (Layer 2) to application protocols (Layer 7) like HTTP, DNS, FTP, etc.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is promiscuous mode in network capturing?",
+    "options": [
+      "A) Capturing all packets on the network segment",
+      "B) Encrypted mode",
+      "C) Capturing only packets destined for your computer",
+      "D) High-speed mode"
+    ],
+    "answer": "A) Capturing all packets on the network segment",
+    "explanation": "Promiscuous mode allows the network interface to capture all packets on the network segment, not just those addressed to your computer. This is essential for complete network analysis.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What file format does Wireshark use to save captures?",
+    "options": [
+      "A) .pcap",
+      "B) .Wsrk",
+      "C) .wrcap",
+      "D) .java"
+    ],
+    "answer": "A) .pcap",
+    "explanation": "Wireshark saves captures in .pcap or the newer .pcapng format. These are standard formats that can be opened by other packet analysis tools as well.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What color coding does Wireshark use?",
+    "options": [
+      "A) All packets are the same color",
+      "B) Different colors for different protocols and packet types",
+      "C) Random colors",
+      "D) Colors based on file size"
+    ],
+    "answer": "B) Different colors for different protocols and packet types",
+    "explanation": "Wireshark uses color coding to help identify different types of traffic at a glance. For example, HTTP might be green, TCP errors might be displayed in red.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What is a follow stream feature in Wireshark?",
+    "options": [
+      "A) Creating a new network",
+      "B) Copying packets to clipboard and saving them to a file",
+      "C) Following a live video stream",
+      "D) Combining and displaying all packets that belong to a TCP/UDP conversation"
+    ],
+    "answer": "D) Combining and displaying all packets that belong to a TCP/UDP conversation",
+    "explanation": "Follow stream allows you to see all the packets in a TCP or UDP conversation assembled together, making it easier to read the complete communication flow.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What can you analyze with Wireshark's statistics features?",
+    "options": [
+      "A) Only errors",
+      "B) Protocol hierarchy",
+      "C) Only packet count",
+      "D) Only bandwidth"
+    ],
+    "answer": "B) Protocol hierarchy",
+    "explanation": "Wireshark statistics include protocol distribution, conversation analysis between endpoints, endpoint statistics, packet lengths, and I/O graphs showing traffic over time.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is TCP stream reassembly in Wireshark?",
+    "options": [
+      "A) Reconstructing the complete data exchanged in a TCP connection",
+      "B) Encrypting TCP data",
+      "C) Splitting TCP packets",
+      "D) Deleting TCP packets"
+    ],
+    "answer": "A) Reconstructing the complete data exchanged in a TCP connection",
+    "explanation": "TCP stream reassembly combines individual TCP segments to reconstruct the complete data stream, allowing you to see the full content of a conversation (like a complete HTTP request/response).",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "Why is Wireshark valuable for learning networking?",
+    "options": [
+      "A) It's expensive software",
+      "B) It automatically fixes network problems",
+      "C) It replaces routers",
+      "D) It allows you to see how protocols actually work in real traffic"
+    ],
+    "answer": "D) It allows you to see how protocols actually work in real traffic",
+    "explanation": "Wireshark is excellent for learning because you can observe actual network traffic and see how protocols like TCP, HTTP, DNS, and others work in practice, not just in theory.",
+    "image": null
+  }
+]

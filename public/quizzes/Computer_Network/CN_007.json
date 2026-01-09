@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of a routing protocol?",
+    "options": [
+      "A) To compress network traffic",
+      "B) To assign IP addresses to devices",
+      "C) To encrypt data packets",
+      "D) To transfer routing information between routers and select the best path"
+    ],
+    "answer": "D) To transfer routing information between routers and select the best path",
+    "explanation": "A routing protocol is used to exchange routing information between routers and helps select the best path to transfer data. Examples include RIP and OSPF.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What is the difference between a routing protocol and a routed protocol?",
+    "options": [
+      "A) Neither carries any data",
+      "B) They are the same thing",
+      "C) Routing protocols carry routing info; routed protocols carry actual data packets",
+      "D) Routed protocols carry routing info; routing protocols carry data"
+    ],
+    "answer": "C) Routing protocols carry routing info; routed protocols carry actual data packets",
+    "explanation": "Routing protocols (like OSPF, RIP) carry routing information between routers, while routed protocols (like IPv4, IPv6) carry the actual data packets that are forwarded by routers.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is an Autonomous System (AS)?",
+    "options": [
+      "A) A wireless access point",
+      "B) A collection of devices under the same administrative authority",
+      "C) A type of firewall",
+      "D) A single router in a network"
+    ],
+    "answer": "B) A collection of devices under the same administrative authority",
+    "explanation": "An Autonomous System is a collection of routers and networks that are controlled by the same organization and managed by the same administrative authority, like an ISP.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "Which type of routing protocol works within a single autonomous system?",
+    "options": [
+      "A) Simple Network Management Protocol (SNMP)",
+      "B) Exterior Gateway Protocol (EGP)",
+      "C) Interior Gateway Protocol (IGP)",
+      "D) Border Gateway Protocol (BGP)"
+    ],
+    "answer": "C) Interior Gateway Protocol (IGP)",
+    "explanation": "Interior Gateway Protocols (like OSPF and RIP) work within a single autonomous system. Exterior Gateway Protocols (like BGP) work between different autonomous systems.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What does Administrative Distance (AD) represent?",
+    "options": [
+      "A) A trustworthiness rating for a routing protocol",
+      "B) The physical distance between routers",
+      "C) The bandwidth of a connection",
+      "D) The number of hops to a destination"
+    ],
+    "answer": "A) A trustworthiness rating for a routing protocol",
+    "explanation": "Administrative Distance is an 8-bit value (0-255) that represents how trustworthy a routing protocol is. A protocol with a lower AD is considered more reliable and will be preferred.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is the range of Administrative Distance values?",
+    "options": [
+      "A) 0 to 100",
+      "B) 1 to 1000",
+      "C) 0 to 65535",
+      "D) 0 to 255"
+    ],
+    "answer": "D) 0 to 255",
+    "explanation": "Administrative Distance is an 8-bit value, so it ranges from 0 to 255. A lower AD indicates a more trusted routing source.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is a Metric in routing?",
+    "options": [
+      "A) The router's serial number",
+      "B) The protocol version number",
+      "C) The time since the router was reset",
+      "D) A value used to determine the best path using a single protocol"
+    ],
+    "answer": "D) A value used to determine the best path using a single protocol",
+    "explanation": "A metric is the value that a routing protocol uses to determine the best path to a destination network. Different protocols use different metrics (RIP uses hop count, OSPF uses cost).",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What metric does the RIP protocol use?",
+    "options": [
+      "A) Bandwidth",
+      "B) Number of hops",
+      "C) Cost",
+      "D) Delay"
+    ],
+    "answer": "B) Number of hops",
+    "explanation": "RIP (Routing Information Protocol) uses the number of hops (routers) as its metric. The path with the fewest hops is considered the best path.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What does OSPF stand for?",
+    "options": [
+      "A) Open System Protocol Format",
+      "B) Open Shortest Path First",
+      "C) Optimal System Path Finder",
+      "D) Operational Shortest Path Framework"
+    ],
+    "answer": "B) Open Shortest Path First",
+    "explanation": "OSPF stands for Open Shortest Path First. It is a link-state routing protocol that learns the state of every link in the network and builds a full topology map.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is a 'link' in OSPF terminology?",
+    "options": [
+      "A) An interface on a router",
+      "B) A connection to the internet",
+      "C) A type of cable",
+      "D) A wireless signal"
+    ],
+    "answer": "A) An interface on a router",
+    "explanation": "In OSPF, a link refers to an interface on a router. The 'state' describes information about that interface such as IP address, mask, and connected network type.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What database does OSPF use to store link information?",
+    "options": [
+      "A) Routing Table",
+      "B) Link State Database (LSDB)",
+      "C) MAC Address Table",
+      "D) ARP Cache"
+    ],
+    "answer": "B) Link State Database (LSDB)",
+    "explanation": "OSPF stores information about all links in the Link State Database (LSDB). All routers in the same area will have identical LSDBs after convergence.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What type of packet does OSPF use to discover neighbors?",
+    "options": [
+      "A) Data Packet",
+      "B) Request Packet",
+      "C) Hello Packet",
+      "D) Update Packet"
+    ],
+    "answer": "C) Hello Packet",
+    "explanation": "OSPF uses Hello packets to discover neighbors and form adjacencies. Routers periodically send hello packets to check if other OSPF routers are on the same network.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the DBD (Database Description) packet in OSPF?",
+    "options": [
+      "A) To delete old routing entries",
+      "B) To encrypt routing data",
+      "C) To provide a summary of the LSDB to check if two routers have the same database",
+      "D) To terminate a connection"
+    ],
+    "answer": "C) To provide a summary of the LSDB to check if two routers have the same database",
+    "explanation": "DBD packets contain a summary of the LSDB and are exchanged after a connection is established. Routers compare this information to identify any missing entries.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "When does a router send a Link State Request (LSR) packet?",
+    "options": [
+      "A) When it first boots up",
+      "B) When it wants to terminate a connection",
+      "C) When it finds missing information in its database",
+      "D) Every 30 seconds automatically"
+    ],
+    "answer": "C) When it finds missing information in its database",
+    "explanation": "A router sends an LSR packet when it compares DBD information and finds that it's missing some routing information. It requests the specific missing details from the neighbor.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What packet does OSPF send in response to an LSR?",
+    "options": [
+      "A) LSACK",
+      "B) LSU",
+      "C) DBD Packet",
+      "D) Hello Packet"
+    ],
+    "answer": "B) LSU",
+    "explanation": "When a router receives an LSR requesting specific information, it responds with a Link State Update (LSU) packet containing the requested details.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "How many states do OSPF routers go through before becoming fully adjacent?",
+    "options": [
+      "A) 5 states",
+      "B) 7 states",
+      "C) 10 states",
+      "D) 3 states"
+    ],
+    "answer": "B) 7 states",
+    "explanation": "OSPF routers go through 7 states: Down, Init, Two-Way, Exstart, Exchange, Loading, and Full. When they reach the Full state, they have identical LSDBs.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "In which OSPF state does a router see its own ID in the neighbor's Hello packet?",
+    "options": [
+      "A) Exchange",
+      "B) Full",
+      "C) Two-Way",
+      "D) Init"
+    ],
+    "answer": "C) Two-Way",
+    "explanation": "In the Two-Way state, a router sees its own Router ID in the neighbor's Hello packet. This is the first real bidirectional relationship between the two routers.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What is determined in the Exstart state of OSPF?",
+    "options": [
+      "A) The routing metric",
+      "B) The network topology",
+      "C) Master/Slave roles for DBD exchange",
+      "D) Which router will be the DR"
+    ],
+    "answer": "C) Master/Slave roles for DBD exchange",
+    "explanation": "In the Exstart state, the Master/Slave roles are negotiated based on Router ID. The router with the higher Router ID becomes the Master and sends its DBD first.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is the priority order for determining OSPF Router ID?",
+    "options": [
+      "A) Loopback interface, physical interface, manual configuration",
+      "B) Manual configuration, highest loopback IP, highest physical interface IP",
+      "C) Random selection",
+      "D) Highest physical interface IP, manual configuration, loopback"
+    ],
+    "answer": "B) Manual configuration, highest loopback IP, highest physical interface IP",
+    "explanation": "Router ID is determined in this priority: 1) Manually configured value, 2) Highest IP on a loopback interface, 3) Highest IP on any active physical interface.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "Why is a loopback interface preferred for Router ID?",
+    "options": [
+      "A) It has higher bandwidth",
+      "B) It provides faster routing",
+      "C) It's required by OSPF standard",
+      "D) It provides stability because it's virtual and can't fail"
+    ],
+    "answer": "D) It provides stability because it's virtual and can't fail",
+    "explanation": "A loopback interface is virtual (no physical cable) and remains active as long as the router is running. Unlike physical interfaces, it can't fail due to cable issues, providing stability for the Router ID.",
+    "image": null
+  }
+]

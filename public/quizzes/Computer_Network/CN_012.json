@@ -1,0 +1,282 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "Wireless networks are what type of communication?",
+    "options": [
+      "A) Multiplex",
+      "B) Half-duplex",
+      "C) Simplex",
+      "D) Full-duplex"
+    ],
+    "answer": "B) Half-duplex",
+    "explanation": "Wireless networks are half-duplex, meaning only one device can send at a time. If more than one device sends simultaneously, a collision occurs.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What mechanism do wireless LANs use to avoid collisions?",
+    "options": [
+      "A) CSMA/CD",
+      "B) CSMA/CA",
+      "C) Token Ring",
+      "D) FDDI"
+    ],
+    "answer": "B) CSMA/CA",
+    "explanation": "Wireless LANs use CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance). A device listens to check if the channel is clear before sending, to avoid collisions.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What are the three types of wireless frames?",
+    "options": [
+      "A) TCP, UDP, and IP frames",
+      "B) Data, Voice, Video frames",
+      "C) Management, Control, and Data frames",
+      "D) Send, Receive, and Echo frames"
+    ],
+    "answer": "C) Management, Control, and Data frames",
+    "explanation": "Wireless LANs use three frame types: Management frames (manage connections), Control frames (acknowledge and control flow), and Data frames (carry actual user data).",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of Management frames?",
+    "options": [
+      "A) To acknowledge received data",
+      "B) To encrypt traffic",
+      "C) To carry user data",
+      "D) To manage the connection"
+    ],
+    "answer": "D) To manage the connection",
+    "explanation": "Management frames manage the wireless connection lifecycle - finding networks (beacon, probe), joining (authentication, association), and leaving (deauthentication, disassociation).",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What do Control frames do?",
+    "options": [
+      "A) Encrypt data",
+      "B) Manage network settings",
+      "C) Acknowledge received frames",
+      "D) Carry user data"
+    ],
+    "answer": "C) Acknowledge received frames",
+    "explanation": "Control frames control how frames are sent - they acknowledge received frames (ACK), and help avoid collisions using RTS (Request to Send) and CTS (Clear to Send).",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is a Beacon frame?",
+    "options": [
+      "A) A frame sent periodically by the AP containing network information",
+      "B) A data frame",
+      "C) An error notification",
+      "D) A frame sent by clients to find networks"
+    ],
+    "answer": "A) A frame sent periodically by the AP containing network information",
+    "explanation": "Beacon frames are sent periodically by the Access Point. They contain network info like SSID, supported rates, and capabilities. Clients use this to discover and evaluate networks.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What type of scanning uses Beacon frames?",
+    "options": [
+      "A) Active scanning",
+      "B) Deep scanning",
+      "C) Passive scanning",
+      "D) Quick scanning"
+    ],
+    "answer": "C) Passive scanning",
+    "explanation": "Passive scanning means the client listens for Beacon frames from APs without sending any requests. The AP broadcasts these frames automatically.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What frames does a client send for Active scanning?",
+    "options": [
+      "A) Data Request",
+      "B) Beacon Request",
+      "C) Probe Request",
+      "D) Association Request"
+    ],
+    "answer": "C) Probe Request",
+    "explanation": "In Active scanning, the client sends Probe Request frames to find specific networks. The AP responds with Probe Response containing network information similar to a Beacon.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is IFS (Interframe Space)?",
+    "options": [
+      "A) A mandatory waiting",
+      "B) A type of encryption",
+      "C) A wireless protocol",
+      "D) A frame type"
+    ],
+    "answer": "A) A mandatory waiting",
+    "explanation": "IFS is a mandatory waiting time that ensures the medium is clear and frames aren't sent so close together that they overlap. It helps prevent collisions.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "Which IFS type has the shortest waiting time?",
+    "options": [
+      "A) DIFS",
+      "B) SIFS",
+      "C) PIFS",
+      "D) RIFS"
+    ],
+    "answer": "B) SIFS",
+    "explanation": "SIFS (Short Interframe Space) is the shortest waiting time and is used for high-priority frames like Acknowledgements. It ensures critical control frames are sent quickly.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is a Backoff timer?",
+    "options": [
+      "A) A timer for network shutdown",
+      "B) A random countdown timer",
+      "C) A frame timeout",
+      "D) A routing timer"
+    ],
+    "answer": "B) A random countdown timer",
+    "explanation": "The Backoff timer is a random countdown that a device sets for itself. During this time, it listens to ensure no one else is sending, helping to avoid collisions.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What is NAV (Network Allocation Vector)?",
+    "options": [
+      "A) The total time needed for a frame transmission including ACK time",
+      "B) A security feature",
+      "C) A type of antenna",
+      "D) A routing protocol"
+    ],
+    "answer": "A) The total time needed for a frame transmission including ACK time",
+    "explanation": "NAV is the total time a station signals it will need the medium - including frame transmission, SIFS, and ACK time. Other stations defer during this period.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What information is included in the Preamble of a wireless frame?",
+    "options": [
+      "A) Radio signals and synchronization info",
+      "B) Encryption keys",
+      "C) User data",
+      "D) Routing information"
+    ],
+    "answer": "A) Radio signals and synchronization info",
+    "explanation": "The Preamble (76-156 bytes) is used for radio signal synchronization between the transmitter and receiver.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What does DCF (Distributed Coordination Function) mean?",
+    "options": [
+      "A) Frames are sent at the same time",
+      "B) Each station coordinates its own data transmission",
+      "C) The AP controls all transmissions",
+      "D) Encryption is distributed"
+    ],
+    "answer": "B) Each station coordinates its own data transmission",
+    "explanation": "In DCF mode, each station is responsible for coordinating its own transmissions using backoff timers and listening before sending. There's no central control from the AP.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What does PCF (Point Coordination Function) mean?",
+    "options": [
+      "A) Peer coordination",
+      "B) Point-to-point communication only",
+      "C) Each station controls itself",
+      "D) The Access Point controls and coordinates all transmissions"
+    ],
+    "answer": "D) The Access Point controls and coordinates all transmissions",
+    "explanation": "In PCF mode, the AP takes central control and coordinates all frame transmissions using CF-Poll messages to ask stations if they have data to send.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "What frames are used to prevent collisions when devices can't hear each other (hidden node problem)?",
+    "options": [
+      "A) Management frames",
+      "B) RTS and CTS frames",
+      "C) Data frames",
+      "D) Beacon frames"
+    ],
+    "answer": "B) RTS and CTS frames",
+    "explanation": "RTS (Request to Send) and CTS (Clear to Send) frames solve the hidden node problem. A device sends RTS, gets CTS from AP, then sends data. All devices respect these signals.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What is Power Save Mode in wireless?",
+    "options": [
+      "A) Reduced signal strength",
+      "B) Lower data rate",
+      "C) Encrypted transmission",
+      "D) The client sleeps and the AP buffers its data until it wakes up"
+    ],
+    "answer": "D) The client sleeps and the AP buffers its data until it wakes up",
+    "explanation": "In Power Save mode, the client sleeps to save battery. The AP buffers any frames for it. When the client wakes and sees buffered data in the TIM, it sends PS-Poll to retrieve it.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What is the correct order for a client joining a wireless network?",
+    "options": [
+      "A) Beacon → Probe → Authentication → Association",
+      "B) Data → Authentication → Probe → Association",
+      "C) Probe → Authentication → Data → Association",
+      "D) Association → Authentication → Data → Beacon "
+    ],
+    "answer": "A) Beacon → Probe → Authentication → Association",
+    "explanation": "The correct order is: 1) Beacon (Help clients), 2) Probe (discover network), 3) Authentication (verify client capability), 4) Association (register with AP). After association, the client can exchange data.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is the difference between disassociation and deauthentication?",
+    "options": [
+      "A) Disassociation is permanent but deauthentication is temporary",
+      "B) Disassociation keeps authentication (faster reconnect); deauthentication requires full re-authentication",
+      "C) They are the same",
+      "D) Deauthentication is faster"
+    ],
+    "answer": "B) Disassociation keeps authentication (faster reconnect); deauthentication requires full re-authentication",
+    "explanation": "Disassociation leaves the network but keeps authentication - you can rejoin with just reassociation. Deauthentication fully exits, requiring complete authentication again to rejoin.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "At what rate are ACK frames sent compared to data frames?",
+    "options": [
+      "A) At the minimum rate",
+      "B) One rate lower than the data frame",
+      "C) At the maximum rate",
+      "D) At the same rate"
+    ],
+    "answer": "B) One rate lower than the data frame",
+    "explanation": "ACK frames are always sent at one data rate lower than the data frame that was received. This ensures the ACK has a higher chance of being received successfully.",
+    "image": null
+  }
+]
