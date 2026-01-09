@@ -1287,6 +1287,62 @@ export const departmentData: { [key: string]: Department } = {
                     questions: 20,
                     jsonFile: "/quizzes/Computer_Network/CN_006.json"
                   },
+                  {
+                    id: "CN_007",
+                    name: "Routing Protocols - OSPF(1)",
+                    code: "CN_007",
+                    duration: "OP", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_007.json"
+                  },
+                  {
+                    id: "CN_008",
+                    name: "OSPF(2) - DR & BDR",
+                    code: "CN_008",
+                    duration: "OP", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_008.json"
+                  },
+                  {
+                    id: "CN_009",
+                    name: "ACL (Standard & Extended)",
+                    code: "CN_009",
+                    duration: "OP", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_009.json"
+                  },
+                  {
+                    id: "CN_010",
+                    name: "VLAN - Trunking - VTP",
+                    code: "CN_010",
+                    duration: "OP", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_010.json"
+                  },
+                  {
+                    id: "CN_011",
+                    name: "WAN - Frame Relay - DSL",
+                    code: "CN_011",
+                    duration: "OP", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_011.json"
+                  },
+                  {
+                    id: "CN_012",
+                    name: "Wireless Connection Protocols",
+                    code: "CN_012",
+                    duration: "OP", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_012.json"
+                  },
+                  {
+                    id: "CN_013",
+                    name: "Wireshark (Packet Capture)",
+                    code: "CN_013",
+                    duration: "OP", // in minutes
+                    questions: 20,
+                    jsonFile: "/quizzes/Computer_Network/CN_013.json"
+                  },
                 ]
               },
             },
@@ -6643,6 +6699,7 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
 
 
 
