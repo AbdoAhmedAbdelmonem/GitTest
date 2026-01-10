@@ -1420,62 +1420,48 @@ export default function QuizInterface({
 
         {/* Timer and Score Display */}
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="flex items-center gap-3">
-            {selectedDuration > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <Card
-                  className="bg-black/[0.3] backdrop-blur-md border-white/[0.1] shadow-md"
-                  style={{ padding: "0.25rem 1rem", borderRadius: "1rem" }}
-                >
-                  <CardContent className="p-0">
-                    <div className="flex items-center text-white">
-                      <Clock
-                        className={`w-4 h-4 mr-2`}
-                        style={{ color: selectedTheme.accent }}
-                      />
-                      <span
-                        className="font-mono text-lg font-semibold"
-                        style={{ color: selectedTheme.accent }}
-                      >
-                        {formatTime(timeLeft)}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )}
-            
-            {/* Live Wrong Answers Counter */}
-            {selectedMode === "instant" && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                <Card
-                  className="bg-black/[0.3] backdrop-blur-md border-red-500/[0.3] shadow-md"
-                  style={{ padding: "0.25rem 1rem", borderRadius: "1rem" }}
-                >
-                  <CardContent className="p-0">
-                    <div className="flex items-center text-white">
-                      <XCircle className="w-4 h-4 mr-2 text-red-400" />
-                      <motion.span
-                        key={wrongAnswers}
-                        initial={{ scale: 1.3 }}
-                        animate={{ scale: 1 }}
-                        className="font-mono text-lg font-semibold text-red-400"
-                      >
-                        {wrongAnswers}
-                      </motion.span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <Card
+              className="bg-black/[0.3] backdrop-blur-md border-white/[0.1] shadow-md"
+              style={{ padding: "0.5rem 1rem", borderRadius: "1rem" }}
+            >
+              <CardContent className="p-0">
+                {/* Timer row */}
+                {selectedDuration > 0 && (
+                  <div className="flex items-center justify-center text-white">
+                    <Clock
+                      className="w-4 h-4 mr-2"
+                      style={{ color: selectedTheme.accent }}
+                    />
+                    <span
+                      className="font-mono text-lg font-semibold"
+                      style={{ color: selectedTheme.accent }}
+                    >
+                      {formatTime(timeLeft)}
+                    </span>
+                  </div>
+                )}
+                
+                {/* Wrong counter row - embedded below timer */}
+                {selectedMode === "instant" && (
+                  <div className={`flex items-center justify-center text-white ${selectedDuration > 0 ? 'mt-1 pt-1 border-t border-white/10' : ''}`}>
+                    <XCircle className="w-3.5 h-3.5 mr-1.5 text-red-400" />
+                    <motion.span
+                      key={wrongAnswers}
+                      initial={{ scale: 1.3 }}
+                      animate={{ scale: 1 }}
+                      className="font-mono text-sm font-semibold text-red-400"
+                    >
+                      {wrongAnswers}
+                    </motion.span>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
 
         {/* Progress */}
