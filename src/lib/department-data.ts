@@ -1343,6 +1343,14 @@ export const departmentData: { [key: string]: Department } = {
                     questions: 20,
                     jsonFile: "/quizzes/Computer_Network/CN_013.json"
                   },
+                  {
+                    id: "CN_STAR",
+                    name: "Final Revision Quiz (Anti-long Answers)",
+                    code: "CN_STAR",
+                    duration: "OP", // in minutes
+                    questions: 130,
+                    jsonFile: "/quizzes/Computer_Network/CN_STAR.json"
+                  },
                 ]
               },
             },
@@ -6699,6 +6707,7 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
 
 
 
