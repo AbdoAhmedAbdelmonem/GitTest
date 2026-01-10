@@ -1,0 +1,1822 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is the number range for Extended ACL?",
+    "options": [
+      "A) 100-199 and 2000-2699",
+      "B) 1-99 and 1300-1999",
+      "C) 200-299",
+      "D) 300-399"
+    ],
+    "answer": "A) 100-199 and 2000-2699",
+    "explanation": "Extended ACL uses numbers from 100 to 199 and 2000 to 2699. This number range indicates that more detailed packet inspection will be performed.",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "What is subnetting?",
+    "options": [
+      "A) Dividing a network into smaller sub-networks",
+      "B) Combining multiple networks into one",
+      "C) Encrypting all network traffic securely",
+      "D) Assigning static IP addresses to hosts"
+    ],
+    "answer": "A) Dividing a network into smaller sub-networks",
+    "explanation": "Subnetting is the practice of dividing a larger network into smaller sub-networks (subnets). This improves network performance by reducing broadcast traffic, enhances security by isolating network segments, allows better IP address management, and enables more efficient use of IP address space. Subnetting is accomplished by borrowing bits from the host portion to create additional network segments.",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What does NAT stand for?",
+    "options": [
+      "A) Network Authentication Token",
+      "B) Network Access Technology",
+      "C) Network Address Translation",
+      "D) Network Application Transfer"
+    ],
+    "answer": "C) Network Address Translation",
+    "explanation": "NAT stands for Network Address Translation. It is a method used by routers to translate private IP addresses used within a local network to a public IP address for communication over the internet. NAT helps conserve public IP addresses, provides a layer of security by hiding internal network structure, and allows multiple devices to share a single public IP address.",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "What can Extended IP ACL check?",
+    "options": [
+      "A) Only port numbers and protocol type",
+      "B) Source IP, destination IP, and ports",
+      "C) Only source IP and MAC address",
+      "D) Only MAC addresses and VLAN ID"
+    ],
+    "answer": "B) Source IP, destination IP, and ports",
+    "explanation": "Extended IP ACL is more powerful and can check source IP, destination IP, protocol (TCP/UDP/IP), source port, and destination port for fine-grained control.",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What is a broadcast domain?",
+    "options": [
+      "A) A domain name used for broadcasting traffic",
+      "B) A segment where broadcasts reach all devices",
+      "C) The physical area covered by wireless AP",
+      "D) The time period for broadcast transmissions"
+    ],
+    "answer": "B) A segment where broadcasts reach all devices",
+    "explanation": "A broadcast domain is a logical network segment in which any device can directly reach any other device by broadcasting at the data link layer. When a device sends a broadcast frame, it reaches all devices within that broadcast domain. Routers segment broadcast domains by not forwarding broadcast traffic between networks, while switches and hubs keep broadcasts within the same domain.",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of a routing protocol?",
+    "options": [
+      "A) To encrypt data packets securely",
+      "B) To compress network traffic for speed",
+      "C) To assign IP addresses via DHCP",
+      "D) To exchange routes and select best path"
+    ],
+    "answer": "D) To exchange routes and select best path",
+    "explanation": "A routing protocol is used to exchange routing information between routers and helps select the best path to transfer data. Examples include RIP and OSPF.",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "According to the document, a crossover cable can be used to connect all of the following EXCEPT:",
+    "options": [
+      "A) PC to Switch",
+      "B) Router to Router",
+      "C) Switch to Switch",
+      "D) Host to Host"
+    ],
+    "answer": "A) PC to Switch",
+    "explanation": "A crossover cable is used to connect similar device types (Host to Host, Switch to Switch, Router to Router) where both devices would normally transmit and receive on the same pins. The crossover cable swaps the transmit and receive pairs, allowing proper communication. A PC to Switch connection requires a straight-through cable because they are different device types with opposite transmit/receive pin configurations. Modern devices with Auto-MDIX can work with either cable type.",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "What does PCF (Point Coordination Function) mean?",
+    "options": [
+      "A) Point-to-point communication only",
+      "B) AP controls all frame transmissions",
+      "C) Peer-to-peer coordination mode",
+      "D) Each station controls itself"
+    ],
+    "answer": "B) AP controls all frame transmissions",
+    "explanation": "In PCF mode, the AP takes central control and coordinates all frame transmissions using CF-Poll messages to ask stations if they have data to send.",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of a UTP cable over an STP cable?",
+    "options": [
+      "A) It is more secure",
+      "B) It is faster",
+      "C) It is cheaper",
+      "D) It is immune to interference"
+    ],
+    "answer": "C) It is cheaper",
+    "explanation": "The main advantage of UTP (Unshielded Twisted Pair) cable over STP (Shielded Twisted Pair) cable is cost. UTP cables are cheaper to manufacture and install because they lack the additional shielding that STP cables have. While STP provides better protection against electromagnetic interference, UTP is sufficient for most standard office environments and is the most commonly deployed cable type. UTP is not more secure, faster, or more immune to interference than STP.",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "What is a trunk link?",
+    "options": [
+      "A) A wireless point-to-point connection",
+      "B) A backup cable for failover support",
+      "C) A cable connecting a PC to switch",
+      "D) A link carrying multiple VLANs traffic"
+    ],
+    "answer": "D) A link carrying multiple VLANs traffic",
+    "explanation": "A trunk link is used to carry traffic from multiple VLANs over one physical connection between switches.",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the DBD (Database Description) packet in OSPF?",
+    "options": [
+      "A) To encrypt all routing data securely",
+      "B) To summarize LSDB for comparison",
+      "C) To delete old routing table entries",
+      "D) To terminate an OSPF connection"
+    ],
+    "answer": "B) To summarize LSDB for comparison",
+    "explanation": "DBD packets contain a summary of the LSDB and are exchanged after a connection is established. Routers compare this information to identify any missing entries.",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What is promiscuous mode in network capturing?",
+    "options": [
+      "A) Encrypted mode",
+      "B) Capturing all packets on the network segment",
+      "C) Capturing only packets destined for your computer",
+      "D) High-speed mode"
+    ],
+    "answer": "B) Capturing all packets on the network segment",
+    "explanation": "Promiscuous mode allows the network interface to capture all packets on the network segment, not just those addressed to your computer. This is essential for complete network analysis.",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which of the following is NOT a type of Ethernet cabling ?",
+    "options": [
+      "A) Crossover cable",
+      "B) Fiber optic cable",
+      "C) Rolled cable",
+      "D) Straight-through cable"
+    ],
+    "answer": "B) Fiber optic cable",
+    "explanation": "Among the options listed, fiber optic cable is NOT one of the specific cable types mentioned in the standard Ethernet cabling categories being discussed. The document focuses on copper cable configurations: straight-through cables (for connecting different device types), crossover cables (for connecting similar devices), and rolled cables (console cables for device management). While fiber optic is used in Ethernet networks, it represents a different physical medium rather than a wiring configuration type.",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "What is IFS (Interframe Space)?",
+    "options": [
+      "A) A frame type",
+      "B) A wireless protocol",
+      "C) A type of encryption",
+      "D) A mandatory waiting"
+    ],
+    "answer": "D) A mandatory waiting",
+    "explanation": "IFS is a mandatory waiting time that ensures the medium is clear and frames aren't sent so close together that they overlap. It helps prevent collisions.",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What does DCF (Distributed Coordination Function) mean?",
+    "options": [
+      "A) All frames are sent simultaneously",
+      "B) Each station coordinates its own TX",
+      "C) The AP controls all transmissions",
+      "D) Encryption keys are distributed"
+    ],
+    "answer": "B) Each station coordinates its own TX",
+    "explanation": "In DCF mode, each station is responsible for coordinating its own transmissions (Konwn as TX in Networks) using backoff timers and listening before sending. There's no central control from the AP.",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "In a Point-to-Point network, how many neighbors does each router have?",
+    "options": [
+      "A) It depends on the configuration",
+      "B) Only one neighbor",
+      "C) Multiple neighbors",
+      "D) No neighbors"
+    ],
+    "answer": "B) Only one neighbor",
+    "explanation": "A Point-to-Point network consists of just two routers connected together, so each router has only one neighbor. This simple network doesn't require DR/BDR election.",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What does the DE bit indicate in Frame Relay?",
+    "options": [
+      "A) The frame is a management frame",
+      "B) Low priority, can be dropped",
+      "C) The frame is encrypted securely",
+      "D) The frame has high priority"
+    ],
+    "answer": "B) Low priority, can be dropped",
+    "explanation": "DE (Discard Eligibility) bit marks low-priority frames. When congestion occurs, the Frame Relay cloud can drop these frames first to reduce congestion.",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "What does an acknowledgment (ACK) in TCP indicate?",
+    "options": [
+      "A) That the receiver is busy",
+      "B) That data has been successfully received",
+      "C) That the connection should be terminated",
+      "D) That an error occurred"
+    ],
+    "answer": "B) That data has been successfully received",
+    "explanation": "An acknowledgment (ACK) in TCP indicates that data has been successfully received by the receiver. The ACK contains an acknowledgment number that specifies the next sequence number the receiver expects to receive, implicitly confirming receipt of all prior bytes. If the sender doesn't receive an ACK within a timeout period, it assumes the data was lost and retransmits it. This acknowledgment mechanism is fundamental to TCP's reliability.",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "A straight-through cable is typically used to connect a PC to a:",
+    "options": [
+      "A) Another PC",
+      "B) Switch",
+      "C) Router",
+      "D) Another Host"
+    ],
+    "answer": "B) Switch",
+    "explanation": "A straight-through cable is used to connect different types of devices, such as a PC (host/DTE device) to a switch or hub (networking device/DCE). In a straight-through cable, the wire on pin 1 at one end connects to pin 1 at the other end, pin 2 to pin 2, and so on. This works because the PC transmits on pins 1&2 and receives on pins 3&6, while the switch receives on pins 1&2 and transmits on pins 3&6, creating a proper communication path.",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "What is an Autonomous System (AS)?",
+    "options": [
+      "A) Devices under same admin authority",
+      "B) type of network firewall",
+      "C) wireless access point device",
+      "D) single router in a network"
+    ],
+    "answer": "A) Devices under same admin authority",
+    "explanation": "An Autonomous System is a collection of routers and networks that are controlled by the same organization and managed by the same administrative authority, like an ISP.",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "How does CHAP improve security over PAP?",
+    "options": [
+      "A) It doesn't require a password",
+      "B) It sends data faster",
+      "C) It uses encrypted text and hashing",
+      "D) It uses more bandwidth"
+    ],
+    "answer": "C) It uses encrypted text and hashing",
+    "explanation": "CHAP uses a 3-way handshake with random challenges and hashing. The password is never sent directly - instead, a hash of the password + challenge is sent and verified.",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What color coding does Wireshark use?",
+    "options": [
+      "A) Different colors for protocols",
+      "B) Colors based on file size",
+      "C) All packets are the same color",
+      "D) Random colors for packets"
+    ],
+    "answer": "A) Different colors for protocols",
+    "explanation": "Wireshark uses color coding to help identify different types of traffic at a glance. For example, HTTP might be green, TCP errors might be displayed in red.",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which private IP address range belongs to Class A?",
+    "options": [
+      "A) 172.16.0.0 to 172.31.255.255",
+      "B) 192.168.0.0 to 192.168.255.255",
+      "C) 10.0.0.0 to 10.255.255.255",
+      "D) 169.254.0.0 to 169.254.255.255"
+    ],
+    "answer": "C) 10.0.0.0 to 10.255.255.255",
+    "explanation": "The Class A private IP address range is 10.0.0.0 to 10.255.255.255 (10.0.0.0/8). This is the largest private address space, providing over 16 million addresses. The Class B private range is 172.16.0.0 to 172.31.255.255, and the Class C private range is 192.168.0.0 to 192.168.255.255. These ranges are defined in RFC 1918 and are not routable on the public internet.",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "What is a VTP danger when adding a new switch?",
+    "options": [
+      "A) DR election",
+      "B) VLAN database overwrite",
+      "C) Network slowdown",
+      "D) Power failure"
+    ],
+    "answer": "B) VLAN database overwrite",
+    "explanation": "A switch with a higher revision number can overwrite VLAN configurations across the network.",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What type of switching method involves the switch reading the entire frame before forwarding it?",
+    "options": [
+      "A) Cut-through switching",
+      "B) Fragment-free switching",
+      "C) Fast-forward switching",
+      "D) Store-and-forward switching"
+    ],
+    "answer": "D) Store-and-forward switching",
+    "explanation": "Store-and-forward switching requires the switch to receive and check the entire frame (including CRC error checking) before forwarding it. This method ensures error-free transmission and allows the switch to filter out damaged frames. While it introduces slight latency, it provides the most reliable switching method and is the most commonly used in modern networks.",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What packet does OSPF send in response to an LSR?",
+    "options": [
+      "A) LSACK",
+      "B) LSU",
+      "C) Hello Packet",
+      "D) DBD Packet"
+    ],
+    "answer": "B) LSU",
+    "explanation": "When a router receives an LSR requesting specific information, it responds with a Link State Update (LSU) packet containing the requested details.",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "At which OSI layer does a router primarily operate?",
+    "options": [
+      "A) Layer 4 - Transport Layer",
+      "B) Layer 2 - Data Link Layer",
+      "C) Layer 3 - Network Layer",
+      "D) Layer 1 - Physical Layer"
+    ],
+    "answer": "C) Layer 3 - Network Layer",
+    "explanation": "Routers operate primarily at Layer 3 (Network Layer) of the OSI model, where they work with IP addresses to route packets between different networks. While routers also interact with lower layers to physically transmit data, their key intelligence and routing decisions are made at Layer 3 using protocols like IP, ICMP, and routing protocols such as OSPF, BGP, and RIP.",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "The first half of a MAC address represents the:",
+    "options": [
+      "A) Device Serial Number (DSN)",
+      "B) Vendor Identifier (OUI)",
+      "C) Network IP Address block",
+      "D) Host Identifier portion"
+    ],
+    "answer": "B) Vendor Identifier (OUI)",
+    "explanation": "The first 24 bits (3 bytes) of a MAC address represent the Organizationally Unique Identifier (OUI), which identifies the manufacturer or vendor of the network interface card. The IEEE assigns these OUI values to manufacturers. For example, all Cisco devices might share the same OUI prefix. This allows network administrators to identify the manufacturer of a device by examining its MAC address.",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "At which OSI layer does a hub operate?",
+    "options": [
+      "A) Layer 1 - Physical Layer",
+      "B) Layer 2 - Data Link Layer",
+      "C) Layer 3 - Network Layer",
+      "D) Layer 4 - Transport Layer"
+    ],
+    "answer": "A) Layer 1 - Physical Layer",
+    "explanation": "A hub operates at Layer 1 (Physical Layer) of the OSI model. It is a simple device that receives electrical signals on one port and broadcasts them to all other ports without any intelligence. Hubs do not examine MAC addresses or make any forwarding decisions - they simply regenerate and repeat signals to all connected devices.",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "What is Area 0 also known as in OSPF?",
+    "options": [
+      "A) Transit Area",
+      "B) Backbone Area",
+      "C) Stub Area",
+      "D) Normal Area"
+    ],
+    "answer": "B) Backbone Area",
+    "explanation": "Area 0 is called the Backbone Area. It's the most important area in OSPF because all other areas must be connected to it, and all inter-area communication passes through Area 0.",
+    "image": null
+  },
+  {
+    "numb": 31,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of VLANs?",
+    "options": [
+      "A) Faster internet speed overall",
+      "B) Security and broadcast control",
+      "C) Increased cable length limit",
+      "D) Lower electricity costs"
+    ],
+    "answer": "B) Security and broadcast control",
+    "explanation": "VLANs improve security by isolating traffic and improve performance by restricting broadcast frames to the same VLAN only.",
+    "image": null
+  },
+  {
+    "numb": 32,
+    "type": "Multiple Choices",
+    "question": "What is the primary function of a router?",
+    "options": [
+      "A) Connect devices in same network",
+      "B) Amplify network signals only",
+      "C) Forward packets between networks",
+      "D) Provide wireless connectivity"
+    ],
+    "answer": "C) Forward packets between networks",
+    "explanation": "A router's primary function is to forward data packets between different networks (internetworking). Routers operate at Layer 3 (Network Layer) and use IP addresses to make forwarding decisions. They maintain routing tables to determine the best path for packets to reach their destination network, connecting LANs to WANs and enabling communication across the internet.",
+    "image": null
+  },
+  {
+    "numb": 33,
+    "type": "Multiple Choices",
+    "question": "Through what links do VTP messages travel?",
+    "options": [
+      "A) Wireless links",
+      "B) Trunk links",
+      "C) Access links",
+      "D) Serial links"
+    ],
+    "answer": "B) Trunk links",
+    "explanation": "VTP messages are exchanged over trunk links that carry traffic for multiple VLANs.",
+    "image": null
+  },
+  {
+    "numb": 34,
+    "type": "Multiple Choices",
+    "question": "What type of packet does OSPF use to discover neighbors?",
+    "options": [
+      "A) Request Packet",
+      "B) Update Packet",
+      "C) Hello Packet",
+      "D) Data Packet"
+    ],
+    "answer": "C) Hello Packet",
+    "explanation": "OSPF uses Hello packets to discover neighbors and form adjacencies. Routers periodically send hello packets to check if other OSPF routers are on the same network.",
+    "image": null
+  },
+  {
+    "numb": 35,
+    "type": "Multiple Choices",
+    "question": "Which subnet mask provides 62 usable host addresses?",
+    "options": [
+      "A) 255.255.255.0 (/24)",
+      "B) 255.255.255.128 (/25)",
+      "C) 255.255.255.192 (/26)",
+      "D) 255.255.255.224 (/27)"
+    ],
+    "answer": "C) 255.255.255.192 (/26)",
+    "explanation": "A /26 subnet mask (255.255.255.192) provides 62 usable host addresses. With 6 host bits (32 - 26 = 6), you get 2^6 = 64 total addresses. Subtract 2 for the network and broadcast addresses: 64 - 2 = 62 usable hosts. This subnet mask is commonly used for small to medium-sized network segments.",
+    "image": null
+  },
+  {
+    "numb": 36,
+    "type": "Multiple Choices",
+    "question": "What is the OSPF cost for a 10 Mbps Ethernet link using default reference bandwidth?",
+    "options": [
+      "A) 10",
+      "B) 1",
+      "C) 1000",
+      "D) 100"
+    ],
+    "answer": "A) 10",
+    "explanation": "Cost = Reference Bandwidth / Actual Bandwidth = 100 Mbps / 10 Mbps = 10. Lower cost paths are preferred in OSPF routing.",
+    "image": null
+  },
+  {
+    "numb": 37,
+    "type": "Multiple Choices",
+    "question": "Can devices on different VLANs communicate directly without a Layer 3 device?",
+    "options": [
+      "A) Yes, always possible",
+      "B) Only with same IP subnet",
+      "C) No, needs Layer 3 device",
+      "D) Only on wireless networks"
+    ],
+    "answer": "C) No, needs Layer 3 device",
+    "explanation": "Different VLANs are separate logical networks, so communication between them requires routing via a router or Layer 3 switch.",
+    "image": null
+  },
+  {
+    "numb": 38,
+    "type": "Multiple Choices",
+    "question": "What does NAT stand for? لو ركزت في اسم الكويز هتعرف الإجابة",
+    "options": [
+      "A) Network Access Technology",
+      "B) Network Application Transfer",
+      "C) Network Authentication Token",
+      "D) Network Address Translation"
+    ],
+    "answer": "D) Network Address Translation",
+    "explanation": "NAT stands for Network Address Translation. It is a method used by routers to translate private (unregistered) IP addresses used within a local network to public (registered) IP addresses for communication over the internet. NAT was developed primarily to solve the problem of IPv4 address depletion and to provide an additional layer of security.",
+    "image": null
+  },
+  {
+    "numb": 39,
+    "type": "Multiple Choices",
+    "question": "What platforms does Wireshark run on?",
+    "options": [
+      "A) Cross-platform",
+      "B) Linux only",
+      "C) Mobile devices only",
+      "D) Windows only"
+    ],
+    "answer": "A) Cross-platform",
+    "explanation": "Wireshark is cross-platform software that runs on Windows, Linux, and macOS, making it accessible to network administrators on various operating systems.",
+    "image": null
+  },
+  {
+    "numb": 40,
+    "type": "Multiple Choices",
+    "question": "In ACL processing, which rule is applied to a matching packet?",
+    "options": [
+      "A) A random matching rule",
+      "B) The first matching rule",
+      "C) All matching rules",
+      "D) The last matching rule"
+    ],
+    "answer": "B) The first matching rule",
+    "explanation": "ACLs process rules from top to bottom, and the first matching rule is applied. This is why the order of ACL rules is very important.",
+    "image": null
+  },
+  {
+    "numb": 41,
+    "type": "Multiple Choices",
+    "question": "Which applications typically use TCP?",
+    "options": [
+      "A) DNS queries and DHCP",
+      "B) Web browsing, email, and file transfer",
+      "C) Network broadcasts",
+      "D) Video streaming and online gaming"
+    ],
+    "answer": "B) Web browsing, email, and file transfer",
+    "explanation": "Applications that require reliable, ordered data delivery typically use TCP. This includes web browsing (HTTP/HTTPS), email (SMTP, POP3, IMAP), file transfer (FTP, SFTP), remote access (SSH, Telnet), and database connections. These applications cannot tolerate data loss or out-of-order delivery, so they benefit from TCP's reliability mechanisms including acknowledgments, retransmissions, and sequencing.",
+    "image": null
+  },
+  {
+    "numb": 42,
+    "type": "Multiple Choices",
+    "question": "What is a follow stream feature in Wireshark?",
+    "options": [
+      "A) Creating a new network config",
+      "B) Following a live video stream",
+      "C) Combining TCP/UDP conversation",
+      "D) Copying packets to clipboard"
+    ],
+    "answer": "C) Combining TCP/UDP conversation",
+    "explanation": "Follow stream allows you to see all the packets in a TCP or UDP conversation assembled together, making it easier to read the complete communication flow.",
+    "image": null
+  },
+  {
+    "numb": 43,
+    "type": "Multiple Choices",
+    "question": "How many layers does the OSI model have?",
+    "options": [
+      "A) 5 layers",
+      "B) 6 layers",
+      "C) 8 layers",
+      "D) 7 layers"
+    ],
+    "answer": "D) 7 layers",
+    "explanation": "The OSI (Open Systems Interconnection) model has 7 layers. From bottom to top: Physical, Data Link, Network, Transport, Session, Presentation, and Application. This model was developed by the International Organization for Standardization (ISO) to standardize network communication and provide a framework for understanding how different network protocols interact.",
+    "image": null
+  },
+  {
+    "numb": 44,
+    "type": "Multiple Choices",
+    "question": "What does BECN flag with value 1 indicate in Frame Relay?",
+    "options": [
+      "A) The connection is established",
+      "B) There's congestion in the network",
+      "C) There's no congestion",
+      "D) The frame is important"
+    ],
+    "answer": "B) There's congestion in the network",
+    "explanation": "BECN (Backward Explicit Congestion Notification) notifies the source that there's congestion in the network and it should reduce its sending rate.",
+    "image": null
+  },
+  {
+    "numb": 45,
+    "type": "Multiple Choices",
+    "question": "What happens when a switch receives a higher VTP revision number?",
+    "options": [
+      "A) It reboots",
+      "B) It accepts and updates VLAN database",
+      "C) It sends error",
+      "D) It ignores it"
+    ],
+    "answer": "B) It accepts and updates VLAN database",
+    "explanation": "Switches accept VTP updates only if the incoming revision number is higher than their own.",
+    "image": null
+  },
+  {
+    "numb": 46,
+    "type": "Multiple Choices",
+    "question": "What is the primary purpose of NAT?",
+    "options": [
+      "A) To configure DNS servers",
+      "B) To solve IP address shortage",
+      "C) To encrypt network traffic",
+      "D) To increase network speed"
+    ],
+    "answer": "B) To solve IP address shortage",
+    "explanation": "The primary purpose of NAT is to solve the problem of IPv4 address depletion. By allowing multiple devices on a private network to share one or more public IP addresses, NAT conserves the limited number of available public IPv4 addresses. This enables organizations to use private IP addresses internally while still accessing the internet through a smaller number of public addresses.",
+    "image": null
+  },
+  {
+    "numb": 47,
+    "type": "Multiple Choices",
+    "question": "What is a DROther router?",
+    "options": [
+      "A) A backup to the BDR",
+      "B) A router that is disconnected from OSPF",
+      "C) A router that is neither DR nor BDR",
+      "D) A router that uses a different routing protocol"
+    ],
+    "answer": "C) A router that is neither DR nor BDR",
+    "explanation": "DROther is the term used for routers in a multi-access network that are not designated as DR or BDR. They communicate with the DR/BDR for routing updates.",
+    "image": null
+  },
+  {
+    "numb": 48,
+    "type": "Multiple Choices",
+    "question": "What does Standard IP ACL check?",
+    "options": [
+      "A) Only the source IP address",
+      "B) Only the destination IP address",
+      "C) Only the protocol type",
+      "D) Source IP, destination IP, and port numbers"
+    ],
+    "answer": "A) Only the source IP address",
+    "explanation": "Standard IP ACL only checks the source IP address. It cannot check destination IP, protocol type, or port numbers. Use Extended ACL for more detailed filtering.",
+    "image": null
+  },
+  {
+    "numb": 49,
+    "type": "Multiple Choices",
+    "question": "What is Wireshark?",
+    "options": [
+      "A) A routing protocol for WAN",
+      "B) A wireless access point device",
+      "C) A network protocol analyzer",
+      "D) A type of network firewall"
+    ],
+    "answer": "C) A network protocol analyzer",
+    "explanation": "Wireshark is a free, cross-platform, open-source network protocol analyzer. It captures network traffic and presents it as individual packets for detailed analysis.",
+    "image": null
+  },
+  {
+    "numb": 50,
+    "type": "Multiple Choices",
+    "question": "At which OSI layer does MAC addressing occur?",
+    "options": [
+      "A) Transport Layer",
+      "B) Physical Layer",
+      "C) Network Layer",
+      "D) Data Link Layer"
+    ],
+    "answer": "D) Data Link Layer",
+    "explanation": "MAC (Media Access Control) addressing occurs at the Data Link Layer (Layer 2). This layer is responsible for node-to-node data transfer and provides error detection and correction. The Data Link Layer uses MAC addresses to identify devices on the local network and is further divided into two sublayers: LLC (Logical Link Control) and MAC (Media Access Control).",
+    "image": null
+  },
+  {
+    "numb": 51,
+    "type": "Multiple Choices",
+    "question": "Which LSA type is generated by ABRs to advertise routes from one area to another?",
+    "options": [
+      "A) External LSA",
+      "B) Network LSA",
+      "C) Router LSA",
+      "D) Summary LSA"
+    ],
+    "answer": "D) Summary LSA",
+    "explanation": "Summary LSA (Type 3) is generated by ABRs to advertise routes from one area to another area. It floods from one area to another, unlike Router and Network LSAs.",
+    "image": null
+  },
+  {
+    "numb": 52,
+    "type": "Multiple Choices",
+    "question": "What do Control frames do?",
+    "options": [
+      "A) Carry user data",
+      "B) Manage network settings",
+      "C) Encrypt data",
+      "D) Acknowledge received frames"
+    ],
+    "answer": "D) Acknowledge received frames",
+    "explanation": "Control frames control how frames are sent - they acknowledge received frames (ACK), and help avoid collisions using RTS (Request to Send) and CTS (Clear to Send).",
+    "image": null
+  },
+  {
+    "numb": 53,
+    "type": "Multiple Choices",
+    "question": "What can a VTP Client do?",
+    "options": [
+      "A) Create VLANs on the network",
+      "B) Disable VTP on switches (VTP Server)",
+      "C) Receive VLAN info and apply it locally",
+      "D) Ignore all VTP messages from the server"
+    ],
+    "answer": "C) Receive VLAN info and apply it locally",
+    "explanation": "VTP Clients cannot create VLANs but they synchronize and apply VLAN information received from the server.",
+    "image": null
+  },
+  {
+    "numb": 54,
+    "type": "Multiple Choices",
+    "question": "What is a major disadvantage of using a hub in a network?",
+    "options": [
+      "A) Only works with fiber cables",
+      "B) Requires manual configuration",
+      "C) It is too expensive for use",
+      "D) Creates single collision domain"
+    ],
+    "answer": "D) Creates single collision domain",
+    "explanation": "A hub creates a single collision domain, meaning all connected devices share the same bandwidth and only one device can transmit at a time. When multiple devices try to transmit simultaneously, collisions occur, reducing network efficiency. This makes hubs unsuitable for modern networks with high traffic. Switches solve this problem by creating separate collision domains for each port.",
+    "image": null
+  },
+  {
+    "numb": 55,
+    "type": "Multiple Choices",
+    "question": "What can you troubleshoot using Wireshark?",
+    "options": [
+      "A) Hardware failures",
+      "B) Software installation",
+      "C) Network connectivity issues",
+      "D) PAT Connections problems"
+    ],
+    "answer": "C) Network connectivity issues",
+    "explanation": "Wireshark helps troubleshoot various network problems including connectivity issues, latency problems, packet loss, and protocol errors by examining actual network traffic.",
+    "image": null
+  },
+  {
+    "numb": 56,
+    "type": "Multiple Choices",
+    "question": "What is the difference between a routing protocol and a routed protocol?",
+    "options": [
+      "A) Neither carries any data",
+      "B) Routing protocols carry routing info; routed protocols carry actual data packets",
+      "C) They are the same thing",
+      "D) Routed protocols carry routing info; routing protocols carry data"
+    ],
+    "answer": "B) Routing protocols carry routing info; routed protocols carry actual data packets",
+    "explanation": "Routing protocols (like OSPF, RIP) carry routing information between routers, while routed protocols (like IPv4, IPv6) carry the actual data packets that are forwarded by routers.",
+    "image": null
+  },
+  {
+    "numb": 57,
+    "type": "Multiple Choices",
+    "question": "Wireless networks are what type of communication?",
+    "options": [
+      "A) Half-duplex",
+      "B) Multiplex",
+      "C) Full-duplex",
+      "D) Simplex"
+    ],
+    "answer": "A) Half-duplex",
+    "explanation": "Wireless networks are half-duplex, meaning only one device can send at a time. If more than one device sends simultaneously, a collision occurs.",
+    "image": null
+  },
+  {
+    "numb": 58,
+    "type": "Multiple Choices",
+    "question": "What information does PAT use to differentiate between multiple internal hosts using the same public IP?",
+    "options": [
+      "A) DNS names",
+      "B) MAC addresses",
+      "C) Port numbers",
+      "D) Subnet masks"
+    ],
+    "answer": "C) Port numbers",
+    "explanation": "PAT uses port numbers to differentiate between multiple internal hosts sharing the same public IP address. When an internal device initiates a connection, PAT assigns a unique source port number and records the mapping in its translation table. When response packets arrive at the public IP address, PAT examines the destination port number to determine which internal device should receive the packet, then translates it back to the appropriate private IP address.",
+    "image": null
+  },
+  {
+    "numb": 59,
+    "type": "Multiple Choices",
+    "question": "In Extended ACL, what does 'eq 23' mean?",
+    "options": [
+      "A) ACL number 23",
+      "B) Equal to Telnet port",
+      "C) 23 packets per second",
+      "D) Equal to 23 bytes"
+    ],
+    "answer": "B) Equal to Telnet port",
+    "explanation": "The 'eq' keyword means 'equal to', followed by a port number. 'eq 23' means the rule applies to traffic on port 23, which is Telnet.",
+    "image": null
+  },
+  {
+    "numb": 60,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of Management frames?",
+    "options": [
+      "A) To acknowledge received data",
+      "B) To carry user data",
+      "C) To encrypt traffic",
+      "D) To manage the connection"
+    ],
+    "answer": "D) To manage the connection",
+    "explanation": "Management frames manage the wireless connection lifecycle - finding networks (beacon, probe), joining (authentication, association), and leaving (deauthentication, disassociation).",
+    "image": null
+  },
+  {
+    "numb": 61,
+    "type": "Multiple Choices",
+    "question": "How does a switch learn MAC addresses?",
+    "options": [
+      "A) Through DHCP server requests",
+      "B) By examining source MAC of frames",
+      "C) By broadcasting to all devices",
+      "D) Through manual admin configuration"
+    ],
+    "answer": "B) By examining source MAC of frames",
+    "explanation": "A switch learns MAC addresses dynamically through a process called 'learning'. When a frame enters a port, the switch examines the source MAC address and associates it with that port in its MAC address table (CAM table). Over time, the switch builds a complete map of which devices are connected to which ports, enabling efficient frame forwarding.",
+    "image": null
+  },
+  {
+    "numb": 62,
+    "type": "Multiple Choices",
+    "question": "What is a collision domain?",
+    "options": [
+      "A) A security zone in a network",
+      "B) Physical area where devices collide",
+      "C) A domain name that conflicts",
+      "D) Segment where collisions can occur"
+    ],
+    "answer": "D) Segment where collisions can occur",
+    "explanation": "A collision domain is a network segment where data packet collisions can occur when two or more devices attempt to transmit at the same time. In a hub-based network, all connected devices are in one collision domain. Switches create separate collision domains for each port, allowing simultaneous transmissions without collisions and significantly improving network performance.",
+    "image": null
+  },
+  {
+    "numb": 63,
+    "type": "Multiple Choices",
+    "question": "What type of communication does UDP provide?",
+    "options": [
+      "A) Connection-oriented and reliable",
+      "B) Connection-oriented and unreliable",
+      "C) Connectionless and reliable",
+      "D) Connectionless and unreliable"
+    ],
+    "answer": "D) Connectionless and unreliable",
+    "explanation": "UDP provides connectionless and unreliable communication. Connectionless means UDP sends data without establishing a connection first - it just sends datagrams to the destination. Unreliable means UDP does not guarantee delivery, does not ensure packets arrive in order, and does not retransmit lost packets. However, this simplicity makes UDP faster and more efficient for applications that can tolerate some data loss, like live video streaming or online gaming.",
+    "image": null
+  },
+  {
+    "numb": 64,
+    "type": "Multiple Choices",
+    "question": "What does CIDR stand for?",
+    "options": [
+      "A) Class Internet Domain Routing",
+      "B) Classified IP Domain Range",
+      "C) Classless Inter-Domain Routing",
+      "D) Central Internet Data Routing"
+    ],
+    "answer": "C) Classless Inter-Domain Routing",
+    "explanation": "CIDR stands for Classless Inter-Domain Routing. It is a method of IP address allocation and routing that replaced the older classful network design. CIDR notation uses a slash followed by the number of network bits (e.g., 192.168.1.0/24), providing more flexible and efficient use of IP address space by allowing variable-length subnet masking.",
+    "image": null
+  },
+  {
+    "numb": 65,
+    "type": "Multiple Choices",
+    "question": "What is the range of Administrative Distance values?",
+    "options": [
+      "A) 1 to 1000",
+      "B) 0 to 100",
+      "C) 0 to 65535",
+      "D) 0 to 255"
+    ],
+    "answer": "D) 0 to 255",
+    "explanation": "Administrative Distance is an 8-bit value, so it ranges from 0 to 255. A lower AD indicates a more trusted routing source.",
+    "image": null
+  },
+  {
+    "numb": 66,
+    "type": "Multiple Choices",
+    "question": "What are the two main protocols operating at the Transport Layer?",
+    "options": [
+      "A) IP and ICMP",
+      "B) ARP and RARP",
+      "C) TCP and UDP",
+      "D) HTTP and FTP"
+    ],
+    "answer": "C) TCP and UDP",
+    "explanation": "TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are the two main protocols operating at the Transport Layer. TCP provides connection-oriented, reliable communication with error checking, flow control, and guaranteed delivery. UDP provides connectionless, unreliable communication that is faster but without delivery guarantees. Applications choose between them based on their specific requirements.",
+    "image": null
+  },
+  {
+    "numb": 67,
+    "type": "Multiple Choices",
+    "question": "A multicast MAC address for IP multicast over Ethernet always begins with which value?",
+    "options": [
+      "A) 0100.5E",
+      "B) 0000.00",
+      "C) 5022.AB",
+      "D) FFFF.FF"
+    ],
+    "answer": "A) 0100.5E",
+    "explanation": "IP multicast MAC addresses over Ethernet always begin with the prefix 0100.5E (or 01:00:5E in colon notation). This is a reserved range defined by IANA for IPv4 multicast. The remaining bits map to the multicast IP address. Multicast allows efficient one-to-many communication, where a single transmission can reach multiple interested receivers without broadcasting to all devices on the network.",
+    "image": null
+  },
+  {
+    "numb": 68,
+    "type": "Multiple Choices",
+    "question": "What does OSPF stand for?",
+    "options": [
+      "A) Open Shortest Path First",
+      "B) Open System Protocol Format",
+      "C) Optimal System Path Finder",
+      "D) Operational Shortest Path Framework"
+    ],
+    "answer": "A) Open Shortest Path First",
+    "explanation": "OSPF stands for Open Shortest Path First. It is a link-state routing protocol that learns the state of every link in the network and builds a full topology map.",
+    "image": null
+  },
+  {
+    "numb": 69,
+    "type": "Multiple Choices",
+    "question": "What is the first usable host address in the network 192.168.5.0/26?",
+    "options": [
+      "A) 192.168.5.64",
+      "B) 192.168.5.65",
+      "C) 192.168.5.0",
+      "D) 192.168.5.1"
+    ],
+    "answer": "D) 192.168.5.1",
+    "explanation": "For the network 192.168.5.0/26, the first usable host address is 192.168.5.1. The /26 subnet mask means 26 bits for network, leaving 6 bits for hosts. The network address is 192.168.5.0 (all host bits 0), and the broadcast is 192.168.5.63 (all host bits 1). The first usable host is always the network address + 1, which is 192.168.5.1.",
+    "image": null
+  },
+  {
+    "numb": 70,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of TCP over UDP?",
+    "options": [
+      "A) Reliable, ordered delivery",
+      "B) TCP is faster than UDP",
+      "C) Works on wireless only",
+      "D) Uses less bandwidth"
+    ],
+    "answer": "A) Reliable, ordered delivery",
+    "explanation": "The main advantage of TCP over UDP is that it provides reliable, ordered delivery with error checking. TCP ensures all data arrives at the destination, retransmits lost packets, delivers data in the correct sequence, detects and corrects errors using checksums, and provides flow control. This makes TCP ideal for applications where data integrity is critical, such as web browsing, email, file transfers, and database transactions.",
+    "image": null
+  },
+  {
+    "numb": 71,
+    "type": "Multiple Choices",
+    "question": "What does UDP stand for?",
+    "options": [
+      "A) User Data Packet",
+      "B) Universal Data Protocol",
+      "C) Unified Delivery Protocol",
+      "D) User Datagram Protocol"
+    ],
+    "answer": "D) User Datagram Protocol",
+    "explanation": "UDP stands for User Datagram Protocol. It is a connectionless, unreliable transport protocol that sends data without establishing a connection or guaranteeing delivery. UDP is faster than TCP because it has less overhead - no handshake, no acknowledgments, no retransmissions. It's used for applications where speed is more important than reliability, such as streaming, gaming, DNS queries, and VoIP.",
+    "image": null
+  },
+  {
+    "numb": 72,
+    "type": "Multiple Choices",
+    "question": "What is the Protocol Data Unit (PDU) called at the Transport Layer?",
+    "options": [
+      "A) Frames",
+      "B) Segments",
+      "C) Packets",
+      "D) Bits"
+    ],
+    "answer": "B) Segments",
+    "explanation": "At the Transport Layer (Layer 4), the Protocol Data Unit is called a segment (for TCP) or datagram (for UDP). Each layer has its own PDU name: Physical Layer uses bits, Data Link Layer uses frames, Network Layer uses packets, and Transport Layer uses segments. This encapsulation process adds layer-specific headers as data moves down the OSI stack.",
+    "image": null
+  },
+  {
+    "numb": 73,
+    "type": "Multiple Choices",
+    "question": "What is the correct format for a MAC address?",
+    "options": [
+      "A) 192.168.1.1",
+      "B) 5022.ab5b.63a9",
+      "C) 5A:2B",
+      "D) http://www.chameleon-nu.tech"
+    ],
+    "answer": "B) 5022.ab5b.63a9",
+    "explanation": "The correct format for a MAC address is 5022.ab5b.63a9, which shows 12 hexadecimal digits representing 6 bytes. MAC addresses can be written in various formats including colon-separated (50:22:AB:5B:63:A9), hyphen-separated (50-22-AB-5B-63-A9), or dot-separated in groups of 4 (5022.ab5b.63a9). Option A is an IP address format, option C is a URL, and option D doesn't have enough digits to be a complete MAC address.",
+    "image": null
+  },
+  {
+    "numb": 74,
+    "type": "Multiple Choices",
+    "question": "Which protocol operates at the Application Layer?",
+    "options": [
+      "A) HTTP",
+      "B) TCP",
+      "C) IP",
+      "D) ARP"
+    ],
+    "answer": "A) HTTP",
+    "explanation": "HTTP (Hypertext Transfer Protocol) operates at the Application Layer (Layer 7). Other Application Layer protocols include FTP, SMTP, DNS, Telnet, and SNMP. IP operates at Layer 3 (Network), TCP at Layer 4 (Transport), and ARP at Layer 2 (Data Link). Application Layer protocols provide specific services to end-user applications.",
+    "image": null
+  },
+  {
+    "numb": 75,
+    "type": "Multiple Choices",
+    "question": "What happens when a switch receives a frame destined for an unknown MAC address?",
+    "options": [
+      "A) Stores frame until learned",
+      "B) Floods to all ports except source",
+      "C) Sends error to the source",
+      "D) Drops the frame silently"
+    ],
+    "answer": "B) Floods to all ports except source",
+    "explanation": "When a switch receives a frame for a MAC address not in its MAC address table, it floods the frame to all ports except the incoming port. This ensures the frame reaches its destination even if the switch hasn't learned where that device is located yet. When the destination device responds, the switch will learn its MAC address and port location for future communications.",
+    "image": null
+  },
+  {
+    "numb": 76,
+    "type": "Multiple Choices",
+    "question": "Which class of IP address is 172.16.50.10?",
+    "options": [
+      "A) Class C",
+      "B) Class D",
+      "C) Class A",
+      "D) Class B"
+    ],
+    "answer": "D) Class B",
+    "explanation": "172.16.50.10 is a Class B address. Class B addresses range from 128.0.0.0 to 191.255.255.255, with the first two bits being 10 in binary. The first octet (172) falls within this range. Additionally, this is a private IP address from the 172.16.0.0/12 range, commonly used in internal networks.",
+    "image": null
+  },
+  {
+    "numb": 77,
+    "type": "Multiple Choices",
+    "question": "What is flow control in TCP?",
+    "options": [
+      "A) Routing data through network",
+      "B) Controlling physical electricity",
+      "C) Encrypting data packets securely",
+      "D) Managing transmission rate"
+    ],
+    "answer": "D) Managing transmission rate",
+    "explanation": "Flow control in TCP is the mechanism that manages the rate of data transmission between sender and receiver to prevent the sender from overwhelming the receiver with too much data too quickly. TCP uses a sliding window protocol where the receiver advertises its available buffer space (receive window), and the sender adjusts its transmission rate accordingly. This ensures efficient data transfer without packet loss due to buffer overflow.",
+    "image": null
+  },
+  {
+    "numb": 78,
+    "type": "Multiple Choices",
+    "question": "Why is PAP considered insecure?",
+    "options": [
+      "A) It's too slow",
+      "B) It requires a certificate (SSL)",
+      "C) It sends username and password in plain text",
+      "D) It uses too much bandwidth (high latency)"
+    ],
+    "answer": "C) It sends username and password in plain text",
+    "explanation": "PAP sends username and password in plain text (unencrypted), making it easy for attackers to sniff and capture credentials.",
+    "image": null
+  },
+  {
+    "numb": 79,
+    "type": "Multiple Choices",
+    "question": "which of the following is a LMI Type in Frame Relay?",
+    "options": [
+      "A) SVC",
+      "B) PAP",
+      "C) ABR",
+      "D) ANSI"
+    ],
+    "answer": "D) ANSI",
+    "explanation": "ANSI - Cisco - ITU-T(Q.933A) are LMI Types in Frame Relay.",
+    "image": null
+  },
+  {
+    "numb": 80,
+    "type": "Multiple Choices",
+    "question": "Can a trunk form if both switches are in Auto mode?",
+    "options": [
+      "A) Yes, but slowly",
+      "B) Only on Cisco switches",
+      "C) No, because neither initiates",
+      "D) Yes"
+    ],
+    "answer": "C) No, because neither initiates",
+    "explanation": "Auto mode does not initiate trunking, so two Auto-mode switches cannot form a trunk.",
+    "image": null
+  },
+  {
+    "numb": 81,
+    "type": "Multiple Choices",
+    "question": "Which LSA type is generated by each router and floods within the same area?",
+    "options": [
+      "A) Summary LSA",
+      "B) Router LSA",
+      "C) External LSA",
+      "D) Network LSA"
+    ],
+    "answer": "B) Router LSA",
+    "explanation": "Router LSA (Type 1) is generated by each router and contains information about the router's directly connected interfaces. It floods only within the same area.",
+    "image": null
+  },
+  {
+    "numb": 82,
+    "type": "Multiple Choices",
+    "question": "Which LSA type is generated only by the DR?",
+    "options": [
+      "A) Network LSA",
+      "B) External LSA",
+      "C) Summary LSA",
+      "D) Router LSA"
+    ],
+    "answer": "A) Network LSA",
+    "explanation": "Network LSA (Type 2) is generated only by the DR in multi-access networks. It contains information about all routers connected to the shared network segment.",
+    "image": null
+  },
+  {
+    "numb": 83,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the Designated Router (DR) in OSPF?",
+    "options": [
+      "A) To block unauthorized traffic",
+      "B) To encrypt routing information",
+      "C) To provide backup power supply",
+      "D) Central router for LSA exchange"
+    ],
+    "answer": "D) Central router for LSA exchange",
+    "explanation": "The DR is the central router responsible for collecting and distributing routing information (LSAs) in a multi-access network, reducing unnecessary communication overhead between routers.",
+    "image": null
+  },
+  {
+    "numb": 84,
+    "type": "Multiple Choices",
+    "question": "What is VLSM?",
+    "options": [
+      "A) Virtual Link Subnet Management",
+      "B) Very Large Subnet Method",
+      "C) Virtual LAN Subnet Masking",
+      "D) Variable Length Subnet Masking"
+    ],
+    "answer": "D) Variable Length Subnet Masking",
+    "explanation": "VLSM stands for Variable Length Subnet Masking. It is a subnetting technique that allows network administrators to use different subnet masks for different subnets within the same network, enabling more efficient use of IP address space. VLSM is part of CIDR and allows you to allocate IP addresses based on actual network requirements rather than fixed class boundaries, reducing IP address waste.",
+    "image": null
+  },
+  {
+    "numb": 85,
+    "type": "Multiple Choices",
+    "question": "What is the subnet mask 255.255.255.0 in CIDR notation?",
+    "options": [
+      "A) /25",
+      "B) /16",
+      "C) /32",
+      "D) /24"
+    ],
+    "answer": "D) /24",
+    "explanation": "The subnet mask 255.255.255.0 is represented as /24 in CIDR notation. This indicates that the first 24 bits (three octets) are used for the network portion, leaving 8 bits for host addresses. This provides 256 total addresses, with 254 usable host addresses (excluding network and broadcast addresses).",
+    "image": null
+  },
+  {
+    "numb": 86,
+    "type": "Multiple Choices",
+    "question": "What frames are used to prevent collisions when devices can't hear each other (hidden node problem)?",
+    "options": [
+      "A) Beacon frames",
+      "B) Management frames",
+      "C) RTS and CTS frames",
+      "D) Data frames"
+    ],
+    "answer": "C) RTS and CTS frames",
+    "explanation": "RTS (Request to Send) and CTS (Clear to Send) frames solve the hidden node problem. A device sends RTS, gets CTS from AP, then sends data. All devices respect these signals.",
+    "image": null
+  },
+  {
+    "numb": 87,
+    "type": "Multiple Choices",
+    "question": "What is the main difference between TCP and UDP at the Transport Layer?",
+    "options": [
+      "A) TCP at Layer 3, UDP at Layer 4",
+      "B) TCP reliable, UDP unreliable",
+      "C) UDP uses IP, TCP uses MAC",
+      "D) TCP is faster than UDP"
+    ],
+    "answer": "B) TCP reliable, UDP unreliable",
+    "explanation": "TCP (Transmission Control Protocol) is connection-oriented, meaning it establishes a connection before data transfer, provides reliable delivery with error checking, acknowledgments, and retransmission. UDP (User Datagram Protocol) is connectionless, offering faster but unreliable delivery without guarantees. TCP is used when reliability is critical (web browsing, email), while UDP is used for speed-sensitive applications (streaming, gaming, DNS).",
+    "image": null
+  },
+  {
+    "numb": 88,
+    "type": "Multiple Choices",
+    "question": "What protocol layers can Wireshark analyze?",
+    "options": [
+      "A) Only Layer 7",
+      "B) All layers",
+      "C) Only Layers 2 and 3",
+      "D) Only Layer 1"
+    ],
+    "answer": "B) All layers",
+    "explanation": "Wireshark can analyze packets at all OSI layers, from Ethernet frames (Layer 2) to application protocols (Layer 7) like HTTP, DNS, FTP, etc.",
+    "image": null
+  },
+  {
+    "numb": 89,
+    "type": "Multiple Choices",
+    "question": "What is TCP stream reassembly in Wireshark?",
+    "options": [
+      "A) Reconstructing TCP data stream",
+      "B) Deleting TCP packets only",
+      "C) Splitting TCP packets apart",
+      "D) Encrypting TCP data securely"
+    ],
+    "answer": "A) Reconstructing TCP data stream",
+    "explanation": "TCP stream reassembly combines individual TCP segments to reconstruct the complete data stream, allowing you to see the full content of a conversation (like a complete HTTP request/response).",
+    "image": null
+  },
+  {
+    "numb": 90,
+    "type": "Multiple Choices",
+    "question": "Which layer of the OSI model is responsible for physical transmission of raw bit streams?",
+    "options": [
+      "A) Network Layer",
+      "B) Physical Layer",
+      "C) Data Link Layer",
+      "D) Transport Layer"
+    ],
+    "answer": "B) Physical Layer",
+    "explanation": "The Physical Layer (Layer 1) is responsible for the physical transmission of raw bit streams over a physical medium. It deals with the electrical, mechanical, and functional specifications of the physical connection, including voltage levels, cable types, connectors, and signaling methods. This layer converts digital bits into electrical, optical, or radio signals.",
+    "image": null
+  },
+  {
+    "numb": 91,
+    "type": "Multiple Choices",
+    "question": "What is the correct order for a client joining a wireless network?",
+    "options": [
+      "A) Association → Authentication → Data → Beacon ",
+      "B) Data → Authentication → Probe → Association",
+      "C) Probe → Authentication → Data → Association",
+      "D) Beacon → Probe → Authentication → Association"
+    ],
+    "answer": "D) Beacon → Probe → Authentication → Association",
+    "explanation": "The correct order is: 1) Beacon (Help clients), 2) Probe (discover network), 3) Authentication (verify client capability), 4) Association (register with AP). After association, the client can exchange data.",
+    "image": null
+  },
+  {
+    "numb": 92,
+    "type": "Multiple Choices",
+    "question": "How many well-known port numbers are there?",
+    "options": [
+      "A) 0 to 65535",
+      "B) 0 to 1023",
+      "C) 0 to 49151",
+      "D) 0 to 255"
+    ],
+    "answer": "B) 0 to 1023",
+    "explanation": "Well-known ports range from 0 to 1023. These ports are assigned by IANA (Internet Assigned Numbers Authority) for standard services and protocols. Examples include port 80 for HTTP, port 443 for HTTPS, port 21 for FTP, port 22 for SSH, and port 25 for SMTP. Applications typically need administrative privileges to bind to well-known ports. The complete port range is 0-65535 (16 bits).",
+    "image": null
+  },
+  {
+    "numb": 93,
+    "type": "Multiple Choices",
+    "question": "How many bits are in a port number?",
+    "options": [
+      "A) 64 bits",
+      "B) 32 bits",
+      "C) 16 bits",
+      "D) 8 bits"
+    ],
+    "answer": "C) 16 bits",
+    "explanation": "A port number is 16 bits in length, which allows for port numbers ranging from 0 to 65,535 (2^16 - 1 = 65,535). Port numbers are divided into three ranges: Well-Known Ports (0-1023) used by system services, Registered Ports (1024-49151) used by applications, and Dynamic/Private Ports (49152-65535) used for temporary connections. This 16-bit field enables PAT to support thousands of simultaneous connections.",
+    "image": null
+  },
+  {
+    "numb": 94,
+    "type": "Multiple Choices",
+    "question": "When does a router send a Link State Request (LSR) packet?",
+    "options": [
+      "A) When terminating connection",
+      "B) When it first boots up",
+      "C) Every 30 seconds automatically",
+      "D) When finding missing info"
+    ],
+    "answer": "D) When finding missing info",
+    "explanation": "A router sends an LSR packet when it compares DBD information and finds that it's missing some routing information. It requests the specific missing details from the neighbor.",
+    "image": null
+  },
+  {
+    "numb": 95,
+    "type": "Multiple Choices",
+    "question": "What is an inside global address in NAT terminology?",
+    "options": [
+      "A) Public IP for outside view",
+      "B) MAC address of device",
+      "C) Private IP used internally",
+      "D) Subnet mask of network"
+    ],
+    "answer": "A) Public IP for outside view",
+    "explanation": "An inside global address is the public (registered) IP address by which inside devices are known to the outside world. This is the address that external networks see when communicating with devices behind the NAT router. The NAT device translates the inside local (private) address to the inside global (public) address when packets leave the network.",
+    "image": null
+  },
+  {
+    "numb": 96,
+    "type": "Multiple Choices",
+    "question": "How many bits are in an IPv4 address?",
+    "options": [
+      "A) 128 bits",
+      "B) 64 bits",
+      "C) 32 bits",
+      "D) 16 bits"
+    ],
+    "answer": "C) 32 bits",
+    "explanation": "An IPv4 address consists of 32 bits, divided into four octets (8 bits each). Each octet can range from 0 to 255 when represented in decimal notation, separated by dots (e.g., 192.168.1.1). The 32-bit address space allows for approximately 4.3 billion unique addresses.",
+    "image": null
+  },
+  {
+    "numb": 97,
+    "type": "Multiple Choices",
+    "question": "What information is included in the Preamble of a wireless frame?",
+    "options": [
+      "A) Radio signals and synchronization info",
+      "B) Routing information",
+      "C) Encryption keys",
+      "D) User data"
+    ],
+    "answer": "A) Radio signals and synchronization info",
+    "explanation": "The Preamble (76-156 bytes) is used for radio signal synchronization between the transmitter and receiver.",
+    "image": null
+  },
+  {
+    "numb": 98,
+    "type": "Multiple Choices",
+    "question": "What does Wireshark capture and display?",
+    "options": [
+      "A) Files and folders",
+      "B) Individual packets with their fields and headers",
+      "C) User passwords and private data",
+      "D) System configurations"
+    ],
+    "answer": "B) Individual packets with their fields and headers",
+    "explanation": "Wireshark captures network packets and dissects them, displaying various packet fields and headers based on the type of packet that was captured (TCP, UDP, HTTP, etc.).",
+    "image": null
+  },
+  {
+    "numb": 99,
+    "type": "Multiple Choices",
+    "question": "Which IFS type has the shortest waiting time?",
+    "options": [
+      "A) SIFS",
+      "B) PIFS",
+      "C) RIFS",
+      "D) DIFS"
+    ],
+    "answer": "A) SIFS",
+    "explanation": "SIFS (Short Interframe Space) is the shortest waiting time and is used for high-priority frames like Acknowledgements. It ensures critical control frames are sent quickly.",
+    "image": null
+  },
+  {
+    "numb": 100,
+    "type": "Multiple Choices",
+    "question": "What does OSI stand for?",
+    "options": [
+      "A) Operating System Interface",
+      "B) Open Systems Interconnection",
+      "C) Optical Signal Integration",
+      "D) Open Standard Interface"
+    ],
+    "answer": "B) Open Systems Interconnection",
+    "explanation": "OSI stands for Open Systems Interconnection. It is a conceptual framework created by ISO (International Organization for Standardization) to standardize the functions of a communication system. The model divides network communication into seven distinct layers, each with specific responsibilities.",
+    "image": null
+  },
+  {
+    "numb": 101,
+    "type": "Multiple Choices",
+    "question": "What is the name of the connector used for Ethernet cables?",
+    "options": [
+      "A) USB-C",
+      "B) RJ45",
+      "C) RJ11",
+      "D) BNC"
+    ],
+    "answer": "B) RJ45",
+    "explanation": "RJ45 (Registered Jack 45) is the standard connector used for Ethernet cables. It is an 8-position, 8-contact (8P8C) modular connector that accommodates the 8 wires in a standard Ethernet cable. RJ11 is used for telephone lines and has fewer contacts, USB-C is for USB connections, and BNC connectors were used in older coaxial Ethernet implementations. The RJ45 connector clicks into place when properly inserted into an Ethernet port.",
+    "image": null
+  },
+  {
+    "numb": 102,
+    "type": "Multiple Choices",
+    "question": "What are the two authentication methods used by PPP?",
+    "options": [
+      "A) PAP and CHAP",
+      "B) TCP and UDP",
+      "C) HTTP and HTTPS",
+      "D) SSH and Telnet"
+    ],
+    "answer": "A) PAP and CHAP",
+    "explanation": "PPP uses PAP (Password Authentication Protocol) which sends credentials in plain text, and CHAP (Challenge Handshake Authentication Protocol) which is more secure using encryption.",
+    "image": null
+  },
+  {
+    "numb": 103,
+    "type": "Multiple Choices",
+    "question": "At which layer of the OSI model does the Transport Layer operate?",
+    "options": [
+      "A) Layer 5",
+      "B) Layer 4",
+      "C) Layer 2",
+      "D) Layer 3"
+    ],
+    "answer": "B) Layer 4",
+    "explanation": "The Transport Layer operates at Layer 4 of the OSI model. It sits between the Network Layer (Layer 3) below and the Session Layer (Layer 5) above. The Transport Layer is responsible for end-to-end communication, providing reliable or unreliable delivery of data segments between applications running on different hosts, and includes protocols like TCP and UDP.",
+    "image": null
+  },
+  {
+    "numb": 104,
+    "type": "Multiple Choices",
+    "question": "What is a segment in the context of the Transport Layer?",
+    "options": [
+      "A) A routing table entry only",
+      "B) A physical cable section",
+      "C) A type of network switch",
+      "D) Transport Layer PDU"
+    ],
+    "answer": "D) Transport Layer PDU",
+    "explanation": "A segment is the Protocol Data Unit (PDU) at the Transport Layer. When data from the upper layers is passed to the Transport Layer, it is encapsulated into segments (for TCP) or datagrams (for UDP). A segment includes the Transport Layer header (containing source and destination ports, sequence numbers, acknowledgments, flags, etc.) plus the data payload. These segments are then passed to the Network Layer for further encapsulation into packets.",
+    "image": null
+  },
+  {
+    "numb": 105,
+    "type": "Multiple Choices",
+    "question": "What is the standard trunking protocol?",
+    "options": [
+      "A) ISL",
+      "B) STP",
+      "C) IEEE 802.1Q",
+      "D) VTP"
+    ],
+    "answer": "C) IEEE 802.1Q",
+    "explanation": "IEEE 802.1Q is the open standard trunking protocol supported by all vendors. ISL is Cisco proprietary.",
+    "image": null
+  },
+  {
+    "numb": 106,
+    "type": "Multiple Choices",
+    "question": "Why is Wireshark valuable for learning networking?",
+    "options": [
+      "A) It replaces routers",
+      "B) Auto fixes network issues",
+      "C) It's expensive software",
+      "D) Shows protocols in action"
+    ],
+    "answer": "D) Shows protocols in action",
+    "explanation": "Wireshark is excellent for learning because you can observe actual network traffic and see how protocols like TCP, HTTP, DNS, and others work in practice, not just in theory.",
+    "image": null
+  },
+  {
+    "numb": 107,
+    "type": "Multiple Choices",
+    "question": "What is the value of a broadcast MAC address?",
+    "options": [
+      "A) 0100.5E00.0000",
+      "B) 0000.0000.0000",
+      "C) 255.255.255.255",
+      "D) FFFF.FFFF.FFFF"
+    ],
+    "answer": "D) FFFF.FFFF.FFFF",
+    "explanation": "The broadcast MAC address is FFFF.FFFF.FFFF (all bits set to 1). When a frame is sent to this destination address, it is delivered to all devices on the local network segment. This is different from 255.255.255.255, which is an IP broadcast address. The all-zeros address (0000.0000.0000) is invalid, and 0100.5E00.0000 is related to multicast addressing. Broadcast frames are used for network discovery and protocols like ARP.",
+    "image": null
+  },
+  {
+    "numb": 108,
+    "type": "Multiple Choices",
+    "question": "What is the VTP Revision Number?",
+    "options": [
+      "A) Counter that increases with VLAN changes",
+      "B) Switch serial number",
+      "C) VTP version",
+      "D) Number of VLANs"
+    ],
+    "answer": "A) Counter that increases with VLAN changes",
+    "explanation": "The revision number increments whenever VLANs are created, deleted, or modified.",
+    "image": null
+  },
+  {
+    "numb": 109,
+    "type": "Multiple Choices",
+    "question": "What does VTP stand for?",
+    "options": [
+      "A) Virtual Transfer Protocol",
+      "B) VLAN Trunking Protocol",
+      "C) VLAN Transport Process",
+      "D) Virtual Trunk Procedure"
+    ],
+    "answer": "B) VLAN Trunking Protocol",
+    "explanation": "VTP stands for VLAN Trunking Protocol and is used to propagate VLAN configuration between switches.",
+    "image": null
+  },
+  {
+    "numb": 110,
+    "type": "Multiple Choices",
+    "question": "What database does OSPF use to store link information?",
+    "options": [
+      "A) Link State Database (LSDB)",
+      "B) Routing Table",
+      "C) MAC Address Table",
+      "D) ARP Cache"
+    ],
+    "answer": "A) Link State Database (LSDB)",
+    "explanation": "OSPF stores information about all links in the Link State Database (LSDB). All routers in the same area will have identical LSDBs after convergence.",
+    "image": null
+  },
+  {
+    "numb": 111,
+    "type": "Multiple Choices",
+    "question": "In a straight-through cable connection from a PC to a switch, which pins are primarily used for transmitting data (TX) from the PC?",
+    "options": [
+      "A) 7 & 8",
+      "B) 4 & 5",
+      "C) 1 & 2",
+      "D) 3 & 6"
+    ],
+    "answer": "C) 1 & 2",
+    "explanation": "In a standard Ethernet straight-through cable, a PC (DTE device) transmits data on pins 1 and 2 (TX+/TX-) and receives data on pins 3 and 6 (RX+/RX-). The switch or hub does the opposite: it receives on pins 1 and 2 and transmits on pins 3 and 6. This pin arrangement allows proper bidirectional communication between the PC and switch. Pins 4, 5, 7, and 8 are used for Gigabit Ethernet or Power over Ethernet in modern implementations.",
+    "image": null
+  },
+  {
+    "numb": 112,
+    "type": "Multiple Choices",
+    "question": "What does CSMA/CD stand for in Ethernet networks?",
+    "options": [
+      "A) Computer System Management Device",
+      "B) Carrier Sense with Collision Detection",
+      "C) Central System Multiple Access",
+      "D) Carrier Signal Modulation Delay"
+    ],
+    "answer": "B) Carrier Sense with Collision Detection",
+    "explanation": "CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is the media access control method used in traditional Ethernet networks. Devices listen (carrier sense) before transmitting to avoid collisions. If a collision is detected, devices stop transmitting, wait a random time, and retry. Modern switched full-duplex networks don't need CSMA/CD since each port is a separate collision domain.",
+    "image": null
+  },
+  {
+    "numb": 113,
+    "type": "Multiple Choices",
+    "question": "What type of communication does TCP provide?",
+    "options": [
+      "A) Broadcast-based",
+      "B) Connection-oriented and reliable",
+      "C) Multicast-only",
+      "D) Connectionless and unreliable"
+    ],
+    "answer": "B) Connection-oriented and reliable",
+    "explanation": "TCP provides connection-oriented and reliable communication. Connection-oriented means TCP establishes a connection before transmitting data (using a three-way handshake) and maintains it throughout the session. Reliable means TCP guarantees data delivery through acknowledgments, retransmissions of lost packets, sequencing to maintain order, and error checking using checksums. This makes TCP suitable for applications requiring guaranteed delivery like web browsing, email, and file transfers.",
+    "image": null
+  },
+  {
+    "numb": 114,
+    "type": "Multiple Choices",
+    "question": "What is a Metric in routing?",
+    "options": [
+      "A) The protocol version number",
+      "B) A value used to determine the best path using a single protocol",
+      "C) The router's serial number",
+      "D) The time since the router was reset"
+    ],
+    "answer": "B) A value used to determine the best path using a single protocol",
+    "explanation": "A metric is the value that a routing protocol uses to determine the best path to a destination network. Different protocols use different metrics (RIP uses hop count, OSPF uses cost).",
+    "image": null
+  },
+  {
+    "numb": 115,
+    "type": "Multiple Choices",
+    "question": "What file format does Wireshark use to save captures?",
+    "options": [
+      "A) .wrcap",
+      "B) .pcap",
+      "C) .java",
+      "D) .wsrk"
+    ],
+    "answer": "B) .pcap",
+    "explanation": "Wireshark saves captures in .pcap or the newer .pcapng format. These are standard formats that can be opened by other packet analysis tools as well.",
+    "image": null
+  },
+  {
+    "numb": 116,
+    "type": "Multiple Choices",
+    "question": "Which IP address range is designated for Class C networks?",
+    "options": [
+      "A) 1.0.0.0 to 126.255.255.255",
+      "B) 128.0.0.0 to 191.255.255.255",
+      "C) 224.0.0.0 to 239.255.255.255",
+      "D) 192.0.0.0 to 223.255.255.255"
+    ],
+    "answer": "D) 192.0.0.0 to 223.255.255.255",
+    "explanation": "Class C networks range from 192.0.0.0 to 223.255.255.255. The first three bits of a Class C address are 110 in binary. Class C uses three octets for the network portion and one octet for hosts, providing 254 usable host addresses per network. The default subnet mask for Class C is 255.255.255.0 (/24).",
+    "image": null
+  },
+  {
+    "numb": 117,
+    "type": "Multiple Choices",
+    "question": "What are the two types of networks in OSPF?",
+    "options": [
+      "A) LAN and WAN networks only",
+      "B) Public and Private networks",
+      "C) Wired and Wireless networks",
+      "D) Point-to-Point and Multi-Access"
+    ],
+    "answer": "D) Point-to-Point and Multi-Access",
+    "explanation": "OSPF distinguishes between Point-to-Point networks (simple networks with just two routers connected) and Multi-Access networks (networks where more than two routers are physically connected on the same segment).",
+    "image": null
+  },
+  {
+    "numb": 118,
+    "type": "Multiple Choices",
+    "question": "What is a capture filter in Wireshark?",
+    "options": [
+      "A) Filter that encrypts data",
+      "B) Filter that deletes packets",
+      "C) Filter applied after capture",
+      "D) Filter limiting traffic captured"
+    ],
+    "answer": "D) Filter limiting traffic captured",
+    "explanation": "A capture filter is applied before capturing begins. It limits what traffic is captured, reducing the amount of data you need to analyze.",
+    "image": null
+  },
+  {
+    "numb": 119,
+    "type": "Multiple Choices",
+    "question": "What is Frame Relay?",
+    "options": [
+      "A) A routing protocol that forwards packets",
+      "B) A dedicated leased line that provides a permanent connection",
+      "C) A packet-switched WAN technology",
+      "D) A wireless protocol that uses radio frequencies"
+    ],
+    "answer": "C) A packet-switched WAN technology",
+    "explanation": "Frame Relay is a packet-switched technology that allows one router to connect to many remote routers using one physical link with multiple logical connections (virtual circuits).",
+    "image": null
+  },
+  {
+    "numb": 120,
+    "type": "Multiple Choices",
+    "question": "What is the main difference between a Layer 2 switch and a Layer 3 switch?",
+    "options": [
+      "A) Layer 3 needs fiber optics",
+      "B) Layer 2 has more ports",
+      "C) Layer 2 is faster",
+      "D) Layer 3 can route traffic"
+    ],
+    "answer": "D) Layer 3 can route traffic",
+    "explanation": "A Layer 3 switch (also called a multilayer switch) can perform both switching and routing functions. It operates at both Layer 2 (switching frames based on MAC addresses) and Layer 3 (routing packets based on IP addresses). This allows faster inter-VLAN routing and improved performance compared to using separate switches and routers. Layer 2 switches only forward based on MAC addresses and cannot route between different networks.",
+    "image": null
+  },
+  {
+    "numb": 121,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of a MAC address table in a switch?",
+    "options": [
+      "A) Store IP addresses of devices",
+      "B) Store routing information",
+      "C) Configure security settings",
+      "D) Map MAC addresses to ports"
+    ],
+    "answer": "D) Map MAC addresses to ports",
+    "explanation": "The MAC address table (also called CAM table - Content Addressable Memory) in a switch maps MAC addresses to specific physical ports. This table is built dynamically as the switch learns which devices are connected to which ports by examining source MAC addresses of incoming frames. The switch uses this table to forward frames only to the correct destination port rather than flooding to all ports.",
+    "image": null
+  },
+  {
+    "numb": 122,
+    "type": "Multiple Choices",
+    "question": "What is a 'link' in OSPF terminology?",
+    "options": [
+      "A) A connection to the internet",
+      "B) A wireless signal",
+      "C) An interface on a router",
+      "D) A type of cable"
+    ],
+    "answer": "C) An interface on a router",
+    "explanation": "In OSPF, a link refers to an interface on a router. The 'state' describes information about that interface such as IP address, mask, and connected network type.",
+    "image": null
+  },
+  {
+    "numb": 123,
+    "type": "Multiple Choices",
+    "question": "What is the syntax for Standard ACL?",
+    "options": [
+      "A) access-list <number> permit|deny <source> <destination>",
+      "B) access-list <number> permit|deny <protocol> <source>",
+      "C) access-list <number> permit|deny <source> <wildcard>",
+      "D) access-list <number> permit|deny any"
+    ],
+    "answer": "C) access-list <number> permit|deny <source> <wildcard>",
+    "explanation": "Standard ACL syntax is: access-list <number> permit|deny <source IP> <wildcard mask>. It only specifies the source address.",
+    "image": null
+  },
+  {
+    "numb": 124,
+    "type": "Multiple Choices",
+    "question": "What is the three-way handshake in TCP used for?",
+    "options": [
+      "A) Routing packets through network",
+      "B) Assigning IP addresses to hosts",
+      "C) Encrypting data for security",
+      "D) Establishing TCP connection"
+    ],
+    "answer": "D) Establishing TCP connection",
+    "explanation": "The three-way handshake is the process TCP uses to establish a connection between client and server before data transmission. The process involves three steps: 1) Client sends SYN (synchronize) to server, 2) Server responds with SYN-ACK (synchronize-acknowledge), 3) Client sends ACK (acknowledge) back to server. After this handshake completes, a reliable connection is established and data transfer can begin.",
+    "image": null
+  },
+  {
+    "numb": 125,
+    "type": "Multiple Choices",
+    "question": "At the Data Link layer, Ethernet is responsible for all of the following EXCEPT:",
+    "options": [
+      "A) Actual signal transmission",
+      "B) Addressing",
+      "C) Preparing packets for transmission",
+      "D) Framing packets"
+    ],
+    "answer": "A) Actual signal transmission",
+    "explanation": "Actual signal transmission is the responsibility of the Physical Layer (Layer 1), not the Data Link Layer (Layer 2). The Data Link Layer handles logical functions such as MAC addressing, framing packets into proper Ethernet frames, and preparing packets for transmission. The Physical Layer then takes these prepared frames and handles the actual electrical, optical, or radio signal transmission over the physical medium.",
+    "image": null
+  },
+  {
+    "numb": 126,
+    "type": "Multiple Choices",
+    "question": "What happens if a packet doesn't match any rule in an ACL?",
+    "options": [
+      "A) The packet is permitted by default",
+      "B) The packet is duplicated",
+      "C) The packet is denied",
+      "D) The packet is sent back to the source"
+    ],
+    "answer": "C) The packet is denied",
+    "explanation": "ACLs have an implicit deny at the end. If a packet doesn't match any rule, it is automatically dropped. This is why you often need to add a 'permit any' rule at the end.",
+    "image": null
+  },
+  {
+    "numb": 127,
+    "type": "Multiple Choices",
+    "question": "What is granular analysis in Wireshark?",
+    "options": [
+      "A) Examining individual packets in detail",
+      "B) Analyzing the entire network at once",
+      "C) Counting total packets",
+      "D) Measuring network speed"
+    ],
+    "answer": "A) Examining individual packets in detail",
+    "explanation": "Granular analysis means examining individual packets in detail - viewing their headers, payload, protocols, source/destination addresses, and other specific fields.",
+    "image": null
+  },
+  {
+    "numb": 128,
+    "type": "Multiple Choices",
+    "question": "What is a Leased Line?",
+    "options": [
+      "A) A temporary dial-up connection",
+      "B) A permanent dedicated WAN link",
+      "C) A shared internet connection",
+      "D) A wireless network connection"
+    ],
+    "answer": "B) A permanent dedicated WAN link",
+    "explanation": "A leased line is a permanent, point-to-point, dedicated WAN connection. It's always on, not shared with anyone, very stable and secure, but very expensive.",
+    "image": null
+  },
+  {
+    "numb": 129,
+    "type": "Multiple Choices",
+    "question": "What license is Wireshark distributed under?",
+    "options": [
+      "A) Proprietary license",
+      "B) Monthly subscription",
+      "C) Open-source license",
+      "D) Enterprise license only"
+    ],
+    "answer": "C) Open-source license",
+    "explanation": "Wireshark is free and open-source software. Anyone can download, use, and even modify the source code according to its open-source license.",
+    "image": null
+  },
+  {
+    "numb": 130,
+    "type": "Multiple Choices",
+    "question": "What is required for VTP communication?",
+    "options": [
+      "A) Same number of ports",
+      "B) Same MAC address",
+      "C) Same VTP domain name and version",
+      "D) Same hostname"
+    ],
+    "answer": "C) Same VTP domain name and version",
+    "explanation": "VTP requires switches to be in the same VTP domain and use the same VTP version.",
+    "image": null
+  }
+]
