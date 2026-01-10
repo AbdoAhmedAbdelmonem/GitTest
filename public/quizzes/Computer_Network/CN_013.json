@@ -172,12 +172,12 @@
     "type": "Multiple Choices",
     "question": "What protocol layers can Wireshark analyze?",
     "options": [
-      "A) All layers",
+      "A) All layers EXCEPT 1",
       "B) Only Layer 7",
       "C) Only Layers 2 and 3",
       "D) Only Layer 1"
     ],
-    "answer": "A) All layers",
+    "answer": "A) All layers EXCEPT 1",
     "explanation": "Wireshark can analyze packets at all OSI layers, from Ethernet frames (Layer 2) to application protocols (Layer 7) like HTTP, DNS, FTP, etc.",
     "image": null
   },
@@ -279,4 +279,5 @@
     "explanation": "Wireshark is excellent for learning because you can observe actual network traffic and see how protocols like TCP, HTTP, DNS, and others work in practice, not just in theory.",
     "image": null
   }
+
 ]
