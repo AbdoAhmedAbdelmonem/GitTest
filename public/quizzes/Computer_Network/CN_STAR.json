@@ -826,7 +826,7 @@
     "image": null
   },
   {
-    "numb": 60,
+    "numb": 60, 
     "type": "Multiple Choices",
     "question": "What is the purpose of Management frames?",
     "options": [
@@ -1227,7 +1227,7 @@
       "C) Only Layers 2, 3, 4",
       "D) Only Layer 1"
     ],
-    "answer": "B) All layers",
+    "answer": "B) All layers but not 1",
     "explanation": "Wireshark can analyze packets at all OSI layers, from Ethernet frames (Layer 2) to application protocols (Layer 7) like HTTP, DNS, FTP, etc.",
     "image": null
   },
