@@ -520,7 +520,7 @@
   {
     "numb": 38,
     "type": "Multiple Choices",
-    "question": "What does NAT stand for? لو ركزت في اسم الكويز هتعرف الإجابة",
+    "question": "What does NAT stand for?",
     "options": [
       "A) Network Access Technology",
       "B) Network Application Transfer",
@@ -1819,4 +1819,5 @@
     "explanation": "VTP requires switches to be in the same VTP domain and use the same VTP version.",
     "image": null
   }
+
 ]
