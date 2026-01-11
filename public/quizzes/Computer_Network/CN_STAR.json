@@ -1223,8 +1223,8 @@
     "question": "What protocol layers can Wireshark analyze?",
     "options": [
       "A) Only Layer 7",
-      "B) All layers",
-      "C) Only Layers 2 and 3",
+      "B) All layers, but not 1",
+      "C) Only Layers 2, 3, 4",
       "D) Only Layer 1"
     ],
     "answer": "B) All layers",
@@ -1821,3 +1821,4 @@
   }
 
 ]
+
