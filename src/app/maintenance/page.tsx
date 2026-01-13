@@ -175,7 +175,7 @@ export default function MaintenancePage() {
             ))}
           </div>
           <p className="text-gray-500 mt-4 text-sm font-rubik">
-            (Subject to change... because, you know, it&apos;s software! 😅)
+            (Subject to change... because, you know, it&apos;s software! 😂)
           </p>
         </div>
 
@@ -194,7 +194,7 @@ export default function MaintenancePage() {
 
         {/* Footer message */}
         <p className="text-gray-500 text-sm font-rubik">
-          Need something urgent? Reach out on social media 📱
+          Need something urgent? Reach out on WhatsApp
         </p>
       </div>
     </div>
