@@ -846,3 +846,118 @@ html {
 .animate-float-icon {
   animation: floatIcon 4s ease-in-out infinite;
 }
+
+/* ========================================
+   MAINTENANCE PAGE ANIMATIONS
+   ======================================== */
+
+/* Gear Rotation Animation */
+@keyframes gearRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gearRotateReverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-gear-rotate {
+  animation: gearRotate 8s linear infinite;
+}
+
+.animate-gear-rotate-reverse {
+  animation: gearRotateReverse 6s linear infinite;
+}
+
+/* Wrench Movement Animation */
+@keyframes wrenchMove {
+
+  0%,
+  100% {
+    transform: rotate(-15deg) translateY(0);
+  }
+
+  25% {
+    transform: rotate(15deg) translateY(-5px);
+  }
+
+  50% {
+    transform: rotate(-10deg) translateY(0);
+  }
+
+  75% {
+    transform: rotate(10deg) translateY(5px);
+  }
+}
+
+.animate-wrench-move {
+  animation: wrenchMove 2s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Spark Animation */
+@keyframes spark {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) translateY(-30px);
+  }
+}
+
+.animate-spark {
+  animation: spark 1s ease-out infinite;
+}
+
+/* Progress Pulse Animation */
+@keyframes progressPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-progress-pulse {
+  animation: progressPulse 2s ease-in-out infinite;
+}
+
+/* Fade In Animation */
+@keyframes fadeInMessage {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInMessage 0.5s ease-out;
+}
