@@ -16,7 +16,7 @@ import { getStudentSession } from "@/lib/auth"
 import { useEffect, useState } from "react"
 import GsapStackedCards from "@/components/gsap-stacked-cards"
 import AnimatedParticles from "@/components/animated-particles"
-import NextExams from '@/components/next-exams';
+// import NextExams from '@/components/next-exams';
 
 const specializations = [
   {
@@ -204,9 +204,9 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="container mx-auto py-8">
+      {/* <div className="container mx-auto py-8">
         <NextExams />
-      </div>
+      </div> */}
       
       {/* Magic Search Section */}
       <ScrollAnimatedSection className="py-12 bg-[#030303] border-t border-white/5">
