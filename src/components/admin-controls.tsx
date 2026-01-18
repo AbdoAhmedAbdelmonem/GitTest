@@ -58,7 +58,7 @@ export function FileActions({ fileId, fileName, onDeleted, onRenamed }: FileActi
     setRenameSuccess(false)
 
     try {
-      const session = getStudentSession()
+      const session = await getStudentSession()
       if (!session) throw new Error('No session found')
 
       const response = await fetch(`/api/google-drive/rename/${fileId}?userId=${session.user_id}`, {
@@ -97,7 +97,7 @@ export function FileActions({ fileId, fileName, onDeleted, onRenamed }: FileActi
     setIsDeleting(true)
 
     try {
-      const session = getStudentSession()
+      const session = await getStudentSession()
       if (!session) throw new Error('No session found')
 
       const response = await fetch(`/api/google-drive/delete/${fileId}?userId=${session.user_id}`, {
@@ -384,7 +384,7 @@ export function FolderActions({ folderId, folderName, onDeleted, onRenamed }: Fo
     setRenameSuccess(false)
 
     try {
-      const session = getStudentSession()
+      const session = await getStudentSession()
       if (!session) throw new Error('No session found')
 
       const response = await fetch(`/api/google-drive/rename/${folderId}?userId=${session.user_id}`, {
@@ -423,7 +423,7 @@ export function FolderActions({ folderId, folderName, onDeleted, onRenamed }: Fo
     setIsDeleting(true)
 
     try {
-      const session = getStudentSession()
+      const session = await getStudentSession()
       if (!session) throw new Error('No session found')
 
       const response = await fetch(`/api/google-drive/delete/${folderId}?userId=${session.user_id}`, {
