@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { exchangeCodeForTokens, getGoogleUserInfo, storeUserTokens } from '@/lib/google-oauth'
-import { createClient } from '@/lib/supabase/client'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 export async function GET(request: NextRequest) {
   try {
@@ -56,17 +56,17 @@ export async function GET(request: NextRequest) {
 
     console.log(`🔐 OAUTH CALLBACK DEBUG - Google user info for user ${userId}: ${userInfo.email} (ID: ${userInfo.id})`)
 
-    // Check if this Google account is already associated with another user
-    const supabase = createClient()
-    const { data: existingUser } = await supabase
-      .from('chameleons')
+    // Check if this Google account is already associated with another user in admins table
+    const supabase = createAdminClient()
+    const { data: existingAdmin } = await supabase
+      .from('admins')
       .select('user_id, google_email')
       .eq('google_id', userInfo.id)
       .neq('user_id', userId)
       .single()
 
-    if (existingUser) {
-      console.log(`🚨 OAUTH CALLBACK DEBUG - Google account ${userInfo.email} already associated with user ${existingUser.user_id}, but trying to associate with user ${userId}`)
+    if (existingAdmin) {
+      console.log(`🚨 OAUTH CALLBACK DEBUG - Google account ${userInfo.email} already associated with user ${existingAdmin.user_id}, but trying to associate with user ${userId}`)
       return NextResponse.redirect(
         new URL(`/drive?error=${encodeURIComponent('This Google account is already connected to another user. Each user must use their own Google account.')}`, request.url)
       )
@@ -83,15 +83,6 @@ export async function GET(request: NextRequest) {
     )
 
     console.log(`✅ OAUTH CALLBACK DEBUG - Tokens stored successfully for user ${userId} with Google account ${userInfo.email}`)
-
-    // For admin users, also set Authorized to true
-    if (isAdmin) {
-      const supabase = createClient()
-      await supabase
-        .from('chameleons')
-        .update({ Authorized: true, is_banned: false })
-        .eq('user_id', userId)
-    }
 
     console.log(`✅ OAuth tokens stored successfully for user ${userId}`)
     
