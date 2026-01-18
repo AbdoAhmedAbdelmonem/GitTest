@@ -24,6 +24,7 @@ import {
   Star,
   ArrowLeft,
   UserCircle,
+  Phone,
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -207,6 +208,7 @@ export default function AuthPage() {
   })
   const [signupData, setSignupData] = useState({
     username: "",
+    phoneNumber: "",
     age: "",
     password: "",
     confirmPassword: "",
@@ -502,6 +504,7 @@ export default function AuthPage() {
 
       const insertData = {
         username: signupData.username,
+        phone_number: signupData.phoneNumber,
         pass: hashedPassword,
         specialization: specialization,
         age: Number.parseInt(signupData.age),
@@ -1083,6 +1086,29 @@ export default function AuthPage() {
                                   required
                                 />
                               </div>
+
+                            <motion.div
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.2 }}
+                              className="space-y-2"
+                            >
+                              <Label htmlFor="phoneNumber" className="text-white/80">
+                                Phone Number
+                              </Label>
+                              <div className="relative">
+                                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
+                                <Input
+                                  id="phoneNumber"
+                                  type="tel"
+                                  placeholder="Enter your phone number"
+                                  value={signupData.phoneNumber}
+                                  onChange={(e) => setSignupData({ ...signupData, phoneNumber: e.target.value })}
+                                  className="pl-10 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:ring-purple-500/20"
+                                  required
+                                />
+                              </div>
+                            </motion.div>
                             </motion.div>
 
 
