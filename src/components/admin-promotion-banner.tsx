@@ -33,7 +33,7 @@ export function AdminPromotionBanner({ onDismiss }: AdminPromotionBannerProps) {
         .from("Notifications")
         .select("*")
         .eq("user_id", session.user_id)
-        .eq("provider", "admin_promotion")
+        .eq("provider", "Chameleon")
         .eq("seen", "false")
         .order("created_at", { ascending: false })
         .limit(1);
@@ -234,3 +234,4 @@ export function AdminPromotionBanner({ onDismiss }: AdminPromotionBannerProps) {
     </AnimatePresence>
   );
 }
+
