@@ -1,5 +1,6 @@
 import { google } from 'googleapis'
 import { createClient } from '@/lib/supabase/client'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 // Google OAuth2 configuration
 export const oauth2Client = new google.auth.OAuth2(
@@ -88,12 +89,12 @@ export async function storeUserTokens(
   expiryDate?: number
 ) {
   try {
-    const supabase = createClient()
+    const supabase = createAdminClient()
 
     // Check if this refresh token is already used by another user
     if (refreshToken) {
       const { data: existingUsers } = await supabase
-        .from('chameleons')
+        .from('admins')
         .select('user_id, google_email')
         .eq('refresh_token', refreshToken)
         .neq('user_id', userId)
@@ -109,7 +110,7 @@ export async function storeUserTokens(
       google_email: googleEmail,
       access_token: accessToken,
       token_expiry: expiryDate ? new Date(expiryDate) : null,
-      Authorized: true // Set user as authorized when storing tokens
+      authorized: true // Set admin as authorized when storing tokens
     } as any
 
     // Only update refresh token if provided (it's not always returned)
@@ -117,10 +118,26 @@ export async function storeUserTokens(
       updateData.refresh_token = refreshToken
     }
 
-    const { error } = await supabase
+    // First check if user is admin
+    const { data: userData, error: userError } = await supabase
       .from('chameleons')
-      .update(updateData)
+      .select('is_admin')
       .eq('user_id', userId)
+      .single()
+
+    if (userError || !userData?.is_admin) {
+      throw new Error('User must be an admin to store Google Drive tokens')
+    }
+
+    // Store tokens in admins table
+    const { error } = await supabase
+      .from('admins')
+      .upsert({
+        user_id: userId,
+        ...updateData
+      }, {
+        onConflict: 'user_id'
+      })
 
     if (error) {
       console.error('Error storing tokens in database:', error)
@@ -137,10 +154,10 @@ export async function storeUserTokens(
 // Get user tokens from database
 export async function getUserTokens(userId: number) {
   try {
-    const supabase = createClient()
+    const supabase = createAdminClient()
     
     const { data, error } = await supabase
-      .from('chameleons')
+      .from('admins')
       .select('google_id, google_email, access_token, refresh_token, token_expiry')
       .eq('user_id', userId)
       .single()
@@ -253,13 +270,13 @@ export async function configureOAuthClientForUser(userId: number) {
 // Refresh tokens for all admin users
 export async function refreshAllAdminTokens() {
   try {
-    const supabase = createClient()
+    const supabase = createAdminClient()
 
-    // Get all admin users with tokens
-    const { data: adminUsers, error } = await supabase
-      .from('chameleons')
-      .select('user_id, google_id, google_email, access_token, refresh_token, token_expiry')
-      .eq('Authorized', true)
+    // Get all admin users with tokens from admins table
+    const { data: adminData, error } = await supabase
+      .from('admins')
+      .select('user_id, google_id, google_email, access_token, refresh_token, token_expiry, authorized')
+      .eq('authorized', true)
       .not('refresh_token', 'is', null)
 
     if (error) {
@@ -267,18 +284,18 @@ export async function refreshAllAdminTokens() {
       throw new Error('Failed to fetch admin users')
     }
 
-    if (!adminUsers || adminUsers.length === 0) {
+    if (!adminData || adminData.length === 0) {
       console.log('No admin users found with refresh tokens')
       return { refreshedCount: 0, failedCount: 0, totalUsers: 0 }
     }
 
     let refreshedCount = 0
     let failedCount = 0
-    const totalUsers = adminUsers.length
+    const totalUsers = adminData.length
 
     console.log(`Starting token refresh for ${totalUsers} admin users`)
 
-    for (const user of adminUsers) {
+    for (const user of adminData) {
       try {
         // Check if token needs refresh (add 10-minute buffer for cron job)
         if (!isTokenExpired(user.token_expiry)) {
