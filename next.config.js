@@ -14,7 +14,7 @@ const nextConfig = {
   // Production webpack configuration
   webpack: (config, { dev, isServer }) => {
     // Only apply in production builds
-    if (!dev) {
+    if (!dev && !isServer) {
       // Minimize and obfuscate code
       config.optimization = {
         ...config.optimization,
@@ -23,28 +23,22 @@ const nextConfig = {
         sideEffects: false,
       }
       
-      // Remove comments and console.logs in production
-      if (!isServer) {
-        config.optimization.minimizer = config.optimization.minimizer || []
-        const TerserPlugin = require('terser-webpack-plugin')
-        config.optimization.minimizer.push(
-          new TerserPlugin({
-            terserOptions: {
+      // Next.js already uses Terser by default with good settings
+      // Just ensure console.logs are removed
+      if (config.optimization.minimizer) {
+        config.optimization.minimizer.forEach((plugin) => {
+          if (plugin.constructor.name === 'TerserPlugin') {
+            plugin.options.terserOptions = {
+              ...plugin.options.terserOptions,
               compress: {
-                drop_console: true, // Remove console.log
+                ...plugin.options.terserOptions?.compress,
+                drop_console: true,
                 drop_debugger: true,
                 pure_funcs: ['console.log', 'console.info', 'console.debug'],
               },
-              mangle: {
-                safari10: true, // Mangle names for better obfuscation
-              },
-              format: {
-                comments: false, // Remove all comments
-              },
-            },
-            extractComments: false,
-          })
-        )
+            }
+          }
+        })
       }
     }
     return config
