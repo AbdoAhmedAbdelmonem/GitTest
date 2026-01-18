@@ -6,29 +6,22 @@ export async function GET(request: NextRequest) {
   try {
     const supabase = createAdminClient()
 
-    // Get authenticated user from auth token (prevents IDOR)
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader) {
+    // Get userId from query params
+    const { searchParams } = new URL(request.url)
+    const userIdParam = searchParams.get('userId')
+
+    if (!userIdParam) {
       return NextResponse.json(
-        { error: 'Unauthorized - No auth token' },
-        { status: 401 }
+        { error: 'Missing userId parameter' },
+        { status: 400 }
       )
     }
 
-    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''))
-
-    if (authError || !authUser) {
-      return NextResponse.json(
-        { error: 'Unauthorized - Invalid token' },
-        { status: 401 }
-      )
-    }
-
-    // Get user_id and admin status from database using auth_id
+    // Get user data using admin client (bypasses RLS)
     const { data: userData, error: userError } = await supabase
       .from('chameleons')
       .select('user_id, is_admin')
-      .eq('auth_id', authUser.id)
+      .eq('user_id', parseInt(userIdParam))
       .single()
 
     if (userError || !userData) {
