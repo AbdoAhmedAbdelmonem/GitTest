@@ -2,6 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import type { CookieOptions } from '@supabase/ssr'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url)
@@ -48,11 +49,12 @@ export async function GET(request: NextRequest) {
       // Check if this is a forgot password flow
       const isForgotPassword = requestUrl.searchParams.get('mode') === 'forgot-password'
       
-      // Check if user already exists in our database
-      const { data: existingUser, error: dbError } = await supabase
+      // Check if user already exists in our database using admin client (bypasses RLS)
+      const adminSupabase = createAdminClient()
+      const { data: existingUser, error: dbError } = await adminSupabase
         .from("chameleons")
         .select("*")
-        .eq("email", session.user.email)
+        .eq("auth_id", session.user.id)
         .single()
 
       console.log('Database query result:', !!existingUser, dbError?.message)
@@ -71,7 +73,6 @@ export async function GET(request: NextRequest) {
         const sessionData = {
           user_id: existingUser.user_id,
           username: existingUser.username,
-          phone_number: existingUser.phone_number,
           specialization: existingUser.specialization,
           age: existingUser.age,
           current_level: existingUser.current_level,
@@ -94,7 +95,7 @@ export async function GET(request: NextRequest) {
         
         console.log('New user, redirecting to profile completion')
         // New user - redirect to complete profile
-        return NextResponse.redirect(`${requestUrl.origin}/auth?step=name-phone&mode=signup`)
+        return NextResponse.redirect(`${requestUrl.origin}/auth?step=name&mode=signup`)
       }
     } else {
       console.log('No session found after exchange')
