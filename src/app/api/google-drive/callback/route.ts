@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { exchangeCodeForTokens, getGoogleUserInfo, storeUserTokens } from '@/lib/google-oauth'
 import { createAdminClient } from '@/lib/supabase/admin'
+import crypto from 'crypto'
 
 export async function GET(request: NextRequest) {
   try {
@@ -22,17 +23,42 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Parse state parameter to get user ID
+    // Parse and verify signed state parameter
     let userId: number
-    let isAdmin = false
     
-    if (state && state.startsWith('user:')) {
-      const parts = state.split(':')
-      userId = parseInt(parts[1])
-      isAdmin = parts.includes('admin')
-    } else {
+    if (!state) {
       return NextResponse.redirect(
-        new URL(`/drive?error=${encodeURIComponent('Invalid state parameter')}`, request.url)
+        new URL(`/drive?error=${encodeURIComponent('Missing state parameter')}`, request.url)
+      )
+    }
+
+    try {
+      const [payloadBase64, signature] = state.split('.')
+      
+      // Verify signature
+      const expectedSignature = crypto
+        .createHmac('sha256', process.env.OAUTH_STATE_SECRET!)
+        .update(payloadBase64)
+        .digest('base64url')
+      
+      if (signature !== expectedSignature) {
+        throw new Error('Invalid signature')
+      }
+      
+      // Decode payload
+      const payload = JSON.parse(Buffer.from(payloadBase64, 'base64url').toString())
+      userId = payload.userId
+      
+      // Optional: Check timestamp (e.g., reject if older than 10 minutes)
+      const age = Date.now() - payload.ts
+      if (age > 10 * 60 * 1000) {
+        throw new Error('State expired')
+      }
+      
+    } catch (error) {
+      console.error('State verification failed:', error)
+      return NextResponse.redirect(
+        new URL(`/drive?error=${encodeURIComponent('Invalid or expired state')}`, request.url)
       )
     }
 
