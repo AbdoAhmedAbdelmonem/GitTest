@@ -35,156 +35,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createBrowserClient } from "@/lib/supabase/client";
-
-// Confetti Celebration Component
-const Confetti = memo(function Confetti({ isActive, intensity = 'high' }: { isActive: boolean; intensity?: 'high' | 'medium' | 'low' }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>(0);
-  const particlesRef = useRef<Array<{
-    x: number;
-    y: number;
-    vx: number;
-    vy: number;
-    color: string;
-    size: number;
-    rotation: number;
-    rotationSpeed: number;
-    gravity: number;
-    opacity: number;
-  }>>([]);
-
-  useEffect(() => {
-    if (!isActive || !canvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const colors = [
-      '#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4',
-      '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE'
-    ];
-
-    const particleCount = intensity === 'high' ? 150 : intensity === 'medium' ? 80 : 40;
-    particlesRef.current = [];
-
-    for (let i = 0; i < particleCount; i++) {
-      particlesRef.current.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height - canvas.height,
-        vx: (Math.random() - 0.5) * 10,
-        vy: Math.random() * 3 + 2,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        size: Math.random() * 10 + 5,
-        rotation: Math.random() * 360,
-        rotationSpeed: (Math.random() - 0.5) * 10,
-        gravity: 0.1 + Math.random() * 0.1,
-        opacity: 1
-      });
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particlesRef.current.forEach((particle) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        particle.vy += particle.gravity;
-        particle.rotation += particle.rotationSpeed;
-        particle.vx *= 0.99;
-
-        if (particle.y > canvas.height) {
-          particle.opacity -= 0.02;
-        }
-
-        if (particle.opacity > 0) {
-          ctx.save();
-          ctx.translate(particle.x, particle.y);
-          ctx.rotate((particle.rotation * Math.PI) / 180);
-          ctx.globalAlpha = particle.opacity;
-          ctx.fillStyle = particle.color;
-          ctx.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size * 0.6);
-          ctx.restore();
-        }
-      });
-
-      particlesRef.current = particlesRef.current.filter(p => p.opacity > 0);
-
-      if (particlesRef.current.length > 0) {
-        animationRef.current = requestAnimationFrame(animate);
-      }
-    };
-
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animationRef.current);
-    };
-  }, [isActive, intensity]);
-
-  if (!isActive) return null;
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-50"
-      style={{ mixBlendMode: 'screen' }}
-    />
-  );
-});
-
-// Animated Counting Number Component
-const CountingNumber = memo(function CountingNumber({ 
-  target, 
-  duration = 2000,
-  delay = 500,
-  className = '' 
-}: { 
-  target: number; 
-  duration?: number;
-  delay?: number;
-  className?: string 
-}) {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    const delayTimer = setTimeout(() => {
-      setHasStarted(true);
-    }, delay);
-
-    return () => clearTimeout(delayTimer);
-  }, [delay]);
-
-  useEffect(() => {
-    if (!hasStarted) return;
-
-    const startTime = Date.now();
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // Easing function for smooth animation
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const currentCount = Math.floor(easeOutQuart * target);
-      setCount(currentCount);
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        setCount(target);
-      }
-    };
-
-    animate();
-  }, [target, duration, hasStarted]);
-
-  return <span className={className}>{count}%</span>;
-});
-
-import { getStudentSession, clearStudentSession } from "@/lib/auth";
+import { getStudentSession } from "@/lib/auth";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Dialog as ImageDialog, DialogContent as ImageDialogContent } from "@/components/ui/dialog";
 import Calculator from "@/components/Calculator";
@@ -271,7 +122,7 @@ const quizModes = [
     id: "instant",
     name: "Instant Feedback",
     icon: Lightbulb,
-    description: "See Answers Immediately With Creative Animations",
+    description: "See Answers Immediately with Explain",
     color: "from-yellow-500/[0.15]",
   },
   {
@@ -432,8 +283,6 @@ export default function QuizInterface({
   const [maxAttemptsReached, setMaxAttemptsReached] = useState(false);
   const [showAttemptsDialog, setShowAttemptsDialog] = useState(false);
   const [showCalculator, setShowCalculator] = useState(false);
-  const [wrongAnswers, setWrongAnswers] = useState(0);
-  const [showConfetti, setShowConfetti] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const submissionInProgress = useRef(false);
   const supabase = createBrowserClient();
@@ -446,7 +295,7 @@ export default function QuizInterface({
   // Memoize checkQuizAttempts to avoid unnecessary recreations
   const checkQuizAttempts = useCallback(async (): Promise<void> => {
     try {
-      const session = getStudentSession();
+      const session = await getStudentSession();
       if (!session) {
         return;
       }
@@ -469,7 +318,7 @@ export default function QuizInterface({
 
       const attemptsCount = count || 0;
       setAttemptsToday(attemptsCount);
-      setMaxAttemptsReached(attemptsCount >= 10);
+      setMaxAttemptsReached(attemptsCount >= 5);
     } catch (error) {
       console.error("Unexpected error checking attempts:", error);
     }
@@ -477,7 +326,7 @@ export default function QuizInterface({
   
   useEffect(() => {
     const checkAuth = async () => {
-      const session = getStudentSession();
+      const session = await getStudentSession();
       setIsAuthenticated(!!session);
       
       if (session) {
@@ -500,9 +349,17 @@ export default function QuizInterface({
   }, [checkQuizAttempts, quizData.code]);
   
   // ✅ Force logout if banned
-  const handleBannedLogout = () => {
-    clearStudentSession();
-    window.location.href = "/auth";
+  const handleBannedLogout = async () => {
+    try {
+      const supabase = createBrowserClient();
+      await supabase.auth.signOut({ scope: 'global' });
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "/auth";
+    } catch (error) {
+      console.error('Logout error:', error);
+      window.location.href = "/auth";
+    }
   };
 
   // Memoize loadQuestions
@@ -612,8 +469,6 @@ export default function QuizInterface({
     setUserAnswers({});
     setAnswerRevealed({});
     setShowAnswer(false);
-    setWrongAnswers(0);
-    setShowConfetti(false);
     
     setCurrentStep("quiz");
 
@@ -651,10 +506,6 @@ export default function QuizInterface({
       return;
     }
 
-    // Get current question to check if answer is correct
-    const currentQ = questions[currentQuestion];
-    const isCorrect = answer.trim() === currentQ?.answer?.trim();
-
     // Batch state updates using functional updates
     setUserAnswers(prev => {
       const updated = {
@@ -666,11 +517,6 @@ export default function QuizInterface({
       return updated;
     });
 
-    // Track wrong answers in instant mode
-    if (selectedMode === "instant" && !isCorrect) {
-      setWrongAnswers(prev => prev + 1);
-    }
-
     if (selectedMode === "instant") {
       setShowAnswer(true);
       setAnswerRevealed(prev => ({
@@ -678,7 +524,7 @@ export default function QuizInterface({
         [currentQuestion]: true,
       }));
     }
-  }, [selectedMode, currentQuestion, userAnswers, quizData.code, questions]);
+  }, [selectedMode, currentQuestion, userAnswers, quizData.code]);
 
   const nextQuestion = useCallback(() => {
     if (currentQuestion < questions.length - 1) {
@@ -736,7 +582,7 @@ export default function QuizInterface({
     setQuizSubmitted(true);
     
     try {
-      const session = getStudentSession();
+      const session = await getStudentSession();
       if (!session) {
         console.error("No user session found");
         return;
@@ -1420,20 +1266,20 @@ export default function QuizInterface({
 
         {/* Timer and Score Display */}
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <Card
-              className="bg-black/[0.3] backdrop-blur-md border-white/[0.1] shadow-md"
-              style={{ padding: "0.5rem 1rem", borderRadius: "1rem" }}
+          {selectedDuration > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex justify-center"
             >
-              <CardContent className="p-0">
-                {/* Timer row */}
-                {selectedDuration > 0 && (
-                  <div className="flex items-center justify-center text-white">
+              <Card
+                className="bg-black/[0.3] backdrop-blur-md border-white/[0.1] shadow-md"
+                style={{ padding: "0.25rem 1rem", borderRadius: "1rem" }}
+              >
+                <CardContent className="p-0">
+                  <div className="flex items-center text-white">
                     <Clock
-                      className="w-4 h-4 mr-2"
+                      className={`w-4 h-4 mr-2`}
                       style={{ color: selectedTheme.accent }}
                     />
                     <span
@@ -1443,25 +1289,10 @@ export default function QuizInterface({
                       {formatTime(timeLeft)}
                     </span>
                   </div>
-                )}
-                
-                {/* Wrong counter row - embedded below timer */}
-                {selectedMode === "instant" && (
-                  <div className={`flex items-center justify-center text-white ${selectedDuration > 0 ? 'mt-1 pt-1 border-t border-white/10' : ''}`}>
-                    <XCircle className="w-3.5 h-3.5 mr-1.5 text-red-400" />
-                    <motion.span
-                      key={wrongAnswers}
-                      initial={{ scale: 1.3 }}
-                      animate={{ scale: 1 }}
-                      className="font-mono text-sm font-semibold text-red-400"
-                    >
-                      {wrongAnswers}
-                    </motion.span>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </motion.div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
         </div>
 
         {/* Progress */}
@@ -1576,83 +1407,11 @@ export default function QuizInterface({
                           initial={{ opacity: 0, y: 20, scale: 0.9 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: -20, scale: 0.9 }}
-                          className="mt-6 p-6 rounded-xl border border-white/[0.15] bg-white/[0.03] backdrop-blur-sm relative overflow-hidden"
+                          className="mt-6 p-6 rounded-xl border border-white/[0.15] bg-white/[0.03] backdrop-blur-sm"
                         >
-                          {/* Fireworks/Sparkle celebration for correct answers */}
-                          {isCorrect && (
-                            <>
-                              {/* Sparkle stars */}
-                              {[...Array(8)].map((_, i) => (
-                                <motion.div
-                                  key={i}
-                                  className="absolute"
-                                  initial={{ 
-                                    opacity: 0, 
-                                    scale: 0,
-                                    x: '50%',
-                                    y: '50%'
-                                  }}
-                                  animate={{ 
-                                    opacity: [0, 1, 0], 
-                                    scale: [0, 1.5, 0],
-                                    x: `${50 + (Math.cos(i * Math.PI / 4) * 60)}%`,
-                                    y: `${50 + (Math.sin(i * Math.PI / 4) * 40)}%`
-                                  }}
-                                  transition={{ 
-                                    duration: 1.5, 
-                                    delay: i * 0.1,
-                                    ease: "easeOut"
-                                  }}
-                                >
-                                  <Sparkles className="w-5 h-5 text-yellow-400" />
-                                </motion.div>
-                              ))}
-                              
-                              {/* Glowing burst effect */}
-                              <motion.div
-                                className="absolute inset-0 pointer-events-none"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: [0, 0.3, 0] }}
-                                transition={{ duration: 1.2 }}
-                                style={{
-                                  background: 'radial-gradient(circle at center, rgba(34, 197, 94, 0.4) 0%, transparent 70%)',
-                                }}
-                              />
-                              
-                              {/* Floating particles */}
-                              {[...Array(6)].map((_, i) => (
-                                <motion.div
-                                  key={`particle-${i}`}
-                                  className="absolute w-2 h-2 rounded-full"
-                                  style={{ 
-                                    backgroundColor: ['#FFD700', '#4ECDC4', '#FF6B6B', '#45B7D1', '#96CEB4', '#FFEAA7'][i],
-                                    left: `${15 + i * 15}%`,
-                                  }}
-                                  initial={{ opacity: 0, y: 20 }}
-                                  animate={{ 
-                                    opacity: [0, 1, 0], 
-                                    y: [-20, -60],
-                                    x: [0, (i % 2 === 0 ? -10 : 10)]
-                                  }}
-                                  transition={{ 
-                                    duration: 2, 
-                                    delay: 0.2 + i * 0.15,
-                                    ease: "easeOut"
-                                  }}
-                                />
-                              ))}
-                            </>
-                          )}
-                          
-                          <div className="flex items-center mb-3 relative z-10">
+                          <div className="flex items-center mb-3">
                             {isCorrect ? (
-                              <motion.div
-                                initial={{ scale: 0, rotate: -180 }}
-                                animate={{ scale: 1, rotate: 0 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                              >
-                                <CheckCircle className="w-6 h-6 text-green-400 mr-3" />
-                              </motion.div>
+                              <CheckCircle className="w-6 h-6 text-green-400 mr-3" />
                             ) : (
                               <XCircle className="w-6 h-6 text-red-400 mr-3" />
                             )}
@@ -1662,17 +1421,8 @@ export default function QuizInterface({
                                 isCorrect ? "text-green-400" : "text-red-400"
                               )}
                             >
-                              {isCorrect ? "🎉 Correct! Well done!" : "Incorrect"}
+                              {isCorrect ? "Correct! Well done!" : "Incorrect"}
                             </span>
-                            {isCorrect && (
-                              <motion.div
-                                className="ml-2"
-                                animate={{ rotate: [0, 15, -15, 0] }}
-                                transition={{ duration: 0.5, delay: 0.3 }}
-                              >
-                                <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                              </motion.div>
-                            )}
                           </div>
                           <p className="text-white/80 mb-3">
                             The correct answer is:{" "}
@@ -1868,17 +1618,10 @@ export default function QuizInterface({
   if (currentStep === "results") {
     const percentage = Math.round((score / questions.length) * 100);
     const scoreInfo = getScoreMessage();
-    
-    // Determine confetti intensity based on score
-    const confettiIntensity = percentage >= 90 ? 'high' : percentage >= 70 ? 'medium' : 'low';
-    const shouldShowConfetti = percentage >= 50;
 
     return (
       <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
       <div className="relative min-h-screen w-full bg-[#030303] overflow-hidden">
-        {/* Confetti Celebration */}
-        {shouldShowConfetti && <Confetti isActive={true} intensity={confettiIntensity} />}
-        
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
         {/* Elegant Shapes */}
@@ -1908,7 +1651,7 @@ export default function QuizInterface({
                         animate={{ rotate: 360 }}
                         transition={{
                           duration: 2,
-                          repeat: 9999,
+                          repeat: Number.POSITIVE_INFINITY,
                           ease: "linear",
                         }}
                         className="absolute -top-2 -right-2"
@@ -1947,142 +1690,51 @@ export default function QuizInterface({
               </CardHeader>
 
               <CardContent className="space-y-8">
-                {/* Enhanced Circular Score Counter */}
                 <div className="relative">
-                  <div className="w-56 h-56 mx-auto relative">
-                    {/* Glow effect */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3, duration: 0.8 }}
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background: `radial-gradient(circle, ${selectedTheme.primary}30 0%, transparent 70%)`,
-                        filter: 'blur(20px)',
-                      }}
-                    />
-                    
+                  <div className="w-40 h-40 mx-auto relative">
                     <svg
                       className="w-full h-full transform -rotate-90"
                       viewBox="0 0 100 100"
                     >
-                      {/* Outer decorative ring */}
                       <circle
                         cx="50"
                         cy="50"
-                        r="45"
-                        stroke="rgba(255,255,255,0.05)"
-                        strokeWidth="1"
+                        r="35"
+                        stroke="rgba(255,255,255,0.1)"
+                        strokeWidth="6"
                         fill="none"
                       />
-                      
-                      {/* Background track */}
-                      <circle
-                        cx="50"
-                        cy="50"
-                        r="38"
-                        stroke="rgba(255,255,255,0.08)"
-                        strokeWidth="8"
-                        fill="none"
-                      />
-                      
-                      {/* Secondary ring with lighter color */}
                       <motion.circle
                         cx="50"
                         cy="50"
-                        r="38"
-                        stroke={`${selectedTheme.accent}40`}
-                        strokeWidth="8"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeDasharray={`${2 * Math.PI * 38}`}
-                        initial={{ strokeDashoffset: 2 * Math.PI * 38 }}
-                        animate={{
-                          strokeDashoffset: 2 * Math.PI * 38 * (1 - percentage / 100),
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          delay: 0.3,
-                          ease: "easeOut",
-                        }}
-                      />
-                      
-                      {/* Main progress ring with gradient effect */}
-                      <defs>
-                        <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor={selectedTheme.accent} />
-                          <stop offset="50%" stopColor={selectedTheme.primary} />
-                          <stop offset="100%" stopColor={selectedTheme.secondary} />
-                        </linearGradient>
-                      </defs>
-                      <motion.circle
-                        cx="50"
-                        cy="50"
-                        r="38"
-                        stroke="url(#scoreGradient)"
+                        r="35"
+                        stroke={selectedTheme.primary}
                         strokeWidth="6"
                         fill="none"
                         strokeLinecap="round"
-                        strokeDasharray={`${2 * Math.PI * 38}`}
-                        initial={{ strokeDashoffset: 2 * Math.PI * 38 }}
+                        strokeDasharray={`${2 * Math.PI * 35}`}
+                        initial={{ strokeDashoffset: 2 * Math.PI * 35 }}
                         animate={{
-                          strokeDashoffset: 2 * Math.PI * 38 * (1 - percentage / 100),
+                          strokeDashoffset:
+                            2 * Math.PI * 35 * (1 - percentage / 100),
                         }}
                         transition={{
                           duration: 2,
                           delay: 0.5,
                           ease: "easeOut",
                         }}
-                        style={{
-                          filter: `drop-shadow(0 0 8px ${selectedTheme.primary}80)`,
-                        }}
-                      />
-                      
-                      {/* Inner decorative ring */}
-                      <circle
-                        cx="50"
-                        cy="50"
-                        r="30"
-                        stroke="rgba(255,255,255,0.03)"
-                        strokeWidth="1"
-                        fill="none"
                       />
                     </svg>
-                    
-                    {/* Center content with counting animation */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <CountingNumber 
-                        target={percentage} 
-                        duration={2000} 
-                        delay={600}
-                        className="text-5xl font-bold bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent"
-                      />
+                    <div className="absolute inset-0 flex items-center justify-center">
                       <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 2.2 }}
-                        className="text-xs text-white/50 mt-1 uppercase tracking-widest"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 1, type: "spring" }}
+                        className="text-4xl font-bold"
                       >
-                        Score
+                        {percentage}%
                       </motion.span>
                     </div>
-                    
-                    {/* Animated ring pulse for high scores */}
-                    {percentage >= 80 && (
-                      <motion.div
-                        className="absolute inset-0 rounded-full border-2"
-                        style={{ borderColor: `${selectedTheme.primary}50` }}
-                        animate={{
-                          scale: [1, 1.1, 1],
-                          opacity: [0.5, 0, 0.5],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: 9999,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    )}
                   </div>
                 </div>
 
