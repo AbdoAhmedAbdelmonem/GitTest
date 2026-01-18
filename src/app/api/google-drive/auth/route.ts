@@ -40,10 +40,8 @@ export async function GET(request: NextRequest) {
     // Generate Google OAuth URL
     const authUrl = getGoogleAuthUrl(state)
     
-    return NextResponse.json({
-      success: true,
-      authUrl
-    })
+    // Redirect directly to Google OAuth page
+    return NextResponse.redirect(authUrl)
     
   } catch (error) {
     console.error('Error generating auth URL:', error)
