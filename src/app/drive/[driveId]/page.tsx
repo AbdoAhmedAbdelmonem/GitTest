@@ -319,15 +319,13 @@ export default function DriveRootPage() {
 
   useEffect(() => {
     // Preload session immediately
-    const session = getStudentSession();
-    if (session) {
-      setUserSession(session);
-      setBasicLoaded(true);
-    }
-
-    // Fetch fresh admin status from database since localStorage might be outdated
-    const checkAdminStatus = async () => {
-      if (session?.user_id) {
+    const loadSession = async () => {
+      const session = await getStudentSession();
+      if (session) {
+        setUserSession(session);
+        setBasicLoaded(true);
+        
+        // Fetch fresh admin status from database
         try {
           const response = await fetch(
             `/api/google-drive/check-access?userId=${session.user_id}`
@@ -348,9 +346,7 @@ export default function DriveRootPage() {
       }
     };
 
-    if (session) {
-      checkAdminStatus();
-    }
+    loadSession();
   }, []);
 
   const fetchDriveInfo = async () => {
