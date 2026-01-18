@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import bcrypt from 'bcryptjs'
 
 // In-memory storage for login attempts (per IP address)
@@ -102,8 +102,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create Supabase client
-    const supabase = await createServerSupabaseClient()
+    // Create Supabase admin client (bypasses RLS for server-side operations)
+    const supabase = createAdminClient()
 
     // Get user data
     const { data: userData, error: userError } = await supabase
@@ -120,8 +120,23 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Cast userData to proper type
+    const user = userData as {
+      user_id: number
+      username: string
+      specialization: string
+      age: number
+      current_level: number
+      is_admin: boolean
+      is_banned: boolean
+      created_at: string
+      email?: string
+      profile_image?: string
+      pass: string
+    }
+
     // Verify password
-    const isPasswordValid = await bcrypt.compare(password, userData.pass)
+    const isPasswordValid = await bcrypt.compare(password, user.pass)
 
     if (!isPasswordValid) {
       recordFailedAttempt(clientIP)
@@ -132,7 +147,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if account is banned
-    if (userData.is_banned) {
+    if (user.is_banned) {
       return NextResponse.json(
         { error: 'Your account has been banned. Please contact support.' },
         { status: 403 }
@@ -142,22 +157,46 @@ export async function POST(request: NextRequest) {
     // Successful login - reset attempts
     recordSuccessfulLogin(clientIP)
 
-    // Return user data (excluding password)
-    const sessionData = {
-      user_id: userData.user_id,
-      username: userData.username,
-      phone_number: userData.phone_number,
-      specialization: userData.specialization,
-      age: userData.age,
-      current_level: userData.current_level,
-      is_admin: userData.is_admin,
-      is_banned: userData.is_banned,
-      created_at: userData.created_at,
-      email: userData.email,
-      profile_image: userData.profile_image,
+    // Sign in with Supabase Auth using auth_id
+    // First, check if user has auth_id
+    if (!userData.auth_id) {
+      return NextResponse.json(
+        { error: 'Account not properly configured. Please contact support.' },
+        { status: 500 }
+      )
     }
 
-    return NextResponse.json({ user: sessionData })
+    // Get the auth user's email to sign in
+    const { data: authUser, error: authUserError } = await supabase.auth.admin.getUserById(userData.auth_id)
+    
+    if (authUserError || !authUser?.user?.email) {
+      console.error('Error fetching auth user:', authUserError)
+      return NextResponse.json(
+        { error: 'Authentication error. Please contact support.' },
+        { status: 500 }
+      )
+    }
+
+    // Return user data (excluding password) and auth_id for client-side auth
+    const sessionData = {
+      user_id: user.user_id,
+      username: user.username,
+      specialization: user.specialization,
+      age: user.age,
+      current_level: user.current_level,
+      is_admin: user.is_admin,
+      is_banned: user.is_banned,
+      created_at: user.created_at,
+      email: user.email,
+      profile_image: user.profile_image,
+      auth_id: userData.auth_id,
+    }
+
+    // Return success with auth credentials for client-side session
+    return NextResponse.json({ 
+      user: sessionData,
+      authEmail: authUser.user.email
+    })
 
   } catch (error) {
     console.error('Login error:', error)
