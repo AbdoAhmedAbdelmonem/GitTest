@@ -1,34 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { createBrowserClient } from '@/lib/supabase/client'
 
 export async function GET(request: NextRequest) {
   try {
     const supabase = createAdminClient()
 
-    // Get authenticated user from auth token (prevents IDOR)
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader) {
+    // Get user_id from query params (for backwards compatibility)
+    const url = new URL(request.url)
+    const userId = url.searchParams.get('userId')
+
+    if (!userId) {
       return NextResponse.json(
-        { error: 'Unauthorized - No auth token' },
-        { status: 401 }
+        { error: 'Missing userId parameter' },
+        { status: 400 }
       )
     }
 
-    // Parse user from JWT token
-    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''))
-
-    if (authError || !authUser) {
-      return NextResponse.json(
-        { error: 'Unauthorized - Invalid token' },
-        { status: 401 }
-      )
-    }
-
-    // Get user data using auth_id (prevents IDOR)
+    // Get user data using user_id (uses admin client to bypass RLS)
     const { data: user, error: userError } = await supabase
       .from('chameleons')
       .select('user_id, is_admin')
-      .eq('auth_id', authUser.id)
+      .eq('user_id', parseInt(userId))
       .single()
 
     if (userError) {
