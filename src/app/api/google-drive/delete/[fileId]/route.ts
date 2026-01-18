@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { google } from 'googleapis'
-import { createClient } from '@/lib/supabase/client'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getValidAccessToken } from '@/lib/google-oauth'
 
 // Check if user has admin access
 async function checkAdminAccess(userId: number) {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   
   const { data: user, error } = await supabase
     .from('chameleons')
-    .select('is_admin, Authorized')
+    .select('is_admin')
     .eq('user_id', userId)
     .single()
 
@@ -18,11 +18,17 @@ async function checkAdminAccess(userId: number) {
     return { hasAccess: false, isAdmin: false }
   }
 
-  console.log('User data from DB:', user)
+  // Check if admin is authorized (has Google tokens)
+  const { data: adminData } = await supabase
+    .from('admins')
+    .select('authorized')
+    .eq('user_id', userId)
+    .single()
+
+  console.log('User data from DB:', user, 'Admin data:', adminData)
   
-  // For now, just check is_admin to allow debugging
-  // TODO: Add back Authorized check once OAuth is properly set up
-  const hasAccess = user.is_admin
+  // User has admin access if they are admin AND authorized
+  const hasAccess = user.is_admin && (adminData?.authorized || false)
   return { hasAccess, isAdmin: user.is_admin }
 }
 
@@ -31,15 +37,33 @@ export async function DELETE(
   { params }: { params: { fileId: string } }
 ) {
   try {
-    const { searchParams } = new URL(request.url)
-    const userId = searchParams.get('userId')
-    
-    if (!userId) {
+    const supabase = createAdminClient()
+
+    // Get authenticated user from auth token (prevents IDOR)
+    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser()
+
+    if (authError || !authUser) {
       return NextResponse.json(
-        { error: 'User ID is required' },
-        { status: 400 }
+        { error: 'Unauthorized - Please log in' },
+        { status: 401 }
       )
     }
+
+    // Get user_id from database using auth_id
+    const { data: userData, error: userError } = await supabase
+      .from('chameleons')
+      .select('user_id, is_admin')
+      .eq('auth_id', authUser.id)
+      .single()
+
+    if (userError || !userData) {
+      return NextResponse.json(
+        { error: 'User not found' },
+        { status: 404 }
+      )
+    }
+
+    const userId = userData.user_id.toString()
 
     if (!params.fileId) {
       return NextResponse.json(
