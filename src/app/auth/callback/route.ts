@@ -68,8 +68,9 @@ export async function GET(request: NextRequest) {
         }
         
         console.log('Existing user found, redirecting to main page')
-        // User is already logged in via Supabase Auth - just redirect to home
-        return NextResponse.redirect(`${requestUrl.origin}/`)
+        // User is already logged in via Supabase Auth
+        // Add a timestamp to force cache clear
+        return NextResponse.redirect(`${requestUrl.origin}/?login=success&t=${Date.now()}`)
       } else {
         // Handle forgot password for non-existing user
         if (isForgotPassword) {
