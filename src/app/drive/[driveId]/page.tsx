@@ -38,6 +38,7 @@ import {
   FolderActions,
 } from "@/components/admin-controls";
 import { CreateActions } from "@/components/create-actions";
+import { AdminAuthWarningButton } from "@/components/admin-auth-warning-button";
 import {
   FileCardSkeleton,
   StatsCardSkeleton,
@@ -212,6 +213,7 @@ export default function DriveRootPage() {
   const [driveInfo, setDriveInfo] = useState<FolderInfo | null>(null);
   const [urlCopied, setUrlCopied] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(false);
   const [userSession, setUserSession] = useState<any>(null);
   const [fetchingPromises, setFetchingPromises] = useState<
     Map<string, Promise<any>>
@@ -334,10 +336,12 @@ export default function DriveRootPage() {
 
           console.log("Fresh admin status from DB:", result);
 
-          // User is admin if they have is_admin=true AND are authorized
-          const isUserAdmin = result.isAdmin && result.authorized;
-          console.log("Final admin status:", isUserAdmin);
+          // User is admin if they have is_admin=true
+          const isUserAdmin = result.isAdmin;
+          const isUserAuthorized = result.authorized;
+          console.log("Final admin status:", isUserAdmin, "Authorized:", isUserAuthorized);
           setIsAdmin(isUserAdmin);
+          setIsAuthorized(isUserAuthorized);
         } catch (error) {
           console.error("Error checking admin status:", error);
           // Fallback to session data
@@ -688,11 +692,21 @@ export default function DriveRootPage() {
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                     {isAdmin && actualDriveId && (
-                      <CreateActions
-                        currentFolderId={actualDriveId}
-                        onFileCreated={refreshFiles}
-                        userSession={userSession}
-                      />
+                      isAuthorized ? (
+                        <CreateActions
+                          currentFolderId={actualDriveId}
+                          onFileCreated={refreshFiles}
+                          userSession={userSession}
+                        />
+                      ) : (
+                        <AdminAuthWarningButton
+                          onAuthorize={() => {
+                            if (userSession) {
+                              window.location.href = `/api/google-drive/auth?userId=${userSession.user_id}`;
+                            }
+                          }}
+                        />
+                      )
                     )}
                     <Button
                       onClick={copyCurrentUrl}
