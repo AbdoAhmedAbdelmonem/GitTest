@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
     const { data: adminData, error: adminError } = await supabase
       .from('admins')
       .select('access_token, refresh_token, authorized')
-      .eq('user_id', parseInt(userId))
+      .eq('user_id', user.user_id)
       .single()
 
     if (adminError && adminError.code !== 'PGRST116') {
