@@ -38,32 +38,19 @@ export async function DELETE(
 ) {
   try {
     const supabase = createAdminClient()
+    
+    // Get userId from query params
+    const { searchParams } = new URL(request.url)
+    const userIdParam = searchParams.get('userId')
 
-    // Get authenticated user from auth token (prevents IDOR)
-    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser()
-
-    if (authError || !authUser) {
+    if (!userIdParam) {
       return NextResponse.json(
-        { error: 'Unauthorized - Please log in' },
-        { status: 401 }
+        { error: 'Missing userId parameter' },
+        { status: 400 }
       )
     }
 
-    // Get user_id from database using auth_id
-    const { data: userData, error: userError } = await supabase
-      .from('chameleons')
-      .select('user_id, is_admin')
-      .eq('auth_id', authUser.id)
-      .single()
-
-    if (userError || !userData) {
-      return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
-      )
-    }
-
-    const userId = userData.user_id.toString()
+    const userId = userIdParam
 
     if (!params.fileId) {
       return NextResponse.json(
