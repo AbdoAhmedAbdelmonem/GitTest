@@ -71,8 +71,8 @@ export function GoogleDriveManager({
   useEffect(() => {
     if (!userId) {
       // Get from session storage
-      import('@/lib/auth').then(({ getStudentSession }) => {
-        const session = getStudentSession()
+      import('@/lib/auth').then(async ({ getStudentSession }) => {
+        const session = await getStudentSession()
         if (session) {
           console.log('📁 SESSION DEBUG - Got session for user:', session.user_id, 'is_admin:', session.is_admin)
           setCurrentUserId(session.user_id)
