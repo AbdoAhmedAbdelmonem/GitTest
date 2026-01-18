@@ -1,42 +1,75 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/client'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
-    const userId = searchParams.get('userId')
-    
-    if (!userId) {
+    const supabase = createAdminClient()
+
+    // Get authenticated user from auth token (prevents IDOR)
+    const authHeader = request.headers.get('authorization')
+    if (!authHeader) {
       return NextResponse.json(
-        { error: 'User ID is required' },
-        { status: 400 }
+        { error: 'Unauthorized - No auth token' },
+        { status: 401 }
       )
     }
 
-    const supabase = createClient()
-    
-    // Check if user has stored Google OAuth tokens
-    const { data: user, error } = await supabase
+    // Parse user from JWT token
+    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''))
+
+    if (authError || !authUser) {
+      return NextResponse.json(
+        { error: 'Unauthorized - Invalid token' },
+        { status: 401 }
+      )
+    }
+
+    // Get user data using auth_id (prevents IDOR)
+    const { data: user, error: userError } = await supabase
       .from('chameleons')
-      .select('user_id, access_token, refresh_token, Authorized, is_admin')
-      .eq('user_id', parseInt(userId))
+      .select('user_id, is_admin')
+      .eq('auth_id', authUser.id)
       .single()
 
-    if (error) {
-      console.error('Error checking user access:', error)
+    if (userError) {
+      console.error('Error checking user:', userError)
       return NextResponse.json(
-        { hasAccess: false, error: 'Failed to check user access' },
+        { hasAccess: false, error: 'Failed to check user' },
         { status: 500 }
       )
     }
 
-    // User has access if they have tokens and are authorized
-    const hasAccess = !!(user?.access_token && user?.Authorized)
+    // If user is not an admin, they don't have Google Drive access
+    if (!user?.is_admin) {
+      return NextResponse.json({
+        hasAccess: false,
+        isAdmin: false,
+        authorized: false
+      })
+    }
+
+    // Check if admin has Google OAuth tokens in admins table
+    const { data: adminData, error: adminError } = await supabase
+      .from('admins')
+      .select('access_token, refresh_token, authorized')
+      .eq('user_id', parseInt(userId))
+      .single()
+
+    if (adminError && adminError.code !== 'PGRST116') {
+      console.error('Error checking admin access:', adminError)
+      return NextResponse.json(
+        { hasAccess: false, error: 'Failed to check admin access' },
+        { status: 500 }
+      )
+    }
+
+    // Admin has access if they have tokens and are authorized
+    const hasAccess = !!(adminData?.access_token && adminData?.authorized)
     
     return NextResponse.json({
       hasAccess,
       isAdmin: user?.is_admin || false,
-      authorized: user?.Authorized || false
+      authorized: adminData?.authorized || false
     })
     
   } catch (error) {
