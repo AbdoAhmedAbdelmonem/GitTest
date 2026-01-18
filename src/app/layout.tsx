@@ -4,7 +4,6 @@ import "./globals.css";
 import { ToastProvider } from "@/components/ToastProvider";
 import { NotificationProvider } from "@/hooks/use-notifications";
 import DevToolsProtection from "@/components/DevToolsProtection";
-import { AdminPromotionBanner } from "@/components/admin-promotion-banner";
 
 // Inter as Geist Sans replacement
 const geistSans = Inter({
@@ -43,10 +42,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} antialiased`}
-      >
-        {/* Admin Promotion Banner */}
-        <AdminPromotionBanner />
-        
+      >        
         {/* لف الـ children جوه NotificationProvider وبعدها ToastProvider */}
         <NotificationProvider>
           <ToastProvider>{children}</ToastProvider>
