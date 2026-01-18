@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { google } from 'googleapis'
-import { createClient } from '@/lib/supabase/client'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getValidAccessToken } from '@/lib/google-oauth'
 
 // Check if user has admin access
 async function checkAdminAccess(userId: number) {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   
   const { data: user, error } = await supabase
     .from('chameleons')
-    .select('is_admin, Authorized')
+    .select('is_admin')
     .eq('user_id', userId)
     .single()
 
@@ -18,10 +18,17 @@ async function checkAdminAccess(userId: number) {
     return { hasAccess: false, isAdmin: false }
   }
 
-  console.log('User data from DB:', user)
+  // Check if admin is authorized (has Google tokens)
+  const { data: adminData } = await supabase
+    .from('admins')
+    .select('authorized')
+    .eq('user_id', userId)
+    .single()
+
+  console.log('User data from DB:', user, 'Admin data:', adminData)
   
   // User has admin access if they are admin AND authorized
-  const hasAccess = user.is_admin && user.Authorized
+  const hasAccess = user.is_admin && (adminData?.authorized || false)
   return { hasAccess, isAdmin: user.is_admin }
 }
 
