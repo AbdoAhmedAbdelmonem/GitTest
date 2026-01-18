@@ -10,9 +10,17 @@ const NotificationContext = createContext<NotificationContextType | undefined>(u
 export function NotificationProvider({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [user, setUser] = useState<{ user_id: number } | null>(null)
   const supabase = createClient()
 
-  const user = getStudentSession()
+  // Load user session on mount
+  useEffect(() => {
+    const loadUser = async () => {
+      const session = await getStudentSession()
+      setUser(session)
+    }
+    loadUser()
+  }, [])
 
   const fetchNotifications = useCallback(async () => {
     if (!user?.user_id) return
