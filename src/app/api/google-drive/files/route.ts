@@ -11,42 +11,19 @@ export async function GET(request: NextRequest) {
     const folderId = searchParams.get('folderId')
     const fileId = searchParams.get('fileId')
     const type = searchParams.get('type') // 'info' for single file info
+    const userIdParam = searchParams.get('userId')
     
     const supabase = createAdminClient()
 
-    // Get authenticated user from auth token (prevents IDOR)
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader) {
+    // Get userId from query params
+    if (!userIdParam) {
       return NextResponse.json(
-        { error: 'Unauthorized - No auth token' },
-        { status: 401 }
+        { error: 'Missing userId parameter' },
+        { status: 400 }
       )
     }
 
-    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''))
-
-    if (authError || !authUser) {
-      return NextResponse.json(
-        { error: 'Unauthorized - Invalid token' },
-        { status: 401 }
-      )
-    }
-
-    // Get user_id from database using auth_id
-    const { data: userData, error: userError } = await supabase
-      .from('chameleons')
-      .select('user_id, is_admin')
-      .eq('auth_id', authUser.id)
-      .single()
-
-    if (userError || !userData) {
-      return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
-      )
-    }
-
-    const userId = userData.user_id
+    const userId = parseInt(userIdParam)
 
     // Get valid access token for the user (no authorization check for viewing)
     const accessToken = await getValidAccessToken(userId)
