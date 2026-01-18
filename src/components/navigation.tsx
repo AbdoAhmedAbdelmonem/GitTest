@@ -5,15 +5,16 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, LogOut, Home, HelpCircle, ChevronDown, Lock } from "lucide-react"
+import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, LogOut, Home, HelpCircle, ChevronDown, Lock, Gamepad2 } from "lucide-react"
 import Link from "next/link"
-import { getStudentSession, clearStudentSession } from "@/lib/auth"
+import { getStudentSession } from "@/lib/auth"
+import { createBrowserClient } from "@/lib/supabase/client"
 import { NotificationBell } from "./notification-bell"
 import { User } from "@/lib/types"
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
-  { name: "Tournament", href: "/Tournament", icon: BookOpen },
+  { name: "Tournament", href: "/Tournment", icon: BookOpen },
   { name: "Specializations", href: "#", icon: SquareUserRound },
   { name: "About", href: "/about", icon: HelpCircle  },
   { name: "Explo", href: "/explo", icon: BrainCircuit, target: "_blank" }
@@ -66,11 +67,14 @@ export default function Navigation() {
     }
     window.addEventListener("scroll", handleScroll)
     
-    // Check if user is logged in
-    const session = getStudentSession()
-    if (session) {
-      setUser(session)
+    // Check if user is logged in (async)
+    const checkSession = async () => {
+      const session = await getStudentSession()
+      if (session) {
+        setUser(session)
+      }
     }
+    checkSession()
 
     // Check tournament lock status
     const targetDate = new Date('2025-10-07')
@@ -114,10 +118,21 @@ export default function Navigation() {
     }
   }, [isSpecializationsOpen])
 
-  const handleLogout = () => {
-    clearStudentSession()
-    setUser(null)
-    window.location.reload() // Refresh the page to update the UI
+  const handleLogout = async () => {
+    try {
+      const supabase = createBrowserClient()
+      await supabase.auth.signOut({ scope: 'global' })
+      
+      // Clear any remaining localStorage/sessionStorage
+      localStorage.clear()
+      sessionStorage.clear()
+      
+      setUser(null)
+      window.location.href = '/' // Redirect to home and refresh
+    } catch (error) {
+      console.error('Logout error:', error)
+      window.location.href = '/' // Still redirect even if there's an error
+    }
   }
 
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, item: typeof navItems[0]) => {
