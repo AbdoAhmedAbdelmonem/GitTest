@@ -10,8 +10,11 @@ export function DebugSession() {
   const [showDebug, setShowDebug] = useState(false)
 
   useEffect(() => {
-    const sessionData = getStudentSession()
-    setSession(sessionData)
+    const loadSession = async () => {
+      const sessionData = await getStudentSession()
+      setSession(sessionData)
+    }
+    loadSession()
   }, [])
 
   if (!showDebug) {
