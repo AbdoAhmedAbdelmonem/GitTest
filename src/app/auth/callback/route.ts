@@ -67,25 +67,9 @@ export async function GET(request: NextRequest) {
           return NextResponse.redirect(`${requestUrl.origin}/auth?step=reset-password&mode=forgot-password&email=${emailParam}`)
         }
         
-        console.log('Existing user found, setting up session and redirecting to main page')
-        
-        // Create session data for existing user
-        const sessionData = {
-          user_id: existingUser.user_id,
-          username: existingUser.username,
-          specialization: existingUser.specialization,
-          age: existingUser.age,
-          current_level: existingUser.current_level,
-          is_admin: existingUser.is_admin,
-          is_banned: existingUser.is_banned,
-          created_at: existingUser.created_at,
-          email: existingUser.email,
-          profile_image: existingUser.profile_image,
-        }
-        
-        // Redirect to a special route that will set the session and redirect
-        const sessionParam = encodeURIComponent(JSON.stringify(sessionData))
-        return NextResponse.redirect(`${requestUrl.origin}/auth/complete-login?session=${sessionParam}`)
+        console.log('Existing user found, redirecting to main page')
+        // User is already logged in via Supabase Auth - just redirect to home
+        return NextResponse.redirect(`${requestUrl.origin}/`)
       } else {
         // Handle forgot password for non-existing user
         if (isForgotPassword) {
