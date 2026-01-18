@@ -16,7 +16,6 @@ import { getStudentSession } from "@/lib/auth"
 import { useEffect, useState } from "react"
 import GsapStackedCards from "@/components/gsap-stacked-cards"
 import AnimatedParticles from "@/components/animated-particles"
-// import NextExams from '@/components/next-exams';
 
 const specializations = [
   {
@@ -102,10 +101,13 @@ export default function HomePage() {
   const [solvedQuizzes, setSolvedQuizzes] = useState<number | null>(null)
 
   useEffect(() => {
-    const session = getStudentSession()
-    if (session) {
-      setUsername(session.username)
+    const loadSession = async () => {
+      const session = await getStudentSession()
+      if (session) {
+        setUsername(session.username)
+      }
     }
+    loadSession()
   }, [])
 
   const fetchUserStats = async () => {
@@ -203,10 +205,6 @@ export default function HomePage() {
           ))}
         </div>
       </div>
-
-      {/* <div className="container mx-auto py-8">
-        <NextExams />
-      </div> */}
       
       {/* Magic Search Section */}
       <ScrollAnimatedSection className="py-12 bg-[#030303] border-t border-white/5">
