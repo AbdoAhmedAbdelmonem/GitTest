@@ -263,11 +263,11 @@ export default function DrivePage() {
   }, [urlParam])
 
   useEffect(() => {
-    const session = getStudentSession()
-    setUserSession(session)
-    
-    // Fetch fresh admin status from database since localStorage might be outdated
-    const checkAdminStatus = async () => {
+    const loadSession = async () => {
+      const session = await getStudentSession()
+      setUserSession(session)
+      
+      // Fetch fresh admin status from database
       if (session?.user_id) {
         try {
           const response = await fetch(`/api/google-drive/check-access?userId=${session.user_id}`)
@@ -282,12 +282,12 @@ export default function DrivePage() {
         } catch (error) {
           console.error('Error checking admin status:', error)
           // Fallback to session data
-          setIsAdmin(session.is_admin || false)
+          setIsAdmin(session?.is_admin || false)
         }
       }
     }
     
-    checkAdminStatus()
+    loadSession()
   }, [])
 
   const fetchFolderInfo = useCallback(async (folderId: string): Promise<FolderInfo | null> => {
