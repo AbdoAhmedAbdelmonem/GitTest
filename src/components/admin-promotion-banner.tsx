@@ -33,7 +33,7 @@ export function AdminPromotionBanner({ onDismiss }: AdminPromotionBannerProps) {
         .from("Notifications")
         .select("*")
         .eq("user_id", session.user_id)
-        .eq("provider", "Chameleon")
+        .eq("provider", "admin_promotion")
         .eq("seen", "false")
         .order("created_at", { ascending: false })
         .limit(1);
@@ -58,11 +58,20 @@ export function AdminPromotionBanner({ onDismiss }: AdminPromotionBannerProps) {
       const session = await getStudentSession();
       if (!session) {
         alert("Please log in to authorize your Google account");
+        setIsAuthorizing(false);
         return;
       }
 
-      // Redirect to Google OAuth authorization
-      window.location.href = `/api/google-drive/auth?userId=${session.user_id}`;
+      // Fetch Google OAuth URL from API
+      const response = await fetch(`/api/google-drive/auth?userId=${session.user_id}`);
+      const data = await response.json();
+
+      if (!response.ok || !data.authUrl) {
+        throw new Error(data.error || "Failed to get authorization URL");
+      }
+
+      // Redirect to Google OAuth page
+      window.location.href = data.authUrl;
     } catch (error) {
       console.error("Error starting OAuth flow:", error);
       alert("Failed to start authorization. Please try again.");
@@ -234,4 +243,3 @@ export function AdminPromotionBanner({ onDismiss }: AdminPromotionBannerProps) {
     </AnimatePresence>
   );
 }
-
