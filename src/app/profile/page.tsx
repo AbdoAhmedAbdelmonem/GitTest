@@ -257,7 +257,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const loadProfileData = async () => {
-      const session = getStudentSession()
+      const session = await getStudentSession()
       if (!session) {
         setIsRedirecting(true)
         router.push("/auth")
@@ -424,14 +424,8 @@ export default function ProfilePage() {
         const updatedUserData = { ...userData, ...data[0] }
         setUserData(updatedUserData)
         
-        // Update session storage
-        if (typeof window !== 'undefined') {
-          const session = getStudentSession()
-          if (session) {
-            const updatedSession = { ...session, ...data[0] }
-            localStorage.setItem("student_session", JSON.stringify(updatedSession))
-          }
-        }
+        // Session is now managed by Supabase Auth, no need to update localStorage
+        // The session will be automatically refreshed on next getStudentSession() call
         
         setIsEditing(false)
         setValidationErrors({})
