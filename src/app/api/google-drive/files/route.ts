@@ -1,27 +1,55 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { google } from 'googleapis'
-import { createClient } from '@/lib/supabase/client'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { getValidAccessToken } from '@/lib/google-oauth'
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const userId = searchParams.get('userId')
     const pageSize = parseInt(searchParams.get('pageSize') || '20')
     const pageToken = searchParams.get('pageToken')
     const folderId = searchParams.get('folderId')
     const fileId = searchParams.get('fileId')
     const type = searchParams.get('type') // 'info' for single file info
     
-    if (!userId) {
+    const supabase = createAdminClient()
+
+    // Get authenticated user from auth token (prevents IDOR)
+    const authHeader = request.headers.get('authorization')
+    if (!authHeader) {
       return NextResponse.json(
-        { error: 'User ID is required' },
-        { status: 400 }
+        { error: 'Unauthorized - No auth token' },
+        { status: 401 }
       )
     }
 
+    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''))
+
+    if (authError || !authUser) {
+      return NextResponse.json(
+        { error: 'Unauthorized - Invalid token' },
+        { status: 401 }
+      )
+    }
+
+    // Get user_id from database using auth_id
+    const { data: userData, error: userError } = await supabase
+      .from('chameleons')
+      .select('user_id, is_admin')
+      .eq('auth_id', authUser.id)
+      .single()
+
+    if (userError || !userData) {
+      return NextResponse.json(
+        { error: 'User not found' },
+        { status: 404 }
+      )
+    }
+
+    const userId = userData.user_id
+
     // Get valid access token for the user (no authorization check for viewing)
-    const accessToken = await getValidAccessToken(parseInt(userId))
+    const accessToken = await getValidAccessToken(userId)
     if (!accessToken) {
       return NextResponse.json(
         { 
