@@ -14,7 +14,7 @@ import { User } from "@/lib/types"
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
-  { name: "Tournament", href: "/Tournment", icon: BookOpen },
+  { name: "Tournament", href: "/Tournament", icon: BookOpen },
   { name: "Specializations", href: "#", icon: SquareUserRound },
   { name: "About", href: "/about", icon: HelpCircle  },
   { name: "Explo", href: "/explo", icon: BrainCircuit, target: "_blank" }
