@@ -163,6 +163,8 @@ export default function AuthPage() {
   const [otpCode, setOtpCode] = useState("")
   const [generatedOtp, setGeneratedOtp] = useState("")
   const [resendTimer, setResendTimer] = useState(0)
+  const otpSentRef = useRef(false) // Track if OTP has been sent to prevent duplicates
+  const [otpVerificationAttempted, setOtpVerificationAttempted] = useState(false)
 
   // Form state
   const [loginData, setLoginData] = useState({
@@ -385,9 +387,12 @@ export default function AuthPage() {
       console.log('Auth page: stepParam =', stepParam, 'modeParam =', modeParam)
 
       // Only handle profile completion for new users coming from callback
-      // Also check if we haven't already set the user data to prevent infinite loops
-      if ((stepParam === "name" || stepParam === "name-phone") && modeParam === "signup" && !googleUserData) {
+      // Also check if we haven't already sent OTP to prevent duplicates
+      if ((stepParam === "name" || stepParam === "name-phone") && modeParam === "signup" && !googleUserData && !otpSentRef.current) {
         console.log('Auth page: Setting up profile completion for new user')
+        
+        // Set flag to prevent duplicate sends
+        otpSentRef.current = true
         
         // Get session to populate OAuth data
         const supabase = createBrowserClient()
@@ -594,6 +599,7 @@ export default function AuthPage() {
       setGoogleUserData(null)
       setOtpCode("")
       setGeneratedOtp("")
+      otpSentRef.current = false // Reset flag if user goes back
     } else if (authStep === "name") {
       setAuthStep("google")
       setGoogleUserData(null)
@@ -606,10 +612,14 @@ export default function AuthPage() {
 
   const handleOtpVerification = () => {
     console.log('Verifying OTP:', { entered: otpCode, expected: generatedOtp })
+    setOtpVerificationAttempted(true)
     if (otpCode === generatedOtp) {
-      setAuthStep("name")
       setError("")
       addToast('Email verified successfully!', 'success')
+      // Delay step change to show green feedback
+      setTimeout(() => {
+        setAuthStep("name")
+      }, 500)
     } else {
       setError("Invalid verification code. Please try again.")
       addToast('Invalid code', 'error')
@@ -643,6 +653,7 @@ export default function AuthPage() {
         setResendTimer(600) // Reset to 10 minutes
         addToast('New verification code sent to your email', 'success')
         setError("")
+        setOtpVerificationAttempted(false)
       } else {
         console.error('Resend failed:', data)
         setError('Failed to resend code. Please try again.')
@@ -852,13 +863,15 @@ export default function AuthPage() {
                       ? "Sign in with Google or GitHub"
                       : authStep === "google"
                         ? "Sign up with Google or GitHub to get started quickly"
-                        : authStep === "name"
-                          ? "Tell us your name"
-                          : authStep === "specialization"
-                            ? "Choose your specialization, level, and age"
-                            : authStep === "password"
-                              ? "Create a secure password for your account"
-                              : "Your account has been created successfully!"}
+                        : authStep === "otp"
+                          ? ""
+                          : authStep === "name"
+                            ? "Tell us your name"
+                            : authStep === "specialization"
+                              ? "Choose your specialization, level, and age"
+                              : authStep === "password"
+                                ? "Create a secure password for your account"
+                                : "Your account has been created successfully!"}
                   </CardDescription>
                 </motion.div>
               </AnimatePresence>
@@ -906,7 +919,7 @@ export default function AuthPage() {
                   </motion.div>
                 ) : (
                   <form onSubmit={mode === "login" ? handleLogin : (authStep === "password" ? handleSignup : (e) => { e.preventDefault(); handleStepForward(); })} className="space-y-4 overflow-visible">
-                    {(mode === "login" || authStep === "google") && (
+                    {(mode === "login" || authStep === "google") && authStep !== "otp" && (
                       <div className="flex border border-white/10 rounded-lg p-1 bg-white/5">
                         <button
                           type="button"
@@ -1037,30 +1050,7 @@ export default function AuthPage() {
                           </>
                         ) : authStep === "otp" ? (
                           <>
-                            {/* OTP Verification Step */}
-                            {googleUserData && (
-                              <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg border border-white/10 mb-4"
-                              >
-                                {googleUserData.picture ? (
-                                  <Image
-                                    src={googleUserData.picture}
-                                    alt="Profile"
-                                    width={40}
-                                    height={40}
-                                    className="w-10 h-10 rounded-full"
-                                  />
-                                ) : (
-                                  <UserCircle className="w-10 h-10 text-white/60" />
-                                )}
-                                <div className="flex-1">
-                                  <p className="text-white font-medium">{googleUserData.name}</p>
-                                  <p className="text-white/60 text-sm">{googleUserData.email}</p>
-                                </div>
-                              </motion.div>
-                            )}
+                            
 
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
@@ -1078,25 +1068,59 @@ export default function AuthPage() {
                               </div>
 
                               <div className="space-y-2">
-                                <Label htmlFor="otp" className="text-white/80">
+                                <Label htmlFor="otp-0" className="text-white/80 text-center block">
                                   Verification Code
                                 </Label>
-                                <div className="relative">
-                                  <Hash className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
-                                  <Input
-                                    id="otp"
-                                    type="text"
-                                    placeholder="Enter 6-digit code"
-                                    value={otpCode}
-                                    onChange={(e) => {
-                                      const value = e.target.value.replace(/\D/g, '').slice(0, 6)
-                                      setOtpCode(value)
-                                      setError("")
-                                    }}
-                                    className="pl-10 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:ring-purple-500/20 text-center text-2xl tracking-widest"
-                                    maxLength={6}
-                                    autoComplete="off"
-                                  />
+                                <div className="flex justify-center gap-2">
+                                  {[0, 1, 2, 3, 4, 5].map((index) => {
+                                    const digit = otpCode[index] || ""
+                                    const isCodeCorrect = otpVerificationAttempted && otpCode === generatedOtp
+                                    const isCodeWrong = otpVerificationAttempted && otpCode !== generatedOtp
+                                    
+                                    return (
+                                      <Input
+                                        key={index}
+                                        id={`otp-${index}`}
+                                        type="text"
+                                        inputMode="numeric"
+                                        maxLength={1}
+                                        value={digit}
+                                        onChange={(e) => {
+                                          const value = e.target.value.replace(/\D/g, '')
+                                          if (value) {
+                                            const newOtp = otpCode.split('')
+                                            newOtp[index] = value
+                                            setOtpCode(newOtp.join('').slice(0, 6))
+                                            setError("")
+                                            
+                                            // Auto-focus next input
+                                            if (index < 5 && value) {
+                                              const nextInput = document.getElementById(`otp-${index + 1}`)
+                                              nextInput?.focus()
+                                            }
+                                          } else {
+                                            const newOtp = otpCode.split('')
+                                            newOtp[index] = ''
+                                            setOtpCode(newOtp.join(''))
+                                          }
+                                        }}
+                                        onKeyDown={(e) => {
+                                          if (e.key === 'Backspace' && !digit && index > 0) {
+                                            const prevInput = document.getElementById(`otp-${index - 1}`)
+                                            prevInput?.focus()
+                                          }
+                                        }}
+                                        className={`w-12 h-14 text-center text-2xl font-bold bg-white/5 border-2 text-white placeholder:text-white/40 focus:ring-2 transition-all ${
+                                          isCodeCorrect 
+                                            ? 'border-green-500 focus:border-green-500 focus:ring-green-500/20' 
+                                            : isCodeWrong 
+                                            ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' 
+                                            : 'border-white/20 focus:border-purple-500 focus:ring-purple-500/20'
+                                        }`}
+                                        autoComplete="off"
+                                      />
+                                    )
+                                  })}
                                 </div>
                               </div>
 
@@ -1332,47 +1356,49 @@ export default function AuthPage() {
                       </motion.div>
                     </AnimatePresence>
 
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                      className="pt-4"
-                    >
-                      <Button
-                        type={mode === "login" || authStep === "password" ? "submit" : "button"}
-                        disabled={isLoading || (mode === "signup" && authStep === "google")}
-                        onClick={(e) => {
-                          if (mode === "signup" && (authStep === "name" || authStep === "specialization")) {
-                            e.preventDefault()
-                            handleStepForward()
-                          }
-                        }}
-                        className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 shadow-lg hover:shadow-purple-500/25 transition-all duration-300 group"
+                    {authStep !== "otp" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="pt-4"
                       >
-                        {isLoading ? (
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                            className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
-                          />
-                        ) : (
-                          <>
-                            {mode === "login"
-                              ? "Sign In"
-                              : authStep === "google"
-                                ? "Continue with Google"
-                                : authStep === "name"
-                                  ? "Continue"
-                                  : authStep === "specialization"
+                        <Button
+                          type={mode === "login" || authStep === "password" ? "submit" : "button"}
+                          disabled={isLoading || (mode === "signup" && authStep === "google")}
+                          onClick={(e) => {
+                            if (mode === "signup" && (authStep === "name" || authStep === "specialization")) {
+                              e.preventDefault()
+                              handleStepForward()
+                            }
+                          }}
+                          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 shadow-lg hover:shadow-purple-500/25 transition-all duration-300 group"
+                        >
+                          {isLoading ? (
+                            <motion.div
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                              className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                            />
+                          ) : (
+                            <>
+                              {mode === "login"
+                                ? "Sign In"
+                                : authStep === "google"
+                                  ? "Continue with Google"
+                                  : authStep === "name"
                                     ? "Continue"
-                                    : authStep === "password"
-                                      ? "Complete Registration"
-                                      : ""}
-                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                          </>
-                        )}
-                      </Button>
-                    </motion.div>
+                                    : authStep === "specialization"
+                                      ? "Continue"
+                                      : authStep === "password"
+                                        ? "Complete Registration"
+                                        : ""}
+                              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                            </>
+                          )}
+                        </Button>
+                      </motion.div>
+                    )}
                   </form>
                 )}
               </AnimatePresence>
