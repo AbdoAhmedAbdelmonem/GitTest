@@ -416,7 +416,6 @@ export default function AuthPage() {
           
           // Send OTP via email service
           try {
-            console.log('Sending OTP to:', session.user.email)
             const response = await fetch('/api/send-otp', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -428,7 +427,6 @@ export default function AuthPage() {
             })
             
             const data = await response.json()
-            console.log('OTP API Response:', data)
             
             if (response.ok && data.success) {
               setAuthStep("otp")
@@ -611,7 +609,6 @@ export default function AuthPage() {
   }
 
   const handleOtpVerification = () => {
-    console.log('Verifying OTP:', { entered: otpCode, expected: generatedOtp })
     setOtpVerificationAttempted(true)
     if (otpCode === generatedOtp) {
       setError("")
@@ -635,7 +632,6 @@ export default function AuthPage() {
     setIsLoading(true)
     
     try {
-      console.log('Resending OTP to:', googleUserData.email)
       const response = await fetch('/api/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -647,7 +643,6 @@ export default function AuthPage() {
       })
       
       const data = await response.json()
-      console.log('Resend OTP Response:', data)
       
       if (response.ok && data.success) {
         setResendTimer(600) // Reset to 10 minutes
