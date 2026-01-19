@@ -162,6 +162,7 @@ export default function AuthPage() {
   const [oauthProvider, setOauthProvider] = useState<"google" | "github" | null>(null)
   const [otpCode, setOtpCode] = useState("")
   const [generatedOtp, setGeneratedOtp] = useState("")
+  const [resendTimer, setResendTimer] = useState(0)
 
   // Form state
   const [loginData, setLoginData] = useState({
@@ -222,6 +223,16 @@ export default function AuthPage() {
       setPreviousPath(path === "/auth" ? "/" : path)
     }
   }, [searchParams])
+
+  // Timer countdown for resend button
+  useEffect(() => {
+    if (resendTimer > 0) {
+      const interval = setInterval(() => {
+        setResendTimer((prev) => prev - 1)
+      }, 1000)
+      return () => clearInterval(interval)
+    }
+  }, [resendTimer])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -411,27 +422,17 @@ export default function AuthPage() {
             
             if (response.ok && data.success) {
               setAuthStep("otp")
-              
-              // In development, show OTP in toast for testing
-              if (data.otp) {
-                addToast(`DEV MODE - Your code is: ${data.otp}`, 'info')
-                console.log('🔐 OTP Code:', data.otp)
-              } else {
-                addToast('Verification code sent to your email', 'info')
-              }
+              setResendTimer(600) // 10 minutes = 600 seconds
+              addToast('Email sent successfully! Check your inbox.', 'success')
             } else {
               console.error('OTP send failed:', data)
-              // Show OTP in console for development even if email fails
-              console.log('🔐 OTP Code (email failed):', otp)
-              addToast(`DEV: Email failed but code is ${otp}`, 'info')
-              setAuthStep("otp")
+              setError('Failed to send verification code. Please try again.')
+              setIsLoading(false)
             }
           } catch (err) {
             console.error('OTP send error:', err)
-            // Still allow OTP step for development
-            console.log('🔐 OTP Code (error):', otp)
-            addToast(`DEV: Error but code is ${otp}`, 'info')
-            setAuthStep("otp")
+            setError('Failed to send verification code. Please try again.')
+            setIsLoading(false)
           }
           
           setMode("signup")
@@ -603,11 +604,12 @@ export default function AuthPage() {
   }
 
   const handleResendOtp = async () => {
-    if (!googleUserData?.email) return
+    if (!googleUserData?.email || resendTimer > 0) return
     
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
     setGeneratedOtp(otp)
     setOtpCode("")
+    setIsLoading(true)
     
     try {
       console.log('Resending OTP to:', googleUserData.email)
@@ -625,27 +627,18 @@ export default function AuthPage() {
       console.log('Resend OTP Response:', data)
       
       if (response.ok && data.success) {
-        // In development, show OTP in toast for testing
-        if (data.otp) {
-          addToast(`DEV MODE - New code: ${data.otp}`, 'info')
-          console.log('🔐 New OTP Code:', data.otp)
-        } else {
-          addToast('New verification code sent', 'info')
-        }
+        setResendTimer(600) // Reset to 10 minutes
+        addToast('New verification code sent to your email', 'success')
         setError("")
       } else {
         console.error('Resend failed:', data)
-        // Show OTP in console even if email fails
-        console.log('🔐 New OTP Code (email failed):', otp)
-        addToast(`DEV: Email failed but new code is ${otp}`, 'info')
-        setError("")
+        setError('Failed to resend code. Please try again.')
       }
     } catch (err) {
       console.error('OTP resend error:', err)
-      // Still show OTP for development
-      console.log('🔐 New OTP Code (error):', otp)
-      addToast(`DEV: Error but new code is ${otp}`, 'info')
-      setError("")
+      setError('Failed to resend code. Please try again.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -1108,9 +1101,17 @@ export default function AuthPage() {
                                 <button
                                   type="button"
                                   onClick={handleResendOtp}
-                                  className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                                  disabled={resendTimer > 0}
+                                  className={`text-sm transition-colors ${
+                                    resendTimer > 0 
+                                      ? 'text-white/40 cursor-not-allowed' 
+                                      : 'text-purple-400 hover:text-purple-300'
+                                  }`}
                                 >
-                                  Didn&apos;t receive the code? Resend
+                                  {resendTimer > 0 
+                                    ? `Resend in ${Math.floor(resendTimer / 60)}:${(resendTimer % 60).toString().padStart(2, '0')}`
+                                    : "Didn't receive the code? Resend"
+                                  }
                                 </button>
                               </div>
                             </motion.div>
