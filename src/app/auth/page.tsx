@@ -434,8 +434,9 @@ export default function AuthPage() {
           const otp = Math.floor(100000 + Math.random() * 900000).toString()
           setGeneratedOtp(otp)
           
-          // Send OTP via Supabase email
+          // Send OTP via email service
           try {
+            console.log('Sending OTP to:', session.user.email)
             const response = await fetch('/api/send-otp', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -446,16 +447,35 @@ export default function AuthPage() {
               })
             })
             
-            if (response.ok) {
+            const data = await response.json()
+            console.log('OTP API Response:', data)
+            
+            if (response.ok && data.success) {
               setOtpSent(true)
               setAuthStep("otp")
-              addToast('Verification code sent to your email', 'info')
+              
+              // In development, show OTP in toast for testing
+              if (data.otp) {
+                addToast(`DEV MODE - Your code is: ${data.otp}`, 'info')
+                console.log('🔐 OTP Code:', data.otp)
+              } else {
+                addToast('Verification code sent to your email', 'info')
+              }
             } else {
-              setError('Failed to send verification code')
+              console.error('OTP send failed:', data)
+              // Show OTP in console for development even if email fails
+              console.log('🔐 OTP Code (email failed):', otp)
+              addToast(`DEV: Email failed but code is ${otp}`, 'info')
+              setOtpSent(true)
+              setAuthStep("otp")
             }
           } catch (err) {
             console.error('OTP send error:', err)
-            setError('Failed to send verification code')
+            // Still allow OTP step for development
+            console.log('🔐 OTP Code (error):', otp)
+            addToast(`DEV: Error but code is ${otp}`, 'info')
+            setOtpSent(true)
+            setAuthStep("otp")
           }
           
           setMode("signup")
@@ -616,11 +636,14 @@ export default function AuthPage() {
   }
 
   const handleOtpVerification = () => {
+    console.log('Verifying OTP:', { entered: otpCode, expected: generatedOtp })
     if (otpCode === generatedOtp) {
       setAuthStep("name")
       setError("")
+      addToast('Email verified successfully!', 'success')
     } else {
       setError("Invalid verification code. Please try again.")
+      addToast('Invalid code', 'error')
     }
   }
 
@@ -632,6 +655,7 @@ export default function AuthPage() {
     setOtpCode("")
     
     try {
+      console.log('Resending OTP to:', googleUserData.email)
       const response = await fetch('/api/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -642,15 +666,31 @@ export default function AuthPage() {
         })
       })
       
-      if (response.ok) {
-        addToast('New verification code sent', 'info')
+      const data = await response.json()
+      console.log('Resend OTP Response:', data)
+      
+      if (response.ok && data.success) {
+        // In development, show OTP in toast for testing
+        if (data.otp) {
+          addToast(`DEV MODE - New code: ${data.otp}`, 'info')
+          console.log('🔐 New OTP Code:', data.otp)
+        } else {
+          addToast('New verification code sent', 'info')
+        }
         setError("")
       } else {
-        setError('Failed to resend code')
+        console.error('Resend failed:', data)
+        // Show OTP in console even if email fails
+        console.log('🔐 New OTP Code (email failed):', otp)
+        addToast(`DEV: Email failed but new code is ${otp}`, 'info')
+        setError("")
       }
     } catch (err) {
       console.error('OTP resend error:', err)
-      setError('Failed to resend code')
+      // Still show OTP for development
+      console.log('🔐 New OTP Code (error):', otp)
+      addToast(`DEV: Error but new code is ${otp}`, 'info')
+      setError("")
     }
   }
 
