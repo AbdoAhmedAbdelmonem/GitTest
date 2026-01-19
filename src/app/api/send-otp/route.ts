@@ -44,8 +44,8 @@ export async function POST(request: Request) {
   <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
     <!-- Header -->
     <div style="text-align: center; margin-bottom: 40px;">
-      <div style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); width: 80px; height: 80px; border-radius: 20px; margin: 0 auto 20px; display: inline-flex; align-items: center; justify-content: center;">
-        <img src="https://chameleon-nu.vercel.app/images/1212.jpg" alt="Chameleon" style="width: 50px; height: 50px; object-fit: contain; display: block;" />
+      <div style="width: 80px; height: 80px; border-radius: 20px; margin: 0 auto 20px; display: inline-flex; align-items: center; justify-content: center;">
+        <img src="https://chameleon-nu.vercel.app/images/1212.jpg" alt="Chameleon" style="width: 100px; height: 90px; object-fit: contain; display: block;" />
       </div>
       <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">Chameleon</h1>
       <p style="color: #94a3b8; margin: 8px 0 0; font-size: 14px;">Educational Platform</p>
@@ -153,4 +153,3 @@ export async function POST(request: Request) {
     )
   }
 }
-
