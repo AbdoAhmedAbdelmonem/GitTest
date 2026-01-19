@@ -48,7 +48,7 @@ function CreativeDropdown({
   value: string
   onChange: (value: string) => void
   options: { value: string; label: string }[]
-  icon: React.ComponentType<any>
+  icon: React.ComponentType<{ className?: string }>
   className?: string
 }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -127,51 +127,11 @@ function CreativeDropdown({
   )
 }
 
-// Auth functions to manage user session
-const saveStudentSession = (userData: any) => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("student_session", JSON.stringify(userData))
-  }
-}
-
-const getStudentSession = () => {
-  if (typeof window !== "undefined") {
-    const session = localStorage.getItem("student_session")
-    return session ? JSON.parse(session) : null
-  }
-  return null
-}
-
-// Password hashing and verification functions
+// Password hashing function
 async function hashPassword(plainPassword: string) {
   const saltRounds = 12 // cost factor
   const hash = await bcrypt.hash(plainPassword, saltRounds)
   return hash
-}
-
-// Clear student session function for backward compatibility
-const clearStudentSession = () => {
-  if (typeof window !== "undefined") {
-    localStorage.removeItem("student_session")
-    localStorage.removeItem("remembered_login")
-  }
-}
-
-// Enhanced logout function that clears both app and Google sessions
-const handleCompleteLogout = async () => {
-  if (typeof window !== "undefined") {
-    // Clear local storage
-    localStorage.clear()
-    
-    // Clear Supabase session
-    const supabase = createBrowserClient()
-    await supabase.auth.signOut()
-    
-    // Optional: Open Google logout URL in new tab to logout from Google
-    // This allows users to logout from Google completely if they want
-    const googleLogoutUrl = 'https://accounts.google.com/logout'
-    window.open(googleLogoutUrl, '_blank')
-  }
 }
 
 type AuthStep = "google" | "otp" | "name" | "specialization" | "password" | "complete"
@@ -202,7 +162,6 @@ export default function AuthPage() {
   const [oauthProvider, setOauthProvider] = useState<"google" | "github" | null>(null)
   const [otpCode, setOtpCode] = useState("")
   const [generatedOtp, setGeneratedOtp] = useState("")
-  const [otpSent, setOtpSent] = useState(false)
 
   // Form state
   const [loginData, setLoginData] = useState({
@@ -451,7 +410,6 @@ export default function AuthPage() {
             console.log('OTP API Response:', data)
             
             if (response.ok && data.success) {
-              setOtpSent(true)
               setAuthStep("otp")
               
               // In development, show OTP in toast for testing
@@ -466,7 +424,6 @@ export default function AuthPage() {
               // Show OTP in console for development even if email fails
               console.log('🔐 OTP Code (email failed):', otp)
               addToast(`DEV: Email failed but code is ${otp}`, 'info')
-              setOtpSent(true)
               setAuthStep("otp")
             }
           } catch (err) {
@@ -474,7 +431,6 @@ export default function AuthPage() {
             // Still allow OTP step for development
             console.log('🔐 OTP Code (error):', otp)
             addToast(`DEV: Error but code is ${otp}`, 'info')
-            setOtpSent(true)
             setAuthStep("otp")
           }
           
@@ -624,7 +580,6 @@ export default function AuthPage() {
       setGoogleUserData(null)
       setOtpCode("")
       setGeneratedOtp("")
-      setOtpSent(false)
     } else if (authStep === "name") {
       setAuthStep("google")
       setGoogleUserData(null)
@@ -1112,7 +1067,7 @@ export default function AuthPage() {
                                 </div>
                                 <h3 className="text-xl font-semibold text-white">Verify Your Email</h3>
                                 <p className="text-white/60 text-sm">
-                                  We've sent a 6-digit code to <span className="text-purple-400">{googleUserData?.email}</span>
+                                  We&apos;ve sent a 6-digit code to <span className="text-purple-400">{googleUserData?.email}</span>
                                 </p>
                               </div>
 
@@ -1155,7 +1110,7 @@ export default function AuthPage() {
                                   onClick={handleResendOtp}
                                   className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
                                 >
-                                  Didn't receive the code? Resend
+                                  Didn&apos;t receive the code? Resend
                                 </button>
                               </div>
                             </motion.div>
