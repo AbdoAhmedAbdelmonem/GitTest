@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
         profile_image: userData.profile_image,
         phone_number: userData.phone_number || '',
         auth_id: userData.auth_id,
-      })
+      } as any) // Type assertion for Supabase insert
       .select()
       .single()
 
@@ -53,3 +53,4 @@ export async function POST(request: NextRequest) {
     )
   }
 }
+
