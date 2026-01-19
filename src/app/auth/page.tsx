@@ -19,7 +19,7 @@ import {
   Shield,
   BookOpen,
   Hash,
-  ChevronDown,
+  n,
   GraduationCap,
   Star,
   ArrowLeft,
@@ -32,64 +32,6 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { createBrowserClient } from "@/lib/supabase/client"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useToast } from "@/components/ToastProvider"
-
-function ElegantShape({
-  className,
-  delay = 0,
-  width = 400,
-  height = 100,
-  rotate = 0,
-  gradient = "from-white/[0.08]",
-}: {
-  className?: string
-  delay?: number
-  width?: number
-  height?: number
-  rotate?: number
-  gradient?: string
-}) {
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: -150,
-        rotate: rotate - 15,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        rotate: rotate,
-      }}
-      transition={{
-        duration: 2.4,
-        delay,
-        ease: [0.23, 0.86, 0.39, 0.96],
-        opacity: { duration: 1.2 },
-      }}
-      className={`absolute ${className}`}
-    >
-      <motion.div
-        animate={{
-          y: [0, 15, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
-        style={{
-          width,
-          height,
-        }}
-        className="relative"
-      >
-        <div
-          className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} backdrop-blur-[2px] border-2 border-white/[0.15] shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]`}
-        />
-      </motion.div>
-    </motion.div>
-  )
-}
 
 // Custom dropdown component with creative styling
 function CreativeDropdown({
@@ -207,11 +149,6 @@ async function hashPassword(plainPassword: string) {
   return hash
 }
 
-async function verifyPassword(plainPassword: string, hashedPassword: string) {
-  const match = await bcrypt.compare(plainPassword, hashedPassword)
-  return match
-}
-
 // Clear student session function for backward compatibility
 const clearStudentSession = () => {
   if (typeof window !== "undefined") {
@@ -237,7 +174,7 @@ const handleCompleteLogout = async () => {
   }
 }
 
-type AuthStep = "google" | "name-phone" | "specialization" | "password" | "complete"
+type AuthStep = "google" | "otp" | "name" | "specialization" | "password" | "complete"
 type GoogleUserData = {
   email: string
   name: string
@@ -262,7 +199,10 @@ export default function AuthPage() {
   const [authStep, setAuthStep] = useState<AuthStep>("google")
   const [googleUserData, setGoogleUserData] = useState<GoogleUserData | null>(null)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
-  const [oauthProvider, setOauthProvider] = useState<"google" | "github" | "facebook" | null>(null)
+  const [oauthProvider, setOauthProvider] = useState<"google" | "github" | null>(null)
+  const [otpCode, setOtpCode] = useState("")
+  const [generatedOtp, setGeneratedOtp] = useState("")
+  const [otpSent, setOtpSent] = useState(false)
 
   // Form state
   const [loginData, setLoginData] = useState({
@@ -284,8 +224,8 @@ export default function AuthPage() {
     
     if (modeParam === "signup") {
       setMode("signup")
-      if (stepParam === "name-phone") {
-        setAuthStep("name-phone")
+      if (stepParam === "name" || stepParam === "name-phone") {
+        setAuthStep("name")
       }
     } else {
       setMode("login")
@@ -330,32 +270,43 @@ export default function AuthPage() {
     setError("")
 
     try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          studentId: loginData.studentId,
+          password: loginData.password,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        if (response.status === 429 && data.lockoutRemaining) {
+          setError(`Too many failed login attempts. Please try again in ${data.lockoutRemaining} minutes.`)
+        } else {
+          setError(data.error || 'Login failed')
+        }
+        setIsLoading(false)
+        return
+      }
+
+      // Successful login
+      const userData = data.user
+      const authEmail = data.authEmail
+
+      // Sign in with Supabase Auth to create session
       const supabase = createBrowserClient()
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: authEmail,
+        password: loginData.password,
+      })
 
-      // First get the user data with the hashed password
-      const { data: userData, error: userError } = await supabase
-        .from("chameleons")
-        .select("*")
-        .eq("user_id", Number.parseInt(loginData.studentId))
-        .single()
-
-      if (userError || !userData) {
-        setError("Invalid student ID or password")
-        setIsLoading(false)
-        return
-      }
-
-      // Verify the password against the hashed version
-      const isPasswordValid = await verifyPassword(loginData.password, userData.pass)
-
-      if (!isPasswordValid) {
-        setError("Invalid student ID or password")
-        setIsLoading(false)
-        return
-      }
-
-      if (userData.is_banned) {
-        setError("Your account has been banned. Please contact support.")
+      if (signInError) {
+        console.error('Supabase Auth sign-in error:', signInError)
+        setError('Authentication error. Please try again.')
         setIsLoading(false)
         return
       }
@@ -370,23 +321,7 @@ export default function AuthPage() {
         localStorage.removeItem("remembered_login")
       }
 
-      // Save user session
-      const sessionData = {
-        user_id: userData.user_id,
-        username: userData.username,
-        phone_number: userData.phone_number,
-        specialization: userData.specialization,
-        age: userData.age,
-        current_level: userData.current_level,
-        is_admin: userData.is_admin,
-        is_banned: userData.is_banned,
-        created_at: userData.created_at,
-        email: userData.email,
-        profile_image: userData.profile_image,
-      }
-
-      saveStudentSession(sessionData)
-
+      // Session is now managed by Supabase Auth
       // Redirect to the previous page instead of always going to home
       router.push(previousPath)
       addToast(`Welcome back, ${userData.username}!`, "info")
@@ -412,7 +347,7 @@ export default function AuthPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?mode=signup&step=name-phone`,
+          redirectTo: `${window.location.origin}/auth/callback?mode=signup&step=name`,
           queryParams: {
             access_type: "offline",
             prompt: "select_account", // Force account selection instead of consent
@@ -449,7 +384,7 @@ export default function AuthPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "github",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?mode=signup&step=name-phone`,
+          redirectTo: `${window.location.origin}/auth/callback?mode=signup&step=name`,
           scopes: "read:user user:email",
         },
       })
@@ -467,37 +402,6 @@ export default function AuthPage() {
     }
   }
 
-  const handleMetaSignIn = async () => {
-    setIsGoogleLoading(true)
-    setError("")
-    setOauthProvider("facebook")
-
-    try {
-      const supabase = createBrowserClient()
-
-      console.log('Starting Meta OAuth with origin:', window.location.origin)
-
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "facebook",
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback?mode=signup&step=name-phone`,
-          scopes: "public_profile email",
-        },
-      })
-
-      if (error) {
-        console.error("Meta OAuth error details:", error)
-        setError("Failed to sign in with Meta: " + error.message)
-        setIsGoogleLoading(false)
-        return
-      }
-    } catch (err) {
-      console.error("Meta sign-in error:", err)
-      setError("An error occurred during Meta sign-in")
-      setIsGoogleLoading(false)
-    }
-  }
-
   useEffect(() => {
     const handleAuthFlow = async () => {
       const stepParam = searchParams.get("step")
@@ -507,7 +411,7 @@ export default function AuthPage() {
 
       // Only handle profile completion for new users coming from callback
       // Also check if we haven't already set the user data to prevent infinite loops
-      if (stepParam === "name-phone" && modeParam === "signup" && !googleUserData) {
+      if ((stepParam === "name" || stepParam === "name-phone") && modeParam === "signup" && !googleUserData) {
         console.log('Auth page: Setting up profile completion for new user')
         
         // Get session to populate OAuth data
@@ -517,7 +421,7 @@ export default function AuthPage() {
         if (session?.user) {
           // Detect provider from session metadata
           const provider = session.user.app_metadata?.provider || 'google'
-          setOauthProvider(provider as "google" | "github" | "facebook")
+          setOauthProvider(provider as "google" | "github")
           
           setGoogleUserData({
             email: session.user.email || "",
@@ -525,14 +429,42 @@ export default function AuthPage() {
             picture: session.user.user_metadata?.avatar_url || session.user.user_metadata?.picture || "",
             sub: session.user.id,
           })
-          setAuthStep("name-phone")
+          
+          // Send OTP for new signups
+          const otp = Math.floor(100000 + Math.random() * 900000).toString()
+          setGeneratedOtp(otp)
+          
+          // Send OTP via Supabase email
+          try {
+            const response = await fetch('/api/send-otp', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: session.user.email,
+                otp: otp,
+                name: session.user.user_metadata?.full_name || session.user.user_metadata?.name || 'User'
+              })
+            })
+            
+            if (response.ok) {
+              setOtpSent(true)
+              setAuthStep("otp")
+              addToast('Verification code sent to your email', 'info')
+            } else {
+              setError('Failed to send verification code')
+            }
+          } catch (err) {
+            console.error('OTP send error:', err)
+            setError('Failed to send verification code')
+          }
+          
           setMode("signup")
         }
       }
     }
 
     handleAuthFlow()
-  }, [searchParams, googleUserData])
+  }, [searchParams, googleUserData, addToast])
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -568,27 +500,68 @@ export default function AuthPage() {
         return
       }
 
-      // Hash the password before storing it
+      // If using OAuth (Google/GitHub), the user is already created in auth.users
+      // Just need to update password if they set one
+      let authUserId: string
+      const email = googleUserData?.email || `user_${Date.now()}@temp.local` // Fallback email
+
+      if (googleUserData) {
+        // OAuth flow - user already exists in auth.users
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) {
+          setError("Authentication error. Please try again.")
+          setIsLoading(false)
+          return
+        }
+        authUserId = user.id
+      } else {
+        // Regular signup - create auth user first
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+          email: email,
+          password: signupData.password,
+        })
+
+        if (authError || !authData.user) {
+          console.error('Supabase Auth signup error:', authError)
+          setError('Failed to create account: ' + (authError?.message || 'Unknown error'))
+          setIsLoading(false)
+          return
+        }
+        authUserId = authData.user.id
+      }
+
+      // Hash the password before storing it (for backwards compatibility)
       const hashedPassword = await hashPassword(signupData.password)
 
       const insertData = {
         username: signupData.username,
-        pass: hashedPassword,
         phone_number: signupData.phoneNumber,
+        pass: hashedPassword,
         specialization: specialization,
         age: Number.parseInt(signupData.age),
         current_level: Number.parseInt(level),
         is_admin: false,
         is_banned: false,
-        email: googleUserData?.email || "", // Add email from Google
-        profile_image: googleUserData?.picture || "", // Add profile image from Google
+        email: email,
+        profile_image: googleUserData?.picture || "",
+        auth_id: authUserId, // Link to Supabase Auth user
       }
 
-      const { data: newUser, error: insertError } = await supabase
-        .from("chameleons")
-        .insert(insertData)
-        .select()
-        .single()
+      // Use API route with service role to bypass RLS
+      const response = await fetch('/api/users/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(insertData),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        setError('Failed to create profile: ' + (errorData.error || 'Unknown error'))
+        setIsLoading(false)
+        return
+      }
+
+      const { data: newUser, error: insertError } = await response.json()
 
       if (insertError) {
         console.log("Registration error:", insertError)
@@ -598,27 +571,15 @@ export default function AuthPage() {
       }
 
       if (newUser) {
-        const sessionData = {
-          user_id: newUser.user_id,
-          username: newUser.username,
-          phone_number: newUser.phone_number,
-          specialization: newUser.specialization,
-          age: newUser.age,
-          current_level: newUser.current_level,
-          is_admin: newUser.is_admin,
-          is_banned: newUser.is_banned,
-          created_at: newUser.created_at,
-          email: newUser.email,
-          profile_image: newUser.profile_image,
-        }
-
-        saveStudentSession(sessionData)
+        // Session is now managed by Supabase Auth
         setAuthStep("complete")
 
-        // Redirect after a brief success message
+        // Add toast and redirect after a delay
+        addToast(`Welcome, ${newUser.username}!`, "success")
+        
+        // Use setTimeout to ensure the redirect happens only once
         setTimeout(() => {
           router.push(previousPath)
-          addToast(`Welcome, ${newUser.username}!`, "info")
         }, 2000)
       }
     } catch (err) {
@@ -637,27 +598,73 @@ export default function AuthPage() {
   }
 
   const handleStepBack = () => {
-    if (authStep === "name-phone") {
+    if (authStep === "otp") {
+      // Cannot go back from OTP, need to restart OAuth
+      setAuthStep("google")
+      setGoogleUserData(null)
+      setOtpCode("")
+      setGeneratedOtp("")
+      setOtpSent(false)
+    } else if (authStep === "name") {
       setAuthStep("google")
       setGoogleUserData(null)
     } else if (authStep === "specialization") {
-      setAuthStep("name-phone")
+      setAuthStep("name")
     } else if (authStep === "password") {
       setAuthStep("specialization")
     }
   }
 
+  const handleOtpVerification = () => {
+    if (otpCode === generatedOtp) {
+      setAuthStep("name")
+      setError("")
+    } else {
+      setError("Invalid verification code. Please try again.")
+    }
+  }
+
+  const handleResendOtp = async () => {
+    if (!googleUserData?.email) return
+    
+    const otp = Math.floor(100000 + Math.random() * 900000).toString()
+    setGeneratedOtp(otp)
+    setOtpCode("")
+    
+    try {
+      const response = await fetch('/api/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: googleUserData.email,
+          otp: otp,
+          name: googleUserData.name
+        })
+      })
+      
+      if (response.ok) {
+        addToast('New verification code sent', 'info')
+        setError("")
+      } else {
+        setError('Failed to resend code')
+      }
+    } catch (err) {
+      console.error('OTP resend error:', err)
+      setError('Failed to resend code')
+    }
+  }
+
   const handleStepForward = () => {
     if (authStep === "google") {
-      setAuthStep("name-phone")
-    } else if (authStep === "name-phone") {
-      // Validate name and phone before proceeding
+      setAuthStep("name")
+    } else if (authStep === "name") {
+      // Validate name before proceeding
       if (!signupData.username.trim()) {
         setError("Username is required")
         return
       }
-      if (!signupData.phoneNumber.trim() || signupData.phoneNumber.length < 11) {
-        setError("Valid phone number is required")
+      if (signupData.username.trim().length < 3) {
+        setError("Username must be at least 3 characters")
         return
       }
       setError("")
@@ -701,43 +708,11 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303] relative">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
-
-      {/* Floating shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <ElegantShape
-          delay={0.3}
-          width={600}
-          height={140}
-          rotate={12}
-          gradient="from-indigo-500/[0.15]"
-          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
-        />
-        <ElegantShape
-          delay={0.5}
-          width={500}
-          height={120}
-          rotate={-15}
-          gradient="from-rose-500/[0.15]"
-          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
-        />
-        <ElegantShape
-          delay={0.4}
-          width={300}
-          height={80}
-          rotate={-8}
-          gradient="from-violet-500/[0.15]"
-          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
-        />
-        <ElegantShape
-          delay={0.6}
-          width={200}
-          height={60}
-          rotate={20}
-          gradient="from-amber-500/[0.15]"
-          className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
-        />
+      {/* Static background image */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05]" />
+        <div className="absolute inset-0 bg-[url('/images/Background.png')] bg-cover bg-center bg-no-repeat opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80" />
       </div>
 
       {/* Back Button */}
@@ -776,7 +751,7 @@ export default function AuthPage() {
             <CardHeader className="text-center pb-6">
               {mode === "signup" && (
                 <div className="flex items-center justify-center mb-4">
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2" style={{ width: "307px" }}>
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-all ${
                         authStep === "google" ? "bg-purple-500 text-white" : "bg-purple-500/20 text-purple-300"
@@ -786,12 +761,12 @@ export default function AuthPage() {
                     </div>
                     <div
                       className={`w-8 h-1 rounded transition-all ${
-                        authStep === "name-phone" || authStep === "specialization" || authStep === "password" || authStep === "complete" ? "bg-purple-500" : "bg-white/20"
+                        authStep === "name" || authStep === "specialization" || authStep === "password" || authStep === "complete" ? "bg-purple-500" : "bg-white/20"
                       }`}
                     />
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-all ${
-                        authStep === "name-phone"
+                        authStep === "name"
                           ? "bg-purple-500 text-white"
                           : authStep === "specialization" || authStep === "password" || authStep === "complete"
                             ? "bg-purple-500/20 text-purple-300"
@@ -861,21 +836,23 @@ export default function AuthPage() {
                       ? "Sign In"
                       : authStep === "google"
                         ? "Create Account"
-                        : authStep === "name-phone"
-                          ? "Personal Information"
-                          : authStep === "specialization"
-                            ? "Academic Details"
-                            : authStep === "password"
-                              ? "Set Your Password"
-                              : "Welcome!"}
+                        : authStep === "otp"
+                          ? "Verify Email"
+                          : authStep === "name"
+                            ? "Personal Information"
+                            : authStep === "specialization"
+                              ? "Academic Details"
+                              : authStep === "password"
+                                ? "Set Your Password"
+                                : "Welcome!"}
                   </CardTitle>
                   <CardDescription className="text-white/60">
                     {mode === "login"
-                      ? "Sign in with Google or enter your student ID and password"
+                      ? "Sign in with Google or GitHub"
                       : authStep === "google"
-                        ? "Sign up with Google to get started quickly"
-                        : authStep === "name-phone"
-                          ? "Tell us your name and phone number"
+                        ? "Sign up with Google or GitHub to get started quickly"
+                        : authStep === "name"
+                          ? "Tell us your name"
                           : authStep === "specialization"
                             ? "Choose your specialization, level, and age"
                             : authStep === "password"
@@ -961,7 +938,7 @@ export default function AuthPage() {
                       </div>
                     )}
 
-                    {(authStep === "name-phone" || authStep === "specialization" || authStep === "password") && (
+                    {(authStep === "name" || authStep === "specialization" || authStep === "password") && (
                       <Button
                         type="button"
                         variant="ghost"
@@ -993,7 +970,7 @@ export default function AuthPage() {
                                 type="button"
                                 onClick={handleGoogleSignIn}
                                 disabled={isGoogleLoading}
-                                className="w-full bg-white hover:bg-gray-50 text-gray-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-9"
+                                className="w-full bg-white hover:bg-gray-50 text-gray-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
                               >
                                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-red-500/10 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                                 {isGoogleLoading ? (
@@ -1004,7 +981,7 @@ export default function AuthPage() {
                                   />
                                 ) : (
                                   <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
-                                    <path
+                        9           <path
                                       fill="#4285F4"
                                       d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                                     />
@@ -1026,7 +1003,6 @@ export default function AuthPage() {
                               </Button>
                             </motion.div>
 
-                            {/* GitHub Button */}
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1036,47 +1012,21 @@ export default function AuthPage() {
                                 type="button"
                                 onClick={handleGithubSignIn}
                                 disabled={isGoogleLoading}
-                                className="w-full relative overflow-hidden bg-[#24292e] hover:bg-[#1b1f23] text-white border border-[#30363d] transition-all duration-300 group h-9"
+                                className="w-full bg-[#24292e] hover:bg-[#1b1f23] text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
                               >
-                                {isGoogleLoading && oauthProvider === "github" ? (
+                                <div className="absolute inset-0 bg-gradient-to-r from-gray-700/20 to-gray-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                {isGoogleLoading ? (
                                   <motion.div
                                     animate={{ rotate: 360 }}
                                     transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                                     className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full mr-3"
                                   />
                                 ) : (
-                                  <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                                  <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                   </svg>
                                 )}
                                 Continue with GitHub
-                              </Button>
-                            </motion.div>
-
-                            {/* Meta/Facebook Button */}
-                            <motion.div
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.2 }}
-                            >
-                              <Button
-                                type="button"
-                                onClick={handleMetaSignIn}
-                                disabled={isGoogleLoading}
-                                className="w-full relative overflow-hidden bg-[#0866FF] hover:bg-[#0654d4] text-white border border-[#0866FF]/50 transition-all duration-300 group h-9"
-                              >
-                                {isGoogleLoading && oauthProvider === "facebook" ? (
-                                  <motion.div
-                                    animate={{ rotate: 360 }}
-                                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                                    className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full mr-3"
-                                  />
-                                ) : (
-                                  <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                  </svg>
-                                )}
-                                Continue with Meta
                               </Button>
                             </motion.div>
 
@@ -1084,9 +1034,9 @@ export default function AuthPage() {
                               <></>
                             )}
                           </>
-                        ) : authStep === "name-phone" ? (
+                        ) : authStep === "otp" ? (
                           <>
-                            {/* Google User Info Display */}
+                            {/* OTP Verification Step */}
                             {googleUserData && (
                               <motion.div
                                 initial={{ opacity: 0, y: 20 }}
@@ -1104,10 +1054,113 @@ export default function AuthPage() {
                                 ) : (
                                   <UserCircle className="w-10 h-10 text-white/60" />
                                 )}
-                                <div>
+                                <div className="flex-1">
                                   <p className="text-white font-medium">{googleUserData.name}</p>
                                   <p className="text-white/60 text-sm">{googleUserData.email}</p>
                                 </div>
+                              </motion.div>
+                            )}
+
+                            <motion.div
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="space-y-4"
+                            >
+                              <div className="text-center space-y-2 mb-6">
+                                <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                  <Shield className="w-8 h-8 text-purple-400" />
+                                </div>
+                                <h3 className="text-xl font-semibold text-white">Verify Your Email</h3>
+                                <p className="text-white/60 text-sm">
+                                  We've sent a 6-digit code to <span className="text-purple-400">{googleUserData?.email}</span>
+                                </p>
+                              </div>
+
+                              <div className="space-y-2">
+                                <Label htmlFor="otp" className="text-white/80">
+                                  Verification Code
+                                </Label>
+                                <div className="relative">
+                                  <Hash className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
+                                  <Input
+                                    id="otp"
+                                    type="text"
+                                    placeholder="Enter 6-digit code"
+                                    value={otpCode}
+                                    onChange={(e) => {
+                                      const value = e.target.value.replace(/\D/g, '').slice(0, 6)
+                                      setOtpCode(value)
+                                      setError("")
+                                    }}
+                                    className="pl-10 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:ring-purple-500/20 text-center text-2xl tracking-widest"
+                                    maxLength={6}
+                                    autoComplete="off"
+                                  />
+                                </div>
+                              </div>
+
+                              <Button
+                                type="button"
+                                onClick={handleOtpVerification}
+                                disabled={otpCode.length !== 6}
+                                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
+                              >
+                                Verify Code
+                                <ArrowRight className="ml-2 w-4 h-4" />
+                              </Button>
+
+                              <div className="text-center">
+                                <button
+                                  type="button"
+                                  onClick={handleResendOtp}
+                                  className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                                >
+                                  Didn't receive the code? Resend
+                                </button>
+                              </div>
+                            </motion.div>
+                          </>
+                        ) : authStep === "name" ? (
+                          <>
+                            {/* OAuth User Info Display */}
+                            {googleUserData && (
+                              <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg border border-white/10 mb-4"
+                              >
+                                {googleUserData.picture ? (
+                                  <Image
+                                    src={googleUserData.picture}
+                                    alt="Profile"
+                                    width={40}
+                                    height={40}
+                                    className="w-10 h-10 rounded-full"
+                                  />
+                                ) : (
+                                  <UserCircle className="w-10 h-10 text-white/60" />
+                                )}
+                                <div className="flex-1">
+                                  <p className="text-white font-medium">{googleUserData.name}</p>
+                                  <p className="text-white/60 text-sm">{googleUserData.email}</p>
+                                </div>
+                                {oauthProvider && (
+                                  <div className="flex items-center gap-1 text-xs text-white/50 bg-white/5 px-2 py-1 rounded">
+                                    {oauthProvider === "google" ? (
+                                      <svg className="w-3 h-3" viewBox="0 0 24 24">
+                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66 2.84.81-.62z"/>
+                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                      </svg>
+                                    ) : (
+                                      <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                      </svg>
+                                    )}
+                                    <span className="capitalize">{oauthProvider}</span>
+                                  </div>
+                                )}
                               </motion.div>
                             )}
 
@@ -1127,13 +1180,13 @@ export default function AuthPage() {
                                   id="username"
                                   type="text"
                                   placeholder="Enter your username"
+                                  minLength={3}
                                   value={signupData.username}
                                   onChange={(e) => setSignupData({ ...signupData, username: e.target.value })}
                                   className="pl-10 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:ring-purple-500/20"
                                   required
                                 />
                               </div>
-                            </motion.div>
 
                             <motion.div
                               initial={{ opacity: 0, x: -20 }}
@@ -1141,16 +1194,14 @@ export default function AuthPage() {
                               transition={{ delay: 0.2 }}
                               className="space-y-2"
                             >
-                              <Label htmlFor="phone" className="text-white/80">
+                              <Label htmlFor="phoneNumber" className="text-white/80">
                                 Phone Number
                               </Label>
                               <div className="relative">
                                 <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
                                 <Input
-                                  id="phone"
+                                  id="phoneNumber"
                                   type="tel"
-                                  maxLength={15}
-                                  minLength={11}
                                   placeholder="Enter your phone number"
                                   value={signupData.phoneNumber}
                                   onChange={(e) => setSignupData({ ...signupData, phoneNumber: e.target.value })}
@@ -1159,6 +1210,9 @@ export default function AuthPage() {
                                 />
                               </div>
                             </motion.div>
+                            </motion.div>
+
+
                           </>
                         ) : authStep === "specialization" ? (
                           <>
@@ -1176,6 +1230,7 @@ export default function AuthPage() {
                                 id="age"
                                 type="number"
                                 placeholder="Enter your age"
+                                maxLength={2}
                                 value={signupData.age}
                                 onChange={(e) => setSignupData({ ...signupData, age: e.target.value })}
                                 className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:ring-purple-500/20"
@@ -1278,7 +1333,7 @@ export default function AuthPage() {
                         type={mode === "login" || authStep === "password" ? "submit" : "button"}
                         disabled={isLoading || (mode === "signup" && authStep === "google")}
                         onClick={(e) => {
-                          if (mode === "signup" && (authStep === "name-phone" || authStep === "specialization")) {
+                          if (mode === "signup" && (authStep === "name" || authStep === "specialization")) {
                             e.preventDefault()
                             handleStepForward()
                           }
@@ -1297,7 +1352,7 @@ export default function AuthPage() {
                               ? "Sign In"
                               : authStep === "google"
                                 ? "Continue with Google"
-                                : authStep === "name-phone"
+                                : authStep === "name"
                                   ? "Continue"
                                   : authStep === "specialization"
                                     ? "Continue"
@@ -1359,8 +1414,6 @@ export default function AuthPage() {
           ))}
         </motion.div>
       </div>
-
-      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
     </div>
   )
 }
