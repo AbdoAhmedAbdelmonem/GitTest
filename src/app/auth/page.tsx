@@ -19,7 +19,6 @@ import {
   Shield,
   BookOpen,
   Hash,
-  n,
   GraduationCap,
   Star,
   ArrowLeft,
