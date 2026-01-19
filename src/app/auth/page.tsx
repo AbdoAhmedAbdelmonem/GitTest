@@ -291,6 +291,11 @@ export default function AuthPage() {
         localStorage.removeItem("remembered_login")
       }
 
+      // Dispatch event to trigger notification fetch
+      window.dispatchEvent(new CustomEvent('userLoggedIn', { 
+        detail: { userId: userData.user_id } 
+      }))
+
       // Session is now managed by Supabase Auth
       // Redirect to the previous page instead of always going to home
       router.push(previousPath)
@@ -423,7 +428,10 @@ export default function AuthPage() {
             if (response.ok && data.success) {
               setAuthStep("otp")
               setResendTimer(600) // 10 minutes = 600 seconds
-              addToast('Email sent successfully! Check your inbox.', 'success')
+              // Force immediate toast by calling it directly
+              setTimeout(() => {
+                addToast('Email sent successfully! Check your inbox.', 'success')
+              }, 0)
             } else {
               console.error('OTP send failed:', data)
               setError('Failed to send verification code. Please try again.')
@@ -550,6 +558,11 @@ export default function AuthPage() {
       if (newUser) {
         // Session is now managed by Supabase Auth
         setAuthStep("complete")
+
+        // Dispatch event to trigger notification fetch
+        window.dispatchEvent(new CustomEvent('userLoggedIn', { 
+          detail: { userId: newUser.user_id } 
+        }))
 
         // Add toast and redirect after a delay
         addToast(`Welcome, ${newUser.username}!`, "success")
