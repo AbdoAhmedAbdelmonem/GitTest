@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 // ⚠️ Toggle this to enable/disable maintenance mode
-const MAINTENANCE_MODE = true
+const MAINTENANCE_MODE = false
 
 export function middleware(request: NextRequest) {
   // If maintenance mode is enabled
@@ -43,6 +43,7 @@ export const config = {
     '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 }
+
 
 
 
