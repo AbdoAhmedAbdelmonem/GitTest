@@ -277,7 +277,7 @@ export default function ProfilePage() {
       const { data: freshUserData, error: userCheckError } = await supabase
         .from("chameleons")
         .select("deletion_scheduled_at")
-        .eq("user_id", session.user_id)
+        .eq("auth_id", session.auth_id)
         .single()
 
       // Check if user account was deleted (not found in database)
@@ -311,7 +311,7 @@ export default function ProfilePage() {
       const { data: attemptsData } = await supabase
         .from("quiz_data")
         .select(`*`)
-        .eq("user_id", session.user_id)
+        .eq("auth_id", session.auth_id)
         .order("solved_at", { ascending: false })
 
       setQuizData(attemptsData || [])
@@ -410,7 +410,7 @@ export default function ProfilePage() {
           username: editForm.username.trim(),
           age: parseInt(editForm.age)
         })
-        .eq("user_id", userData.user_id)
+        .eq("auth_id", userData.auth_id)
         .select()
 
       if (error) {
@@ -432,7 +432,7 @@ export default function ProfilePage() {
         addToast("Profile updated successfully!", "success")
         // Add a notification about profile update
         addNotification(
-          userData.user_id,
+          userData.auth_id,
           "Profile Updated",
           "System",
           "success",
@@ -444,7 +444,7 @@ export default function ProfilePage() {
       console.error("Error updating profile:", error)
       addToast("Failed to update profile. Please try again.", "error")
       addNotification(
-        userData.user_id,
+        userData.auth_id,
         "Profile Update Failed",
         "System",
         "failure",
@@ -629,15 +629,6 @@ export default function ProfilePage() {
                 )}
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-yellow-500/20">
-                    <Star className="w-5 h-5 text-yellow-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-white/60">User ID</p>
-                    <p className="text-white font-medium">{userData.user_id}</p>
-                  </div>
-                </div>
                 
                 <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
                   <div className="p-3 rounded-full bg-blue-500/20">

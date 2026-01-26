@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Parse and verify signed state parameter
-    let userId: number
+    let authId: string
     
     if (!state) {
       return NextResponse.redirect(
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
       
       // Decode payload
       const payload = JSON.parse(Buffer.from(payloadBase64, 'base64url').toString())
-      userId = payload.userId
+      authId = payload.authId || payload.userId // Support both for backwards compat
       
       // Optional: Check timestamp (e.g., reject if older than 10 minutes)
       const age = Date.now() - payload.ts
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    console.log(`🔐 OAUTH CALLBACK DEBUG - Processing callback for user ${userId}, state: ${state}`)
+    console.log(`🔐 OAUTH CALLBACK DEBUG - Processing callback for user ${authId}, state: ${state}`)
 
     // Exchange code for tokens
     const tokens = await exchangeCodeForTokens(code) as any
@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
       throw new Error('No access token received from Google')
     }
 
-    console.log(`🔐 OAUTH CALLBACK DEBUG - Got tokens for user ${userId}: access_token starts with ${tokens.access_token.substring(0, 20)}..., refresh_token starts with ${tokens.refresh_token ? tokens.refresh_token.substring(0, 20) + '...' : 'NONE'}`)
+    console.log(`🔐 OAUTH CALLBACK DEBUG - Got tokens for user ${authId}: access_token starts with ${tokens.access_token.substring(0, 20)}..., refresh_token starts with ${tokens.refresh_token ? tokens.refresh_token.substring(0, 20) + '...' : 'NONE'}`)
 
     // Get user info from Google
     const userInfo = await getGoogleUserInfo(tokens.access_token)
@@ -80,19 +80,19 @@ export async function GET(request: NextRequest) {
       throw new Error('Failed to get user information from Google')
     }
 
-    console.log(`🔐 OAUTH CALLBACK DEBUG - Google user info for user ${userId}: ${userInfo.email} (ID: ${userInfo.id})`)
+    console.log(`🔐 OAUTH CALLBACK DEBUG - Google user info for user ${authId}: ${userInfo.email} (ID: ${userInfo.id})`)
 
     // Check if this Google account is already associated with another user in admins table
     const supabase = createAdminClient()
     const { data: existingAdmin } = await supabase
       .from('admins')
-      .select('user_id, google_email')
+      .select('auth_id, google_email')
       .eq('google_id', userInfo.id)
-      .neq('user_id', userId)
+      .neq('auth_id', authId)
       .single()
 
     if (existingAdmin) {
-      console.log(`🚨 OAUTH CALLBACK DEBUG - Google account ${userInfo.email} already associated with user ${existingAdmin.user_id}, but trying to associate with user ${userId}`)
+      console.log(`🚨 OAUTH CALLBACK DEBUG - Google account ${userInfo.email} already associated with user ${existingAdmin.auth_id}, but trying to associate with user ${authId}`)
       return NextResponse.redirect(
         new URL(`/drive?error=${encodeURIComponent('This Google account is already connected to another user. Each user must use their own Google account.')}`, request.url)
       )
@@ -100,7 +100,7 @@ export async function GET(request: NextRequest) {
 
     // Store tokens in database
     await storeUserTokens(
-      userId,
+      authId,
       userInfo.id,
       userInfo.email,
       tokens.access_token,
@@ -108,9 +108,9 @@ export async function GET(request: NextRequest) {
       tokens.expiry_date
     )
 
-    console.log(`✅ OAUTH CALLBACK DEBUG - Tokens stored successfully for user ${userId} with Google account ${userInfo.email}`)
+    console.log(`✅ OAUTH CALLBACK DEBUG - Tokens stored successfully for user ${authId} with Google account ${userInfo.email}`)
 
-    console.log(`✅ OAuth tokens stored successfully for user ${userId}`)
+    console.log(`✅ OAuth tokens stored successfully for user ${authId}`)
     
     // Redirect back to drive page with success message
     return NextResponse.redirect(

@@ -4,13 +4,13 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { getValidAccessToken } from '@/lib/google-oauth'
 
 // Check if user has admin access
-async function checkAdminAccess(userId: number) {
+async function checkAdminAccess(authId: string) {
   const supabase = createAdminClient()
   
   const { data: user, error } = await supabase
     .from('chameleons')
     .select('is_admin')
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
 
   if (error || !user) {
@@ -22,7 +22,7 @@ async function checkAdminAccess(userId: number) {
   const { data: adminData } = await supabase
     .from('admins')
     .select('authorized')
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
 
   console.log('User data from DB:', user, 'Admin data:', adminData)
@@ -37,22 +37,22 @@ export async function POST(
   { params }: { params: { fileId: string } }
 ) {
   try {
-    const { newName, userId: userIdFromBody } = await request.json()
+    const { newName, authId: authIdFromBody } = await request.json()
     
     const supabase = createAdminClient()
 
-    // Get userId from body or query params
+    // Get authId from body or query params
     const { searchParams } = new URL(request.url)
-    const userIdParam = searchParams.get('userId') || userIdFromBody
+    const authIdParam = searchParams.get('authId') || authIdFromBody
 
-    if (!userIdParam) {
+    if (!authIdParam) {
       return NextResponse.json(
-        { error: 'Missing userId parameter' },
+        { error: 'Missing authId parameter' },
         { status: 400 }
       )
     }
 
-    const userId = userIdParam
+    const authId = authIdParam
 
     if (!params.fileId) {
       return NextResponse.json(
@@ -69,7 +69,7 @@ export async function POST(
     }
 
     // Check if user has admin access
-    const { hasAccess } = await checkAdminAccess(parseInt(userId))
+    const { hasAccess } = await checkAdminAccess(authId)
     
     if (!hasAccess) {
       return NextResponse.json(
@@ -79,7 +79,7 @@ export async function POST(
     }
 
     // Get valid access token for the user
-    const accessToken = await getValidAccessToken(parseInt(userId))
+    const accessToken = await getValidAccessToken(authId)
     if (!accessToken) {
       return NextResponse.json(
         { error: 'Google Drive authentication required' },

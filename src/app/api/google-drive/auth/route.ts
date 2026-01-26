@@ -40,16 +40,16 @@ export async function GET(request: NextRequest) {
      * 3) Validate query param
      * ------------------------------------------------------------------ */
     const { searchParams } = new URL(request.url)
-    const userIdParam = searchParams.get('userId')
+    const authIdParam = searchParams.get('authId')
 
-    if (!userIdParam || isNaN(Number(userIdParam))) {
+    if (!authIdParam) {
       return NextResponse.json(
-        { error: 'Invalid userId' },
+        { error: 'Invalid authId' },
         { status: 400 }
       )
     }
 
-    const userId = Number(userIdParam)
+    const authId = authIdParam
 
     /* ------------------------------------------------------------------
      * 4) Fetch user record using ADMIN client (server only)
@@ -58,8 +58,8 @@ export async function GET(request: NextRequest) {
 
     const { data: userData, error: userError } = await admin
       .from('chameleons')
-      .select('user_id, auth_id, is_admin')
-      .eq('user_id', userId)
+      .select('auth_id, is_admin')
+      .eq('auth_id', authId)
       .single()
 
     if (userError || !userData) {
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
      * 6) Generate a SAFE state (signed, non-forgeable)
      * ------------------------------------------------------------------ */
     const payload = {
-      userId: userData.user_id,
+      authId: userData.auth_id,
       ts: Date.now(),
     }
 

@@ -1,27 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { createBrowserClient } from '@/lib/supabase/client'
 
 export async function GET(request: NextRequest) {
   try {
     const supabase = createAdminClient()
 
-    // Get user_id from query params (for backwards compatibility)
+    // Get auth_id from query params
     const url = new URL(request.url)
-    const userId = url.searchParams.get('userId')
+    const authId = url.searchParams.get('authId')
 
-    if (!userId) {
+    if (!authId) {
       return NextResponse.json(
-        { error: 'Missing userId parameter' },
+        { error: 'Missing authId parameter' },
         { status: 400 }
       )
     }
 
-    // Get user data using user_id (uses admin client to bypass RLS)
+    // Get user data using auth_id (uses admin client to bypass RLS)
     const { data: user, error: userError } = await supabase
       .from('chameleons')
-      .select('user_id, is_admin')
-      .eq('user_id', parseInt(userId))
+      .select('auth_id, is_admin')
+      .eq('auth_id', authId)
       .single()
 
     if (userError) {
@@ -45,7 +44,7 @@ export async function GET(request: NextRequest) {
     const { data: adminData, error: adminError } = await supabase
       .from('admins')
       .select('access_token, refresh_token, authorized')
-      .eq('user_id', user.user_id)
+      .eq('auth_id', authId)
       .single()
 
     if (adminError && adminError.code !== 'PGRST116') {

@@ -11,22 +11,22 @@ export async function GET(request: NextRequest) {
     const folderId = searchParams.get('folderId')
     const fileId = searchParams.get('fileId')
     const type = searchParams.get('type') // 'info' for single file info
-    const userIdParam = searchParams.get('userId')
+    const authIdParam = searchParams.get('authId')
     
     const supabase = createAdminClient()
 
-    // Get userId from query params
-    if (!userIdParam) {
+    // Get authId from query params
+    if (!authIdParam) {
       return NextResponse.json(
-        { error: 'Missing userId parameter' },
+        { error: 'Missing authId parameter' },
         { status: 400 }
       )
     }
 
-    const userId = parseInt(userIdParam)
+    const authId = authIdParam
 
     // Get valid access token for the user (no authorization check for viewing)
-    const accessToken = await getValidAccessToken(userId)
+    const accessToken = await getValidAccessToken(authId)
     if (!accessToken) {
       return NextResponse.json(
         { 

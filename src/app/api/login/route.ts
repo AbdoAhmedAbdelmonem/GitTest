@@ -105,11 +105,11 @@ export async function POST(request: NextRequest) {
     // Create Supabase admin client (bypasses RLS for server-side operations)
     const supabase = createAdminClient()
 
-    // Get user data
+    // Get user data by auth_id (using the authenticated user's ID)
     const { data: userData, error: userError } = await supabase
       .from('chameleons')
       .select('*')
-      .eq('user_id', Number.parseInt(studentId))
+      .eq('auth_id', studentId)
       .single()
 
     if (userError || !userData) {
@@ -122,7 +122,7 @@ export async function POST(request: NextRequest) {
 
     // Cast userData to proper type
     const user = userData as {
-      user_id: number
+      auth_id: string
       username: string
       specialization: string
       age: number
@@ -179,7 +179,7 @@ export async function POST(request: NextRequest) {
 
     // Return user data (excluding password) and auth_id for client-side auth
     const sessionData = {
-      user_id: user.user_id,
+      auth_id: user.auth_id,
       username: user.username,
       specialization: user.specialization,
       age: user.age,
@@ -189,7 +189,6 @@ export async function POST(request: NextRequest) {
       created_at: user.created_at,
       email: user.email,
       profile_image: user.profile_image,
-      auth_id: userData.auth_id,
     }
 
     // Return success with auth credentials for client-side session

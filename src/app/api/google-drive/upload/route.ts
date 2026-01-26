@@ -13,13 +13,13 @@ export const maxDuration = 300 // 5 minutes timeout
 export const dynamic = 'force-dynamic'
 
 // Check if user has admin access
-async function checkAdminAccess(userId: number) {
+async function checkAdminAccess(authId: string) {
   const supabase = createAdminClient()
 
   const { data: user, error } = await supabase
     .from('chameleons')
     .select('is_admin')
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
 
   if (error || !user) {
@@ -31,7 +31,7 @@ async function checkAdminAccess(userId: number) {
   const { data: adminData } = await supabase
     .from('admins')
     .select('authorized')
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
 
   console.log('User data from DB:', user, 'Admin data:', adminData)
@@ -43,7 +43,7 @@ async function checkAdminAccess(userId: number) {
 
 export async function POST(request: NextRequest) {
   let file: File | null = null
-  let userId: string = ''
+  let authId: string = ''
   let parentFolderId: string = ''
 
   try {
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     try {
       const formData = await request.formData()
       file = formData.get('file') as File
-      userId = formData.get('userId') as string
+      authId = formData.get('authId') as string
       parentFolderId = formData.get('parentFolderId') as string
     } catch (formDataError) {
       console.log('FormData parsing failed, this might be due to large file size:', formDataError)
@@ -74,20 +74,20 @@ export async function POST(request: NextRequest) {
       fileSizeMB: file?.size ? (file.size / (1024 * 1024)).toFixed(2) : 'unknown',
       fileType: file?.type,
       parentFolderId,
-      userId,
+      authId,
       contentLength: request.headers.get('content-length'),
       contentType: request.headers.get('content-type')
     })
 
-    if (!file || !userId) {
+    if (!file || !authId) {
       return NextResponse.json(
-        { error: 'File and user ID are required' },
+        { error: 'File and auth ID are required' },
         { status: 400 }
       )
     }
 
     // Check if user has admin access
-    const { hasAccess } = await checkAdminAccess(parseInt(userId))
+    const { hasAccess } = await checkAdminAccess(authId)
 
     if (!hasAccess) {
       return NextResponse.json(
@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get valid access token for the user
-    const accessToken = await getValidAccessToken(parseInt(userId))
+    const accessToken = await getValidAccessToken(authId)
     if (!accessToken) {
       return NextResponse.json(
         {
@@ -179,7 +179,7 @@ export async function POST(request: NextRequest) {
       fileName: file?.name,
       fileSize: file?.size,
       fileSizeMB: file?.size ? (file.size / (1024 * 1024)).toFixed(2) : 'unknown',
-      userId,
+      authId,
       parentFolderId
     })
 
