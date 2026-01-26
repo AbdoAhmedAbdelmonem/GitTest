@@ -37,6 +37,41 @@ export interface Department {
   }
 }
 
+export const departmentKeyMap: { [key: string]: string } = {
+  // Computing and Data Sciences
+  'computing and data sciences': 'computing-data-sciences',
+  'data science': 'computing-data-sciences',
+  'computing & data sciences': 'computing-data-sciences',
+  'fcds': 'computing-data-sciences',
+  'computing': 'computing-data-sciences',
+  
+  // Business Analytics
+  'business-analytics': 'business-analytics',
+  'business analytics': 'business-analytics',
+  'ba': 'business-analytics',
+  
+  // Artificial Intelligence (Intelligent Systems)
+  'artificial-intelligence': 'artificial-intelligence',
+  'artificial intelligence': 'artificial-intelligence',
+  'intelligent systems': 'artificial-intelligence',
+  'ai': 'artificial-intelligence',
+  
+  // Media Analytics
+  'media-analytics': 'media-analytics',
+  'media analytics': 'media-analytics',
+  'ma': 'media-analytics',
+  
+  // Healthcare Informatics
+  'healthcare-informatics': 'healthcare-informatics',
+  'healthcare informatics': 'healthcare-informatics',
+  'hi': 'healthcare-informatics',
+  
+  // Cybersecurity
+  'cybersecurity': 'cybersecurity',
+  'cyber security': 'cybersecurity',
+  'cs': 'cybersecurity'
+}
+
 
 export const departmentData: { [key: string]: Department } = {
   "computing-data-sciences": {
@@ -6707,6 +6742,7 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
 
 
 
