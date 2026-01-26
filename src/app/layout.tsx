@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Roboto_Mono, Rubik } from "next/font/google";
+import { Inter, Roboto_Mono, Rubik, Outfit } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ToastProvider";
 import { NotificationProvider } from "@/hooks/use-notifications";
@@ -23,6 +23,12 @@ const rubik = Rubik({
   variable: "--font-rubik",
 });
 
+// Outfit font for headers
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+});
+
 export const metadata: Metadata = {
   title: "Chameleon | Future Skills",
   description:
@@ -41,9 +47,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} ${outfit.variable} antialiased`}
       >      
-        <DevToolsProtection />
         
         {/* لف الـ children جوه NotificationProvider وبعدها ToastProvider */}
         <NotificationProvider>
