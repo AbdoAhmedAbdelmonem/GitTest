@@ -16,7 +16,7 @@ import { useToast  } from "@/components/ToastProvider"
 import Image from "next/image"
 import { useAddNotification } from "@/components/notification"
 import { DeleteAccountDialog } from "@/components/delete-account-dialog"
-import { departmentData, type Subject } from '@/lib/department-data'
+import { departmentData, departmentKeyMap, type Subject } from '@/lib/department-data'
 
 
 interface QuizQuestion {
@@ -56,12 +56,12 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
   return (
     <Card className="bg-black/40 border-white/20 shadow-2xl mt-8">
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
-          <TrendingUp className="w-5 h-5 text-purple-400" />
-          Progress Over Attempts
+        <CardTitle className="text-2xl font-outfit font-extrabold italic tracking-tight text-white flex items-center gap-2">
+          <TrendingUp className="w-6 h-6 text-indigo-400" />
+          Progress Over <span className="bg-gradient-to-r from-indigo-400 to-violet-500 bg-clip-text text-transparent">Attempts</span>
         </CardTitle>
-        <CardDescription className="text-white/60">
-          Your performance across quiz attempts with trend line
+        <CardDescription className="text-white/60 font-outfit">
+          Your performance across quiz attempts with real-time trend visualization
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -97,7 +97,7 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
                     y1={`${100 - point.score}%`}
                     x2={`${(nextPoint.trial / maxTrial) * 100}%`}
                     y2={`${100 - nextPoint.score}%`}
-                    stroke="rgba(168, 85, 247, 0.5)"
+                    stroke="rgba(129, 140, 248, 0.5)"
                     strokeWidth="2"
                   />
                 );
@@ -108,17 +108,16 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
             {data.map((point, i) => (
               <div
                 key={i}
-                className="absolute w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-white/70 shadow-lg transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-10"
+                className="absolute w-4 h-4 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 border-2 border-white/70 shadow-[0_0_15px_rgba(67,59,134,0.5)] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-10"
                 style={{
                   left: `${(point.trial / maxTrial) * 100}%`,
                   top: `${100 - point.score}%`
                 }}
               >
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/90 text-white text-xs p-2 rounded whitespace-nowrap shadow-xl z-20">
-                  <div className="font-bold">{point.quizTitle}</div>
-                  <div>Trial {point.trial}: {point.score}%</div>
-                  <div>Date: {point.date}</div>
-                  <div>Questions: {point.totalQuestions}</div>
+                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/90 text-white text-xs p-2 rounded whitespace-nowrap shadow-xl z-20 font-outfit">
+                  <div className="font-bold text-indigo-400">{point.quizTitle}</div>
+                  <div>Trial {point.trial}: <span className="font-bold">{point.score}%</span></div>
+                  <div className="text-white/60">Date: {point.date}</div>
                 </div>
               </div>
             ))}
@@ -132,15 +131,15 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
           </div>
         </div>
         
-        <div className="mt-4 text-sm text-white/60">
-          <p style={{marginTop: "3rem"}}>This visualization shows your quiz scores across attempts, with a line connecting your performance over time.</p>
+        <div className="mt-4 text-sm text-white/60 font-outfit">
+          <p style={{marginTop: "3rem"}}>This protocol visualization tracks your performance over sequential attempts.</p>
           <div className="mt-2 flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500"></span>
-            <span>Each dot represents a quiz attempt</span>
+            <span className="w-3 h-3 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500"></span>
+            <span>Identifier for each attempt</span>
           </div>
           <div className="mt-1 flex items-center gap-2">
-            <span className="w-4 h-0.5 bg-purple-500/50"></span>
-            <span>Line shows progress trend across attempts</span>
+            <span className="w-4 h-0.5 bg-indigo-500/50"></span>
+            <span>Progress vector mapping performance trend</span>
           </div>
         </div>
       </CardContent>
@@ -151,22 +150,6 @@ function ProgressDotPlot({ quizData }: { quizData: any[] }) {
 // Helper function to get user's registered subjects based on level and department
 function getUserSubjects(level: number, specialization: string, currentTerm: 'term1' | 'term2' = 'term1'): Subject[] {
   console.log('🔍 getUserSubjects called with:', { level, specialization, currentTerm })
-  
-  // Map ALL possible specialization name variations to department keys
-  const departmentKeyMap: { [key: string]: string } = {
-    // Computing and Data Sciences variations
-    'Computing and Data Sciences': 'computing-data-sciences',
-    'computing and data sciences': 'computing-data-sciences',
-    'Data Science': 'computing-data-sciences',
-    'data science': 'computing-data-sciences',
-    'Computing & Data Sciences': 'computing-data-sciences',
-    'FCDS': 'computing-data-sciences',
-    
-    // Business Analytics variations
-    'Business Analytics': 'business-analytics',
-    'business analytics': 'business-analytics',
-    'BA': 'business-analytics'
-  }
   
   const departmentKey = departmentKeyMap[specialization] || departmentKeyMap[specialization?.toLowerCase()]
   console.log('✅ Mapped department key:', departmentKey, 'from specialization:', specialization)
@@ -506,15 +489,15 @@ export default function ProfilePage() {
       }}
     >
       
-          {/* Back Button */}
+      {/* Back Button */}
       <div className="absolute top-6 left-6 z-20">
         <Button
           onClick={() => window.history.back()}
           variant="ghost"
-          className="text-white/90 hover:text-white hover:bg-white/10 border border-white/20 bg-black/30"
+          className="h-10 px-6 rounded-full text-white/90 hover:text-white hover:bg-indigo-500/20 border border-white/10 bg-black/30 backdrop-blur-md transition-all duration-300 font-outfit"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Dashboard
+          Dashboard
         </Button>
       </div>
 
@@ -523,7 +506,7 @@ export default function ProfilePage() {
         <Button
           variant="ghost"
           onClick={handleLogout}
-          className="text-white/90 hover:text-white hover:bg-white/10 border border-white/20 bg-black/30"
+          className="h-10 px-6 rounded-full text-white/90 hover:text-white hover:bg-red-500/20 border border-white/10 bg-black/30 backdrop-blur-md transition-all duration-300 font-outfit"
         >
           <LogOut className="w-4 h-4 mr-2" />
           Logout
@@ -554,7 +537,7 @@ export default function ProfilePage() {
                   : 'w-24 h-24'
               }`}
               style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+                background: 'linear-gradient(135deg, #433b86 0%, #6c63ff 50%, #818cf8 100%)',
                 padding: '3px',
                 margin: userData.is_admin ? '3px' : '0'
               }}
@@ -576,8 +559,10 @@ export default function ProfilePage() {
             </div>
           </div>
           
-          <h1 className="text-3xl font-bold text-white mb-2">Your Profile</h1>
-          <p className="text-white/60">Manage your account and view your progress</p>
+          <h1 className="text-4xl md:text-5xl font-outfit font-extrabold italic tracking-tight text-white mb-2">
+            Your <span className="bg-gradient-to-r from-indigo-400 to-violet-500 bg-clip-text text-transparent">Profile</span>
+          </h1>
+          <p className="text-white/60 font-outfit">Core Synchronization & Identity Matrix</p>
           
           {/* Deletion Countdown Warning */}
           {userData.deletion_scheduled_at && (
@@ -620,8 +605,10 @@ export default function ProfilePage() {
           <div className="md:col-span-1 animate-in slide-in-from-left duration-500 delay-100">
             <Card className="bg-black/40 border-white/20 shadow-2xl h-full">
               <CardHeader className="text-center pb-6">
-                <CardTitle className="text-xl font-bold text-white">Personal Information</CardTitle>
-                <CardDescription className="text-white/60">Your account details</CardDescription>
+                <CardTitle className="text-2xl font-outfit font-extrabold italic tracking-tight text-white">
+                  Identity <span className="text-indigo-400">Attributes</span>
+                </CardTitle>
+                <CardDescription className="text-white/60 font-outfit">User credentials and attributes</CardDescription>
                 {validationErrors.general && (
                   <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
                     <p className="text-red-400 text-sm text-center">{validationErrors.general}</p>
@@ -630,32 +617,32 @@ export default function ProfilePage() {
               </CardHeader>
               <CardContent className="space-y-6">
                 
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-blue-500/20">
-                    <Mail className="w-5 h-5 text-blue-400" />
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="p-3 rounded-full bg-[#433b86]/20">
+                    <Mail className="w-5 h-5 text-indigo-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-white/60">Email</p>
-                    <p className="text-white font-medium">{userData.email || 'Not provided'}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Access Endpoint</p>
+                    <p className="text-white font-medium font-outfit">{userData.email || 'Not provided'}</p>
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-green-500/20">
-                    <Phone className="w-5 h-5 text-green-400" />
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="p-3 rounded-full bg-[#433b86]/20">
+                    <Phone className="w-5 h-5 text-indigo-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-white/60">Phone</p>
-                    <p className="text-white font-medium">{userData.phone_number || 'Not provided'}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Secure Comms</p>
+                    <p className="text-white font-medium font-outfit">{userData.phone_number || 'Not provided'}</p>
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-purple-500/20">
-                    <User className="w-5 h-5 text-purple-400" />
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="p-3 rounded-full bg-[#433b86]/20">
+                    <User className="w-5 h-5 text-indigo-400" />
                   </div>
                   <div className="flex-1">
-                    <Label htmlFor="username" className="text-sm text-white/60 block mb-1">Username</Label>
+                    <Label htmlFor="username" className="text-[10px] uppercase tracking-wider text-indigo-400/60 block mb-1 font-outfit">Designation</Label>
                     {isEditing ? (
                       <>
                         <Input
@@ -663,24 +650,24 @@ export default function ProfilePage() {
                           name="username"
                           value={editForm.username}
                           onChange={handleInputChange}
-                          className={`bg-white/10 border-white/20 text-white ${validationErrors.username ? 'border-red-500' : ''}`}
+                          className={`bg-black/40 border-2 border-[#433b86]/30 text-white focus:border-indigo-400 focus:ring-indigo-500/20 font-outfit ${validationErrors.username ? 'border-red-500' : ''}`}
                         />
                         {validationErrors.username && (
-                          <p className="text-red-400 text-xs mt-1">{validationErrors.username}</p>
+                          <p className="text-red-400 text-xs mt-1 font-outfit">{validationErrors.username}</p>
                         )}
                       </>
                     ) : (
-                      <p className="text-white font-medium">{userData.username}</p>
+                      <p className="text-white font-medium font-outfit">{userData.username}</p>
                     )}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-orange-500/20">
-                    <Calendar className="w-5 h-5 text-orange-400" />
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="p-3 rounded-full bg-[#433b86]/20">
+                    <Calendar className="w-5 h-5 text-indigo-400" />
                   </div>
                   <div className="flex-1">
-                    <Label htmlFor="age" className="text-sm text-white/60 block mb-1">Age</Label>
+                    <Label htmlFor="age" className="text-[10px] uppercase tracking-wider text-indigo-400/60 block mb-1 font-outfit">Cycle Count</Label>
                     {isEditing ? (
                       <>
                         <Input
@@ -689,50 +676,50 @@ export default function ProfilePage() {
                           type="number"
                           value={editForm.age}
                           onChange={handleInputChange}
-                          className={`bg-white/10 border-white/20 text-white ${validationErrors.age ? 'border-red-500' : ''}`}
+                          className={`bg-black/40 border-2 border-[#433b86]/30 text-white focus:border-indigo-400 focus:ring-indigo-500/20 font-outfit ${validationErrors.age ? 'border-red-500' : ''}`}
                         />
                         {validationErrors.age && (
-                          <p className="text-red-400 text-xs mt-1">{validationErrors.age}</p>
+                          <p className="text-red-400 text-xs mt-1 font-outfit">{validationErrors.age}</p>
                         )}
                       </>
                     ) : (
-                      <p className="text-white font-medium">{userData.age}</p>
+                      <p className="text-white font-medium font-outfit">{userData.age}</p>
                     )}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-amber-500/20">
-                    <GraduationCap className="w-5 h-5 text-amber-400" />
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="p-3 rounded-full bg-[#433b86]/20">
+                    <GraduationCap className="w-5 h-5 text-indigo-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-white/60">Level</p>
-                    <p className="text-white font-medium">Level {userData.current_level}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Authority Level</p>
+                    <p className="text-white font-medium font-outfit">Level {userData.current_level}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-pink-500/20">
-                    <BookOpen className="w-5 h-5 text-pink-400" />
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="p-3 rounded-full bg-[#433b86]/20">
+                    <BookOpen className="w-5 h-5 text-indigo-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-white/60">Specialization</p>
-                    <p className="text-white font-medium">{userData.specialization}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Core Class</p>
+                    <p className="text-white font-medium font-outfit">{userData.specialization}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <div className="p-3 rounded-full bg-indigo-500/20">
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="p-3 rounded-full bg-[#433b86]/20">
                     <Shield className="w-5 h-5 text-indigo-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-white/60">Status</p>
-                    <p className="text-white font-medium">
+                    <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Account Status</p>
+                    <p className="text-white font-medium font-outfit">
                       {userData.email === "tokyo9900777@gmail.com"?"Owner":userData.is_admin 
                         ? "Administrator" 
                         : userData.is_banned 
-                          ? "Banned" 
-                          : "Active Student"
+                          ? "Offline" 
+                          : "Synchronized"
                       }
                     </p>
                   </div>
@@ -741,35 +728,35 @@ export default function ProfilePage() {
 
 
                 {isEditing ? (
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 font-outfit">
                     <Button 
                       onClick={handleSaveEdit}
                       disabled={isSaving}
-                      className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white border-0 shadow-lg hover:shadow-green-500/25 transition-all duration-300"
+                      className="flex-1 h-12 rounded-full bg-white text-black hover:bg-indigo-50 font-bold border-0 shadow-lg shadow-indigo-500/10 transition-all duration-300"
                     >
                       {isSaving ? (
                         <LoadingSpinner size="sm" className="mr-2" />
                       ) : (
                         <Save className="w-4 h-4 mr-2" />
                       )}
-                      Save Changes
+                      Sync
                     </Button>
                     <Button 
                       onClick={handleCancelEdit}
                       variant="outline"
-                      className="flex-1 text-red-500 bg-black hover:text-white hover:bg-red-500 hover:border-red-500 border-red-500"
+                      className="flex-1 h-12 rounded-full text-red-400 bg-black/40 border-2 border-red-500/30 hover:bg-red-500/10 hover:border-red-500/50 transition-all duration-300 hover:text-red-500"
                     >
                       <X className="w-4 h-4 mr-2" />
-                      Cancel
+                      Abort
                     </Button>
                   </div>
                 ) : (
                   <Button 
                     onClick={handleEdit}
-                    className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 shadow-lg hover:shadow-purple-500/25 transition-all duration-300 group"
+                    className="w-full h-12 rounded-full bg-white text-black hover:bg-indigo-50 font-outfit font-bold border-0 shadow-lg shadow-indigo-500/10 transition-all duration-300 group"
                   >
                     <Edit3 className="w-4 h-4 mr-2" />
-                    Edit Profile
+                    Initialize Reconfig
                   </Button>
                 )}
               </CardContent>
@@ -779,19 +766,21 @@ export default function ProfilePage() {
           {/* Quiz History Card */}
           <div className="md:col-span-2 animate-in slide-in-from-right duration-500 delay-200">
             <Card className="bg-black/40 border-white/20 shadow-2xl h-full">
-              <CardHeader style={{height: "auto"}} className="text-center pb-6">
-                <CardTitle className="text-xl font-bold text-white">Quiz History</CardTitle>
-                <CardDescription className="text-white/60">
-                  Your recent quiz attempts and performance
+              <CardHeader className="text-center pb-6">
+                <CardTitle className="text-2xl font-outfit font-extrabold italic tracking-tight text-white">
+                  Network <span className="text-indigo-400">Activity</span>
+                </CardTitle>
+                <CardDescription className="text-white/60 font-outfit">
+                  Recent synchronization logs and performance metrics
                 </CardDescription>
               </CardHeader>
               <CardContent style={{height: "53rem"}} className="overflow-y-auto custom-scrollbar">
                 {quizData.length > 0 ? (
                   <div className="space-y-4 flex-1">
-                  {quizData.map((attempt, index) => {
-                    // Determine theme colors based on chosen_theme
-                    let themeColor = '#8b5cf6'; // Default purple
-                    let themeShadow = 'rgba(139, 92, 246, 0.3)';
+                    {quizData.map((attempt, index) => {
+                    // Default indigo theme
+                    let themeColor = '#433b86'; 
+                    let themeShadow = 'rgba(67, 59, 134, 0.3)';
                     
                     // Map theme name to color if available
                     if (attempt.chosen_theme) {
@@ -844,25 +833,25 @@ export default function ProfilePage() {
                       {/* Content */}
                       <div className="relative z-10 h-full flex flex-col">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-white font-medium">Quiz #{attempt.quiz_id}</h3>
+                        <h3 className="text-white font-outfit font-bold italic">Quiz #{attempt.quiz_id}</h3>
                         <div 
-                        className="flex items-center gap-2 px-2 py-1 rounded-full" 
+                        className="flex items-center gap-2 px-3 py-1 rounded-full backdrop-blur-sm" 
                         style={{
-                          backgroundColor: `${themeColor}30`,
-                          borderLeft: `2px solid ${themeColor}`
+                          backgroundColor: `${themeColor}20`,
+                          border: `1px solid ${themeColor}40`
                         }}
                         >
                         <Star className="w-3 h-3" style={{ color: themeColor }} />
-                        <span className="text-xs" style={{ color: themeColor }}>
-                          {attempt.score !== undefined ? `${Math.round(attempt.score)}%` : "No score"}
+                        <span className="text-xs font-outfit font-bold" style={{ color: themeColor }}>
+                          {attempt.score !== undefined ? `${Math.round(attempt.score)}%` : "N/A"}
                         </span>
                         </div>
                       </div>
                       
-                      <p className="text-white/60 text-sm mb-3">
+                      <p className="text-white/60 text-sm mb-3 font-outfit">
                         {attempt.total_questions 
-                        ? `Answered ${Math.round(attempt.score / 100 * attempt.total_questions)} out of ${attempt.total_questions} questions correctly`
-                        : "Quiz attempt record"
+                        ? `Synchronized ${Math.round(attempt.score / 100 * attempt.total_questions)} / ${attempt.total_questions} data points`
+                        : "Security protocol execution record"
                         }
                       </p>
                       
@@ -923,15 +912,15 @@ export default function ProfilePage() {
                         )}
                       </div>
                       
-                      <div className="flex justify-between items-center">
+                      <div className="flex justify-between items-center font-outfit">
                         <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1">
                           <Award 
                           className="w-4 h-4" 
                           style={{ color: themeColor }}
                           />
-                          <span className="text-xs text-white/60">
-                          {attempt.how_finished === "in-progress" ? "Timed Out" : "Completed"}
+                          <span className="text-[10px] uppercase tracking-wider text-white/60">
+                          {attempt.how_finished === "in-progress" ? "Terminated" : "Resolved"}
                           </span>
                         </div>
                         <div className="flex items-center gap-1">
@@ -939,7 +928,7 @@ export default function ProfilePage() {
                           className="w-4 h-4" 
                           style={{ color: themeColor }}
                           />
-                          <span className="text-xs text-white/60">
+                          <span className="text-[10px] uppercase tracking-wider text-white/60">
                           {new Date(attempt.created_at || attempt.solved_at).toLocaleDateString()}
                           </span>
                         </div>
@@ -969,50 +958,52 @@ export default function ProfilePage() {
         <div className="mt-12 animate-in fade-in duration-500 delay-300">
           <Card className="bg-black/40 border-white/20 shadow-2xl">
             <CardHeader className="text-center pb-6">
-              <CardTitle className="text-xl font-bold text-white">Learning Statistics</CardTitle>
-              <CardDescription className="text-white/60">Your overall progress and achievements</CardDescription>
+              <CardTitle className="text-2xl font-outfit font-extrabold italic tracking-tight text-white">
+                Learning <span className="text-indigo-400">Statistics</span>
+              </CardTitle>
+              <CardDescription className="text-white/60 font-outfit">Aggregate performance and milestones</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="text-center p-6 rounded-lg bg-white/5 border border-white/10">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-purple-500/20 flex items-center justify-center">
-                    <BookOpen className="w-6 h-6 text-purple-400" />
+                <div className="text-center p-6 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#433b86]/20 flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-indigo-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-1">{quizData.length}</h3>
-                  <p className="text-white/60 text-sm">Quizzes Taken</p>
+                  <h3 className="text-3xl font-outfit font-extrabold italic text-white mb-1">{quizData.length}</h3>
+                  <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Protocols Ran</p>
                 </div>
 
-                <div className="text-center p-6 rounded-lg bg-white/5 border border-white/10">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-blue-500/20 flex items-center justify-center">
-                    <Star className="w-6 h-6 text-blue-400" />
+                <div className="text-center p-6 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#433b86]/20 flex items-center justify-center">
+                    <Star className="w-6 h-6 text-indigo-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-1">
+                  <h3 className="text-3xl font-outfit font-extrabold italic text-white mb-1">
                     {quizData.length > 0 
                       ? Math.round(quizData.reduce((sum, attempt) => sum + (Number(attempt.score) || 0), 0) / quizData.length) 
                       : 0
                     }%
                   </h3>
-                  <p className="text-white/60 text-sm">Average Score</p>
+                  <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Success Rate</p>
                 </div>
 
-                <div className="text-center p-6 rounded-lg bg-white/5 border border-white/10">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <Award className="w-6 h-6 text-green-400" />
+                <div className="text-center p-6 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#433b86]/20 flex items-center justify-center">
+                    <Award className="w-6 h-6 text-indigo-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-1">
+                  <h3 className="text-3xl font-outfit font-extrabold italic text-white mb-1">
                     {quizData.filter(attempt => attempt.score >= 80).length}
                   </h3>
-                  <p className="text-white/60 text-sm">Mastered Quizzes</p>
+                  <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Master Quizzes</p>
                 </div>
 
-                <div className="text-center p-6 rounded-lg bg-white/5 border border-white/10">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-amber-500/20 flex items-center justify-center">
-                    <Calendar className="w-6 h-6 text-amber-400" />
+                <div className="text-center p-6 rounded-lg bg-[#433b86]/5 border border-[#433b86]/10 transition-all hover:bg-[#433b86]/10">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#433b86]/20 flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-indigo-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-1">
+                  <h3 className="text-3xl font-outfit font-extrabold italic text-white mb-1">
                     {new Date(userData.created_at).toLocaleDateString()}
                   </h3>
-                  <p className="text-white/60 text-sm">Member Since</p>
+                  <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Cycle Start</p>
                 </div>
               </div>
             </CardContent>
@@ -1023,12 +1014,12 @@ export default function ProfilePage() {
         <div className="mt-12 animate-in fade-in duration-500 delay-400">
           <Card className="bg-black/40 border-white/20 shadow-2xl">
             <CardHeader className="text-center pb-6">
-              <CardTitle className="text-2xl font-bold text-white flex items-center justify-center gap-2">
-                <BookOpen className="w-6 h-6 text-purple-400" />
-                Registered Subjects
+              <CardTitle className="text-3xl font-outfit font-extrabold italic tracking-tight text-white flex items-center justify-center gap-3">
+                <BookOpen className="w-8 h-8 text-indigo-400" />
+                Registered <span className="bg-gradient-to-r from-indigo-400 to-violet-500 bg-clip-text text-transparent">Subjects</span>
               </CardTitle>
-              <CardDescription className="text-white/60">
-                Your {getCurrentTerm() === 'term1' ? 'Term 1' : 'Term 2'} subjects - Level {userData.current_level} • {userData.specialization}
+              <CardDescription className="text-white/60 font-outfit">
+                {getCurrentTerm() === 'term1' ? 'Sector 1' : 'Sector 2'} modules • Authority Level {userData.current_level} • {userData.specialization}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -1037,17 +1028,6 @@ export default function ProfilePage() {
                 const subjects = getUserSubjects(userData.current_level, userData.specialization, currentTerm)
                 
                 // Get department key for URL construction
-                const departmentKeyMap: { [key: string]: string } = {
-                  'Computing and Data Sciences': 'computing-data-sciences',
-                  'computing and data sciences': 'computing-data-sciences',
-                  'Data Science': 'computing-data-sciences',
-                  'data science': 'computing-data-sciences',
-                  'Computing & Data Sciences': 'computing-data-sciences',
-                  'FCDS': 'computing-data-sciences',
-                  'Business Analytics': 'business-analytics',
-                  'business analytics': 'business-analytics',
-                  'BA': 'business-analytics'
-                }
                 const departmentKey = departmentKeyMap[userData.specialization] || departmentKeyMap[userData.specialization?.toLowerCase()] || 'computing-data-sciences'
                 
                 if (subjects.length === 0) {
@@ -1082,51 +1062,46 @@ export default function ProfilePage() {
                     {subjects.map((subject, index) => (
                       <div 
                         key={subject.id}
-                        className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 group"
+                        className="p-6 rounded-2xl bg-black/40 border-2 border-[#433b86]/10 hover:border-[#433b86]/40 hover:shadow-[0_0_30px_rgba(67,59,134,0.15)] transition-all duration-500 group relative overflow-hidden"
                         style={{ 
                           animationDelay: `${index * 75}ms`,
                           animation: 'fadeInUp 0.5s ease-out forwards',
                           opacity: 0
-                        }}
-                      >
+                        }}>
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-[#433b86]/5 rounded-full -mr-12 -mt-12 transition-all group-hover:bg-[#433b86]/10" />
                         {/* Subject Header */}
-                        <div className="mb-4">
-                          <h3 className="text-white font-bold text-xl mb-2 group-hover:text-purple-400 transition-colors">
+                        <div className="mb-4 relative z-10">
+                          <h3 className="text-white font-outfit font-extrabold italic text-xl mb-2 group-hover:text-indigo-400 transition-colors">
                             {subject.name}
                           </h3>
                           <div className="flex items-center justify-between">
-                            <p className="text-xs text-white/50">{subject.code}</p>
+                            <p className="text-[10px] uppercase tracking-widest text-white/40 font-outfit">{subject.code}</p>
                             <div className="flex gap-2">
-                              <span className="text-xs px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30 font-semibold">
-                                {subject.creditHours} Credits
+                              <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#433b86]/10 text-indigo-400 border border-[#433b86]/20 font-outfit font-bold">
+                                {subject.creditHours} CR
                               </span>
-                              {subject.materials.quizzes && subject.materials.quizzes.length > 0 && (
-                                <span className="text-xs px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 font-semibold">
-                                  {subject.materials.quizzes.length} Quizzes
-                                </span>
-                              )}
                             </div>
                           </div>
                         </div>
                         
                         {/* Subject Description */}
-                        <p className="text-sm text-white/70 mb-6 line-clamp-3 min-h-[60px]">
+                        <p className="text-sm text-white/60 mb-6 line-clamp-2 min-h-[40px] font-outfit">
                           {subject.description}
                         </p>
                         
                         {/* Material Links Grid */}
-                        <div className="space-y-2">
+                        <div className="space-y-2 relative z-10">
                           <div className="grid grid-cols-2 gap-2">
                             {subject.materials.lectures && subject.materials.lectures !== '' && subject.materials.lectures !== ' ' && (
                               <Button
                                 asChild
                                 size="sm"
                                 variant="outline"
-                                className="bg-white/5 border-white/20 text-white hover:bg-purple-500/20 hover:border-purple-500/50 hover:text-purple-400 transition-all"
+                                className="h-9 rounded-full bg-white text-black hover:bg-indigo-50 border-0 font-outfit font-bold text-[11px] transition-all"
                               >
                                 <Link href={createDriveLink(subject.materials.lectures)}>
                                   <BookOpen className="w-3 h-3 mr-1" />
-                                  Lectures
+                                  LECTURES
                                 </Link>
                               </Button>
                             )}
@@ -1136,11 +1111,11 @@ export default function ProfilePage() {
                                 asChild
                                 size="sm"
                                 variant="outline"
-                                className="bg-white/5 border-white/20 text-white hover:bg-blue-500/20 hover:border-blue-500/50 hover:text-blue-400 transition-all"
+                                className="h-9 rounded-full bg-[#433b86]/10 border-2 border-[#433b86]/30 text-indigo-400 hover:bg-[#433b86]/20 hover:border-[#433b86]/50 font-outfit font-bold text-[11px] transition-all hover:text-indigo-400"
                               >
                                 <Link href={createDriveLink(subject.materials.sections)}>
                                   <FileText className="w-3 h-3 mr-1" />
-                                  Sections
+                                  SECTIONS
                                 </Link>
                               </Button>
                             )}
@@ -1150,11 +1125,11 @@ export default function ProfilePage() {
                                 asChild
                                 size="sm"
                                 variant="outline"
-                                className="bg-white/5 border-white/20 text-white hover:bg-cyan-500/20 hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
+                                className="h-9 rounded-full bg-[#433b86]/10 border-2 border-[#433b86]/30 text-indigo-400 hover:bg-[#433b86]/20 hover:border-[#433b86]/50 font-outfit font-bold text-[11px] transition-all hover:text-indigo-400"
                               >
                                 <Link href={`/specialization/${departmentKey}/${userData.current_level}/${subject.id}?tab=quizzes`}>
                                   <Trophy className="w-3 h-3 mr-1" />
-                                  Quizzes
+                                  QUIZZES
                                 </Link>
                               </Button>
                             )}
@@ -1167,7 +1142,7 @@ export default function ProfilePage() {
                                 asChild
                                 size="sm"
                                 variant="outline"
-                                className="bg-white/5 border-white/20 text-white hover:bg-red-500/20 hover:border-red-500/50 hover:text-red-400 transition-all"
+                                className="h-9 rounded-full bg-white text-black hover:bg-indigo-50 border-0 font-outfit font-bold text-[11px] transition-all"
                               >
                                 <a 
                                   href={Array.isArray(subject.materials.videos) ? subject.materials.videos[0] : subject.materials.videos} 
@@ -1175,7 +1150,7 @@ export default function ProfilePage() {
                                   rel="noopener noreferrer"
                                 >
                                   <Video className="w-3 h-3 mr-1" />
-                                  Videos
+                                  VIDEOS
                                 </a>
                               </Button>
                             )}
@@ -1185,11 +1160,11 @@ export default function ProfilePage() {
                                 asChild
                                 size="sm"
                                 variant="outline"
-                                className="bg-white/5 border-white/20 text-white hover:bg-green-500/20 hover:border-green-500/50 hover:text-green-400 transition-all"
+                                className="h-9 rounded-full bg-[#433b86]/10 border-2 border-[#433b86]/30 text-indigo-400 hover:bg-[#433b86]/20 hover:border-[#433b86]/50 font-outfit font-bold text-[11px] transition-all hover:text-indigo-400"
                               >
                                 <Link href={createDriveLink(subject.materials.summaries)}>
                                   <FileText className="w-3 h-3 mr-1" />
-                                  Summaries
+                                  SUMMARIES
                                 </Link>
                               </Button>
                             )}
@@ -1199,11 +1174,11 @@ export default function ProfilePage() {
                                 asChild
                                 size="sm"
                                 variant="outline"
-                                className="bg-white/5 border-white/20 text-white hover:bg-orange-500/20 hover:border-orange-500/50 hover:text-orange-400 transition-all"
+                                className="h-9 rounded-full bg-white text-black hover:bg-indigo-50 border-0 font-outfit font-bold text-[11px] transition-all"
                               >
                                 <Link href={createDriveLink(subject.materials.exams)}>
                                   <GraduationCap className="w-3 h-3 mr-1" />
-                                  Exams
+                                  EXAMS
                                 </Link>
                               </Button>
                             )}
@@ -1225,23 +1200,21 @@ export default function ProfilePage() {
         <div className="mt-12 animate-in fade-in duration-500 delay-500">
           <Card className="bg-gradient-to-br from-red-950/40 to-red-900/20 border-red-500/30 shadow-2xl shadow-red-500/10">
             <CardHeader className="text-center pb-6">
-              <CardTitle className="text-xl font-bold text-red-400 flex items-center justify-center gap-2">
-                The Nuclear Option
+              <CardTitle className="text-2xl font-outfit font-extrabold italic tracking-tight text-red-400 flex items-center justify-center gap-2">
+                Protocol <span className="text-red-600">Termination</span>
               </CardTitle>
-              <CardDescription className="text-white/60">
-                Had enough? We get it. Sort of. Not really. But we respect your choices... mostly.
+              <CardDescription className="text-white/60 font-outfit uppercase text-[10px] tracking-[0.2em]">
+                Secure identity deletion node
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20">
+              <div className="p-4 rounded-xl bg-red-500/5 border border-red-500/20 font-outfit">
                 <p className="text-white/70 text-sm mb-4">
-                  🌟<span className="italic">"Sometimes we need to start over."</span> 
-                  <span className="text-white/50"> - Some may I Love!</span>
+                  ⚠️ <span className="italic font-bold text-red-400">"SOMETIMES WE NEED TO INITIALIZE A SYSTEM WIPE."</span> 
                 </p>
-                <p className="text-white/60 text-sm">
-                  Deleting your account will remove all your quiz attempts, notifications, and that sweet, 
-                  sweet progress you've made. We'll give you 14 days to change your mind because we're 
-                  optimists like that.
+                <p className="text-white/60 text-[11px] leading-relaxed">
+                  Executing account termination will purge all synchronized attempt data, encrypted notifications, and identity footprints. 
+                  A 14-day protocol window allows for manual restoration if necessary.
                 </p>
               </div>
               
