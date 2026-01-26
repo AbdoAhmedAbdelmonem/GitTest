@@ -330,7 +330,7 @@ export default function DriveRootPage() {
         // Fetch fresh admin status from database
         try {
           const response = await fetch(
-            `/api/google-drive/check-access?userId=${session.user_id}`
+            `/api/google-drive/check-access?authId=${session.auth_id}`
           );
           const result = await response.json();
 
@@ -381,15 +381,15 @@ export default function DriveRootPage() {
           console.log(
             "Public API failed for drive info, trying authenticated API"
           );
-          endpoint = `/api/google-drive/files?userId=${
-            userSession.user_id
+          endpoint = `/api/google-drive/files?authId=${
+            userSession.auth_id
           }&fileId=${encodeURIComponent(actualDriveId)}&type=info`;
           response = await fetch(endpoint);
         }
       } else {
         // Admin users use authenticated API directly
-        endpoint = `/api/google-drive/files?userId=${
-          userSession.user_id
+        endpoint = `/api/google-drive/files?authId=${
+          userSession.auth_id
         }&fileId=${encodeURIComponent(actualDriveId)}&type=info`;
         response = await fetch(endpoint);
       }
@@ -447,12 +447,12 @@ export default function DriveRootPage() {
             console.log(
               "Public API failed, trying authenticated API for non-admin user"
             );
-            endpoint = `/api/google-drive/files?userId=${userSession.user_id}&folderId=${actualDriveId}`;
+            endpoint = `/api/google-drive/files?authId=${userSession.auth_id}&folderId=${actualDriveId}`;
             response = await fetch(endpoint);
           }
         } else {
           // Admin users use authenticated API directly
-          endpoint = `/api/google-drive/files?userId=${userSession.user_id}&folderId=${actualDriveId}`;
+          endpoint = `/api/google-drive/files?authId=${userSession.auth_id}&folderId=${actualDriveId}`;
           response = await fetch(endpoint);
         }
 
@@ -702,7 +702,7 @@ export default function DriveRootPage() {
                         <AdminAuthWarningButton
                           onAuthorize={() => {
                             if (userSession) {
-                              window.location.href = `/api/google-drive/auth?userId=${userSession.user_id}`;
+                              window.location.href = `/api/google-drive/auth?authId=${userSession.auth_id}`;
                             }
                           }}
                         />
