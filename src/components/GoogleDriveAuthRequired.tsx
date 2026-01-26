@@ -27,7 +27,7 @@ export function GoogleDriveAuthRequired({ userSession, isAdmin, onAuthComplete }
   const [error, setError] = useState<string | null>(null)
 
   const handleAuthenticate = async () => {
-    if (!userSession?.user_id) {
+    if (!userSession?.auth_id) {
       setError('No user session found')
       return
     }
@@ -42,7 +42,7 @@ export function GoogleDriveAuthRequired({ userSession, isAdmin, onAuthComplete }
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: userSession.user_id,
+          authId: userSession.auth_id,
           isAdmin: isAdmin
         })
       })

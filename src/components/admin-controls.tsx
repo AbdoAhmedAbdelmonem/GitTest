@@ -61,7 +61,7 @@ export function FileActions({ fileId, fileName, onDeleted, onRenamed }: FileActi
       const session = await getStudentSession()
       if (!session) throw new Error('No session found')
 
-      const response = await fetch(`/api/google-drive/rename/${fileId}?userId=${session.user_id}`, {
+      const response = await fetch(`/api/google-drive/rename/${fileId}?authId=${session.auth_id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newName: newName.trim() })
@@ -100,7 +100,7 @@ export function FileActions({ fileId, fileName, onDeleted, onRenamed }: FileActi
       const session = await getStudentSession()
       if (!session) throw new Error('No session found')
 
-      const response = await fetch(`/api/google-drive/delete/${fileId}?userId=${session.user_id}`, {
+      const response = await fetch(`/api/google-drive/delete/${fileId}?authId=${session.auth_id}`, {
         method: 'DELETE'
       })
 
@@ -387,7 +387,7 @@ export function FolderActions({ folderId, folderName, onDeleted, onRenamed }: Fo
       const session = await getStudentSession()
       if (!session) throw new Error('No session found')
 
-      const response = await fetch(`/api/google-drive/rename/${folderId}?userId=${session.user_id}`, {
+      const response = await fetch(`/api/google-drive/rename/${folderId}?authId=${session.auth_id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newName: newName.trim() })
@@ -426,7 +426,7 @@ export function FolderActions({ folderId, folderName, onDeleted, onRenamed }: Fo
       const session = await getStudentSession()
       if (!session) throw new Error('No session found')
 
-      const response = await fetch(`/api/google-drive/delete/${folderId}?userId=${session.user_id}`, {
+      const response = await fetch(`/api/google-drive/delete/${folderId}?authId=${session.auth_id}`, {
         method: 'DELETE'
       })
 

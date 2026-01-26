@@ -13,12 +13,12 @@ export interface UploadItem {
   endTime?: number
   abortController?: AbortController
   parentFolderId: string
-  userId: string
+  authId: string
 }
 
 interface UploadContextType {
   uploads: UploadItem[]
-  uploadFile: (file: File, parentFolderId: string, userId: string, onComplete?: () => void) => Promise<void>
+  uploadFile: (file: File, parentFolderId: string, authId: string, onComplete?: () => void) => Promise<void>
   cancelUpload: (uploadId: string) => void
   clearCompleted: () => void
   retryUpload: (uploadId: string) => void
@@ -43,7 +43,7 @@ export function UploadProvider({ children }: UploadProviderProps) {
   const { addToast } = useToast()
   const uploadCallbacksRef = useRef<Map<string, () => void>>(new Map())
 
-  const uploadFile = useCallback(async (file: File, parentFolderId: string, userId: string, onComplete?: () => void) => {
+  const uploadFile = useCallback(async (file: File, parentFolderId: string, authId: string, onComplete?: () => void) => {
     const uploadId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
     const abortController = new AbortController()
 
@@ -55,7 +55,7 @@ export function UploadProvider({ children }: UploadProviderProps) {
       startTime: Date.now(),
       abortController,
       parentFolderId,
-      userId
+      authId
     }
 
     setUploads(prev => [...prev, uploadItem])
@@ -75,7 +75,7 @@ export function UploadProvider({ children }: UploadProviderProps) {
         sizeMB: (file.size / (1024 * 1024)).toFixed(2),
         type: file.type,
         parentFolderId,
-        userId
+        authId
       })
 
       // Step 1: Get signed upload URL from our server
@@ -89,7 +89,7 @@ export function UploadProvider({ children }: UploadProviderProps) {
           fileSize: file.size,
           mimeType: file.type,
           parentFolderId,
-          userId
+          authId
         }),
       })
 
@@ -350,7 +350,7 @@ export function UploadProvider({ children }: UploadProviderProps) {
 
     // Retry the upload with stored parameters
     const retryFile = new File([upload.file], upload.file.name, { type: upload.file.type })
-    uploadFile(retryFile, upload.parentFolderId, upload.userId)
+    uploadFile(retryFile, upload.parentFolderId, upload.authId)
       .catch(error => {
         console.error('Retry failed:', error)
         addToast(`Retry failed for "${upload.file.name}"`, 'error')

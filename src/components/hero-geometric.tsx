@@ -72,7 +72,7 @@ export default function HeroGeometric({
           </motion.div>
 
           <motion.div custom={1} variants={fadeUpVariants} {...animationSettings} transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}>
-            <h1 className="text-[65px] md:text-[120px] font-bold mb-6 md:mb-8 tracking-tight leading-tight">
+            <h1 className="text-[65px] md:text-[120px] font-bold mb-6 md:mb-8 tracking-tight leading-tight" style={{ fontFamily: 'var(--font-outfit), sans-serif',fontWeight:'bold'}}>
               <span className="text-white">
                 {title1}
               </span>

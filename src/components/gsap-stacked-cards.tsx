@@ -118,7 +118,7 @@ export default function GsapStackedCards() {
             <Sparkles className="w-4 h-4 text-blue-400" />
             <span className="text-sm text-white/80 font-medium">Your Learning Hub</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6" >
             Everything You Need to{' '}
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Succeed

@@ -31,7 +31,7 @@ import { useUpload } from "./upload-context"
 interface CreateActionsProps {
   currentFolderId: string
   onFileCreated?: () => void
-  userSession: { user_id: string } | null
+  userSession: { auth_id: string } | null
 }
 
 export function CreateActions({ currentFolderId, onFileCreated, userSession }: CreateActionsProps) {
@@ -62,13 +62,13 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
   // Check if user has Google Drive authentication
   useEffect(() => {
     const checkAuthentication = async () => {
-      if (!userSession?.user_id) {
+      if (!userSession?.auth_id) {
         setHasGoogleAuth(false)
         return
       }
 
       try {
-        const response = await fetch(`/api/google-drive/check-access?userId=${userSession.user_id}`)
+        const response = await fetch(`/api/google-drive/check-access?authId=${userSession.auth_id}`)
         const result = await response.json()
 
         if (response.ok && result.hasAccess) {
@@ -86,17 +86,17 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
     }
 
     checkAuthentication()
-  }, [userSession?.user_id])
+  }, [userSession?.auth_id])
 
   const handleAuthenticate = async () => {
-    if (!userSession?.user_id) return
+    if (!userSession?.auth_id) return
 
     try {
       const response = await fetch('/api/google-drive/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId: userSession.user_id,
+          authId: userSession.auth_id,
           isAdmin: true
         })
       })
@@ -131,7 +131,7 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
         body: JSON.stringify({
           folderName: folderName.trim(),
           parentFolderId: currentFolderId,
-          userId: userSession?.user_id,
+          authId: userSession?.auth_id,
         }),
       })
 
@@ -172,10 +172,10 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
   }
 
   const handleFileUpload = async (file: File) => {
-    if (!file || !userSession?.user_id) return
+    if (!file || !userSession?.auth_id) return
 
     try {
-      await uploadFile(file, currentFolderId, userSession.user_id.toString(), () => {
+      await uploadFile(file, currentFolderId, userSession.auth_id, () => {
         // Auto-refresh immediately after successful upload
         onFileCreated?.()
       })
@@ -283,7 +283,7 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
         body: JSON.stringify({
           folderName,
           parentFolderId: parentId,
-          userId: userSession?.user_id,
+          authId: userSession?.auth_id,
         }),
       })
 
@@ -421,7 +421,7 @@ export function CreateActions({ currentFolderId, onFileCreated, userSession }: C
         }
 
         try {
-          await uploadFile(file, parentId, userSession?.user_id?.toString() || '', () => {
+          await uploadFile(file, parentId, userSession?.auth_id || '', () => {
             onFileCreated?.()
           })
           uploadedCount++

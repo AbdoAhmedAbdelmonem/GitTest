@@ -307,7 +307,7 @@ export default function QuizInterface({
       const { error, count } = await supabase
         .from("quiz_data")
         .select("*", { count: "exact" })
-        .eq("user_id", session.user_id)
+        .eq("auth_id", session.auth_id)
         .eq("quiz_id", quizData.code)
         .gte("solved_at", todayISO);
 
@@ -597,7 +597,7 @@ export default function QuizInterface({
       console.log(`📊 Score Calculation: ${finalScore} correct out of ${questions.length} = ${scorePercentage}%`);
       
       const quizResult = {
-        user_id: session.user_id,
+        auth_id: session.auth_id,
         quiz_id: quizId,
         score: scorePercentage,
         how_finished: status,

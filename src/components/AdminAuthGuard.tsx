@@ -29,13 +29,13 @@ export function AdminAuthGuard({ userSession, onAuthStatusChange, children }: Ad
   const [error, setError] = useState<string | null>(null)
 
   const checkAuthStatus = async () => {
-    if (!userSession?.user_id) {
+    if (!userSession?.auth_id) {
       setAuthStatus('needs-auth')
       return
     }
 
     try {
-      const response = await fetch(`/api/google-drive/check-access?userId=${userSession.user_id}`)
+      const response = await fetch(`/api/google-drive/check-access?authId=${userSession.auth_id}`)
       const result = await response.json()
 
       if (response.ok) {
@@ -60,10 +60,10 @@ export function AdminAuthGuard({ userSession, onAuthStatusChange, children }: Ad
 
   useEffect(() => {
     checkAuthStatus()
-  }, [userSession?.user_id])
+  }, [userSession?.auth_id])
 
   const handleAuthenticate = async () => {
-    if (!userSession?.user_id) {
+    if (!userSession?.auth_id) {
       setError('No user session found')
       return
     }
@@ -78,7 +78,7 @@ export function AdminAuthGuard({ userSession, onAuthStatusChange, children }: Ad
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: userSession.user_id,
+          authId: userSession.auth_id,
           isAdmin: true
         })
       })

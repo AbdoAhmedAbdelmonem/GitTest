@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useNotifications } from "@/hooks/use-notifications"
 
 interface NotificationAdderProps {
-  userId: number
+  authId: string
   title?: string
   provider?: string
   type?: string
@@ -14,7 +14,7 @@ interface NotificationAdderProps {
 }
 
 export function NotificationAdder({
-  userId,
+  authId,
   title,
   provider,
   type,
@@ -25,9 +25,9 @@ export function NotificationAdder({
   const { addNotification } = useNotifications()
 
   useEffect(() => {
-    if (autoAdd && userId) {
+    if (autoAdd && authId) {
       const notification = {
-        user_id: userId,
+        auth_id: authId,
         title: title || null,
         provider: provider || null,
         type: type || null,
@@ -37,7 +37,7 @@ export function NotificationAdder({
 
       addNotification(notification)
     }
-  }, [userId, title, provider, type, messageContent, seen, autoAdd, addNotification])
+  }, [authId, title, provider, type, messageContent, seen, autoAdd, addNotification])
 
   // This component doesn't render anything, it just adds notifications
   return null
@@ -48,7 +48,7 @@ export function useAddNotification() {
   const { addNotification } = useNotifications()
 
   const addCustomNotification = (
-    userId: number,
+    authId: string,
     title?: string,
     provider?: string,
     type?: string,
@@ -56,7 +56,7 @@ export function useAddNotification() {
     seen: string = "false"
   ) => {
     const notification = {
-      user_id: userId,
+      auth_id: authId,
       title: title || null,
       provider: provider || null,
       type: type || null,

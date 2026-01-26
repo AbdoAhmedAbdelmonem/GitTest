@@ -38,7 +38,7 @@ interface DriveFile {
 }
 
 interface GoogleDriveManagerProps {
-  userId?: number
+  authId?: string
   isAdmin?: boolean
   folderId?: string // Optional folder ID to work with specific folder
   currentFolderId?: string // Alternative prop name for current folder
@@ -47,7 +47,7 @@ interface GoogleDriveManagerProps {
 }
 
 export function GoogleDriveManager({ 
-  userId, 
+  authId, 
   isAdmin = false, 
   folderId, 
   currentFolderId, 
@@ -64,18 +64,18 @@ export function GoogleDriveManager({
   const [hasGoogleAccess, setHasGoogleAccess] = useState<boolean | null>(null)
   const [autoAuthInProgress, setAutoAuthInProgress] = useState(false)
 
-  // Get user session if userId not provided
-  const [currentUserId, setCurrentUserId] = useState<number | null>(userId || null)
+  // Get user session if authId not provided
+  const [currentAuthId, setCurrentAuthId] = useState<string | null>(authId || null)
   const [currentIsAdmin, setCurrentIsAdmin] = useState<boolean>(isAdmin)
 
   useEffect(() => {
-    if (!userId) {
+    if (!authId) {
       // Get from session storage
       import('@/lib/auth').then(async ({ getStudentSession }) => {
         const session = await getStudentSession()
         if (session) {
-          console.log('📁 SESSION DEBUG - Got session for user:', session.user_id, 'is_admin:', session.is_admin)
-          setCurrentUserId(session.user_id)
+          console.log('📁 SESSION DEBUG - Got session for user:', session.auth_id, 'is_admin:', session.is_admin)
+          setCurrentAuthId(session.auth_id)
           // For now, just check is_admin to allow debugging
           // TODO: Add back Authorized check once OAuth is properly set up
           setCurrentIsAdmin(session.is_admin || false)
@@ -84,20 +84,20 @@ export function GoogleDriveManager({
         }
       })
     }
-  }, [userId])
+  }, [authId])
 
   // Use the effective folder ID
   const effectiveFolderId = currentFolderId || folderId
 
   // Load user's Google Drive files
   const loadFiles = useCallback(async () => {
-    if (!currentUserId) return
+    if (!currentAuthId) return
 
     setLoading(true)
     setError(null)
 
     try {
-      let url = `/api/google-drive/files?userId=${currentUserId}&pageSize=20`
+      let url = `/api/google-drive/files?authId=${currentAuthId}&pageSize=20`
       if (effectiveFolderId) {
         url += `&folderId=${effectiveFolderId}`
       }
@@ -116,21 +116,21 @@ export function GoogleDriveManager({
     } finally {
       setLoading(false)
     }
-  }, [currentUserId, effectiveFolderId, onFilesChange])
+  }, [currentAuthId, effectiveFolderId, onFilesChange])
 
   const { uploadFile: uploadFileContext } = useUpload()
 
   // Upload file to Google Drive (Admin only) - now using direct upload
   const uploadFile = async () => {
-    if (!selectedFile || !currentIsAdmin || !currentUserId) return
+    if (!selectedFile || !currentIsAdmin || !currentAuthId) return
 
-    console.log('📁 UPLOAD DEBUG - Starting upload for user:', currentUserId, 'file:', selectedFile.name)
+    console.log('📁 UPLOAD DEBUG - Starting upload for user:', currentAuthId, 'file:', selectedFile.name)
 
     setUploading(true)
     setError(null)
 
     try {
-      await uploadFileContext(selectedFile, effectiveFolderId || 'root', currentUserId.toString(), async () => {
+      await uploadFileContext(selectedFile, effectiveFolderId || 'root', currentAuthId, async () => {
         // Reload files after successful upload
         await loadFiles()
       })
@@ -145,10 +145,10 @@ export function GoogleDriveManager({
 
   // Check if user has Google Drive access
   const checkGoogleAccess = useCallback(async () => {
-    if (!currentUserId) return false
+    if (!currentAuthId) return false
 
     try {
-      const response = await fetch(`/api/google-drive/check-access?userId=${currentUserId}`)
+      const response = await fetch(`/api/google-drive/check-access?authId=${currentAuthId}`)
       const result = await response.json()
 
       if (response.ok) {
@@ -163,16 +163,16 @@ export function GoogleDriveManager({
       setHasGoogleAccess(false)
       return false
     }
-  }, [currentUserId])
+  }, [currentAuthId])
 
   // Auto-authorize Google Drive (Admin only)
   const autoAuthorizeGoogleDrive = useCallback(async () => {
-    if (!currentIsAdmin || !currentUserId) return
+    if (!currentIsAdmin || !currentAuthId) return
 
     setAutoAuthInProgress(true)
 
     try {
-      const response = await fetch(`/api/google-drive/auth?userId=${currentUserId}&isAdmin=${currentIsAdmin}`, {
+      const response = await fetch(`/api/google-drive/auth?authId=${currentAuthId}&isAdmin=${currentIsAdmin}`, {
         method: 'GET'
       })
 
@@ -188,14 +188,14 @@ export function GoogleDriveManager({
       setError(err instanceof Error ? err.message : 'Failed to auto-authorize Google Drive')
       setAutoAuthInProgress(false)
     }
-  }, [currentIsAdmin, currentUserId])
+  }, [currentIsAdmin, currentAuthId])
 
   // Manual authorize Google Drive (Non-admin users)
   const authorizeGoogleDrive = async () => {
-    if (!currentUserId) return
+    if (!currentAuthId) return
     
     try {
-      const response = await fetch(`/api/google-drive/auth?userId=${currentUserId}&isAdmin=${currentIsAdmin}`, {
+      const response = await fetch(`/api/google-drive/auth?authId=${currentAuthId}&isAdmin=${currentIsAdmin}`, {
         method: 'GET'
       })
       
@@ -213,7 +213,7 @@ export function GoogleDriveManager({
 
   // Rename file (Admin only)
   const renameFile = async (fileId: string, currentName: string) => {
-    if (!currentIsAdmin || !currentUserId) return
+    if (!currentIsAdmin || !currentAuthId) return
     
     const newName = prompt('Enter new filename:', currentName)
     if (!newName || newName === currentName) return
@@ -222,7 +222,7 @@ export function GoogleDriveManager({
     setError(null)
     
     try {
-      const response = await fetch(`/api/google-drive/rename/${fileId}?userId=${currentUserId}`, {
+      const response = await fetch(`/api/google-drive/rename/${fileId}?authId=${currentAuthId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newName })
@@ -245,7 +245,7 @@ export function GoogleDriveManager({
 
   // Delete file (Admin only)
   const deleteFile = async (fileId: string, fileName: string) => {
-    if (!currentIsAdmin || !currentUserId) return
+    if (!currentIsAdmin || !currentAuthId) return
     
     if (!confirm(`Are you sure you want to delete "${fileName}"?`)) return
     
@@ -253,7 +253,7 @@ export function GoogleDriveManager({
     setError(null)
     
     try {
-      const response = await fetch(`/api/google-drive/delete/${fileId}?userId=${currentUserId}`, {
+      const response = await fetch(`/api/google-drive/delete/${fileId}?authId=${currentAuthId}`, {
         method: 'DELETE'
       })
       
@@ -306,7 +306,7 @@ export function GoogleDriveManager({
   // Initialize component
   useEffect(() => {
     const initializeComponent = async () => {
-      if (!currentUserId) return
+      if (!currentAuthId) return
 
       // For admin users, check Google Drive access and auto-authorize if needed
       if (currentIsAdmin) {
@@ -327,12 +327,12 @@ export function GoogleDriveManager({
       }
     }
 
-    if (currentUserId) {
+    if (currentAuthId) {
       initializeComponent()
     }
-  }, [currentUserId, currentIsAdmin, hasGoogleAccess, autoAuthorizeGoogleDrive, checkGoogleAccess, loadFiles])
+  }, [currentAuthId, currentIsAdmin, hasGoogleAccess, autoAuthorizeGoogleDrive, checkGoogleAccess, loadFiles])
 
-  if (!currentUserId) {
+  if (!currentAuthId) {
     return (
       <Card className="bg-white/[0.02] border-white/10 backdrop-blur-xl">
         <CardContent className="pt-6">
