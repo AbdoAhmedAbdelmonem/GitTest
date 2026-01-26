@@ -270,9 +270,9 @@ export default function DrivePage() {
       setUserSession(session)
       
       // Fetch fresh admin status from database
-      if (session?.user_id) {
+      if (session?.auth_id) {
         try {
-          const response = await fetch(`/api/google-drive/check-access?userId=${session.user_id}`)
+          const response = await fetch(`/api/google-drive/check-access?authId=${session.auth_id}`)
           const result = await response.json()
           
           console.log('Fresh admin status from DB:', result)
@@ -325,7 +325,7 @@ export default function DrivePage() {
         // If public API fails, fallback to authenticated API
         if (!response.ok) {
           console.log('Public API failed for folder info, trying authenticated API')
-          url = `/api/google-drive/files?userId=${userSession.user_id}&fileId=${encodeURIComponent(folderId)}&type=info`;
+          url = `/api/google-drive/files?authId=${userSession.auth_id}&fileId=${encodeURIComponent(folderId)}&type=info`;
           response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -336,7 +336,7 @@ export default function DrivePage() {
         }
       } else {
         // Admin users use authenticated API directly
-        url = `/api/google-drive/files?userId=${userSession.user_id}&fileId=${encodeURIComponent(folderId)}&type=info`;
+        url = `/api/google-drive/files?authId=${userSession.auth_id}&fileId=${encodeURIComponent(folderId)}&type=info`;
         response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -400,7 +400,7 @@ export default function DrivePage() {
         // If public API fails, fallback to authenticated API
         if (!response.ok) {
           console.log('Public API failed for folder contents, trying authenticated API')
-          url = `/api/google-drive/files?userId=${userSession.user_id}&folderId=${folderId}`;
+          url = `/api/google-drive/files?authId=${userSession.auth_id}&folderId=${folderId}`;
           if (pageToken) {
             url += `&pageToken=${pageToken}`;
           }
@@ -408,7 +408,7 @@ export default function DrivePage() {
         }
       } else {
         // Admin users use authenticated API directly
-        url = `/api/google-drive/files?userId=${userSession.user_id}&folderId=${folderId}`;
+        url = `/api/google-drive/files?authId=${userSession.auth_id}&folderId=${folderId}`;
         if (pageToken) {
           url += `&pageToken=${pageToken}`;
         }
@@ -759,7 +759,7 @@ export default function DrivePage() {
                     <AdminAuthWarningButton
                       onAuthorize={() => {
                         if (userSession) {
-                          window.location.href = `/api/google-drive/auth?userId=${userSession.user_id}`;
+                          window.location.href = `/api/google-drive/auth?authId=${userSession.auth_id}`;
                         }
                       }}
                     />
