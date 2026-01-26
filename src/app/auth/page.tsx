@@ -60,14 +60,14 @@ function CustomDropdown({
 
   return (
     <div className="space-y-2" ref={dropdownRef}>
-      <Label className="text-[#FFAA00] text-xs font-semibold tracking-widest uppercase">
+      <Label className="text-[#818cf8] text-xs font-semibold tracking-widest uppercase">
         {label}
       </Label>
       <div className="relative">
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="flex h-12 w-full items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 text-left text-white text-sm hover:bg-white/[0.05] focus:outline-none focus:ring-1 focus:ring-[#FFAA00]/30 transition-all"
+          className="flex h-12 w-full items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 text-left text-white text-sm hover:bg-white/[0.05] focus:outline-none focus:ring-1 focus:ring-[#433b86]/30 transition-all"
         >
           <span>{selectedOption?.label || `Select ${label.toLowerCase()}`}</span>
           <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -94,7 +94,7 @@ function CustomDropdown({
                     }}
                     className={`block w-full px-4 py-2.5 text-left text-sm transition-colors ${
                       value === option.value
-                        ? "bg-[#FFAA00]/10 text-[#FFAA00]"
+                        ? "bg-[#433b86]/10 text-[#818cf8]"
                         : "text-white/70 hover:bg-white/5 hover:text-white"
                     }`}
                   >
@@ -636,12 +636,12 @@ export default function AuthPage() {
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/60" />
       
-      {/* Orange gradient glow effects */}
+      {/* Indigo gradient glow effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#FFAA00]/[0.03] blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#FFAA00]/[0.03] blur-[120px] rounded-full translate-x-1/2 translate-y-1/2" />
-        <div className="absolute top-1/2 left-0 w-[250px] h-[600px] bg-[#FFAA00]/[0.02] blur-[80px] -translate-x-1/2" />
-        <div className="absolute top-1/2 right-0 w-[250px] h-[600px] bg-[#FFAA00]/[0.02] blur-[80px] translate-x-1/2" />
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#433b86]/[0.1] blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#433b86]/[0.1] blur-[120px] rounded-full translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-1/2 left-0 w-[250px] h-[600px] bg-[#433b86]/[0.05] blur-[80px] -translate-x-1/2" />
+        <div className="absolute top-1/2 right-0 w-[250px] h-[600px] bg-[#433b86]/[0.05] blur-[80px] translate-x-1/2" />
       </div>
 
       {/* Logo */}
@@ -671,10 +671,12 @@ export default function AuthPage() {
             transition={{ duration: 0.4 }}
           >
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl font-bold italic mb-3" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+            <h1 className="text-4xl md:text-5xl font-outfit font-extrabold italic tracking-tight mb-3">
               <span className="text-white">{stepContent.title}</span>
               <br />
-              <span className="text-[#FFAA00]">{stepContent.accent}</span>
+              <span className="bg-gradient-to-r from-indigo-400 to-violet-500 bg-clip-text text-transparent">
+                {stepContent.accent}
+              </span>
             </h1>
 
             {/* Subtitle */}
@@ -700,12 +702,12 @@ export default function AuthPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center gap-5"
               >
-                <div className="w-14 h-14 bg-[#FFAA00] rounded-full flex items-center justify-center">
+                <div className="w-14 h-14 bg-[#433b86] rounded-full flex items-center justify-center">
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring" }}
-                    className="text-xl text-black"
+                    className="text-xl text-white"
                   >
                     ✓
                   </motion.span>
@@ -713,7 +715,7 @@ export default function AuthPage() {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                  className="w-5 h-5 border-2 border-white/20 border-t-[#FFAA00] rounded-full"
+                  className="w-5 h-5 border-2 border-white/20 border-t-[#433b86] rounded-full"
                 />
               </motion.div>
             ) : (
@@ -801,10 +803,10 @@ export default function AuthPage() {
                       <button
                         type="button"
                         onClick={() => toggleMode(mode === "login" ? "signup" : "login")}
-                        className="text-white font-medium underline underline-offset-4 hover:text-[#FFAA00] transition-colors inline-flex items-center gap-1.5 text-sm"
+                        className="text-white font-medium underline underline-offset-4 hover:text-[#818cf8] transition-colors inline-flex items-center gap-1.5 text-sm"
                       >
                         {mode === "login" ? "Initialize a new identity" : "Sign in to your account"}
-                        <span className="text-[#FFAA00]">✦</span>
+                        <span className="text-[#818cf8]">✦</span>
                       </button>
                     </div>
 
@@ -821,8 +823,8 @@ export default function AuthPage() {
                 {/* OTP Verification */}
                 {authStep === "otp" && (
                   <div className="space-y-5">
-                    <div className="w-16 h-16 bg-[#FFAA00]/10 rounded-xl flex items-center justify-center mx-auto border border-[#FFAA00]/20">
-                      <Shield className="w-8 h-8 text-[#FFAA00]" />
+                    <div className="w-16 h-16 bg-[#433b86]/10 rounded-xl flex items-center justify-center mx-auto border border-[#433b86]/20">
+                      <Shield className="w-8 h-8 text-[#818cf8]" />
                     </div>
 
                     <div className="flex justify-center gap-2">
@@ -861,9 +863,9 @@ export default function AuthPage() {
                               }
                             }}
                             className={`w-10 h-12 text-center text-xl font-bold bg-white/[0.03] border-2 text-white rounded-lg transition-all ${
-                              isCorrect ? 'border-[#FFAA00] ring-2 ring-[#FFAA00]/20' 
+                              isCorrect ? 'border-[#433b86] ring-2 ring-[#433b86]/20' 
                               : isWrong ? 'border-red-500 ring-2 ring-red-500/20' 
-                              : 'border-white/10 focus:border-[#FFAA00]/50'
+                              : 'border-white/10 focus:border-[#433b86]/50'
                             }`}
                           />
                         )
@@ -884,7 +886,7 @@ export default function AuthPage() {
                       type="button"
                       onClick={handleResendOtp}
                       disabled={resendTimer > 0}
-                      className={`text-xs ${resendTimer > 0 ? 'text-white/30' : 'text-[#FFAA00] hover:underline'}`}
+                      className={`text-xs ${resendTimer > 0 ? 'text-white/30' : 'text-[#818cf8] hover:underline'}`}
                     >
                       {resendTimer > 0 ? `Resend in ${Math.floor(resendTimer / 60)}:${(resendTimer % 60).toString().padStart(2, '0')}` : "Resend code"}
                     </button>
@@ -895,7 +897,7 @@ export default function AuthPage() {
                 {authStep === "name" && (
                   <div className="space-y-4 text-left">
                     <div className="space-y-1.5">
-                      <Label className="text-[#FFAA00] text-xs font-semibold tracking-widest uppercase">
+                      <Label className="text-[#818cf8] text-xs font-semibold tracking-widest uppercase">
                         Username
                       </Label>
                       <Input
@@ -903,13 +905,13 @@ export default function AuthPage() {
                         placeholder="Enter your username"
                         value={signupData.username}
                         onChange={(e) => setSignupData({ ...signupData, username: e.target.value })}
-                        className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 text-sm placeholder:text-white/30 focus:border-[#FFAA00]/50 focus:ring-[#FFAA00]/20"
+                        className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 text-sm placeholder:text-white/30 focus:border-[#433b86]/50 focus:ring-[#433b86]/20"
                         required
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <Label className="text-[#FFAA00] text-xs font-semibold tracking-widest uppercase">
+                      <Label className="text-[#818cf8] text-xs font-semibold tracking-widest uppercase">
                         Phone Number
                       </Label>
                       <Input
@@ -917,7 +919,7 @@ export default function AuthPage() {
                         placeholder="Enter your phone number"
                         value={signupData.phoneNumber}
                         onChange={(e) => setSignupData({ ...signupData, phoneNumber: e.target.value })}
-                        className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 text-sm placeholder:text-white/30 focus:border-[#FFAA00]/50 focus:ring-[#FFAA00]/20"
+                        className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 text-sm placeholder:text-white/30 focus:border-[#433b86]/50 focus:ring-[#433b86]/20"
                         required
                       />
                     </div>
@@ -945,7 +947,7 @@ export default function AuthPage() {
                 {authStep === "specialization" && (
                   <div className="space-y-4 text-left">
                     <div className="space-y-1.5">
-                      <Label className="text-[#FFAA00] text-xs font-semibold tracking-widest uppercase">
+                      <Label className="text-[#818cf8] text-xs font-semibold tracking-widest uppercase">
                         Age
                       </Label>
                       <Input
@@ -953,7 +955,7 @@ export default function AuthPage() {
                         placeholder="Enter your age"
                         value={signupData.age}
                         onChange={(e) => setSignupData({ ...signupData, age: e.target.value })}
-                        className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 text-sm placeholder:text-white/30 focus:border-[#FFAA00]/50 focus:ring-[#FFAA00]/20"
+                        className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 text-sm placeholder:text-white/30 focus:border-[#433b86]/50 focus:ring-[#433b86]/20"
                         required
                       />
                     </div>
@@ -997,7 +999,7 @@ export default function AuthPage() {
                 {authStep === "password" && (
                   <div className="space-y-4 text-left">
                     <div className="space-y-1.5">
-                      <Label className="text-[#FFAA00] text-xs font-semibold tracking-widest uppercase">
+                      <Label className="text-[#818cf8] text-xs font-semibold tracking-widest uppercase">
                         Password
                       </Label>
                       <div className="relative">
@@ -1006,7 +1008,7 @@ export default function AuthPage() {
                           placeholder="Create a password"
                           value={signupData.password}
                           onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
-                          className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 pr-10 text-sm placeholder:text-white/30 focus:border-[#FFAA00]/50 focus:ring-[#FFAA00]/20"
+                          className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 pr-10 text-sm placeholder:text-white/30 focus:border-[#433b86]/50 focus:ring-[#433b86]/20"
                           required
                         />
                         <button
@@ -1020,7 +1022,7 @@ export default function AuthPage() {
                     </div>
 
                     <div className="space-y-1.5">
-                      <Label className="text-[#FFAA00] text-xs font-semibold tracking-widest uppercase">
+                      <Label className="text-[#818cf8] text-xs font-semibold tracking-widest uppercase">
                         Confirm Password
                       </Label>
                       <div className="relative">
@@ -1029,7 +1031,7 @@ export default function AuthPage() {
                           placeholder="Confirm your password"
                           value={signupData.confirmPassword}
                           onChange={(e) => setSignupData({ ...signupData, confirmPassword: e.target.value })}
-                          className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 pr-10 text-sm placeholder:text-white/30 focus:border-[#FFAA00]/50 focus:ring-[#FFAA00]/20"
+                          className="h-11 bg-white/[0.03] border-white/10 text-white rounded-xl px-4 pr-10 text-sm placeholder:text-white/30 focus:border-[#433b86]/50 focus:ring-[#433b86]/20"
                           required
                         />
                         <button
@@ -1084,12 +1086,12 @@ export default function AuthPage() {
         transition={{ delay: 0.5 }}
         className="absolute bottom-6 left-0 right-0 flex justify-center gap-6 text-[10px] tracking-widest"
       >
-        <span className="text-[#FFAA00]/60 flex items-center gap-1.5">
-          <span className="w-1 h-1 bg-[#FFAA00] rounded-full animate-pulse" />
+        <span className="text-[#818cf8] flex items-center gap-1.5">
+          <span className="w-1 h-1 bg-[#433b86] rounded-full animate-pulse" />
           SECURE LOGIN
         </span>
-        <span className="text-white/30">ENCRYPTED</span>
-        <span className="text-white/30">CHAMELEON V2.1</span>
+        <span className="text-white/30 font-outfit">ENCRYPTED</span>
+        <span className="text-white/30 font-outfit">CHAMELEON V2.1</span>
       </motion.div>
     </div>
   )
