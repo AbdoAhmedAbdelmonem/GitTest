@@ -774,7 +774,7 @@ export default function ProfilePage() {
                   Recent synchronization logs and performance metrics
                 </CardDescription>
               </CardHeader>
-              <CardContent style={{height: "53rem"}} className="overflow-y-auto custom-scrollbar">
+              <CardContent style={{height: "47rem"}} className="overflow-y-auto custom-scrollbar">
                 {quizData.length > 0 ? (
                   <div className="space-y-4 flex-1">
                     {quizData.map((attempt, index) => {
@@ -1239,3 +1239,4 @@ export default function ProfilePage() {
     </div>
   )
 }
+
