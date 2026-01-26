@@ -8,7 +8,7 @@ import { z } from 'zod'
  */
 
 // Common validators
-export const userIdSchema = z.number().int().positive()
+export const authIdSchema = z.string().uuid()
 export const emailSchema = z.string().email().max(255)
 export const phoneSchema = z.string().regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number format')
 export const usernameSchema = z.string().min(3).max(50).regex(/^[a-zA-Z0-9_-]+$/, 'Username can only contain letters, numbers, dashes and underscores')

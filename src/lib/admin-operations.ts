@@ -8,7 +8,7 @@ import type { AdminData } from './auth-updated'
  * Check if a user is an authorized admin
  * Uses the new admins table structure
  */
-export async function checkAdminAccess(userId: number): Promise<{
+export async function checkAdminAccess(authId: string): Promise<{
   hasAccess: boolean
   isAdmin: boolean
   authorized: boolean
@@ -25,7 +25,7 @@ export async function checkAdminAccess(userId: number): Promise<{
         authorized
       )
     `)
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
   
   if (error || !user) {
@@ -43,13 +43,13 @@ export async function checkAdminAccess(userId: number): Promise<{
 /**
  * Get admin data including Google Drive tokens
  */
-export async function getAdminData(userId: number): Promise<AdminData | null> {
+export async function getAdminData(authId: string): Promise<AdminData | null> {
   const supabase = await createServerClient()
   
   const { data, error } = await supabase
     .from('admins')
     .select('*')
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
   
   if (error || !data) {
@@ -63,7 +63,7 @@ export async function getAdminData(userId: number): Promise<AdminData | null> {
  * Update admin Google Drive tokens
  */
 export async function updateAdminTokens(
-  userId: number,
+  authId: string,
   tokens: {
     access_token?: string
     refresh_token?: string
@@ -77,7 +77,7 @@ export async function updateAdminTokens(
   const { data: user } = await supabase
     .from('chameleons')
     .select('is_admin')
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
   
   if (!user?.is_admin) {
@@ -88,7 +88,7 @@ export async function updateAdminTokens(
   const { error } = await supabase
     .from('admins')
     .upsert({
-      user_id: userId,
+      auth_id: authId,
       ...tokens,
       updated_at: new Date().toISOString()
     })
@@ -103,7 +103,7 @@ export async function updateAdminTokens(
 /**
  * Get admin Google Drive tokens for API calls
  */
-export async function getAdminGoogleTokens(userId: number): Promise<{
+export async function getAdminGoogleTokens(authId: string): Promise<{
   access_token?: string
   refresh_token?: string
   token_expiry?: string
@@ -113,7 +113,7 @@ export async function getAdminGoogleTokens(userId: number): Promise<{
   
   // Use the database function we created
   const { data, error } = await supabase.rpc('get_admin_tokens', {
-    p_user_id: userId
+    p_auth_id: authId
   })
   
   if (error || !data || data.length === 0) {
@@ -126,11 +126,11 @@ export async function getAdminGoogleTokens(userId: number): Promise<{
 /**
  * Check if admin is authorized (simplified check)
  */
-export async function isAdminAuthorized(userId: number): Promise<boolean> {
+export async function isAdminAuthorized(authId: string): Promise<boolean> {
   const supabase = await createServerClient()
   
   const { data, error } = await supabase.rpc('is_admin_authorized', {
-    p_user_id: userId
+    p_auth_id: authId
   })
   
   if (error) {
@@ -144,7 +144,7 @@ export async function isAdminAuthorized(userId: number): Promise<boolean> {
  * Authorize an admin for Google Drive access
  */
 export async function authorizeAdmin(
-  userId: number,
+  authId: string,
   googleData: {
     google_id: string
     google_email: string
@@ -159,7 +159,7 @@ export async function authorizeAdmin(
   const { data: user } = await supabase
     .from('chameleons')
     .select('is_admin')
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
   
   if (!user?.is_admin) {
@@ -170,7 +170,7 @@ export async function authorizeAdmin(
   const { error } = await supabase
     .from('admins')
     .upsert({
-      user_id: userId,
+      auth_id: authId,
       google_id: googleData.google_id,
       google_email: googleData.google_email,
       access_token: googleData.access_token,
@@ -190,7 +190,7 @@ export async function authorizeAdmin(
 /**
  * Revoke admin authorization
  */
-export async function revokeAdminAccess(userId: number): Promise<{ success: boolean; error?: string }> {
+export async function revokeAdminAccess(authId: string): Promise<{ success: boolean; error?: string }> {
   const supabase = await createServerClient()
   
   const { error } = await supabase
@@ -202,7 +202,7 @@ export async function revokeAdminAccess(userId: number): Promise<{ success: bool
       token_expiry: null,
       updated_at: new Date().toISOString()
     })
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
   
   if (error) {
     return { success: false, error: error.message }
@@ -214,11 +214,11 @@ export async function revokeAdminAccess(userId: number): Promise<{ success: bool
 /**
  * Get user with admin info using secure function
  */
-export async function getUserWithAdminInfo(userId: number) {
+export async function getUserWithAdminInfo(authId: string) {
   const supabase = await createServerClient()
   
   const { data, error } = await supabase
-    .rpc('get_user_with_admin_info', { p_user_id: userId })
+    .rpc('get_user_with_admin_info', { p_auth_id: authId })
   
   if (error || !data || data.length === 0) {
     return null

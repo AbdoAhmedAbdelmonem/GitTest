@@ -1,7 +1,7 @@
 import { createBrowserClient } from '@/lib/supabase/client'
 
 export interface StudentUser {
-  user_id: number
+  auth_id: string
   username: string
   phone_number: string
   specialization: string
@@ -12,7 +12,6 @@ export interface StudentUser {
   created_at: string
   profile_image?: string
   email?: string
-  auth_id?: string // Supabase auth user ID
 }
 
 const SESSION_CACHE_KEY = 'chameleon_user_cache'
@@ -113,7 +112,7 @@ export async function getStudentSession(forceRefresh = false): Promise<StudentUs
     }
 
     const sessionData: StudentUser = {
-      user_id: userData.user_id,
+      auth_id: userData.auth_id,
       username: userData.username,
       phone_number: userData.phone_number,
       specialization: userData.specialization,
@@ -123,8 +122,7 @@ export async function getStudentSession(forceRefresh = false): Promise<StudentUs
       is_banned: userData.is_banned,
       created_at: userData.created_at,
       profile_image: userData.profile_image,
-      email: userData.email,
-      auth_id: userData.auth_id
+      email: userData.email
     }
 
     // Cache the session data

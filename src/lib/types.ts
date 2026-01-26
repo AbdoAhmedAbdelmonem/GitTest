@@ -1,5 +1,5 @@
 export interface User {
-  user_id: number
+  auth_id: string
   username: string
   phone_number: string
   specialization: string
@@ -29,7 +29,7 @@ export interface QuizQuestion {
 
 export interface QuizAttempt {
   id: number
-  user_id: number
+  auth_id: string
   phone_number: string
   quiz_id: number
   score: number
@@ -40,7 +40,7 @@ export interface Notification {
   id: number
   created_at: string
   title: string | null
-  user_id: number | null
+  auth_id: string | null
   seen: string | null
   provider: string | null
   type: string | null
@@ -56,5 +56,6 @@ export interface NotificationContextType {
   addNotification: (notification: Omit<Notification, 'id' | 'created_at'>) => Promise<void>
   deleteNotification: (notificationId: number) => Promise<void>
   refreshNotifications: () => Promise<void>
-  fetchNotificationsOnLogin: (userId: number) => Promise<void>
+  fetchNotificationsOnLogin: (authId: string) => Promise<void>
 }
+

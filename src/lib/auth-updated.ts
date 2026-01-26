@@ -1,7 +1,6 @@
 // Updated type definitions for the new database structure
 export interface StudentUser {
-  user_id: number
-  auth_id: string // UUID from auth.users
+  auth_id: string // UUID from auth.users - Primary identifier
   username: string
   phone_number: string
   specialization: string
@@ -17,7 +16,7 @@ export interface StudentUser {
 // Admin-specific data (from admins table)
 export interface AdminData {
   admin_id: number
-  user_id: number
+  auth_id: string
   google_id?: string
   google_email?: string
   access_token?: string

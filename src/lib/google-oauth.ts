@@ -81,7 +81,7 @@ export async function refreshAccessToken(refreshToken: string) {
 
 // Store tokens in database
 export async function storeUserTokens(
-  userId: number,
+  authId: string,
   googleId: string,
   googleEmail: string,
   accessToken: string,
@@ -95,12 +95,12 @@ export async function storeUserTokens(
     if (refreshToken) {
       const { data: existingUsers } = await supabase
         .from('admins')
-        .select('user_id, google_email')
+        .select('auth_id, google_email')
         .eq('refresh_token', refreshToken)
-        .neq('user_id', userId)
+        .neq('auth_id', authId)
 
       if (existingUsers && existingUsers.length > 0) {
-        console.error(`🚨 SECURITY VIOLATION: Attempting to store duplicate refresh token for user ${userId}. Token already used by:`, existingUsers)
+        console.error(`🚨 SECURITY VIOLATION: Attempting to store duplicate refresh token for user ${authId}. Token already used by:`, existingUsers)
         throw new Error('This Google account is already connected to another user. Each user must use their own Google account.')
       }
     }
@@ -122,22 +122,50 @@ export async function storeUserTokens(
     const { data: userData, error: userError } = await supabase
       .from('chameleons')
       .select('is_admin')
-      .eq('user_id', userId)
+      .eq('auth_id', authId)
       .single()
 
     if (userError || !userData?.is_admin) {
       throw new Error('User must be an admin to store Google Drive tokens')
     }
 
-    // Store tokens in admins table
-    const { error } = await supabase
+    // Store tokens in admins table - check if record exists first
+    const { data: existingAdmin } = await supabase
       .from('admins')
-      .upsert({
-        user_id: userId,
-        ...updateData
-      }, {
-        onConflict: 'user_id'
-      })
+      .select('auth_id')
+      .eq('auth_id', authId)
+      .single()
+
+    let error
+    if (existingAdmin) {
+      // Update existing record
+      const { error: updateError } = await supabase
+        .from('admins')
+        .update({
+          google_id: googleId,
+          google_email: googleEmail,
+          access_token: accessToken,
+          token_expiry: expiryDate ? new Date(expiryDate) : null,
+          authorized: true,
+          ...(refreshToken && { refresh_token: refreshToken })
+        })
+        .eq('auth_id', authId)
+      error = updateError
+    } else {
+      // Insert new record
+      const { error: insertError } = await supabase
+        .from('admins')
+        .insert({
+          auth_id: authId,
+          google_id: googleId,
+          google_email: googleEmail,
+          access_token: accessToken,
+          token_expiry: expiryDate ? new Date(expiryDate) : null,
+          authorized: true,
+          ...(refreshToken && { refresh_token: refreshToken })
+        })
+      error = insertError
+    }
 
     if (error) {
       console.error('Error storing tokens in database:', error)
@@ -152,14 +180,14 @@ export async function storeUserTokens(
 }
 
 // Get user tokens from database
-export async function getUserTokens(userId: number) {
+export async function getUserTokens(authId: string) {
   try {
     const supabase = createAdminClient()
     
     const { data, error } = await supabase
       .from('admins')
       .select('google_id, google_email, access_token, refresh_token, token_expiry')
-      .eq('user_id', userId)
+      .eq('auth_id', authId)
       .single()
 
     if (error) {
@@ -187,45 +215,45 @@ export function isTokenExpired(expiryDate: string | Date | null): boolean {
 }
 
 // Get valid access token (refresh if needed) - requires individual authentication
-export async function getValidAccessToken(userId: number): Promise<string> {
+export async function getValidAccessToken(authId: string): Promise<string> {
   try {
-    console.log('🔑 TOKEN DEBUG - Getting valid access token for user:', userId)
+    console.log('🔑 TOKEN DEBUG - Getting valid access token for user:', authId)
     
     // Each user must have their own tokens - no token sharing
-    const tokens = await getUserTokens(userId)
+    const tokens = await getUserTokens(authId)
     
     if (!tokens?.access_token) {
-      console.log('🔑 TOKEN DEBUG - No access token found for user:', userId)
+      console.log('🔑 TOKEN DEBUG - No access token found for user:', authId)
       throw new Error('No access token found for user. Please authenticate with Google Drive.')
     }
 
-    console.log('🔑 TOKEN DEBUG - User', userId, 'has token starting with:', tokens.access_token.substring(0, 20) + '...')
+    console.log('🔑 TOKEN DEBUG - User', authId, 'has token starting with:', tokens.access_token.substring(0, 20) + '...')
 
     // User has their own tokens, check if valid
     if (!isTokenExpired(tokens.token_expiry)) {
-      console.log('🔑 TOKEN DEBUG - User', userId, 'token is still valid')
+      console.log('🔑 TOKEN DEBUG - User', authId, 'token is still valid')
       return tokens.access_token
     }
 
     // Token is expired, refresh it
     if (!tokens.refresh_token) {
-      console.log('🔑 TOKEN DEBUG - User', userId, 'has no refresh token')
+      console.log('🔑 TOKEN DEBUG - User', authId, 'has no refresh token')
       throw new Error('No refresh token available to refresh access token')
     }
 
-    console.log('🔑 TOKEN DEBUG - User', userId, 'token expired, refreshing...')
+    console.log('🔑 TOKEN DEBUG - User', authId, 'token expired, refreshing...')
     const newTokens = await refreshAccessToken(tokens.refresh_token)
     
     if (!newTokens.access_token) {
-      console.log('🔑 TOKEN DEBUG - Failed to get new access token for user:', userId)
+      console.log('🔑 TOKEN DEBUG - Failed to get new access token for user:', authId)
       throw new Error('Failed to get new access token')
     }
 
-    console.log('🔑 TOKEN DEBUG - User', userId, 'got new token starting with:', newTokens.access_token.substring(0, 20) + '...')
+    console.log('🔑 TOKEN DEBUG - User', authId, 'got new token starting with:', newTokens.access_token.substring(0, 20) + '...')
 
     // Store new tokens
     await storeUserTokens(
-      userId,
+      authId,
       tokens.google_id,
       tokens.google_email,
       newTokens.access_token,
@@ -233,19 +261,19 @@ export async function getValidAccessToken(userId: number): Promise<string> {
       newTokens.expiry_date || undefined
     )
 
-    console.log('🔑 TOKEN DEBUG - Stored new tokens for user:', userId)
+    console.log('🔑 TOKEN DEBUG - Stored new tokens for user:', authId)
     return newTokens.access_token
   } catch (error) {
-    console.error('🔑 TOKEN DEBUG - Error getting valid access token for user', userId, ':', error)
+    console.error('🔑 TOKEN DEBUG - Error getting valid access token for user', authId, ':', error)
     throw error
   }
 }
 
 // Configure OAuth client with user tokens
-export async function configureOAuthClientForUser(userId: number) {
+export async function configureOAuthClientForUser(authId: string) {
   try {
-    const accessToken = await getValidAccessToken(userId)
-    const tokens = await getUserTokens(userId)
+    const accessToken = await getValidAccessToken(authId)
+    const tokens = await getUserTokens(authId)
 
     // Create a new OAuth2 client instance for this user
     // to avoid global state conflicts
@@ -275,7 +303,7 @@ export async function refreshAllAdminTokens() {
     // Get all admin users with tokens from admins table
     const { data: adminData, error } = await supabase
       .from('admins')
-      .select('user_id, google_id, google_email, access_token, refresh_token, token_expiry, authorized')
+      .select('auth_id, google_id, google_email, access_token, refresh_token, token_expiry, authorized')
       .eq('authorized', true)
       .not('refresh_token', 'is', null)
 
@@ -299,30 +327,30 @@ export async function refreshAllAdminTokens() {
       try {
         // Check if token needs refresh (add 10-minute buffer for cron job)
         if (!isTokenExpired(user.token_expiry)) {
-          console.log(`Token for user ${user.user_id} is still valid`)
+          console.log(`Token for user ${user.auth_id} is still valid`)
           continue
         }
 
         if (!user.refresh_token) {
-          console.log(`No refresh token for user ${user.user_id}`)
+          console.log(`No refresh token for user ${user.auth_id}`)
           failedCount++
           continue
         }
 
-        console.log(`Refreshing token for user ${user.user_id}`)
+        console.log(`Refreshing token for user ${user.auth_id}`)
 
         // Refresh the token
         const newTokens = await refreshAccessToken(user.refresh_token)
 
         if (!newTokens.access_token) {
-          console.error(`Failed to get new access token for user ${user.user_id}`)
+          console.error(`Failed to get new access token for user ${user.auth_id}`)
           failedCount++
           continue
         }
 
         // Store new tokens
         await storeUserTokens(
-          user.user_id,
+          user.auth_id,
           user.google_id,
           user.google_email,
           newTokens.access_token,
@@ -331,10 +359,10 @@ export async function refreshAllAdminTokens() {
         )
 
         refreshedCount++
-        console.log(`Successfully refreshed token for user ${user.user_id}`)
+        console.log(`Successfully refreshed token for user ${user.auth_id}`)
 
       } catch (userError) {
-        console.error(`Error refreshing token for user ${user.user_id}:`, userError)
+        console.error(`Error refreshing token for user ${user.auth_id}:`, userError)
         failedCount++
       }
     }

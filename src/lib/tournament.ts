@@ -1,10 +1,12 @@
 "use server"
 
 import { createServerClient } from "@/lib/supabase/server"
+import { createAdminClient } from "@/lib/supabase/admin"
 import { calculateTournamentPoints } from "@/lib/utils"
 
+
 export interface LeaderboardEntry {
-  id: number
+  id: string
   name: string
   points: number
   profile_image?: string
@@ -28,7 +30,7 @@ export interface UserTournamentStats {
 
 interface QuizDataEntry {
   quiz_id: number
-  user_id: number
+  auth_id: string
   score: number | null
   quiz_level: number
   duration_selected: string | null
@@ -48,19 +50,19 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
     // Get current user from Supabase auth
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     
-    let currentUserId: number | null = null
+    let currentAuthId: string | null = null
     let currentUsername: string | null = null
 
     if (!authError && user && user.email) {
       // Get user profile from chameleons table using email (this is how the auth system links users)
       const { data: userProfile, error: profileError } = await supabase
         .from("chameleons")
-        .select("user_id, username, profile_image")
+        .select("auth_id, username, profile_image")
         .eq("email", user.email)
         .single()
 
       if (!profileError && userProfile) {
-        currentUserId = userProfile.user_id
+        currentAuthId = userProfile.auth_id
         currentUsername = userProfile.username
       }
     }
@@ -87,7 +89,7 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
         .from("quiz_data")
         .select(`
           quiz_id,
-          user_id,
+          auth_id,
           score,
           quiz_level,
           duration_selected,
@@ -133,36 +135,63 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
       return { leaderboard: [] }
     }
 
-    // Log the found entries for debugging
-    quizData.forEach((entry: QuizDataEntry) => {
-      console.log(`Found: user_id=${entry.user_id}, level=${entry.quiz_level}, solved=${entry.solved_at}, score=${entry.score}`)
-    })
+    // Get unique auth IDs from quiz data
+    const authIds = [...new Set(quizData.map(entry => entry.auth_id))]
+    
+    console.log(`DEBUG: Found ${authIds.length} unique auth_ids in quiz data for level ${level}:`, authIds.slice(0, 5))
 
-    // Get unique user IDs from quiz data
-    const userIds = [...new Set(quizData.map(entry => entry.user_id))]
+    // Fetch user profiles in batches to avoid URL-too-long errors and timeouts
+    // The .in() query can fail with 700+ IDs, so we batch in groups of 50
+    const adminSupabase = createAdminClient()
+    const BATCH_SIZE = 50
+    const allProfiles: { auth_id: string; username: string; profile_image?: string | null; specialization?: string | null }[] = []
+    
+    console.log(`DEBUG: Fetching user profiles in batches of ${BATCH_SIZE}...`)
+    
+    for (let i = 0; i < authIds.length; i += BATCH_SIZE) {
+      const batchIds = authIds.slice(i, i + BATCH_SIZE)
+      try {
+        const { data: batchProfiles, error: batchError } = await adminSupabase
+          .from("chameleons")
+          .select("auth_id, username, profile_image, specialization")
+          .in("auth_id", batchIds)
+        
+        if (batchError) {
+          console.error(`DEBUG: Error fetching batch ${i / BATCH_SIZE + 1}:`, batchError.message)
+        } else if (batchProfiles) {
+          allProfiles.push(...batchProfiles)
+        }
+      } catch (err) {
+        console.error(`DEBUG: Exception in batch ${i / BATCH_SIZE + 1}:`, err)
+      }
+    }
+    
+    const userProfiles = allProfiles
+    console.log(`DEBUG: Fetched ${userProfiles.length} user profiles from chameleons table in ${Math.ceil(authIds.length / BATCH_SIZE)} batches`)
+    
+    if (userProfiles.length > 0) {
+      console.log(`DEBUG: Sample user profile:`, userProfiles[0])
+    }
 
-    // Fetch user profiles for all users in the quiz data
-    const { data: userProfiles } = await supabase
-      .from("chameleons")
-      .select("user_id, username, profile_image, current_level, specialization")
-      .in("user_id", userIds)
-
-    // Create a map of user_id to user profile
-    const userProfileMap = new Map<number, { username: string; profile_image?: string; current_level: number; specialization?: string }>()
+    // Create a map of auth_id to user profile
+    const userProfileMap = new Map<string, { username: string; profile_image?: string; specialization?: string }>()
     if (userProfiles) {
       userProfiles.forEach(profile => {
-        userProfileMap.set(profile.user_id, {
+        userProfileMap.set(profile.auth_id, {
           username: profile.username,
-          profile_image: profile.profile_image,
-          current_level: profile.current_level,
-          specialization: profile.specialization
+          profile_image: profile.profile_image || undefined,
+          specialization: profile.specialization || undefined
         })
       })
     }
 
+    
+    console.log(`DEBUG: Created userProfileMap with ${userProfileMap.size} entries`)
+
+
     // Group by user and calculate total points from all quizzes
-    const userTotalScores = new Map<number, {
-      userId: number
+    const userTotalScores = new Map<string, {
+      authId: string
       username: string
       profile_image?: string
       specialization?: string
@@ -174,9 +203,9 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
     // Track first attempt for each quiz per user
     const userQuizFirstAttempt = new Map<string, QuizDataEntry>()
 
-    // First pass: identify first attempt for each quiz_id per user_id
+    // First pass: identify first attempt for each quiz_id per auth_id
     quizData.forEach((entry: QuizDataEntry) => {
-      const key = `${entry.user_id}_${entry.quiz_id}`
+      const key = `${entry.auth_id}_${entry.quiz_id}`
       const existing = userQuizFirstAttempt.get(key)
       
       // Keep the earliest attempt (oldest solved_at timestamp)
@@ -189,18 +218,19 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
 
     // Second pass: calculate points only for first attempts
     userQuizFirstAttempt.forEach((entry: QuizDataEntry) => {
-      const userId = entry.user_id
-      const userProfile = userProfileMap.get(userId)
+      const authId = entry.auth_id
+      const userProfile = userProfileMap.get(authId)
       
-      // Only count quizzes where the quiz level matches the user's current level
-      if (!userProfile || userProfile.current_level !== entry.quiz_level) {
-        console.log(`Skipping quiz entry: user_id=${userId}, quiz_id=${entry.quiz_id}, quiz_level=${entry.quiz_level}, user_current_level=${userProfile?.current_level}, solved_at=${entry.solved_at}`)
-        return // Skip this quiz entry
-      }
+      // NOTE: We already filter by quiz_level in the query (line 99)
+      // So all entries here are for the correct level - no need to check current_level
+      // This allows users who changed levels to still appear in their historical quiz data
       
-      const username = userProfile?.username || `User ${userId}`
+      // Get user info from profile if available, otherwise use defaults
+      const username = userProfile?.username || `User ${authId.substring(0, 8)}`
       const profile_image = userProfile?.profile_image
       const specialization = userProfile?.specialization
+
+
       
       const rawPoints = calculateTournamentPoints(
         entry.score || 0,
@@ -213,13 +243,13 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
       // Reduce points by dividing by 10 and rounding
       const points = Math.round(rawPoints / 10)
 
-      console.log(`Adding points for ${username} (level ${userProfile.current_level}): quiz_id=${entry.quiz_id}, score=${entry.score}, duration=${entry.duration_selected}, mode=${entry.answering_mode}, finished=${entry.how_finished} => ${rawPoints} raw points / 10 = ${points} points (FIRST ATTEMPT)`)
+      console.log(`Adding points for ${username}: quiz_id=${entry.quiz_id}, quiz_level=${entry.quiz_level}, score=${entry.score}, duration=${entry.duration_selected}, mode=${entry.answering_mode}, finished=${entry.how_finished} => ${rawPoints} raw points / 10 = ${points} points (FIRST ATTEMPT)`)
 
       const quizTime = new Date(entry.solved_at)
 
-      if (!userTotalScores.has(userId)) {
-        userTotalScores.set(userId, {
-          userId,
+      if (!userTotalScores.has(authId)) {
+        userTotalScores.set(authId, {
+          authId,
           username,
           profile_image,
           specialization,
@@ -228,7 +258,7 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
           earliestQuizTime: quizTime
         })
       } else {
-        const existing = userTotalScores.get(userId)!
+        const existing = userTotalScores.get(authId)!
         existing.totalPoints += points
         existing.quizCount += 1
         // Track the earliest quiz time for tiebreaker
@@ -253,28 +283,28 @@ export async function getLeaderboardData(level: 1 | 2 | 3): Promise<{
       })
       .slice(0, 10)
       .map((user) => ({
-        id: user.userId,
+        id: user.authId,
         name: user.username,
         profile_image: user.profile_image,
         specialization: user.specialization,
         points: user.totalPoints,
-        isCurrentUser: user.userId === currentUserId
+        isCurrentUser: user.authId === currentAuthId
       }))
 
     // Always find and return the current user's entry if they have participated
     // This ensures the frontend always has access to the current user's data
     let currentUserEntry: LeaderboardEntry | undefined
-    if (currentUserId && currentUsername) {
+    if (currentAuthId && currentUsername) {
       // First check if user is in the top 10
       const userInTop10 = sortedUsers.find(u => u.isCurrentUser)
       if (userInTop10) {
         currentUserEntry = userInTop10
       } else {
         // User not in top 10, but may have participated
-        const currentUserData = userTotalScores.get(currentUserId)
+        const currentUserData = userTotalScores.get(currentAuthId)
         if (currentUserData) {
           currentUserEntry = {
-            id: currentUserData.userId,
+            id: currentUserData.authId,
             name: currentUserData.username,
             profile_image: currentUserData.profile_image,
             specialization: currentUserData.specialization,
@@ -314,7 +344,7 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
       .from("quiz_data")
       .select(`
         quiz_id,
-        user_id,
+        auth_id,
         score,
         quiz_level,
         duration_selected,
@@ -353,20 +383,20 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
     return { leaderboard: [] }
   }
 
-  // Get unique user IDs from quiz data
-  const userIds = [...new Set(quizData.map(entry => entry.user_id))]
+  // Get unique auth IDs from quiz data
+  const authIds = [...new Set(quizData.map(entry => entry.auth_id))]
 
   // Fetch user profiles for all users in the quiz data
   const { data: userProfiles } = await supabase
     .from("chameleons")
-    .select("user_id, username, profile_image, current_level, specialization")
-    .in("user_id", userIds)
+    .select("auth_id, username, profile_image, current_level, specialization")
+    .in("auth_id", authIds)
 
-  // Create a map of user_id to user profile
-  const userProfileMap = new Map<number, { username: string; profile_image?: string; current_level: number; specialization?: string }>()
+  // Create a map of auth_id to user profile
+  const userProfileMap = new Map<string, { username: string; profile_image?: string; current_level: number; specialization?: string }>()
   if (userProfiles) {
     userProfiles.forEach(profile => {
-      userProfileMap.set(profile.user_id, {
+      userProfileMap.set(profile.auth_id, {
         username: profile.username,
         profile_image: profile.profile_image,
         current_level: profile.current_level,
@@ -376,8 +406,8 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
   }
 
   // Group by user and calculate total points from all quizzes
-  const userTotalScores = new Map<number, {
-    userId: number
+  const userTotalScores = new Map<string, {
+    authId: string
     username: string
     profile_image?: string
     specialization?: string
@@ -388,9 +418,9 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
   // Track first attempt for each quiz per user
   const userQuizFirstAttempt = new Map<string, QuizDataEntry>()
 
-  // First pass: identify first attempt for each quiz_id per user_id
+  // First pass: identify first attempt for each quiz_id per auth_id
   quizData.forEach((entry: QuizDataEntry) => {
-    const key = `${entry.user_id}_${entry.quiz_id}`
+    const key = `${entry.auth_id}_${entry.quiz_id}`
     const existing = userQuizFirstAttempt.get(key)
     
     // Keep the earliest attempt (oldest solved_at timestamp)
@@ -401,15 +431,15 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
 
   // Second pass: calculate points only for first attempts
   userQuizFirstAttempt.forEach((entry: QuizDataEntry) => {
-    const userId = entry.user_id
-    const userProfile = userProfileMap.get(userId)
+    const authId = entry.auth_id
+    const userProfile = userProfileMap.get(authId)
     
     // Only count quizzes where the quiz level matches the user's current level
     if (!userProfile || userProfile.current_level !== entry.quiz_level) {
       return // Skip this quiz entry
     }
     
-    const username = userProfile?.username || `User ${userId}`
+    const username = userProfile?.username || `User ${authId}`
     const profile_image = userProfile?.profile_image
     const specialization = userProfile?.specialization
     const rawPoints = calculateTournamentPoints(
@@ -425,9 +455,9 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
 
     const quizTime = new Date(entry.solved_at)
 
-    if (!userTotalScores.has(userId)) {
-      userTotalScores.set(userId, {
-        userId,
+    if (!userTotalScores.has(authId)) {
+      userTotalScores.set(authId, {
+        authId,
         username,
         profile_image,
         specialization,
@@ -435,7 +465,7 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
         earliestQuizTime: quizTime
       })
     } else {
-      const existing = userTotalScores.get(userId)!
+      const existing = userTotalScores.get(authId)!
       existing.totalPoints += points
       // Track the earliest quiz time for tiebreaker
       if (quizTime < existing.earliestQuizTime) {
@@ -457,7 +487,7 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
     })
     .slice(0, 10)
     .map((user) => ({
-      id: user.userId,
+      id: user.authId,
       name: user.username,
       profile_image: user.profile_image,
       specialization: user.specialization,
@@ -470,7 +500,7 @@ async function getPublicLeaderboardData(supabase: Awaited<ReturnType<typeof crea
   }
 }
 
-export async function getUserTournamentStats(userId: number, level: 1 | 2 | 3): Promise<UserTournamentStats | null> {
+export async function getUserTournamentStats(authId: string, level: 1 | 2 | 3): Promise<UserTournamentStats | null> {
   try {
     const supabase = await createServerClient()
 
@@ -482,7 +512,7 @@ export async function getUserTournamentStats(userId: number, level: 1 | 2 | 3): 
     const { data: userProfile, error: profileError } = await supabase
       .from("chameleons")
       .select("username, profile_image, specialization")
-      .eq("user_id", userId)
+      .eq("auth_id", authId)
       .single()
 
     if (profileError || !userProfile) {
@@ -502,7 +532,7 @@ export async function getUserTournamentStats(userId: number, level: 1 | 2 | 3): 
         total_questions,
         solved_at
       `)
-      .eq("user_id", userId)
+      .eq("auth_id", authId)
       .eq("quiz_level", level)
       .not("score", "is", null)
       .gte("solved_at", tournamentStart.toISOString())
@@ -579,7 +609,7 @@ export async function getUserTournamentStats(userId: number, level: 1 | 2 | 3): 
     const allUsers = [...leaderboard]
     
     // Find user's rank
-    const userRank = allUsers.findIndex(u => u.id === userId) + 1
+    const userRank = allUsers.findIndex(u => u.id === authId) + 1
     const totalParticipants = allUsers.length
 
     return {

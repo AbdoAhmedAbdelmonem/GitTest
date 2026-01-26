@@ -12,7 +12,7 @@ const oauth2Client = new google.auth.OAuth2(
 /**
  * Generate authorization URL for OAuth flow
  */
-export function getAuthUrl(userId: number, isAdmin: boolean = false): string {
+export function getAuthUrl(authId: string, isAdmin: boolean = false): string {
   const scopes = [
     'https://www.googleapis.com/auth/drive.file',
     'https://www.googleapis.com/auth/drive.appdata',
@@ -20,7 +20,7 @@ export function getAuthUrl(userId: number, isAdmin: boolean = false): string {
     'https://www.googleapis.com/auth/userinfo.email',
   ]
 
-  const state = `user:${userId}${isAdmin ? ':admin' : ''}`
+  const state = `user:${authId}${isAdmin ? ':admin' : ''}`
 
   return oauth2Client.generateAuthUrl({
     access_type: 'offline',
@@ -52,7 +52,7 @@ export async function getGoogleUserInfo(accessToken: string) {
  * Refresh access token using refresh token
  * Now queries admins table for tokens
  */
-export async function refreshAccessToken(userId: number): Promise<string | null> {
+export async function refreshAccessToken(authId: string): Promise<string | null> {
   try {
     const supabase = createAdminClient()
     
@@ -60,11 +60,11 @@ export async function refreshAccessToken(userId: number): Promise<string | null>
     const { data: adminData, error } = await supabase
       .from('admins')
       .select('refresh_token')
-      .eq('user_id', userId)
+      .eq('auth_id', authId)
       .single()
 
     if (error || !adminData?.refresh_token) {
-      console.error('No refresh token found for user:', userId)
+      console.error('No refresh token found for user:', authId)
       return null
     }
 
@@ -78,12 +78,12 @@ export async function refreshAccessToken(userId: number): Promise<string | null>
     }
 
     // Update tokens in admins table
-    await updateAdminTokens(userId, {
+    await updateAdminTokens(authId, {
       access_token: credentials.access_token,
       token_expiry: credentials.expiry_date ? new Date(credentials.expiry_date).toISOString() : undefined,
     })
 
-    console.log('✅ Access token refreshed successfully for user:', userId)
+    console.log('✅ Access token refreshed successfully for user:', authId)
     return credentials.access_token
 
   } catch (error) {
@@ -97,7 +97,7 @@ export async function refreshAccessToken(userId: number): Promise<string | null>
  * UPDATED: Now stores in admins table instead of chameleons
  */
 export async function storeUserTokens(
-  userId: number,
+  authId: string,
   googleId: string,
   googleEmail: string,
   accessToken: string,
@@ -110,7 +110,7 @@ export async function storeUserTokens(
   const { data: user } = await supabase
     .from('chameleons')
     .select('is_admin')
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
 
   if (!user?.is_admin) {
@@ -119,7 +119,7 @@ export async function storeUserTokens(
 
   // Prepare data for admins table
   const adminData: any = {
-    user_id: userId,
+    auth_id: authId,
     google_id: googleId,
     google_email: googleEmail,
     access_token: accessToken,
@@ -139,7 +139,7 @@ export async function storeUserTokens(
   const { error } = await supabase
     .from('admins')
     .upsert(adminData, {
-      onConflict: 'user_id'
+      onConflict: 'auth_id'
     })
 
   if (error) {
@@ -147,21 +147,21 @@ export async function storeUserTokens(
     throw new Error('Failed to store tokens')
   }
 
-  console.log(`✅ Tokens stored in admins table for user ${userId}`)
+  console.log(`✅ Tokens stored in admins table for user ${authId}`)
 }
 
 /**
  * Get user tokens from admins table
  * UPDATED: Now queries admins table
  */
-export async function getUserTokens(userId: number) {
+export async function getUserTokens(authId: string) {
   const supabase = createAdminClient()
   
   // Get tokens from admins table
   const { data, error } = await supabase
     .from('admins')
     .select('google_id, google_email, access_token, refresh_token, token_expiry, authorized')
-    .eq('user_id', userId)
+    .eq('auth_id', authId)
     .single()
 
   if (error || !data) {
@@ -188,22 +188,22 @@ export function isTokenExpired(expiryDate: string | null | undefined): boolean {
  * Get valid access token (refresh if needed)
  * UPDATED: Works with admins table
  */
-export async function getValidAccessToken(userId: number): Promise<string | null> {
+export async function getValidAccessToken(authId: string): Promise<string | null> {
   try {
-    const tokens = await getUserTokens(userId)
+    const tokens = await getUserTokens(authId)
     
     if (!tokens?.access_token) {
-      console.error('No access token found for user:', userId)
+      console.error('No access token found for user:', authId)
       return null
     }
 
     // Check if token is expired
     if (isTokenExpired(tokens.token_expiry)) {
-      console.log('Token expired, refreshing for user:', userId)
-      return await refreshAccessToken(userId)
+      console.log('Token expired, refreshing for user:', authId)
+      return await refreshAccessToken(authId)
     }
 
-    console.log('🔑 TOKEN DEBUG - User', userId, 'has valid token')
+    console.log('🔑 TOKEN DEBUG - User', authId, 'has valid token')
     return tokens.access_token
 
   } catch (error) {
@@ -216,12 +216,12 @@ export async function getValidAccessToken(userId: number): Promise<string | null
  * Revoke user's Google access
  * UPDATED: Clears tokens from admins table
  */
-export async function revokeUserAccess(userId: number): Promise<boolean> {
+export async function revokeUserAccess(authId: string): Promise<boolean> {
   try {
     const supabase = createAdminClient()
     
     // Get access token to revoke with Google
-    const tokens = await getUserTokens(userId)
+    const tokens = await getUserTokens(authId)
     
     if (tokens?.access_token) {
       // Revoke with Google
@@ -242,7 +242,7 @@ export async function revokeUserAccess(userId: number): Promise<boolean> {
         authorized: false,
         updated_at: new Date().toISOString()
       })
-      .eq('user_id', userId)
+      .eq('auth_id', authId)
 
     if (error) {
       console.error('Error clearing admin tokens:', error)
