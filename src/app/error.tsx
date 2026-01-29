@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { AlertCircle, RefreshCcw, Home, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
-export default function Error({
+export default function ErrorPage({
   error,
   reset,
 }: {
@@ -14,83 +14,69 @@ export default function Error({
   reset: () => void
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error('System Error caught by boundary:', error)
+    // Standard error logging
+    console.error('System Error Boundary caught error:', error)
   }, [error])
 
   return (
-    <div className="min-h-screen bg-[#030303] flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Sophisticated Ambient Background */}
+    <div className="min-h-screen bg-black flex items-center justify-center p-6 relative overflow-hidden font-sans">
+      {/* Subtle Background Glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-red-500/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-slate-500/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-red-500/5 rounded-full blur-[120px]" />
+        <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px]" />
       </div>
 
-      <Card className="relative z-10 max-w-lg w-full bg-black/40 backdrop-blur-2xl border-white/5 shadow-[0_0_50px_-12px_rgba(255,255,255,0.05)] rounded-2xl overflow-hidden border-t-white/10">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
+      <Card className="relative z-10 max-w-lg w-full bg-zinc-950/50 backdrop-blur-xl border-zinc-800 shadow-2xl rounded-2xl overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
         
-        <CardHeader className="text-center pt-12 pb-6">
-          <div className="mx-auto w-16 h-16 rounded-full bg-white/[0.03] border border-white/[0.08] flex items-center justify-center mb-6 shadow-inner ring-1 ring-white/10">
-            <AlertCircle className="w-8 h-8 text-red-400/80 stroke-[1.5px]" />
+        <CardHeader className="text-center pt-10 pb-6">
+          <div className="mx-auto w-14 h-14 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-4">
+            <AlertCircle className="w-7 h-7 text-red-500" />
           </div>
-          <CardTitle className="text-2xl font-light tracking-tight text-white mb-2">
+          <CardTitle className="text-2xl font-semibold tracking-tight text-white mb-2">
             System Interruption
           </CardTitle>
-          <CardDescription className="text-slate-400 font-medium leading-relaxed max-w-[280px] mx-auto">
-            A serious error occurred while processing your request. Our systems have logged this event.
+          <CardDescription className="text-zinc-400 font-medium max-w-[300px] mx-auto text-sm">
+            An unexpected error has occurred while processing your request. Our technical team has been notified.
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="px-8 pb-12 space-y-8">
-          <div className="space-y-3">
+        <CardContent className="px-8 pb-10 space-y-6">
+          <div className="flex flex-col gap-3">
             <Button
-              onClick={() => reset()}
-              className="w-full bg-white text-black hover:bg-slate-200 transition-all duration-300 h-12 text-sm font-semibold rounded-xl flex items-center justify-center gap-2 group"
+              onClick={reset}
+              className="w-full bg-white text-black hover:bg-zinc-200 transition-colors h-11 text-sm font-semibold rounded-xl flex items-center justify-center gap-2"
             >
-              <RefreshCcw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
-              Attempt Reconstruction
+              <RefreshCcw className="w-4 h-4" />
+              Try Again
             </Button>
             
-            <Link href="/" className="block">
+            <Link href="/" className="w-full">
               <Button
                 variant="outline"
-                className="w-full border-white/5 bg-white/[0.02] text-white hover:bg-white/[0.05] transition-all duration-300 h-12 text-sm font-medium rounded-xl border-t-white/10"
+                className="w-full border-zinc-800 bg-zinc-900/50 text-white hover:bg-zinc-800 h-11 text-sm font-medium rounded-xl"
               >
-                <Home className="w-4 h-4 mr-2 opacity-60" />
-                Return to Safety
+                <Home className="w-4 h-4 mr-2" />
+                Return Home
               </Button>
             </Link>
           </div>
 
-          <div className="pt-6 border-t border-white/[0.03]">
+          <div className="pt-6 border-t border-zinc-900">
             <details className="group">
-              <summary className="flex items-center justify-between cursor-pointer list-none">
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500 group-hover:text-slate-400 transition-colors">
-                  Diagnostic Metadata
-                </span>
-                <ChevronRight className="w-3 h-3 text-slate-600 group-open:rotate-90 transition-transform duration-300" />
+              <summary className="flex items-center justify-between cursor-pointer list-none text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:text-zinc-400 transition-colors">
+                Diagnostic Metadata
+                <ChevronRight className="w-3 h-3 text-zinc-600 transition-transform group-open:rotate-90" />
               </summary>
-              <div className="mt-4 p-4 rounded-lg bg-black/40 border border-white/5 animate-in fade-in slide-in-from-top-2 duration-300">
-                <code className="text-[11px] font-mono text-red-300/60 leading-relaxed break-all">
-                  {error.digest || error.message || 'Reference: S-INTERNAL_FAILURE'}
+              <div className="mt-4 p-3 rounded-lg bg-zinc-950/80 border border-zinc-800/50">
+                <code className="text-[10px] font-mono text-zinc-500 leading-relaxed break-all">
+                  {error.digest || error.message || 'Reference: S-INTERNAL_SYSTEM_ERR'}
                 </code>
-                <p className="mt-3 text-[10px] text-slate-600 leading-tight">
-                  This identifier unique to your session assists our technical team in resolution.
-                </p>
               </div>
             </details>
           </div>
         </CardContent>
-
-        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       </Card>
-
-      <style jsx global>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 0.1; }
-          50% { opacity: 0.2; }
-        }
-      `}</style>
     </div>
   )
 }
