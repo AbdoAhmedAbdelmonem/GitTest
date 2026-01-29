@@ -34,7 +34,9 @@ export const metadata: Metadata = {
   description:
     "Master your future skills with Chameleon, the ultimate platform for learning and growth With a focus on technology, design, and innovation.",
   icons: {
-    icon: "/images/1212-removebg-preview.png",
+    icon: [
+      { url: "/images/1212-removebg-preview.png", sizes: "any" },
+    ],
     apple: "/images/1212-removebg-preview.png",
   },
 };
