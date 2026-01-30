@@ -3,14 +3,14 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Notification, NotificationContextType } from '@/lib/types'
-import { getStudentSession } from '@/lib/auth'
+import { getStudentSession, StudentUser } from '@/lib/auth'
 
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined)
 
 export function NotificationProvider({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [user, setUser] = useState<{ user_id: number } | null>(null)
+  const [user, setUser] = useState<StudentUser | null>(null)
   const supabase = createClient()
 
   // Load user session on mount
@@ -23,14 +23,14 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const fetchNotifications = useCallback(async () => {
-    if (!user?.user_id) return
+    if (!user?.auth_id) return
 
     setIsLoading(true)
     try {
       const { data, error } = await supabase
         .from('Notifications')
         .select('*')
-        .eq('user_id', user.user_id)
+        .eq('auth_id', user.auth_id)
         .order('created_at', { ascending: false })
 
       if (error) {
@@ -44,7 +44,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     } finally {
       setIsLoading(false)
     }
-  }, [user?.user_id, supabase])
+  }, [user?.auth_id, supabase])
 
   const markAsRead = useCallback(async (notificationId: number) => {
     try {
@@ -71,13 +71,13 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   }, [supabase])
 
   const markAllAsRead = useCallback(async () => {
-    if (!user?.user_id) return
+    if (!user?.auth_id) return
 
     try {
       const { error } = await supabase
         .from('Notifications')
         .update({ seen: 'true' })
-        .eq('user_id', user.user_id)
+        .eq('auth_id', user.auth_id)
         .eq('seen', 'false')
 
       if (error) {
@@ -91,7 +91,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       console.error('Error marking all notifications as read:', error)
     }
-  }, [user?.user_id, supabase])
+  }, [user?.auth_id, supabase])
 
   const addNotification = useCallback(async (notification: Omit<Notification, 'id' | 'created_at'>) => {
     try {
@@ -139,13 +139,13 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   }, [fetchNotifications])
 
   // Force fetch notifications (used after login)
-  const fetchNotificationsOnLogin = useCallback(async (userId: number) => {
+  const fetchNotificationsOnLogin = useCallback(async (authId: string) => {
     setIsLoading(true)
     try {
       const { data, error } = await supabase
         .from('Notifications')
         .select('*')
-        .eq('user_id', userId)
+        .eq('auth_id', authId)
         .order('created_at', { ascending: false })
 
       if (error) {
@@ -162,18 +162,18 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   }, [supabase])
 
   useEffect(() => {
-    if (user?.user_id) {
+    if (user?.auth_id) {
       fetchNotifications()
     }
-  }, [user?.user_id, fetchNotifications])
+  }, [user?.auth_id, fetchNotifications])
 
   // Listen for login events to fetch notifications
   useEffect(() => {
     const handleUserLogin = (event: CustomEvent) => {
-      const { userId } = event.detail
-      if (userId && userId === user?.user_id) {
+      const { authId } = event.detail
+      if (authId && authId === user?.auth_id) {
         // User has logged in, fetch their notifications
-        fetchNotificationsOnLogin(userId)
+        fetchNotificationsOnLogin(authId)
       }
     }
 
@@ -182,7 +182,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     return () => {
       window.removeEventListener('userLoggedIn', handleUserLogin as EventListener)
     }
-  }, [user?.user_id, fetchNotificationsOnLogin])
+  }, [user?.auth_id, fetchNotificationsOnLogin])
 
   // Memoize unread count calculation
   const unreadCount = useMemo(() =>
