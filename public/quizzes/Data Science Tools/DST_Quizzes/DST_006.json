@@ -1,0 +1,392 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "What is the main difference between hierarchical and partitional clustering algorithms?",
+    "options": [
+      "Hierarchical creates a tree-like structure while partitional creates non-overlapping clusters",
+      "Partitional creates a tree-like structure while hierarchical creates non-overlapping clusters",
+      "Both create tree-like structures",
+      "Both create non-overlapping clusters"
+    ],
+    "answer": "Hierarchical creates a tree-like structure while partitional creates non-overlapping clusters",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "In k-means clustering, what is the first step of the algorithm?",
+    "options": [
+      "Assign objects to the nearest cluster center",
+      "Decide on a value for k",
+      "Re-estimate the cluster centers",
+      "Check for convergence"
+    ],
+    "answer": "Decide on a value for k",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What does the objective function in k-means clustering minimize?",
+    "options": [
+      "The number of clusters",
+      "The distance between all points and their cluster centers",
+      "The variance within each cluster",
+      "The number of iterations"
+    ],
+    "answer": "The distance between all points and their cluster centers",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "Which of the following is NOT a weakness of k-means clustering?",
+    "options": [
+      "Need to specify k in advance",
+      "Unable to handle noisy data and outliers",
+      "Not suitable for clusters with non-convex shapes",
+      "Requires categorical data"
+    ],
+    "answer": "Requires categorical data",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What technique is suggested for determining the number of clusters in k-means?",
+    "options": [
+      "Knee finding or elbow finding",
+      "Random selection",
+      "Always using k=3",
+      "Using hierarchical clustering first"
+    ],
+    "answer": "Knee finding or elbow finding",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "Which of the following best describes partitional clustering?",
+    "options": [
+      "It creates a hierarchical decomposition of the set of objects",
+      "Each instance is placed in exactly one of K non overlapping clusters",
+      "It does not require the number of clusters to be specified",
+      "It always finds the global optimum"
+    ],
+    "answer": "Each instance is placed in exactly one of K non overlapping clusters",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "What is the Davies-Bouldin Index (DBI) used for?",
+    "options": [
+      "To determine the initial centroids",
+      "To evaluate clustering algorithms",
+      "To calculate distance between points",
+      "To visualize clusters"
+    ],
+    "answer": "To evaluate clustering algorithms",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "In agglomerative hierarchical clustering, what is the first step?",
+    "options": [
+      "Merge the two closest clusters",
+      "Compute the distance matrix",
+      "Let each data point be a cluster",
+      "Update the distance matrix"
+    ],
+    "answer": "Compute the distance matrix",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "What is single-link distance between clusters?",
+    "options": [
+      "The maximum distance between any two points in different clusters",
+      "The average distance between all points in different clusters",
+      "The minimum distance between any two points in different clusters",
+      "The distance between cluster centroids"
+    ],
+    "answer": "The minimum distance between any two points in different clusters",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "When does the k-means algorithm typically stop iterating?",
+    "options": [
+      "After a fixed number of iterations.",
+      "When the objective function value reaches zero",
+      "If none of the objects changed membership in the last iteration",
+      "When the number of clusters equals the number of objects"
+    ],
+    "answer": "If none of the objects changed membership in the last iteration",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "What parameters are needed for DBSCAN clustering?",
+    "options": [
+      "k (number of clusters)",
+      "Eps (neighborhood radius) and MinPts (minimum points)",
+      "Only Eps",
+      "Only MinPts"
+    ],
+    "answer": "Eps (neighborhood radius) and MinPts (minimum points)",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What is a core point in DBSCAN?",
+    "options": [
+      "A point with no neighbors",
+      "A point with at least MinPts in its Eps-neighborhood",
+      "A point on the edge of a cluster",
+      "A noise point"
+    ],
+    "answer": "A point with at least MinPts in its Eps-neighborhood",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "What type of clusters can density-based methods like DBSCAN discover?",
+    "options": [
+      "Only spherical clusters",
+      "Only linearly separable clusters",
+      "Clusters of arbitrary shape",
+      "Only convex clusters"
+    ],
+    "answer": "Clusters of arbitrary shape",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "In the agglomerative clustering Python example, what parameter defines the distance metric?",
+    "options": [
+      "n_clusters",
+      "affinity",
+      "linkage",
+      "random_state"
+    ],
+    "answer": "affinity",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What is the complexity of hierarchical clustering?",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(n³)"
+    ],
+    "answer": "O(n³)",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "Which of the following is NOT a density-based clustering method ?",
+    "options": [
+      "DBSCAN",
+      "OPTICS",
+      "K-MEDOIDS",
+      "DENCLUE"
+    ],
+    "answer": "K-MEDOIDS",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "What does a lower Davies-Bouldin Index value indicate?",
+    "options": [
+      "Worse clustering",
+      "Better clustering",
+      "More clusters needed",
+      "Higher dimensionality"
+    ],
+    "answer": "Better clustering",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "In k-means, what happens if none of the objects change membership in an iteration?",
+    "options": [
+      "The algorithm continues",
+      "The algorithm restarts",
+      "The algorithm exits",
+      "The value of k is increased"
+    ],
+    "answer": "The algorithm exits",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What is the main advantage of k-means ?",
+    "options": [
+      "Can handle categorical data well",
+      "Relatively efficient with complexity O(tkn)",
+      "Doesn't require specifying k",
+      "Works well with noisy data"
+    ],
+    "answer": "Relatively efficient with complexity O(tkn)",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "In the k-means Python example, what function is used to generate sample data?",
+    "options": [
+      "make_blobs",
+      "make_circles",
+      "make_moons",
+      "make_classification"
+    ],
+    "answer": "make_blobs",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What does 'MinPts' represent in density-based clustering?",
+    "options": [
+      "The minimum number of clusters",
+      "The maximum radius of a neighborhood",
+      "The minimum number of points in an Eps-neighborhood of a point for it to be considered a core point",
+      "The minimum distance between two clusters"
+    ],
+    "answer": "The minimum number of points in an Eps-neighborhood of a point for it to be considered a core point",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "Which of the following is true about noise points in DBSCAN?",
+    "options": [
+      "They are core points",
+      "They are border points",
+      "They are not density-reachable from any core object",
+      "They form their own clusters"
+    ],
+    "answer": "They are not density-reachable from any core object",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "What is the key operation in agglomerative hierarchical clustering?",
+    "options": [
+      "Initializing centroids",
+      "Computing distance between clusters",
+      "Assigning points to nearest centroid",
+      "Determining k"
+    ],
+    "answer": "Computing distance between clusters",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "How is the single-link distance between two clusters defined?",
+    "options": [
+      "The maximum distance between any object in one cluster and any object in the other",
+      "The average distance between all pairs of objects, one from each cluster",
+      "The minimum distance between any object in one cluster and any object in the other",
+      "The distance between the centroids of the two clusters"
+    ],
+    "answer": "The minimum distance between any object in one cluster and any object in the other",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "What visualization is used in the Python example for agglomerative clustering?",
+    "options": [
+      "Heatmap",
+      "Dendrogram",
+      "Scatter plot",
+      "Line chart"
+    ],
+    "answer": "Scatter plot",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "What is density-connected in DBSCAN?",
+    "options": [
+      "Two points connected directly",
+      "Two points connected through a chain of core points",
+      "Two points in the same grid cell",
+      "Two points with the same attributes"
+    ],
+    "answer": "Two points connected through a chain of core points",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a characteristic of density-based clustering methods?",
+    "options": [
+      "They require specifying k",
+      "They can discover clusters of arbitrary shape",
+      "They work only with spherical clusters",
+      "They cannot handle noise"
+    ],
+    "answer": "They can discover clusters of arbitrary shape",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "In the k-means Python example, what parameter specifies the number of clusters?",
+    "options": [
+      "n_neighbors",
+      "n_clusters",
+      "random_state",
+      "affinity"
+    ],
+    "answer": "n_clusters",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "What is the purpose of the distance matrix in hierarchical clustering?",
+    "options": [
+      "To initialize centroids",
+      "To determine which clusters to merge",
+      "To assign points to clusters",
+      "To visualize the data"
+    ],
+    "answer": "To determine which clusters to merge",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "Which of the following is NOT a step in the DBSCAN algorithm?",
+    "options": [
+      "Arbitrarily select a point",
+      "Form a cluster if it's a core point",
+      "Update cluster centroids",
+      "Retrieve all density-reachable points"
+    ],
+    "answer": "Update cluster centroids",
+    "image": null
+  }
+]

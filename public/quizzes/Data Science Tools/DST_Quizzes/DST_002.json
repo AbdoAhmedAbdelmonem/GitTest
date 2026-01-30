@@ -1,0 +1,392 @@
+[
+  {
+    "numb": 1,
+    "type": "Multiple Choices",
+    "question": "According to the presentation, which of the following is a way you will typically get data?",
+    "options": [
+      "Directly download a data file",
+      "Query data from a database",
+      "Query an API",
+      "All of the above"
+    ],
+    "answer": "All of the above",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "type": "Multiple Choices",
+    "question": "Which HTTP request method is described as the most common?",
+    "options": [
+      "PUT",
+      "POST",
+      "GET",
+      "DELETE"
+    ],
+    "answer": "GET",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "type": "Multiple Choices",
+    "question": "What is a key characteristic of REST APIs mentioned in the document?",
+    "options": [
+      "They maintain user session state on the server",
+      "They use a proprietary communication protocol",
+      "They are stateless, meaning the server doesn't remember previous interactions",
+      "They require a graphical user interface"
+    ],
+    "answer": "They are stateless, meaning the server doesn't remember previous interactions",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "type": "Multiple Choices",
+    "question": "Which Python library is recommended for issuing HTTP requests?",
+    "options": [
+      "http.client",
+      "urllib",
+      "requests",
+      "socket"
+    ],
+    "answer": "requests",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "type": "Multiple Choices",
+    "question": "What does CSV stand for?",
+    "options": [
+      "Comma Separated Values",
+      "Computer System Validation",
+      "Common Source Vector",
+      "Cascading Style Variables"
+    ],
+    "answer": "Comma Separated Values",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "type": "Multiple Choices",
+    "question": "In a CSV file, if values themselves contain commas, how can this be handled?",
+    "options": [
+      "Replace commas with semicolons",
+      "Remove the commas from the values",
+      "Enclose the values in quotes",
+      "Split the value into multiple columns"
+    ],
+    "answer": "Enclose the values in quotes",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "type": "Multiple Choices",
+    "question": "Which data format is described as easy for humans to read and write, and easy for machines to parse and generate, consisting of attribute-value pairs and arrays?",
+    "options": [
+      "CSV",
+      "XML",
+      "JSON",
+      "HTML"
+    ],
+    "answer": "JSON",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "type": "Multiple Choices",
+    "question": "In JSON, how is a number always assumed to be represented?",
+    "options": [
+      "Integer",
+      "Floating point",
+      "String",
+      "Boolean"
+    ],
+    "answer": "Floating point",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "type": "Multiple Choices",
+    "question": "Which Python built-in library is used to parse JSON data?",
+    "options": [
+      "json_parser",
+      "simplejson",
+      "json",
+      "jsonify"
+    ],
+    "answer": "json",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "type": "Multiple Choices",
+    "question": "How is HTML described in relation to XML in terms of syntax and purpose?",
+    "options": [
+      "HTML is syntactically stricter than XML and describes data structure",
+      "HTML is syntactically like XML but primarily meant to describe appearance",
+      "HTML uses a completely different syntax from XML and is for data interchange",
+      "HTML is an older version of XML used for web documents"
+    ],
+    "answer": "HTML is syntactically like XML but primarily meant to describe appearance",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "type": "Multiple Choices",
+    "question": "Which Python library is mentioned for parsing XML/HTML, specifically focused on getting data out of these files?",
+    "options": [
+      "xml.etree.ElementTree",
+      "lxml",
+      "BeautifulSoup",
+      "html.parser"
+    ],
+    "answer": "BeautifulSoup",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "type": "Multiple Choices",
+    "question": "What does the 'A' in ACID properties of a relational database stand for?",
+    "options": [
+      "Accuracy",
+      "Atomicity",
+      "Availability",
+      "Authentication"
+    ],
+    "answer": "Atomicity",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "type": "Multiple Choices",
+    "question": "Which `re` module function in Python is used to find the first occurrence of a pattern in a string?",
+    "options": [
+      "re.match()",
+      "re.findall()",
+      "re.search()",
+      "re.sub()"
+    ],
+    "answer": "re.search()",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "type": "Multiple Choices",
+    "question": "In regular expressions, what does '\\d' typically match?",
+    "options": [
+      "Any non-digit character",
+      "Any whitespace character",
+      "Any digit ([0-9])",
+      "Any word character"
+    ],
+    "answer": "Any digit ([0-9])",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "type": "Multiple Choices",
+    "question": "What does the regular expression quantifier 'a*' mean?",
+    "options": [
+      "Match character 'a' exactly once",
+      "Match character 'a' zero or one time",
+      "Match character 'a' zero or more times",
+      "Match character 'a' one or more times"
+    ],
+    "answer": "Match character 'a' zero or more times",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "type": "Multiple Choices",
+    "question": "In Python's `re` module, what is the purpose of using 'r' before a regular expression string (e.g., r\"\\w+\")?",
+    "options": [
+      "To make the search case-sensitive",
+      "To indicate a raw string, avoiding the need to double escape backslashes",
+      "To reverse the search direction",
+      "To restrict the search to the beginning of the string"
+    ],
+    "answer": "To indicate a raw string, avoiding the need to double escape backslashes",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "type": "Multiple Choices",
+    "question": "By default, regular expressions try to capture as much text as possible. What is this behavior called?",
+    "options": [
+      "Minimal matching",
+      "Lazy matching",
+      "Greedy matching",
+      "Exact matching"
+    ],
+    "answer": "Greedy matching",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "type": "Multiple Choices",
+    "question": "Which of the following is a reason for data visualization according to the document?",
+    "options": [
+      "To provide exact numerical values for all data points simultaneously",
+      "To replace quantitative analysis entirely",
+      "To gain insight into an information space by mapping data onto graphical primitives",
+      "To make datasets appear more complex"
+    ],
+    "answer": "To gain insight into an information space by mapping data onto graphical primitives",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "type": "Multiple Choices",
+    "question": "What type of visualization is a Spidergram (Star Plot) used for?",
+    "options": [
+      "Displaying univariate data",
+      "Displaying bivariate data relationships",
+      "Displaying multivariate data",
+      "Displaying time-series data"
+    ],
+    "answer": "Displaying multivariate data",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "type": "Multiple Choices",
+    "question": "In Parallel Coordinate Plots, how are items characterized by many parameters represented?",
+    "options": [
+      "As points on a 2D scatter plot",
+      "As lines connecting points on parallel axes",
+      "As segments of a pie chart",
+      "As bars in a histogram"
+    ],
+    "answer": "As lines connecting points on parallel axes",
+    "image": null
+  },
+  {
+    "numb": 21,
+    "type": "Multiple Choices",
+    "question": "What is the idea behind using Chernoff Faces for data visualization?",
+    "options": [
+      "Faces are mathematically precise representations of data",
+      "Humans easily recognize faces and notice small changes without difficulty",
+      "They are the only way to represent more than 10 variables",
+      "They are easy to generate with basic programming tools"
+    ],
+    "answer": "Humans easily recognize faces and notice small changes without difficulty",
+    "image": null
+  },
+  {
+    "numb": 22,
+    "type": "Multiple Choices",
+    "question": "What does a Tag Cloud (Word Cloud) primarily visualize?",
+    "options": [
+      "The relationship between different text documents",
+      "The frequency or importance of words in a text",
+      "The grammatical structure of sentences",
+      "The sentiment of a body of text"
+    ],
+    "answer": "The frequency or importance of words in a text",
+    "image": null
+  },
+  {
+    "numb": 23,
+    "type": "Multiple Choices",
+    "question": "Which Python library is used with Pandas to load a dataset as a data frame in the example?",
+    "options": [
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "Pandas itself"
+    ],
+    "answer": "Pandas itself",
+    "image": null
+  },
+  {
+    "numb": 24,
+    "type": "Multiple Choices",
+    "question": "In Matplotlib, what does the `bins` argument in `plt.hist()` control?",
+    "options": [
+      "The color of the histogram bars",
+      "The number or edges of the intervals for grouping data",
+      "The height of the histogram bars",
+      "The title of the histogram"
+    ],
+    "answer": "The number or edges of the intervals for grouping data",
+    "image": null
+  },
+  {
+    "numb": 25,
+    "type": "Multiple Choices",
+    "question": "Which Python library provides a high-level interface to Matplotlib and makes it easier to produce attractive statistical plots?",
+    "options": [
+      "NumPy",
+      "SciPy",
+      "Seaborn",
+      "Pandas"
+    ],
+    "answer": "Seaborn",
+    "image": null
+  },
+  {
+    "numb": 26,
+    "type": "Multiple Choices",
+    "question": "In Seaborn's `lmplot()`, what does the `hue` argument achieve?",
+    "options": [
+      "It changes the overall theme of the plot",
+      "It allows color-coding of data points based on a variable",
+      "It adjusts the transparency of the plot elements",
+      "It fits a linear regression model to the data"
+    ],
+    "answer": "It allows color-coding of data points based on a variable",
+    "image": null
+  },
+  {
+    "numb": 27,
+    "type": "Multiple Choices",
+    "question": "What type of plot is `sns.heatmap()` in Seaborn useful for visualizing?",
+    "options": [
+      "One-dimensional distributions",
+      "Time-series data",
+      "Matrix-like data, such as correlation matrices",
+      "Hierarchical data"
+    ],
+    "answer": "Matrix-like data, such as correlation matrices",
+    "image": null
+  },
+  {
+    "numb": 28,
+    "type": "Multiple Choices",
+    "question": "What does the y-value represent in an Empirical Cumulative Distribution Function (ECDF)?",
+    "options": [
+      "The frequency of a specific x-value",
+      "The mean of the data points up to the corresponding x-value",
+      "The fraction of data points that have a value smaller than the corresponding x-value",
+      "The standard deviation of the data points"
+    ],
+    "answer": "The fraction of data points that have a value smaller than the corresponding x-value",
+    "image": null
+  },
+  {
+    "numb": 29,
+    "type": "Multiple Choices",
+    "question": "In the NetworkX example, what does `nx.shortest_path(g, 'b', 'd', weighted=True)` calculate?",
+    "options": [
+      "The shortest path between nodes 'b' and 'd' considering the number of edges only",
+      "All possible paths between nodes 'b' and 'd'",
+      "The shortest path between nodes 'b' and 'd' considering the weights of the edges",
+      "The longest path between nodes 'b' and 'd'"
+    ],
+    "answer": "The shortest path between nodes 'b' and 'd' considering the weights of the edges",
+    "image": null
+  },
+  {
+    "numb": 30,
+    "type": "Multiple Choices",
+    "question": "According to the document, NetworkX provides basic drawing capabilities by using which library?",
+    "options": [
+      "Graphviz",
+      "Plotly",
+      "Bokeh",
+      "Matplotlib"
+    ],
+    "answer": "Matplotlib",
+    "image": null
+  }
+]
