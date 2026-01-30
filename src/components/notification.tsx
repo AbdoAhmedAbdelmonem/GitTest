@@ -34,7 +34,7 @@ export function NotificationAdder({
         message_content: messageContent || null,
         seen: seen
       }
-
+ 
       addNotification(notification)
     }
   }, [authId, title, provider, type, messageContent, seen, autoAdd, addNotification])
