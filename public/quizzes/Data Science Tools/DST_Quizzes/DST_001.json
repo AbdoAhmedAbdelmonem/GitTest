@@ -210,7 +210,7 @@
   {
     "numb": 17,
     "type": "Multiple Choices",
-    "question": "Which of these visualization tools is specifically mentioned in the handout?",
+    "question": "Which of the following is a data visualization tool?",
     "options": [
       "Matplotlib",
       "Tableau",
@@ -236,7 +236,7 @@
   {
     "numb": 19,
     "type": "Multiple Choices",
-    "question": "Which of these is NOT a component of the data science pipeline mentioned in the handout?",
+    "question": "Which of these is NOT a component of the data science pipeline?",
     "options": [
       "Data collection",
       "Data processing",
@@ -262,14 +262,14 @@
   {
     "numb": 21,
     "type": "Multiple Choices",
-    "question": "Which of these data formats is NOT mentioned in the handout?",
+    "question": "Which of these data formats is NOT a Data Formate type",
     "options": [
       "XML",
-      "JSON",
+      "BMW",
       "YAML",
       "CSV"
     ],
-    "answer": "YAML",
+    "answer": "BMW",
     "image": null
   },
   {
@@ -327,7 +327,7 @@
   {
     "numb": 26,
     "type": "Multiple Choices",
-    "question": "Which of these is NOT listed as a data science tool in the handout?",
+    "question": "Which of these is NOT a data science tool?",
     "options": [
       "SAS",
       "Weka",
@@ -353,7 +353,7 @@
   {
     "numb": 28,
     "type": "Multiple Choices",
-    "question": "Which of these is mentioned as a use case for the course?",
+    "question": "Which of these is a use case for the Data Science tools?",
     "options": [
       "Finance",
       "Media",
@@ -379,7 +379,7 @@
   {
     "numb": 30,
     "type": "Multiple Choices",
-    "question": "Which of these is NOT a characteristic of NumPy arrays mentioned in the handout?",
+    "question": "Which of these is NOT a characteristic of NumPy arrays?",
     "options": [
       "Fixed size at creation",
       "Homogeneous data types",
