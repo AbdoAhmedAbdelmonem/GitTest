@@ -1,0 +1,242 @@
+[
+  {
+    "numb": 1,
+    "question": "1- What is a function in programming?",
+    "options": [
+      "A) A variable that stores data",
+      "B) A command that repeats a block of code",
+      "C) A statement that performs calculations",
+      "D) A self-contained block of statements that perform a specific task"
+    ],
+    "answer": "D) A self-contained block of statements that perform a specific task",
+    "image": null
+  },
+  {
+    "numb": 2,
+    "question": "2- What are the two types of functions in programming?",
+    "options": [
+      "A) Recursive and Iterative functions",
+      "B) Built-in and User-defined functions",
+      "C) Static and Dynamic functions",
+      "D) Global and Local functions"
+    ],
+    "answer": "B) Built-in and User-defined functions",
+    "image": null
+  },
+  {
+    "numb": 3,
+    "question": "3- What does the return type 'void' signify in a function?",
+    "options": [
+      "A) The function does not return any value",
+      "B) The function returns an integer",
+      "C) The function returns a string",
+      "D) The function returns a boolean"
+    ],
+    "answer": "A) The function does not return any value",
+    "image": null
+  },
+  {
+    "numb": 4,
+    "question": "4- Where is a global variable declared in a program?",
+    "options": [
+      "A) Inside a specific function",
+      "B) At the end of a function",
+      "C) Within a loop",
+      "D) Outside of every function definition"
+    ],
+    "answer": "D) Outside of every function definition",
+    "image": null
+  },
+  {
+    "numb": 5,
+    "question": "5- What is method overloading?",
+    "options": [
+      "A) Creating multiple instances of a class",
+      "B) Using multiple return types in a function",
+      "C) Defining several methods within a class with the same name but different signatures",
+      "D) Calling a function multiple times in a program"
+    ],
+    "answer": "C) Defining several methods within a class with the same name but different signatures",
+    "image": null
+  },
+  {
+    "numb": 6,
+    "question": "6- What is the purpose of the parameter list in a function?",
+    "options": [
+      "A) To define the return type of the function",
+      "B) To provide input data values to the function",
+      "C) To declare the function name",
+      "D) To specify the output of the function"
+    ],
+    "answer": "B) To provide input data values to the function",
+    "image": null
+  },
+  {
+    "numb": 7,
+    "question": "7- What is a local variable?",
+    "options": [
+      "A) A variable declared within a function or block",
+      "B) A variable declared outside of all functions",
+      "C) A variable that can be accessed anywhere in the program",
+      "D) A variable that stores a fixed value"
+    ],
+    "answer": "A) A variable declared within a function or block",
+    "image": null
+  },
+  {
+    "numb": 8,
+    "question": "8- What is a global variable?",
+    "options": [
+      "A) A variable declared inside a loop",
+      "B) A variable declared inside a specific function",
+      "C) A variable declared outside of every function definition",
+      "D) A variable that cannot be modified"
+    ],
+    "answer": "C) A variable declared outside of every function definition",
+    "image": null
+  },
+  {
+    "numb": 9,
+    "question": "9- Which of the following is a correct example of a built-in function in Java?",
+    "options": [
+      "A) int sum(int a, int b)",
+      "B) Math.sqrt(x)",
+      "C) void display()",
+      "D) double multiply(double a, double b)"
+    ],
+    "answer": "B) Math.sqrt(x)",
+    "image": null
+  },
+  {
+    "numb": 10,
+    "question": "10- How is a function called in Java?",
+    "options": [
+      "A) By defining the function",
+      "B) By writing the return type first",
+      "C) By declaring a variable",
+      "D) Using the function name followed by the actual parameter list"
+    ],
+    "answer": "D) Using the function name followed by the actual parameter list",
+    "image": null
+  },
+  {
+    "numb": 11,
+    "question": "11- Which keyword is used in Java to indicate that a function does not return a value?",
+    "options": [
+      "A) void",
+      "B) null",
+      "C) empty",
+      "D) none"
+    ],
+    "answer": "A) void",
+    "image": null
+  },
+  {
+    "numb": 12,
+    "question": "12- What does the scope of a variable determine?",
+    "options": [
+      "A) The data type of the variable",
+      "B) The memory allocation for the variable",
+      "C) The context within a program in which a variable is valid and can be used",
+      "D) The value of the variable"
+    ],
+    "answer": "C) The context within a program in which a variable is valid and can be used",
+    "image": null
+  },
+  {
+    "numb": 13,
+    "question": "13- What happens if a variable is declared inside a function?",
+    "options": [
+      "A) It becomes a global variable",
+      "B) It becomes a local variable",
+      "C) It is accessible from anywhere in the program",
+      "D) It automatically gets initialized to zero"
+    ],
+    "answer": "B) It becomes a local variable",
+    "image": null
+  },
+  {
+    "numb": 14,
+    "question": "14- What is method signature?",
+    "options": [
+      "A) The return type of the method",
+      "B) The method body",
+      "C) The combination of the method name and formal parameter list",
+      "D) The variables declared in the method"
+    ],
+    "answer": "C) The combination of the method name and formal parameter list",
+    "image": null
+  },
+  {
+    "numb": 15,
+    "question": "15- Which of the following is NOT part of a method signature?",
+    "options": [
+      "A) Method name",
+      "B) The returned type value",
+      "C) Formal parameter list",
+      "D) The order of parameters"
+    ],
+    "answer": "B) The returned type value",
+    "image": null
+  },
+  {
+    "numb": 16,
+    "question": "16- In the context of functions, what is overloading?",
+    "options": [
+      "A) Using the same method in different classes",
+      "B) Using the same variable name in multiple methods",
+      "C) Declaring the same method multiple times",
+      "D) Defining multiple methods with the same name but different signatures"
+    ],
+    "answer": "D) Defining multiple methods with the same name but different signatures",
+    "image": null
+  },
+  {
+    "numb": 17,
+    "question": "17- What is the output of the following function call: Math.sqrt(25)?",
+    "options": [
+      "A) 25",
+      "B) 2.5",
+      "C) 5.0",
+      "D) Error"
+    ],
+    "answer": "C) 5.0",
+    "image": null
+  },
+  {
+    "numb": 18,
+    "question": "18- What type of function is used to sum two integer numbers in the provided examples?",
+    "options": [
+      "A) A built-in function",
+      "B) A user-defined function",
+      "C) A recursive function",
+      "D) A void function"
+    ],
+    "answer": "B) A user-defined function",
+    "image": null
+  },
+  {
+    "numb": 19,
+    "question": "19- What is required to declare a void function?",
+    "options": [
+      "A) Use of the keyword void in the function declaration",
+      "B) Declaring a return type",
+      "C) A specific number of parameters",
+      "D) A loop inside the function"
+    ],
+    "answer": "A) Use of the keyword void in the function declaration",
+    "image": null
+  },
+  {
+    "numb": 20,
+    "question": "20- What is a built-in function?",
+    "options": [
+      "A) A function defined by the user",
+      "B) A function provided by the programming language's standard library",
+      "C) A function that cannot be modified",
+      "D) A function that is only used in large programs"
+    ],
+    "answer": "B) A function provided by the programming language's standard library",
+    "image": null
+  }
+]
