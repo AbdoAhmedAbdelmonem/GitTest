@@ -700,9 +700,22 @@ export default function DriveRootPage() {
                         />
                       ) : (
                         <AdminAuthWarningButton
-                          onAuthorize={() => {
+                          onAuthorize={async () => {
                             if (userSession) {
-                              window.location.href = `/api/google-drive/auth?authId=${userSession.auth_id}`;
+                              try {
+                                const response = await fetch(`/api/google-drive/auth?authId=${userSession.auth_id}&isAdmin=${userSession.is_admin}`);
+                                const result = await response.json();
+                                
+                                if (response.ok && result.authUrl) {
+                                  window.location.href = result.authUrl;
+                                } else {
+                                  console.error('Failed to get authorization URL:', result.error);
+                                  alert('Failed to initiate authorization. Please try again.');
+                                }
+                              } catch (error) {
+                                console.error('Error during authorization:', error);
+                                alert('An error occurred during authorization. Please try again.');
+                              }
                             }
                           }}
                         />
