@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import { createServerClient } from '@supabase/ssr'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { getAuthUrl } from '@/lib/google-oauth'
+import { getGoogleAuthUrl } from '@/lib/google-oauth'
 import crypto from 'crypto'
 
 export async function GET(request: NextRequest) {
@@ -69,13 +69,10 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Explicit type assertion for TypeScript
-    const verifiedUser = userData as { auth_id: string; is_admin: boolean }
-
     /* ------------------------------------------------------------------
      * 5) Ownership check (CRITICAL)
      * ------------------------------------------------------------------ */
-    if (verifiedUser.auth_id !== user.id) {
+    if (userData.auth_id !== user.id) {
       return NextResponse.json(
         { error: 'Forbidden' },
         { status: 403 }
@@ -86,7 +83,7 @@ export async function GET(request: NextRequest) {
      * 6) Generate a SAFE state (signed, non-forgeable)
      * ------------------------------------------------------------------ */
     const payload = {
-      authId: verifiedUser.auth_id,
+      authId: userData.auth_id,
       ts: Date.now(),
     }
 
@@ -104,9 +101,9 @@ export async function GET(request: NextRequest) {
     /* ------------------------------------------------------------------
      * 7) Generate Google OAuth URL
      * ------------------------------------------------------------------ */
-    const authUrl = getAuthUrl(state, verifiedUser.is_admin, true)
+    const authUrl = getGoogleAuthUrl(state)
 
-    return NextResponse.redirect(authUrl)
+    return NextResponse.json({ authUrl })
 
   } catch (error) {
     console.error('OAuth init error:', error)
