@@ -213,6 +213,124 @@ export async function getValidAccessToken(authId: string): Promise<string | null
 }
 
 /**
+ * Refresh tokens for all admins
+ * ADDED: Batch refresh function for all admin users
+ */
+export async function refreshAllAdminTokens(): Promise<{
+  refreshedCount: number
+  failedCount: number
+  totalUsers: number
+  results: Array<{
+    auth_id: string
+    status: 'success' | 'failed' | 'skipped'
+    reason?: string
+    error?: string
+  }>
+}> {
+  try {
+    const supabase = createAdminClient()
+    
+    // Get all admins with refresh tokens
+    const { data: admins, error } = await supabase
+      .from('admins')
+      .select('auth_id, google_email, refresh_token, token_expiry, authorized')
+      .eq('authorized', true)
+      .not('refresh_token', 'is', null)
+
+    if (error) {
+      console.error('Error fetching admins:', error)
+      throw new Error('Failed to fetch admins')
+    }
+
+    if (!admins || admins.length === 0) {
+      console.log('No admins with refresh tokens found')
+      return {
+        refreshedCount: 0,
+        failedCount: 0,
+        totalUsers: 0,
+        results: []
+      }
+    }
+
+    console.log(`📋 Found ${admins.length} admins with refresh tokens`)
+
+    let refreshedCount = 0
+    let failedCount = 0
+    const results: Array<{
+      auth_id: string
+      status: 'success' | 'failed' | 'skipped'
+      reason?: string
+      error?: string
+    }> = []
+
+    // Process each admin
+    for (const admin of admins as Array<{
+      auth_id: string
+      google_email: string
+      refresh_token: string
+      token_expiry: string | null
+      authorized: boolean
+    }>) {
+      try {
+        // Check if token needs refresh (with 5-minute buffer)
+        const needsRefresh = !admin.token_expiry ||
+          isTokenExpired(admin.token_expiry)
+
+        if (!needsRefresh) {
+          console.log(`⏭️ Token for ${admin.auth_id} is still valid, skipping`)
+          results.push({
+            auth_id: admin.auth_id,
+            status: 'skipped',
+            reason: 'Token still valid'
+          })
+          continue
+        }
+
+        console.log(`🔄 Refreshing token for ${admin.auth_id} (${admin.google_email})`)
+        
+        // Refresh the token
+        const newAccessToken = await refreshAccessToken(admin.auth_id)
+
+        if (!newAccessToken) {
+          throw new Error('No access token received from refresh')
+        }
+
+        console.log(`✅ Successfully refreshed token for ${admin.auth_id}`)
+        refreshedCount++
+
+        results.push({
+          auth_id: admin.auth_id,
+          status: 'success'
+        })
+
+      } catch (adminError) {
+        console.error(`❌ Failed to refresh token for ${admin.auth_id}:`, adminError)
+        failedCount++
+
+        results.push({
+          auth_id: admin.auth_id,
+          status: 'failed',
+          error: adminError instanceof Error ? adminError.message : 'Unknown error'
+        })
+      }
+    }
+
+    console.log(`📊 Batch refresh completed: ${refreshedCount} successful, ${failedCount} failed`)
+
+    return {
+      refreshedCount,
+      failedCount,
+      totalUsers: admins.length,
+      results
+    }
+
+  } catch (error) {
+    console.error('Critical error in refreshAllAdminTokens:', error)
+    throw error
+  }
+}
+
+/**
  * Revoke user's Google access
  * UPDATED: Clears tokens from admins table
  */
@@ -232,16 +350,18 @@ export async function revokeUserAccess(authId: string): Promise<boolean> {
       }
     }
 
-    // Clear tokens in admins table
-    const { error } = await supabase
-      .from('admins')
-      .update({
-        access_token: null,
-        refresh_token: null,
-        token_expiry: null,
-        authorized: false,
-        updated_at: new Date().toISOString()
-      })
+    // Clear tokens in admins table  
+    const updatePayload: any = {
+      access_token: null,
+      refresh_token: null,
+      token_expiry: null,
+      authorized: false,
+      updated_at: new Date().toISOString()
+    }
+    
+    const { error } = await (supabase
+      .from('admins') as any)
+      .update(updatePayload)
       .eq('auth_id', authId)
 
     if (error) {
