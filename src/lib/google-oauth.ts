@@ -11,8 +11,15 @@ const oauth2Client = new google.auth.OAuth2(
 
 /**
  * Generate authorization URL for OAuth flow
+ * @param authIdOrState - Either the authId to generate state, or a pre-generated state string
+ * @param isAdmin - Whether the user is an admin (only used if authIdOrState is authId)
+ * @param useProvidedState - If true, authIdOrState is treated as a complete state string
  */
-export function getAuthUrl(authId: string, isAdmin: boolean = false): string {
+export function getAuthUrl(
+  authIdOrState: string, 
+  isAdmin: boolean = false,
+  useProvidedState: boolean = false
+): string {
   const scopes = [
     'https://www.googleapis.com/auth/drive.file',
     'https://www.googleapis.com/auth/drive.appdata',
@@ -20,7 +27,10 @@ export function getAuthUrl(authId: string, isAdmin: boolean = false): string {
     'https://www.googleapis.com/auth/userinfo.email',
   ]
 
-  const state = `user:${authId}${isAdmin ? ':admin' : ''}`
+  // Use provided state or generate new one
+  const state = useProvidedState 
+    ? authIdOrState 
+    : `user:${authIdOrState}${isAdmin ? ':admin' : ''}`
 
   return oauth2Client.generateAuthUrl({
     access_type: 'offline',
