@@ -68,6 +68,21 @@ export function GoogleDriveManager({
   const [currentAuthId, setCurrentAuthId] = useState<string | null>(authId || null)
   const [currentIsAdmin, setCurrentIsAdmin] = useState<boolean>(isAdmin)
 
+  // Check current admin status from database
+  const checkCurrentAdminStatus = useCallback(async (authId: string) => {
+    try {
+      const response = await fetch(`/api/google-drive/check-access?authId=${authId}`)
+      const result = await response.json()
+      if (response.ok) {
+        setCurrentIsAdmin(result.isAdmin)
+        return result.isAdmin
+      }
+    } catch (error) {
+      console.error('Error checking admin status:', error)
+    }
+    return false
+  }, [])
+
   useEffect(() => {
     if (!authId) {
       // Get from session storage
@@ -76,15 +91,17 @@ export function GoogleDriveManager({
         if (session) {
           console.log('📁 SESSION DEBUG - Got session for user:', session.auth_id, 'is_admin:', session.is_admin)
           setCurrentAuthId(session.auth_id)
-          // For now, just check is_admin to allow debugging
-          // TODO: Add back Authorized check once OAuth is properly set up
-          setCurrentIsAdmin(session.is_admin || false)
+          // Check fresh admin status from database instead of relying on potentially stale session
+          await checkCurrentAdminStatus(session.auth_id)
         } else {
           console.log('📁 SESSION DEBUG - No session found')
         }
       })
+    } else {
+      // If authId is provided as prop, check admin status
+      checkCurrentAdminStatus(authId)
     }
-  }, [authId])
+  }, [authId, checkCurrentAdminStatus])
 
   // Use the effective folder ID
   const effectiveFolderId = currentFolderId || folderId
@@ -308,18 +325,8 @@ export function GoogleDriveManager({
     const initializeComponent = async () => {
       if (!currentAuthId) return
 
-      // For admin users, check Google Drive access and auto-authorize if needed
-      if (currentIsAdmin) {
-        const hasAccess = await checkGoogleAccess()
-        if (!hasAccess) {
-          // Auto-authorize Google Drive for admin users
-          await autoAuthorizeGoogleDrive()
-          return // Don't load files yet, will happen after OAuth redirect
-        }
-      } else {
-        // For regular users, just check access
-        await checkGoogleAccess()
-      }
+      // Check Google Drive access for all users
+      await checkGoogleAccess()
 
       // Load files if user has access
       if (hasGoogleAccess !== false) {
@@ -330,7 +337,7 @@ export function GoogleDriveManager({
     if (currentAuthId) {
       initializeComponent()
     }
-  }, [currentAuthId, currentIsAdmin, hasGoogleAccess, autoAuthorizeGoogleDrive, checkGoogleAccess, loadFiles])
+  }, [currentAuthId, hasGoogleAccess, checkGoogleAccess, loadFiles])
 
   if (!currentAuthId) {
     return (
@@ -401,28 +408,40 @@ export function GoogleDriveManager({
           {currentIsAdmin ? (
             <Card className="bg-blue-500/10 border-blue-500/20">
               <CardContent className="pt-4">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-3 h-3 rounded-full ${
-                    hasGoogleAccess === null ? "bg-yellow-400" :
-                    hasGoogleAccess ? "bg-green-400" : "bg-blue-400"
-                  }`}></div>
-                  <div>
-                    <p className={`font-medium ${
-                      hasGoogleAccess ? "text-green-300" : "text-blue-300"
-                    }`}>
-                      {hasGoogleAccess === null ? "Checking Google Drive Access..." :
-                       hasGoogleAccess ? "Google Drive Connected" : 
-                       autoAuthInProgress ? "Auto-Authorizing..." : "Authorization Required"}
-                    </p>
-                    <p className="text-xs text-white/60">
-                      {hasGoogleAccess 
-                        ? "Ready to manage files" 
-                        : autoAuthInProgress 
-                          ? "Redirecting to Google for automatic authorization..."
-                          : "Admin users get automatic access"
-                      }
-                    </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-3 h-3 rounded-full ${
+                      hasGoogleAccess === null ? "bg-yellow-400" :
+                      hasGoogleAccess ? "bg-green-400" : "bg-blue-400"
+                    }`}></div>
+                    <div>
+                      <p className={`font-medium ${
+                        hasGoogleAccess ? "text-green-300" : "text-blue-300"
+                      }`}>
+                        {hasGoogleAccess === null ? "Checking Google Drive Access..." :
+                         hasGoogleAccess ? "Google Drive Connected" : 
+                         autoAuthInProgress ? "Auto-Authorizing..." : "Authorization Required"}
+                      </p>
+                      <p className="text-xs text-white/60">
+                        {hasGoogleAccess 
+                          ? "Ready to manage files" 
+                          : autoAuthInProgress 
+                            ? "Redirecting to Google for automatic authorization..."
+                            : "Admin users get automatic access"
+                        }
+                      </p>
+                    </div>
                   </div>
+                  {!hasGoogleAccess && hasGoogleAccess !== null && !autoAuthInProgress && (
+                    <Button 
+                      onClick={authorizeGoogleDrive} 
+                      variant="outline" 
+                      size="sm" 
+                      className="text-white border-white/20 hover:bg-white/10"
+                    >
+                      Authorize Now
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
