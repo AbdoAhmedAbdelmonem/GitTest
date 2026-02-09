@@ -8,6 +8,7 @@ import Image from "next/image"
 import { Menu, X, LogIn, UserPlus, BookOpen, BrainCircuit, SquareUserRound, LogOut, Home, HelpCircle, ChevronDown, Lock, Gamepad2 } from "lucide-react"
 import Link from "next/link"
 import { getStudentSession } from "@/lib/auth"
+import { formatTAName } from "@/lib/ta-utils"
 import { createBrowserClient } from "@/lib/supabase/client"
 import { NotificationBell } from "./notification-bell"
 import { User } from "@/lib/types"
@@ -542,7 +543,7 @@ export default function Navigation() {
                               )}
                             </div>
                           </div>
-                          <span>{user.username}</span>
+                          <span>{formatTAName(user.username, user.current_level)}</span>
                         </Link>
                         <Button
                           onClick={() => {
