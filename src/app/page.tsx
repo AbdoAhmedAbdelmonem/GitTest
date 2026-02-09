@@ -16,6 +16,7 @@ import { getStudentSession } from "@/lib/auth"
 import { useEffect, useState } from "react"
 import GsapStackedCards from "@/components/gsap-stacked-cards"
 import AnimatedParticles from "@/components/animated-particles"
+import { formatTAName } from "@/lib/ta-utils"
 
 const specializations = [
   {
@@ -93,6 +94,7 @@ interface UserStats {
 
 export default function HomePage() {
   const [username, setUsername] = useState<string>("")
+  const [userLevel, setUserLevel] = useState<number>(1)
   const [userStats, setUserStats] = useState<UserStats | null>(null)
   const [isLoadingStats, setIsLoadingStats] = useState(true)
   const [isRefreshing, setIsRefreshing] = useState(false)
@@ -105,6 +107,7 @@ export default function HomePage() {
       const session = await getStudentSession()
       if (session) {
         setUsername(session.username)
+        setUserLevel(session.current_level || 1)
       }
     }
     loadSession()
@@ -413,9 +416,9 @@ export default function HomePage() {
             <Badge variant="outline" className="mb-4 bg-white/5 border-white/10 text-white/60">
               Specializations
             </Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{username ? `${username}'s Learning Path` : 'Choose Your'} <span style={{ color: 'rgba(99, 102, 241, 1)' }}>Adventure</span></h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{username ? `${formatTAName(username, userLevel)}'s Learning Path` : 'Choose Your'} <span style={{ color: 'rgba(99, 102, 241, 1)' }}>Adventure</span></h2>
             <p className="text-lg text-white/40 max-w-2xl mx-auto">
-              {username ? `Hi ${username}! Explore our comprehensive specializations designed to prepare you for the careers of tomorrow` : 'Explore our comprehensive specializations designed to prepare you for the careers of tomorrow'}
+              {username ? `Hi ${formatTAName(username, userLevel)}! Explore our comprehensive specializations designed to prepare you for the careers of tomorrow` : 'Explore our comprehensive specializations designed to prepare you for the careers of tomorrow'}
             </p>
           </ScrollAnimatedSection>
 
@@ -503,7 +506,7 @@ export default function HomePage() {
       <ScrollAnimatedSection className="py-20 bg-[#030303] border-t border-white/5">
         <div className="container mx-auto px-4 text-center">
           <ScrollAnimatedSection animation="scaleIn" className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{username ? `${username}, Ready to Start Your Journey?` : 'Ready to Start Your Journey?'}</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{username ? `${formatTAName(username, userLevel)}, Ready to Start Your Journey?` : 'Ready to Start Your Journey?'}</h2>
             <p className="text-lg text-white/40 mb-8 leading-relaxed">
               Join thousands of students who are already building their future with our expert-led courses and
               industry-recognized certifications.
@@ -608,7 +611,7 @@ export default function HomePage() {
                 </p>
                 {username && (
                   <p className="text-xs text-white/40" style={{ fontFamily: 'forte' }}>
-                    Personalized experience for {username} ✨
+                    Personalized experience for {formatTAName(username, userLevel)} ✨
                   </p>
                 )}
             </div>
