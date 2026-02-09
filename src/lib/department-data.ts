@@ -1965,7 +1965,7 @@ export const departmentData: { [key: string]: Department } = {
               materials: {
                 lectures: "https://drive.google.com/drive/folders/1rLxUL06kYDhdBrGfB1H-F_s1zomdjqd1?usp=drive_link",
                 sections: "https://drive.google.com/drive/folders/149t4EDeg2uQkt97V_m94S6aJYPqCaekY?usp=drive_link",
-                videos: "",
+                videos: "https://youtube.com/playlist?list=PL7snZ0LSsq3ghVGnrH2n6jIdY40wFrKcl&si=HYicxLOeh6ztXJgG",
                 summaries: "https://drive.google.com/drive/folders/1KJuTX2s7cXjBiX9al646SbgwfGXRLBXf?usp=drive_link",
                 exams: "https://drive.google.com/drive/folders/1FVBJtarizr-5ZQbTRMZ3CQ5YaQlyusOV?usp=drive_link"
               },
@@ -9167,3 +9167,4 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
+
