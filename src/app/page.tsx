@@ -366,7 +366,9 @@ export default function HomePage() {
                               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center">
                                 <span className="text-xs font-bold text-white/80">L{levelStat.level}</span>
                               </div>
-                              <span className="text-sm text-white/60">Level {levelStat.level}</span>
+                              <span className="text-sm text-white/60">
+                                {levelStat.level === 5 ? 'Teaching Assistant' : `Level ${levelStat.level}`}
+                              </span>
                             </div>
                             <div className="flex items-center gap-2">
                               <span className="text-sm font-semibold text-white">
