@@ -17,6 +17,7 @@ import Image from "next/image"
 import { useAddNotification } from "@/components/notification"
 import { DeleteAccountDialog } from "@/components/delete-account-dialog"
 import { departmentData, departmentKeyMap, type Subject } from '@/lib/department-data'
+import { formatTAName, isGraduatedTA } from '@/lib/ta-utils'
 
 
 interface QuizQuestion {
@@ -657,7 +658,7 @@ export default function ProfilePage() {
                         )}
                       </>
                     ) : (
-                      <p className="text-white font-medium font-outfit">{userData.username}</p>
+                      <p className="text-white font-medium font-outfit">{formatTAName(userData.username, userData.current_level)}</p>
                     )}
                   </div>
                 </div>
@@ -715,11 +716,10 @@ export default function ProfilePage() {
                   <div>
                     <p className="text-[10px] uppercase tracking-wider text-indigo-400/60 font-outfit">Account Status</p>
                     <p className="text-white font-medium font-outfit">
-                      {userData.email === "tokyo9900777@gmail.com"?"Owner":userData.is_admin 
-                        ? "Administrator" 
-                        : userData.is_banned 
-                          ? "Offline" 
-                          : "Synchronized"
+                      {userData.email === "tokyo9900777@gmail.com" ? "Owner" : 
+                       isGraduatedTA(userData.current_level) ? "GRADUATED TA" :
+                       userData.is_admin ? "Administrator" : 
+                       userData.is_banned ? "Offline" : "Synchronized"
                       }
                     </p>
                   </div>
@@ -1010,7 +1010,8 @@ export default function ProfilePage() {
           </Card>
         </div>
 
-        {/* Registered Subjects Section - NEW SEPARATE SECTION */}
+        {/* Registered Subjects Section - Hidden for Graduated TAs */}
+        {!isGraduatedTA(userData.current_level) && (
         <div className="mt-12 animate-in fade-in duration-500 delay-400">
           <Card className="bg-black/40 border-white/20 shadow-2xl">
             <CardHeader className="text-center pb-6">
@@ -1192,6 +1193,7 @@ export default function ProfilePage() {
             </CardContent>
           </Card>
         </div>
+        )}
 
         {/* Progress Visualization */}
         <ProgressDotPlot quizData={quizData} />
