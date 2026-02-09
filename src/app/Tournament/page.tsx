@@ -42,6 +42,7 @@ import {
 } from "@/lib/tournament";
 import ScrollAnimatedSection from "@/components/scroll-animated-section";
 import Navigation from "@/components/navigation";
+import { formatTAName } from "@/lib/ta-utils";
 
 // Import Stalinist One font
 import "@fontsource/stalinist-one";
@@ -1584,7 +1585,7 @@ export default function TournamentPage() {
                   </div>
                   <div>
                     <div className="text-2xl font-bold text-white">
-                      {selectedUserStats.username}
+                      {formatTAName(selectedUserStats.username, selectedUserStats.level)}
                     </div>
                     {selectedUserStats.specialization && (
                       <div className="text-xs text-purple-300/70 font-medium mt-0.5">
