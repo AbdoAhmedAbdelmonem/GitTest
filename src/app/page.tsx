@@ -192,19 +192,21 @@ export default function HomePage() {
       <div className="w-full bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-purple-900/20 border-y border-white/10 overflow-hidden">
         <div className="flex items-center gap-8 py-3 animate-marquee whitespace-nowrap">
           {[...Array(10)].map((_, i) => (
-            <div key={i} className="flex items-center gap-4 px-4">
-              <Image 
-                src="/Morx.png" 
-                alt="Morx" 
-                width={32}
-                height={32}
-                className="object-contain"
-              />
-              <span className="text-white/80 font-semibold flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-yellow-400" />
-                Coming Soon: Morx - Stay Tuned!
-              </span>
-            </div>
+            <a key={i} href="https://morx-team.vercel.app">
+              <div className="flex items-center gap-4 px-4">
+                <Image 
+                  src="/Morx.png" 
+                  alt="Morx" 
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                />
+                <span className="text-white/80 font-semibold flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-yellow-400" />
+                  Morx Team is Available Now !
+                </span>
+              </div>
+            </a>
           ))}
         </div>
       </div>
