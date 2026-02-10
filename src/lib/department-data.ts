@@ -1965,25 +1965,25 @@ export const departmentData: { [key: string]: Department } = {
               materials: {
                 lectures: "https://drive.google.com/drive/folders/1rLxUL06kYDhdBrGfB1H-F_s1zomdjqd1?usp=drive_link",
                 sections: "https://drive.google.com/drive/folders/149t4EDeg2uQkt97V_m94S6aJYPqCaekY?usp=drive_link",
-                videos: "https://youtube.com/playlist?list=PL7snZ0LSsq3ghVGnrH2n6jIdY40wFrKcl&si=HYicxLOeh6ztXJgG",
+                videos: "",
                 summaries: "https://drive.google.com/drive/folders/1KJuTX2s7cXjBiX9al646SbgwfGXRLBXf?usp=drive_link",
                 exams: "https://drive.google.com/drive/folders/1FVBJtarizr-5ZQbTRMZ3CQ5YaQlyusOV?usp=drive_link"
               },
             },
-            {
-              id: "algorithm-design",
-              name: "Algorithm Design",
-              code: "02-24-0X0XX",
-              description: "Design and analysis of efficient algorithms",
-              creditHours: 3,
-              materials: {
-                lectures: "https://drive.google.com/drive/folders/1iOGtM71_PlCnaT5uD9bYSdqhlThfCXMI?usp=drive_link",
-                sections: "https://drive.google.com/drive/folders/11dk-88iCFHc_XGxy59t-CGgba0agQVSC?usp=drive_link",
-                videos: "",
-                summaries: "https://drive.google.com/drive/folders/1PU9XmZgUtI8UBBCoGvgD1xim6SwrImdn?usp=drive_link",
-                exams: "https://drive.google.com/drive/folders/1MolIrIQb07FOLf3PwwhCcVy_PW5NH7sg?usp=drive_link",
-              },
-            },
+            // {
+            //   id: "algorithm-design",
+            //   name: "Algorithm Design",
+            //   code: "02-24-0X0XX",
+            //   description: "Design and analysis of efficient algorithms",
+            //   creditHours: 3,
+            //   materials: {
+            //     lectures: "https://drive.google.com/drive/folders/1iOGtM71_PlCnaT5uD9bYSdqhlThfCXMI?usp=drive_link",
+            //     sections: "https://drive.google.com/drive/folders/11dk-88iCFHc_XGxy59t-CGgba0agQVSC?usp=drive_link",
+            //     videos: "",
+            //     summaries: "https://drive.google.com/drive/folders/1PU9XmZgUtI8UBBCoGvgD1xim6SwrImdn?usp=drive_link",
+            //     exams: "https://drive.google.com/drive/folders/1MolIrIQb07FOLf3PwwhCcVy_PW5NH7sg?usp=drive_link",
+            //   },
+            // },
             {
               id: "advanced-database-systems",
               name: "Advanced Database Systems",
@@ -1998,20 +1998,20 @@ export const departmentData: { [key: string]: Department } = {
                 exams: "https://drive.google.com/drive/folders/1HalJgXrhKyBuFRHGj0Z9WZiUQWr7GlmJ?usp=drive_link",
               },
             },
-            {
-              id: "convex-optimization",
-              name: "Convex Optimization",
-              code: "02-24-0X0XX",
-              description: "Techniques and applications of convex optimization",
-              creditHours: 3,
-              materials: {
-                lectures: "https://drive.google.com/drive/folders/1PYIW3EDLw9NAyZQyEb2DusgVHHcLJV6M?usp=drive_link",
-                sections: "https://drive.google.com/drive/folders/1tFnr-E5ELvZKUVozVuVMMRD3ISlzdd1D?usp=drive_link",
-                videos: "",
-                summaries: "https://drive.google.com/drive/folders/1dj1SQFmohMdDo7EVlr2mGXo7ZBWcxSpn?usp=drive_link",
-                exams: "https://drive.google.com/drive/folders/1VcS8JRTUQWcCsUOyfxxEcJiqBANgfhAW?usp=drive_link",
-              },
-            },
+            // {
+            //   id: "convex-optimization",
+            //   name: "Convex Optimization",
+            //   code: "02-24-0X0XX",
+            //   description: "Techniques and applications of convex optimization",
+            //   creditHours: 3,
+            //   materials: {
+            //     lectures: "https://drive.google.com/drive/folders/1PYIW3EDLw9NAyZQyEb2DusgVHHcLJV6M?usp=drive_link",
+            //     sections: "https://drive.google.com/drive/folders/1tFnr-E5ELvZKUVozVuVMMRD3ISlzdd1D?usp=drive_link",
+            //     videos: "",
+            //     summaries: "https://drive.google.com/drive/folders/1dj1SQFmohMdDo7EVlr2mGXo7ZBWcxSpn?usp=drive_link",
+            //     exams: "https://drive.google.com/drive/folders/1VcS8JRTUQWcCsUOyfxxEcJiqBANgfhAW?usp=drive_link",
+            //   },
+            // },
             {
               id: "operating-systems",
               name: "Operating Systems",
@@ -2024,6 +2024,20 @@ export const departmentData: { [key: string]: Department } = {
                 videos: "",
                 summaries: "https://drive.google.com/drive/folders/12S1na5_w3TYn6AP1xGcz4-MVK4PwuSm_?usp=drive_link",
                 exams: "https://drive.google.com/drive/folders/1aS7ppq-ylQ6EAtYcndF_S5dijNKSqY25?usp=drive_link",
+              },
+            },
+            {
+              id: "software-engineering",
+              name: "Software Engineering",
+              code: "02-24-0X0XX",
+              description: "Fundamentals of software engineering principles and practices",
+              creditHours: 3,
+              materials: {
+                lectures: "https://drive.google.com/drive/folders/14kAH4lk1B8-_gt_jwGIVlPYDXUMqh9Ot?usp=drive_link",
+                sections: "https://drive.google.com/drive/folders/1UAOG8RjkjYK5P5qCAKIhgp-YMCqkbzGc?usp=drive_link",
+                videos: "",
+                summaries: "https://drive.google.com/drive/folders/13C2VAFVwKFB2HHckl27f9dXfInsApJ_z?usp=drive_link",
+                exams: "https://drive.google.com/drive/folders/1gEr6m40AJJ1aawnhCMavO_2KCCKvAS8j?usp=drive_link",
               },
             }
           ],
@@ -9167,4 +9181,3 @@ export const departmentData: { [key: string]: Department } = {
     },
   },
 }
-
