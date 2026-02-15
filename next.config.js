@@ -120,7 +120,7 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https: blob:",
               "connect-src 'self' https://*.supabase.co https://accounts.google.com https://www.googleapis.com",
-              "frame-src 'self' https://accounts.google.com",
+              "frame-src 'self' https://accounts.google.com https://www.youtube.com https://www.youtube-nocookie.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
