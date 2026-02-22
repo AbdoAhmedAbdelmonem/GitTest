@@ -1,3 +1,4 @@
+// [PERF] Optimized: added explicit fast transition to card variants, removed scale from card entrance, replaced icon motion.div with CSS transition
 // specialization/department/level/page.tsx
 "use client"
 
@@ -24,8 +25,13 @@ const fadeUpVariants = {
 }
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: { opacity: 1, y: 0, scale: 1 },
+  hidden: { opacity: 0, y: 20 },
+  // Removed scale — GPU compositing for 10+ cards on mobile is expensive
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.25, delay: i * 0.04, ease: [0, 0, 0.58, 1] as const },
+  }),
 }
 
 export default function LevelPage({ params }: Props) {
@@ -215,16 +221,13 @@ function LevelContentClient({ department, level }: { department: string; level: 
                       animate="visible"
                     >
                       <Link href={`/specialization/${department}/${level}/${subject.id}`}>
-                        <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-500 group cursor-pointer backdrop-blur-sm">
+                        <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-300 group cursor-pointer backdrop-blur-sm">
                           <CardHeader>
                             <div className="flex items-center gap-3 mb-2">
-                              <motion.div
-                                whileHover={{ scale: 1.1, rotate: 5 }}
-                                transition={{ duration: 0.3 }}
-                                className="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500/[0.15] to-transparent border border-white/[0.15] flex items-center justify-center backdrop-blur-sm"
-                              >
+                              {/* Plain div with CSS transition — no JS overhead on each hover */}
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500/[0.15] to-transparent border border-white/[0.15] flex items-center justify-center backdrop-blur-sm transition-transform duration-200 group-hover:scale-105">
                                 <BookOpen className="w-5 h-5 text-blue-400" />
-                              </motion.div>
+                              </div>
                               <Badge variant="outline" className="bg-white/[0.03] border-white/[0.1] text-white/60">
                                 Term 1
                               </Badge>
@@ -270,16 +273,13 @@ function LevelContentClient({ department, level }: { department: string; level: 
                       animate="visible"
                     >
                       <Link href={`/specialization/${department}/${level}/${subject.id}`}>
-                        <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-500 group cursor-pointer backdrop-blur-sm">
+                        <Card className="h-full bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all duration-300 group cursor-pointer backdrop-blur-sm">
                           <CardHeader>
                             <div className="flex items-center gap-3 mb-2">
-                              <motion.div
-                                whileHover={{ scale: 1.1, rotate: 5 }}
-                                transition={{ duration: 0.3 }}
-                                className="w-10 h-10 rounded-lg bg-gradient-to-r from-green-500/[0.15] to-transparent border border-white/[0.15] flex items-center justify-center backdrop-blur-sm"
-                              >
+                              {/* Plain div with CSS transition — no JS overhead on each hover */}
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-green-500/[0.15] to-transparent border border-white/[0.15] flex items-center justify-center backdrop-blur-sm transition-transform duration-200 group-hover:scale-105">
                                 <BookOpen className="w-5 h-5 text-green-400" />
-                              </motion.div>
+                              </div>
                               <Badge variant="outline" className="bg-white/[0.03] border-white/[0.1] text-white/60">
                                 Term 2
                               </Badge>
