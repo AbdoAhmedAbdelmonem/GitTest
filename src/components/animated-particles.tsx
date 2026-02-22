@@ -1,3 +1,4 @@
+// [PERF] Optimized: reduced particle cap (100→60), pauses loop when tab is hidden, throttled mousemove via rAF
 "use client"
 
 import { useEffect, useRef } from "react"
@@ -17,6 +18,7 @@ export default function AnimatedParticles() {
   const particlesRef = useRef<Particle[]>([])
   const mouseRef = useRef({ x: 0, y: 0 })
   const animationFrameRef = useRef<number>()
+  const mouseMoveScheduled = useRef(false)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -39,7 +41,8 @@ export default function AnimatedParticles() {
     }
 
     const createParticles = () => {
-      const particleCount = Math.min(100, Math.floor((window.innerWidth * window.innerHeight) / 15000))
+      // Reduced cap from 100 → 60 for lower CPU usage
+      const particleCount = Math.min(60, Math.floor((window.innerWidth * window.innerHeight) / 20000))
       particlesRef.current = []
 
       for (let i = 0; i < particleCount; i++) {
@@ -96,6 +99,12 @@ export default function AnimatedParticles() {
     const animate = () => {
       if (!ctx || !canvas) return
 
+      // Pause animation when tab is hidden to save CPU
+      if (document.hidden) {
+        animationFrameRef.current = requestAnimationFrame(animate)
+        return
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       particlesRef.current.forEach((particle) => {
@@ -134,25 +143,34 @@ export default function AnimatedParticles() {
       animationFrameRef.current = requestAnimationFrame(animate)
     }
 
+    // Throttled mouse-move via rAF flag to prevent hundreds of calls/sec
     const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY }
+      if (!mouseMoveScheduled.current) {
+        mouseMoveScheduled.current = true
+        requestAnimationFrame(() => {
+          mouseRef.current = { x: e.clientX, y: e.clientY }
+          mouseMoveScheduled.current = false
+        })
+      }
+    }
+
+    const handleResize = () => {
+      resizeCanvas()
+      createParticles()
     }
 
     resizeCanvas()
     createParticles()
     animate()
 
-    window.addEventListener("resize", () => {
-      resizeCanvas()
-      createParticles()
-    })
+    window.addEventListener("resize", handleResize)
     window.addEventListener("mousemove", handleMouseMove)
 
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
-      window.removeEventListener("resize", resizeCanvas)
+      window.removeEventListener("resize", handleResize)
       window.removeEventListener("mousemove", handleMouseMove)
     }
   }, [])

@@ -1,3 +1,4 @@
+// [PERF] Optimized: changed viewport once:false → once:true — prevents re-animating elements on every scroll back
 "use client"
 
 import { motion } from "framer-motion"
@@ -75,7 +76,7 @@ export default function ScrollAnimatedSection({
       initial="hidden"
       whileInView="visible"
       viewport={{
-        once: false, // This allows animations to reverse when scrolling back up
+        once: true, // Play animation only once — prevents re-running on scroll back
         margin: "-100px", // Trigger animation when element is 100px from viewport
       }}
       variants={variants}
