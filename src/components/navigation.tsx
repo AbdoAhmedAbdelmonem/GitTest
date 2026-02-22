@@ -1,7 +1,8 @@
+// [PERF] Optimized: faster nav entrance (0.8s→0.3s), removed nav item stagger delays, throttled scroll handler
 // components/navigation.tsx (updated)
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
@@ -62,11 +63,20 @@ export default function Navigation() {
     },
   ]
 
+  const scrollThrottled = useRef(false)
+
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      // Throttle scroll handler — only update state when rAF fires, not every px
+      if (!scrollThrottled.current) {
+        scrollThrottled.current = true
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50)
+          scrollThrottled.current = false
+        })
+      }
     }
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     
     // Check if user is logged in (async)
     const checkSession = async () => {
@@ -147,9 +157,9 @@ export default function Navigation() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? "bg-[#030303]/80 backdrop-blur-xl border-b border-white/10" : "bg-transparent"
         }`}
@@ -180,9 +190,9 @@ export default function Navigation() {
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
-                  initial={{ opacity: 0, y: -20 }}
+                  initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
+                  transition={{ duration: 0.2 }}
                 >
                   {item.name === "Tournament" && isTournamentLocked ? (
                     <div className="flex items-center gap-2 text-white/50 cursor-not-allowed">
