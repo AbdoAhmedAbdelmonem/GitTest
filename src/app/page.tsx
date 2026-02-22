@@ -1,3 +1,4 @@
+// [PERF] Optimized: removed cache-busting (no-store + timestamp) from /api/stats/users fetch; marquee reduced from 10 → 6 items
 'use client'
 import HeroGeometric from "@/components/hero-geometric"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -115,15 +116,7 @@ export default function HomePage() {
 
   const fetchUserStats = async () => {
     try {
-      // Add timestamp to prevent caching
-      const timestamp = new Date().getTime()
-      const response = await fetch(`/api/stats/users?t=${timestamp}`, {
-        cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache',
-        },
-      })
+      const response = await fetch('/api/stats/users')
       if (response.ok) {
         const data = await response.json()
         setUserStats(data)
@@ -191,7 +184,7 @@ export default function HomePage() {
       {/* Morx Coming Soon Marquee */}
       <div className="w-full bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-purple-900/20 border-y border-white/10 overflow-hidden">
         <div className="flex items-center gap-8 py-3 animate-marquee whitespace-nowrap">
-          {[...Array(10)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <a key={i} href="https://morx-team.vercel.app">
               <div className="flex items-center gap-4 px-4">
                 <Image 
