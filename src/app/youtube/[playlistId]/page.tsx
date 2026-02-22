@@ -1,3 +1,4 @@
+// [PERF] Optimized: removed per-item video stagger animation (was 2s+ for large playlists), added lazy loading to thumbnails
 "use client"
 
 import { useState, useEffect } from "react"
@@ -452,14 +453,12 @@ export default function YouTubePlaylistPage() {
                   </CardHeader>
                   <CardContent className="p-0">
                     <div className="overflow-y-auto max-h-[550px] lg:max-h-[700px] custom-youtube-scrollbar">
+                      {/* Removed per-item motion.div — staggering 100+ items was causing 2s+ delay */}
                       {filteredVideos.map((video, index) => (
-                        <motion.div
+                        <div
                           key={video.id}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.3, delay: index * 0.02 }}
                           onClick={() => setCurrentVideo(video)}
-                          className={`p-3 sm:p-4 border-b border-white/5 cursor-pointer transition-all duration-300 hover:bg-white/5 ${
+                          className={`p-3 sm:p-4 border-b border-white/5 cursor-pointer transition-colors duration-200 hover:bg-white/5 ${
                             currentVideo?.id === video.id ? "bg-red-500/10 border-l-4 border-l-red-500" : ""
                           }`}
                         >
@@ -468,6 +467,7 @@ export default function YouTubePlaylistPage() {
                               <img
                                 src={video.thumbnails.medium?.url || "/placeholder.svg"}
                                 alt={video.title}
+                                loading="lazy"
                                 className="w-16 h-12 sm:w-20 sm:h-14 object-cover rounded-lg"
                               />
                               <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1 rounded font-rubik">
@@ -495,7 +495,7 @@ export default function YouTubePlaylistPage() {
                               </div>
                             </div>
                           </div>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </CardContent>
@@ -516,7 +516,7 @@ export default function YouTubePlaylistPage() {
                           {/* Video Player */}
                           <div className="aspect-video w-full mb-4 md:mb-6 rounded-lg overflow-hidden bg-black">
                             <iframe
-                              src={`https://www.youtube.com/embed/${currentVideo.videoId}?autoplay=1&rel=0`}
+                              src={`https://www.youtube-nocookie.com/embed/${currentVideo.videoId}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1`}
                               title={currentVideo.title}
                               className="w-full h-full"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
