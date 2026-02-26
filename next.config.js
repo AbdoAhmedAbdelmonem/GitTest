@@ -52,6 +52,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'morx-team.vercel.app',
+      },
+      {
+        protocol: 'https',
         hostname: 'avatars.githubusercontent.com',
       },
       {
