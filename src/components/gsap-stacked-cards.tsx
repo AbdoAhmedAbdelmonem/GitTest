@@ -35,7 +35,7 @@ const cards: CardData[] = [
     id: 3,
     title: 'FCDS 2025/2026 Schedule',
     description: 'Academic Calendar for Lectures and Sections',
-    link: 'https://drive.google.com/file/d/1iSwuc-akojbCK0k6OyOXiuc1cOclbw3j/view?usp=drive_link',
+    link: 'https://drive.google.com/file/d/11hdn4wst2ckEQmXU-8fZrBjTTHErdlC8/view?usp=drive_link',
     gradient: 'from-orange-500 via-red-500 to-pink-500',
     image: '/images/Sched.png'
   },
@@ -244,3 +244,4 @@ export default function GsapStackedCards() {
     </div>
   )
 }
+
