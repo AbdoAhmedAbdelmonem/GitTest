@@ -39,14 +39,14 @@ const cards: CardData[] = [
     gradient: 'from-orange-500 via-red-500 to-pink-500',
     image: '/images/Sched.png'
   },
-  // {
-  //   id: 4,
-  //   title: 'Track Progress',
-  //   description: 'Monitor your achievements and learning analytics',
-  //   link: '/dashboard',
-  //   gradient: 'from-emerald-500 via-green-500 to-teal-400',
-  //   image: '/placeholder.svg?height=225&width=400&text=Dashboard'
-  // }
+  {
+    id: 4,
+    title: 'Morx - Team Management System',
+    description: 'Monitor your Teams and learning analytics',
+    link: 'https://morx-team.vercel.app',
+    gradient: 'from-emerald-500 via-green-500 to-teal-400',
+    image: 'https://morx-team.vercel.app/Blue%20and%20White%20Illustration%20Build%20a%20Business%20Team%20Presentation.png'
+  }
 ]
 
 export default function GsapStackedCards() {
@@ -244,4 +244,5 @@ export default function GsapStackedCards() {
     </div>
   )
 }
+
 
