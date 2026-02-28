@@ -105,9 +105,9 @@ const ALL_STEPS: Question[] = [
   },
   {
     id: "q5", section: "١ · الانطباع العام", type: "radio",
-    label: "هل تفتكر إن الذكاء الاصطناعي\nممكن يتعتمد عليه في الكتابة؟",
+    label: "هل تفتكر إن الذكاء الاصطناعي\nممكن يُعتمد عليه في الكتابة؟",
     sub: "",
-    options: ["في الكتابة الرسمية بس", "في الكتابة غير الرسمية بس", "في الاتنين", "مينفعش يتعتمد عليه"],
+    options: ["في الكتابة الرسمية بس", "في الكتابة غير الرسمية بس", "في الاتنين", "مينفعش يُعتمد عليه"],
     required: true,
     accent: "#a855f7", accent2: "#ec4899",
   },
@@ -479,7 +479,7 @@ export default function SurveyArPage() {
               <div className="flex items-center gap-2 mb-6">
                 <Image src="/images/1212-removebg-preview.png" alt="Chameleon" width={22} height={22} className="object-contain" />
                 <p className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#a855f7", letterSpacing: "0.1em" }}>
-                  استبيان كاميليون 2025
+                  استبيان كاميليون 2026
                 </p>
               </div>
 
