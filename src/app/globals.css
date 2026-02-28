@@ -160,6 +160,12 @@
   font-family: 'Rubik', sans-serif !important;
 }
 
+/* Arabic survey — force Rubik everywhere */
+[lang="ar"],
+[lang="ar"] * {
+  font-family: 'Rubik', sans-serif !important;
+}
+
 /* Notification dropdown improvements */
 .notification-dropdown {
   will-change: transform, opacity;
