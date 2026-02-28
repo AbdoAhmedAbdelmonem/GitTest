@@ -486,7 +486,7 @@ export default function SurveyPage() {
               <div className="flex items-center gap-2 mb-6">
                 <Image src="/images/1212-removebg-preview.png" alt="Chameleon" width={22} height={22} className="object-contain" />
                 <p className="text-sm font-semibold tracking-[0.2em] uppercase" style={{ color: "#a855f7" }}>
-                  Chameleon Survey 2025
+                  Chameleon Survey 2026
                 </p>
               </div>
               <h1 className="font-extrabold leading-[0.93] tracking-tight text-white mb-4" style={{ fontSize: "clamp(2.4rem,7vw,6.5rem)" }}>
@@ -721,3 +721,4 @@ export default function SurveyPage() {
     </div>
   )
 }
+
