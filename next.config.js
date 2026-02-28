@@ -48,11 +48,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'github.com',
+        hostname: 'morx-team.vercel.app',
       },
       {
         protocol: 'https',
-        hostname: 'morx-team.vercel.app',
+        hostname: 'github.com',
       },
       {
         protocol: 'https',
@@ -123,11 +123,11 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https: blob:",
-              "connect-src 'self' https://*.supabase.co https://accounts.google.com https://www.googleapis.com",
-              "frame-src 'self' https://accounts.google.com https://www.youtube.com https://www.youtube-nocookie.com",
+              "connect-src 'self' https://*.supabase.co https://accounts.google.com https://www.googleapis.com https://docs.google.com",
+              "frame-src 'self' https://accounts.google.com https://www.youtube.com https://www.youtube-nocookie.com https://docs.google.com",
               "object-src 'none'",
               "base-uri 'self'",
-              "form-action 'self'",
+              "form-action 'self' https://docs.google.com",
               "frame-ancestors 'none'",
             ].join('; '),
           },
