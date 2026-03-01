@@ -299,7 +299,7 @@ export const ALL_STEPS_EN: Question[] = [
   {
     id: "q15b", section: "2 · Evaluation", type: "star",
     quote: "\"Technology has changed the way we communicate, making it faster and more efficient, yet sometimes less personal and emotionally connected.\"",
-    label: "How would you rate the creativity of the text you just read?",
+    label: "How would you rate the creativity of this text based on your personal impression?",
     sub: "Rate from 1 to 5.",
     required: true,
     accent: "#fbbf24", accent2: "#f59f0b8c",
@@ -519,7 +519,7 @@ export const ALL_STEPS_AR: Question[] = [
   {
     id: "q15b", section: "٢ · التقييم", type: "star",
     quote: "\"لقد غيَّرت التكنولوجيا الطريقة التي نتواصل بها، وجعلتها أسرع وأكثر كفاءة، ولكنها في بعض الأحيان أصبحت أقل خصوصية وترابطاً عاطفياً.\"",
-    label: "كيف تقيم إبداع النص الذي قرأته للتو؟",
+    label: "كيف تقيم مستوى الإبداع في هذا النص بناءً على انطباعك الشخصي؟",
     sub: "اختار تقييم من 1 لـ 5.",
     required: true,
     accent: "#fbbf24", accent2: "#f59e0b",
