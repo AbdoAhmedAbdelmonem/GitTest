@@ -55,7 +55,7 @@ const ALL_STEPS: Question[] = [
   },
   {
     id: "demo-education", section: "احكيلنا عنك", type: "radio",
-    label: "ايه حالتك دراسية حالية؟",
+    label: "ايه حالتك الدراسية حاليًا؟",
     sub: "",
     options: ["ثانوية عامة", "جامعة", "خريج"],
     required: true,
@@ -271,21 +271,101 @@ const FORM_MAP: Record<string, string> = {
   q20: "entry.1505558509",
 }
 
+const AR_TO_EN_MAP: Record<string, string> = {
+  // demo-gender
+  "ذكر": "Male",
+  "أنثى": "Female",
+  // demo-education
+  "ثانوية عامة": "High School",
+  "جامعة": "University",
+  "خريج": "Graduated",
+  // demo-field
+  "علم البيانات": "Data Science",
+  "هندسة": "Engineering",
+  "طب": "Medicine",
+  "تجارة": "Business",
+  "فنون": "Arts",
+  "أخرى": "Other",
+  // q1
+  "بحبه جداً": "I like it very much",
+  "بحبه لحد ما": "I somewhat like it",
+  "محايد": "Neutral",
+  "مش بحبه": "I don't like it",
+  "بفضل ماستخدمهوش": "I prefer not to use it",
+  // q2
+  "دايماً": "Always",
+  "غالباً": "Often",
+  "أحياناً": "Sometimes",
+  "نادراً": "Rarely",
+  "مش بعرف أفرق": "I can't tell the difference",
+  // q3
+  "كتابة الإنسان": "Human writing",
+  "كتابة الذكاء الاصطناعي": "AI writing",
+  "الاتنين بالتساوي": "Both equally",
+  "حسب الموضوع": "It depends on the topic",
+  // q4
+  "أيوه، بشكل كبير": "Yes, to a great extent",
+  "أيوه، بشكل متوسط": "Yes, to a moderate extent",
+  "بشكل محدود": "To a limited extent",
+  "لأ، مش بيقدر ينقل مشاعر": "No, it cannot convey emotions",
+  "مش متأكد": "Not sure",
+  // q5
+  "في الكتابة الرسمية بس": "Only in formal writing",
+  "في الكتابة غير الرسمية بس": "Only in informal writing",
+  "في الاتنين": "In both",
+  "مينفعش يُعتمد عليه": "It cannot be relied upon",
+  // q8
+  "السرعة في إتمام المهام": "Speed in completing tasks",
+  "توفير الجهد": "Saving effort",
+  "صياغة اللغة/الأسلوب": "Language formulation/style",
+  "تحسين دقة القواعد": "Improves grammar accuracy",
+  "المساعدة في توليد الأفكار": "Helps generate ideas",
+  // q9
+  "التعبير العاطفي الحقيقي": "Genuine emotional expression",
+  "الإبداع الشخصي": "Personal creativity",
+  "التجربة الإنسانية": "Human experience",
+  "الفهم العميق للسياق": "Deep contextual understanding",
+  "الأسلوب الشخصي المميز": "Unique personal style",
+  // q10
+  "مش بستخدم أدوات ذكاء اصطناعي": "I do not use AI tools",
+  // q12
+  "أيوه، بالكامل": "Yes, completely",
+  "جزئياً": "Partially",
+  "في مجالات معينة بس": "Only in certain fields",
+  "لأ": "No",
+  // q13
+  "مش حاسس بكده": "I don’t feel that",
+  // q14
+  "عمري ما استخدمتها": "I have never used it",
+  // q15
+  "التعبير العاطفي": "Emotional expression",
+  "الأسلوب الشخصي": "Personal style",
+  "الإبداع والخيال": "Creativity and imagination",
+  "خبرة الكاتب وفهمه للسياق": "Writer’s experience and contextual understanding",
+  "أسلوب الكتابة غير الرسمي": "Informal writing style",
+  // q16
+  "الإنسان": "Humans",
+  "الذكاء الاصطناعي": "AI",
+  "مش عارف": "I don’t know"
+}
+
 function buildGoogleFormUrl(answers: Record<string, AnswerVal>, otherText: string): string {
   const params = new URLSearchParams()
   for (const [qId, entryId] of Object.entries(FORM_MAP)) {
     const val = answers[qId]
     if (val === undefined || val === null || val === "") continue
     if (Array.isArray(val)) {
-      for (const v of val) params.append(entryId, v)
+      for (const v of val) params.append(entryId, AR_TO_EN_MAP[v] || v)
     } else if (typeof val === "number") {
       params.append(entryId, String(val))
     } else {
+      let finalVal = val as string
       if (qId === "demo-field" && val === "أخرى" && otherText.trim()) {
-        params.append(entryId, otherText.trim())
+        finalVal = otherText.trim()
       } else {
-        params.append(entryId, val)
+        finalVal = AR_TO_EN_MAP[finalVal] || finalVal
       }
+      params.append(entryId, finalVal)
     }
   }
   return `${FORM_BASE}?${params.toString()}`
@@ -395,14 +475,19 @@ export default function SurveyArPage() {
         const val = answers[qId]
         if (val === undefined || val === null || val === "") continue
         if (Array.isArray(val)) {
-          for (const v of val) params.append(entryId, v)
+          for (const v of val) params.append(entryId, AR_TO_EN_MAP[v] || v)
         } else if (typeof val === "number") {
           params.append(entryId, String(val))
         } else {
           // Send empty string to Google Forms if it's "Not specialized" and was skipped
           let finalVal = val as string
-          if (qId === "demo-field" && val === "أخرى" && otherText.trim()) finalVal = otherText.trim()
-          else if (qId === "demo-field" && val === "Not specialized") finalVal = ""
+          if (qId === "demo-field" && val === "أخرى" && otherText.trim()) {
+            finalVal = otherText.trim()
+          } else if (qId === "demo-field" && val === "Not specialized") {
+            finalVal = ""
+          } else {
+            finalVal = AR_TO_EN_MAP[finalVal] || finalVal
+          }
 
           params.append(entryId, finalVal)
         }
