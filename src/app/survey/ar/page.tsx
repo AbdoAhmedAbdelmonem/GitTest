@@ -6,7 +6,6 @@ import { ChevronLeft, ChevronRight, Send, Star, Loader2, Globe } from "lucide-re
 import Image from "next/image"
 import { useToast } from "@/components/ToastProvider"
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 type QType = "radio" | "checkbox" | "textarea" | "radio-other" | "text-input" | "rating"
 interface Question {
   id: string
@@ -24,9 +23,7 @@ interface Question {
   maxLabel?: string
 }
 
-// ─── All steps (demographics + survey) — Arabic ───────────────────────────────
 const ALL_STEPS: Question[] = [
-  // ──────────── البيانات الديموغرافية: احكيلنا عنك ──────────────────────
   {
     id: "demo-name", section: "احكيلنا عنك", type: "text-input",
     label: "اسمك ايه؟",
@@ -70,7 +67,6 @@ const ALL_STEPS: Question[] = [
     accent: "#f97316", accent2: "#ec4899",
   },
 
-  // ──────────── القسم 1: الانطباع العام ──────────────────────────────────
   {
     id: "q1", section: "١ · الانطباع العام", type: "radio",
     label: "هل بتحب أسلوب كتابة\nالذكاء الاصطناعي؟",
@@ -112,7 +108,6 @@ const ALL_STEPS: Question[] = [
     accent: "#a855f7", accent2: "#ec4899",
   },
 
-  // ──────────── القسم 2: تقييم كتابة الذكاء الاصطناعي ────────────────────
   {
     id: "q6", section: "٢ · التقييم", type: "rating",
     label: "قيّم كتابة الذكاء الاصطناعي\nفي المواضيع العاطفية.",
@@ -202,7 +197,6 @@ const ALL_STEPS: Question[] = [
     accent: "#6366f1", accent2: "#a855f7",
   },
 
-  // ──────────── القسم 3: أسئلة مفتوحة ───────────────────────────────────
   {
     id: "q17", section: "٣ · أسئلة مفتوحة", type: "textarea",
     label: "هل تفتكر إن كتابة\nالإنسان فيها عيوب؟",
@@ -241,7 +235,6 @@ const DEMO_COUNT = 5
 const TOTAL = ALL_STEPS.length
 type AnswerVal = string | string[] | number
 
-// ─── Google Form entry ID mapping ─────────────────────────────────────────────
 const FORM_BASE = "https://docs.google.com/forms/d/e/1FAIpQLSccLnBUzkM_m-vynoPJCK7YQm6I1UrHDOwpfBSY13itquf5hw/formResponse"
 const FORM_MAP: Record<string, string> = {
   "demo-name":  "entry.370956578",
@@ -272,78 +265,62 @@ const FORM_MAP: Record<string, string> = {
 }
 
 const AR_TO_EN_MAP: Record<string, string> = {
-  // demo-gender
   "ذكر": "Male",
   "أنثى": "Female",
-  // demo-education
   "ثانوية عامة": "High School",
   "جامعة": "University",
   "خريج": "Graduated",
-  // demo-field
   "علم البيانات": "Data Science",
   "هندسة": "Engineering",
   "طب": "Medicine",
   "تجارة": "Business",
   "فنون": "Arts",
   "أخرى": "Other",
-  // q1
   "بحبه جداً": "I like it very much",
   "بحبه لحد ما": "I somewhat like it",
   "محايد": "Neutral",
   "مش بحبه": "I don't like it",
   "بفضل ماستخدمهوش": "I prefer not to use it",
-  // q2
   "دايماً": "Always",
   "غالباً": "Often",
   "أحياناً": "Sometimes",
   "نادراً": "Rarely",
   "مش بعرف أفرق": "I can't tell the difference",
-  // q3
   "كتابة الإنسان": "Human writing",
   "كتابة الذكاء الاصطناعي": "AI writing",
   "الاتنين بالتساوي": "Both equally",
   "حسب الموضوع": "It depends on the topic",
-  // q4
   "أيوه، بشكل كبير": "Yes, to a great extent",
   "أيوه، بشكل متوسط": "Yes, to a moderate extent",
   "بشكل محدود": "To a limited extent",
   "لأ، مش بيقدر ينقل مشاعر": "No, it cannot convey emotions",
   "مش متأكد": "Not sure",
-  // q5
   "في الكتابة الرسمية بس": "Only in formal writing",
   "في الكتابة غير الرسمية بس": "Only in informal writing",
   "في الاتنين": "In both",
   "مينفعش يُعتمد عليه": "It cannot be relied upon",
-  // q8
   "السرعة في إتمام المهام": "Speed in completing tasks",
   "توفير الجهد": "Saving effort",
   "صياغة اللغة/الأسلوب": "Language formulation/style",
   "تحسين دقة القواعد": "Improves grammar accuracy",
   "المساعدة في توليد الأفكار": "Helps generate ideas",
-  // q9
   "التعبير العاطفي الحقيقي": "Genuine emotional expression",
   "الإبداع الشخصي": "Personal creativity",
   "التجربة الإنسانية": "Human experience",
   "الفهم العميق للسياق": "Deep contextual understanding",
   "الأسلوب الشخصي المميز": "Unique personal style",
-  // q10
   "مش بستخدم أدوات ذكاء اصطناعي": "I do not use AI tools",
-  // q12
   "أيوه، بالكامل": "Yes, completely",
   "جزئياً": "Partially",
   "في مجالات معينة بس": "Only in certain fields",
   "لأ": "No",
-  // q13
   "مش حاسس بكده": "I don’t feel that",
-  // q14
   "عمري ما استخدمتها": "I have never used it",
-  // q15
   "التعبير العاطفي": "Emotional expression",
   "الأسلوب الشخصي": "Personal style",
   "الإبداع والخيال": "Creativity and imagination",
   "خبرة الكاتب وفهمه للسياق": "Writer’s experience and contextual understanding",
   "أسلوب الكتابة غير الرسمي": "Informal writing style",
-  // q16
   "الإنسان": "Humans",
   "الذكاء الاصطناعي": "AI",
   "مش عارف": "I don’t know"
@@ -371,7 +348,6 @@ function buildGoogleFormUrl(answers: Record<string, AnswerVal>, otherText: strin
   return `${FORM_BASE}?${params.toString()}`
 }
 
-// ─── Pill ─────────────────────────────────────────────────────────────────────
 const Pill = memo(function Pill({ label, selected, accent, onClick }: {
   label: string; selected: boolean; accent: string; onClick: () => void
 }) {
@@ -388,7 +364,6 @@ const Pill = memo(function Pill({ label, selected, accent, onClick }: {
   )
 })
 
-// ─── Rating scale (1–5 cubes) ─────────────────────────────────────────────────
 const RatingScale = memo(function RatingScale({ value, onChange, minLabel, maxLabel, accent, accent2 }: {
   value: number | null; onChange: (v: number) => void
   minLabel: string; maxLabel: string; accent: string; accent2: string
@@ -416,7 +391,6 @@ const RatingScale = memo(function RatingScale({ value, onChange, minLabel, maxLa
   )
 })
 
-// ─── Progress bar ─────────────────────────────────────────────────────────────
 const ProgressBar = memo(function ProgressBar({ step, accent, accent2 }: { step: number; accent: string; accent2: string }) {
   return (
     <div className="fixed top-0 left-0 right-0 h-0.5 bg-white/5 z-50">
@@ -428,12 +402,10 @@ const ProgressBar = memo(function ProgressBar({ step, accent, accent2 }: { step:
   )
 })
 
-// ─── Animation presets ────────────────────────────────────────────────────────
 const SLIDE   = { initial: { opacity: 0, x: -70 }, animate: { opacity: 1, x: 0 }, exit: { opacity: 0, x: 70 } }
 const FADE_UP = { initial: { opacity: 0, y: 40 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -30 } }
 const DUR     = { duration: 0.36, ease: [0.16, 1, 0.3, 1] } as const
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
 export default function SurveyArPage() {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, AnswerVal>>({})
@@ -460,10 +432,9 @@ export default function SurveyArPage() {
   }, [q])
 
   const handleNext = useCallback(async () => {
-    // Conditional logic: skip demo-field if High School is selected
     if (q?.id === "demo-education" && answers["demo-education"] === "ثانوية عامة") {
       setAnswers((prev) => ({ ...prev, "demo-field": "Not specialized" }))
-      setStep((s) => s + 2) // Skip demo-field
+      setStep((s) => s + 2) 
       return
     }
 
@@ -479,7 +450,6 @@ export default function SurveyArPage() {
         } else if (typeof val === "number") {
           params.append(entryId, String(val))
         } else {
-          // Send empty string to Google Forms if it's "Not specialized" and was skipped
           let finalVal = val as string
           if (qId === "demo-field" && val === "أخرى" && otherText.trim()) {
             finalVal = otherText.trim()
@@ -492,7 +462,6 @@ export default function SurveyArPage() {
           params.append(entryId, finalVal)
         }
       }
-      // Submit via the new API proxy
       const res = await fetch("/api/survey/submit", {
         method: "POST",
         body: params.toString(),
@@ -500,9 +469,9 @@ export default function SurveyArPage() {
 
       if (!res.ok) throw new Error("Submission failed")
 
-      addToast("✅ اتبعت! إجاباتك اتسجلت بنجاح.", "success")
+      addToast("اتبعت! إجاباتك اتسجلت بنجاح.", "success")
     } catch {
-      addToast("⚠️ مشكلة. إجاباتك ممكن ماتكونش اتسجلت. جرب تاني.", "error")
+      addToast("مشكلة. إجاباتك ممكن ماتكونش اتسجلت. جرب تاني.", "error")
     }
     await new Promise((r) => setTimeout(r, 800))
     setSubmitting(false)
@@ -510,9 +479,7 @@ export default function SurveyArPage() {
   }, [step, answers, otherText])
 
   const handleBack = useCallback(() => {
-    // If we are on the step right AFTER the skipped demo-field (which is q1),
-    // and High School was selected, jump back 2 steps instead of 1.
-    const q1Index = ALL_STEPS.findIndex(s => s.id === "q1") + 1 // +1 because step 0 is intro
+    const q1Index = ALL_STEPS.findIndex(s => s.id === "q1") + 1
     if (step === q1Index && answers["demo-education"] === "ثانوية عامة") {
       setStep((s) => Math.max(s - 2, 0))
     } else {
@@ -537,13 +504,11 @@ export default function SurveyArPage() {
       className="relative min-h-screen w-full overflow-hidden"
       style={{ background: "#070710" }}
     >
-      {/* Blobs */}
       <div aria-hidden className="pointer-events-none fixed rounded-full blur-[120px] opacity-25 survey-blob-1"
         style={{ width: 600, height: 600, background: `radial-gradient(circle,${accent},transparent 70%)`, top: "-15%", left: "-8%", willChange: "transform" }} />
       <div aria-hidden className="pointer-events-none fixed rounded-full blur-[100px] opacity-15 survey-blob-2"
         style={{ width: 500, height: 500, background: `radial-gradient(circle,${accent2},transparent 70%)`, bottom: "-10%", right: "-5%", willChange: "transform" }} />
 
-      {/* ── Language toggle (fixed top-left in RTL) ── */}
       <a href="/survey"
         className="fixed top-5 left-5 z-50 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 text-white/40 hover:text-white/80 hover:border-white/25 hover:bg-white/10 transition-all duration-200 backdrop-blur-sm"
         title="English"
@@ -551,14 +516,11 @@ export default function SurveyArPage() {
         <Globe className="w-4.5 h-4.5" />
       </a>
 
-      {/* Progress */}
       {step >= 1 && step <= TOTAL && <ProgressBar step={step} accent={accent} accent2={accent2} />}
 
-      {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-16 lg:px-28 py-20">
         <AnimatePresence mode="wait" initial={false}>
 
-          {/* ── مقدمة ── */}
           {step === 0 && (
             <motion.div key="intro" {...FADE_UP} transition={DUR}>
               <div className="flex items-center gap-2 mb-6">
@@ -583,7 +545,6 @@ export default function SurveyArPage() {
                 إجاباتك مجهولة الهوية وهتُستخدم لأغراض أكاديمية فقط.
               </p>
 
-              {/* Section tags */}
               <div className="flex flex-wrap gap-2 mb-12">
                 {["احكيلنا عنك", "١ · الانطباع العام", "٢ · التقييم", "٣ · أسئلة مفتوحة"].map((s) => (
                   <span key={s} className="text-xs font-medium px-3 py-1 rounded-full border border-white/10 text-white/40">{s}</span>
@@ -599,7 +560,6 @@ export default function SurveyArPage() {
             </motion.div>
           )}
 
-          {/* ── سؤال ── */}
           {step >= 1 && step <= TOTAL && q && (
             <motion.div key={`q${step}`} {...SLIDE} transition={DUR}>
               <div className="flex items-center gap-3 mb-5">
@@ -615,7 +575,6 @@ export default function SurveyArPage() {
               {q.sub && <p className="text-sm md:text-base text-white/40 mb-10 font-light leading-loose">{q.sub}</p>}
               {!q.sub && <div className="mb-10" />}
 
-              {/* ── Text Input (name / phone) ── */}
               {q.type === "text-input" && (
                 <div className="max-w-md">
                   <input
@@ -636,7 +595,6 @@ export default function SurveyArPage() {
                 </div>
               )}
 
-              {/* ── Rating (5 cubes) ── */}
               {q.type === "rating" && (
                 <div className="max-w-lg">
                   <RatingScale
@@ -658,7 +616,6 @@ export default function SurveyArPage() {
                 </div>
               )}
 
-              {/* Radio with "Other" */}
               {q.type === "radio-other" && q.options && (
                 <div className="max-w-3xl">
                   <div className="flex flex-wrap gap-3">
@@ -683,7 +640,6 @@ export default function SurveyArPage() {
                 </div>
               )}
 
-              {/* Checkbox */}
               {q.type === "checkbox" && q.options && (
                 <div className="flex flex-wrap gap-3 max-w-3xl">
                   {q.options.map((opt) => {
@@ -699,7 +655,6 @@ export default function SurveyArPage() {
                 </div>
               )}
 
-              {/* Textarea */}
               {q.type === "textarea" && (
                 <div className="max-w-2xl">
                   <textarea rows={5}
@@ -721,7 +676,6 @@ export default function SurveyArPage() {
                 </div>
               )}
 
-              {/* Navigation */}
               <div className="flex items-center gap-6 mt-12">
                 <button
                   onClick={canProceed && !submitting ? handleNext : undefined}
@@ -748,7 +702,6 @@ export default function SurveyArPage() {
             </motion.div>
           )}
 
-          {/* ── شكراً ── */}
           {step === TOTAL + 1 && (
             <motion.div key="done" {...FADE_UP} transition={DUR}>
               <div className="flex gap-1.5 mb-10">
@@ -785,7 +738,6 @@ export default function SurveyArPage() {
         </AnimatePresence>
       </div>
 
-      {/* CSS blob drift */}
       <style>{`
         @keyframes blobDrift1{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(25px,18px) scale(1.04)}70%{transform:translate(-15px,-12px) scale(0.97)}}
         @keyframes blobDrift2{0%,100%{transform:translate(0,0) scale(1)}35%{transform:translate(-22px,-18px) scale(1.03)}65%{transform:translate(12px,22px) scale(0.97)}}
@@ -795,3 +747,4 @@ export default function SurveyArPage() {
     </div>
   )
 }
+
